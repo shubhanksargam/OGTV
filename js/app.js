@@ -46,17 +46,20 @@ addEventListener("keydown",e=>{
   else if(e.key==="m"||e.key==="M") toggleSound();
 });
 
-/* ---------- TV static: covers the blank screen while a channel tunes in or buffers ---------- */
+/* ---------- Intro static: covers the blank screen while a channel tunes in or buffers ---------- */
 const noise=$("noise"), nctx=noise.getContext("2d"), nimg=nctx.createImageData(noise.width,noise.height);
 const stillNoise=matchMedia("(prefers-reduced-motion: reduce)").matches;
 let staticOn=false, staticSince=0, staticRAF=0;
-function drawNoise(){const d=nimg.data;
-  for(let i=0;i<d.length;i+=4){const v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
-  nctx.putImageData(nimg,0,0); if(staticOn&&!stillNoise) staticRAF=requestAnimationFrame(drawNoise)}
-function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false; drawNoise()}
-function hideStatic(){ // keep it up at least 450ms so a channel change reads like real TV
-  const wait=Math.max(0,450-(Date.now()-staticSince));
-  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<450)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true},wait)}
+function drawNoise(){
+  if(staticOn&&!stillNoise) staticRAF=requestAnimationFrame(drawNoise);
+  const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=60+Math.random()*195|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
+  nctx.putImageData(nimg,0,0);
+}
+function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false;
+  const id=$("ident"); id.style.animation="none"; void id.offsetWidth; id.style.animation=""; drawNoise()}
+function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
+  const wait=Math.max(0,1200-(Date.now()-staticSince));
+  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true},wait)}
 
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, ended=false, muted=true;
