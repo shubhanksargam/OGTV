@@ -13,7 +13,8 @@ import {roman} from "./roman.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
@@ -56,7 +57,8 @@ async function playlist(listId, take) {
 async function detailsFromPlaylist(e) {
   const r = await fetch("https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=" + e.id, {headers: HEADERS});
   if (r.status === 429 || r.status >= 500) throw new Error("oEmbed " + r.status);
-  return {sec: e.sec, title: e.title || "", ok: r.status === 200 && e.sec > 0};
+  const author = r.status === 200 ? (await r.json()).author_name : "";
+  return {sec: e.sec, title: e.title || "", author, ok: r.status === 200 && e.sec > 0};
 }
 
 // -> {sec, title, ok} where ok means embeddable, not live/upcoming, family-safe
@@ -66,7 +68,7 @@ async function detailsFromPage(id) {
   if (!m) throw new Error("no player data for " + id);
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   const mf = (p.microformat || {}).playerMicroformatRenderer || {};
-  return {sec: +v.lengthSeconds || 0, title: v.title || "", pub: mf.publishDate?.slice(0, 10),
+  return {sec: +v.lengthSeconds || 0, title: v.title || "", author: v.author || "", pub: mf.publishDate?.slice(0, 10),
     ok: ps.status === "OK" && ps.playableInEmbed === true && !v.isLiveContent && !v.isUpcoming && mf.isFamilySafe !== false};
 }
 
@@ -77,7 +79,7 @@ async function detailsFromApi(ids) {
     for (const it of JSON.parse(await get(url)).items || []) {
       const d = it.contentDetails.duration.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
       const sec = (+d[1] || 0) * 86400 + (+d[2] || 0) * 3600 + (+d[3] || 0) * 60 + (+d[4] || 0);
-      out[it.id] = {sec, title: it.snippet.title,
+      out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle,
         ok: it.status.embeddable && it.status.privacyStatus === "public" && it.snippet.liveBroadcastContent === "none" && !it.contentDetails.contentRating?.ytRating};
     }
   }
@@ -109,7 +111,7 @@ async function fetchFeed(f, old) {
     for (const e of entries) {
       const d = KEY ? info[e.id] : await (f.playlist && e.title ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null));
       if (!KEY) await sleep(300);
-      if (!d || !d.ok) continue;
+      if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;

@@ -1,5 +1,6 @@
 {
-  "_about": "YouTube creators whose latest uploads fill each category. Run: node scripts/fetch-feeds.mjs  (writes js/feeds.js). minMin/maxMin filter by length in minutes.",
+  "_about": "YouTube creators whose latest uploads fill each category. Run: node scripts/fetch-feeds.mjs  (writes js/feeds.js). minMin/maxMin filter by length in minutes. blockChannels: uploaders whose videos are never used, whichever source lists them.",
+  "blockChannels": ["Grow Music"],
   "feeds": [
     {"id": "UCaayLD9i5x4MmIoVZxXSv_g", "src": "T-Series Bhakti Sagar", "cat": "bhakti", "lang": "hi", "maxMin": 30},
     {"id": "UCChqsCRFePrP2X897iQkyAA", "src": "Kabita's Kitchen", "cat": "rasoi", "lang": "hi", "maxMin": 30},
