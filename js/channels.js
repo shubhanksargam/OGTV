@@ -18,7 +18,7 @@ const CHANNELS = [
     {from:17,to:24,cat:"sehat",label:"Full classes"}]},
   {key:"geet",n:5,name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
   {key:"gyaan",n:6,name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,cat:"gyaan",label:"Explainers, all day"}]},
-  {key:"hasya",n:7,name:"Hasya",en:"Comedy",parts:[{from:0,to:24,cat:"hasya",label:"Stand-up & sketches"}]},
+  {key:"hasya",n:7,name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,cat:"hasya",label:"Hindi & English comedy"}]},
   {key:"khel",n:8,name:"Khel",en:"Sports",parts:[
     {from:0,to:6,  cat:"cricket",alt:"khel",label:"Cricket replays"},
     {from:6,to:9,  cat:"khel",alt:"cricket",label:"Morning sports"},
