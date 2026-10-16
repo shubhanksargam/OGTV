@@ -136,7 +136,7 @@ function wakeUI(strip){
   if(!isFull())return; const sc=$("screen");
   sc.classList.remove("fs-idle"); if(strip&&!sc.classList.contains("strip-on")){sc.classList.add("strip-on"); renderStrip()}
   clearTimeout(uiTimer);
-  uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
+  uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); if(isFull()) sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
 }
 function renderStrip(){
   const now=Date.now();
@@ -175,7 +175,8 @@ $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingCli
 function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
 $("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():wakeUI(true)); // tap the video: open, or close the strip
 function onFullscreenChange(){const sc=$("screen");
-  if(isFull()){browse=cur; showBanner(); wakeUI(false)} else sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}
+  if(isFull()){browse=cur; showBanner(); wakeUI(false)}
+  else {clearTimeout(uiTimer); clearTimeout(bannerTimer); sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}} // back to normal view: controls stay put
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */

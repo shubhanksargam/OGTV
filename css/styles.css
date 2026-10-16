@@ -115,7 +115,9 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .fs-catch,.screen:-webkit-full-screen .fs-catch,.screen.pseudo-fs .fs-catch{display:block;position:absolute;inset:0;z-index:2}
 .screen:fullscreen .fs-ui,.screen:-webkit-full-screen .fs-ui,.screen.pseudo-fs .fs-ui{display:block}
 .screen.fs-idle .fs-catch{cursor:none}
-.screen.fs-idle .fs,.screen.fs-idle .cc,.screen.fs-idle .sound{opacity:0!important;pointer-events:none;transition:opacity .4s}
+.screen:fullscreen.fs-idle .fs,.screen:fullscreen.fs-idle .cc,.screen:fullscreen.fs-idle .sound,
+.screen:-webkit-full-screen.fs-idle .fs,.screen:-webkit-full-screen.fs-idle .cc,.screen:-webkit-full-screen.fs-idle .sound,
+.screen.pseudo-fs.fs-idle .fs,.screen.pseudo-fs.fs-idle .cc,.screen.pseudo-fs.fs-idle .sound{opacity:0!important;pointer-events:none;transition:opacity .4s} /* full screen only */
 /* Full screen, subtitles and sound stay usable above the channel strip */
 .screen:fullscreen .fs,.screen:fullscreen .cc,.screen:fullscreen .sound,.screen:-webkit-full-screen .fs,.screen:-webkit-full-screen .cc,.screen:-webkit-full-screen .sound,
 .screen.pseudo-fs .fs,.screen.pseudo-fs .cc,.screen.pseudo-fs .sound{z-index:6;transition:bottom .3s ease,opacity .4s}
