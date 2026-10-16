@@ -123,11 +123,11 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.pseudo-fs .fs,.screen.pseudo-fs .cc,.screen.pseudo-fs .sound{z-index:6;transition:bottom .3s ease,opacity .4s}
 .screen.strip-on .fs,.screen.strip-on .cc,.screen.strip-on .sound{bottom:calc(5vh + 126px);opacity:1!important}
 .fs-ui{position:absolute;inset:0;z-index:5;pointer-events:none}
-.banner{position:absolute;left:4vw;bottom:6vh;display:flex;gap:24px;align-items:center;max-width:min(72vw,940px);padding:18px 28px 18px 20px;border-radius:22px;
+.banner{position:absolute;left:4vw;bottom:max(6vh,82px);display:flex;gap:24px;align-items:center;max-width:min(72vw,940px);padding:18px 28px 18px 20px;border-radius:22px;
   background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.5);
   opacity:0;transform:translateY(18px);transition:opacity .35s ease,transform .35s ease,bottom .35s ease}
 .screen.banner-on .banner{opacity:1;transform:none}
-.screen.strip-on .banner{bottom:calc(6vh + 170px)}
+.screen.strip-on .banner{bottom:calc(5vh + 190px)} /* above the buttons, which sit above the strip */
 .bn-n{font:700 clamp(2.6rem,5vw,4.4rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold);min-width:1.5em;text-align:center}
 .bn-body{display:flex;flex-direction:column;gap:6px;min-width:0}
 .bn-name{font-weight:700;font-size:clamp(1.1rem,2vw,1.45rem);color:#fff}

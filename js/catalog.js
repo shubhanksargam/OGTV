@@ -13,11 +13,11 @@ const CATALOG = [
   {id:"Exp3aP7Ojb0",t:"Special veg sandwich on the tawa",cat:"rasoi",lang:"hi",min:9,src:"Kabita's Kitchen",tag:"snack"},
   {id:"OCtjnPuxbxI",t:"One-teaspoon-oil breakfast",cat:"rasoi",lang:"hi",min:10,src:"Kabita's Kitchen"},
   // Sehat (yoga)
-  {id:"VcUkvIVkVGs",t:"Warm-up yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
-  {id:"Q3_0NZwBE7g",t:"20-minute daily yoga for beginners",cat:"sehat",lang:"hi",min:20,src:"Art of Living"},
-  {id:"G8x2WscstH0",t:"15-minute daily yoga",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
-  {id:"0efkVn-I5gk",t:"Morning yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
-  {id:"DbbsVGkZ1Ck",t:"How to start yoga, part 1",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
+  {id:"VcUkvIVkVGs",t:"Warm-up yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
+  {id:"Q3_0NZwBE7g",t:"20-minute daily yoga for beginners",cat:"sehat",lang:"hi",min:20,src:"Art of Living",tag:"yoga"},
+  {id:"G8x2WscstH0",t:"15-minute daily yoga",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
+  {id:"0efkVn-I5gk",t:"Morning yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
+  {id:"DbbsVGkZ1Ck",t:"How to start yoga, part 1",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
   // Sadabahar (evergreen songs)
   {id:"oSkbkxlMurA",t:"Lata Mangeshkar & Kishore Kumar hits",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
   {id:"3OFpvKUbAwU",t:"Lata & Kishore duets",cat:"geet",lang:"hi",min:30,src:"Jukebox"},

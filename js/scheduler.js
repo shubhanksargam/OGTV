@@ -11,10 +11,12 @@ const BAD=new Set();
 function markBad(id){BAD.add(id); cache.clear()}
 
 function pick(part){
-  const ok=v=>!BAD.has(v.id);
-  let pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat&&(!part.tag||v.tag===part.tag)&&(!part.maxMin||v.min<=part.maxMin));
+  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang); // part.lang: only that language, never a fallback to others
+  const re=part.match&&(part._re||(part._re=new RegExp(part.match,"i"))); // part.match: title must match, e.g. snack recipes
+  let pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
   if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat);
   if(!pool.length&&part.alt) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.alt); // e.g. Kids falls back to science
+  if(!pool.length&&part.tag) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat);
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
   return pool.length?pool:CATALOG;
 }
