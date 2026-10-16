@@ -103,7 +103,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes resolve{0%{opacity:0}18%{opacity:.85}26%{opacity:.15}40%{opacity:1}52%{opacity:.55}62%,100%{opacity:1}} /* signal locking on */
 .static .ident .logo,.static .ident .logo-mark{color:#0b0a0f} /* the primary logo's black-on-light version */
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
-.live{background:var(--sindoor);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.12em;padding:3px 9px;border-radius:4px}
 .chanbug{font-family:var(--display);font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
   padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
