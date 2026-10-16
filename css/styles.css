@@ -1,0 +1,110 @@
+/* Layout: a living-room TV — big screen left, channel remote right, programme guide underneath.
+   Single committed dark look (a lit screen in a dim room), large type for viewers 14–80. */
+:root{
+  color-scheme: dark;
+  --room:#14111c;        /* dim room */
+  --panel:#1e1a29;       /* cabinet */
+  --panel-2:#272236;
+  --line:#3a3350;
+  --ink:#f6efe3;         /* warm paper white */
+  --muted:#b9ae9f;
+  --marigold:#f2a03d;    /* accent */
+  --marigold-ink:#1d1206;
+  --sindoor:#e5483a;     /* LIVE */
+  --peacock:#3fb8a8;     /* rule chips */
+  --display:"Yatra One", "Mukta", Georgia, serif;
+  --body:"Mukta", "Noto Sans Telugu", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --telugu:"Noto Sans Telugu", "Mukta", system-ui, sans-serif;
+}
+html,body{background:var(--room);color:var(--ink)}
+body{font-family:var(--body);font-size:17px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  padding-block:16px 40px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;justify-content:space-between}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand h1{font-family:var(--display);font-weight:400;font-size:2.1rem;margin:0;color:var(--marigold);letter-spacing:.01em}
+.brand span{color:var(--muted);font-size:.95rem}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:700}
+.clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:8px 14px;min-height:44px;color:var(--muted);font-weight:500}
+.seg button[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink)}
+
+/* main grid */
+.main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.main{grid-template-columns:1fr}}
+
+.tv{display:flex;flex-direction:column;gap:12px;min-width:0}
+.screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;
+  box-shadow:0 0 0 1px var(--line),0 20px 60px -20px rgba(242,160,61,.25)}
+#yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
+.live{background:var(--sindoor);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.12em;padding:3px 9px;border-radius:4px}
+.chanbug{font-family:var(--display);font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
+  padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;
+  padding:6% 8%;background:radial-gradient(120% 90% at 20% 10%,#3a2a4f 0%,#1a1424 55%,#0e0b14 100%)}
+.card .kicker{color:var(--marigold);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
+.card h2{font-family:var(--display);font-weight:400;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
+.card p{margin:0;color:var(--muted);max-width:52ch}
+.card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
+  padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
+.card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:700}
+
+.now{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.now-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.now h3{margin:0;font-size:1.3rem;line-height:1.25;text-wrap:balance;min-width:0}
+.meta{color:var(--muted);font-size:.95rem;font-variant-numeric:tabular-nums}
+.bar{height:8px;background:var(--panel-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--marigold);width:0}
+.why{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.92rem;color:var(--muted)}
+.chip{border:1px solid var(--peacock);color:var(--peacock);border-radius:999px;padding:2px 10px;font-size:.85rem;font-weight:500}
+.next{font-size:.98rem}
+.next b{color:var(--marigold);font-weight:700}
+
+/* remote / channel list */
+.remote{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px}
+.remote h4{margin:6px 8px 6px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ch{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;text-align:left;background:transparent;
+  border:0;border-radius:10px;padding:10px 10px;min-height:64px}
+.ch:hover{background:var(--panel-2)}
+.ch[aria-current="true"]{background:var(--panel-2);box-shadow:inset 3px 0 0 var(--marigold)}
+.ch .num{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.3rem;color:var(--marigold);text-align:center}
+.ch .nm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ch .nm strong{font-family:var(--display);font-weight:400;font-size:1.15rem}
+.ch .nm em{font-style:normal;color:var(--muted);font-size:.85rem}
+.ch .on{display:block;color:var(--muted);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hint{color:var(--muted);font-size:.85rem;margin:6px 8px 4px}
+kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:.8rem}
+
+/* guide */
+.guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 0 10px}
+.guide-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:0 18px 10px}
+.guide-head h4{margin:0;font-family:var(--display);font-weight:400;font-size:1.35rem}
+.guide-head span{color:var(--muted);font-size:.9rem}
+.gscroll{overflow-x:auto;position:relative}
+.grid{position:relative;padding:0 18px}
+.trow{display:flex;height:30px;position:relative;margin-left:120px}
+.tick{position:absolute;top:6px;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateX(-50%)}
+.grow{display:flex;align-items:stretch;height:58px;margin-bottom:6px}
+.glabel{width:112px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-size:1.02rem;
+  position:sticky;left:0;background:var(--panel);z-index:2;padding-left:2px}
+.glane{position:relative;flex:none}
+.prog{position:absolute;top:0;bottom:0;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);
+  padding:6px 9px;overflow:hidden;font-size:.86rem;line-height:1.25;text-align:left;min-width:0}
+.prog b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog small{color:var(--muted);font-variant-numeric:tabular-nums}
+.prog.nowp{border-color:var(--marigold)}
+.nowline{position:absolute;top:0;bottom:0;width:2px;background:var(--sindoor);z-index:1;pointer-events:none}
+
+.note{color:var(--muted);font-size:.92rem;max-width:80ch}
+.note strong{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

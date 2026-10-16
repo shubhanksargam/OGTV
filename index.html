@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aangan TV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&family=Noto+Sans+Telugu:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>आँगन TV</h1><span>Aangan · always on, for the whole family</span></div>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Language">
+        <button id="lang-all" data-lang="all" aria-pressed="true">Sab / All</button>
+        <button id="lang-hi" data-lang="hi" aria-pressed="false">हिन्दी</button>
+        <button id="lang-te" data-lang="te" aria-pressed="false" style="font-family:var(--telugu)">తెలుగు</button>
+      </div>
+      <div class="clock" id="clock" aria-live="off">--:--<small>IST</small></div>
+    </div>
+  </header>
+
+  <section class="main">
+    <div class="tv">
+      <div class="screen" id="screen">
+        <div id="yt"></div>
+        <div class="bug"><span class="live">LIVE</span><span class="chanbug" id="chanbug"></span></div>
+        <div class="card" id="card" hidden></div>
+        <button class="sound" id="sound" hidden>Turn sound on</button>
+      </div>
+      <div class="now" aria-live="polite">
+        <div class="now-row"><h3 id="nowTitle">Tuning in…</h3><span class="meta" id="nowTime"></span></div>
+        <div class="bar"><i id="nowBar"></i></div>
+        <div class="why" id="why"></div>
+        <div class="next" id="next"></div>
+      </div>
+    </div>
+
+    <nav class="remote" aria-label="Channels">
+      <h4>Channels</h4>
+      <div id="chlist"></div>
+      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>7</kbd> jump, <kbd>M</kbd> sound</p>
+    </nav>
+  </section>
+
+  <section class="guide" aria-label="Programme guide">
+    <div class="guide-head"><h4>Programme guide</h4><span id="gspan">Next 3 hours · India Standard Time</span></div>
+    <div class="gscroll"><div class="grid" id="grid"></div></div>
+  </section>
+
+  <p class="note" id="modeNote"></p>
+</div>
+
+<script src="js/catalog.js"></script>
+<script src="js/channels.js"></script>
+<script src="js/scheduler.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
