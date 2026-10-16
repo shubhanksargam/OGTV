@@ -3,8 +3,13 @@
 // play in an embed, aren't live, are family-safe and fit the length limits.
 // Uses the YouTube Data API when YT_API_KEY is set, otherwise reads each watch page.
 // A creator that fails this run keeps its videos from the previous js/feeds.js.
-// Usage: node scripts/fetch-feeds.mjs
+// A source is a creator ("id": channel ID, latest ~15 uploads) or a playlist ("playlist": ID, first "take" videos).
+// "match"/"skip" are case-insensitive regexes on the title, e.g. only trailers from a music label.
+// "keepDays" keeps videos from earlier runs that are newer than that many days.
+// Usage: node scripts/fetch-feeds.mjs            refresh every source
+//        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
+import {roman} from "./roman.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
@@ -23,8 +28,22 @@ async function get(url, tries = 3) {
 
 async function rss(channelId) {
   const xml = await get("https://www.youtube.com/feeds/videos.xml?channel_id=" + channelId);
-  return [...xml.matchAll(/<entry>[\s\S]*?<yt:videoId>([^<]+)<\/yt:videoId>[\s\S]*?<published>([^<]+)<\/published>/g)]
-    .map(m => ({id: m[1], pub: m[2].slice(0, 10)}));
+  return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(m => m[1])
+    .filter(e => !e.includes("/shorts/")) // the feed links Shorts as /shorts/ID
+    .map(e => ({id: e.match(/<yt:videoId>([^<]+)/)[1], pub: (e.match(/<published>([^<]+)/) || [])[1]?.slice(0, 10)}));
+}
+
+async function playlist(listId, take) {
+  const html = await get("https://www.youtube.com/playlist?list=" + listId);
+  const m = html.match(/var ytInitialData = (\{.*?\});<\/script>/s);
+  if (!m) throw new Error("no playlist data");
+  const ids = [];
+  JSON.stringify(JSON.parse(m[1]), (k, v) => {
+    if (k === "lockupViewModel" && v.contentType === "LOCKUP_CONTENT_TYPE_VIDEO") ids.push(v.contentId);
+    if (k === "playlistVideoRenderer" && v.videoId) ids.push(v.videoId);
+    return v;
+  });
+  return [...new Set(ids)].slice(0, take).map(id => ({id}));
 }
 
 // -> {sec, title, ok} where ok means embeddable, not live/upcoming, family-safe
@@ -34,7 +53,7 @@ async function detailsFromPage(id) {
   if (!m) throw new Error("no player data for " + id);
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   const mf = (p.microformat || {}).playerMicroformatRenderer || {};
-  return {sec: +v.lengthSeconds || 0, title: v.title || "",
+  return {sec: +v.lengthSeconds || 0, title: v.title || "", pub: mf.publishDate?.slice(0, 10),
     ok: ps.status === "OK" && ps.playableInEmbed === true && !v.isLiveContent && !v.isUpcoming && mf.isFamilySafe !== false};
 }
 
@@ -54,7 +73,7 @@ async function detailsFromApi(ids) {
 
 // "Main title | #tags | Channel" -> "Main title"
 function cleanTitle(t) {
-  t = t.replace(/#\S+/g, "").replace(/\s+/g, " ").trim();
+  t = t.replace(/#\S+/g, "").replace(/[\[(](?:hindi|english|full video|official video|4k|hd)[\])]/gi, "").replace(/\s+/g, " ").trim();
   const first = t.split(/\s[|｜]\s/)[0].trim();
   if (first.length >= 8) t = first;
   return t.length > 90 ? t.slice(0, 87).trimEnd() + "…" : t;
@@ -67,9 +86,11 @@ async function previous() {
   } catch { return []; }
 }
 
+const keyOf = f => f.id || f.playlist;
 async function fetchFeed(f, old) {
   try {
-    const entries = await rss(f.id);
+    const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await rss(f.id);
+    const match = f.match && new RegExp(f.match, "i"), skip = f.skip && new RegExp(f.skip, "i");
     const info = KEY ? await detailsFromApi(entries.map(e => e.id)) : {};
     const items = []; let unread = 0;
     for (const e of entries) {
@@ -78,25 +99,43 @@ async function fetchFeed(f, old) {
       if (!d || !d.ok) continue;
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
-      items.push({id: e.id, t: cleanTitle(d.title), cat: f.cat, lang: f.lang, min, src: f.src, pub: e.pub, feed: f.id});
+      if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
+      items.push({id: e.id, t: cleanTitle(d.title), cat: f.cat, lang: f.lang, min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     if (entries.length && unread === entries.length) throw new Error("YouTube blocked every video page");
     console.log(`${String(items.length).padStart(2)} / ${entries.length}  ${f.src}`);
     return items;
   } catch (err) {
-    const kept = old.filter(v => v.feed === f.id);
+    const kept = old.filter(v => v.feed === keyOf(f));
     console.log(`FAILED ${f.src} (${err.message}); kept ${kept.length} from last run`);
     return kept;
   }
 }
 
-// A few creators at a time keeps it quick without hammering YouTube
+// Festival songs are refreshed only in the 30 days before a festival (and during it); otherwise last run's are kept
+const festSrc = await readFile(new URL("js/festivals.js", ROOT), "utf8");
+const FESTIVALS = JSON.parse(festSrc.slice(festSrc.indexOf("["), festSrc.lastIndexOf("]") + 1));
+const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10), DAY = 86400e3;
+const inSeason = cat => FESTIVALS.some(x => x.cat === cat && today <= x.to && Date.parse(x.from) - Date.parse(today) <= 30 * DAY);
+
+// A few sources at a time keeps it quick without hammering YouTube
+const ONLY = process.argv[2]?.split(",");
 const old = await previous(), results = new Array(feeds.length);
 let next = 0;
-await Promise.all(Array.from({length: 4}, async () => {
-  while (next < feeds.length) { const i = next++; results[i] = await fetchFeed(feeds[i], old); }
+await Promise.all(Array.from({length: 6}, async () => {
+  while (next < feeds.length) {
+    const i = next++, f = feeds[i];
+    const kept = old.filter(v => v.feed === keyOf(f));
+    const skipNow = (ONLY && !ONLY.includes(f.cat)) || (f.cat.startsWith("fest-") && !inSeason(f.cat) && kept.length);
+    results[i] = skipNow ? kept : await fetchFeed(f, old);
+    if (!skipNow && f.keepDays) { // e.g. trailers: keep earlier finds for a while so the channel builds up
+      const since = new Date(Date.now() - f.keepDays * DAY).toISOString().slice(0, 10);
+      results[i].push(...kept.filter(v => (v.pub || "") >= since && !results[i].some(x => x.id === v.id)));
+    }
+  }
 }));
-const items = results.flat();
+const seen = new Set(), items = results.flat().filter(v => !seen.has(v.id) && seen.add(v.id))
+  .map(v => ({...v, t: roman(v.t)})); // titles in Latin script only
 
 const body = "/* Generated by scripts/fetch-feeds.mjs from scripts/feeds.json. Do not edit by hand. */\n"
   + "const FEED = [\n" + items.map(v => JSON.stringify(v)).join(",\n") + "\n];\n"

@@ -1,0 +1,39 @@
+{
+  "_about": "Official YouTube channels checked for a live stream every 30 minutes by scripts/fetch-live.mjs (writes js/live.js). Earlier in a list = preferred.",
+  "groups": {
+    "matches": [
+      {"id":"UCmqfX0S3x0I3uwLkPdpX03w","src":"Star Sports","lang":"hi"},
+      {"id":"UC_WKb6N9iTGc77hxwXLDrbA","src":"Sony Sports Network","lang":"hi"},
+      {"id":"UCF10AG_t1AYW3mlmX7g1VJA","src":"FanCode","lang":"en"},
+      {"id":"UCX2eNtU1ZG3x4OpdP2UIlJA","src":"Prasar Bharati Sports","lang":"hi"},
+      {"id":"UCt2JXOLNxqry7B_4rRZME3Q","src":"ICC","lang":"en"},
+      {"id":"UCL7l6c635bbxWkH7Gofbb-A","src":"Pro Kabaddi","lang":"hi"},
+      {"id":"UCJk-aQ7NZtqYtpcqKDt_vZg","src":"Indian Super League","lang":"en"},
+      {"id":"UCv_R1MJycEf4_-qLK_S-RPQ","src":"Khelo India","lang":"hi"},
+      {"id":"UChh-akEbUM8_6ghGVnJd6cQ","src":"BWF TV","lang":"en"},
+      {"id":"UC9ckyA_A3MfXUa0ttxMoIZw","src":"World Table Tennis","lang":"en"}
+    ],
+    "news": [
+      {"id":"UCt4t-jeY85JegMlZ-E5UWtA","src":"Aaj Tak","lang":"hi"},
+      {"id":"UCRWFSbif-RFENbBrSiez1DA","src":"ABP News","lang":"hi"},
+      {"id":"UC9CYT9gSNLevX5ey2_6CK0Q","src":"NDTV India","lang":"hi"},
+      {"id":"UCttspZesZIDEwwpVIgoZtWQ","src":"India TV","lang":"hi"},
+      {"id":"UCIvaYmXn910QMdemBG3v1pQ","src":"Zee News","lang":"hi"},
+      {"id":"UCPP3etACgdUWvizcES1dJ8Q","src":"News18 India","lang":"hi"},
+      {"id":"UCKwucPzHZ7zCUIf7If-Wo1g","src":"DD News","lang":"hi"},
+      {"id":"UCZFMm1mMw0F81Z37aaEzTUA","src":"NDTV 24x7","lang":"en"},
+      {"id":"UCYPvAwZP8pZhSMW8qs7cVCw","src":"India Today","lang":"en"},
+      {"id":"UC_gUM8rL-Lrg6O3adPW9K1g","src":"WION","lang":"en"},
+      {"id":"UC6RJ7-PaXg6TIH2BzZfTV7w","src":"Times Now","lang":"en"},
+      {"id":"UCef1-8eOpJgud7szVPlZQAQ","src":"CNN-News18","lang":"en"}
+    ],
+    "bihar": [
+      {"id":"UC531MlZA5LUbeGwEN_zcppw","src":"News18 Bihar Jharkhand","lang":"hi"},
+      {"id":"UCZUjHLJivN0OZPC_Wj8JvkA","src":"Zee Bihar Jharkhand","lang":"hi"},
+      {"id":"UCz-E4UIPP-4iKn9UKaGBRWA","src":"ABP Bihar","lang":"hi"},
+      {"id":"UCBdxSSyIlnwo3Aj5O0c6RWQ","src":"Kashish News","lang":"hi"},
+      {"id":"UCunkkfYOmPbQ6KfkAhawoWw","src":"News4Nation","lang":"hi"},
+      {"id":"UCRP74f4FXxw7ez2iIyUsHSg","src":"First Bihar Jharkhand","lang":"hi"}
+    ]
+  }
+}

@@ -8,10 +8,13 @@ on:
 permissions:
   contents: write
   pages: write
+concurrency:
+  group: site-data
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,6 +31,6 @@ jobs:
           sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d)#" index.html
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Refresh feeds"
-          git push
+          git commit -qam "Refresh feeds"
+          git pull -q --rebase && git push -q
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

@@ -40,20 +40,23 @@ const CATALOG = [
   {id:"rW_fwcmyIfk",t:"Neeraj Chopra wins historic gold · Tokyo 2020",cat:"khel",lang:"en",min:4,src:"Olympics"},
   {id:"S3w6rysLXdQ",t:"The best of PV Sindhu at the Olympics",cat:"khel",lang:"en",min:9,src:"Olympics"},
   {id:"JP2jo285Q-s",t:"India men's hockey: top 10 goals",cat:"khel",lang:"en",min:6,src:"FIH Hockey"},
-  {id:"HuqaOWc3wsc",t:"भारत बनाम पाकिस्तान · हॉकी हाइलाइट्स",cat:"khel",lang:"hi",min:10,src:"FIH Hockey"},
-  {id:"H7q7q1IwEY4",t:"पाकिस्तान को हराकर भारत फाइनल में · 2011 विश्व कप",cat:"khel",lang:"hi",min:10,src:"ICC"},
+  {id:"HuqaOWc3wsc",t:"India vs Pakistan · hockey highlights",cat:"khel",lang:"hi",min:10,src:"FIH Hockey"},
+  {id:"H7q7q1IwEY4",t:"India beat Pakistan to reach the final · 2011 World Cup",cat:"khel",lang:"hi",min:10,src:"ICC"},
   {id:"IXKu3w5-glc",t:"IND v AUS · 2016 T20 World Cup · Hindi highlights",cat:"khel",lang:"hi",min:8,src:"ICC"},
   // Vigyan (science)
   {id:"p9pPjASnnxw",t:"Quantum mechanics in simple words",cat:"vigyan",lang:"en",min:8,src:"Science ABC"},
   {id:"5-2NLHB4Gxg",t:"Work, force & energy · Dr. Binocs",cat:"vigyan",lang:"en",min:7,src:"Peekaboo Kidz"},
   {id:"suQDwZcnJdg",t:"Gravity · Dr. Binocs",cat:"vigyan",lang:"en",min:4,src:"Peekaboo Kidz"},
-  {id:"6dj48zWlbGc",t:"कम लागत वाले विज्ञान प्रयोग · माचिस मॉडल",cat:"vigyan",lang:"hi",min:26,src:"Arvind Gupta"},
-  {id:"l83ZbSrbUnk",t:"हमारे शरीर के अंग कैसे काम करते हैं",cat:"vigyan",lang:"hi",min:39,src:"Binocs Ki Duniya"},
-  {id:"XzSxezvf_8g",t:"विद्युत · टॉर्च और सर्किट के साथ प्रयोग",cat:"vigyan",lang:"hi",min:9,src:"Bodhaguru"},
-  {id:"esoQhorc1As",t:"पानी के 3 आसान विज्ञान प्रयोग",cat:"vigyan",lang:"hi",min:6,src:"Unacademy Live Laboratory"},
+  {id:"6dj48zWlbGc",t:"Low-cost science experiments · matchbox models",cat:"vigyan",lang:"hi",min:26,src:"Arvind Gupta"},
+  {id:"l83ZbSrbUnk",t:"How the organs of our body work",cat:"vigyan",lang:"hi",min:39,src:"Binocs Ki Duniya"},
+  {id:"XzSxezvf_8g",t:"Electricity · experiments with a torch and circuits",cat:"vigyan",lang:"hi",min:9,src:"Bodhaguru"},
+  {id:"esoQhorc1As",t:"3 easy science experiments with water",cat:"vigyan",lang:"hi",min:6,src:"Unacademy Live Laboratory"},
   {id:"vnfiSiR9cvI",t:"The human liver · Hindi",cat:"vigyan",lang:"hi",min:30,src:"Infinity Stream"},
   {id:"z4aOiALk2Fk",t:"The human brain · Hindi",cat:"vigyan",lang:"hi",min:34,src:"Infinity Stream"},
 ];
 const CAT_LABEL={bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
-  khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts"};
+  khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",
+  cricket:"Cricket",football:"Football",live:"Live",khabar:"Hindi news",news:"English news",bihar:"Bihar & Jharkhand news",punjabi:"Punjabi",
+  hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems"};
+const catLabel=c=>CAT_LABEL[c]||(c.startsWith("fest-")?"Festival songs":c);
 const LANG_LABEL={hi:"Hindi",en:"English"};

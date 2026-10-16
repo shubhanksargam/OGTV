@@ -1,6 +1,6 @@
 # OGTV
 
-A 24×7 TV-style website for Indian viewers, in Hindi and English. YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
+A 24×7 TV-style website for Indian viewers: 33 channels of Hindi and English YouTube, three of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
 
 ## Run it
 
@@ -18,7 +18,10 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `css/styles.css` | Colours, fonts and layout (tokens at the top in `:root`) |
 | `js/catalog.js` | Hand-picked videos: YouTube ID, title, category, language, length in minutes |
 | `js/feeds.js` | Generated: latest uploads from the creators in `scripts/feeds.json` |
-| `scripts/fetch-feeds.mjs` | Rebuilds `js/feeds.js` (`node scripts/fetch-feeds.mjs`) |
+| `scripts/fetch-feeds.mjs` | Rebuilds `js/feeds.js` (`node scripts/fetch-feeds.mjs`, or `... khel,geet` for some categories) |
+| `js/live.js` | Generated: which channels in `scripts/live.json` are live right now |
+| `js/festivals.js` | Festival calendar for the Festivals channel (add next year's dates before Oct 2027) |
+| `scripts/fetch-live.mjs` | Rebuilds `js/live.js` (`node scripts/fetch-live.mjs`) |
 | `js/channels.js` | Channels and their rules (time blocks in IST and what each block plays) |
 | `js/scheduler.js` | Builds each day's schedule deterministically from the rules |
 | `js/app.js` | Player, channel list, programme guide, remote keys |
@@ -35,7 +38,11 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 `cat` must be a key of `CAT_LABEL` (`bhakti, rasoi, sehat, geet, gyaan, hasya, khel, vigyan, tech, paisa, safar, bachche, baatcheet`). `lang` is `hi` or `en`. `tag` is optional.
 
-**A creator feed** — add a line to `scripts/feeds.json` with the YouTube channel ID (starts with `UC`), category and language, then run `node scripts/fetch-feeds.mjs`. Only uploads that allow embedding, aren't live, are family-safe and fit `minMin`–`maxMin` (default 3–60 minutes) are kept, so Shorts drop out.
+**A creator feed** — add a line to `scripts/feeds.json` with the YouTube channel ID (`"id"`, starts with `UC`) or a playlist ID (`"playlist"`, plus `"take"` for how many), category and language, then run `node scripts/fetch-feeds.mjs`. `"match"`/`"skip"` filter by title, e.g. only trailers. Only uploads that allow embedding, aren't live, are family-safe and fit `minMin`–`maxMin` (default 3–60 minutes) are kept, so Shorts drop out.
+
+**Live channels** — a channel with `live:"news"` plays the first on-air stream from that group in `scripts/live.json`, and its `parts` when nothing is live. `.github/workflows/refresh-live.yml` rechecks every 30 minutes and commits `js/live.js` only when it changes. Only official channels' own streams are used.
+
+**Festivals channel** — plays the `cat` of whichever row in `js/festivals.js` covers today (`from`–`to`), or the next festival coming up. Festival song playlists live in `scripts/feeds.json` under `fest-*` categories and are only refetched within 30 days of their festival.
 
 **Nightly refresh** — `.github/workflows/refresh-feeds.yml` reruns the feed script at 03:00 IST and commits `js/feeds.js` when there are new videos. Run it by hand from the repo's Actions tab → Refresh feeds → Run workflow. For more reliable lookups, add a YouTube Data API key as a repository secret named `YT_API_KEY`.
 
@@ -55,6 +62,9 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 - The first tap ("Press to start") lets the browser play with sound.
 - `?ch=8` in the address opens channel 8. Type two digits on the keyboard for channels 10 and up.
+- Full screen: the button on the screen, double-click, or `F`. On iPhone the screen fills the browser window instead.
+- Retro mode: the **Retro** button or `R` adds a camcorder look (VHS colour, scanlines, grain, PLAY readout). Remembered per browser.
+- A video that won't play is skipped and the channel moves to the next one.
 - **NEW** in the guide marks videos uploaded in the last 30 days.
 
 ## How the sync works
