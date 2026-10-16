@@ -125,6 +125,7 @@
     {"id": "UCJEDFSxHHOW1PpBccdSxOTA", "src": "The Indian Express", "cat": "news", "lang": "en", "maxMin": 45},
     {"id": "UCuyRsHZILrU7ZDIAbGASHdA", "src": "ThePrint", "cat": "news", "lang": "en", "maxMin": 45},
     {"id": "UC3njZ48-FDxLleBYaP0SZIg", "src": "The Hindu", "cat": "news", "lang": "en", "maxMin": 45},
+    {"id": "UC83iGbaOhZR8AWNYYNzSNjg", "src": "India Global Review", "cat": "news", "lang": "en", "maxMin": 45},
     {"id": "UC531MlZA5LUbeGwEN_zcppw", "src": "News18 Bihar Jharkhand", "cat": "bihar", "lang": "hi", "minMin": 2, "maxMin": 40},
     {"id": "UCZUjHLJivN0OZPC_Wj8JvkA", "src": "Zee Bihar Jharkhand", "cat": "bihar", "lang": "hi", "minMin": 2, "maxMin": 40},
     {"id": "UCz-E4UIPP-4iKn9UKaGBRWA", "src": "ABP Bihar", "cat": "bihar", "lang": "hi", "minMin": 2, "maxMin": 40},
