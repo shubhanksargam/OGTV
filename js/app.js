@@ -51,7 +51,7 @@ addEventListener("keydown",e=>{
   else if(e.key==="ArrowDown"){e.preventDefault();tune(cur+1)}
   else if(/^[0-9]$/.test(e.key)){ // "1" then "2" = channel 12; waits a moment for a second digit
     digits+=e.key; clearTimeout(digitTimer);
-    if(digits.length>=2||+digits*10>CHANNELS.length){tuneNumber(+digits);digits=""}
+    if(digits.length>=2||+digits*10>CHANNELS[CHANNELS.length-1].n){tuneNumber(+digits);digits=""}
     else digitTimer=setTimeout(()=>{tuneNumber(+digits);digits=""},900);
   }
   else if(e.key==="m"||e.key==="M") toggleSound();

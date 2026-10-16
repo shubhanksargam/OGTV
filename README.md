@@ -1,6 +1,6 @@
 # OGTV
 
-A 24×7 TV-style website for Indian viewers: 34 channels of Hindi and English YouTube, three of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
+A 24×7 TV-style website for Indian viewers: 33 channels of Hindi and English YouTube, two of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
 
 ## Run it
 
