@@ -1,6 +1,6 @@
 /* ---------- Analytics: GoatCounter (no cookies, no personal data) ----------
    Set GC_CODE to your GoatCounter site code (the "ogtv" in ogtv.goatcounter.com). Empty = no tracking. */
-const GC_CODE = "";
+const GC_CODE = "shubhank";
 
 window.goatcounter = {no_onload: true}; // we count the visit ourselves, without the ?ch= query
 function track(name, title){ // events show up as paths in the GoatCounter dashboard
