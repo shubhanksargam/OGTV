@@ -64,7 +64,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 - `?ch=8` in the address opens channel 8. Type two digits on the keyboard for channels 10 and up.
 - Subtitles: the **CC** button on the screen or `S` turns YouTube's subtitles off (or back on) for every video. Remembered per browser.
 - Hide the channel list with its **Hide** button or `C`; the tab on the right edge brings it back.
-- Full screen: the button on the screen, double-click, or `F`. On iPhone the screen fills the browser window instead.
+- Full screen: the button on the screen, double-click, or `F`. In full screen a banner shows each channel change, moving the mouse to the bottom (or tapping, or `←`/`→`) opens a strip of all channels (`Enter` tunes), the OGTV mark and channel name sit in the corner, and controls fade when idle. On iPhone the screen fills the browser window instead.
 - Retro mode: the **Retro** button or `R` adds a camcorder look (VHS colour, scanlines, grain, PLAY readout). Remembered per browser.
 - A video that won't play is skipped and the channel moves to the next one.
 - **NEW** in the guide marks videos uploaded in the last 30 days.

@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#14111c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Yatra+One&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=25">
+<link rel="stylesheet" href="css/styles.css?v=27">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)" stroke="var(--cut,#14111c)" stroke-width="9"/></symbol></svg>
@@ -29,8 +29,14 @@
         <div id="yt"></div>
         <div class="vhs" aria-hidden="true"><i class="grain"></i><span class="osd osd-play">PLAY &#9654;</span><span class="osd osd-time" id="osdTime"></span></div>
         <div class="static" id="static" aria-hidden="true"><canvas id="noise" width="400" height="225"></canvas><span class="ident" id="ident"><span class="logo"><svg class="logo-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="logo-word">GTV</span></span></span></div>
-        <div class="bug"><span class="chanbug" id="chanbug"></span></div>
+        <div class="bug"><svg class="bug-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="chanbug" id="chanbug"></span></div>
         <div class="card" id="card" hidden></div>
+        <div class="fs-catch" id="fsCatch" aria-hidden="true"></div>
+        <div class="fs-ui">
+          <div class="banner" id="banner" aria-live="polite"></div>
+          <div class="digits" id="digits" aria-hidden="true"></div>
+          <div class="strip" id="strip" role="list" aria-label="All channels"></div>
+        </div>
         <button class="sound" id="sound" hidden>Turn sound on</button>
         <button class="cc" id="cc" aria-pressed="true" aria-label="Subtitles" title="Subtitles (S)">CC</button>
         <button class="fs" id="fs" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
@@ -77,13 +83,13 @@
   </footer>
 </div>
 
-<script src="js/analytics.js?v=25"></script>
-<script src="js/catalog.js?v=25"></script>
-<script src="js/feeds.js?v=25"></script>
-<script src="js/live.js?v=25"></script>
-<script src="js/festivals.js?v=25"></script>
-<script src="js/channels.js?v=25"></script>
-<script src="js/scheduler.js?v=25"></script>
-<script src="js/app.js?v=25"></script>
+<script src="js/analytics.js?v=27"></script>
+<script src="js/catalog.js?v=27"></script>
+<script src="js/feeds.js?v=27"></script>
+<script src="js/live.js?v=27"></script>
+<script src="js/festivals.js?v=27"></script>
+<script src="js/channels.js?v=27"></script>
+<script src="js/scheduler.js?v=27"></script>
+<script src="js/app.js?v=27"></script>
 </body>
 </html>

@@ -39,18 +39,19 @@ let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;try{localStorage.setItem("aangan-ch",cur)}catch(e){}
-  countChannel();
+  countChannel(); browse=cur; clearDigits();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
-  playingKey=null; renderChannels(); tick();}
+  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
   if(!started){start();return}
+  if(isFull()&&fsKey(e)) return;
   if(e.key==="ArrowUp"){e.preventDefault();tune(cur-1)}
   else if(e.key==="ArrowDown"){e.preventDefault();tune(cur+1)}
   else if(/^[0-9]$/.test(e.key)){ // "1" then "2" = channel 12; waits a moment for a second digit
-    digits+=e.key; clearTimeout(digitTimer);
+    digits+=e.key; clearTimeout(digitTimer); showDigits();
     if(digits.length>=2||+digits*10>CHANNELS[CHANNELS.length-1].n){tuneNumber(+digits);digits=""}
     else digitTimer=setTimeout(()=>{tuneNumber(+digits);digits=""},900);
   }
@@ -119,10 +120,59 @@ function toggleFullscreen(){
   const el=$("screen"), fsEl=document.fullscreenElement||document.webkitFullscreenElement;
   if(fsEl){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return}
   const req=el.requestFullscreen||el.webkitRequestFullscreen;
-  if(req&&!el.classList.contains("pseudo-fs")) req.call(el); else el.classList.toggle("pseudo-fs");
+  if(req&&!el.classList.contains("pseudo-fs")) req.call(el); else {el.classList.toggle("pseudo-fs"); onFullscreenChange()}
   track("fullscreen","Full screen");
 }
 $("fs").addEventListener("click",toggleFullscreen);
+
+/* ---------- Full-screen TV mode ----------
+   Banner on every channel change; a strip of all channels (mouse near the bottom, tap, or left/right; Enter tunes);
+   controls and cursor fade after a few idle seconds. */
+const isFull=()=>!!(document.fullscreenElement||document.webkitFullscreenElement)||$("screen").classList.contains("pseudo-fs");
+const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}, esc=t=>String(t).replace(/[&<>"]/g,c=>ESC[c]);
+let browse=cur, uiTimer=0, bannerTimer=0, digitsTimer=0;
+function wakeUI(strip){
+  if(!isFull())return; const sc=$("screen");
+  sc.classList.remove("fs-idle"); if(strip&&!sc.classList.contains("strip-on")){sc.classList.add("strip-on"); renderStrip()}
+  clearTimeout(uiTimer);
+  uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
+}
+function renderStrip(){
+  const now=Date.now();
+  $("strip").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
+    return `<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}">
+      <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
+      <span class="sc-bar"><i style="width:${pct}%"></i></span></button>`}).join("");
+  const f=$("strip").children[browse]; if(f) f.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+}
+function showBanner(){
+  if(!isFull())return;
+  const c=CHANNELS[cur], now=Date.now(), s=slotAt(c,now), nx=s.live?null:slotAt(c,s.end);
+  $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
+    <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
+    <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`;
+  const sc=$("screen"); sc.classList.add("banner-on"); clearTimeout(bannerTimer);
+  bannerTimer=setTimeout(()=>sc.classList.remove("banner-on"),4500);
+}
+function showDigits(){if(!isFull())return; const last=CHANNELS[CHANNELS.length-1].n;
+  $("digits").textContent=digits+(digits.length<2&&+digits*10<=last?"_":""); $("screen").classList.add("digits-on");
+  clearTimeout(digitsTimer); digitsTimer=setTimeout(clearDigits,1500)}
+function clearDigits(){$("screen").classList.remove("digits-on")}
+function fsKey(e){ // keys that only mean something in full screen
+  const sc=$("screen");
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();
+    browse=(browse+(e.key==="ArrowRight"?1:-1)+CHANNELS.length)%CHANNELS.length; wakeUI(true); renderStrip(); return true}
+  if(e.key==="Enter"&&sc.classList.contains("strip-on")){e.preventDefault(); tune(browse); wakeUI(true); return true}
+  wakeUI(false); return false;
+}
+$("strip").addEventListener("click",e=>{const b=e.target.closest(".sc"); if(b){tune(+b.dataset.i); wakeUI(true)}});
+$("strip").addEventListener("mousemove",()=>wakeUI(true));
+$("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingClientRect(); wakeUI(e.clientY>r.top+r.height*.72)});
+$("fsCatch").addEventListener("click",()=>wakeUI(!$("screen").classList.contains("strip-on")));
+function onFullscreenChange(){const sc=$("screen");
+  if(isFull()){browse=cur; showBanner(); wakeUI(false)} else sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}
+document.addEventListener("fullscreenchange",onFullscreenChange);
+document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=false; try{retro=localStorage.getItem("ogtv-retro")==="1"}catch(e){}
 function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("retro").setAttribute("aria-pressed",on);
