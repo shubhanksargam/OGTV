@@ -16,6 +16,16 @@ const CHANNELS = [
     {from:0,to:17,cat:"sehat",maxMin:20,label:"Short sessions"},
     {from:17,to:24,cat:"sehat",label:"Full classes"}]},
   {key:"geet",n:5,name:"सदाबहार",en:"Sadabahar",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
-  {key:"gyaan",n:6,name:"ज्ञान",en:"Gyaan",parts:[{from:0,to:24,cat:"gyaan",label:"Science & space"}]},
-  {key:"hasya",n:7,name:"హాస్యం",en:"Hasya",telugu:true,parts:[{from:0,to:24,cat:"hasya",label:"Comedy shorts"}]},
+  {key:"gyaan",n:6,name:"ज्ञान",en:"Gyaan",parts:[{from:0,to:24,cat:"gyaan",label:"Space, India & explainers"}]},
+  {key:"hasya",n:7,name:"हास्य",en:"Hasya",parts:[{from:0,to:24,cat:"hasya",label:"Comedy, all day"}]},
+  {key:"khel",n:8,name:"खेल",en:"Khel · Sports",parts:[{from:0,to:24,cat:"khel",label:"Highlights & stories"}]},
+  {key:"vigyan",n:9,name:"विज्ञान",en:"Vigyan · Science",parts:[{from:0,to:24,cat:"vigyan",label:"Experiments & explainers"}]},
+  {key:"tech",n:10,name:"टेक",en:"Tech",parts:[{from:0,to:24,cat:"tech",label:"Gadgets & reviews"}]},
+  {key:"paisa",n:11,name:"पैसा",en:"Paisa · Money",parts:[{from:0,to:24,cat:"paisa",label:"Money & investing"}]},
+  {key:"safar",n:12,name:"सफ़र",en:"Safar · Travel",parts:[{from:0,to:24,cat:"safar",label:"Travel India & beyond"}]},
+  {key:"bachche",n:13,name:"बच्चे",en:"Bachche · Kids",parts:[
+    {from:0,to:7,cat:"vigyan",alt:"bachche",maxMin:15,label:"Early science"},
+    {from:7,to:21,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
+    {from:21,to:24,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
+  {key:"baatcheet",n:14,name:"बातचीत",en:"Baatcheet · Podcasts",parts:[{from:0,to:24,cat:"baatcheet",label:"Long conversations"}]},
 ];

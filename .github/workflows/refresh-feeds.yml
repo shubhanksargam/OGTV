@@ -1,0 +1,33 @@
+# Refreshes js/feeds.js from the creators in scripts/feeds.json every night, so channels pick up new uploads.
+# Optional: add a YT_API_KEY repository secret (YouTube Data API v3) for more reliable lookups.
+name: Refresh feeds
+on:
+  schedule:
+    - cron: "30 21 * * *"   # 03:00 IST
+  workflow_dispatch:         # "Run workflow" button in the Actions tab
+permissions:
+  contents: write
+  pages: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/fetch-feeds.mjs
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: Commit and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet js/feeds.js; then echo "No new videos"; exit 0; fi
+          sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d)#" index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Refresh feeds"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

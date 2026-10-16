@@ -1,0 +1,53 @@
+{
+  "_about": "YouTube creators whose latest uploads fill each category. Run: node scripts/fetch-feeds.mjs  (writes js/feeds.js). minMin/maxMin filter by length in minutes.",
+  "feeds": [
+    {"id":"UCaayLD9i5x4MmIoVZxXSv_g","src":"T-Series Bhakti Sagar","cat":"bhakti","lang":"hi","maxMin":30},
+
+    {"id":"UCChqsCRFePrP2X897iQkyAA","src":"Kabita's Kitchen","cat":"rasoi","lang":"hi","maxMin":30},
+    {"id":"UCgoxyzvouZM-tCgsYzrYtyg","src":"Nisha Madhulika","cat":"rasoi","lang":"hi","maxMin":30},
+    {"id":"UCEHCDn_BBnk3uTK1M64ptyw","src":"Chef Ranveer Brar","cat":"rasoi","lang":"hi","maxMin":30},
+    {"id":"UCe2JAC5FUfbxLCfAvBWmNJA","src":"Your Food Lab","cat":"rasoi","lang":"hi","maxMin":30},
+
+    {"id":"UCYC6Vcczj8v-Y5OgpEJTFBw","src":"Fit Tuber","cat":"sehat","lang":"hi","maxMin":40},
+
+    {"id":"UCP6uH_XlsxrXwZQ4DlqbqPg","src":"Shemaroo Filmi Gaane","cat":"geet","lang":"hi","minMin":3,"maxMin":60},
+
+    {"id":"UCw5hEVOTfz_AfzsNFWyNlNg","src":"ISRO","cat":"gyaan","lang":"en","maxMin":60},
+    {"id":"UCz4a7agVFr1TxU-mpAP8hkw","src":"Mohak Mangal","cat":"gyaan","lang":"hi","maxMin":45},
+    {"id":"UCKZozRVHRYsYHGEyNKuhhdA","src":"Think School","cat":"gyaan","lang":"en","maxMin":45},
+    {"id":"UCrC8mOqJQpoB7NuIMKIS6rQ","src":"StudyIQ IAS","cat":"gyaan","lang":"hi","maxMin":30},
+
+    {"id":"UC7eHZXheF8nVOfwB2PEslMw","src":"Ashish Chanchlani","cat":"hasya","lang":"hi","maxMin":45},
+    {"id":"UCzNq9i-DlDDBLjPerVzJW-A","src":"Kenny Sebastian","cat":"hasya","lang":"en","maxMin":45},
+    {"id":"UC5W8kZaY_u59fwgtjnLrBXA","src":"Kanan Gill","cat":"hasya","lang":"en","maxMin":45},
+    {"id":"UCeumGTY1v0mZjcQDRixH40A","src":"Rakesh Addlakha","cat":"hasya","lang":"hi","maxMin":45},
+
+    {"id":"UCL7l6c635bbxWkH7Gofbb-A","src":"Pro Kabaddi","cat":"khel","lang":"hi","maxMin":40},
+    {"id":"UCX2eNtU1ZG3x4OpdP2UIlJA","src":"Prasar Bharati Sports","cat":"khel","lang":"hi","maxMin":40},
+    {"id":"UCgq3yo_CiroLdMzd3DG3ihw","src":"Khel Now TV","cat":"khel","lang":"en","maxMin":40},
+
+    {"id":"UCT7EcU7rC44DiS3RkfZzZMg","src":"Arvind Gupta","cat":"vigyan","lang":"hi","maxMin":40},
+    {"id":"UCGdnxe0jXfxnqaKXMOtuJyA","src":"Binocs Ki Duniya","cat":"vigyan","lang":"hi","maxMin":45},
+    {"id":"UC46ccgpPJK-3wLzzQrLGtSg","src":"DW Documentary Hindi","cat":"vigyan","lang":"hi","maxMin":60},
+    {"id":"UCfLXWFj1_PdAqqoJcAVK64w","src":"Infinity Stream","cat":"vigyan","lang":"hi","maxMin":45},
+    {"id":"UCcN3IuIAR6Fn74FWMQf6lFA","src":"Science ABC","cat":"vigyan","lang":"en","maxMin":30},
+    {"id":"UCxlJ45KjG4XVcQ_hd8j227A","src":"Peekaboo Kidz","cat":"vigyan","lang":"en","maxMin":30},
+
+    {"id":"UCOhHO2ICt0ti9KAh-QHvttQ","src":"Technical Guruji","cat":"tech","lang":"hi","maxMin":40},
+    {"id":"UCEPL07qzVsOcHd3sMUws65g","src":"Trakin Tech","cat":"tech","lang":"hi","maxMin":40},
+    {"id":"UCO2WJZKQoDW4Te6NHx4KfTg","src":"Geekyranjit","cat":"tech","lang":"en","maxMin":40},
+
+    {"id":"UCe3qdG0A_gr-sEdat5y2twQ","src":"CA Rachana Ranade","cat":"paisa","lang":"hi","maxMin":45},
+    {"id":"UCwAdQUuPT6laN-AQR17fe1g","src":"Pranjal Kamra","cat":"paisa","lang":"hi","maxMin":45},
+    {"id":"UCRzYN32xtBf3Yxsx5BvJWJw","src":"Ankur Warikoo","cat":"paisa","lang":"en","maxMin":45},
+
+    {"id":"UCl5dXugC3XZeDVsDkTaWJ4g","src":"Mountain Trekker","cat":"safar","lang":"hi","maxMin":45},
+    {"id":"UCGeGhS_akOxBWQcSmje6B-w","src":"Tanya Khanijow","cat":"safar","lang":"en","maxMin":45},
+    {"id":"UCgilhqoyZrXV2EBlaaAtVaw","src":"Nomadic Indian","cat":"safar","lang":"en","maxMin":45},
+
+    {"id":"UCAwIKJ84zBsiuuy9DVR13mA","src":"ChuChu TV Storytime","cat":"bachche","lang":"en","maxMin":30},
+
+    {"id":"UCzwCEE_PchiBULMnAJqhGVg","src":"Raj Shamani","cat":"baatcheet","lang":"hi","minMin":20,"maxMin":180},
+    {"id":"UCPxMZIFE856tbTfdkdjzTSQ","src":"BeerBiceps","cat":"baatcheet","lang":"hi","minMin":20,"maxMin":180}
+  ]
+}

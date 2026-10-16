@@ -1,14 +1,17 @@
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
 let cur=0; try{const s=+localStorage.getItem("aangan-ch");if(s>=0&&s<CHANNELS.length)cur=s}catch(e){}
+{const n=+new URLSearchParams(location.search).get("ch"), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8 opens Khel
+const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
+const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>';
 
 function renderChannels(){
   const now=Date.now();
   $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now);
     return `<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
       <span class="num">${c.n}</span>
-      <span style="min-width:0"><span class="nm"><strong style="${c.telugu?'font-family:var(--telugu);font-weight:700':''}">${c.name}</strong><em>${c.en}</em></span>
-      <span class="on">${s.v.t}</span></span></button>`}).join("");
+      <span style="min-width:0"><span class="nm"><strong>${c.name}</strong><em>${c.en}</em></span>
+      <span class="on">${isNew(s.v)?NEW:""}${s.v.t}</span></span></button>`}).join("");
 }
 $("chlist").addEventListener("click",e=>{const b=e.target.closest(".ch");if(b)tune(+b.dataset.i)});
 
@@ -21,8 +24,8 @@ function renderGuide(){
     const lane=slotsBetween(c,a,b).map(s=>{const x=Math.max(s.start,a),y=Math.min(s.end,b);
       const on=now>=s.start&&now<s.end;
       return `<button class="prog${on?' nowp':''}" data-i="${i}" style="left:${(x-a)/MIN*PX+1}px;width:${(y-x)/MIN*PX-3}px" title="${s.v.t}">
-        <b>${s.v.t}</b><small>${fmt(s.start)}</small></button>`}).join("");
-    rows+=`<div class="grow"><div class="glabel" style="${c.telugu?'font-family:var(--telugu);font-weight:700':''}">${c.n} ${c.name}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
+        <b>${isNew(s.v)?NEW:""}${s.v.t}</b><small>${fmt(s.start)}</small></button>`}).join("");
+    rows+=`<div class="grow"><div class="glabel">${c.n} ${c.name}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
   });
   rows+=`<div class="nowline" style="left:${18+120+(now-a)/MIN*PX}px"></div>`;
   $("grid").innerHTML=rows;
@@ -37,12 +40,20 @@ document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",(
 document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.lang===LANG));
 
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;try{localStorage.setItem("aangan-ch",cur)}catch(e){}
+  try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
   playingKey=null; renderChannels(); tick();}
+let digits="", digitTimer=0;
+function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
+  if(!started){start();return}
   if(e.key==="ArrowUp"){e.preventDefault();tune(cur-1)}
   else if(e.key==="ArrowDown"){e.preventDefault();tune(cur+1)}
-  else if(/^[1-7]$/.test(e.key)) tune(+e.key-1);
+  else if(/^[0-9]$/.test(e.key)){ // "1" then "2" = channel 12; waits a moment for a second digit
+    digits+=e.key; clearTimeout(digitTimer);
+    if(digits.length>=2||+digits*10>CHANNELS.length){tuneNumber(+digits);digits=""}
+    else digitTimer=setTimeout(()=>{tuneNumber(+digits);digits=""},900);
+  }
   else if(e.key==="m"||e.key==="M") toggleSound();
 });
 
@@ -72,7 +83,7 @@ window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
   const s=slotAt(CHANNELS[cur],Date.now());
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,start:Math.floor((Date.now()-s.start)/1000)},
-    events:{onReady:()=>{MODE="yt";player.mute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
+    events:{onReady:()=>{MODE="yt";muted?player.mute():player.unMute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               if(e.data===S.PLAYING) hideStatic(); else if(e.data===S.BUFFERING) showStatic();
@@ -85,6 +96,11 @@ function fallback(){
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"}
+/* Press to start: one tap gives the browser permission to play with sound */
+let started=false;
+function start(){if(started)return; started=true; $("start").hidden=true; muted=false;
+  $("sound").textContent="Mute"; if(MODE==="yt"&&player){player.unMute();player.playVideo()}}
+$("start").addEventListener("click",start);
 $("sound").addEventListener("click",toggleSound);
 
 function showCard(msg){

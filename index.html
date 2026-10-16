@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OGTV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&family=Noto+Sans+Telugu:wght@500;700&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css?v=9">
 </head>
 <body>
+<button class="start" id="start" aria-label="Press to start OGTV with sound"><span class="start-logo">OGTV</span><span class="start-cta">Press to start</span><span class="start-sub">Tap anywhere or press any key · sound on</span></button>
 <div class="wrap">
   <header class="top">
     <div class="brand"><h1>OGTV</h1><span>Always on, for the whole family</span></div>
@@ -16,7 +17,7 @@
       <div class="seg" role="group" aria-label="Language">
         <button id="lang-all" data-lang="all" aria-pressed="true">Sab / All</button>
         <button id="lang-hi" data-lang="hi" aria-pressed="false">हिन्दी</button>
-        <button id="lang-te" data-lang="te" aria-pressed="false" style="font-family:var(--telugu)">తెలుగు</button>
+        <button id="lang-en" data-lang="en" aria-pressed="false">English</button>
       </div>
       <div class="clock" id="clock" aria-live="off">--:--<small>IST</small></div>
     </div>
@@ -42,7 +43,7 @@
     <nav class="remote" aria-label="Channels">
       <h4>Channels</h4>
       <div id="chlist"></div>
-      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>7</kbd> jump, <kbd>M</kbd> sound</p>
+      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>14</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound</p>
     </nav>
   </section>
 
@@ -54,9 +55,10 @@
   <p class="note" id="modeNote"></p>
 </div>
 
-<script src="js/catalog.js?v=8"></script>
-<script src="js/channels.js?v=8"></script>
-<script src="js/scheduler.js?v=8"></script>
-<script src="js/app.js?v=8"></script>
+<script src="js/catalog.js?v=9"></script>
+<script src="js/feeds.js?v=9"></script>
+<script src="js/channels.js?v=9"></script>
+<script src="js/scheduler.js?v=9"></script>
+<script src="js/app.js?v=9"></script>
 </body>
 </html>

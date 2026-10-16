@@ -7,11 +7,13 @@ function seeded(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h
 function shuffle(arr,rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
 let LANG="all";
-try{const s=localStorage.getItem("aangan-lang");if(s)LANG=s}catch(e){}
+try{const s=localStorage.getItem("aangan-lang");if(s==="hi"||s==="en")LANG=s}catch(e){} // older saves may hold "te"
 
 function pick(part){
   let pool=CATALOG.filter(v=>v.cat===part.cat && (!part.tag||v.tag===part.tag) && (!part.maxMin||v.min<=part.maxMin));
   if(!pool.length) pool=CATALOG.filter(v=>v.cat===part.cat);
+  if(!pool.length&&part.alt) pool=CATALOG.filter(v=>v.cat===part.alt); // e.g. Kids falls back to science
+  if(!pool.length) pool=CATALOG; // never leave a channel empty
   if(LANG!=="all"){const f=pool.filter(v=>v.lang===LANG); if(f.length) return {pool:f,fallback:false}; return {pool,fallback:true}}
   return {pool,fallback:false};
 }
