@@ -31,7 +31,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .logo{display:inline-flex;align-items:center;gap:.1em;line-height:1;font-family:"Unbounded",var(--body);font-weight:700;letter-spacing:-.045em;color:var(--ink)}
 .logo-mark{width:1.05em;height:.84em;flex:none;color:var(--marigold)}
 .brand h1{font-size:2rem;margin:0;font-weight:700}
-.brand>span{color:var(--muted);font-size:.95rem}
 .tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
 .clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:700}
 .clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
