@@ -46,6 +46,18 @@ addEventListener("keydown",e=>{
   else if(e.key==="m"||e.key==="M") toggleSound();
 });
 
+/* ---------- TV static: covers the blank screen while a channel tunes in or buffers ---------- */
+const noise=$("noise"), nctx=noise.getContext("2d"), nimg=nctx.createImageData(noise.width,noise.height);
+const stillNoise=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let staticOn=false, staticSince=0, staticRAF=0;
+function drawNoise(){const d=nimg.data;
+  for(let i=0;i<d.length;i+=4){const v=Math.random()*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
+  nctx.putImageData(nimg,0,0); if(staticOn&&!stillNoise) staticRAF=requestAnimationFrame(drawNoise)}
+function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false; drawNoise()}
+function hideStatic(){ // keep it up at least 450ms so a channel change reads like real TV
+  const wait=Math.max(0,450-(Date.now()-staticSince));
+  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<450)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true},wait)}
+
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, ended=false, muted=true;
 function loadYT(){
@@ -59,11 +71,13 @@ window.onYouTubeIframeAPIReady=()=>{
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,start:Math.floor((Date.now()-s.start)/1000)},
     events:{onReady:()=>{MODE="yt";player.mute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
-            onStateChange:e=>{if(e.data===YT.PlayerState.ENDED){ended=true;showCard()}},
-            onError:e=>{ended=true;showCard("This video can't be played here (YouTube error "+e.data+"). The channel moves on at the next slot.")}}});
+            onStateChange:e=>{const S=YT.PlayerState;
+              if(e.data===S.PLAYING) hideStatic(); else if(e.data===S.BUFFERING) showStatic();
+              else if(e.data===S.ENDED){ended=true;hideStatic();showCard()}},
+            onError:e=>{ended=true;hideStatic();showCard("This video can't be played here (YouTube error "+e.data+"). The channel moves on at the next slot.")}}});
 };
 function fallback(){
-  MODE="fallback"; playingKey=null; tick();
+  MODE="fallback"; hideStatic(); playingKey=null; tick();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
@@ -93,7 +107,7 @@ function tick(){
   if(key!==playingKey){
     playingKey=key; ended=false;
     const off=Math.floor((now-s.start)/1000);
-    if(MODE==="yt"&&player){$("card").hidden=true;player.loadVideoById({videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
+    if(MODE==="yt"&&player){$("card").hidden=true;showStatic();player.loadVideoById({videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=s.v.t;
     const hh=h=>String(h%24).padStart(2,"0")+":00";
@@ -109,7 +123,7 @@ function tick(){
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=`https://www.youtube.com/watch?v=${s.v.id}&t=${Math.floor((now-s.start)/1000)}s`}
 }
 
-renderChannels(); renderGuide(); tick(); loadYT();
+showStatic(); renderChannels(); renderGuide(); tick(); loadYT();
 setInterval(tick,1000);
 setInterval(renderGuide,60e3);
 setTimeout(()=>{const g=document.querySelector(".gscroll");if(g)g.scrollLeft=0},0);

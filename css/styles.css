@@ -45,6 +45,17 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;
   box-shadow:0 0 0 1px var(--line),0 20px 60px -20px rgba(242,160,61,.25)}
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* TV static while a channel tunes in */
+.static{position:absolute;inset:0;z-index:1;background:#111;overflow:hidden}
+.static canvas{width:100%;height:100%;display:block;filter:contrast(1.4) brightness(.85)}
+.static::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 1px,transparent 1px 3px)}
+.static::after{content:"";position:absolute;left:0;right:0;height:22%;top:-22%;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.14) 45%,rgba(255,255,255,.22) 50%,transparent);animation:roll 1.8s linear infinite}
+@keyframes roll{to{top:100%}}
+/* Chequered screen filter over the video; --check is the square size, --check-dark how strong the dark squares are */
+.checks{--check:3px;--check-dark:.16;position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 50%,transparent 60%,rgba(0,0,0,.45) 100%),
+    repeating-conic-gradient(rgba(0,0,0,var(--check-dark)) 0 25%,transparent 0 50%) 0 0/calc(var(--check)*2) calc(var(--check)*2)}
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .live{background:var(--sindoor);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.12em;padding:3px 9px;border-radius:4px}
 .chanbug{font-family:var(--display);font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
