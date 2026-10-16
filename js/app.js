@@ -124,6 +124,7 @@ function toggleFullscreen(){
   track("fullscreen","Full screen");
 }
 $("fs").addEventListener("click",toggleFullscreen);
+$("maximize").addEventListener("click",toggleFullscreen);
 
 /* ---------- Full-screen TV mode ----------
    Banner on every channel change; a strip of all channels (mouse near the bottom, tap, or left/right; Enter tunes);
@@ -179,14 +180,15 @@ document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=false; try{retro=localStorage.getItem("ogtv-retro")==="1"}catch(e){}
-function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("retro").setAttribute("aria-pressed",on);
+function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{localStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd()}
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 $("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on")});
+$("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on"); wakeUI(false)});
 /* Hide the channel list on the right; the TV then takes the full width */
-let listHidden=false; try{listHidden=localStorage.getItem("ogtv-list")==="hidden"}catch(e){}
+let listHidden=true; try{listHidden=localStorage.getItem("ogtv-list")!=="shown"}catch(e){} // hidden unless the viewer opened it
 function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").hidden=!hide;
   document.querySelector(".main").classList.toggle("list-hidden",hide);
   try{localStorage.setItem("ogtv-list",hide?"hidden":"shown")}catch(e){}}
