@@ -23,15 +23,9 @@ const CATALOG = [
   {id:"G8x2WscstH0",t:"15-minute daily yoga",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
   {id:"0efkVn-I5gk",t:"Morning yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
   {id:"DbbsVGkZ1Ck",t:"How to start yoga, part 1",cat:"sehat",lang:"hi",min:15,src:"Yoga"},
-  {id:"cUnoXSVckhU",t:"45-minute yoga class, day 11",cat:"sehat",lang:"hi",min:45,src:"Onkar Yoga"},
   // Sadabahar (evergreen songs)
   {id:"oSkbkxlMurA",t:"Lata Mangeshkar & Kishore Kumar hits",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"O10nYq_DW7w",t:"Sukoon bhare sadabahar gaane",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
   {id:"3OFpvKUbAwU",t:"Lata & Kishore duets",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"BWE-dVBj4J4",t:"80s Hindi songs",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"eggVq-nGS_I",t:"70s & 80s evergreen Bollywood",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"4K3KxssmufY",t:"70s, 80s ke evergreen gaane",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"frhfdIkbnPI",t:"Kishore & Lata superhits",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
   // Gyaan (knowledge)
   {id:"oyw87aNY42E",t:"Passage to the Moon · Chandrayaan-1, part 2",cat:"gyaan",lang:"en",min:20,src:"ISRO"},
   {id:"K2YaqO6loyU",t:"The full story of Chandrayaan-2",cat:"gyaan",lang:"en",min:20,src:"Documentary"},
@@ -41,7 +35,6 @@ const CATALOG = [
   {id:"aEIUVfKCRic",t:"Wormhole kya hota hai?",cat:"gyaan",lang:"hi",min:15,src:"Explainer"},
   {id:"l61RMuMxBiA",t:"Chandrayaan-1 explained in 3 minutes",cat:"gyaan",lang:"en",min:4,src:"Explainer"},
   // Hasya (comedy)
-  {id:"vVzwoHwclHA",t:"Bachelor Boys · short film",cat:"hasya",lang:"te",min:20,src:"Infinitum Media"},
   {id:"z6vc490rbkE",t:"Paradesi · short film",cat:"hasya",lang:"te",min:20,src:"Short film"},
   {id:"fQwxwQ93324",t:"H2O · comedy short",cat:"hasya",lang:"te",min:15,src:"Short film"},
   {id:"4bKX8HzOdJ4",t:"Buridi · comedy short",cat:"hasya",lang:"te",min:15,src:"Mahesh Vitta"},

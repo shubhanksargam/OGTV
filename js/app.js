@@ -51,10 +51,10 @@ let MODE="loading", player=null, playingKey=null, ended=false, muted=true;
 function loadYT(){
   const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
   s.onerror=()=>fallback(); document.head.appendChild(s);
-  setTimeout(()=>{if(MODE==="loading")fallback()},5000);
+  setTimeout(()=>{if(MODE==="loading")fallback()},8000);
 }
 window.onYouTubeIframeAPIReady=()=>{
-  if(MODE==="fallback")return;
+  // Also runs if the API arrives after the timeout: the player takes over from the link-out card
   const s=slotAt(CHANNELS[cur],Date.now());
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,start:Math.floor((Date.now()-s.start)/1000)},
     events:{onReady:()=>{MODE="yt";player.mute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
