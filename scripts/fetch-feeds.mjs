@@ -86,7 +86,7 @@ async function previous() {
   } catch { return []; }
 }
 
-const keyOf = f => f.id || f.playlist;
+const keyOf = f => (f.id || f.playlist) + "|" + f.cat; // one source can feed several categories (Star Sports: cricket, football, khel)
 async function fetchFeed(f, old) {
   try {
     const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await rss(f.id);
