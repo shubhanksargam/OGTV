@@ -64,4 +64,5 @@ const CHANNELS = [
   {key:"drive",n:31,name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   {key:"anthems",n:32,name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
   {key:"classics",n:33,name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,cat:"classics",alt:"cricket",label:"From the archive"}]},
+  {key:"raag",n:34,name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,cat:"raag",label:"Sitar & santoor, all day"}]},
 ];
