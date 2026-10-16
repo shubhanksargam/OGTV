@@ -62,6 +62,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 - The first tap ("Press to start") lets the browser play with sound.
 - `?ch=8` in the address opens channel 8. Type two digits on the keyboard for channels 10 and up.
+- Subtitles: the **CC** button on the screen or `S` turns YouTube's subtitles off (or back on) for every video. Remembered per browser.
 - Hide the channel list with its **Hide** button or `C`; the tab on the right edge brings it back.
 - Full screen: the button on the screen, double-click, or `F`. On iPhone the screen fills the browser window instead.
 - Retro mode: the **Retro** button or `R` adds a camcorder look (VHS colour, scanlines, grain, PLAY readout). Remembered per browser.

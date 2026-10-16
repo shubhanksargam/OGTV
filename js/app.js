@@ -58,6 +58,7 @@ addEventListener("keydown",e=>{
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="c"||e.key==="C") setList(!listHidden);
+  else if(e.key==="s"||e.key==="S") toggleSubs();
   else if(e.key==="Escape"&&$("screen").classList.contains("pseudo-fs")) toggleFullscreen();
 });
 
@@ -90,7 +91,7 @@ window.onYouTubeIframeAPIReady=()=>{
     events:{onReady:()=>{MODE="yt";muted?player.mute():player.unMute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
-              if(e.data===S.PLAYING) hideStatic(); else if(e.data===S.BUFFERING) showStatic();
+              if(e.data===S.PLAYING){hideStatic(); applySubs()} else if(e.data===S.BUFFERING) showStatic();
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],Date.now()).live) skip(); else {ended=true;hideStatic();showCard()}}},
             onError:e=>skip(e.data)}});
 };
@@ -136,6 +137,15 @@ function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").h
   document.querySelector(".main").classList.toggle("list-hidden",hide);
   try{localStorage.setItem("ogtv-list",hide?"hidden":"shown")}catch(e){}}
 $("hideList").addEventListener("click",()=>setList(true));
+/* Subtitles: YouTube's captions on (its default) or off for every video; reapplied as each video starts */
+let subs=true; try{subs=localStorage.getItem("ogtv-subs")!=="off"}catch(e){}
+function applySubs(){if(MODE!=="yt"||!player)return;
+  try{subs?player.loadModule("captions"):(player.setOption("captions","track",{}),player.unloadModule("captions"))}catch(e){}}
+function setSubs(on){subs=on; $("cc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
+  try{localStorage.setItem("ogtv-subs",on?"on":"off")}catch(e){} applySubs()}
+const toggleSubs=()=>{setSubs(!subs); if(!subs) track("subs-off","Subtitles off")};
+$("cc").addEventListener("click",toggleSubs);
+setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
 setList(listHidden);
 setRetro(retro);
