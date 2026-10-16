@@ -12,7 +12,7 @@
   --marigold-ink:#1d1206;
   --sindoor:#e5483a;     /* LIVE */
   --peacock:#3fb8a8;     /* rule chips */
-  --display:"Yatra One", "Mukta", Georgia, serif;
+  --display:"Mukta", system-ui, sans-serif; /* channel names: the same bold Mukta as the full-screen panel */
   --body:"Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 html,body{background:var(--room);color:var(--ink)}
@@ -102,7 +102,11 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .fs-catch,.screen:-webkit-full-screen .fs-catch,.screen.pseudo-fs .fs-catch{display:block;position:absolute;inset:0;z-index:2}
 .screen:fullscreen .fs-ui,.screen:-webkit-full-screen .fs-ui,.screen.pseudo-fs .fs-ui{display:block}
 .screen.fs-idle .fs-catch{cursor:none}
-.screen.fs-idle .fs,.screen.fs-idle .cc,.screen.fs-idle .sound,.screen.strip-on .fs,.screen.strip-on .cc,.screen.strip-on .sound{opacity:0!important;pointer-events:none;transition:opacity .4s}
+.screen.fs-idle .fs,.screen.fs-idle .cc,.screen.fs-idle .sound{opacity:0!important;pointer-events:none;transition:opacity .4s}
+/* Full screen, subtitles and sound stay usable above the channel strip */
+.screen:fullscreen .fs,.screen:fullscreen .cc,.screen:fullscreen .sound,.screen:-webkit-full-screen .fs,.screen:-webkit-full-screen .cc,.screen:-webkit-full-screen .sound,
+.screen.pseudo-fs .fs,.screen.pseudo-fs .cc,.screen.pseudo-fs .sound{z-index:6;transition:bottom .3s ease,opacity .4s}
+.screen.strip-on .fs,.screen.strip-on .cc,.screen.strip-on .sound{bottom:calc(5vh + 126px);opacity:1!important}
 .fs-ui{position:absolute;inset:0;z-index:5;pointer-events:none}
 .banner{position:absolute;left:4vw;bottom:6vh;display:flex;gap:24px;align-items:center;max-width:min(72vw,940px);padding:18px 28px 18px 20px;border-radius:22px;
   background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.5);
@@ -118,7 +122,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .strip{position:absolute;left:0;right:0;bottom:0;display:flex;gap:14px;overflow-x:auto;padding:70px 4vw 5vh;scroll-snap-type:x proximity;scrollbar-width:none;
   background:linear-gradient(transparent,rgba(8,7,12,.94) 50%);opacity:0;transform:translateY(34px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
 .strip::-webkit-scrollbar{display:none}
-.screen.strip-on .strip{opacity:1;transform:none;pointer-events:auto}
+.screen.strip-on .strip{opacity:1;transform:none}
+.screen.strip-on .sc{pointer-events:auto} /* only the cards catch clicks; the rest of the video closes the strip */
 .sc{flex:none;width:236px;scroll-snap-align:center;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;text-align:left;padding:14px 16px;border-radius:16px;
   border:1px solid rgba(255,255,255,.1);background:rgba(30,26,41,.88);color:#fff;font:inherit;cursor:pointer;transition:transform .2s ease,border-color .2s,background .2s}
 .sc-n{grid-row:1/3;align-self:center;font:700 1.9rem/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold)}
@@ -148,14 +153,14 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .static .ident .logo,.static .ident .logo-mark{color:#0b0a0f} /* the primary logo's black-on-light version */
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .bug-mark{width:34px;height:27px;color:var(--marigold);--cut:transparent;filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
-.chanbug{font-family:var(--display);font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
   padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
 [hidden]{display:none!important}
 .card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;
   padding:6% 8%;background:radial-gradient(120% 90% at 20% 10%,#3a2a4f 0%,#1a1424 55%,#0e0b14 100%)}
 .card .kicker{color:var(--marigold);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
-.card h2{font-family:var(--display);font-weight:400;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
+.card h2{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
 .card p{margin:0;color:var(--muted);max-width:52ch}
 .card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
   padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
@@ -182,7 +187,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .ch[aria-current="true"]{background:var(--panel-2);box-shadow:inset 3px 0 0 var(--marigold)}
 .ch .num{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.3rem;color:var(--marigold);text-align:center}
 .ch .nm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.ch .nm strong{font-family:var(--display);font-weight:400;font-size:1.15rem}
+.ch .nm strong{font-family:var(--display);font-weight:700;font-size:1.1rem}
 .ch .nm em{font-style:normal;color:var(--muted);font-size:.85rem}
 .ch .on{display:block;color:var(--muted);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hint{color:var(--muted);font-size:.85rem;margin:6px 8px 4px}
@@ -191,14 +196,14 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* guide */
 .guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 0 10px}
 .guide-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:0 18px 10px}
-.guide-head h4{margin:0;font-family:var(--display);font-weight:400;font-size:1.35rem}
+.guide-head h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.35rem}
 .guide-head span{color:var(--muted);font-size:.9rem}
 .gscroll{overflow-x:auto;position:relative}
 .grid{position:relative;padding:0 18px}
 .trow{display:flex;height:30px;position:relative;margin-left:120px}
 .tick{position:absolute;top:6px;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateX(-50%)}
 .grow{display:flex;align-items:stretch;height:58px;margin-bottom:6px}
-.glabel{width:112px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-size:1.02rem;
+.glabel{width:112px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-weight:700;font-size:1rem;
   position:sticky;left:0;background:var(--panel);z-index:2;padding-left:2px}
 .glane{position:relative;flex:none}
 .prog{position:absolute;top:0;bottom:0;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);

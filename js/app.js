@@ -166,9 +166,13 @@ function fsKey(e){ // keys that only mean something in full screen
   wakeUI(false); return false;
 }
 $("strip").addEventListener("click",e=>{const b=e.target.closest(".sc"); if(b){tune(+b.dataset.i); wakeUI(true)}});
-$("strip").addEventListener("mousemove",()=>wakeUI(true));
-$("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingClientRect(); wakeUI(e.clientY>r.top+r.height*.72)});
-$("fsCatch").addEventListener("click",()=>wakeUI(!$("screen").classList.contains("strip-on")));
+$("strip").addEventListener("mousemove",e=>{if(e.target.closest(".sc")) wakeUI(true)});
+// Hover opens the strip only on moving INTO the bottom area, so a click that closed it isn't undone by the next jiggle
+let inBottom=false;
+$("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingClientRect(), now=e.clientY>r.top+r.height*.8;
+  wakeUI(now&&!inBottom); inBottom=now});
+function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
+$("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():wakeUI(true)); // tap the video: open, or close the strip
 function onFullscreenChange(){const sc=$("screen");
   if(isFull()){browse=cur; showBanner(); wakeUI(false)} else sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}
 document.addEventListener("fullscreenchange",onFullscreenChange);
