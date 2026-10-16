@@ -166,6 +166,9 @@ function tick(){
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=`https://www.youtube.com/watch?v=${s.v.id}&t=${Math.floor((now-s.start)/1000)}s`}
 }
 
+// About section numbers come from the data, so they stay right as channels and creators change
+$("aboutChannels").textContent=CHANNELS.length;
+$("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
 showStatic(); renderChannels(); renderGuide(); tick(); loadYT();
 setInterval(tick,1000);
 setInterval(renderGuide,60e3);

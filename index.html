@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#14111c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Yatra+One&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=17">
+<link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)" stroke="var(--cut,#14111c)" stroke-width="9"/></symbol></svg>
@@ -45,7 +45,7 @@
     <nav class="remote" aria-label="Channels">
       <h4>Channels</h4>
       <div id="chlist"></div>
-      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>30</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>F</kbd> full screen, <kbd>R</kbd> retro</p>
+      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>33</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>F</kbd> full screen, <kbd>R</kbd> retro</p>
     </nav>
   </section>
 
@@ -55,14 +55,32 @@
   </section>
 
   <p class="note" id="modeNote"></p>
+
+  <footer class="about" aria-labelledby="about-h">
+    <div class="about-head"><h2 id="about-h">About</h2><span class="logo about-logo" aria-hidden="true"><svg class="logo-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="logo-word">GTV</span></span></div>
+    <div class="about-grid">
+      <section>
+        <h3>YouTube, the way TV used to be</h3>
+        <p>OGTV turns Indian YouTube into <span id="aboutChannels">33</span> always-on channels, from cricket and live news to Bhakti, Bollywood hits and science. No searching, no feeds: switch on, flip channels, watch what's on.</p>
+      </section>
+      <section>
+        <h3>Everyone sees the same moment</h3>
+        <p>Each channel runs on a schedule built from time-of-day rules, so every viewer tuned to a channel is at the same point of the same programme, like real TV. New uploads from <span id="aboutCreators">160+</span> creators, channels and playlists are added every night, and live channels pick up official streams as they go on air.</p>
+      </section>
+      <section>
+        <h3>Credits</h3>
+        <p>Every video and stream belongs to its creator and plays through YouTube's own player. OGTV doesn't host, download or change any video, and isn't affiliated with YouTube or the channels shown. The code is open on <a href="https://github.com/shubhanksargam/OGTV" target="_blank" rel="noopener">GitHub</a>.</p>
+      </section>
+    </div>
+  </footer>
 </div>
 
-<script src="js/catalog.js?v=17"></script>
-<script src="js/feeds.js?v=17"></script>
-<script src="js/live.js?v=17"></script>
-<script src="js/festivals.js?v=17"></script>
-<script src="js/channels.js?v=17"></script>
-<script src="js/scheduler.js?v=17"></script>
-<script src="js/app.js?v=17"></script>
+<script src="js/catalog.js?v=18"></script>
+<script src="js/feeds.js?v=18"></script>
+<script src="js/live.js?v=18"></script>
+<script src="js/festivals.js?v=18"></script>
+<script src="js/channels.js?v=18"></script>
+<script src="js/scheduler.js?v=18"></script>
+<script src="js/app.js?v=18"></script>
 </body>
 </html>
