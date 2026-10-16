@@ -26,9 +26,12 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 
 /* header */
 .top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;justify-content:space-between}
-.brand{display:flex;align-items:baseline;gap:12px}
-.brand h1{font-family:var(--display);font-weight:400;font-size:2.1rem;margin:0;color:var(--marigold);letter-spacing:.01em}
-.brand span{color:var(--muted);font-size:.95rem}
+.brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+/* OGTV logo: the O is a TV screen with an on-air light; mark from the #ogmark symbol, word in Unbounded */
+.logo{display:inline-flex;align-items:center;gap:.1em;line-height:1;font-family:"Unbounded",var(--body);font-weight:700;letter-spacing:-.045em;color:var(--ink)}
+.logo-mark{width:1.05em;height:.84em;flex:none;color:var(--marigold)}
+.brand h1{font-size:2rem;margin:0;font-weight:700}
+.brand>span{color:var(--muted);font-size:.95rem}
 .tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
 .clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:700}
 .clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
@@ -44,7 +47,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* Press to start splash */
 .start{position:fixed;inset:0;z-index:50;border:0;cursor:pointer;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   background:radial-gradient(70% 60% at 50% 45%,#1d1a26 0%,#0b0a0f 70%,#050407 100%);font-family:var(--body)}
-.start-logo{font-weight:700;letter-spacing:.08em;font-size:clamp(3rem,13vw,7rem);text-shadow:0 0 24px rgba(255,255,255,.35)}
+.start-logo{font-size:clamp(3.2rem,14vw,8rem);--cut:#110f17}
+.start-logo .logo{filter:drop-shadow(0 0 28px rgba(242,160,61,.25))}
 .start-cta{font-weight:700;letter-spacing:.4em;text-transform:uppercase;font-size:clamp(.85rem,2.6vw,1.05rem);color:var(--marigold);animation:blink 1.4s ease-in-out infinite}
 .start-sub{color:var(--muted);font-size:.9rem}
 @keyframes blink{50%{opacity:.35}}
@@ -85,10 +89,10 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:contrast(1.15)}
 .static::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.35))}
-.static .ident{position:relative;z-index:1;font-family:var(--body);font-weight:700;letter-spacing:.06em;color:#fff;
-  font-size:clamp(2.6rem,11vw,6.5rem);text-shadow:0 0 18px rgba(255,255,255,.55),0 0 2px #fff;mix-blend-mode:screen;
-  animation:resolve 1.6s ease-out .25s both}
-@keyframes resolve{0%{opacity:0;filter:blur(10px)}35%{opacity:.35}55%{opacity:.2}100%{opacity:.95;filter:blur(0)}}
+.static .ident{position:relative;z-index:1;font-size:clamp(2.6rem,11vw,6.5rem);mix-blend-mode:screen;
+  filter:drop-shadow(0 0 14px rgba(255,255,255,.6));animation:resolve 1.6s ease-out .25s both;--cut:transparent;--live-dot:#fff}
+.static .ident .logo,.static .ident .logo-mark{color:#fff}
+@keyframes resolve{0%{opacity:0;filter:blur(10px)}35%{opacity:.35}55%{opacity:.2}100%{opacity:.95;filter:blur(0) drop-shadow(0 0 14px rgba(255,255,255,.6))}}
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .live{background:var(--sindoor);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.12em;padding:3px 9px;border-radius:4px}
 .chanbug{font-family:var(--display);font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
