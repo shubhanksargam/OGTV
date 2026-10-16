@@ -34,7 +34,7 @@ const CHANNELS = [
     {from:7,to:21,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
     {from:21,to:24,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   {key:"baatcheet",n:14,name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,cat:"baatcheet",label:"Long conversations"}]},
-  {key:"cricket",n:15,name:"Cricket",en:"Highlights & analysis",parts:[{from:0,to:24,cat:"cricket",alt:"khel",label:"Cricket, all day"}]},
+  {key:"cricket",n:15,name:"Cricket",en:"Match highlights",parts:[{from:0,to:24,cat:"cricket",alt:"classics",label:"Recent match highlights"}]},
   {key:"football",n:16,name:"Football",en:"ISL & world football",parts:[{from:0,to:24,cat:"football",label:"Football, all day"}]},
   {key:"livematch",n:17,name:"Live Matches",en:"Official live sports",live:"matches",parts:[
     {from:0,to:24,cat:"cricket",alt:"khel",label:"Highlights until the next live match"}]},
@@ -55,4 +55,5 @@ const CHANNELS = [
   {key:"festival",n:31,name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
   {key:"drive",n:32,name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   {key:"anthems",n:33,name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"classics",n:34,name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,cat:"classics",alt:"cricket",label:"From the archive"}]},
 ];

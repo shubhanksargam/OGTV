@@ -102,8 +102,11 @@ async function fetchFeed(f, old) {
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
       items.push({id: e.id, t: cleanTitle(d.title), cat: f.cat, lang: f.lang, min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
-    if (entries.length && unread === entries.length) throw new Error("YouTube blocked every video page");
-    console.log(`${String(items.length).padStart(2)} / ${entries.length}  ${f.src}`);
+    // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
+    // A few unread: keep their previous entries rather than silently dropping them.
+    if (entries.length && unread * 2 >= entries.length) throw new Error(`YouTube blocked ${unread} of ${entries.length} video pages`);
+    if (unread) items.push(...old.filter(v => v.feed === keyOf(f) && !items.some(x => x.id === v.id)));
+    console.log(`${String(items.length).padStart(2)} / ${entries.length}  ${f.src}${unread ? ` (${unread} blocked, kept earlier)` : ""}`);
     return items;
   } catch (err) {
     const kept = old.filter(v => v.feed === keyOf(f));
