@@ -60,7 +60,7 @@ window.onYouTubeIframeAPIReady=()=>{
     events:{onReady:()=>{MODE="yt";player.mute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{if(e.data===YT.PlayerState.ENDED){ended=true;showCard()}},
-            onError:()=>{ended=true;showCard("This video can't be played here. The channel moves on at the next slot.")}}});
+            onError:e=>{ended=true;showCard("This video can't be played here (YouTube error "+e.data+"). The channel moves on at the next slot.")}}});
 };
 function fallback(){
   MODE="fallback"; playingKey=null; tick();
