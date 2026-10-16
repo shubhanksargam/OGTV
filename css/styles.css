@@ -57,7 +57,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* Press to start splash */
 .start{position:fixed;inset:0;z-index:50;border:0;cursor:pointer;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   background:radial-gradient(70% 60% at 50% 45%,#1d1a26 0%,#0b0a0f 70%,#050407 100%);font-family:var(--body)}
-.start-logo{font-size:clamp(3.2rem,14vw,8rem);--cut:#110f17}
+.start-logo{font-size:clamp(3.2rem,14vw,8rem)}
 .start-logo .logo{filter:drop-shadow(0 0 28px rgba(242,160,61,.25))}
 .start-cta{font-weight:700;letter-spacing:.4em;text-transform:uppercase;font-size:clamp(.85rem,2.6vw,1.05rem);color:var(--marigold);animation:blink 1.4s ease-in-out infinite}
 .start-sub{color:var(--muted);font-size:.9rem}
@@ -148,11 +148,11 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:contrast(1.15)}
 .static::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.35))}
-.static .ident{position:relative;z-index:1;font-size:clamp(2.2rem,8vw,4.6rem);--cut:transparent;filter:drop-shadow(0 0 1px rgba(255,255,255,.5));animation:resolve 1.1s steps(1,end) .2s both}
+.static .ident{position:relative;z-index:1;font-size:clamp(2.2rem,8vw,4.6rem);filter:drop-shadow(0 0 1px rgba(255,255,255,.5));animation:resolve 1.1s steps(1,end) .2s both}
 @keyframes resolve{0%{opacity:0}18%{opacity:.85}26%{opacity:.15}40%{opacity:1}52%{opacity:.55}62%,100%{opacity:1}} /* signal locking on */
 .static .ident .logo,.static .ident .logo-mark{color:#0b0a0f} /* the primary logo's black-on-light version */
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
-.bug-mark{width:34px;height:27px;color:var(--marigold);--cut:transparent;filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
+.bug-mark{width:40px;height:32px;color:var(--marigold);filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
 .chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
   padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
