@@ -1,0 +1,42 @@
+# Daily traffic check. The report shows on the run page; a sharp drop opens a GitHub issue, which GitHub emails you about.
+# Needs repository secrets GOATCOUNTER_CODE and GOATCOUNTER_TOKEN (Settings > Secrets and variables > Actions).
+name: Traffic watch
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 06:00 IST, after the previous day has closed in UTC
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check traffic
+        id: check
+        env:
+          GOATCOUNTER_CODE: ${{ secrets.GOATCOUNTER_CODE }}
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+        run: |
+          set +e
+          node scripts/traffic-watch.mjs > report.md
+          code=$?
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          echo "fell=$([ $code -eq 2 ] && echo yes || echo no)" >> "$GITHUB_OUTPUT"
+          [ $code -eq 0 ] || [ $code -eq 2 ]
+      - name: Open an issue when traffic fell
+        if: steps.check.outputs.fell == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create traffic-alert --color E5483A --description "Traffic drop found by Traffic watch" 2>/dev/null || true
+          if [ -n "$(gh issue list --label traffic-alert --state open --json number --jq '.[].number')" ]; then
+            gh issue comment "$(gh issue list --label traffic-alert --state open --json number --jq '.[0].number')" --body-file report.md
+          else
+            gh issue create --title "Traffic drop on OGTV ($(date -u -d yesterday +%Y-%m-%d))" --label traffic-alert --body-file report.md
+          fi

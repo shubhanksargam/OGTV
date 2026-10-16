@@ -34,7 +34,12 @@ function renderGuide(){
 }
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".prog");if(b)tune(+b.dataset.i)});
 
+// A channel counts as watched after 10 s on it, so flicking past doesn't inflate it
+let watchTimer=0;
+function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
+  watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;try{localStorage.setItem("aangan-ch",cur)}catch(e){}
+  countChannel();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
   playingKey=null; renderChannels(); tick();}
 let digits="", digitTimer=0;
@@ -51,7 +56,8 @@ addEventListener("keydown",e=>{
   }
   else if(e.key==="m"||e.key==="M") toggleSound();
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
-  else if(e.key==="r"||e.key==="R") setRetro(!retro);
+  else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
+  else if(e.key==="c"||e.key==="C") setList(!listHidden);
   else if(e.key==="Escape"&&$("screen").classList.contains("pseudo-fs")) toggleFullscreen();
 });
 
@@ -91,7 +97,8 @@ window.onYouTubeIframeAPIReady=()=>{
 // A video or stream that won't play is dropped from this browser's schedule and the next one starts.
 // After many failures in one visit something bigger is wrong (blocker, network), so stop and say so.
 function skip(code){
-  if(++skips>15){ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube.");return}
+  track("play-error-"+(code||"ended"),"Video failed to play"+(code?" (YouTube "+code+")":""));
+  if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube.");return}
   if(playingId) markBad(playingId); playingKey=null; tick(); renderGuide();
 }
 function fallback(){
@@ -102,7 +109,7 @@ function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.
   $("sound").textContent=muted?"Turn sound on":"Mute"}
 /* Press to start: one tap gives the browser permission to play with sound */
 let started=false;
-function start(){if(started)return; started=true; $("start").hidden=true; muted=false;
+function start(){if(started)return; started=true; track("start","Pressed start"); countChannel(); $("start").hidden=true; muted=false;
   $("sound").textContent="Mute"; if(MODE==="yt"&&player){player.unMute();player.playVideo()}}
 $("start").addEventListener("click",start);
 $("sound").addEventListener("click",toggleSound);
@@ -112,6 +119,7 @@ function toggleFullscreen(){
   if(fsEl){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return}
   const req=el.requestFullscreen||el.webkitRequestFullscreen;
   if(req&&!el.classList.contains("pseudo-fs")) req.call(el); else el.classList.toggle("pseudo-fs");
+  track("fullscreen","Full screen");
 }
 $("fs").addEventListener("click",toggleFullscreen);
 /* Retro camcorder look, remembered per browser */
@@ -121,7 +129,15 @@ function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("ret
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
-$("retro").addEventListener("click",()=>setRetro(!retro));
+$("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on")});
+/* Hide the channel list on the right; the TV then takes the full width */
+let listHidden=false; try{listHidden=localStorage.getItem("ogtv-list")==="hidden"}catch(e){}
+function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").hidden=!hide;
+  document.querySelector(".main").classList.toggle("list-hidden",hide);
+  try{localStorage.setItem("ogtv-list",hide?"hidden":"shown")}catch(e){}}
+$("hideList").addEventListener("click",()=>setList(true));
+$("showList").addEventListener("click",()=>setList(false));
+setList(listHidden);
 setRetro(retro);
 $("screen").addEventListener("dblclick",toggleFullscreen);
 
@@ -157,6 +173,7 @@ function tick(){
     $("why").innerHTML=`<span>On air because</span><span class="chip">${s.part.label}${hours}</span>`
       +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · snacks only":""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live?`<span class="chip">Nothing live right now</span>`:"");
+    if(ch.live&&!s.live&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${s.v.src}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${onAir(nx)}`;
     renderChannels();
   }
@@ -171,5 +188,8 @@ $("aboutChannels").textContent=CHANNELS.length;
 $("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
 showStatic(); renderChannels(); renderGuide(); tick(); loadYT();
 setInterval(tick,1000);
+// Watch-time milestones while the page is visible: how long people stay
+let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
+setInterval(()=>{if(!started||document.hidden)return; watchedSec+=15; const m=MILESTONES[watchedSec]; if(m) track("watch-"+m,"Watched "+m)},15e3);
 setInterval(renderGuide,60e3);
 setTimeout(()=>{const g=document.querySelector(".gscroll");if(g)g.scrollLeft=0},0);

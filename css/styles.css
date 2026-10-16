@@ -38,6 +38,17 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* main grid */
 .main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:860px){.main{grid-template-columns:1fr}}
+.main.list-hidden{grid-template-columns:minmax(0,1fr)}
+/* Channel list toggle: Hide in the panel; a tab on the right edge brings it back */
+.remote-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hide-list{display:inline-flex;align-items:center;gap:2px;min-height:36px;padding:0 10px 0 6px;border:1px solid var(--line);border-radius:999px;
+  background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;flex-direction:row-reverse}
+.hide-list:hover{color:var(--ink);border-color:var(--muted)}
+.show-list{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:14px 8px;border:1px solid var(--line);border-right:0;border-radius:12px 0 0 12px;background:var(--panel);color:var(--ink);cursor:pointer;
+  box-shadow:-8px 0 24px rgba(0,0,0,.35)}
+.show-list span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:.85rem;letter-spacing:.08em}
+.show-list:hover{background:var(--panel-2)}
 
 .tv{display:flex;flex-direction:column;gap:12px;min-width:0}
 .screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;

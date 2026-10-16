@@ -62,10 +62,17 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 - The first tap ("Press to start") lets the browser play with sound.
 - `?ch=8` in the address opens channel 8. Type two digits on the keyboard for channels 10 and up.
+- Hide the channel list with its **Hide** button or `C`; the tab on the right edge brings it back.
 - Full screen: the button on the screen, double-click, or `F`. On iPhone the screen fills the browser window instead.
 - Retro mode: the **Retro** button or `R` adds a camcorder look (VHS colour, scanlines, grain, PLAY readout). Remembered per browser.
 - A video that won't play is skipped and the channel moves to the next one.
 - **NEW** in the guide marks videos uploaded in the last 30 days.
+
+## Traffic monitoring
+
+- `js/analytics.js` sends visits and events to GoatCounter once `GC_CODE` is set (no cookies). Events: `start`, `ch-NN-key` (10 s on a channel), `watch-5m/15m/30m/60m/2h`, `live-none-<group>`, `play-error-<code>`, `blocked`, `retro-on`, `fullscreen`.
+- Dashboard: `https://<code>.goatcounter.com`.
+- `.github/workflows/traffic-watch.yml` runs `scripts/traffic-watch.mjs` daily at 06:00 IST: a report on the run page, and a `traffic-alert` issue (GitHub emails you) when yesterday's visitors fell below half the 7-day average. Needs secrets `GOATCOUNTER_CODE` and `GOATCOUNTER_TOKEN`.
 
 ## How the sync works
 
