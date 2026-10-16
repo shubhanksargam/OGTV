@@ -145,7 +145,6 @@
     {"playlist": "PLO7-VO1D0_6NmK47v6tpOcxurcxdW-hZa", "src": "Latest Bollywood songs 2026", "cat": "bollywood", "lang": "hi", "take": 110, "minMin": 2, "maxMin": 12},
     {"playlist": "PL3oW2tjiIxvTSdJ4zqjL9dijeZ0LjcuGS", "src": "Latest Hindi songs 2026", "cat": "bollywood", "lang": "hi", "take": 130, "minMin": 2, "maxMin": 12},
     {"playlist": "PLR6GfCtcYOahplW320HfJOq6ospm3DtMT", "src": "Dhurandhar 1 & 2 soundtrack", "cat": "bollywood", "lang": "hi", "take": 40, "minMin": 2, "maxMin": 12},
-    {"playlist": "PLeGTr28S_qmS1HVxcSWgIVRHU1j3a8ty3", "src": "Latest Bollywood love hits", "cat": "bollywood", "lang": "hi", "take": 80, "minMin": 2, "maxMin": 12},
     {"id": "UCq-Fj5jknLsUf-MWSy4_brA", "src": "T-Series", "cat": "bollywood", "lang": "hi", "skip": "trailer|teaser|jukebox|audio", "minMin": 2, "maxMin": 12},
     {"id": "UCFFbwnve3yF62-tVXkTyHqg", "src": "Zee Music Company", "cat": "bollywood", "lang": "hi", "skip": "trailer|teaser|jukebox|audio", "minMin": 2, "maxMin": 12},
     {"id": "UC56gTxNs4f9xZ7Pa2i5xNzg", "src": "Sony Music India", "cat": "bollywood", "lang": "hi", "skip": "trailer|teaser|jukebox|audio", "minMin": 2, "maxMin": 12},
