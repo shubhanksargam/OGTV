@@ -87,4 +87,9 @@ const CHANNELS = [
   {key:"hasya",n:32,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
   {key:"trailers",n:33,group:"Entertainment",name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
   {key:"baatcheet",n:34,group:"Entertainment",name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,preferMin:30,cat:"baatcheet",label:"Long conversations"}]},
+  {key:"niche",n:35,group:"Entertainment",name:"Niche",en:"Rare, offbeat & curious",parts:[
+    {from:0,to:9,  cat:"niche",label:"Offbeat world"},
+    {from:9,to:13, cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"Rare India"},
+    {from:13,to:20,cat:"niche",label:"Curious finds"},
+    {from:20,to:24,cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"From the archives"}]},
 ];

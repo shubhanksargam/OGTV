@@ -313,6 +313,15 @@
     {"id": "UCqXO3ktBw0D0sw1z5hZFeDg", "src": "Tips Films", "cat": "trailers", "lang": "hi", "minMin": 1, "maxMin": 6, "match": "trailer|teaser", "keepDays": 120},
     {"id": "UCvC4D8onUfXzvjTOM-dBfEA", "src": "Marvel", "cat": "trailers", "lang": "en", "minMin": 1, "maxMin": 6, "match": "trailer|teaser", "keepDays": 120},
     {"id": "UCjmJDM5pRKbUlVIzDYYWb6g", "src": "Warner Bros.", "cat": "trailers", "lang": "en", "minMin": 1, "maxMin": 6, "match": "trailer|teaser", "keepDays": 120},
-    {"id": "UCq0OueAsdxH6b8nyAspwViw", "src": "Universal Pictures", "cat": "trailers", "lang": "en", "minMin": 1, "maxMin": 6, "match": "trailer|teaser", "keepDays": 120}
+    {"id": "UCq0OueAsdxH6b8nyAspwViw", "src": "Universal Pictures", "cat": "trailers", "lang": "en", "minMin": 1, "maxMin": 6, "match": "trailer|teaser", "keepDays": 120},
+    {"id": "UCWxqSvqiH8PGpSNPSVtFwGw", "src": "Prasar Bharati Archives", "cat": "niche", "lang": "hi", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCEV8LcN8kq2up4mRM_SCOZw", "src": "Films Division", "cat": "niche", "lang": "hi", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCEwKMXfktjqfaT9JoPB6r-A", "src": "The Better India", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCAL3JXZSzSm8AlZyD3nQdBA", "src": "Primitive Technology", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCBa659QWEk1AI4Tg--mrJ2A", "src": "Tom Scott", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCuCkxoKLYO_EQ2GeFtbM_bw", "src": "Half as Interesting", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UC9RM-iSvTu1uPJb8X5yp3EQ", "src": "Wendover Productions", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UC1ZBQ-F-yktYD4m5AzM6pww", "src": "Mustard", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCbbQalJ4OaC0oQ0AqRaOJ9g", "src": "Map Men", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"}
   ]
 }
