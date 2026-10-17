@@ -322,6 +322,15 @@
     {"id": "UCuCkxoKLYO_EQ2GeFtbM_bw", "src": "Half as Interesting", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
     {"id": "UC9RM-iSvTu1uPJb8X5yp3EQ", "src": "Wendover Productions", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
     {"id": "UC1ZBQ-F-yktYD4m5AzM6pww", "src": "Mustard", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
-    {"id": "UCbbQalJ4OaC0oQ0AqRaOJ9g", "src": "Map Men", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"}
+    {"id": "UCbbQalJ4OaC0oQ0AqRaOJ9g", "src": "Map Men", "cat": "niche", "lang": "en", "minMin": 3, "maxMin": 60, "skip": "#shorts|\blive\b"},
+    {"id": "UCNJcSUSzUeFm8W9P7UUlSeQ", "src": "TVF", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCC89oVFqenaffhBoyqxd6qw", "src": "Dice Media", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCnmc_PeDpqp5ww2PcB4dU9w", "src": "Terribly Tiny Tales", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCKdX5TtJb6urNG1xEcDOeuQ", "src": "Royal Stag Barrel Select Shorts", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UC7IMq6lLHbptAnSucW1pClA", "src": "FilterCopy", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCWnTC8o8AycL6a2eRrKSdBg", "src": "Pocket Films", "cat": "fiction", "lang": "hi", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCTMt7iMWa7jy0fNXIktwyLA", "src": "Omeleto", "cat": "fiction", "lang": "en", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UC7sDT8jZ76VLV1u__krUutA", "src": "DUST", "cat": "fiction", "lang": "en", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"},
+    {"id": "UCMOB6uDg7e-h8OuCw8dK2_Q", "src": "ALTER", "cat": "fiction", "lang": "en", "minMin": 4, "maxMin": 60, "skip": "trailer|teaser|\bbts\b|behind the scenes|promo|#shorts|reaction|making of|announcement|\blive\b"}
   ]
 }
