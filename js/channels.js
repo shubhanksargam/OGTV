@@ -103,4 +103,8 @@ const CHANNELS = [
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
+  {key:"premium",n:38,group:"Entertainment",name:"Premium Movies",en:"Hindi films, 2000s to now",parts:[
+    {from:0,to:12, cat:"premium",label:"Movies all night & morning"},
+    {from:12,to:18,cat:"premium",label:"Afternoon movie"},
+    {from:18,to:24,cat:"premium",label:"Prime-time premiere"}]},
 ];
