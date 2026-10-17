@@ -11,6 +11,7 @@ function track(name, title){ // events show up as paths in the GoatCounter dashb
 if(GC_CODE){
   const s=document.createElement("script"); s.async=true; s.src="https://gc.zgo.at/count.js";
   s.dataset.goatcounter=`https://${GC_CODE}.goatcounter.com/count`;
-  s.onload=()=>{window.goatcounter.count({path:"/", title:"OGTV"}); (window.__gcQueue||[]).forEach(f=>f()); window.__gcQueue=[]};
+  // the visit is counted by page: "/" or a /tv/<channel>/ landing page
+  s.onload=()=>{window.goatcounter.count({path:location.pathname, title:document.title}); (window.__gcQueue||[]).forEach(f=>f()); window.__gcQueue=[]};
   document.head.appendChild(s);
 }

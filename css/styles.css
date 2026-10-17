@@ -233,6 +233,15 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 
 .note{color:var(--muted);font-size:.92rem;max-width:80ch}
 .note strong{color:var(--ink)}
+/* All-channels directory and channel-page intro: plain links and text search engines read */
+.directory{border-top:1px solid var(--line);margin-top:12px;padding:28px 2px 8px}
+.directory h2,.seo-intro h2{margin:0 0 16px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 32px}
+.directory h3{margin:0 0 6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold)}
+.directory ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.directory a{color:var(--ink);text-decoration:none;font-weight:700}.directory a:hover{color:var(--marigold)}
+.directory li span{color:var(--muted);font-size:.88rem}
+.seo-intro{padding:20px 2px 0}.seo-intro p{margin:0;color:var(--muted);max-width:75ch;line-height:1.55}
 /* About, at the very bottom */
 .about{border-top:1px solid var(--line);margin-top:12px;padding:28px 2px 40px;display:flex;flex-direction:column;gap:20px}
 .about-head{display:flex;align-items:center;justify-content:space-between;gap:16px}

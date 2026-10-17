@@ -29,8 +29,9 @@ jobs:
         run: |
           if git diff --quiet js/feeds.js; then echo "No new videos"; exit 0; fi
           sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d)#" index.html
+          node scripts/build-pages.mjs   # channel pages copy the home page, so rebuild them after the stamp
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -qam "Refresh feeds"
+          git add -A && git commit -qm "Refresh feeds"
           git pull -q --rebase && git push -q
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

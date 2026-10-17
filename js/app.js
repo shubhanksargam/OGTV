@@ -1,7 +1,7 @@
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
 let cur=0; try{const s=+localStorage.getItem("aangan-ch");if(s>=0&&s<CHANNELS.length)cur=s}catch(e){}
-{const n=+new URLSearchParams(location.search).get("ch"), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8 opens Khel
+{const n=+new URLSearchParams(location.search).get("ch")||window.OGTV_CH, i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";

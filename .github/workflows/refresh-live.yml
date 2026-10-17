@@ -27,8 +27,9 @@ jobs:
         run: |
           if git diff --quiet js/live.js; then echo "No change"; exit 0; fi
           sed -i -E "s#js/live\.js\?v=[^\"]*#js/live.js?v=$(date -u +%Y%m%d%H%M)#" index.html
+          node scripts/build-pages.mjs   # channel pages copy the home page, so rebuild them after the stamp
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -qam "Refresh live streams"
+          git add -A && git commit -qm "Refresh live streams"
           git pull -q --rebase && git push -q
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
