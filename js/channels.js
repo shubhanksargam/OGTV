@@ -1,18 +1,18 @@
 /* ---------- Channels and their rules. A rule = hours (IST) + what to select ---------- */
 // live: a group in js/live.js. While one of its streams is on air the channel shows it; otherwise its parts play.
 const CHANNELS = [
-  {key:"aangan",n:1,name:"Aangan",en:"Family mix, in Hindi",parts:[  // strictly Hindi, family-safe, no cartoons
+  {key:"aangan",n:1,name:"Aangan",en:"Family mix, in Hindi",parts:[  // strictly Hindi (named documentary channels excepted), family-safe, no cartoons, no cooking
     {from:0,to:5,  cat:"geet",    lang:"hi",preferMin:15,label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
     {from:6,to:8,  cat:"sehat",   lang:"hi",tag:"yoga",preferMin:15,label:"Morning yoga"},
-    {from:8,to:10, cat:"rasoi",   lang:"hi",match:"nashta|breakfast|paratha|poha|upma|idli|dosa|uttapam|cheela|chila|thepla|sandwich|toast|dhokla|vada|pancake|oats|halwa|puri|bhature|aloo",label:"Breakfast recipes"},
+    {from:8,to:10, cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife & nature"},
     {from:10,to:11,cat:"vigyan",lang:"hi",langExcept:"National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Documentary hour"},
     {from:11,to:12,cat:"data",lang:"hi",langExcept:"India in Pixels",label:"India in data"},
     {from:12,to:13,cat:"khabar",  lang:"hi",label:"Afternoon news"},
-    {from:13,to:15,cat:"rasoi",   lang:"hi",match:"dal|daal|sabzi|sabji|curry|kari|rajma|chole|chana|kadhi|paneer|rice|chawal|pulao|biryani|roti|thali|bharta|kofta|korma|khichdi|bhindi|gobhi|lauki|matar|baingan",label:"Lunch recipes"},
+    {from:13,to:15,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Discovery afternoon"},
     {from:15,to:17,cat:"safar",   lang:"hi",preferMin:15,label:"Travel hour"},
     {from:17,to:18,cat:"hasya",   lang:"hi",src:"Kapil Sharma|Ashish Chanchlani|Rakesh Addlakha|Taarak Mehta",label:"Family comedy"},
-    {from:18,to:19,cat:"rasoi",   lang:"hi",match:"snack|nashta|pakod|pakor|bhaji|samosa|chaat|sandwich|tikki|cutlet|kachori|vada|dhokla|chila|cheela|toast|bhel|nimki|mathri|namkeen|roll|chips|fries|momos|chai",label:"Chai-time snacks"},
+    {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
     {from:19,to:20,cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",festival:true,label:"Evening aarti"},
     {from:20,to:21,cat:"khabar",  lang:"hi",label:"Prime-time news"},
     {from:21,to:23,cat:"hits2010",lang:"hi",alt:"bollywood",preferMin:15,label:"Bollywood nights"},
@@ -37,12 +37,15 @@ const CHANNELS = [
     {from:13,to:16,preferMin:15,cat:"khel",alt:"cricket",label:"Kabaddi, hockey & more"},
     {from:16,to:24,preferMin:15,cat:"cricket",alt:"khel",label:"Prime-time cricket"}]},
   {key:"vigyan",n:9,name:"Vigyan",en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
-  {key:"tech",n:10,name:"Tech",en:"News, reviews & deep dives",parts:[
-    {from:0,to:7,  cat:"tech",tag:"deep",preferMin:15,label:"Late-night deep dives"},
+  {key:"tech",n:10,name:"Tech",en:"Gadgets, explainers, cars & bikes",parts:[
+    {from:0,to:7,  cat:"tech",tag:"deep",alt:"tech",preferMin:15,label:"Late-night deep dives"},
     {from:7,to:10, cat:"tech",tag:"news",maxMin:15,label:"Morning tech news"},
-    {from:10,to:17,cat:"tech",tag:"review",label:"Reviews & comparisons"},
-    {from:17,to:20,cat:"tech",tag:"review",preferMin:12,label:"Prime-time reviews"},
-    {from:20,to:24,cat:"tech",tag:"deep",preferMin:15,label:"Deep dives"}]},
+    {from:10,to:13,cat:"tech",tag:"review",label:"New gadgets"},
+    {from:13,to:15,cat:"tech",tag:"explain",label:"How tech works"},
+    {from:15,to:17,cat:"tech",tag:"auto",label:"Cars & bikes"},
+    {from:17,to:19,cat:"tech",tag:"review",preferMin:12,label:"Prime-time gadgets"},
+    {from:19,to:21,cat:"tech",tag:"auto",preferMin:12,label:"Machines & motors"},
+    {from:21,to:24,cat:"tech",tag:"explain",preferMin:12,label:"Hi-tech explained"}]},
   {key:"paisa",n:11,name:"Paisa",en:"Money",parts:[{from:0,to:24,preferMin:15,cat:"paisa",label:"Money & investing"}]},
   {key:"safar",n:12,name:"Safar",en:"Travel",parts:[{from:0,to:24,preferMin:15,cat:"safar",label:"Travel India & beyond"}]},
   {key:"bachche",n:13,name:"Bachche",en:"Kids",parts:[

@@ -238,7 +238,7 @@ function tick(){
     const hh=h=>String(h%24).padStart(2,"0")+":00";
     const hours=s.part.from===0&&s.part.to===24?"":`: ${hh(s.part.from)}–${hh(s.part.to)}`; // all-day blocks need no hours
     $("why").innerHTML=`<span>On air because</span><span class="chip">${s.part.label}${hours}</span>`
-      +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · snacks only":""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
+      +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · "+s.part.tag:""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${s.v.src}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${onAir(nx)}`;
