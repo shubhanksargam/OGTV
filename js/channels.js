@@ -98,4 +98,9 @@ const CHANNELS = [
     {from:10,to:18,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Indian web series & shorts"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
+  {key:"retro",n:37,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
+    {from:0,to:6,  cat:"retro",label:"Late-night classics"},
+    {from:6,to:12, cat:"retro",label:"Morning show"},
+    {from:12,to:18,cat:"retro",label:"Matinee"},
+    {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
 ];
