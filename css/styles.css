@@ -195,6 +195,9 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* remote / channel list */
 .remote{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px}
 #chlist{overflow-y:auto;max-height:min(68vh,560px);scrollbar-width:thin}
+/* Group headings in the channel list and the full-screen strip */
+.ch-group{margin:14px 8px 4px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);font-weight:700}
+.sc-group{flex:none;align-self:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--marigold);font-weight:700;margin:0 -2px}
 .remote h4{margin:6px 8px 6px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .ch{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;text-align:left;background:transparent;
   border:0;border-radius:10px;padding:10px 10px;min-height:64px}

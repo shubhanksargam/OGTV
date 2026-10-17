@@ -9,8 +9,8 @@ const onAir=s=>s.live?s.v.src+": "+s.v.t:s.v.t;
 
 function renderChannels(){
   const now=Date.now();
-  $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now);
-    return `<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
+  $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<h5 class="ch-group">${c.group}</h5>`:"";
+    return `${head}<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
       <span class="num">${c.n}</span>
       <span style="min-width:0"><span class="nm"><strong>${c.name}</strong><em>${c.en}</em></span>
       <span class="on">${badge(s)}${onAir(s)}</span></span></button>`}).join("");
@@ -141,10 +141,11 @@ function wakeUI(strip){
 function renderStrip(){
   const now=Date.now();
   $("strip").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
-    return `<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}">
+    const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${c.group}</span>`:"";
+    return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}">
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
       <span class="sc-bar"><i style="width:${pct}%"></i></span></button>`}).join("");
-  const f=$("strip").children[browse]; if(f) f.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+  const f=$("strip").querySelectorAll(".sc")[browse]; if(f) f.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); // group labels sit between cards
 }
 function showBanner(){
   if(!isFull())return;
