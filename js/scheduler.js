@@ -11,17 +11,27 @@ const BAD=new Set();
 function markBad(id){BAD.add(id); cache.clear()}
 
 function pick(part){
-  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang); // part.lang: only that language, never a fallback to others
+  const exc=part.langExcept&&new RegExp(part.langExcept,"i"); // named creators allowed whatever their language
+  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src))); // part.lang: only that language, never a fallback to others
+  const inCat=c=>Array.isArray(part.cat)?part.cat.includes(c):c===part.cat; // cat may list several categories
   const re=part.match&&(part._re||(part._re=new RegExp(part.match,"i"))); // part.match: title must match, e.g. snack recipes
-  let pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
-  if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat);
+  const srcOk=v=>(!part.src||new RegExp(part.src,"i").test(v.src))&&(!part.srcSkip||!new RegExp(part.srcSkip,"i").test(v.src)); // part.src / srcSkip: which creators
+  let pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
+  if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat));
+  if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&inCat(v.cat));
   if(!pool.length&&part.alt) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.alt); // e.g. Kids falls back to science
-  if(!pool.length&&part.tag) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat);
+  if(!pool.length&&part.tag) pool=CATALOG.filter(v=>ok(v)&&inCat(v.cat));
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
   return pool.length?pool:CATALOG;
 }
+/* Festivals: the row covering this day, if any */
+function festivalOn(dayStart){const d=new Date(dayStart+IST).toISOString().slice(0,10);
+  return (typeof FESTIVALS==="undefined"?[]:FESTIVALS).find(x=>x.from<=d&&d<=x.to)||null}
+// A part with festival:true plays that festival's songs while one is on (e.g. Aangan's evening slot)
+const onFestival=(p,dayStart)=>{const f=p.festival&&festivalOn(dayStart);
+  return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,preferMin:15,label:`${f.name} songs`}:p};
 /* Festivals channel: today's festival from js/festivals.js, else the next one */
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function festivalParts(dayStart){
@@ -38,7 +48,7 @@ const cache=new Map();
 function buildDay(ch,dayStart){
   const k=ch.key+"|"+dayStart; if(cache.has(k)) return cache.get(k);
   const slots=[];
-  (ch.festival?festivalParts(dayStart):ch.parts).forEach((p,pi)=>{
+  (ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart))).forEach((p,pi)=>{
     const pool=pick(p), rnd=seeded(k+"|"+pi);
     let order=shuffle(pool,rnd), i=0;
     let t=dayStart+p.from*HOUR; const end=dayStart+p.to*HOUR;
