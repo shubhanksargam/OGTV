@@ -887,6 +887,8 @@ const FEED = [
 {"id":"d6mAi5kHsxc","t":"How To Escape A Dark Place, Beat Anxiety & Take Back Control","cat":"baatcheet","lang":"hi","min":101,"src":"Raj Shamani","pub":"2026-10-03","feed":"UCzwCEE_PchiBULMnAJqhGVg|baatcheet"},
 {"id":"txryxBFzmSs","t":"How Intelligence Agents Lie, Recruit & Run Secret Operations","cat":"baatcheet","lang":"hi","min":116,"src":"Raj Shamani","pub":"2026-10-01","feed":"UCzwCEE_PchiBULMnAJqhGVg|baatcheet"},
 {"id":"J5ft7TFUkoc","t":"The Next Big Energy Opportunity: Solar, Wind, Batteries & Hydrogen","cat":"baatcheet","lang":"hi","min":111,"src":"Raj Shamani","pub":"2026-09-29","feed":"UCzwCEE_PchiBULMnAJqhGVg|baatcheet"},
+{"id":"jZE3k051n0I","t":"Ep 454: The Ideas of Gandhi","cat":"baatcheet","lang":"en","min":136,"src":"The Seen and the Unseen","pub":"2026-10-05","feed":"UCdb70s_KLErbXcjxjhCFb1g|baatcheet"},
+{"id":"zq27lrLLSs0","t":"Ep 440: Ram and Friends","cat":"baatcheet","lang":"en","min":145,"src":"The Seen and the Unseen","pub":"2026-03-23","feed":"UCdb70s_KLErbXcjxjhCFb1g|baatcheet"},
 {"id":"5tQiPZr_RuI","t":"South Africa Champions vs England Champions","cat":"khel","lang":"en","min":22,"src":"FanCode","pub":"2026-10-16","feed":"UCF10AG_t1AYW3mlmX7g1VJA|khel"},
 {"id":"tSRDidjpAFk","t":"Anders Antonsen vs Alwi Farhan","cat":"khel","lang":"en","min":9,"src":"BWF TV","pub":"2026-10-16","feed":"UChh-akEbUM8_6ghGVnJd6cQ|khel"},
 {"id":"ZJ7yOECNm0c","t":"Chou Tien Chen vs Alex Lanier","cat":"khel","lang":"en","min":9,"src":"BWF TV","pub":"2026-10-16","feed":"UChh-akEbUM8_6ghGVnJd6cQ|khel"},
