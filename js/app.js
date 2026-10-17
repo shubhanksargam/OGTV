@@ -168,7 +168,8 @@ function fsKey(e){ // keys that only mean something in full screen
   wakeUI(false); return false;
 }
 $("strip").addEventListener("click",e=>{const b=e.target.closest(".sc"); if(b){tune(+b.dataset.i); wakeUI(true)}});
-$("strip").addEventListener("mousemove",e=>{if(e.target.closest(".sc")) wakeUI(true)});
+// Any sliding through the strip (scroll, swipe, wheel, touch, hover) keeps it open until 7 s after it stops
+["mousemove","scroll","wheel","touchstart","touchmove","pointerdown"].forEach(ev=>$("strip").addEventListener(ev,()=>wakeUI(true),{passive:true}));
 // Hover opens the strip only on moving INTO the bottom area, so a click that closed it isn't undone by the next jiggle
 let inBottom=false;
 $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingClientRect(), now=e.clientY>r.top+r.height*.8;
