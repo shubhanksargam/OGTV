@@ -31,7 +31,13 @@ const CHANNELS = [
     {from:20,to:22,cat:"sehat",tag:"learn",label:"Fitness explained"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
   {key:"rasoi",n:5,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
-  {key:"safar",n:6,group:"Lifestyle",name:"Safar",en:"Travel",parts:[{from:0,to:24,preferMin:15,cat:"safar",label:"Travel India & beyond"}]},
+  {key:"safar",n:6,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
+    {from:0,to:6,  cat:"safar",tag:"world",preferMin:20,label:"Long journeys"},
+    {from:6,to:7,  cat:"safar",tag:"scenic",alt:"safar",label:"Scenic mornings"},
+    {from:7,to:14, cat:"safar",tag:"india",preferMin:15,label:"Travel India"},
+    {from:14,to:17,cat:"safar",tag:"world",label:"Around the world"},
+    {from:17,to:21,cat:"safar",tag:"india",preferMin:15,label:"Indian road trips"},
+    {from:21,to:24,cat:"safar",tag:"world",preferMin:20,label:"The world at night"}]},
   {key:"bachche",n:7,group:"Lifestyle",name:"Bachche",en:"Kids",parts:[
     {from:0,to:7,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Early science"},
     {from:7,to:21,preferMin:15,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
