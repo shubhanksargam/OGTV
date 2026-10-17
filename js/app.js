@@ -57,7 +57,7 @@ addEventListener("keydown",e=>{
   }
   else if(e.key==="m"||e.key==="M") toggleSound();
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
-  else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
+  else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","VHS mode on")}
   else if(e.key==="c"||e.key==="C") setList(!listHidden);
   else if(e.key==="s"||e.key==="S") toggleSubs();
   else if(e.key==="Escape"&&$("screen").classList.contains("pseudo-fs")) toggleFullscreen();
@@ -188,8 +188,8 @@ function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("ret
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
-$("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on")});
-$("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on"); wakeUI(false)});
+$("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on")});
+$("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on"); wakeUI(false)});
 /* Hide the channel list on the right; the TV then takes the full width */
 let listHidden=true; try{listHidden=localStorage.getItem("ogtv-list")!=="shown"}catch(e){} // hidden unless the viewer opened it
 function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").hidden=!hide;
