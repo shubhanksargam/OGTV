@@ -103,8 +103,10 @@ const CHANNELS = [
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
-  {key:"premium",n:38,group:"Entertainment",name:"Premium Movies",en:"Hindi films, 2000s to now",parts:[
-    {from:0,to:12, cat:"premium",label:"Movies all night & morning"},
-    {from:12,to:18,cat:"premium",label:"Afternoon movie"},
-    {from:18,to:24,cat:"premium",label:"Prime-time premiere"}]},
+  {key:"premium",n:38,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
+    {from:0,to:6,  cat:"premium",src:"Mosfilm",label:"World cinema after midnight"},
+    {from:6,to:14, cat:"premium",srcSkip:"Mosfilm",label:"Bollywood hits"},
+    {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
+    {from:18,to:22,cat:"premium",srcSkip:"Mosfilm",label:"Prime-time blockbuster"},
+    {from:22,to:24,cat:"premium",src:"Mosfilm",label:"World cinema classics"}]},
 ];

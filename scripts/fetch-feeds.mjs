@@ -6,6 +6,8 @@
 // A source is a creator ("id": channel ID, latest ~15 uploads) or a playlist ("playlist": ID, first "take" videos).
 // "match"/"skip" are case-insensitive regexes on the title, e.g. only trailers from a music label.
 // "keepDays" keeps videos from earlier runs that are newer than that many days.
+// "authors": only videos uploaded by these channels (use fan-made playlists to find films, keep official uploads only).
+// "list": "popular" reads the channel's most popular uploads instead of its latest (used for Blockbusters).
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
@@ -38,8 +40,8 @@ async function rss(channelId) {
 // with an API key, the channel's uploads playlist through the API (no RSS at all);
 // without one, RSS first, then the uploads playlist page ("UU" + the channel ID after "UC").
 // "UULF…" is the same uploads list without Shorts (podcasts post dozens of clips between episodes); "UU…" is the fallback.
-async function uploads(channelId) {
-  const lists = ["UULF" + channelId.slice(2), "UU" + channelId.slice(2)];
+async function uploads(channelId, popular) {
+  const lists = popular ? ["UULP" + channelId.slice(2)] : ["UULF" + channelId.slice(2), "UU" + channelId.slice(2)]; // UULP: most popular, for "the best of" a channel
   for (const list of lists) {
     try {
       if (KEY) {
@@ -126,7 +128,7 @@ async function previous() {
 const keyOf = f => (f.id || f.playlist) + "|" + f.cat + (f.tag ? "|" + f.tag : "") + (f.match ? "|m" : ""); // a filtered source is distinct from the same channel unfiltered // one source can feed several categories (Star Sports: cricket, football, khel)
 async function fetchFeed(f, old) {
   try {
-    const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await uploads(f.id);
+    const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await uploads(f.id, f.list === "popular");
     const match = f.match && new RegExp(f.match, "i"), skip = f.skip && new RegExp(f.skip, "i");
     const info = KEY ? await detailsFromApi(entries.map(e => e.id)) : {};
     const items = []; let unread = 0;
@@ -134,6 +136,7 @@ async function fetchFeed(f, old) {
       const d = KEY ? info[e.id] : await (e.title && e.sec ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null)); // listed with title + length: no watch page needed
       if (!KEY) await sleep(300);
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
+      if (f.authors && !f.authors.includes(d.author)) continue; // fan playlists: only official uploaders
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
@@ -170,11 +173,21 @@ await Promise.all(Array.from({length: 6}, async () => {
     results[i] = skipNow ? kept : await fetchFeed(f, old);
     if (!skipNow && f.keepDays) { // e.g. trailers: keep earlier finds for a while so the channel builds up
       const since = new Date(Date.now() - f.keepDays * DAY).toISOString().slice(0, 10);
-      results[i].push(...kept.filter(v => (v.pub || "") >= since && !results[i].some(x => x.id === v.id)));
+      const m = f.match && new RegExp(f.match, "i"), k = f.skip && new RegExp(f.skip, "i"); // earlier finds still have to pass today's filters
+      results[i].push(...kept.filter(v => (v.pub || "") >= since && !results[i].some(x => x.id === v.id) && (!m || m.test(v.t)) && !(k && k.test(v.t))));
     }
   }
 }));
-const seen = new Set(), items = results.flat().filter(v => !seen.has(v.id + v.cat) && seen.add(v.id + v.cat)) // a song may be on two channels
+// Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
+const bySource = new Map(feeds.map(f => [keyOf(f), f]));
+const passes = v => { const f = bySource.get(v.feed); if (!f) return true;
+  return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t)); };
+// Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
+const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").split(/full|hindi|movie|film|\||-|4k|hd|comedy|action|horror|drama|romantic|thriller|superhit|blockbuster/)[0].replace(/[^a-z0-9]/g, "");
+const seen = new Set(), items = results.flat().filter(passes).filter(v => {
+  const k = ["premium", "retro", "masters"].includes(v.cat) && filmKey(v).length > 3 ? "film:" + v.cat + filmKey(v) : v.id + v.cat; // a song may be on two channels
+  return !seen.has(k) && seen.add(k);
+})
   .map(v => ({...v, t: roman(v.t)})); // titles in Latin script only
 
 const body = "/* Generated by scripts/fetch-feeds.mjs from scripts/feeds.json. Do not edit by hand. */\n"
