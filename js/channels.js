@@ -92,10 +92,12 @@ const CHANNELS = [
     {from:9,to:13, cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"Rare India"},
     {from:13,to:20,cat:"niche",label:"Curious finds"},
     {from:20,to:24,cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"From the archives"}]},
-  {key:"fiction",n:36,group:"Entertainment",name:"Fiction",en:"Web series & short films",parts:[
+  {key:"fiction",n:36,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
     {from:0,to:2,  cat:"fiction",src:"ALTER|DUST",label:"Midnight thrillers"},
-    {from:2,to:10, cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
-    {from:10,to:18,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Indian web series & shorts"},
+    {from:2,to:6,  cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
+    {from:6,to:10, cat:"fiction",tag:"mytho",label:"Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga"},
+    {from:10,to:14,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Indian web series & shorts"},
+    {from:14,to:18,cat:"fiction",tag:"dd",label:"Old but gold: Byomkesh, Fauji, Malgudi Days"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
   {key:"retro",n:37,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
