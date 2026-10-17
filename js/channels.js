@@ -2,7 +2,7 @@
 // live: a group in js/live.js. While one of its streams is on air the channel shows it; otherwise its parts play.
 const CHANNELS = [
   {key:"aangan",n:1,name:"Aangan",en:"Family mix, in Hindi",parts:[  // strictly Hindi
-    {from:0,to:5,  cat:"geet",     lang:"hi",label:"Late-night sadabahar"},
+    {from:0,to:5,  cat:"geet",     lang:"hi",preferMin:15,label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",   lang:"hi",label:"Morning aarti"},
     {from:6,to:8,  cat:"sehat",    lang:"hi",tag:"yoga",label:"Morning yoga"},
     {from:8,to:10, cat:"rasoi",    lang:"hi",label:"Breakfast in the kitchen"},
@@ -14,8 +14,8 @@ const CHANNELS = [
     {from:18,to:19,cat:"rasoi",    lang:"hi",match:"snack|nashta|pakod|pakor|bhaji|samosa|chaat|sandwich|tikki|cutlet|kachori|vada|dhokla|chila|cheela|toast|bhel|nimki|mathri|namkeen|roll|chips|fries|momos|chai",label:"Chai-time snacks"},
     {from:19,to:20,cat:"bhakti",   lang:"hi",label:"Evening aarti"},
     {from:20,to:21,cat:"khabar",   lang:"hi",label:"Prime-time news"},
-    {from:21,to:23,cat:"hits2010", lang:"hi",alt:"bollywood",label:"Bollywood nights"},
-    {from:23,to:24,cat:"geet",     lang:"hi",label:"Sadabahar"}]},
+    {from:21,to:23,cat:"hits2010", lang:"hi",preferMin:15,alt:"bollywood",label:"Bollywood nights"},
+    {from:23,to:24,cat:"geet",     lang:"hi",preferMin:15,label:"Sadabahar"}]},
   {key:"bhakti",n:2,name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   {key:"rasoi",n:3,name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
   {key:"sehat",n:4,name:"Sehat",en:"Yoga & fitness",parts:[
@@ -26,7 +26,7 @@ const CHANNELS = [
     {from:17,to:20,cat:"sehat",tag:"workout",label:"Evening workouts"},
     {from:20,to:22,cat:"sehat",tag:"learn",label:"Fitness explained"},
     {from:22,to:24,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
-  {key:"geet",n:5,name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
+  {key:"geet",n:5,name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",preferMin:15,label:"Evergreen, all day"}]},
   {key:"gyaan",n:6,name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,cat:"gyaan",label:"Explainers, all day"}]},
   {key:"hasya",n:7,name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,cat:"hasya",label:"Hindi & English comedy"}]},
   {key:"khel",n:8,name:"Khel",en:"Sports",parts:[
@@ -50,19 +50,19 @@ const CHANNELS = [
   {key:"bihar",n:18,name:"Bihar Jharkhand",en:"Live regional news",live:"bihar",parts:[{from:0,to:24,cat:"bihar",label:"Regional reports"}]},
   {key:"khabar",n:19,name:"Khabar",en:"Hindi news & analysis",parts:[{from:0,to:24,cat:"khabar",label:"Reports & explainers"}]},
   {key:"news",n:20,name:"Newsroom",en:"English news & analysis",parts:[{from:0,to:24,cat:"news",label:"Reports & explainers"}]},
-  {key:"punjabi",n:21,name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
-  {key:"hits2000",n:22,name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"hits2010",n:23,name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"bollywood",n:24,name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
-  {key:"english",n:25,name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
+  {key:"punjabi",n:21,name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",preferMin:15,label:"Bangers, all day"}]},
+  {key:"hits2000",n:22,name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",preferMin:15,label:"2000s hits"}]},
+  {key:"hits2010",n:23,name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",preferMin:15,label:"2010s hits"}]},
+  {key:"bollywood",n:24,name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",preferMin:15,label:"New releases & hits"}]},
+  {key:"english",n:25,name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",preferMin:15,label:"Pop hits"}]},
   {key:"trailers",n:26,name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
   {key:"data",n:27,name:"India in Data",en:"Maps, charts & stories",parts:[{from:0,to:24,cat:"data",label:"Data stories"}]},
   {key:"classroom",n:28,name:"Classroom",en:"NPTEL & lectures",parts:[{from:0,to:24,cat:"classroom",label:"Lectures"}]},
   {key:"curious",n:29,name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,cat:"curious",label:"Explainers"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:30,name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
-  {key:"drive",n:31,name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  {key:"anthems",n:32,name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"drive",n:31,name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",preferMin:15,label:"Road-trip playlist"}]},
+  {key:"anthems",n:32,name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",preferMin:15,label:"Big-chorus pop & rock"}]},
   {key:"classics",n:33,name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,cat:"classics",alt:"cricket",label:"From the archive"}]},
   {key:"raag",n:34,name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,cat:"raag",label:"Sitar & santoor, all day"}]},
 ];

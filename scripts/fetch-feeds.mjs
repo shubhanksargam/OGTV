@@ -101,7 +101,7 @@ async function previous() {
   } catch { return []; }
 }
 
-const keyOf = f => (f.id || f.playlist) + "|" + f.cat + (f.tag ? "|" + f.tag : ""); // one source can feed several categories (Star Sports: cricket, football, khel)
+const keyOf = f => (f.id || f.playlist) + "|" + f.cat + (f.tag ? "|" + f.tag : "") + (f.match ? "|m" : ""); // a filtered source is distinct from the same channel unfiltered // one source can feed several categories (Star Sports: cricket, football, khel)
 async function fetchFeed(f, old) {
   try {
     const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await rss(f.id);

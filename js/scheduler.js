@@ -18,6 +18,8 @@ function pick(part){
   if(!pool.length&&part.alt) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.alt); // e.g. Kids falls back to science
   if(!pool.length&&part.tag) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.cat);
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
+  // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
+  if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
   return pool.length?pool:CATALOG;
 }
 /* Festivals channel: today's festival from js/festivals.js, else the next one */
@@ -27,9 +29,9 @@ function festivalParts(dayStart){
   const list=typeof FESTIVALS==="undefined"?[]:FESTIVALS;
   const f=list.find(x=>x.from<=d&&d<=x.to);
   if(f){const n=days(f.day,d), when=n===0?"today":n<0?`in ${-n} day${n===-1?"":"s"}`:`day ${n+1}`;
-    return [{from:0,to:24,cat:f.cat,alt:"bhakti",label:`${f.name} · ${when}`}]}
+    return [{from:0,to:24,cat:f.cat,alt:"bhakti",preferMin:15,label:`${f.name} · ${when}`}]}
   const nx=list.find(x=>x.from>d);
-  if(nx){const [,m,dd]=nx.day.split("-"); return [{from:0,to:24,cat:nx.cat,alt:"bhakti",label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
+  if(nx){const [,m,dd]=nx.day.split("-"); return [{from:0,to:24,cat:nx.cat,alt:"bhakti",preferMin:15,label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
   return [{from:0,to:24,cat:"bhakti",label:"Devotional songs"}];
 }
 const cache=new Map();
