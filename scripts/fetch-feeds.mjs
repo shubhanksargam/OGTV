@@ -34,6 +34,28 @@ async function rss(channelId) {
     .map(e => ({id: e.match(/<yt:videoId>([^<]+)/)[1], pub: (e.match(/<published>([^<]+)/) || [])[1]?.slice(0, 10)}));
 }
 
+// A channel's latest uploads. YouTube's RSS feeds return 404 for many channels at random, so:
+// with an API key, the channel's uploads playlist through the API (no RSS at all);
+// without one, RSS first, then the uploads playlist page ("UU" + the channel ID after "UC").
+// "UULF…" is the same uploads list without Shorts (podcasts post dozens of clips between episodes); "UU…" is the fallback.
+async function uploads(channelId) {
+  const lists = ["UULF" + channelId.slice(2), "UU" + channelId.slice(2)];
+  for (const list of lists) {
+    try {
+      if (KEY) {
+        const j = JSON.parse(await get(`https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=30&playlistId=${list}&key=${KEY}`, 1));
+        const items = (j.items || []).map(it => ({id: it.contentDetails.videoId, pub: it.contentDetails.videoPublishedAt?.slice(0, 10)}));
+        if (items.length) return items;
+      } else {
+        const items = await playlist(list, 30);
+        if (items.length) return items;
+      }
+    } catch {}
+  }
+  if (KEY) throw new Error("no uploads list");
+  return rss(channelId); // last resort
+}
+
 async function playlist(listId, take) {
   const html = await get("https://www.youtube.com/playlist?list=" + listId);
   const m = html.match(/var ytInitialData = (\{.*?\});<\/script>/s);
@@ -104,12 +126,12 @@ async function previous() {
 const keyOf = f => (f.id || f.playlist) + "|" + f.cat + (f.tag ? "|" + f.tag : "") + (f.match ? "|m" : ""); // a filtered source is distinct from the same channel unfiltered // one source can feed several categories (Star Sports: cricket, football, khel)
 async function fetchFeed(f, old) {
   try {
-    const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await rss(f.id);
+    const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await uploads(f.id);
     const match = f.match && new RegExp(f.match, "i"), skip = f.skip && new RegExp(f.skip, "i");
     const info = KEY ? await detailsFromApi(entries.map(e => e.id)) : {};
     const items = []; let unread = 0;
     for (const e of entries) {
-      const d = KEY ? info[e.id] : await (f.playlist && e.title ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null));
+      const d = KEY ? info[e.id] : await (e.title && e.sec ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null)); // listed with title + length: no watch page needed
       if (!KEY) await sleep(300);
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
       const min = Math.ceil(d.sec / 60);
