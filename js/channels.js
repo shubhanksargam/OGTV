@@ -82,7 +82,7 @@ const CHANNELS = [
   {key:"english",n:28,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
   {key:"anthems",n:29,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
   {key:"drive",n:30,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  {key:"raag",n:31,group:"Music",name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,preferMin:25,cat:"raag",label:"Sitar & santoor, all day"}]},
+  {key:"raag",n:31,group:"Music",name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,cat:"raag",label:"Sitar & santoor, all day"}]},
   // ---- Entertainment ----
   {key:"hasya",n:32,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
   {key:"trailers",n:33,group:"Entertainment",name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
