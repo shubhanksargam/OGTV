@@ -19,8 +19,6 @@ const CATALOG = [
   {id:"0efkVn-I5gk",t:"Morning yoga for beginners",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
   {id:"DbbsVGkZ1Ck",t:"How to start yoga, part 1",cat:"sehat",lang:"hi",min:15,src:"Yoga",tag:"yoga"},
   // Sadabahar (evergreen songs)
-  {id:"oSkbkxlMurA",t:"Lata Mangeshkar & Kishore Kumar hits",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
-  {id:"3OFpvKUbAwU",t:"Lata & Kishore duets",cat:"geet",lang:"hi",min:30,src:"Jukebox"},
   // Gyaan (knowledge)
   {id:"oyw87aNY42E",t:"Passage to the Moon · Chandrayaan-1, part 2",cat:"gyaan",lang:"en",min:20,src:"ISRO"},
   {id:"K2YaqO6loyU",t:"The full story of Chandrayaan-2",cat:"gyaan",lang:"en",min:20,src:"Documentary"},

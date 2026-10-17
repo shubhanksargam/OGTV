@@ -31,7 +31,7 @@ function festivalOn(dayStart){const d=new Date(dayStart+IST).toISOString().slice
   return (typeof FESTIVALS==="undefined"?[]:FESTIVALS).find(x=>x.from<=d&&d<=x.to)||null}
 // A part with festival:true plays that festival's songs while one is on (e.g. Aangan's evening slot)
 const onFestival=(p,dayStart)=>{const f=p.festival&&festivalOn(dayStart);
-  return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,preferMin:15,label:`${f.name} songs`}:p};
+  return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,label:`${f.name} songs`}:p};
 /* Festivals channel: today's festival from js/festivals.js, else the next one */
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function festivalParts(dayStart){
@@ -39,9 +39,9 @@ function festivalParts(dayStart){
   const list=typeof FESTIVALS==="undefined"?[]:FESTIVALS;
   const f=list.find(x=>x.from<=d&&d<=x.to);
   if(f){const n=days(f.day,d), when=n===0?"today":n<0?`in ${-n} day${n===-1?"":"s"}`:`day ${n+1}`;
-    return [{from:0,to:24,cat:f.cat,alt:"bhakti",preferMin:15,label:`${f.name} · ${when}`}]}
+    return [{from:0,to:24,cat:f.cat,alt:"bhakti",label:`${f.name} · ${when}`}]}
   const nx=list.find(x=>x.from>d);
-  if(nx){const [,m,dd]=nx.day.split("-"); return [{from:0,to:24,cat:nx.cat,alt:"bhakti",preferMin:15,label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
+  if(nx){const [,m,dd]=nx.day.split("-"); return [{from:0,to:24,cat:nx.cat,alt:"bhakti",label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
   return [{from:0,to:24,cat:"bhakti",label:"Devotional songs"}];
 }
 const cache=new Map();

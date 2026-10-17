@@ -3,7 +3,7 @@
 // group: the heading a channel sits under in the channel list
 const CHANNELS = [
   {key:"aangan",n:1,name:"Aangan",en:"Family mix, in Hindi",parts:[  // strictly Hindi (named documentary channels excepted), family-safe, no cartoons, no cooking
-    {from:0,to:5,  cat:"geet",    lang:"hi",preferMin:15,label:"Late-night sadabahar"},
+    {from:0,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
     {from:6,to:8,  cat:"sehat",   lang:"hi",tag:"yoga",preferMin:15,label:"Morning yoga"},
     {from:8,to:10, cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife & nature"},
@@ -16,10 +16,10 @@ const CHANNELS = [
     {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
     {from:19,to:20,cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",festival:true,label:"Evening aarti"},
     {from:20,to:21,cat:"khabar",  lang:"hi",label:"Prime-time news"},
-    {from:21,to:23,cat:"hits2010",lang:"hi",alt:"bollywood",preferMin:15,label:"Bollywood nights"},
-    {from:23,to:24,cat:"geet",    lang:"hi",preferMin:15,label:"Sadabahar"}]},
+    {from:21,to:23,cat:"hits2010",lang:"hi",alt:"bollywood",label:"Bollywood nights"},
+    {from:23,to:24,cat:"geet",    lang:"hi",label:"Sadabahar"}]},
   // ---- Lifestyle ----
-  {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",preferMin:15,label:"Devotional, all day"}]},
+  {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
   {key:"sehat",n:4,group:"Lifestyle",name:"Sehat",en:"Yoga & fitness",parts:[
@@ -74,14 +74,14 @@ const CHANNELS = [
   {key:"news",n:21,group:"News",name:"Newsroom",en:"English news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"news",label:"Reports & explainers"}]},
   {key:"bihar",n:22,group:"News",name:"Bihar Jharkhand",en:"Live regional news",live:"bihar",parts:[{from:0,to:24,preferMin:15,cat:"bihar",label:"Regional reports"}]},
   // ---- Music ----
-  {key:"bollywood",n:23,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",preferMin:15,label:"New releases & hits"}]},
-  {key:"hits2010",n:24,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",preferMin:15,label:"2010s hits"}]},
-  {key:"hits2000",n:25,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",preferMin:15,label:"2000s hits"}]},
-  {key:"geet",n:26,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",preferMin:15,label:"Evergreen, all day"}]},
-  {key:"punjabi",n:27,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",preferMin:15,label:"Bangers, all day"}]},
-  {key:"english",n:28,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",preferMin:15,label:"Pop hits"}]},
-  {key:"anthems",n:29,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",preferMin:15,label:"Big-chorus pop & rock"}]},
-  {key:"drive",n:30,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",preferMin:15,label:"Road-trip playlist"}]},
+  {key:"bollywood",n:23,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
+  {key:"hits2010",n:24,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:25,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"geet",n:26,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
+  {key:"punjabi",n:27,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
+  {key:"english",n:28,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
+  {key:"anthems",n:29,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"drive",n:30,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   {key:"raag",n:31,group:"Music",name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,preferMin:25,cat:"raag",label:"Sitar & santoor, all day"}]},
   // ---- Entertainment ----
   {key:"hasya",n:32,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
