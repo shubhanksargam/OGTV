@@ -109,13 +109,47 @@ function fallback(){
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"}
-/* Opening ident plays by itself, then the channel shows. Browsers only allow sound after the visitor has
-   interacted, so we ask for it and fall back to muted if refused; the first tap or key anywhere turns it on. */
+/* Opening ident plays by itself, with only the swoosh as the iris opens; the channel's sound comes in after it,
+   with a short fade. Browsers only allow sound after the visitor has interacted, so we ask for it and fall back
+   to muted if refused; the first tap or key anywhere turns it on. */
 let started=false, soundTapped=false;
+const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
-  countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400)}
-  if(!soundTapped) setSound(true)}
-const introTimer=setTimeout(()=>start(true),matchMedia("(prefers-reduced-motion: reduce)").matches?1900:5800);
+  countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); swoosh()}
+  if(!soundTapped) soundIn()}
+function soundIn(){setSound(true); if(MODE!=="yt"||!player)return; let v=0; player.setVolume(0);
+  const fade=setInterval(()=>{v+=10; player.setVolume(v); if(v>=100)clearInterval(fade)},80)}
+const introTimer=setTimeout(()=>start(true),REDUCED?1900:5300);
+const swooshTimer=setTimeout(swoosh,REDUCED?1300:3550); // just ahead of the iris opening
+/* The transition swoosh: airy noise through a band-pass rising 300 Hz → 5 kHz while it drifts left to right, a soft
+   sine gliding down underneath, and a short hall tail (~1.6 s). Very quiet. Web Audio, no file; plays only where
+   the browser allows sound. */
+let swooshed=false;
+function swoosh(){
+  clearTimeout(swooshTimer); if(swooshed)return; swooshed=true;
+  try{
+    const ac=new (window.AudioContext||window.webkitAudioContext)();
+    ac.resume().then(()=>{if(ac.state!=="running"){ac.close();return}
+      const t=ac.currentTime+0.02, L=1.6, sr=ac.sampleRate;
+      const out=ac.createGain(); out.gain.value=0.12; out.connect(ac.destination);
+      const verb=ac.createConvolver(), ir=ac.createBuffer(2,sr*1.4,sr); // hall: decaying stereo noise as the impulse
+      for(let c=0;c<2;c++){const d=ir.getChannelData(c); for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3)}
+      verb.buffer=ir; const wet=ac.createGain(); wet.gain.value=0.35; verb.connect(wet); wet.connect(out);
+      const buf=ac.createBuffer(1,sr*L,sr), nd=buf.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=Math.random()*2-1;
+      const air=ac.createBufferSource(), bp=ac.createBiquadFilter(), amp=ac.createGain(); air.buffer=buf; bp.type="bandpass"; bp.Q.value=1.6;
+      bp.frequency.setValueAtTime(300,t); bp.frequency.exponentialRampToValueAtTime(5200,t+0.75); bp.frequency.exponentialRampToValueAtTime(2400,t+L);
+      amp.gain.setValueAtTime(0.0001,t); amp.gain.exponentialRampToValueAtTime(1,t+0.6); amp.gain.exponentialRampToValueAtTime(0.0001,t+L);
+      air.connect(bp); bp.connect(amp); let tail=amp;
+      if(ac.createStereoPanner){const pan=ac.createStereoPanner(); pan.pan.setValueAtTime(-0.6,t); pan.pan.linearRampToValueAtTime(0.6,t+L); amp.connect(pan); tail=pan}
+      tail.connect(out); tail.connect(verb);
+      const sub=ac.createOscillator(), sg=ac.createGain(); // body
+      sub.frequency.setValueAtTime(110,t); sub.frequency.exponentialRampToValueAtTime(42,t+1.1);
+      sg.gain.setValueAtTime(0.0001,t); sg.gain.exponentialRampToValueAtTime(0.5,t+0.45); sg.gain.exponentialRampToValueAtTime(0.0001,t+1.2);
+      sub.connect(sg); sg.connect(out);
+      air.start(t); air.stop(t+L); sub.start(t); sub.stop(t+1.25); setTimeout(()=>ac.close(),(L+1.6)*1000);
+    }).catch(()=>{});
+  }catch(e){}
+}
 $("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; if(MODE!=="yt"||!player)return;
   if(muted){player.mute();return} player.unMute(); player.playVideo(); checkSound()}
