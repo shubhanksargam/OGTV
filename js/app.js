@@ -109,46 +109,43 @@ function fallback(){
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"}
-/* Opening ident plays by itself, with only the swoosh as the iris opens; the channel's sound comes in after it,
+/* Opening ident plays by itself, with only its bloom as the iris opens; the channel's sound comes in after it,
    with a short fade. Browsers only allow sound after the visitor has interacted, so we ask for it and fall back
    to muted if refused; the first tap or key anywhere turns it on. */
 let started=false, soundTapped=false;
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
-  countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); swoosh()}
+  countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(!soundTapped) soundIn()}
 function soundIn(){setSound(true); if(MODE!=="yt"||!player)return; let v=0; player.setVolume(0);
   const fade=setInterval(()=>{v+=10; player.setVolume(v); if(v>=100)clearInterval(fade)},80)}
 const introTimer=setTimeout(()=>start(true),REDUCED?1900:5300);
-const swooshTimer=setTimeout(swoosh,REDUCED?1300:3550); // just ahead of the iris opening
-/* The transition swoosh: airy noise through a band-pass rising 300 Hz → 5 kHz while it drifts left to right, a soft
-   sine gliding down underneath, and a short hall tail (~1.6 s). Very quiet. Web Audio, no file; plays only where
-   the browser allows sound. */
-let swooshed=false;
-function swoosh(){
-  clearTimeout(swooshTimer); if(swooshed)return; swooshed=true;
-  try{
-    const ac=new (window.AudioContext||window.webkitAudioContext)();
-    ac.resume().then(()=>{if(ac.state!=="running"){ac.close();return}
-      const t=ac.currentTime+0.02, L=1.6, sr=ac.sampleRate;
-      const out=ac.createGain(); out.gain.value=0.12; out.connect(ac.destination);
-      const verb=ac.createConvolver(), ir=ac.createBuffer(2,sr*1.4,sr); // hall: decaying stereo noise as the impulse
-      for(let c=0;c<2;c++){const d=ir.getChannelData(c); for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3)}
-      verb.buffer=ir; const wet=ac.createGain(); wet.gain.value=0.35; verb.connect(wet); wet.connect(out);
-      const buf=ac.createBuffer(1,sr*L,sr), nd=buf.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=Math.random()*2-1;
-      const air=ac.createBufferSource(), bp=ac.createBiquadFilter(), amp=ac.createGain(); air.buffer=buf; bp.type="bandpass"; bp.Q.value=1.6;
-      bp.frequency.setValueAtTime(300,t); bp.frequency.exponentialRampToValueAtTime(5200,t+0.75); bp.frequency.exponentialRampToValueAtTime(2400,t+L);
-      amp.gain.setValueAtTime(0.0001,t); amp.gain.exponentialRampToValueAtTime(1,t+0.6); amp.gain.exponentialRampToValueAtTime(0.0001,t+L);
-      air.connect(bp); bp.connect(amp); let tail=amp;
-      if(ac.createStereoPanner){const pan=ac.createStereoPanner(); pan.pan.setValueAtTime(-0.6,t); pan.pan.linearRampToValueAtTime(0.6,t+L); amp.connect(pan); tail=pan}
-      tail.connect(out); tail.connect(verb);
-      const sub=ac.createOscillator(), sg=ac.createGain(); // body
-      sub.frequency.setValueAtTime(110,t); sub.frequency.exponentialRampToValueAtTime(42,t+1.1);
-      sg.gain.setValueAtTime(0.0001,t); sg.gain.exponentialRampToValueAtTime(0.5,t+0.45); sg.gain.exponentialRampToValueAtTime(0.0001,t+1.2);
-      sub.connect(sg); sg.connect(out);
-      air.start(t); air.stop(t+L); sub.start(t); sub.stop(t+1.25); setTimeout(()=>ac.close(),(L+1.6)*1000);
-    }).catch(()=>{});
-  }catch(e){}
+const bloomTimer=setTimeout(bloom,REDUCED?1300:3700); // as the iris opens
+/* Ident sound, made with Web Audio (no files); plays only where the browser allows sound. As the iris opens,
+   a warm D major add-9 chord blooms with a high glint and a hall tail. */
+const AC=window.AudioContext||window.webkitAudioContext;
+let bloomed=false;
+function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
+  const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
+  const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
+  const verb=ac.createConvolver(), ir=ac.createBuffer(2,sr*2.2,sr); // decaying stereo noise as the impulse
+  for(let c=0;c<2;c++){const d=ir.getChannelData(c); for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,4)}
+  verb.buffer=ir; const wet=ac.createGain(); wet.gain.value=0.3; verb.connect(wet); wet.connect(out); return {out,verb};
+}
+function bloom(){
+  clearTimeout(bloomTimer); if(bloomed||!AC)return; bloomed=true;
+  try{const ac=new AC(); ac.resume().then(()=>{if(ac.state!=="running"){ac.close();return} bloomNotes(ac,ac.currentTime+0.03); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
+}
+function bloomNotes(ac,t){
+  const {out,verb}=identOut(ac,0.4), lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
+  lp.frequency.setValueAtTime(250,t); lp.frequency.exponentialRampToValueAtTime(3200,t+0.6); lp.frequency.exponentialRampToValueAtTime(900,t+2.4);
+  pad.gain.value=0.0001; pad.gain.setValueAtTime(0.0001,t); pad.gain.exponentialRampToValueAtTime(0.16,t+0.35); pad.gain.setTargetAtTime(0.0001,t+1.2,0.45);
+  lp.connect(pad); pad.connect(out); pad.connect(verb);
+  [146.83,185,220,329.63,440].forEach(f=>[-7,7].forEach(c=>{ // D3 F#3 A3 E4 A4, each as two detuned saws
+    const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=f; o.detune.value=c; o.connect(lp); o.start(t); o.stop(t+3)}));
+  [1174.66,1760].forEach((f,i)=>{const o=ac.createOscillator(), g=ac.createGain(), at=t+0.15+i*0.08; o.frequency.value=f; // glint: D6, A6
+    g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.05,at+0.25); g.gain.exponentialRampToValueAtTime(0.0001,at+1.85);
+    o.connect(g); g.connect(out); g.connect(verb); o.start(t); o.stop(t+2.2)});
 }
 $("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; if(MODE!=="yt"||!player)return;
