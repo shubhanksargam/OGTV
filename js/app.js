@@ -1,6 +1,6 @@
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
-let cur=0; try{const s=+localStorage.getItem("aangan-ch");if(s>=0&&s<CHANNELS.length)cur=s}catch(e){}
+let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 {const n=+new URLSearchParams(location.search).get("ch")||window.OGTV_CH, i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
@@ -38,7 +38,7 @@ $("grid").addEventListener("click",e=>{const b=e.target.closest(".prog");if(b)tu
 let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
-function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;try{localStorage.setItem("aangan-ch",cur)}catch(e){}
+function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
   countChannel(); browse=cur; clearDigits();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
   playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs();}
@@ -253,7 +253,7 @@ function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomF
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
-let retro=true; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")!=="0"}catch(e){} // every visit opens in retro; turning it off lasts for this tab only
+let retro=false; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")==="1"}catch(e){} // visits open in the plain look; retro on lasts for this tab only
 function setRetro(on){retro=on; $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd();
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
@@ -329,12 +329,13 @@ setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
 setList(listHidden);
 setRetro(retro);
-// Retro opens straight into the full-screen TV: it fills the window at once, and the first tap or key makes it
-// true full screen (browsers only allow that after the visitor does something). Exit full screen leaves it.
+// The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
+// the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
+// visitor does something). Exit full screen leaves it.
 function autoFull(){
-  if(!retro||roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
+  if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
-    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro"))||e.key==="Escape") return;
+    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro,#fs,#home"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
     const r=req.call(room);
     if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
