@@ -46,7 +46,7 @@ let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
-  if(!started){start();return}
+  if(!started){start();return} // a key during the ident skips it
   if(isFull()&&fsKey(e)) return;
   if(e.key==="ArrowUp"){e.preventDefault();tune(cur-1)}
   else if(e.key==="ArrowDown"){e.preventDefault();tune(cur+1)}
@@ -89,7 +89,7 @@ window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
   const s=slotAt(CHANNELS[cur],Date.now());
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((Date.now()-s.start)/1000)})},
-    events:{onReady:()=>{MODE="yt";muted?player.mute():player.unMute();player.playVideo();playingKey=null;tick();$("sound").hidden=false;
+    events:{onReady:()=>{MODE="yt";muted?player.mute():player.unMute();player.playVideo();if(!muted)checkSound();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               if(e.data===S.PLAYING){hideStatic(); applySubs()} else if(e.data===S.BUFFERING) showStatic();
@@ -109,11 +109,20 @@ function fallback(){
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"}
-/* Press to start: one tap gives the browser permission to play with sound */
-let started=false;
-function start(){if(started)return; started=true; track("start","Pressed start"); countChannel(); $("start").hidden=true; muted=false;
-  $("sound").textContent="Mute"; if(MODE==="yt"&&player){player.unMute();player.playVideo()}}
-$("start").addEventListener("click",start);
+/* Opening ident plays by itself, then the channel shows. Browsers only allow sound after the visitor has
+   interacted, so we ask for it and fall back to muted if refused; the first tap or key anywhere turns it on. */
+let started=false, soundTapped=false;
+function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
+  countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400)}
+  if(!soundTapped) setSound(true)}
+const introTimer=setTimeout(()=>start(true),matchMedia("(prefers-reduced-motion: reduce)").matches?1600:3100);
+$("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
+function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; if(MODE!=="yt"||!player)return;
+  if(muted){player.mute();return} player.unMute(); player.playVideo(); checkSound()}
+function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
+  setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
+    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"}},900)}
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(soundTapped)return; soundTapped=true; if(muted) setSound(true)},{once:true,capture:true}));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
 function toggleFullscreen(){

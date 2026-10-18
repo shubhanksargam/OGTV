@@ -54,13 +54,30 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;
   box-shadow:0 0 0 1px var(--line),0 20px 60px -20px rgba(242,160,61,.25)}
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-/* Press to start splash */
-.start{position:fixed;inset:0;z-index:50;border:0;cursor:pointer;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-  background:radial-gradient(70% 60% at 50% 45%,#1d1a26 0%,#0b0a0f 70%,#050407 100%);font-family:var(--body)}
-.start-logo{font-size:clamp(3.2rem,14vw,8rem)}
-.start-logo .logo{filter:drop-shadow(0 0 28px rgba(242,160,61,.25))}
-.start-cta{font-weight:700;letter-spacing:.4em;text-transform:uppercase;font-size:clamp(.85rem,2.6vw,1.05rem);color:var(--marigold);animation:blink 1.4s ease-in-out infinite}
-.start-sub{color:var(--muted);font-size:.9rem}
+/* Opening ident, Netflix-style: the TV ring draws itself, the red dot lights, GTV slides in, a light
+   sweeps across, then the logo rushes toward the viewer and the channel is already playing behind it */
+.start{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;pointer-events:auto;cursor:default;
+  background:radial-gradient(70% 60% at 50% 45%,#1d1a26 0%,#0b0a0f 70%,#050407 100%);animation:intro-bg 3.1s cubic-bezier(.6,0,.4,1) both}
+.start-logo{position:relative;font-size:clamp(3.2rem,14vw,8rem);animation:intro-zoom 3.1s cubic-bezier(.7,0,.3,1) both}
+.start-logo .logo{filter:drop-shadow(0 0 28px rgba(242,160,61,.3))}
+.intro-ring{stroke-dasharray:100;stroke-dashoffset:100;animation:intro-draw .9s cubic-bezier(.65,0,.35,1) .15s forwards}
+.intro-dot{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:intro-pop .5s cubic-bezier(.3,1.6,.5,1) .9s forwards,intro-glow 1.2s ease-in-out 1.4s}
+.start .logo-word i{font-style:normal;display:inline-block;opacity:0;transform:translateX(.35em);animation:intro-letter .45s cubic-bezier(.2,.8,.2,1) forwards}
+.start .logo-word i:nth-child(1){animation-delay:1.05s}.start .logo-word i:nth-child(2){animation-delay:1.15s}.start .logo-word i:nth-child(3){animation-delay:1.25s}
+.intro-sweep{position:absolute;inset:-6% -2%;overflow:hidden;pointer-events:none;mix-blend-mode:screen} /* the light stays on the logo */
+.intro-sweep::before{content:"";position:absolute;inset:0;transform:translateX(-110%) skewX(-18deg);
+  background:linear-gradient(90deg,transparent 30%,rgba(255,240,215,.6) 50%,transparent 70%);animation:intro-sweep .75s ease-in-out 1.6s forwards}
+.start.out{animation:intro-out .4s ease forwards} /* skipped with a tap or key */
+@keyframes intro-draw{to{stroke-dashoffset:0}}
+@keyframes intro-pop{to{transform:scale(1)}}
+@keyframes intro-glow{50%{filter:drop-shadow(0 0 10px #e5483a)}}
+@keyframes intro-letter{to{opacity:1;transform:none}}
+@keyframes intro-sweep{to{transform:translateX(110%) skewX(-18deg)}}
+@keyframes intro-zoom{0%{transform:scale(.86);opacity:0}8%{opacity:1}72%{transform:scale(1);opacity:1}100%{transform:scale(14);opacity:0}}
+@keyframes intro-bg{0%,78%{opacity:1}100%{opacity:0}}
+@keyframes intro-out{to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.start,.start-logo{animation:intro-bg 1.6s ease both}
+  .intro-ring,.intro-dot,.start .logo-word i{animation:none;stroke-dashoffset:0;transform:none;opacity:1}.intro-sweep{display:none}}
 @keyframes blink{50%{opacity:.35}}
 /* Retro camcorder mode: warm VHS colour, scanlines, grain, tracking band and a VCR readout */
 .retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:700;letter-spacing:.06em;cursor:pointer}
