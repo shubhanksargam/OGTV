@@ -243,7 +243,7 @@ function onFullscreenChange(){const sc=$("screen");
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
-let retro=false; try{retro=localStorage.getItem("ogtv-retro")==="1"}catch(e){}
+let retro=true; try{retro=localStorage.getItem("ogtv-retro")!=="0"}catch(e){} // retro mode is the default; off only if the viewer turned it off
 function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{localStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd()}
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
