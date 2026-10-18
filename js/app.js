@@ -46,7 +46,7 @@ let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
-  if(!started){start();return} // a key during the ident skips it
+  if(!started)return; // the ident plays through (a key during it only lets the sound in)
   if(isFull()&&fsKey(e)) return;
   if(e.key==="ArrowUp"){e.preventDefault();tune(cur-1)}
   else if(e.key==="ArrowDown"){e.preventDefault();tune(cur+1)}
@@ -79,7 +79,8 @@ function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolvin
   setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true},wait)}
 
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
-let MODE="loading", player=null, playingKey=null, playingId=null, ended=false, muted=true, skips=0;
+let MODE="loading", player=null, playingKey=null, playingId=null, ended=false, muted=true, skips=0, bufTimer=0;
+const slotKey=(ch,s)=>s.live?ch.key+s.v.id:ch.key+s.start+s.v.id; // a live stream keeps playing across hour blocks
 function loadYT(){
   const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
   s.onerror=()=>fallback(); document.head.appendChild(s);
@@ -87,12 +88,17 @@ function loadYT(){
 }
 window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
-  const s=slotAt(CHANNELS[cur],Date.now());
+  const s=slotAt(CHANNELS[cur],Date.now()), firstKey=slotKey(CHANNELS[cur],s);
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((Date.now()-s.start)/1000)})},
-    events:{onReady:()=>{MODE="yt";player.setVolume(vol);muted?player.mute():player.unMute();player.playVideo();if(!muted)checkSound();playingKey=null;tick();$("sound").hidden=false;
+    events:{onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute()} // sound allowed: open it silently, it fades up after the ident
+              else {player.setVolume(vol);muted?player.mute():player.unMute()}
+              player.playVideo();if(!muted)checkSound();$("sound").hidden=false;
+              playingKey=firstKey;tick(); // reloads only if the programme changed while loading
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
-              if(e.data===S.PLAYING){hideStatic(); applySubs()} else if(e.data===S.BUFFERING) showStatic();
+              clearTimeout(bufTimer);
+              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris()}
+              else if(e.data===S.BUFFERING&&started) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],Date.now()).live) skip(); else {ended=true;hideStatic();showCard()}}},
             onError:e=>skip(e.data)}});
 };
@@ -104,27 +110,45 @@ function skip(code){
   if(playingId) markBad(playingId); playingKey=null; tick(); renderGuide();
 }
 function fallback(){
-  MODE="fallback"; hideStatic(); playingKey=null; tick();
+  MODE="fallback"; hideStatic(); playingKey=null; tick(); videoUp=true; openIris();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
-function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
+function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"; knobs()}
-/* Opening ident plays by itself, with only its bloom as the iris opens; the channel's sound comes in after it,
-   with a short fade. Browsers only allow sound after the visitor has interacted, so we ask for it and fall back
-   to muted if refused; the first tap or key anywhere turns it on. */
-let started=false, soundTapped=false;
+/* Opening ident plays through by itself: OGTV forms, the bloom sounds as the iris opens, then the channel plays and
+   its sound fades in. Browsers allow sound only once the visitor has done something (or has used the site before):
+   a tap, click or key at any point in the ident lets it in, without skipping; with none the ident is silent and
+   the channel starts muted until the first tap or key. */
+let started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0;
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
+  if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
   if(!soundTapped) soundIn()}
-function soundIn(){setSound(true); if(MODE!=="yt"||!player)return; let v=0; player.setVolume(0);
-  const fade=setInterval(()=>{v+=10; player.setVolume(v); if(v>=100)clearInterval(fade)},80)}
-const introTimer=setTimeout(()=>start(true),REDUCED?1900:5300);
-const bloomTimer=setTimeout(bloom,REDUCED?1300:3700); // as the iris opens
-/* Ident sound, made with Web Audio (no files); plays only where the browser allows sound. As the iris opens,
-   a warm D major add-9 chord blooms with a high glint and a hall tail. */
+function soundIn(){if(!primed)return; // not allowed yet: unmuting would make the browser pause the video; the first tap turns it on
+  if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
+  const fade=setInterval(()=>{v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
+// The iris opens onto the channel already playing. Timing follows the animation itself (it can start before this
+// script runs): 1.25 s after the V of OGTV settles the logo is complete; if the picture isn't up by then the ident
+// holds there (rings still turning) until it is, up to 6 s more. Then the iris opens, the bloom sounds with it,
+// and the ident hands over as it finishes.
+let videoUp=false, logoDone=false, capped=false, opened=false;
+function runIdent(){
+  if(REDUCED){introTimer=setTimeout(()=>start(true),1900); bloomTimer=setTimeout(bloom,1300); return}
+  let formed=false; const formedNow=()=>{if(formed)return; formed=true; setTimeout(()=>{logoDone=true; openIris()},1250); setTimeout(()=>{capped=true; openIris()},7250)};
+  document.querySelector(".start .logo-word i:nth-child(3)").addEventListener("animationend",formedNow,{once:true});
+  setTimeout(formedNow,6000)} // in case the animation never reports (a hidden tab)
+function openIris(){if(opened||started||!logoDone||!(videoUp||capped))return; opened=true;
+  $("start").classList.add("open"); bloomTimer=setTimeout(bloom,100); introTimer=setTimeout(()=>start(true),1700)}
+/* Ident sound, made with Web Audio (no files): as the iris opens, a warm D major add-9 chord blooms with a high
+   glint and a hall tail. A context made now tells us whether sound is allowed yet ("running"). */
 const AC=window.AudioContext||window.webkitAudioContext;
-let bloomed=false;
+let bloomed=false, identAc=null; try{identAc=AC?new AC():null}catch(e){}
+primed=!!identAc&&identAc.state==="running"; // sound allowed: the channel opens silently and fades up after the ident
+function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
+  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
+["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
+runIdent();
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
@@ -134,7 +158,9 @@ function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall se
 }
 function bloom(){
   clearTimeout(bloomTimer); if(bloomed||!AC)return; bloomed=true;
-  try{const ac=new AC(); ac.resume().then(()=>{if(ac.state!=="running"){ac.close();return} bloomNotes(ac,ac.currentTime+0.03); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
+  try{const ac=identAc&&identAc.state!=="closed"?identAc:new AC();
+    const asked=performance.now(); // allowed only later (a tap after the iris) is too late for it
+    ac.resume().then(()=>{if(ac.state!=="running"||performance.now()-asked>1500){ac.close();return} bloomNotes(ac,ac.currentTime+0.03); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
 }
 function bloomNotes(ac,t){
   const {out,verb}=identOut(ac,0.4), lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
@@ -147,13 +173,13 @@ function bloomNotes(ac,t){
     g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.05,at+0.25); g.gain.exponentialRampToValueAtTime(0.0001,at+1.85);
     o.connect(g); g.connect(out); g.connect(verb); o.start(t); o.stop(t+2.2)});
 }
-$("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute();return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
-["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(soundTapped)return; soundTapped=true; if(muted) setSound(true)},{once:true,capture:true}));
+// Sound refused after the ident: the first tap or key turns it on (during the ident, the ident handles it)
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(!started||soundTapped)return; soundTapped=true; if(muted) setSound(true)},true));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
 // In retro mode full screen shows the whole TV set, which works just as it does in the page; otherwise the screen alone
@@ -311,13 +337,13 @@ function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").h
   document.querySelector(".main").classList.toggle("list-hidden",hide);
   try{localStorage.setItem("ogtv-list",hide?"hidden":"shown")}catch(e){}}
 $("hideList").addEventListener("click",()=>setList(true));
-/* Subtitles: YouTube's captions on (its default) or off for every video; reapplied as each video starts */
-let subs=true; try{subs=localStorage.getItem("ogtv-subs")!=="off"}catch(e){}
+/* Subtitles: off unless the viewer turns them on (remembered); reapplied as each video starts */
+let subs=false; try{localStorage.removeItem("ogtv-subs"); subs=localStorage.getItem("ogtv-cc")==="on"}catch(e){} // old key saved "on" for everyone
 function applySubs(){if(MODE!=="yt"||!player)return;
   try{subs?player.loadModule("captions"):(player.setOption("captions","track",{}),player.unloadModule("captions"))}catch(e){}}
 function setSubs(on){subs=on; $("cc").setAttribute("aria-pressed",on); $("keyCc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
-  try{localStorage.setItem("ogtv-subs",on?"on":"off")}catch(e){} applySubs()}
-const toggleSubs=()=>{setSubs(!subs); if(!subs) track("subs-off","Subtitles off")};
+  applySubs()}
+const toggleSubs=()=>{setSubs(!subs); try{localStorage.setItem("ogtv-cc",subs?"on":"off")}catch(e){} if(subs) track("subs-on","Subtitles on")};
 $("cc").addEventListener("click",toggleSubs);
 // The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
 $("keyCc").addEventListener("click",toggleSubs);
@@ -361,13 +387,13 @@ function showCard(msg){
 
 function tick(){
   const now=Date.now(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
-  const key=s.live?ch.key+s.v.id:ch.key+s.start+s.v.id; // a live stream keeps playing across hour blocks
+  const key=slotKey(ch,s);
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey){
     playingKey=key; playingId=s.v.id; ended=false;
     const off=Math.floor((now-s.start)/1000);
-    if(MODE==="yt"&&player){$("card").hidden=true;showStatic();
+    if(MODE==="yt"&&player){$("card").hidden=true;if(started)showStatic(); // the ident covers the first tune-in
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
@@ -389,7 +415,7 @@ function tick(){
 // About section numbers come from the data, so they stay right as channels and creators change
 $("aboutChannels").textContent=CHANNELS.length;
 $("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
-showStatic(); renderChannels(); renderGuide(); tick(); loadYT();
+renderChannels(); renderGuide(); tick(); loadYT();
 setInterval(tick,1000);
 // Watch-time milestones while the page is visible: how long people stay
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
