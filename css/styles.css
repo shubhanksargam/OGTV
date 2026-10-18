@@ -95,6 +95,15 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .knob::after{content:"";position:absolute;inset:26%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3e3c3,#b89a68 55%,#7d6440);
   box-shadow:inset 0 -1px 2px rgba(0,0,0,.4)} /* brass cap */
 .knob i{position:absolute;left:50%;top:6%;width:3px;height:22%;margin-left:-1.5px;border-radius:2px;background:var(--marigold);z-index:1;box-shadow:0 0 4px rgba(242,160,61,.6)}
+.knob{touch-action:none;cursor:grab}.knob.turning{cursor:grabbing;transition:none}
+/* Old-TV readout while a knob turns: green block letters with a phosphor glow */
+.tv-osd{position:absolute;left:50%;top:12%;z-index:4;transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity .25s;
+  font-family:"VT323",ui-monospace,monospace;font-size:clamp(1.1rem,3vw,2.2rem);letter-spacing:.08em;color:#8dff9a;white-space:nowrap;
+  text-shadow:0 0 6px rgba(120,255,140,.8),0 0 16px rgba(80,255,120,.35),2px 2px 0 rgba(0,0,0,.6);display:flex;align-items:center;gap:.5em}
+.tv-osd.on{opacity:1}
+.tv-osd b{font-weight:400;color:#c8ffd0}
+.vbars{display:inline-flex;gap:.12em;align-items:flex-end;height:.8em}
+.vbars i{width:.22em;height:100%;background:#8dff9a;box-shadow:0 0 6px rgba(120,255,140,.8)}
 .knob:focus-visible{outline:2px solid var(--marigold);outline-offset:4px}
 .grille{flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
   box-shadow:inset 0 2px 4px rgba(0,0,0,.45)}

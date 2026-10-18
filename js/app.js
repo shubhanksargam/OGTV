@@ -89,7 +89,7 @@ window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
   const s=slotAt(CHANNELS[cur],Date.now());
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((Date.now()-s.start)/1000)})},
-    events:{onReady:()=>{MODE="yt";muted?player.mute():player.unMute();player.playVideo();if(!muted)checkSound();playingKey=null;tick();$("sound").hidden=false;
+    events:{onReady:()=>{MODE="yt";player.setVolume(vol);muted?player.mute():player.unMute();player.playVideo();if(!muted)checkSound();playingKey=null;tick();$("sound").hidden=false;
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               if(e.data===S.PLAYING){hideStatic(); applySubs()} else if(e.data===S.BUFFERING) showStatic();
@@ -249,13 +249,47 @@ function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("set
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
-// The TV set's knobs work: channel turns to the next channel (scroll on it to turn either way), volume turns sound on or off
-const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
-  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
-function knobs(){$("knobCh").style.setProperty("--rot",(cur*360/CHANNELS.length)+"deg"); $("knobVol").style.setProperty("--rot",(muted?-130:110)+"deg")}
-$("knobCh").addEventListener("click",()=>tune(cur+1));
-$("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1))},{passive:false});
-$("knobVol").addEventListener("click",()=>{if(!started) start(); toggleSound()});
+// The TV set's knobs turn like real ones: drag round, scroll, or arrow keys when focused. Channel steps
+// through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
+// 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
+let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
+const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
+let osdTimer=0;
+function tvOsd(html){const o=$("tvOsd"); o.innerHTML=html; o.classList.add("on"); clearTimeout(osdTimer); osdTimer=setTimeout(()=>o.classList.remove("on"),1600)}
+const osdChannel=i=>tvOsd(`<b>CH ${String(CHANNELS[i].n).padStart(2,"0")}</b> ${esc(CHANNELS[i].name.toUpperCase())}`);
+const osdVolume=()=>tvOsd(`<b>VOLUME</b> <span class="vbars">${"<i></i>".repeat(Math.round((muted?0:vol)/5))}</span> ${muted?"MUTE":vol}`);
+function knobs(){$("knobCh").style.setProperty("--rot",(cur*CH_STEP)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
+function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage.setItem("ogtv-vol",vol)}catch(e){}
+  if(MODE==="yt"&&player) player.setVolume(vol);
+  if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
+  osdVolume()}
+// Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click.
+function turnable(el,{onTurn,onDone,onClick}){
+  let start=null;
+  const ang=e=>{const r=el.getBoundingClientRect(); return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};
+  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false}; el.classList.add("turning")});
+  el.addEventListener("pointermove",e=>{if(!start)return; const a=ang(e); let d=a-start.last; if(d>180)d-=360; if(d<-180)d+=360;
+    start.last=a; start.turned+=d; if(Math.hypot(e.clientX-start.x,e.clientY-start.y)>5) start.moved=true; if(start.moved) onTurn(start.turned)});
+  const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick()};
+  el.addEventListener("pointerup",end); el.addEventListener("pointercancel",end);
+}
+let chPreview=0;
+turnable($("knobCh"),{
+  onTurn:d=>{$("knobCh").style.setProperty("--rot",(cur*CH_STEP+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
+  onDone:()=>{chPreview!==cur?tune(chPreview):knobs()},
+  onClick:()=>{if(!started) start(); tune(cur+1); osdChannel(cur)}});
+let volAtStart=vol;
+$("knobVol").addEventListener("pointerdown",()=>{volAtStart=muted?0:vol});
+turnable($("knobVol"),{
+  onTurn:d=>setVol(volAtStart+d/VOL_DEG),
+  onDone:()=>{},
+  onClick:()=>{if(!started) start(); if(muted&&vol===0) setVol(50); else {toggleSound(); osdVolume()}}});
+$("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1)); osdChannel(cur)},{passive:false});
+$("knobVol").addEventListener("wheel",e=>{e.preventDefault(); setVol((muted?0:vol)+(e.deltaY>0?-5:5))},{passive:false});
+$("knobCh").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
+  tune(cur+(k==="ArrowRight"||k==="ArrowUp"?1:-1)); osdChannel(cur)});
+$("knobVol").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
+  setVol((muted?0:vol)+(k==="ArrowRight"||k==="ArrowUp"?5:-5))});
 $("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on")});
 $("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on"); wakeUI(false)});
 /* Hide the channel list on the right; the TV then takes the full width */
