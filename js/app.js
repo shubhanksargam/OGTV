@@ -322,6 +322,7 @@ $("cc").addEventListener("click",toggleSubs);
 // The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
 $("keyCc").addEventListener("click",toggleSubs);
 $("keyFs").addEventListener("click",toggleFullscreen);
+$("keyRetro").addEventListener("click",()=>setRetro(false)); // in full screen this swaps to the plain full-screen look
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
