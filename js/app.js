@@ -112,28 +112,7 @@ function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.
 /* Press to start: one tap gives the browser permission to play with sound */
 let started=false;
 function start(){if(started)return; started=true; track("start","Pressed start"); countChannel(); $("start").hidden=true; muted=false;
-  $("sound").textContent="Mute"; chime();
-  if(MODE==="yt"&&player){player.playVideo(); setTimeout(()=>{if(!muted)player.unMute()},1500)} // sound comes in after the chime
-}
-/* The OGTV chime: three soft rising bell notes over a low fifth, with a short echo (~1.5 s). Made with Web Audio, no file. */
-function chime(){
-  try{
-    const ac=new (window.AudioContext||window.webkitAudioContext)(), t0=ac.currentTime+0.05;
-    const out=ac.createGain(); out.gain.value=0.22; out.connect(ac.destination);
-    const echo=ac.createDelay(); echo.delayTime.value=0.19; const fb=ac.createGain(); fb.gain.value=0.3;
-    out.connect(echo); echo.connect(fb); fb.connect(echo); echo.connect(ac.destination);
-    const bell=(f,t,dur,vol)=>{ // a sine voice, brightened by a fading modulator, gives a bell
-      const car=ac.createOscillator(), mod=ac.createOscillator(), depth=ac.createGain(), amp=ac.createGain();
-      car.frequency.value=f; mod.frequency.value=f*3.5;
-      depth.gain.setValueAtTime(f*1.2,t); depth.gain.exponentialRampToValueAtTime(1,t+dur);
-      amp.gain.setValueAtTime(0.0001,t); amp.gain.exponentialRampToValueAtTime(vol,t+0.012); amp.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-      mod.connect(depth); depth.connect(car.frequency); car.connect(amp); amp.connect(out);
-      car.start(t); mod.start(t); car.stop(t+dur+0.05); mod.stop(t+dur+0.05);
-    };
-    bell(659.25,t0,1.1,0.9); bell(987.77,t0+0.16,1.1,0.7); bell(1318.5,t0+0.32,1.6,0.6); bell(493.88,t0+0.32,1.8,0.35); // E5 B5 E6 over B4
-    setTimeout(()=>ac.close(),3200);
-  }catch(e){}
-}
+  $("sound").textContent="Mute"; if(MODE==="yt"&&player){player.unMute();player.playVideo()}}
 $("start").addEventListener("click",start);
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
