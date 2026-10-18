@@ -57,7 +57,7 @@ addEventListener("keydown",e=>{
   }
   else if(e.key==="m"||e.key==="M") toggleSound();
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
-  else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","VHS mode on")}
+  else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="c"||e.key==="C") setList(!listHidden);
   else if(e.key==="s"||e.key==="S") toggleSubs();
   else if(e.key==="Escape"&&$("screen").classList.contains("pseudo-fs")) toggleFullscreen();
@@ -252,13 +252,15 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // The TV set's knobs turn like real ones: drag round, scroll, or arrow keys when focused. Channel steps
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
+const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
+  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
 let osdTimer=0;
 function tvOsd(html){const o=$("tvOsd"); o.innerHTML=html; o.classList.add("on"); clearTimeout(osdTimer); osdTimer=setTimeout(()=>o.classList.remove("on"),1600)}
 const osdChannel=i=>tvOsd(`<b>CH ${String(CHANNELS[i].n).padStart(2,"0")}</b> ${esc(CHANNELS[i].name.toUpperCase())}`);
 const osdVolume=()=>tvOsd(`<b>VOLUME</b> <span class="vbars">${"<i></i>".repeat(Math.round((muted?0:vol)/5))}</span> ${muted?"MUTE":vol}`);
-function knobs(){$("knobCh").style.setProperty("--rot",(cur*CH_STEP)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
+function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",(cur*CH_STEP)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
 function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage.setItem("ogtv-vol",vol)}catch(e){}
   if(MODE==="yt"&&player) player.setVolume(vol);
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
@@ -290,8 +292,8 @@ $("knobCh").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) 
   tune(cur+(k==="ArrowRight"||k==="ArrowUp"?1:-1)); osdChannel(cur)});
 $("knobVol").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
   setVol((muted?0:vol)+(k==="ArrowRight"||k==="ArrowUp"?5:-5))});
-$("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on")});
-$("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on"); wakeUI(false)});
+$("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on")});
+$("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on"); wakeUI(false)});
 /* Hide the channel list on the right; the TV then takes the full width */
 let listHidden=true; try{listHidden=localStorage.getItem("ogtv-list")!=="shown"}catch(e){} // hidden unless the viewer opened it
 function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").hidden=!hide;
@@ -302,10 +304,14 @@ $("hideList").addEventListener("click",()=>setList(true));
 let subs=true; try{subs=localStorage.getItem("ogtv-subs")!=="off"}catch(e){}
 function applySubs(){if(MODE!=="yt"||!player)return;
   try{subs?player.loadModule("captions"):(player.setOption("captions","track",{}),player.unloadModule("captions"))}catch(e){}}
-function setSubs(on){subs=on; $("cc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
+function setSubs(on){subs=on; $("cc").setAttribute("aria-pressed",on); $("keyCc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
   try{localStorage.setItem("ogtv-subs",on?"on":"off")}catch(e){} applySubs()}
 const toggleSubs=()=>{setSubs(!subs); if(!subs) track("subs-off","Subtitles off")};
 $("cc").addEventListener("click",toggleSubs);
+// The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
+$("keyCc").addEventListener("click",toggleSubs);
+$("keyFs").addEventListener("click",toggleFullscreen);
+$("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
 setList(listHidden);

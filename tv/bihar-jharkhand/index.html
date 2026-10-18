@@ -25,7 +25,7 @@
 <meta name="theme-color" content="#14111c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=81">
+<link rel="stylesheet" href="css/styles.css?v=82">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="ogcut" maskUnits="userSpaceOnUse" x="0" y="0" width="150" height="120"><rect width="150" height="120" fill="#fff"/><circle cx="129" cy="21" r="23" fill="#000"/></mask><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18" mask="url(#ogcut)"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)"/></symbol></defs></svg>
@@ -34,7 +34,7 @@
   <header class="top">
     <div class="brand"><h1 aria-label="OGTV"><span class="logo"><svg class="logo-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="logo-word">GTV</span></span></h1></div>
     <div class="tools">
-      <button class="retro-btn" id="retro" aria-pressed="false" title="VHS mode (R)">VHS mode</button>
+      <button class="retro-btn" id="retro" aria-pressed="false" title="Retro mode (R)">Retro mode</button>
       <div class="clock" id="clock" aria-live="off">--:--<small>IST</small></div>
     </div>
   </header>
@@ -56,7 +56,7 @@
         </div>
         <button class="sound" id="sound" hidden>Turn sound on</button>
         <button class="cc" id="cc" aria-pressed="true" aria-label="Subtitles" title="Subtitles (S)">CC</button>
-        <button class="retro-fs" id="retroFs" aria-pressed="false" title="VHS mode (R)">VHS mode</button>
+        <button class="retro-fs" id="retroFs" aria-pressed="false" title="Retro mode (R)">Retro mode</button>
         <button class="fs" id="fs" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
         <div class="tv-osd" id="tvOsd" aria-live="polite"></div>
         <i class="crt-glass" aria-hidden="true"></i>
@@ -66,6 +66,11 @@
         <span class="set-brand">OGTV</span>
         <span class="knob-wrap"><button class="knob" id="knobCh" aria-label="Channel knob: turn, scroll or use arrow keys to change channel" title="Channel"><i></i></button><small>Channel</small></span>
         <span class="knob-wrap"><button class="knob" id="knobVol" aria-label="Volume knob: turn, scroll or use arrow keys to set the volume; click for sound on or off" title="Volume"><i></i></button><small>Volume</small></span>
+        <span class="keys">
+          <button class="key" id="keyMute" aria-pressed="false" title="Sound (M)">Mute</button>
+          <button class="key" id="keyCc" aria-pressed="true" title="Subtitles (S)">CC</button>
+          <button class="key key-wide" id="keyFs" title="Full screen (F)">Full screen</button>
+        </span>
         <span class="grille" aria-hidden="true"></span>
         <span class="led" aria-hidden="true"></span>
       </div></div></div>
@@ -81,7 +86,7 @@
     <nav class="remote" id="remote" aria-label="Channels">
       <div class="remote-head"><h4>Channels</h4><button class="hide-list" id="hideList" aria-label="Hide channel list" title="Hide channels (C)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hide</button></div>
       <div id="chlist"></div>
-      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>38</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>F</kbd> full screen, <kbd>R</kbd> VHS mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> hide channels</p>
+      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>38</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> hide channels</p>
     </nav>
   </section>
   <button class="show-list" id="showList" hidden aria-label="Show channel list" title="Show channels (C)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Channels</span></button>
@@ -170,13 +175,13 @@
   </footer>
 </div>
 
-<script src="js/analytics.js?v=81"></script>
-<script src="js/catalog.js?v=81"></script>
-<script src="js/feeds.js?v=81"></script>
+<script src="js/analytics.js?v=82"></script>
+<script src="js/catalog.js?v=82"></script>
+<script src="js/feeds.js?v=82"></script>
 <script src="js/live.js?v=202610162154"></script>
-<script src="js/festivals.js?v=81"></script>
-<script src="js/channels.js?v=81"></script>
-<script src="js/scheduler.js?v=81"></script>
-<script src="js/app.js?v=81"></script>
+<script src="js/festivals.js?v=82"></script>
+<script src="js/channels.js?v=82"></script>
+<script src="js/scheduler.js?v=82"></script>
+<script src="js/app.js?v=82"></script>
 </body>
 </html>
