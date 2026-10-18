@@ -22,13 +22,18 @@ const CHANNELS = [
   {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
-  {key:"sehat",n:4,group:"Lifestyle",name:"Sehat",en:"Yoga & fitness",parts:[
+  {key:"sehat",n:4,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
-    {from:5,to:9,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
-    {from:9,to:12,preferMin:15, cat:"sehat",tag:"walk",label:"Walk & move"},
-    {from:12,to:17,cat:"sehat",tag:"workout",maxMin:30,label:"Quick workouts"},
-    {from:17,to:20,preferMin:15,cat:"sehat",tag:"workout",label:"Evening workouts"},
-    {from:20,to:22,cat:"sehat",tag:"learn",label:"Fitness explained"},
+    {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
+    {from:7,to:9,  cat:"sehat",tag:"army",alt:"sehat",label:"Army training: morning PT"},
+    {from:9,to:12, cat:"sehat",tag:"sports",label:"Sports fitness: train like an athlete"},
+    {from:12,to:13,cat:"sehat",tag:"workout",maxMin:30,label:"Quick workouts"},
+    {from:13,to:14,cat:"sehat",tag:"walk",label:"Walk & move"},
+    {from:14,to:18,cat:"sehat",tag:"sports",label:"Sports fitness: speed, strength & mobility"},
+    {from:18,to:19,cat:"sehat",tag:"army",alt:"sehat",label:"Army training: evening drills"},
+    {from:19,to:20,preferMin:15,cat:"sehat",tag:"workout",label:"Evening workouts"},
+    {from:20,to:21,cat:"sehat",tag:"learn",label:"Fitness explained"},
+    {from:21,to:22,cat:"sehat",tag:"soviet",alt:"sehat",label:"Soviet-style training: kettlebells & weightlifting"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
   {key:"rasoi",n:5,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
   {key:"safar",n:6,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
