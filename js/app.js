@@ -134,18 +134,37 @@ const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}, esc=t=>String(t).rep
 let browse=cur, uiTimer=0, bannerTimer=0, digitsTimer=0;
 function wakeUI(strip){
   if(!isFull())return; const sc=$("screen");
-  sc.classList.remove("fs-idle"); if(strip&&!sc.classList.contains("strip-on")){sc.classList.add("strip-on"); renderStrip()}
+  sc.classList.remove("fs-idle"); if(strip&&!sc.classList.contains("strip-on")){sc.classList.add("strip-on"); renderStrip(false)}
   clearTimeout(uiTimer);
   uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); if(isFull()) sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
 }
-function renderStrip(){
-  const now=Date.now();
-  $("strip").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
+// The strip is an endless loop: three copies of the channel row side by side. The focused card is always
+// the copy nearest the middle of the view, so moving past 38 carries on into the next copy's channel 1 in
+// the same direction (and left of 1 into 38). Once the strip is still, the view jumps by one copy to keep
+// its middle inside the middle copy (same picture), so there is always more strip on both sides.
+let settleTimer=0, stripMoving=false; // stripMoving: the strip is gliding to a card; the loop handler waits
+const stripCard=(copy,i)=>$("strip").querySelector(`.sc[data-copy="${copy}"][data-i="${i}"]`);
+const copyWidth=()=>{const a=stripCard(0,0), b=stripCard(1,0); return a&&b?b.offsetLeft-a.offsetLeft:0};
+const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view, measured from copy 0's first card
+  return a?st.scrollLeft+st.clientWidth/2-(a.getBoundingClientRect().left-st.getBoundingClientRect().left+st.scrollLeft):0};
+function renderStrip(smooth=true){
+  const now=Date.now(), strip=$("strip"), mid=stripMid(), w=copyWidth();
+  const row=copy=>CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
     const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${c.group}</span>`:"";
-    return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}">
+    return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
       <span class="sc-bar"><i style="width:${pct}%"></i></span></button>`}).join("");
-  const f=$("strip").querySelectorAll(".sc")[browse]; if(f) f.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"}); // group labels sit between cards
+  strip.innerHTML=row(0)+row(1)+row(2);
+  // the copy of the focused channel closest to where the view is now
+  let copy=1; if(w){const x=stripCard(1,browse).offsetLeft-stripCard(0,0).offsetLeft;
+    copy=[0,1,2].reduce((b,k)=>Math.abs(x+(k-1)*w-mid)<Math.abs(x+(b-1)*w-mid)?k:b,1)}
+  const f=stripCard(copy,browse); stripMoving=true;
+  if(f) f.scrollIntoView({inline:"center",block:"nearest",behavior:smooth?"smooth":"auto"});
+  clearTimeout(settleTimer); settleTimer=setTimeout(()=>{stripMoving=false; settleStrip()},smooth?700:30);
+}
+function settleStrip(){ // keep the middle of the view inside the middle copy, without any visible change
+  const strip=$("strip"), w=copyWidth(), mid=stripMid(); if(!w)return;
+  if(mid<w) strip.scrollLeft+=w; else if(mid>=2*w) strip.scrollLeft-=w;
 }
 function showBanner(){
   if(!isFull())return;
@@ -162,12 +181,14 @@ function showDigits(){if(!isFull())return; const last=CHANNELS[CHANNELS.length-1
 function clearDigits(){$("screen").classList.remove("digits-on")}
 function fsKey(e){ // keys that only mean something in full screen
   const sc=$("screen");
-  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();
-    browse=(browse+(e.key==="ArrowRight"?1:-1)+CHANNELS.length)%CHANNELS.length; wakeUI(true); renderStrip(); return true}
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault(); const right=e.key==="ArrowRight";
+    browse=(browse+(right?1:-1)+CHANNELS.length)%CHANNELS.length; wakeUI(true); renderStrip(); return true}
   if(e.key==="Enter"&&sc.classList.contains("strip-on")){e.preventDefault(); tune(browse); wakeUI(true); return true}
   wakeUI(false); return false;
 }
 $("strip").addEventListener("click",e=>{const b=e.target.closest(".sc"); if(b){tune(+b.dataset.i); wakeUI(true)}});
+// Swiping or scrolling: when the view nears either end, shift it by one copy so the row never runs out
+$("strip").addEventListener("scroll",()=>{if(!stripMoving) settleStrip()},{passive:true}); // same picture, one copy over
 // Any sliding through the strip (scroll, swipe, wheel, touch, hover) keeps it open until 7 s after it stops
 ["mousemove","scroll","wheel","touchstart","touchmove","pointerdown"].forEach(ev=>$("strip").addEventListener(ev,()=>wakeUI(true),{passive:true}));
 // Hover opens the strip only on moving INTO the bottom area, so a click that closed it isn't undone by the next jiggle
