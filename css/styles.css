@@ -424,3 +424,4 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .osd-time{display:block}
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass{pointer-events:auto} /* clicks on the picture stay with the page (first click: true full screen), not YouTube */
 .room:is(:fullscreen,.pseudo-fs) .set-brand{font-size:clamp(.95rem,1.8vmax,1.7rem)}
+.vhs .osd{display:none} /* retro view: no PLAY sign, date or time on the picture */
