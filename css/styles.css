@@ -202,6 +202,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes blink{50%{opacity:.35}}
 /* Retro camcorder mode: warm VHS colour, scanlines, grain, tracking band and a VCR readout */
 .retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:700;letter-spacing:.06em;cursor:pointer}
+.home-btn{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}.home-btn svg{color:var(--marigold)}.home-btn:hover{border-color:var(--marigold)}
 .retro-btn[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink);border-color:var(--marigold)}
 .vhs{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;display:none}
 .screen.retro .vhs{display:block}

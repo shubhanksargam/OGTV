@@ -322,7 +322,7 @@ $("cc").addEventListener("click",toggleSubs);
 // The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
 $("keyCc").addEventListener("click",toggleSubs);
 $("keyFs").addEventListener("click",toggleFullscreen);
-$("keyHome").addEventListener("click",()=>{if(roomFull()) toggleFullscreen(); scrollTo({top:0,behavior:"smooth"})}); // back to the home screen, still in retro
+$("home").addEventListener("click",()=>{if(!retro) setRetro(true); if(!roomFull()) toggleFullscreen()}); // Home is the full-screen retro TV
 $("keyRetro").addEventListener("click",()=>setRetro(false)); // in full screen this swaps to the plain full-screen look
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
@@ -334,7 +334,7 @@ setRetro(retro);
 function autoFull(){
   if(!retro||roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
-    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro,#keyHome"))||e.key==="Escape") return;
+    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
     const r=req.call(room);
     if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
