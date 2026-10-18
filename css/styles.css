@@ -76,7 +76,12 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   box-shadow:inset 0 0 40px rgba(0,0,0,.7),inset 0 0 4px rgba(255,255,255,.08)}
 /* In the set, full screen, subtitles and sound live on the panel as push keys, so the tube shows only the picture */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) :is(.fs,.cc,.sound){display:none!important}
-.set.on~.maximize{display:none}
+.tv.retro-on .maximize{display:none}
+/* Retro full screen: the whole set, centred in a dim room, sized to fit; everything works as in the page */
+.room:fullscreen,.room:-webkit-full-screen,.room.pseudo-fs{display:grid;place-items:center;overflow:auto;padding:4vh 4vw 6vh;
+  background:radial-gradient(70% 60% at 50% 42%,#2a2133 0%,#120e17 62%,#07060a 100%)}
+.room.pseudo-fs{position:fixed;inset:0;z-index:40}
+.room:fullscreen .set.on,.room:-webkit-full-screen .set.on,.room.pseudo-fs .set.on{width:min(88vw,calc(78vh * 1.97));margin:0}
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .fs{left:6%}
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .cc{left:calc(6% + 58px)}
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .sound{right:6%}
@@ -121,6 +126,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .led{width:8px;height:8px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 6px #ff4a3a,0 0 14px rgba(255,74,58,.6)}
 @media (max-width:640px){
   .set.on .set-face{flex-direction:column}
+  .room:fullscreen .set.on,.room.pseudo-fs .set.on{width:88vw}
   .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{display:none} /* too small a tube for the date */
   .set.on .set-panel{flex-direction:row;flex-wrap:wrap;width:auto;justify-content:space-between;padding:8px 12px;gap:10px}
   .keys{display:flex;width:100%;order:5}.key{flex:1;min-height:34px}

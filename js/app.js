@@ -60,7 +60,7 @@ addEventListener("keydown",e=>{
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="c"||e.key==="C") setList(!listHidden);
   else if(e.key==="s"||e.key==="S") toggleSubs();
-  else if(e.key==="Escape"&&$("screen").classList.contains("pseudo-fs")) toggleFullscreen();
+  else if(e.key==="Escape"&&($("screen").classList.contains("pseudo-fs")||$("room").classList.contains("pseudo-fs"))) toggleFullscreen();
 });
 
 /* ---------- Intro static: covers the blank screen while a channel tunes in or buffers ---------- */
@@ -156,11 +156,14 @@ function checkSound(){ // refused (muted again or paused by the browser): carry 
 ["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(soundTapped)return; soundTapped=true; if(muted) setSound(true)},{once:true,capture:true}));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
+// In retro mode full screen shows the whole TV set, which works just as it does in the page; otherwise the screen alone
 function toggleFullscreen(){
-  const el=$("screen"), fsEl=document.fullscreenElement||document.webkitFullscreenElement;
+  const fsEl=document.fullscreenElement||document.webkitFullscreenElement;
   if(fsEl){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return}
+  const room=$("room"); if(room.classList.contains("pseudo-fs")){room.classList.remove("pseudo-fs"); onFullscreenChange(); return}
+  const el=retro&&!$("screen").classList.contains("pseudo-fs")?room:$("screen"), cls=el===room?"pseudo-fs":"pseudo-fs";
   const req=el.requestFullscreen||el.webkitRequestFullscreen;
-  if(req&&!el.classList.contains("pseudo-fs")) req.call(el); else {el.classList.toggle("pseudo-fs"); onFullscreenChange()}
+  if(req&&!el.classList.contains(cls)) req.call(el); else {el.classList.toggle(cls); onFullscreenChange()}
   track("fullscreen","Full screen");
 }
 $("fs").addEventListener("click",toggleFullscreen);
@@ -169,7 +172,8 @@ $("maximize").addEventListener("click",toggleFullscreen);
 /* ---------- Full-screen TV mode ----------
    Banner on every channel change; a strip of all channels (mouse near the bottom, tap, or left/right; Enter tunes);
    controls and cursor fade after a few idle seconds. */
-const isFull=()=>!!(document.fullscreenElement||document.webkitFullscreenElement)||$("screen").classList.contains("pseudo-fs");
+const isFull=()=>(document.fullscreenElement||document.webkitFullscreenElement)===$("screen")||$("screen").classList.contains("pseudo-fs"); // the TV-mode screen (not the retro set)
+const roomFull=()=>(document.fullscreenElement||document.webkitFullscreenElement)===$("room")||$("room").classList.contains("pseudo-fs");
 const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}, esc=t=>String(t).replace(/[&<>"]/g,c=>ESC[c]);
 let browse=cur, uiTimer=0, bannerTimer=0, digitsTimer=0;
 function wakeUI(strip){
@@ -237,14 +241,14 @@ $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingCli
   wakeUI(now&&!inBottom); inBottom=now});
 function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
 $("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():wakeUI(true)); // tap the video: open, or close the strip
-function onFullscreenChange(){const sc=$("screen");
+function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomFull()?"Exit full screen":"Full screen";
   if(isFull()){browse=cur; showBanner(); wakeUI(false)}
   else {clearTimeout(uiTimer); clearTimeout(bannerTimer); sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}} // back to normal view: controls stay put
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=true; try{retro=localStorage.getItem("ogtv-retro")!=="0"}catch(e){} // retro mode is the default; off only if the viewer turned it off
-function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
+function setRetro(on){if(!on&&roomFull()) toggleFullscreen(); retro=on; $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{localStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd()}
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
