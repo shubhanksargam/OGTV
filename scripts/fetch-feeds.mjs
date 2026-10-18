@@ -113,8 +113,11 @@ async function detailsFromApi(ids) {
 // "Main title | #tags | Channel" -> "Main title"
 function cleanTitle(t) {
   t = t.replace(/#\S+/g, "").replace(/[\[(](?:hindi|english|full video|official video|4k|hd)[\])]/gi, "").replace(/\s+/g, " ").trim();
+  // "Coke Studio | Season 14 | Pasoori | Ali Sethi x Shae Gill" → "Pasoori · Ali Sethi x Shae Gill": the show's name isn't the title
+  const segs = t.split(/\s*[|｜]\s*/).filter(Boolean), song = segs.filter(x => !/^(coke studio\b.*|season \d+)$/i.test(x));
   const first = t.split(/\s[|｜]\s/)[0].trim();
-  if (first.length >= 8) t = first;
+  if (song.length && segs.some(x => /^coke studio/i.test(x)) && song.length < segs.length) t = song.slice(0, 2).join(" · ");
+  else if (first.length >= 8) t = first;
   return t.length > 90 ? t.slice(0, 87).trimEnd() + "…" : t;
 }
 

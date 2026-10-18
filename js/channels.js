@@ -88,7 +88,14 @@ const CHANNELS = [
   {key:"english",n:30,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
   {key:"anthems",n:31,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
   {key:"drive",n:32,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  {key:"raag",n:33,group:"Music",name:"Raag",en:"Sitar & santoor",parts:[{from:0,to:24,cat:"raag",label:"Sitar & santoor, all day"}]},
+  {key:"raag",n:33,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+    {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
+    {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
+    {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
+    {from:13,to:17,cat:"raag",tag:"coke",label:"Coke Studio classics"},
+    {from:17,to:20,cat:"raag",tag:"vocal",label:"Evening thumri & khayal"},
+    {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
+    {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
   // ---- Entertainment ----
   {key:"hasya",n:34,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
   {key:"trailers",n:35,group:"Entertainment",name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
