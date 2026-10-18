@@ -115,7 +115,7 @@ let started=false, soundTapped=false;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400)}
   if(!soundTapped) setSound(true)}
-const introTimer=setTimeout(()=>start(true),matchMedia("(prefers-reduced-motion: reduce)").matches?1900:3400);
+const introTimer=setTimeout(()=>start(true),matchMedia("(prefers-reduced-motion: reduce)").matches?1900:5800);
 $("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; if(MODE!=="yt"||!player)return;
   if(muted){player.mute();return} player.unMute(); player.playVideo(); checkSound()}
