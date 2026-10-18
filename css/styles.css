@@ -53,6 +53,59 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .tv{display:flex;flex-direction:column;gap:12px;min-width:0}
 .screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;
   box-shadow:0 0 0 1px var(--line),0 20px 60px -20px rgba(242,160,61,.25)}
+/* The TV set: in VHS mode the screen sits in a walnut cabinet with a curved glass tube, a brass control
+   panel with working knobs, a speaker grille and little legs. Elsewhere the wrappers vanish from layout. */
+.set,.set-face,.set-bezel{display:contents}
+.set-panel,.crt-glass{display:none}
+.set.on{display:block;position:relative;margin-bottom:16px;padding:clamp(12px,2.2vw,26px);border-radius:clamp(18px,2.6vw,34px);
+  background:radial-gradient(120% 80% at 30% 0%,rgba(255,214,170,.16),transparent 55%),
+    repeating-linear-gradient(91deg,rgba(0,0,0,.10) 0 2px,transparent 2px 7px,rgba(0,0,0,.05) 7px 8px,transparent 8px 19px),
+    repeating-linear-gradient(89deg,rgba(255,206,150,.06) 0 1px,transparent 1px 31px),
+    linear-gradient(180deg,#7b4d2b 0%,#5e3920 48%,#432719 100%);
+  box-shadow:inset 0 2px 0 rgba(255,222,186,.28),inset 0 -4px 0 rgba(0,0,0,.35),inset 0 0 0 1px rgba(0,0,0,.35),0 34px 60px -28px rgba(0,0,0,.85)}
+.set.on::before,.set.on::after{content:"";position:absolute;bottom:-15px;width:7%;min-width:26px;height:16px;z-index:-1;
+  background:linear-gradient(90deg,#2c1a10,#4a2d1b 50%,#2c1a10);clip-path:polygon(0 0,100% 0,82% 100%,18% 100%)} /* legs */
+.set.on::before{left:11%}.set.on::after{right:11%}
+.set.on .set-face{display:flex;gap:clamp(10px,1.8vw,22px);align-items:stretch}
+.set.on .set-bezel{display:block;flex:1;min-width:0;padding:clamp(8px,1.4vw,16px);border-radius:clamp(16px,2.4vw,30px);
+  background:linear-gradient(160deg,#25201c,#0e0c0b 60%,#1a1613);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.8),inset 0 8px 18px rgba(0,0,0,.85),0 1px 0 rgba(255,222,186,.22),0 -1px 0 rgba(0,0,0,.5)}
+.set.on .screen:not(.pseudo-fs){border-radius:9% / 13%;box-shadow:0 0 0 2px #050404,0 0 24px rgba(120,200,255,.06)} /* the bulging tube */
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .crt-glass{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(60% 45% at 28% 18%,rgba(255,255,255,.13),transparent 70%),radial-gradient(120% 120% at 50% 50%,transparent 58%,rgba(0,0,0,.55));
+  box-shadow:inset 0 0 40px rgba(0,0,0,.7),inset 0 0 4px rgba(255,255,255,.08)}
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) :is(.fs,.cc,.sound){bottom:7%}
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .fs{left:6%}
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .cc{left:calc(6% + 58px)}
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .sound{right:6%}
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{left:6%;bottom:calc(7% + 60px)} /* above the buttons */
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-play{right:7%;top:9%}
+.set.on .set-panel{display:flex;flex-direction:column;align-items:center;gap:clamp(10px,1.6vw,18px);width:clamp(78px,12%,138px);
+  padding:clamp(10px,1.4vw,16px) clamp(8px,1vw,12px);border-radius:clamp(10px,1.4vw,16px);color:#3a2a18;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),linear-gradient(180deg,#d8c39b,#b39a6e 55%,#9a8259);
+  box-shadow:inset 0 1px 0 rgba(255,250,235,.7),inset 0 -2px 0 rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.4)}
+.set-brand{font-family:"Unbounded",var(--body);font-weight:700;font-size:clamp(.62rem,1.2vw,.82rem);letter-spacing:.08em;color:#4a3520;
+  text-shadow:0 1px 0 rgba(255,248,230,.6),0 -1px 0 rgba(0,0,0,.25)} /* engraved nameplate */
+.knob-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.knob-wrap small{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#4a3520;text-shadow:0 1px 0 rgba(255,248,230,.5)}
+.knob{position:relative;width:clamp(40px,4.6vw,66px);aspect-ratio:1;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:radial-gradient(circle at 50% 50%,#3b322b 0 46%,transparent 47%),repeating-conic-gradient(#1f1915 0 5deg,#3d342d 5deg 10deg);
+  box-shadow:0 4px 8px rgba(0,0,0,.5),0 0 0 2px #1a1410,inset 0 1px 1px rgba(255,255,255,.25);
+  transform:rotate(var(--rot,0deg));transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.knob::after{content:"";position:absolute;inset:26%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3e3c3,#b89a68 55%,#7d6440);
+  box-shadow:inset 0 -1px 2px rgba(0,0,0,.4)} /* brass cap */
+.knob i{position:absolute;left:50%;top:6%;width:3px;height:22%;margin-left:-1.5px;border-radius:2px;background:var(--marigold);z-index:1;box-shadow:0 0 4px rgba(242,160,61,.6)}
+.knob:focus-visible{outline:2px solid var(--marigold);outline-offset:4px}
+.grille{flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.45)}
+.led{width:8px;height:8px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 6px #ff4a3a,0 0 14px rgba(255,74,58,.6)}
+@media (max-width:640px){
+  .set.on .set-face{flex-direction:column}
+  .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{display:none} /* too small a tube for the date */
+  .set.on .set-panel{flex-direction:row;width:auto;justify-content:space-between;padding:8px 14px}
+  .knob-wrap{flex-direction:row;gap:8px}.knob{width:40px}
+  .grille{min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
+}
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* Opening ident, futuristic: out of black a hairline horizon and a faint grid rise, holographic HUD rings boot
    around the logo, O G T V resolve one by one with a brief chromatic shimmer, then an iris of light opens from

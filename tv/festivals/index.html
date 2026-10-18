@@ -41,6 +41,7 @@
 
   <section class="main">
     <div class="tv">
+      <div class="set" id="set"><div class="set-face"><div class="set-bezel">
       <div class="screen" id="screen">
         <div id="yt"></div>
         <div class="vhs" aria-hidden="true"><i class="grain"></i><span class="osd osd-play">PLAY &#9654;</span><span class="osd osd-time" id="osdTime"></span></div>
@@ -57,7 +58,16 @@
         <button class="cc" id="cc" aria-pressed="true" aria-label="Subtitles" title="Subtitles (S)">CC</button>
         <button class="retro-fs" id="retroFs" aria-pressed="false" title="VHS mode (R)">VHS mode</button>
         <button class="fs" id="fs" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <i class="crt-glass" aria-hidden="true"></i>
       </div>
+      </div>
+      <div class="set-panel">
+        <span class="set-brand">OGTV</span>
+        <span class="knob-wrap"><button class="knob" id="knobCh" aria-label="Channel knob: next channel" title="Channel"><i></i></button><small>Channel</small></span>
+        <span class="knob-wrap"><button class="knob" id="knobVol" aria-label="Volume knob: sound on or off" title="Volume"><i></i></button><small>Volume</small></span>
+        <span class="grille" aria-hidden="true"></span>
+        <span class="led" aria-hidden="true"></span>
+      </div></div></div>
       <button class="maximize" id="maximize"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Maximize for the best experience</button>
       <div class="now" aria-live="polite">
         <div class="now-row"><h3 id="nowTitle">Tuning in…</h3><span class="meta" id="nowTime"></span></div>

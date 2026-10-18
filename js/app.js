@@ -41,7 +41,7 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;try{localStorage.setItem("aangan-ch",cur)}catch(e){}
   countChannel(); browse=cur; clearDigits();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
-  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip();}
+  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
@@ -108,7 +108,7 @@ function fallback(){
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;muted=!muted;muted?player.mute():player.unMute();
-  $("sound").textContent=muted?"Turn sound on":"Mute"}
+  $("sound").textContent=muted?"Turn sound on":"Mute"; knobs()}
 /* Opening ident plays by itself, with only its bloom as the iris opens; the channel's sound comes in after it,
    with a short fade. Browsers only allow sound after the visitor has interacted, so we ask for it and fall back
    to muted if refused; the first tap or key anywhere turns it on. */
@@ -148,11 +148,11 @@ function bloomNotes(ac,t){
     o.connect(g); g.connect(out); g.connect(verb); o.start(t); o.stop(t+2.2)});
 }
 $("start").addEventListener("pointerdown",()=>start()); // a tap during the ident skips it
-function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; if(MODE!=="yt"||!player)return;
+function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute();return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
-    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"}},900)}
+    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
 ["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(soundTapped)return; soundTapped=true; if(muted) setSound(true)},{once:true,capture:true}));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
@@ -244,11 +244,18 @@ document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=false; try{retro=localStorage.getItem("ogtv-retro")==="1"}catch(e){}
-function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
+function setRetro(on){retro=on; $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{localStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd()}
 function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
+// The TV set's knobs work: channel turns to the next channel (scroll on it to turn either way), volume turns sound on or off
+const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
+  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
+function knobs(){$("knobCh").style.setProperty("--rot",(cur*360/CHANNELS.length)+"deg"); $("knobVol").style.setProperty("--rot",(muted?-130:110)+"deg")}
+$("knobCh").addEventListener("click",()=>tune(cur+1));
+$("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1))},{passive:false});
+$("knobVol").addEventListener("click",()=>{if(!started) start(); toggleSound()});
 $("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on")});
 $("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","VHS mode on"); wakeUI(false)});
 /* Hide the channel list on the right; the TV then takes the full width */
@@ -301,7 +308,7 @@ function tick(){
     const hh=h=>String(h%24).padStart(2,"0")+":00";
     const hours=s.part.from===0&&s.part.to===24?"":`: ${hh(s.part.from)}–${hh(s.part.to)}`; // all-day blocks need no hours
     $("why").innerHTML=`<span>On air because</span><span class="chip">${s.part.label}${hours}</span>`
-      +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · "+s.part.tag:""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
+      +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · "+(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${s.v.src}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${onAir(nx)}`;
