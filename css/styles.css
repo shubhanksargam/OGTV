@@ -70,7 +70,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .set.on .set-bezel{display:block;flex:1;min-width:0;padding:clamp(8px,1.4vw,16px);border-radius:clamp(16px,2.4vw,30px);
   background:linear-gradient(160deg,#25201c,#0e0c0b 60%,#1a1613);
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.8),inset 0 8px 18px rgba(0,0,0,.85),0 1px 0 rgba(255,222,186,.22),0 -1px 0 rgba(0,0,0,.5)}
-.set.on .screen:not(.pseudo-fs){border-radius:9% / 13%;box-shadow:0 0 0 2px #050404,0 0 24px rgba(120,200,255,.06)} /* the bulging tube */
+.set.on .screen:not(.pseudo-fs){border-radius:6% / 9%;box-shadow:0 0 0 2px #050404,0 0 24px rgba(120,200,255,.06)} /* the bulging tube */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .crt-glass{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;
   background:radial-gradient(60% 45% at 28% 18%,rgba(255,255,255,.13),transparent 70%),radial-gradient(120% 120% at 50% 50%,transparent 58%,rgba(0,0,0,.55));
   box-shadow:inset 0 0 40px rgba(0,0,0,.7),inset 0 0 4px rgba(255,255,255,.08)}
@@ -424,3 +424,15 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass{pointer-events:auto} /* clicks on the picture stay with the page (first click: true full screen), not YouTube */
 .room:is(:fullscreen,.pseudo-fs) .set-brand{font-size:clamp(.95rem,1.8vmax,1.7rem)}
 .vhs .osd{display:none!important} /* retro view: no PLAY sign, date or time on the picture, in any view */
+/* In the page the panel scales with the set's width (cq units), so it never makes the cabinet taller than the
+   tube; any height left over goes to the tube, so there is never an empty band under the picture */
+.set.on{container-type:inline-size}
+.set.on .set-bezel{display:flex;flex-direction:column}
+.set.on .screen:not(.pseudo-fs){flex:1 0 auto}
+.set.on .set-panel{gap:clamp(6px,1.3cqw,18px);padding:clamp(8px,1.2cqw,16px) clamp(6px,.9cqw,12px)}
+.set-brand{font-size:clamp(.75rem,2cqw,1.4rem)}
+.knob{width:clamp(32px,5.4cqw,66px)}
+.knob-wrap small{font-size:clamp(.5rem,.85cqw,.6rem)}
+.key{min-height:clamp(24px,2.9cqw,34px);font-size:clamp(.52rem,.95cqw,.68rem)}
+.grille{min-height:clamp(12px,2.5cqw,36px)}
+@media (max-width:640px){.knob{width:40px}.key{min-height:34px;font-size:.68rem}}
