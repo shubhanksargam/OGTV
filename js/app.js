@@ -328,6 +328,18 @@ setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
 setList(listHidden);
 setRetro(retro);
+// Retro opens straight into the full-screen TV: it fills the window at once, and the first tap or key makes it
+// true full screen (browsers only allow that after the visitor does something). Exit full screen leaves it.
+function autoFull(){
+  if(!retro||roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
+  const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
+    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro"))||e.key==="Escape") return;
+    const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
+    const r=req.call(room);
+    if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
+  addEventListener("click",up,true); addEventListener("keydown",up,true);
+}
+autoFull();
 $("screen").addEventListener("dblclick",toggleFullscreen);
 
 function showCard(msg){
