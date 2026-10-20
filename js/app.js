@@ -213,8 +213,8 @@ function wakeUI(strip){
   uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); if(isFull()) sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
 }
 // The strip is an endless loop: three copies of the channel row side by side. The focused card is always
-// the copy nearest the middle of the view, so moving past 38 carries on into the next copy's channel 1 in
-// the same direction (and left of 1 into 38). Once the strip is still, the view jumps by one copy to keep
+// the copy nearest the middle of the view, so moving past the last channel carries on into the next copy's channel 1 in
+// the same direction (and left of 1 into the last). Once the strip is still, the view jumps by one copy to keep
 // its middle inside the middle copy (same picture), so there is always more strip on both sides.
 let settleTimer=0, stripMoving=false; // stripMoving: the strip is gliding to a card; the loop handler waits
 const stripCard=(copy,i)=>$("strip").querySelector(`.sc[data-copy="${copy}"][data-i="${i}"]`);
@@ -290,7 +290,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
 const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
-  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
+  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
 let osdTimer=0;

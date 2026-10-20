@@ -80,21 +80,31 @@ const CHANNELS = [
     {from:20,to:24,cat:"khel",tag:"india",alt:"khel",label:"Prime time: Indian sport"}]},
   {key:"football",n:19,group:"Sports",name:"Football",en:"ISL & world football",parts:[{from:0,to:24,preferMin:15,cat:"football",label:"Football, all day"}]},
   {key:"classics",n:20,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
+  {key:"worldsport",n:21,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis & world fixtures",parts:[
+    {from:0,to:4,  cat:"khel",tag:"olympic",label:"Olympic classics"},
+    {from:4,to:7,  cat:"world",tag:"more",alt:"world",label:"Golf, cycling & swimming"},
+    {from:7,to:10, cat:"world",tag:"tennis",alt:"world",label:"Tennis: ATP, WTA & the Grand Slams"},
+    {from:10,to:13,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: FIFA, NBA, rugby, hockey"},
+    {from:13,to:16,cat:"world",tag:"f1",alt:"world",label:"F1 & MotoGP"},
+    {from:16,to:19,cat:"khel",tag:"olympic",alt:"world",label:"Olympics & world athletics"},
+    {from:19,to:21,cat:"world",tag:"fixtures",alt:"world",label:"Prime time: international fixtures"},
+    {from:21,to:23,cat:"world",tag:"f1",alt:"world",label:"Race night: F1 & MotoGP"},
+    {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- News ----
-  {key:"livenews",n:21,group:"News",name:"Live News",en:"24x7 news",live:"news",parts:[{from:0,to:24,preferMin:15,cat:"khabar",alt:"news",label:"News reports"}]},
-  {key:"khabar",n:22,group:"News",name:"Khabar",en:"Hindi news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"khabar",label:"Reports & explainers"}]},
-  {key:"news",n:23,group:"News",name:"Newsroom",en:"English news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"news",label:"Reports & explainers"}]},
-  {key:"bihar",n:24,group:"News",name:"Bihar Jharkhand",en:"Live regional news",live:"bihar",parts:[{from:0,to:24,preferMin:15,cat:"bihar",label:"Regional reports"}]},
+  {key:"livenews",n:22,group:"News",name:"Live News",en:"24x7 news",live:"news",parts:[{from:0,to:24,preferMin:15,cat:"khabar",alt:"news",label:"News reports"}]},
+  {key:"khabar",n:23,group:"News",name:"Khabar",en:"Hindi news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"khabar",label:"Reports & explainers"}]},
+  {key:"news",n:24,group:"News",name:"Newsroom",en:"English news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"news",label:"Reports & explainers"}]},
+  {key:"bihar",n:25,group:"News",name:"Bihar Jharkhand",en:"Live regional news",live:"bihar",parts:[{from:0,to:24,preferMin:15,cat:"bihar",label:"Regional reports"}]},
   // ---- Music ----
-  {key:"bollywood",n:25,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
-  {key:"hits2010",n:26,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:27,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"geet",n:28,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
-  {key:"punjabi",n:29,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
-  {key:"english",n:30,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
-  {key:"anthems",n:31,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"drive",n:32,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  {key:"raag",n:33,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+  {key:"bollywood",n:26,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
+  {key:"hits2010",n:27,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:28,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"geet",n:29,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
+  {key:"punjabi",n:30,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
+  {key:"english",n:31,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
+  {key:"anthems",n:32,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"drive",n:33,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
+  {key:"raag",n:34,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
     {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
     {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
     {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
@@ -103,9 +113,9 @@ const CHANNELS = [
     {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
   // ---- Entertainment ----
-  {key:"hasya",n:34,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
-  {key:"trailers",n:35,group:"Entertainment",name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
-  {key:"fiction",n:36,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
+  {key:"hasya",n:35,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
+  {key:"trailers",n:36,group:"Entertainment",name:"Trailers",en:"Movies & shows",parts:[{from:0,to:24,cat:"trailers",label:"Trailers & teasers"}]},
+  {key:"fiction",n:37,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
     {from:0,to:2,  cat:"fiction",src:"ALTER|DUST",label:"Midnight thrillers"},
     {from:2,to:6,  cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
     {from:6,to:10, cat:"fiction",tag:"mytho",label:"Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga"},
@@ -113,12 +123,12 @@ const CHANNELS = [
     {from:14,to:18,cat:"fiction",tag:"dd",label:"Old but gold: Byomkesh, Fauji, Malgudi Days"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
-  {key:"retro",n:37,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
+  {key:"retro",n:38,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
     {from:0,to:6,  cat:"retro",label:"Late-night classics"},
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
-  {key:"premium",n:38,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
+  {key:"premium",n:39,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
     {from:0,to:6,  cat:"premium",src:"Mosfilm",label:"World cinema after midnight"},
     {from:6,to:14, cat:"premium",srcSkip:"Mosfilm",label:"Bollywood hits"},
     {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
