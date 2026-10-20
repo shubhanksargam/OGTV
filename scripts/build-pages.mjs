@@ -32,7 +32,7 @@ const WRITTEN = {
 function describe(c) {
   if (WRITTEN[c.key]) return WRITTEN[c.key];
   const names = c.live ? LIVE[c.live].map(x => x.src) : sources(c), what = c.live ? "Live streams from" : "Videos from";
-  const en = /^(Olympics|Bollywood|DD|ISL|NPTEL|Coldplay|Punjabi|English|Hindi|Classic Hindi)/.test(c.en) ? c.en : c.en.charAt(0).toLowerCase() + c.en.slice(1); // names keep their capital
+  const en = /^(Olympics|Bollywood|DD|ISL|NPTEL|Coldplay|Punjabi|English|Hindi|Classic Hindi)\b/.test(c.en) ? c.en : c.en.charAt(0).toLowerCase() + c.en.slice(1); // names keep their capital
   const lead = `${c.name} on OGTV: ${en}, free and always on.`;
   for (let k = 4; k >= 0; k--) { // as many names as fit in a search snippet (~158 characters), never cut mid-word
     const d = k ? `${lead} ${what} ${list(names.slice(0, k))}.` : lead;
