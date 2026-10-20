@@ -375,7 +375,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* The channel you're watching: tinted row, marigold label with a marker, its current show lit */
 .grow.gcur{background:linear-gradient(90deg,rgba(242,160,61,.2),rgba(242,160,61,.09));border-radius:10px;box-shadow:inset 3px 0 0 var(--marigold)}
 .grow.gcur .glabel{color:var(--marigold);background:linear-gradient(rgba(242,160,61,.14),rgba(242,160,61,.14)),var(--panel)}
-.grow.gcur .glabel::before{content:"B6";font-size:.6rem;margin-right:6px}
+.grow.gcur .glabel::before{content:"▶";font-size:.6rem;margin-right:6px}
 .grow.gcur .prog{border-color:rgba(242,160,61,.45)}
 .grow.gcur .prog.nowp{background:rgba(242,160,61,.22);border-color:var(--marigold);box-shadow:0 0 0 1px var(--marigold),0 0 14px rgba(242,160,61,.3)}
 .nowline{position:absolute;top:0;bottom:0;width:2px;background:var(--sindoor);z-index:1;pointer-events:none}
