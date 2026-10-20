@@ -74,8 +74,12 @@ function liveStream(ch){
 function liveSlot(ch,L,t){const a=Math.floor(t/HOUR)*HOUR; // shown in the guide as hour-long blocks
   return {start:a,end:a+HOUR,live:true,part:LIVE_PART,ch,v:{id:L.id,t:L.t,src:L.src,lang:L.lang,cat:"live",min:60}}}
 
-function slotAt(ch,t){const L=liveStream(ch); if(L) return liveSlot(ch,L,t);
+// ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
+const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
+function slotAt(ch,t){const L=liveStream(ch); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t);
   return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)}
 function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
-  if(L){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,L,t)); return out}
-  let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b) out.push(s); d+=DAY}return out}
+  if(L&&!ch.liveHours){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,L,t)); return out}
+  let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
+  if(L) for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,L,t));
+  return out.sort((x,y)=>x.start-y.start)}
