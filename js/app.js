@@ -99,11 +99,20 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               clearTimeout(bufTimer);
-              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris()}
+              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); keepAwake(true)}
               else if(e.data===S.BUFFERING&&started) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
-              else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],Date.now()).live) skip(); else {ended=true;hideStatic();showCard()}}},
+              else if(e.data===S.PAUSED) keepAwake(false);
+              else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],Date.now()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
+// While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
+// mid-programme; it is let go when playback stops. Browsers drop the lock when the tab is hidden, so it is
+// taken again on return. Browsers without Wake Lock simply behave as before.
+let wakeLock=null, wantAwake=false;
+async function keepAwake(on){wantAwake=on;
+  try{if(on&&!wakeLock&&navigator.wakeLock&&document.visibilityState==="visible"){wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{wakeLock=null})}
+      else if(!on&&wakeLock){const l=wakeLock; wakeLock=null; await l.release()}}catch(e){wakeLock=null}}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&wantAwake) keepAwake(true)});
 // A video or stream that won't play is dropped from this browser's schedule and the next one starts.
 // After many failures in one visit something bigger is wrong (blocker, network), so stop and say so.
 function skip(code){
