@@ -2,7 +2,7 @@
 // live: a group in js/live.js. While one of its streams is on air the channel shows it; otherwise its parts play.
 // group: the heading a channel sits under in the channel list
 const CHANNELS = [
-  {key:"aangan",n:1,name:"Aangan",en:"Family TV, in Hindi",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
+  {key:"aangan",n:1,name:"Aangan",en:"Family TV: DD classics, KBC & Taarak Mehta",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
     {from:6,to:7,  cat:"aangan",  tag:"kahani",alt:"bhakti",label:"Subah ki kahani"},
@@ -21,7 +21,7 @@ const CHANNELS = [
     {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
   {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
-  {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
+  {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
   {key:"sehat",n:4,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
     {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
@@ -77,7 +77,10 @@ const CHANNELS = [
     {from:9,to:13, cat:"khel",tag:"olympic",alt:"khel",label:"Olympics, Asian Games & Commonwealth Games"},
     {from:13,to:16,cat:"khel",srcSkip:"Olympic|Asian Games|Commonwealth|Paralympic|World Athletics",alt:"khel",label:"Kabaddi, hockey, badminton & chess"},
     {from:16,to:20,cat:"khel",tag:"olympic",match:"india|indian|neeraj|sindhu|mirabai|bhaker|lovlina|bajrang|vinesh|sreejesh|chanu|nikhat|avani|antil|harmanpreet|sable|chopra|hockey|bharat|paris 2024",alt:"khel",label:"India at the Games"},
-    {from:20,to:24,cat:"khel",tag:"india",alt:"khel",label:"Prime time: Indian sport"}]},
+    {from:20,to:21,cat:"khel",tag:"prime",src:"Kabaddi|PKL",alt:"khel",label:"Prime time: Pro Kabaddi"},
+    {from:21,to:22,cat:"khel",tag:"prime",src:"Hockey|FIH|badminton|BWF",alt:"khel",label:"India in hockey & badminton"},
+    {from:22,to:23,cat:"khel",tag:"prime",src:"ChessBase|Diamond League",alt:"khel",label:"Gukesh, Pragg & Neeraj"},
+    {from:23,to:24,cat:"khel",tag:"prime",alt:"khel",label:"India's big moments"}]},
   {key:"football",n:19,group:"Sports",name:"Football",en:"ISL & world football",parts:[{from:0,to:24,preferMin:15,cat:"football",label:"Football, all day"}]},
   {key:"classics",n:20,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
   {key:"worldsport",n:21,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis & world fixtures",parts:[

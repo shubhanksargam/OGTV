@@ -26,13 +26,14 @@ const list = a => a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a.at(-1) 
 const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 // Channels whose sources don't tell their story get their own line
 const WRITTEN = {
-  aangan: "Aangan on OGTV: a Hindi family channel through the day. Aarti, yoga, wildlife and documentaries, news, family comedy, Bollywood and old songs.",
-  festival: "Festivals on OGTV: songs for the festival of the day, from Navratri and Diwali to Chhath, Holi, Eid and Christmas, free and always on.",
+  aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
+  festival: "Festivals on OGTV: each festival in its own tradition. Garba, Chhath geet, Gurbani, Braj Holi, qawwali, carols and bhajans, with the film favourites.",
 };
 function describe(c) {
   if (WRITTEN[c.key]) return WRITTEN[c.key];
   const names = c.live ? LIVE[c.live].map(x => x.src) : sources(c), what = c.live ? "Live streams from" : "Videos from";
-  const lead = `${c.name} on OGTV: ${c.en.charAt(0).toLowerCase() + c.en.slice(1)}, free and always on.`;
+  const en = /^(Olympics|Bollywood|DD|ISL|NPTEL|Coldplay|Punjabi|English|Hindi|Classic Hindi)/.test(c.en) ? c.en : c.en.charAt(0).toLowerCase() + c.en.slice(1); // names keep their capital
+  const lead = `${c.name} on OGTV: ${en}, free and always on.`;
   for (let k = 4; k >= 0; k--) { // as many names as fit in a search snippet (~158 characters), never cut mid-word
     const d = k ? `${lead} ${what} ${list(names.slice(0, k))}.` : lead;
     if (d.length <= 158 || !k) return d;
@@ -41,7 +42,7 @@ function describe(c) {
 
 const HOME = {
   title: "OGTV: free live Indian TV online, news, cricket, Bollywood & bhajans",
-  description: `Watch ${CHANNELS.length} free, always-on Indian TV channels in Hindi and English: live news, cricket, Bollywood hits, old songs, bhajans, comedy, podcasts, yoga and documentaries.`,
+  description: `Watch ${CHANNELS.length} free, always-on Indian TV channels in Hindi and English: live news, cricket, Olympic sport, Bollywood, bhajans, KBC, Taarak Mehta and documentaries.`,
 };
 
 function seoBlock({title, description, url, ch}) {
@@ -88,7 +89,9 @@ const replaceBetween = (s, a, b, value) => {
 let home = await read("index.html");
 home = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->", seoBlock({...HOME, url: SITE + "/"}));
 home = replaceBetween(home, "<!-- channels:start", "<!-- channels:end -->", directory());
-home = home.replace(/<span id="aboutChannels">\d+<\/span>/, `<span id="aboutChannels">${CHANNELS.length}</span>`); // the real count in the page itself (search snippets read it)
+home = home.replace(/<span id="aboutChannels">\d+<\/span>/, `<span id="aboutChannels">${CHANNELS.length}</span>`);
+const FEEDS = JSON.parse(await read("scripts/feeds.json")).feeds; // creators, channels and playlists, rounded down to the ten
+home = home.replace(/<span id="aboutCreators">[^<]*<\/span>/, `<span id="aboutCreators">${Math.floor(new Set(FEEDS.map(f => f.id || f.playlist)).size / 10) * 10}+</span>`); // the real count in the page itself (search snippets read it)
 await writeFile(new URL("index.html", ROOT), home);
 
 await rm(new URL("tv/", ROOT), {recursive: true, force: true});
