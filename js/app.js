@@ -27,11 +27,13 @@ function renderGuide(){
       const on=now>=s.start&&now<s.end;
       return `<button class="prog${on?' nowp':''}" data-i="${i}" style="left:${(x-a)/MIN*PX+1}px;width:${(y-x)/MIN*PX-3}px" title="${onAir(s).replace(/"/g,"&quot;")}">
         <b>${badge(s)}${onAir(s)}</b><small>${fmt(s.start)}</small></button>`}).join("");
-    rows+=`<div class="grow"><div class="glabel">${c.n} ${c.name}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
+    rows+=`<div class="grow${i===cur?" gcur":""}"${i===cur?' aria-current="true"':""}><div class="glabel">${c.n} ${c.name}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
   });
   rows+=`<div class="nowline" style="left:${18+120+(now-a)/MIN*PX}px"></div>`;
   $("grid").innerHTML=rows;
 }
+// The guide marks the channel you're on; tuning moves the mark without redrawing the guide
+function markGuide(){document.querySelectorAll("#grid .grow").forEach((r,k)=>{r.classList.toggle("gcur",k===cur); k===cur?r.setAttribute("aria-current","true"):r.removeAttribute("aria-current")})}
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".prog");if(b)tune(+b.dataset.i)});
 
 // A channel counts as watched after 10 s on it, so flicking past doesn't inflate it
@@ -39,7 +41,7 @@ let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
-  countChannel(); browse=cur; clearDigits();
+  countChannel(); browse=cur; clearDigits(); markGuide();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
   playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs();}
 let digits="", digitTimer=0;
