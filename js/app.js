@@ -290,7 +290,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
 const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
-  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
+  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
 let osdTimer=0;

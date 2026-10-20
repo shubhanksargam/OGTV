@@ -16,9 +16,9 @@ const CHANNELS = [
     {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
     {from:19,to:20,cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",festival:true,label:"Evening aarti"},
     {from:20,to:21,cat:"aangan",  tag:"sitcom",src:"Taarak Mehta",label:"Prime time: Taarak Mehta Ka Ooltah Chashmah"},
-    {from:21,to:22,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
-    {from:22,to:23,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"},
-    {from:23,to:24,cat:"geet",    lang:"hi",label:"Sadabahar"}]},
+    {from:21,to:22,cat:"aangan",  tag:"kbc",label:"Kaun Banega Crorepati"},
+    {from:22,to:23,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
+    {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
   {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
