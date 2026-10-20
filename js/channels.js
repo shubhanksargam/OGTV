@@ -3,10 +3,10 @@
 // group: the heading a channel sits under in the channel list
 const CHANNELS = [
   // ---- News ----
-  {key:"livenews",n:1,group:"News",name:"Just News",slug:"live-news",en:"24x7 news",live:"news",parts:[{from:0,to:24,preferMin:15,cat:"khabar",alt:"news",label:"News reports"}]},
+  {key:"livenews",n:1,group:"News",name:"Just News",oldSlugs:["live-news"],en:"24x7 news",live:"news",parts:[{from:0,to:24,preferMin:15,cat:"khabar",alt:"news",label:"News reports"}]},
   {key:"khabar",n:2,group:"News",name:"Khabar",en:"Hindi news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"khabar",label:"Reports & explainers"}]},
   {key:"news",n:3,group:"News",name:"Newsroom",en:"English news & analysis",parts:[{from:0,to:24,preferMin:15,cat:"news",label:"Reports & explainers"}]},
-  {key:"bihar",n:4,group:"News",name:"Purvaiya",slug:"bihar-jharkhand",en:"Regional news, travel, heritage & folk",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
+  {key:"bihar",n:4,group:"News",name:"Purvaiya",oldSlugs:["bihar-jharkhand"],en:"Regional news, travel, heritage & folk",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
     {from:0,to:5,  cat:"biharlife",tag:"folk",alt:"biharlife",label:"Lok sangeet: Bhojpuri, Maithili, Nagpuri & Santhali"},
     {from:5,to:7,  cat:"biharlife",tag:"heritage",alt:"biharlife",label:"Heritage of Magadh & Chotanagpur"},
     {from:7,to:10, cat:"bihar",preferMin:15,label:"Bihar & Jharkhand news"},

@@ -12,7 +12,7 @@ const FEED = JSON.parse(feedSrc.slice(feedSrc.indexOf("["), feedSrc.lastIndexOf(
 const today = new Date().toISOString().slice(0, 10);
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
-const slug = c => c.slug || c.name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const slug = c => c.name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 // The creators a channel actually plays, most videos first: the words people search for
 function sources(c) {
@@ -103,6 +103,13 @@ for (const c of CHANNELS) {
   page = page.replace('<footer class="about"', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${s.length ? ` Also on this channel: ${esc(list(s.slice(4)))}.` : ""}</p></section>\n\n  <footer class="about"`);
   await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});
   await writeFile(new URL(`tv/${slug(c)}/index.html`, ROOT), page);
+  for (const old of c.oldSlugs || []) { // a renamed channel's old address forwards to the new one
+    await mkdir(new URL(`tv/${old}/`, ROOT), {recursive: true});
+    await writeFile(new URL(`tv/${old}/index.html`, ROOT), `<!doctype html><meta charset="utf-8"><title>${esc(c.name)} | OGTV</title>
+<link rel="canonical" href="${url}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/tv/${slug(c)}/">
+<script>location.replace("/tv/${slug(c)}/"+location.search)</script><p>${esc(c.name)} has moved to <a href="/tv/${slug(c)}/">/tv/${slug(c)}/</a>.</p>
+`);
+  }
 }
 
 await writeFile(new URL("sitemap.xml", ROOT), `<?xml version="1.0" encoding="UTF-8"?>
