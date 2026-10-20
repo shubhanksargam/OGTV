@@ -71,12 +71,13 @@ const CHANNELS = [
     {from:20,to:24,cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"From the archives"}]},
   // ---- Sports ----
   {key:"cricket",n:17,group:"Sports",name:"Cricket",en:"Match highlights",parts:[{from:0,to:24,preferMin:15,cat:"cricket",alt:"classics",label:"Recent match highlights"}]},
-  {key:"khel",n:18,group:"Sports",name:"Khel",en:"Sports",parts:[
-    {from:0,to:6,preferMin:15,  cat:"cricket",alt:"khel",label:"Cricket replays"},
-    {from:6,to:9,preferMin:15,  cat:"khel",alt:"cricket",label:"Morning sports"},
-    {from:9,to:13,preferMin:15, cat:"cricket",alt:"khel",label:"Cricket"},
-    {from:13,to:16,preferMin:15,cat:"khel",alt:"cricket",label:"Kabaddi, hockey & more"},
-    {from:16,to:24,preferMin:15,cat:"cricket",alt:"khel",label:"Prime-time cricket"}]},
+  {key:"khel",n:18,group:"Sports",name:"Khel",en:"Olympics, Asian Games & Indian sport",parts:[
+    {from:0,to:6,  cat:"khel",tag:"olympic",alt:"khel",label:"Olympic moments"},
+    {from:6,to:9,  cat:"khel",alt:"cricket",label:"Morning sports"},
+    {from:9,to:13, cat:"khel",tag:"olympic",alt:"khel",label:"Olympics, Asian Games & Commonwealth Games"},
+    {from:13,to:16,cat:"khel",srcSkip:"Olympic|Asian Games|Commonwealth|Paralympic|World Athletics",alt:"khel",label:"Kabaddi, hockey, badminton & chess"},
+    {from:16,to:20,cat:"khel",tag:"olympic",match:"india|indian|neeraj|sindhu|mirabai|bhaker|lovlina|bajrang|vinesh|sreejesh|chanu|nikhat|avani|antil|harmanpreet|sable|chopra|hockey|bharat|paris 2024",alt:"khel",label:"India at the Games"},
+    {from:20,to:24,cat:"khel",tag:"india",alt:"khel",label:"Prime time: Indian sport"}]},
   {key:"football",n:19,group:"Sports",name:"Football",en:"ISL & world football",parts:[{from:0,to:24,preferMin:15,cat:"football",label:"Football, all day"}]},
   {key:"classics",n:20,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
   // ---- News ----
