@@ -60,7 +60,7 @@ ${ch ? '<base href="/">\n' : ""}<title>${esc(title)}</title>
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${url}">
-<meta property="og:image" content="${SITE}/img/og.png">
+<meta property="og:image" content="${SITE}/img/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
