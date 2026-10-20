@@ -112,6 +112,10 @@ for (const c of CHANNELS) {
   }
 }
 
+for (const gone of ["trailers"]) { // channels taken off air: their old pages forward to the home page
+  await mkdir(new URL(`tv/${gone}/`, ROOT), {recursive: true});
+  await writeFile(new URL(`tv/${gone}/index.html`, ROOT), `<!doctype html><meta charset="utf-8"><title>OGTV</title><link rel="canonical" href="${SITE}/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/"><script>location.replace("/")</script>\n`);
+}
 await writeFile(new URL("sitemap.xml", ROOT), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
