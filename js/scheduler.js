@@ -7,6 +7,7 @@ function seeded(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h
 function shuffle(arr,rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
 // Videos and streams that failed to play in this browser; schedules are rebuilt without them
+const AI_RE=/\bai\b|a\.i\.|artificial intelligence|chatgpt|midjourney|deepfake|\bsora\b/i;
 const BAD=new Set();
 function markBad(id){BAD.add(id); cache.clear()}
 
@@ -24,6 +25,9 @@ function pick(part){
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
+  // AI videos (about AI, or AI-made) get less airtime: outside Tech, about two in three sit out, chosen the same
+  // way for every viewer, as long as the pool has plenty of other videos
+  if(!inCat("tech")){const isAI=v=>AI_RE.test(v.t)&&seeded(v.id)()<0.67, rest=pool.filter(v=>!isAI(v)); if(rest.length>=10) pool=rest}
   return pool.length?pool:CATALOG;
 }
 /* Festivals: the row covering this day, if any */
