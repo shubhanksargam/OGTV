@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ogtv.thebharat.si/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/aangan/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/comedy/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/trailers/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/fiction/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/retro-movies/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/classics/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/live-news/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/newsroom/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
@@ -34,10 +40,4 @@
   <url><loc>https://ogtv.thebharat.si/tv/anthems/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/drive/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/raag/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/aangan/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/comedy/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/trailers/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/fiction/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/retro-movies/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/classics/</loc><lastmod>2026-10-20</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
 </urlset>
