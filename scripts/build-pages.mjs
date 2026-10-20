@@ -60,7 +60,7 @@ ${ch ? '<base href="/">\n' : ""}<title>${esc(title)}</title>
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${url}">
-<meta property="og:image" content="${SITE}/img/og.png?v=2">
+<meta property="og:image" content="${SITE}/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -89,6 +89,7 @@ const replaceBetween = (s, a, b, value) => {
 let home = await read("index.html");
 home = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->", seoBlock({...HOME, url: SITE + "/"}));
 home = replaceBetween(home, "<!-- channels:start", "<!-- channels:end -->", directory());
+home = home.replace(/<kbd>1<\/kbd>–<kbd>\d+<\/kbd>/, `<kbd>1</kbd>–<kbd>${CHANNELS.length}</kbd>`); // remote-keys hint
 home = home.replace(/<span id="aboutChannels">\d+<\/span>/, `<span id="aboutChannels">${CHANNELS.length}</span>`);
 const FEEDS = JSON.parse(await read("scripts/feeds.json")).feeds; // creators, channels and playlists, rounded down to the ten
 home = home.replace(/<span id="aboutCreators">[^<]*<\/span>/, `<span id="aboutCreators">${Math.floor(new Set(FEEDS.map(f => f.id || f.playlist)).size / 10) * 10}+</span>`); // the real count in the page itself (search snippets read it)

@@ -100,13 +100,26 @@ const CHANNELS = [
     {from:21,to:24,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   // ---- Music ----
   {key:"bollywood",n:25,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
-  {key:"hits2010",n:26,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:27,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"geet",n:28,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
-  {key:"punjabi",n:29,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
-  {key:"english",n:30,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
-  {key:"anthems",n:31,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"gym",n:32,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
+  {key:"deccan",n:26,group:"Music",name:"Deccan Chargers",en:"Telugu, Tamil, Malayalam & Kannada bangers, and the classics",parts:[  // the one channel outside Hindi & English, by request
+    {from:0,to:3,  cat:"deccan",tag:"classic",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, SPB & Yesudas"},
+    {from:3,to:6,  cat:"deccan",tag:"classic",alt:"deccan",label:"Dawn classics: Rajkumar & the golden era"},
+    {from:6,to:8,  cat:"deccan",tag:"kannada",alt:"deccan",label:"Kannada mornings"},
+    {from:8,to:10, cat:"deccan",tag:"malayalam",alt:"deccan",label:"Malayalam bangers"},
+    {from:10,to:12,cat:"deccan",tag:"tamil",alt:"deccan",label:"Tamil kuthu & bangers"},
+    {from:12,to:14,cat:"deccan",tag:"telugu",alt:"deccan",label:"Telugu mass"},
+    {from:14,to:16,cat:"deccan",tag:"classic",alt:"deccan",label:"Afternoon classics"},
+    {from:16,to:18,cat:"deccan",tag:"kannada",alt:"deccan",label:"Kannada bangers"},
+    {from:18,to:19,cat:"deccan",tag:"malayalam",alt:"deccan",label:"Prime time: Malayalam bangers"},
+    {from:19,to:20,cat:"deccan",tag:"kannada",alt:"deccan",label:"Prime time: Kannada bangers"},
+    {from:20,to:22,cat:"deccan",tag:"tamil",alt:"deccan",label:"Prime time: Tamil bangers"},
+    {from:22,to:24,cat:"deccan",tag:"telugu",alt:"deccan",label:"Prime time: Telugu mass"}]},
+  {key:"hits2010",n:27,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:28,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"geet",n:29,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
+  {key:"punjabi",n:30,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
+  {key:"english",n:31,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
+  {key:"anthems",n:32,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"gym",n:33,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
     {from:4,to:6,  cat:"gym",tag:"rock",alt:"gym",label:"Early riser: rock"},
     {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",label:"Morning set: Punjabi gym bangers"},
@@ -116,8 +129,8 @@ const CHANNELS = [
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
     {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
-  {key:"drive",n:33,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  {key:"raag",n:34,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+  {key:"drive",n:34,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
+  {key:"raag",n:35,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
     {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
     {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
     {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
@@ -126,7 +139,7 @@ const CHANNELS = [
     {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
   // ---- Entertainment ----
-  {key:"aangan",n:35,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, KBC & Taarak Mehta",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
+  {key:"aangan",n:36,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, KBC & Taarak Mehta",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
     {from:6,to:7,  cat:"aangan",  tag:"kahani",alt:"bhakti",label:"Subah ki kahani"},
@@ -143,8 +156,8 @@ const CHANNELS = [
     {from:21,to:22,cat:"aangan",  tag:"kbc",label:"Kaun Banega Crorepati"},
     {from:22,to:23,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
     {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
-  {key:"hasya",n:36,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
-  {key:"fiction",n:37,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
+  {key:"hasya",n:37,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
+  {key:"fiction",n:38,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
     {from:0,to:2,  cat:"fiction",src:"ALTER|DUST",label:"Midnight thrillers"},
     {from:2,to:6,  cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
     {from:6,to:10, cat:"fiction",tag:"mytho",label:"Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga"},
@@ -152,12 +165,12 @@ const CHANNELS = [
     {from:14,to:18,cat:"fiction",tag:"dd",label:"Old but gold: Byomkesh, Fauji, Malgudi Days"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
-  {key:"retro",n:38,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
+  {key:"retro",n:39,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
     {from:0,to:6,  cat:"retro",label:"Late-night classics"},
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
-  {key:"premium",n:39,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
+  {key:"premium",n:40,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
     {from:0,to:6,  cat:"premium",src:"Mosfilm",label:"World cinema after midnight"},
     {from:6,to:14, cat:"premium",srcSkip:"Mosfilm",label:"Bollywood hits"},
     {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
