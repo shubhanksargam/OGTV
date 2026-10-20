@@ -68,7 +68,9 @@ const CHANNELS = [
   {key:"bhakti",n:19,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[
     {from:0,to:6,  cat:"bhakti",label:"Devotional"},
     {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},
-    {from:6.5,to:24,cat:"bhakti",label:"Devotional, all day"}]},
+    {from:6.5,to:7,cat:"bhakti",tag:"chalisa",label:"Shree Hanuman Chalisa"},
+    {from:7,to:8,  cat:"bhakti",src:"Hariharan",alt:"bhakti",label:"Hariharan bhajans"},
+    {from:8,to:24, cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:20,group:"Lifestyle",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
   {key:"sehat",n:21,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[

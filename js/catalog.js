@@ -1,6 +1,11 @@
 /* ---------- Catalog: real YouTube uploads, tagged so rules can select them ---------- */
 const CATALOG = [
   // Bhakti
+  // Hanuman Chalisa, for Bhakti's morning slot (official uploads)
+  {id:"AETFvQonfV8",t:"Hanuman Chalisa · Gulshan Kumar, Hariharan",cat:"bhakti",tag:"chalisa",lang:"hi",min:10,src:"T-Series Bhakti Sagar"},
+  {id:"17ZHT4WbSfw",t:"Hanuman Chalisa · Hariharan",cat:"bhakti",tag:"chalisa",lang:"hi",min:10,src:"T-Series Bhakti Sagar"},
+  {id:"jTNu-R9KA-4",t:"Hanuman Chalisa · Shankar Mahadevan",cat:"bhakti",tag:"chalisa",lang:"hi",min:9,src:"Tips Bhakti Prem"},
+  {id:"BC6TNttdIZM",t:"Hanuman Chalisa · Shankar Mahadevan",cat:"bhakti",tag:"chalisa",lang:"hi",min:9,src:"Times Music Spiritual"},
   // Sankatmochan Hanuman Ashtak, for Bhakti's morning slot (official uploads)
   {id:"HH_a6aRO1TE",t:"Sankatmochan Hanuman Ashtak · Hariharan",cat:"bhakti",tag:"ashtak",lang:"hi",min:6,src:"T-Series Bhakti Sagar"},
   {id:"MeaVRC453M0",t:"Hanuman Ashtak · Hariharan",cat:"bhakti",tag:"ashtak",lang:"hi",min:6,src:"T-Series Bhakti Sagar"},
@@ -8,8 +13,8 @@ const CATALOG = [
   {id:"5hKao7gACW4",t:"Mangalvar special: Sankatmochan Hanuman Ashtak",cat:"bhakti",tag:"ashtak",lang:"hi",min:6,src:"T-Series Bhakti Sagar"},
   {id:"Y2bvXiTQ1Ak",t:"Shri Hanuman Ashtak",cat:"bhakti",tag:"ashtak",lang:"hi",min:7,src:"Shemaroo Bhakti"},
   {id:"0PX4YuWBaXQ",t:"Sankat Mochan Hanuman Ashtak",cat:"bhakti",tag:"ashtak",lang:"hi",min:6,src:"Zee Music Devotional"},
-  {id:"LUx8wlA_dk8",t:"Shree Hanuman Chalisa · Hariharan",cat:"bhakti",lang:"hi",min:10,src:"T-Series Bhakti"},
-  {id:"nh9pJNL79ps",t:"Hanuman Chalisa · Geeta Rabari",cat:"bhakti",lang:"hi",min:10,src:"Geeta Rabari"},
+  {id:"LUx8wlA_dk8",t:"Shree Hanuman Chalisa · Hariharan",cat:"bhakti",tag:"chalisa",lang:"hi",min:10,src:"T-Series Bhakti"},
+  {id:"nh9pJNL79ps",t:"Hanuman Chalisa · Geeta Rabari",cat:"bhakti",tag:"chalisa",lang:"hi",min:10,src:"Geeta Rabari"},
   {id:"gLZO6O9v-IY",t:"Shree Hanuman Chalisa",cat:"bhakti",lang:"hi",min:10,src:"Bhakti"},
   {id:"kC8VzzPPY2A",t:"Hanuman Chalisa with lyrics",cat:"bhakti",lang:"hi",min:10,src:"Bhakti"},
   {id:"drC4vpQF4rM",t:"Shree Hanuman Chalisa · original video",cat:"bhakti",lang:"hi",min:10,src:"Bhakti"},
