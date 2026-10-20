@@ -2,23 +2,23 @@
 // live: a group in js/live.js. While one of its streams is on air the channel shows it; otherwise its parts play.
 // group: the heading a channel sits under in the channel list
 const CHANNELS = [
-  {key:"aangan",n:1,name:"Aangan",en:"Family mix, in Hindi",parts:[  // strictly Hindi (named documentary channels excepted), family-safe, no cartoons, no cooking
+  {key:"aangan",n:1,name:"Aangan",en:"Family TV, in Hindi",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
-    {from:6,to:8,  cat:"sehat",   lang:"hi",tag:"yoga",preferMin:15,label:"Morning yoga"},
-    {from:8,to:10, cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife & nature"},
-    {from:10,to:11,cat:"vigyan",lang:"hi",langExcept:"National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Documentary hour"},
-    {from:11,to:12,cat:"data",lang:"hi",langExcept:"India in Pixels",label:"India in data"},
-    {from:12,to:13,cat:"khabar",  lang:"hi",label:"Afternoon news"},
+    {from:6,to:7,  cat:"aangan",  tag:"kahani",alt:"bhakti",label:"Subah ki kahani"},
+    {from:7,to:9,  cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife & nature"},
+    {from:9,to:11, cat:"aangan",  tag:"dd",label:"Doordarshan classics: Bharat Ek Khoj"},
+    {from:11,to:13,cat:"aangan",  tag:"dd",label:"Doordarshan classics"},
     {from:13,to:15,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Discovery afternoon"},
-    {from:15,to:17,cat:"safar",   lang:"hi",preferMin:15,label:"Travel hour"},
+    {from:15,to:16,cat:"aangan",  tag:"kahani",label:"Dopahar ki kahani"},
+    {from:16,to:17,cat:"aangan",  tag:"kavi",label:"Kavi sammelan"},
     {from:17,to:18,cat:"hasya",   lang:"hi",src:"Kapil Sharma|Ashish Chanchlani|Rakesh Addlakha|Taarak Mehta",label:"Family comedy"},
-    {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
+    {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
     {from:19,to:20,cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",festival:true,label:"Evening aarti"},
-    {from:20,to:21,cat:"khabar",  lang:"hi",label:"Prime-time news"},
-    {from:21,to:23,cat:"hits2010",lang:"hi",alt:"bollywood",label:"Bollywood nights"},
+    {from:20,to:21,cat:"aangan",  tag:"sitcom",src:"Taarak Mehta",label:"Prime time: Taarak Mehta Ka Ooltah Chashmah"},
+    {from:21,to:22,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
+    {from:22,to:23,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"},
     {from:23,to:24,cat:"geet",    lang:"hi",label:"Sadabahar"}]},
-  // ---- Lifestyle ----
   {key:"bhakti",n:2,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:3,group:"Lifestyle",name:"Festivals",en:"Songs for the festival",festival:true,parts:[]},
