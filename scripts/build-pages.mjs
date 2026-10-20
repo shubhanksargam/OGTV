@@ -12,7 +12,7 @@ const FEED = JSON.parse(feedSrc.slice(feedSrc.indexOf("["), feedSrc.lastIndexOf(
 const today = new Date().toISOString().slice(0, 10);
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
-const slug = c => c.name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const slug = c => c.slug || c.name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 // The creators a channel actually plays, most videos first: the words people search for
 function sources(c) {
