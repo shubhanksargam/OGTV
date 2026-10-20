@@ -408,7 +408,7 @@ function tick(){
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
-    const hh=h=>String(h%24).padStart(2,"0")+":00";
+    const hh=h=>String(Math.floor(h)%24).padStart(2,"0")+":"+String(Math.round(h%1*60)).padStart(2,"0"); // 6.5 → 06:30
     const hours=s.part.from===0&&s.part.to===24?"":`: ${hh(s.part.from)}–${hh(s.part.to)}`; // all-day blocks need no hours
     $("why").innerHTML=`<span>On air because</span><span class="chip">${s.part.label}${hours}</span>`
       +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · "+(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)

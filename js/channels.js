@@ -65,7 +65,10 @@ const CHANNELS = [
     {from:21,to:23,cat:"world",tag:"f1",alt:"world",label:"Race night: F1 & MotoGP"},
     {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- Lifestyle ----
-  {key:"bhakti",n:19,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[{from:0,to:24,cat:"bhakti",label:"Devotional, all day"}]},
+  {key:"bhakti",n:19,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[
+    {from:0,to:6,  cat:"bhakti",label:"Devotional"},
+    {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},
+    {from:6.5,to:24,cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:20,group:"Lifestyle",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
   {key:"sehat",n:21,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
