@@ -290,7 +290,7 @@ function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomF
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
-let retro=false; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")==="1"}catch(e){} // visits open in the plain look; retro on lasts for this tab only
+let retro=true; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")!=="0"}catch(e){} // every visit and channel page opens in retro; turning it off lasts for this tab only
 function setRetro(on){retro=on; $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd();
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
@@ -359,7 +359,7 @@ $("cc").addEventListener("click",toggleSubs);
 // The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
 $("keyCc").addEventListener("click",toggleSubs);
 $("keyFs").addEventListener("click",toggleFullscreen);
-$("home").addEventListener("click",()=>{if(retro) setRetro(false); if(!roomFull()) toggleFullscreen()}); // Home is the plain full screen (no TV set)
+$("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); // Home is full screen in the current look (retro by default)
 $("keyRetro").addEventListener("click",()=>setRetro(false)); // in full screen this swaps to the plain full-screen look
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
