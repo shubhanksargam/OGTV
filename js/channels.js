@@ -117,7 +117,14 @@ const CHANNELS = [
   {key:"hits2000",n:28,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
   {key:"geet",n:29,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[{from:0,to:24,cat:"geet",label:"Evergreen, all day"}]},
   {key:"punjabi",n:30,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[{from:0,to:24,cat:"punjabi",label:"Bangers, all day"}]},
-  {key:"english",n:31,group:"Music",name:"English Songs",en:"Pop hits",parts:[{from:0,to:24,cat:"english",label:"Pop hits"}]},
+  {key:"english",n:31,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
+    {from:0,to:3,  cat:"global",tag:"alltime",alt:"global",label:"Billion-view classics"},
+    {from:3,to:6,  cat:"global",tag:"worldcharts",alt:"global",label:"World tour: Seoul, Tokyo & Johannesburg charts"},
+    {from:6,to:9,  cat:"global",tag:"chart",alt:"global",label:"Morning chart: this week's global top 100"},
+    {from:9,to:12, cat:"global",tag:"worldcharts",alt:"global",label:"K-pop, J-pop & Amapiano: the world's charts"},
+    {from:12,to:15,cat:"global",tag:"chart",alt:"global",label:"Daily global chart"},
+    {from:15,to:18,cat:"global",tag:"alltime",alt:"global",label:"All-time most viewed"},
+    {from:18,to:24,cat:"global",tag:"chart",alt:"global",label:"Prime time: the global top 100, US & UK charts"}]},
   {key:"anthems",n:32,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
   {key:"gym",n:33,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
