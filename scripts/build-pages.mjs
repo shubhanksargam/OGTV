@@ -31,6 +31,7 @@ function featured(c) {
 }
 const isoDate = v => new Date(v && v.pub && !isNaN(Date.parse(v.pub)) ? v.pub : today).toISOString();
 const xml = t => String(t).replace(/[&<>"']/g, ch => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;"}[ch]));
+const rest = (names, text) => names.filter(n => !text.includes(n)); // sources the description has not named yet
 const list = a => a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a.at(-1) : a.join("");
 const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 // Channels whose sources don't tell their story get their own line
@@ -133,7 +134,7 @@ for (const c of CHANNELS) {
   let page = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->",
     seoBlock({title: `${c.name}: ${c.en} | OGTV free Indian TV`, description, url, ch: c.n, video: featured(c), chan: c}));
   // a short visible intro, unique to the page
-  page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${s.length ? ` Also on this channel: ${esc(list(s.slice(4)))}.` : ""}</p></section>\n\n  <!-- channels:start`);
+  page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${rest(s, description).length ? ` Also on this channel: ${esc(list(rest(s, description)))}.` : ""}</p></section>\n\n  <!-- channels:start`);
   await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});
   await writeFile(new URL(`tv/${slug(c)}/index.html`, ROOT), page);
   for (const old of c.oldSlugs || []) { // a renamed channel's old address forwards to the new one
