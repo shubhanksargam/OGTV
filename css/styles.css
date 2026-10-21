@@ -91,6 +91,22 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .set-brand{font-size:clamp(.9rem,1.8vw,1.4rem);color:#2b1d10;
   text-shadow:0 1px 0 rgba(255,248,230,.6),0 -1px 0 rgba(0,0,0,.25)} /* engraved nameplate */
 .set-brand .logo,.set-brand .logo-mark{color:#2b1d10} /* the official logo, dark-on-light version, engraved on the brass */
+/* VFD channel display on the panel (vacuum-fluorescent style, as on old tuners and VCRs) */
+.vfd{display:flex;align-items:center;gap:.4em;width:100%;box-sizing:border-box;padding:.3em .5em;border-radius:5px;
+  font-family:"VT323",ui-monospace,monospace;line-height:1;color:#6ff2c8;
+  background:radial-gradient(120% 140% at 30% 0%,#1b2420,#070a08 70%);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.9),inset 0 0 0 1px rgba(0,0,0,.6),0 1px 0 rgba(255,250,235,.55);
+  text-shadow:0 0 4px rgba(111,242,200,.85),0 0 12px rgba(111,242,200,.35)}
+.vfd-n{position:relative;font-weight:400;font-size:clamp(1.3rem,2.6cqw,2.1rem);letter-spacing:.04em}
+.vfd-n::before{content:"88";position:absolute;inset:0;color:rgba(111,242,200,.08);text-shadow:none} /* unlit segments */
+.vfd-name{flex:1;min-width:0;overflow:hidden;white-space:nowrap;font-size:clamp(.8rem,1.35cqw,1.15rem);letter-spacing:.06em}
+.vfd-name i{font-style:normal;display:inline-block}
+.vfd-name.scroll i{animation:vfd-scroll var(--dur,6s) ease-in-out infinite alternate}
+@keyframes vfd-scroll{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--dist,0))}}
+.room:is(:fullscreen,.pseudo-fs) .vfd-n{font-size:clamp(1.3rem,2.4vmax,2.4rem)}
+.room:is(:fullscreen,.pseudo-fs) .vfd-name{font-size:clamp(.8rem,1.2vmax,1.3rem)}
+@media (max-width:640px){.vfd{order:-1}.vfd-n{font-size:1.5rem}.vfd-name{font-size:1rem}}
+@media (prefers-reduced-motion:reduce){.vfd-name.scroll i{animation:none}}
 .knob-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
 .knob-wrap small{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#4a3520;text-shadow:0 1px 0 rgba(255,248,230,.5)}
 .knob{position:relative;width:clamp(40px,4.6vw,66px);aspect-ratio:1;border-radius:50%;border:0;padding:0;cursor:pointer;

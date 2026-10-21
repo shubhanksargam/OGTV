@@ -43,7 +43,7 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
   countChannel(); browse=cur; clearDigits(); markGuide();
   try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
-  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs();}
+  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
@@ -308,6 +308,12 @@ let osdTimer=0;
 function tvOsd(html){const o=$("tvOsd"); o.innerHTML=html; o.classList.add("on"); clearTimeout(osdTimer); osdTimer=setTimeout(()=>o.classList.remove("on"),1600)}
 const osdChannel=i=>tvOsd(`<b>CH ${String(CHANNELS[i].n).padStart(2,"0")}</b> ${esc(CHANNELS[i].name.toUpperCase())}`);
 const osdVolume=()=>tvOsd(`<b>VOLUME</b> <span class="vbars">${"<i></i>".repeat(Math.round((muted?0:vol)/5))}</span> ${muted?"MUTE":vol}`);
+// The panel's display: channel number in big digits, name in the pixel font; long names scroll
+function vfd(){const c=CHANNELS[cur], name=$("vfdName"), box=name.parentElement;
+  $("vfdN").textContent=String(c.n).padStart(2,"0"); name.textContent=c.name.toUpperCase();
+  box.classList.remove("scroll"); name.style.removeProperty("--dist");
+  requestAnimationFrame(()=>{const over=name.scrollWidth-box.clientWidth;
+    if(over>2){name.style.setProperty("--dist",-(over+8)+"px"); name.style.setProperty("--dur",Math.max(4,over/14)+"s"); box.classList.add("scroll")}})}
 function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",(cur*CH_STEP)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
 function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage.setItem("ogtv-vol",vol)}catch(e){}
   if(MODE==="yt"&&player) player.setVolume(vol);
@@ -365,7 +371,7 @@ $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&
 setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
 setList(listHidden);
-setRetro(retro);
+setRetro(retro); vfd();
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
 // visitor does something). Exit full screen leaves it.
