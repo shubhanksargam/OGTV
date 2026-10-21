@@ -99,7 +99,17 @@ const CHANNELS = [
     {from:7,to:21,preferMin:15,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
     {from:21,to:24,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   // ---- Music ----
-  {key:"bollywood",n:25,group:"Music",name:"Bollywood Now",en:"Latest hits",parts:[{from:0,to:24,cat:"bollywood",label:"New releases & hits"}]},
+  {key:"bollywood",n:25,group:"Music",name:"Desi Pop",en:"India's trending songs, every language",oldSlugs:["bollywood-now"],parts:[  // any Indian language, by request
+    {from:0,to:3,  cat:"desipop",tag:"indie",alt:"desipop",label:"Indie after dark: Prateek Kuhad, Anuv Jain & Ritviz"},
+    {from:3,to:6,  cat:"desipop",tag:"voices",alt:"desipop",label:"Voices: Shreya Ghoshal, KK & Arijit"},
+    {from:6,to:9,  cat:"desipop",tag:"trending",alt:"desipop",label:"Morning trending: India's top 100"},
+    {from:9,to:11, cat:"desipop",tag:"stars",alt:"desipop",label:"Anirudh & Diljit"},
+    {from:11,to:13,cat:"raag",tag:"coke",alt:"desipop",label:"Coke Studio bests"},
+    {from:13,to:16,cat:"desipop",tag:"trending",alt:"desipop",label:"Trending in India"},
+    {from:16,to:18,cat:"desipop",tag:"indie",alt:"desipop",label:"Desi hip-hop: Hanumankind, Seedhe Maut & DIVINE"},
+    {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",label:"Prime time: India's top 100 right now"},
+    {from:21,to:23,cat:"desipop",tag:"voices",alt:"desipop",label:"Prime time voices: Arijit, Shreya & KK"},
+    {from:23,to:24,cat:"desipop",tag:"stars",alt:"desipop",label:"Late night: Anirudh & Diljit"}]},
   {key:"deccan",n:26,group:"Music",name:"Deccan Chargers",en:"Telugu, Tamil, Malayalam & Kannada bangers, and the classics",parts:[  // the one channel outside Hindi & English, by request
     {from:0,to:3,  cat:"deccan",tag:"classic",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, SPB & Yesudas"},
     {from:3,to:6,  cat:"deccan",tag:"classic",alt:"deccan",label:"Dawn classics: Rajkumar & the golden era"},
@@ -108,7 +118,7 @@ const CHANNELS = [
     {from:10,to:12,cat:"deccan",tag:"tamil",alt:"deccan",label:"Tamil kuthu & bangers"},
     {from:12,to:14,cat:"deccan",tag:"telugu",alt:"deccan",label:"Telugu mass"},
     {from:14,to:16,cat:"deccan",tag:"classic",alt:"deccan",label:"Afternoon classics"},
-    {from:16,to:18,cat:"deccan",tag:"kannada",alt:"deccan",label:"Kannada bangers"},
+    {from:16,to:18,cat:"deccan",tag:"trending",alt:"deccan",label:"Trending in the South: this week's hits"},
     {from:18,to:19,cat:"deccan",tag:"malayalam",alt:"deccan",label:"Prime time: Malayalam bangers"},
     {from:19,to:20,cat:"deccan",tag:"kannada",alt:"deccan",label:"Prime time: Kannada bangers"},
     {from:20,to:22,cat:"deccan",tag:"tamil",alt:"deccan",label:"Prime time: Tamil bangers"},
