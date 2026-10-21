@@ -1,44 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.thebharat.si/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/just-news/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/newsroom/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/purvaiya/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/gyaan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/vigyan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/curious/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/india-in-data/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/classroom/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/tech/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/paisa/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/baatcheet/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/niche/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/cricket/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/khel/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/football/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/cricket-classics/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/international-sports/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/bhakti/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/festivals/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/sehat/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/rasoi/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/safar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/bachche/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/bollywood-now/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/deccan-chargers/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/2010s-hits/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/2000s-hits/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/sadabahar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/punjabi/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/english-songs/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/anthems/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/gym/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/drive/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/raag/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/aangan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/comedy/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/fiction/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/retro-movies/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ogtv.thebharat.si/tv/classics/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ogtv.thebharat.si/tv/just-news/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Fxg-s824YrE/hqdefault.jpg</video:thumbnail_loc><video:title>Green Boots kaun tha? 30 sal bad DNA ne khola Mount Everest ka sabse bara raj!</video:title>
+      <video:description>Green Boots kaun tha? 30 sal bad DNA ne khola Mount Everest ka sabse bara raj!, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Fxg-s824YrE</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Fxg-s824YrE/hqdefault.jpg</video:thumbnail_loc><video:title>Green Boots kaun tha? 30 sal bad DNA ne khola Mount Everest ka sabse bara raj!</video:title>
+      <video:description>Green Boots kaun tha? 30 sal bad DNA ne khola Mount Everest ka sabse bara raj!, now on Khabar, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Fxg-s824YrE</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/newsroom/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/X6Fi9fzXwaM/hqdefault.jpg</video:thumbnail_loc><video:title>Zelensky Meets Trump Envoy Witkoff</video:title>
+      <video:description>Zelensky Meets Trump Envoy Witkoff, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/X6Fi9fzXwaM</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/purvaiya/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/wVlqmS8YLqE/hqdefault.jpg</video:thumbnail_loc><video:title>Anant Singh Vs Neeraj Kumar: anant sinh ko lekar tanav men niraj?</video:title>
+      <video:description>Anant Singh Vs Neeraj Kumar: anant sinh ko lekar tanav men niraj?, now on Purvaiya, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/wVlqmS8YLqE</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/gyaan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/4uE_MS2lO2M/hqdefault.jpg</video:thumbnail_loc><video:title>Attack on Saudi: ‘Davos in the Desert’ summit Cancelled</video:title>
+      <video:description>Attack on Saudi: ‘Davos in the Desert’ summit Cancelled, now on Gyaan, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/4uE_MS2lO2M</video:player_loc><video:duration>660</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/vigyan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/C--Kgo_ei2Y/hqdefault.jpg</video:thumbnail_loc><video:title>Turtleman Gets Called for the Toughest Rescues</video:title>
+      <video:description>Turtleman Gets Called for the Toughest Rescues, now on Vigyan, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/C--Kgo_ei2Y</video:player_loc><video:duration>3660</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/curious/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/PXbVn-f_wuM/hqdefault.jpg</video:thumbnail_loc><video:title>You Will Only Like Half of This Video</video:title>
+      <video:description>You Will Only Like Half of This Video, now on Curious, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/PXbVn-f_wuM</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/india-in-data/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/3rYlp0He-G8/hqdefault.jpg</video:thumbnail_loc><video:title>Why Mukesh Ambani gave Jio for FREE</video:title>
+      <video:description>Why Mukesh Ambani gave Jio for FREE, now on India in Data, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/3rYlp0He-G8</video:player_loc><video:duration>1200</video:duration><video:publication_date>2026-10-19T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/classroom/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/dAzTioGQIzQ/hqdefault.jpg</video:thumbnail_loc><video:title>Webinar: Regulating at the Speed of AI with Francis Fukuyama and Nate Persily</video:title>
+      <video:description>Webinar: Regulating at the Speed of AI with Francis Fukuyama and Nate Persily, now on Classroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/dAzTioGQIzQ</video:player_loc><video:duration>3420</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/tech/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Om3ySjFtnrA/hqdefault.jpg</video:thumbnail_loc><video:title>AI is dividing the math world in two</video:title>
+      <video:description>AI is dividing the math world in two, now on Tech, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Om3ySjFtnrA</video:player_loc><video:duration>2580</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/paisa/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/cWRr22t8k7o/hqdefault.jpg</video:thumbnail_loc><video:title>Why Lenskart rose 70% when the market fell?</video:title>
+      <video:description>Why Lenskart rose 70% when the market fell?, now on Paisa, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/cWRr22t8k7o</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-10-19T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/baatcheet/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ABoy_36zNUM/hqdefault.jpg</video:thumbnail_loc><video:title>Social Scientist: Why Everyone Wants To Look Rich &amp; Successful</video:title>
+      <video:description>Social Scientist: Why Everyone Wants To Look Rich &amp; Successful, now on Baatcheet, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ABoy_36zNUM</video:player_loc><video:duration>8520</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/niche/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/O87taxrk_aM/hqdefault.jpg</video:thumbnail_loc><video:title>We Spent a Day With the 74 Year Old Who Draws Alpona for Strangers</video:title>
+      <video:description>We Spent a Day With the 74 Year Old Who Draws Alpona for Strangers, now on Niche, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/O87taxrk_aM</video:player_loc><video:duration>600</video:duration><video:publication_date>2026-10-19T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/cricket/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/oBoST6NlsbY/hqdefault.jpg</video:thumbnail_loc><video:title>Pakistan v Netherlands| Match Highlights</video:title>
+      <video:description>Pakistan v Netherlands| Match Highlights, now on Cricket, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/oBoST6NlsbY</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/khel/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Abxrf3uo2s4/hqdefault.jpg</video:thumbnail_loc><video:title>Divith and Prishita are the National Under-15 Champions!</video:title>
+      <video:description>Divith and Prishita are the National Under-15 Champions!, now on Khel, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Abxrf3uo2s4</video:player_loc><video:duration>1200</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/football/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/cp79Tqfw1bo/hqdefault.jpg</video:thumbnail_loc><video:title>FC Lorient vs AS Monaco</video:title>
+      <video:description>FC Lorient vs AS Monaco, now on Football, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/cp79Tqfw1bo</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/cricket-classics/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/oBoST6NlsbY/hqdefault.jpg</video:thumbnail_loc><video:title>Pakistan v Netherlands| Match Highlights</video:title>
+      <video:description>Pakistan v Netherlands| Match Highlights, now on Cricket Classics, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/oBoST6NlsbY</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/international-sports/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Abxrf3uo2s4/hqdefault.jpg</video:thumbnail_loc><video:title>Divith and Prishita are the National Under-15 Champions!</video:title>
+      <video:description>Divith and Prishita are the National Under-15 Champions!, now on International Sports, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Abxrf3uo2s4</video:player_loc><video:duration>1200</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/bhakti/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uMQCgHBlGPY/hqdefault.jpg</video:thumbnail_loc><video:title>Ram ji ki mahima</video:title>
+      <video:description>Ram ji ki mahima, now on Bhakti, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/uMQCgHBlGPY</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/festivals/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/R3IxEo9y-cE/hqdefault.jpg</video:thumbnail_loc><video:title>He murlidhar chhaliya mohan He Murli Dhar Chhaliya Mohan - Krishna Bhajan</video:title>
+      <video:description>He murlidhar chhaliya mohan He Murli Dhar Chhaliya Mohan - Krishna Bhajan, now on Festivals, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/R3IxEo9y-cE</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-09-23T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/sehat/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/1R_pjF1k08o/hqdefault.jpg</video:thumbnail_loc><video:title>Time Management for Coaches (2 Simple Strategies)</video:title>
+      <video:description>Time Management for Coaches (2 Simple Strategies), now on Sehat, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/1R_pjF1k08o</video:player_loc><video:duration>1080</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/rasoi/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/BbptBsaKJoY/hqdefault.jpg</video:thumbnail_loc><video:title>💪 protin rich supar hailthi masur dal ka chila,nashte va tiphin ke liye . Nutritious Breakfa…</video:title>
+      <video:description>💪 protin rich supar hailthi masur dal ka chila,nashte va tiphin ke liye . Nutritious Breakfa…, now on Rasoi, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/BbptBsaKJoY</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/safar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/EljzIM4SjXE/hqdefault.jpg</video:thumbnail_loc><video:title>My First Day in Brazil 🇧🇷</video:title>
+      <video:description>My First Day in Brazil 🇧🇷, now on Safar, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/EljzIM4SjXE</video:player_loc><video:duration>1740</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/bachche/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/C--Kgo_ei2Y/hqdefault.jpg</video:thumbnail_loc><video:title>Turtleman Gets Called for the Toughest Rescues</video:title>
+      <video:description>Turtleman Gets Called for the Toughest Rescues, now on Bachche, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/C--Kgo_ei2Y</video:player_loc><video:duration>3660</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/bollywood-now/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/p1potl1sbjA/hqdefault.jpg</video:thumbnail_loc><video:title>Ramayana: Ravana Tandav (Song)</video:title>
+      <video:description>Ramayana: Ravana Tandav (Song), now on Bollywood Now, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/p1potl1sbjA</video:player_loc><video:duration>120</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/deccan-chargers/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/2mDCVzruYzQ/hqdefault.jpg</video:thumbnail_loc><video:title>ButtaBomma Video Song (Telugu)</video:title>
+      <video:description>ButtaBomma Video Song (Telugu), now on Deccan Chargers, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/2mDCVzruYzQ</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/2010s-hits/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/o-9VdyXZKsQ/hqdefault.jpg</video:thumbnail_loc><video:title>Tujhe Bhula Diya</video:title>
+      <video:description>Tujhe Bhula Diya, now on 2010s Hits, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/o-9VdyXZKsQ</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/2000s-hits/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/3XtUEgQLI5Y/hqdefault.jpg</video:thumbnail_loc><video:title>Jab Se Tere Naina Full Video - Saawariya|Ranbir Kapoor,Sonam Kapoor|Shaan|Sameer Anjaan</video:title>
+      <video:description>Jab Se Tere Naina Full Video - Saawariya|Ranbir Kapoor,Sonam Kapoor|Shaan|Sameer Anjaan, now on 2000s Hits, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/3XtUEgQLI5Y</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/sadabahar/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/6diEMrdtW6I/hqdefault.jpg</video:thumbnail_loc><video:title>I-Popstar: Vol. 2</video:title>
+      <video:description>I-Popstar: Vol. 2, now on Sadabahar, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/6diEMrdtW6I</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/punjabi/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/EdCnVO4msqY/hqdefault.jpg</video:thumbnail_loc><video:title>Hustle | Wazir Patar | Latest Punjabi Songs 2026 | New Punjabi Songs 2026 | Speed Records</video:title>
+      <video:description>Hustle | Wazir Patar | Latest Punjabi Songs 2026 | New Punjabi Songs 2026 | Speed Records, now on Punjabi, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/EdCnVO4msqY</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/english-songs/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/e-ORhEE9VVg/hqdefault.jpg</video:thumbnail_loc><video:title>Taylor Swift - Blank Space</video:title>
+      <video:description>Taylor Swift - Blank Space, now on English Songs, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/e-ORhEE9VVg</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/anthems/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/O2BpKY7Iu-k/hqdefault.jpg</video:thumbnail_loc><video:title>OneRepublic - Need Your Love (Emilio Piano Version)</video:title>
+      <video:description>OneRepublic - Need Your Love (Emilio Piano Version), now on Anthems, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/O2BpKY7Iu-k</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-07-31T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/gym/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/dcrEEGRzyWw/hqdefault.jpg</video:thumbnail_loc><video:title>Straight Up</video:title>
+      <video:description>Straight Up, now on Gym, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/dcrEEGRzyWw</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/drive/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/dESIGVxSSCE/hqdefault.jpg</video:thumbnail_loc><video:title>Dhurandhar The Revenge - AARI AARI (Video)| Ranveer Singh</video:title>
+      <video:description>Dhurandhar The Revenge - AARI AARI (Video)| Ranveer Singh, now on Drive, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/dESIGVxSSCE</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/raag/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/e-1zjovjWiA/hqdefault.jpg</video:thumbnail_loc><video:title>Dil · Afusic x Zoha Waseem x Ali Soomro</video:title>
+      <video:description>Dil · Afusic x Zoha Waseem x Ali Soomro, now on Raag, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/e-1zjovjWiA</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-09-04T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/aangan/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/C--Kgo_ei2Y/hqdefault.jpg</video:thumbnail_loc><video:title>Turtleman Gets Called for the Toughest Rescues</video:title>
+      <video:description>Turtleman Gets Called for the Toughest Rescues, now on Aangan, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/C--Kgo_ei2Y</video:player_loc><video:duration>3660</video:duration><video:publication_date>2026-10-21T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/comedy/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/0V7MteJrdQ8/hqdefault.jpg</video:thumbnail_loc><video:title>Royal Affair Of Laughter - Saif Ali Khan &amp; Kareena Kapoor</video:title>
+      <video:description>Royal Affair Of Laughter - Saif Ali Khan &amp; Kareena Kapoor, now on Comedy, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/0V7MteJrdQ8</video:player_loc><video:duration>600</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/fiction/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/3EUcyEmThqY/hqdefault.jpg</video:thumbnail_loc><video:title>AN APOLOGY</video:title>
+      <video:description>AN APOLOGY, now on Fiction, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/3EUcyEmThqY</video:player_loc><video:duration>660</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/retro-movies/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KvEolPumCBM/hqdefault.jpg</video:thumbnail_loc><video:title>12-12-1950 Full Movie</video:title>
+      <video:description>12-12-1950 Full Movie, now on Retro Movies, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/KvEolPumCBM</video:player_loc><video:duration>6120</video:duration><video:publication_date>2026-10-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.thebharat.si/tv/classics/</loc><lastmod>2026-10-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Qa5qrLzmzxo/hqdefault.jpg</video:thumbnail_loc><video:title>Jab ek aurat ne rajniti men utarkar bare-bare netaon ko hila diya! 💥👑 - Satta Full Movie 4K -</video:title>
+      <video:description>Jab ek aurat ne rajniti men utarkar bare-bare netaon ko hila diya! 💥👑 - Satta Full Movie 4K -, now on Classics, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Qa5qrLzmzxo</video:player_loc><video:duration>8940</video:duration><video:publication_date>2026-10-13T00:00:00.000Z</video:publication_date></video:video>
+  </url>
 </urlset>
