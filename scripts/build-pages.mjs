@@ -118,7 +118,7 @@ const replaceBetween = (s, a, b, value) => {
 };
 
 let home = await read("index.html");
-home = home.replace(/<!-- faq:start[\s\S]*?<!-- faq:end -->\n  /, ""); // channel pages never carry the questions
+home = home.replace(/\s*<!-- faq:start[\s\S]*?<!-- faq:end -->\s*/g, "\n  "); // every old copy goes, whatever the line endings; channel pages never carry the questions
 home = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->", seoBlock({...HOME, url: SITE + "/"}));
 home = replaceBetween(home, "<!-- channels:start", "<!-- channels:end -->", directory());
 home = home.replace(/<kbd>1<\/kbd>–<kbd>\d+<\/kbd>/, `<kbd>1</kbd>–<kbd>${CHANNELS.length}</kbd>`); // remote-keys hint
@@ -133,7 +133,7 @@ for (const c of CHANNELS) {
   let page = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->",
     seoBlock({title: `${c.name}: ${c.en} | OGTV free Indian TV`, description, url, ch: c.n, video: featured(c), chan: c}));
   // a short visible intro, unique to the page
-  page = page.replace('<footer class="about"', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${s.length ? ` Also on this channel: ${esc(list(s.slice(4)))}.` : ""}</p></section>\n\n  <footer class="about"`);
+  page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${s.length ? ` Also on this channel: ${esc(list(s.slice(4)))}.` : ""}</p></section>\n\n  <!-- channels:start`);
   await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});
   await writeFile(new URL(`tv/${slug(c)}/index.html`, ROOT), page);
   for (const old of c.oldSlugs || []) { // a renamed channel's old address forwards to the new one
