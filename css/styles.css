@@ -58,10 +58,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .set,.set-face,.set-bezel{display:contents}
 .set-panel,.crt-glass{display:none}
 .set.on{display:block;position:relative;margin-bottom:16px;padding:clamp(12px,2.2vw,26px);border-radius:clamp(18px,2.6vw,34px);
-  background:radial-gradient(120% 80% at 30% 0%,rgba(255,214,170,.16),transparent 55%),
-    repeating-linear-gradient(91deg,rgba(0,0,0,.10) 0 2px,transparent 2px 7px,rgba(0,0,0,.05) 7px 8px,transparent 8px 19px),
-    repeating-linear-gradient(89deg,rgba(255,206,150,.06) 0 1px,transparent 1px 31px),
-    linear-gradient(180deg,#7b4d2b 0%,#5e3920 48%,#432719 100%);
+  background:
+    radial-gradient(130% 90% at 28% -10%,rgba(255,226,190,.20),transparent 52%),   /* lacquer sheen */
+    linear-gradient(180deg,rgba(255,240,220,.08),transparent 18%,transparent 82%,rgba(0,0,0,.22)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.010 0.36' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.07 0 0 0 0 0.03 1.8 0 0 0 -0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/600px 300px,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='420'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0022 0.032' numOctaves='5' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0 0.03 2.6 0 0 0 -1.0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/900px 420px,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='360'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.003 0.06' numOctaves='3' seed='23' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.86 0 0 0 0 0.52 0 0 0 0 0.26 1.3 0 0 0 -0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/700px 360px,
+    linear-gradient(100deg,#6a3d22 0%,#7a4828 22%,#5c331b 47%,#6f4123 70%,#4f2c17 100%);   /* walnut, uneven tone */
   box-shadow:inset 0 2px 0 rgba(255,222,186,.28),inset 0 -4px 0 rgba(0,0,0,.35),inset 0 0 0 1px rgba(0,0,0,.35),0 34px 60px -28px rgba(0,0,0,.85)}
 .set.on::before,.set.on::after{content:"";position:absolute;bottom:-15px;width:7%;min-width:26px;height:16px;z-index:-1;
   background:linear-gradient(90deg,#2c1a10,#4a2d1b 50%,#2c1a10);clip-path:polygon(0 0,100% 0,82% 100%,18% 100%)} /* legs */
