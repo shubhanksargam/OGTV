@@ -458,3 +458,10 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .key{min-height:clamp(24px,2.9cqw,34px);font-size:clamp(.52rem,.95cqw,.68rem)}
 .grille{min-height:clamp(12px,2.5cqw,36px)}
 @media (max-width:640px){.knob{width:40px}.key{min-height:34px;font-size:.68rem}}
+/* Questions on the home page */
+.faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
+.faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.faq details{border-top:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;font-weight:700;color:var(--ink);list-style-position:outside}
+.faq summary:focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
+.faq details p{margin:8px 0 0;color:var(--muted);max-width:75ch;line-height:1.55}
