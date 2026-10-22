@@ -101,10 +101,10 @@ async function detailsFromApi(ids) {
   const out = {};
   for (let i = 0; i < ids.length; i += 50) {
     const url = "https://www.googleapis.com/youtube/v3/videos?part=contentDetails,status,snippet&key=" + KEY + "&id=" + ids.slice(i, i + 50).join(",");
-    for (const it of JSON.parse(await get(url)).items || []) {
-      const d = it.contentDetails.duration.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
+    for (const it of JSON.parse(await get(url)).items || []) { // an upcoming or live stream has no duration yet: it gets 0 s and is dropped
+      const d = (it.contentDetails.duration || "").match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
       const sec = (+d[1] || 0) * 86400 + (+d[2] || 0) * 3600 + (+d[3] || 0) * 60 + (+d[4] || 0);
-      out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle,
+      out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle, pub: it.snippet.publishedAt?.slice(0, 10),
         ok: it.status.embeddable && it.status.privacyStatus === "public" && it.snippet.liveBroadcastContent === "none" && !it.contentDetails.contentRating?.ytRating};
     }
   }
