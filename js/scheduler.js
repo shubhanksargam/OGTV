@@ -18,6 +18,7 @@ function pick(part){
   const re=part.match&&(part._re||(part._re=new RegExp(part.match,"i"))); // part.match: title must match, e.g. snack recipes
   const srcOk=v=>(!part.src||new RegExp(part.src,"i").test(v.src))&&(!part.srcSkip||!new RegExp(part.srcSkip,"i").test(v.src)); // part.src / srcSkip: which creators
   let pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
+  if(!pool.length&&re&&part.tag) pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat)&&v.tag===part.tag); // e.g. no India match this week: the rest of the latest
   if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat));
   if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&inCat(v.cat));
   if(!pool.length&&part.alt) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.alt); // e.g. Kids falls back to science
@@ -49,13 +50,15 @@ function festivalParts(dayStart){
   return [{from:0,to:24,cat:"bhakti",label:"Devotional songs"}];
 }
 const cache=new Map();
+const cutOut=(spans,holes)=>holes.reduce((acc,[a,b])=>acc.flatMap(([x,y])=>y<=a||x>=b?[[x,y]]:[...(x<a?[[x,a]]:[]),...(y>b?[[b,y]]:[])]),spans);
 /* Prime time is 9 pm to 3 am on weekdays and 7 pm to 4 am on weekends (Saturday and Sunday evenings), IST.
    A channel's prime block runs from its first "prime" part to midnight as written in js/channels.js (or from ch.prime).
    That block is stretched over tonight's prime window, and its overflow past midnight fills this morning's early hours,
    which belong to last night's prime time. 6 am stays fixed; the hours either side of it are fitted proportionally. */
 const weekendEve=d=>{const w=new Date(d+IST).getUTCDay(); return w===0||w===6};
 const primeFrom=ch=>ch.prime!=null?ch.prime:(ch.parts.find(p=>/prime/i.test(p.label))||{}).from;
-function primeWarp(ch,dayStart){const P=ch.festival?null:primeFrom(ch); if(P==null||P<=0||P>=24) return null;
+function primeWarp(ch,dayStart){const P=ch.festival||ch.group==="News"?null:primeFrom(ch); // news keeps its fixed bulletin times
+  if(P==null||P<=0||P>=24) return null;
   const start=weekendEve(dayStart)?19:21, tail=weekendEve(dayStart-DAY)?4:3, len=24-start+tail;
   const M=P>6?6:0; // 6 am stays put, so mornings and daytime keep their times; only the night and evening move
   return h=>h>=P?start+(h-P)*len/(24-P):h>=M?M+(h-M)*(start-M)/(P-M):tail+h*(M-tail)/M}
@@ -63,18 +66,31 @@ function primeWarp(ch,dayStart){const P=ch.festival?null:primeFrom(ch); if(P==nu
 function partSpans(warp,p){if(!warp) return [[p.from,p.to]];
   const a=warp(p.from), b=warp(p.to);
   return b<=24?[[a,b]]:a>=24?[[a-24,b-24]]:[[a,24],[0,b-24]]}
+// part.fixed: a show at a set clock time every day (e.g. Firstsports at 11 pm); the prime-time stretch never moves it.
+// The parts around it close the gap before stretching, then the fixed show is laid over the result.
+function layout(parts,warp){
+  const flex=parts.filter(p=>!p.fixed).sort((x,y)=>x.from-y.from).map((p,i,a)=>({p,from:i?p.from:0,to:i<a.length-1?a[i+1].from:24}));
+  return [...flex.map(x=>({p:x.p,spans:partSpans(warp,{from:x.from,to:x.to}),flex:true})),
+          ...parts.filter(p=>p.fixed).map(p=>({p,spans:[[p.from,p.to]]}))]}
+// part.newest: the latest episode first, then the one before (a daily show), instead of a shuffle
+const newestFirst=pool=>pool.map((v,i)=>[v,i]).sort((a,b)=>(b[0].pub||"").localeCompare(a[0].pub||"")||a[1]-b[1]).map(x=>x[0]);
 function buildDay(ch,dayStart){
   const k=ch.key+"|"+dayStart; if(cache.has(k)) return cache.get(k);
   const slots=[], warp=primeWarp(ch,dayStart);
-  (ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart))).forEach((p,pi)=>{
+  const parts=ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart));
+  const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
+  layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
-    let order=shuffle(pool,rnd), i=0;
-    for(const [from,to] of partSpans(warp,p)){
+    const fresh=()=>p.newest?newestFirst(pool):shuffle(pool,rnd);
+    let order=fresh(), i=0;
+    for(const [from,to] of spans){
       let t=dayStart+from*HOUR; const end=dayStart+to*HOUR;
       while(t<end){
-        if(i>=order.length){order=shuffle(pool,rnd);i=0}
+        if(i>=order.length){order=fresh();i=0}
         const v=order[i++]; const e=Math.min(t+v.min*MIN,end);
-        slots.push({start:t,end:e,v,part:p,ch}); t=e;
+        if(!flex) slots.push({start:t,end:e,v,part:p,ch});
+        else for(const [a,b] of cutOut([[t,e]],fixed)) slots.push({start:a,end:b,v,part:p,ch}); // around the fixed shows
+        t=e;
       }
     }
   });
@@ -84,19 +100,22 @@ function buildDay(ch,dayStart){
 
 /* Live channels play the first stream in js/live.js that is on air; otherwise their parts are the fallback */
 const LIVE_PART={label:"Live now",cat:"live",from:0,to:24};
-function liveStream(ch){
+function liveStream(ch,t){
   if(!ch.live||typeof LIVE==="undefined") return null;
-  return (LIVE[ch.live]||[]).find(x=>!BAD.has(x.id))||null;
+  const on=(LIVE[ch.live]||[]).filter(x=>!BAD.has(x.id));
+  // ch.liveAt [[from,to,"Source"],…]: the same news channel at the same hour every day, when it is live
+  const h=t==null?null:new Date(t+IST).getUTCHours(), want=ch.liveAt&&h!=null&&ch.liveAt.find(([a,b])=>h>=a&&h<b);
+  return (want&&on.find(x=>x.src===want[2]))||on[0]||null;
 }
 function liveSlot(ch,L,t){const a=Math.floor(t/HOUR)*HOUR; // shown in the guide as hour-long blocks
   return {start:a,end:a+HOUR,live:true,part:LIVE_PART,ch,v:{id:L.id,t:L.t,src:L.src,lang:L.lang,cat:"live",min:60}}}
 
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
-function slotAt(ch,t){const L=liveStream(ch); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t);
+function slotAt(ch,t){const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t);
   return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)}
 function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
-  if(L&&!ch.liveHours){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,L,t)); return out}
+  if(L&&!ch.liveHours){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
   let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
-  if(L) for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,L,t));
+  if(L) for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,liveStream(ch,t)||L,t));
   return out.sort((x,y)=>x.start-y.start)}
