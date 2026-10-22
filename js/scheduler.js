@@ -14,17 +14,27 @@ const AI_RE=/\bai\b|a\.i\.|artificial intelligence|midjourney|deepfake/i; // "AI
 const BAD=new Set();
 function markBad(id){BAD.add(id); cache.clear()}
 
+// Built once, so a day's schedule scans only the videos a part can play (the full catalogue is ~13,000 videos):
+// the catalogue by category, kept in catalogue order so every viewer's shuffle stays the same, and each pattern compiled once
+let byCat=null; const RX=new Map();
+const rx=s=>s&&(RX.get(s)||RX.set(s,new RegExp(s,"i")).get(s));
+function inCats(cats){
+  if(!byCat){byCat=new Map(); CATALOG.forEach((v,i)=>{if(!byCat.has(v.cat)) byCat.set(v.cat,[]); byCat.get(v.cat).push(i)})}
+  const list=[...new Set([].concat(cats))], idx=list.flatMap(c=>byCat.get(c)||[]);
+  if(list.length>1) idx.sort((a,b)=>a-b);
+  return idx.map(i=>CATALOG[i]);
+}
 function pick(part){
-  const exc=part.langExcept&&new RegExp(part.langExcept,"i"); // named creators allowed whatever their language
+  const exc=rx(part.langExcept); // named creators allowed whatever their language
   const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src))); // part.lang: only that language, never a fallback to others
-  const inCat=c=>Array.isArray(part.cat)?part.cat.includes(c):c===part.cat; // cat may list several categories
-  const re=part.match&&(part._re||(part._re=new RegExp(part.match,"i"))); // part.match: title must match, e.g. snack recipes
-  const srcOk=v=>(!part.src||new RegExp(part.src,"i").test(v.src))&&(!part.srcSkip||!new RegExp(part.srcSkip,"i").test(v.src)); // part.src / srcSkip: which creators
-  let pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
-  if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&srcOk(v)&&inCat(v.cat));
-  if(!pool.length) pool=CATALOG.filter(v=>ok(v)&&inCat(v.cat));
-  if(!pool.length&&part.alt) pool=CATALOG.filter(v=>ok(v)&&v.cat===part.alt); // e.g. Kids falls back to science
-  if(!pool.length&&part.tag) pool=CATALOG.filter(v=>ok(v)&&inCat(v.cat));
+  const inCat=inCats(part.cat); // cat may list several categories
+  const re=rx(part.match); // part.match: title must match, e.g. snack recipes
+  const srcRe=rx(part.src), skipRe=rx(part.srcSkip), srcOk=v=>(!srcRe||srcRe.test(v.src))&&(!skipRe||!skipRe.test(v.src)); // part.src / srcSkip: which creators
+  let pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
+  if(!pool.length) pool=inCat.filter(v=>ok(v)&&srcOk(v));
+  if(!pool.length) pool=inCat.filter(ok);
+  if(!pool.length&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // e.g. Kids falls back to science
+  if(!pool.length&&part.tag) pool=inCat.filter(ok);
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
