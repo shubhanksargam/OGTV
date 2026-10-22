@@ -339,6 +339,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
   padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
 .card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:700}
+/* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
+.card.interlude{animation:card-fade .8s ease both}
+.card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
+.card.interlude .kicker{animation-delay:.15s}.card.interlude h2{animation-delay:.45s}.card.interlude p{animation-delay:.8s}.card.interlude .count{animation-delay:1.1s}
+@keyframes card-fade{from{opacity:0}to{opacity:1}}
+@keyframes card-in{from{opacity:0;transform:translateY(8px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){.card.interlude>*{animation-name:card-fade}}
 
 .now{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
 .now-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}

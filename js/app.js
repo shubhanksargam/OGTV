@@ -544,7 +544,7 @@ const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)
 function showCard(msg){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
-  const card=$("card"); card.hidden=false;
+  const card=$("card"); card.hidden=false; card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
   if(MODE==="yt"){ // interstitial between programmes
     if(!msg) interlude.start((s.end-now)/1000); // the jingle fills the gap
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
