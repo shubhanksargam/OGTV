@@ -18,8 +18,9 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `css/styles.css` | Colours, fonts and layout (tokens at the top in `:root`) |
 | `js/catalog.js` | Hand-picked videos: YouTube ID, title, category, language, length in minutes |
 | `js/feeds.js` | Generated: latest uploads from the creators in `scripts/feeds.json` |
-| `scripts/fetch-feeds.mjs` | Rebuilds `js/feeds.js` (`node scripts/fetch-feeds.mjs`, or `... khel,geet` for some categories) |
-| `js/live.js` | Generated: which channels in `scripts/live.json` are live right now |
+| `scripts/fetch-feeds.mjs` | Rebuilds `js/feeds.js` (`node scripts/fetch-feeds.mjs`, or `... khel,geet` for some categories); which source each video came from goes to `scripts/feeds-state.json` |
+| `scripts/check.mjs` | Checks script syntax, feed data, channel hours and the schedule (`node scripts/check.mjs`); runs on every push and before every automatic refresh commits |
+| `js/live.js`, `js/live.json` | Generated: which channels in `scripts/live.json` are live right now (open pages re-read the JSON every 10 minutes) |
 | `js/festivals.js` | Festival calendar for the Festivals channel (add next year's dates before Oct 2027) |
 | `scripts/fetch-live.mjs` | Rebuilds `js/live.js` (`node scripts/fetch-live.mjs`) |
 | `js/channels.js` | Channels and their rules (time blocks in IST and what each block plays) |
@@ -27,6 +28,8 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `js/app.js` | Player, channel list, programme guide, remote keys |
 
 Scripts load in that order as plain `<script>` tags. No build step.
+
+**Security:** every page carries a Content-Security-Policy (set in `scripts/build-pages.mjs`), so the site runs no inline scripts: anything new goes in a `.js` file. Titles and names from YouTube go through `esc()` in `js/app.js` wherever they are put into HTML.
 
 ## Adding content
 
