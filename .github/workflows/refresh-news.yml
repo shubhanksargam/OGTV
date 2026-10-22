@@ -1,0 +1,37 @@
+# Newsroom's shows (Vantage with Palki Sharma, Firstpost, IGR) every hour, so today's episodes air today:
+# refreshes only the news category of js/feeds.js and redeploys when an episode is new.
+name: Refresh news shows
+on:
+  schedule:
+    - cron: "20 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: site-data
+  cancel-in-progress: false
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/fetch-feeds.mjs news
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: Commit and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet js/feeds.js; then echo "No new episodes"; exit 0; fi
+          sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d%H%M)#" index.html
+          node scripts/build-pages.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Refresh news shows"
+          git pull -q --rebase && git push -q
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
