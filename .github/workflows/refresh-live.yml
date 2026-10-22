@@ -16,11 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
       - run: node scripts/fetch-live.mjs
+      - name: Check the new data before it ships
+        run: node scripts/check.mjs   # a failure stops here: nothing is committed and the site keeps its last good data
       - name: Commit and redeploy if anything changed
         env:
           GH_TOKEN: ${{ github.token }}
