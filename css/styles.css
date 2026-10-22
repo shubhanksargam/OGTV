@@ -465,3 +465,14 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .faq summary{cursor:pointer;font-weight:700;color:var(--ink);list-style-position:outside}
 .faq summary:focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
 .faq details p{margin:8px 0 0;color:var(--muted);max-width:75ch;line-height:1.55}
+/* Phones: size full screen to the visible area (Safari's bars don't count), and the one-time iPhone tip */
+@supports (height:100dvh){
+  .room:is(:fullscreen,.pseudo-fs) .set.on{height:100dvh}
+  @media (orientation:portrait){.room:is(:fullscreen,.pseudo-fs) .set.on{width:100dvh;height:100vw}}
+  .screen.pseudo-fs{height:100dvh}
+}
+.room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass,.screen.pseudo-fs .fs-catch{touch-action:none}
+.ios-tip{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:70;max-width:min(92vw,420px);
+  padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(20,17,28,.94);color:var(--ink);font:500 .95rem/1.4 var(--body);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center;cursor:pointer}
+.ios-tip b{color:var(--marigold)}
