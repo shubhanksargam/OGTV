@@ -17,3 +17,8 @@ if(GC_CODE){
   s.onload=()=>{window.goatcounter.count({path:location.pathname, title:document.title}); (window.__gcQueue||[]).forEach(f=>f()); window.__gcQueue=[]};
   document.head.appendChild(s);
 }
+// Script errors show up in the dashboard as js-error-… events (at most 5 a visit), so a broken screen doesn't go unnoticed
+let errorsSent=0;
+function reportError(kind,msg){if(errorsSent++>=5)return; try{track("js-error-"+kind,String(msg||"unknown").slice(0,150))}catch(e){}}
+addEventListener("error",e=>reportError("script",(e.message||"")+" @ "+String(e.filename||"").split("/").pop()+":"+(e.lineno||0)));
+addEventListener("unhandledrejection",e=>reportError("promise",e.reason&&e.reason.message||e.reason));

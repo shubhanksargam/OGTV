@@ -8,13 +8,13 @@ const TV_APP=/[?&]app=tv\b/.test(location.search)||/OGTV-AndroidTV/.test(navigat
 if(TV_APP) document.documentElement.classList.add("tv-app");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 {const m=document.querySelector('meta[name="ogtv-ch"]'), n=+new URLSearchParams(location.search).get("ch")||+(m&&m.content), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
-const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
+const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
 const onAir=s=>s.live?s.v.src+": "+s.v.t:s.v.t;
 
 function renderChannels(){
-  const now=Date.now();
+  const now=tvNow();
   $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<h5 class="ch-group">${esc(c.group)}</h5>`:"";
     return `${head}<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
       <span class="num">${c.n}</span>
@@ -24,7 +24,7 @@ function renderChannels(){
 $("chlist").addEventListener("click",e=>{const b=e.target.closest(".ch");if(b)tune(+b.dataset.i)});
 
 function renderGuide(){
-  const now=Date.now(), a=Math.floor(now/(30*MIN))*30*MIN, b=a+3*HOUR, PX=6; // 6px per minute
+  const now=tvNow(), a=Math.floor(now/(30*MIN))*30*MIN, b=a+3*HOUR, PX=6; // 6px per minute
   const W=(b-a)/MIN*PX;
   let ticks="";for(let t=a;t<=b;t+=30*MIN) ticks+=`<span class="tick" style="left:${(t-a)/MIN*PX}px">${fmt(t)}</span>`;
   let rows=`<div class="trow" style="width:${W}px">${ticks}</div>`;
@@ -48,7 +48,7 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
   countChannel(); browse=cur; clearDigits(); markGuide();
-  try{history.replaceState(null,"","?ch="+CHANNELS[cur].n)}catch(e){}
+  try{const q=new URLSearchParams(location.search); q.set("ch",CHANNELS[cur].n); history.replaceState(null,"","?"+q)}catch(e){}
   playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
@@ -96,19 +96,20 @@ function loadYT(){
 }
 window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
-  const s=slotAt(CHANNELS[cur],Date.now()), firstKey=slotKey(CHANNELS[cur],s);
-  player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((Date.now()-s.start)/1000)})},
+  const s=slotAt(CHANNELS[cur],tvNow()), firstKey=slotKey(CHANNELS[cur],s);
+  player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
     events:{onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute()} // sound allowed: open it silently, it fades up after the ident
               else {player.setVolume(vol);muted?player.mute():player.unMute()}
               player.playVideo();if(!muted)checkSound();$("sound").hidden=false;
               playingKey=firstKey;tick(); // reloads only if the programme changed while loading
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
-              clearTimeout(bufTimer);
-              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); keepAwake(true)}
-              else if(e.data===S.BUFFERING&&started) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
+              clearTimeout(bufTimer); clearTimeout(stallTimer);
+              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); keepAwake(true); skips=0; retries=0}
+              else if(e.data===S.BUFFERING){if(started) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
+                stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED) keepAwake(false);
-              else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],Date.now()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
+              else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
 // While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
@@ -119,13 +120,25 @@ async function keepAwake(on){wantAwake=on;
   try{if(on&&!wakeLock&&navigator.wakeLock&&document.visibilityState==="visible"){wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{wakeLock=null})}
       else if(!on&&wakeLock){const l=wakeLock; wakeLock=null; await l.release()}}catch(e){wakeLock=null}}
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&wantAwake) keepAwake(true)});
-// A video or stream that won't play is dropped from this browser's schedule and the next one starts.
-// After many failures in one visit something bigger is wrong (blocker, network), so stop and say so.
+// Why a video failed decides what happens next. Removed or not embeddable (YouTube 100, 101, 150): it is dropped
+// from this browser's schedule and the next one starts. Anything else (a stall, a player hiccup) usually passes, so
+// the same programme is tried again at the current moment after 5 s, 15 s and 60 s before it counts as broken.
+// Offline, nothing is dropped: the programme picks up again when the connection is back.
+const GONE=[100,101,150], RETRY=[5e3,15e3,60e3];
+let retries=0, retryTimer=0, stallTimer=0;
+const replay=()=>{clearTimeout(retryTimer); playingKey=null; tick()};
 function skip(code){
-  track("play-error-"+(code||"ended"),"Video failed to play"+(code?" (YouTube "+code+")":""));
-  if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube.");return}
+  clearTimeout(retryTimer); clearTimeout(stallTimer);
+  if(!navigator.onLine){showStatic(); return} // the "online" listener below takes over
+  track("play-error-"+(code||"ended"),"Video failed to play"+(code?" ("+code+")":""));
+  if(code&&!GONE.includes(code)&&retries<RETRY.length){showStatic(); retryTimer=setTimeout(replay,RETRY[retries++]); return}
+  retries=0;
+  // Many failures in a row: something bigger is wrong (a blocker, the network). Say so, and keep trying every minute
+  if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube. Trying again every minute.");
+    skips=12; retryTimer=setTimeout(replay,60e3); return}
   if(playingId) markBad(playingId); playingKey=null; tick(); renderGuide();
 }
+addEventListener("online",()=>{retries=0; if(MODE==="yt"&&player) replay()});
 function fallback(){
   MODE="fallback"; hideStatic(); playingKey=null; tick(); videoUp=true; openIris();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
@@ -238,7 +251,7 @@ const copyWidth=()=>{const a=stripCard(0,0), b=stripCard(1,0); return a&&b?b.off
 const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view, measured from copy 0's first card
   return a?st.scrollLeft+st.clientWidth/2-(a.getBoundingClientRect().left-st.getBoundingClientRect().left+st.scrollLeft):0};
 function renderStrip(smooth=true){
-  const now=Date.now(), strip=$("strip"), mid=stripMid(), w=copyWidth();
+  const now=tvNow(), strip=$("strip"), mid=stripMid(), w=copyWidth();
   const row=copy=>CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
     const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${esc(c.group)}</span>`:"";
     return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
@@ -258,7 +271,7 @@ function settleStrip(){ // keep the middle of the view inside the middle copy, w
 }
 function showBanner(){
   if(!isFull())return;
-  const c=CHANNELS[cur], now=Date.now(), s=slotAt(c,now), nx=s.live?null:slotAt(c,s.end);
+  const c=CHANNELS[cur], now=tvNow(), s=slotAt(c,now), nx=s.live?null:slotAt(c,s.end);
   $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
     <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`;
@@ -299,7 +312,7 @@ let retro=true; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.
 function setRetro(on){retro=on; $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd();
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
-function osd(){if(!retro)return; const d=new Date(Date.now()+IST), p=n=>String(n).padStart(2,"0");
+function osd(){if(!retro)return; const d=new Date(tvNow()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
 ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // The TV set's knobs turn like real ones: drag round, scroll, or arrow keys when focused. Channel steps
@@ -395,7 +408,7 @@ $("screen").addEventListener("dblclick",toggleFullscreen);
 
 const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)+"&t="+sec+"s";
 function showCard(msg){
-  const now=Date.now(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
+  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
   const card=$("card"); card.hidden=false;
   if(MODE==="yt"){ // interstitial between programmes
@@ -410,11 +423,12 @@ function showCard(msg){
 }
 
 function tick(){
-  const now=Date.now(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
+  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey){
+    if(playingKey&&reloadNow()){location.reload(); return}
     playingKey=key; playingId=s.v.id; ended=false;
     const off=Math.floor((now-s.start)/1000);
     if(MODE==="yt"&&player){$("card").hidden=true;if(started)showStatic(); // the ident covers the first tune-in
@@ -439,12 +453,40 @@ function tick(){
 // About section numbers come from the data, so they stay right as channels and creators change
 $("aboutChannels").textContent=CHANNELS.length;
 $("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
+// The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
+const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
 renderChannels(); renderGuide(); tick(); loadYT();
-setInterval(tick,1000);
+setInterval(guarded(tick,"tick"),1000);
 // Watch-time milestones while the page is visible: how long people stay
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
 setInterval(()=>{if(!started||document.hidden)return; watchedSec+=15; const m=MILESTONES[watchedSec]; if(m) track("watch-"+m,"Watched "+m)},15e3);
-setInterval(renderGuide,60e3);
+setInterval(guarded(renderGuide,"guide"),60e3);
+
+// Live streams start and stop all day. The live list is re-read every 10 minutes, so a set left on picks up a
+// stream that went on air after it was switched on (a channel whose stream changed retunes on the next tick)
+async function refreshLive(){
+  try{const r=await fetch("js/live.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return; const j=await r.json();
+    if(!j||typeof j!=="object"||JSON.stringify(j)===JSON.stringify(LIVE)) return;
+    for(const k of Object.keys(LIVE)) delete LIVE[k]; Object.assign(LIVE,j); renderChannels(); renderGuide()}catch(e){}}
+setInterval(refreshLive,10*MIN);
+// A new version of the site (code, or the nightly feeds) loads itself at the next change of programme, so the
+// viewer only sees a normal programme change. In a browser that waits until nobody has touched it for 30 minutes.
+const stamp=(html,f)=>(html.match(new RegExp(f.replace(/\./g,"\\.")+"\\?v=([^\"']+)"))||[])[1];
+const loadedStamp=f=>{const el=document.querySelector(`script[src^="${f}?"]`); return el?stamp(el.outerHTML,f):""};
+let newVersion=false, lastTouch=Date.now();
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{lastTouch=Date.now()},true));
+async function checkVersion(){
+  try{const html=await (await fetch("index.html?t="+Date.now(),{cache:"no-store"})).text();
+    newVersion=["js/app.js","js/feeds.js"].some(f=>{const v=stamp(html,f); return v&&v!==loadedStamp(f)})}catch(e){}}
+setInterval(checkVersion,HOUR);
+const reloadNow=()=>newVersion&&(TV_APP||Date.now()-lastTouch>30*MIN);
+// The server's clock (the Date header) is the reference: a device more than 3 s off plays on the corrected clock
+async function syncClock(){
+  try{const t0=Date.now(), r=await fetch("robots.txt?t="+t0,{method:"HEAD",cache:"no-store"}), t1=Date.now(), d=Date.parse(r.headers.get("date"));
+    if(!d) return; const off=d+500-(t0+t1)/2, was=clockSkew; // the header has whole seconds: +500 ms is its middle
+    clockSkew=Math.abs(off)>3e3?Math.round(off):0;
+    if(Math.abs(clockSkew-was)>5e3){track("clock-skew","Device clock off by "+Math.round(off/1000)+" s"); if(MODE==="yt"&&player) replay(); renderChannels(); renderGuide()}}catch(e){}}
+syncClock(); setInterval(syncClock,HOUR);
 
 /* ---------- TV app remote ----------
    The app turns each remote key into ogtv.remote(name). Up/down and the channel keys change channel (up is the

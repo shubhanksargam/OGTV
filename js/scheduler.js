@@ -1,6 +1,9 @@
 /* ---------- Scheduler: deterministic per IST day, so every viewer sees the same thing ---------- */
 const IST = 5.5*3600e3, MIN=60e3, HOUR=3600e3, DAY=86400e3;
 const istDayStart = t => Math.floor((t+IST)/DAY)*DAY - IST;
+// TV time: the device clock corrected by the server's (app.js sets clockSkew), so a set whose clock is minutes
+// off still shows the same moment as everyone else
+let clockSkew=0; const tvNow=()=>Date.now()+clockSkew;
 const fmt = t => {const d=new Date(t+IST);return String(d.getUTCHours()).padStart(2,"0")+":"+String(d.getUTCMinutes()).padStart(2,"0")};
 function seeded(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19}
   return ()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);h^=h>>>16;return (h>>>0)/4294967296}}
@@ -51,6 +54,8 @@ function festivalParts(dayStart){
 const cache=new Map();
 function buildDay(ch,dayStart){
   const k=ch.key+"|"+dayStart; if(cache.has(k)) return cache.get(k);
+  // a set left on for weeks keeps only yesterday onwards
+  if(cache.size>CHANNELS.length*4){const keep=istDayStart(tvNow())-DAY; for(const key of cache.keys()) if(+key.split("|")[1]<keep) cache.delete(key)}
   const slots=[];
   (ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart))).forEach((p,pi)=>{
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
@@ -77,7 +82,10 @@ function liveSlot(ch,L,t){const a=Math.floor(t/HOUR)*HOUR; // shown in the guide
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
 function slotAt(ch,t){const L=liveStream(ch); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t);
-  return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)}
+  return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)||gapSlot(ch,t)}
+// Only if a channel's parts leave an hour uncovered (a slip in channels.js): play something rather than break the page
+function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=CATALOG.filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
+  return {start:a,end:a+HOUR,v,part:{label:ch.en||ch.name,cat:v.cat,from:0,to:24},ch}}
 function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
   if(L&&!ch.liveHours){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,L,t)); return out}
   let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
