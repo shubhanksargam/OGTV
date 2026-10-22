@@ -51,7 +51,7 @@ const CHANNELS = [
     {from:21,to:24,cat:"tech",tag:"explain",preferMin:12,label:"Hi-tech explained"}]},
   {key:"paisa",n:11,group:"Knowledge",name:"Paisa",en:"Money",parts:[{from:0,to:24,preferMin:15,cat:"paisa",label:"Money & investing"}]},
   {key:"baatcheet",n:12,group:"Knowledge",name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,preferMin:30,cat:"baatcheet",label:"Long conversations"}]},
-  {key:"niche",n:13,group:"Knowledge",name:"Niche",en:"Rare, offbeat & curious",parts:[
+  {key:"niche",prime:20,n:13,group:"Knowledge",name:"Niche",en:"Rare, offbeat & curious",parts:[
     {from:0,to:9,  cat:"niche",label:"Offbeat world"},
     {from:9,to:13, cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"Rare India"},
     {from:13,to:20,cat:"niche",label:"Curious finds"},
@@ -89,7 +89,7 @@ const CHANNELS = [
     {from:8,to:24, cat:"bhakti",label:"Devotional, all day"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
   {key:"festival",n:20,group:"Lifestyle",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
-  {key:"sehat",n:21,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
+  {key:"sehat",prime:20,n:21,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
     {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
     {from:7,to:9,  cat:"sehat",tag:"army",alt:"sehat",label:"Army training: morning PT"},
@@ -103,7 +103,7 @@ const CHANNELS = [
     {from:21,to:22,cat:"sehat",tag:"soviet",alt:"sehat",label:"Soviet-style training: kettlebells & weightlifting"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
   {key:"rasoi",n:22,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
-  {key:"safar",n:23,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
+  {key:"safar",prime:17,n:23,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
     {from:0,to:6,  cat:"safar",tag:"world",preferMin:20,label:"Long journeys"},
     {from:6,to:7,  cat:"safar",tag:"scenic",alt:"safar",label:"Scenic mornings"},
     {from:7,to:14, cat:"safar",tag:"india",preferMin:15,label:"Travel India"},

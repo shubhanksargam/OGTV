@@ -49,19 +49,36 @@ function festivalParts(dayStart){
   return [{from:0,to:24,cat:"bhakti",label:"Devotional songs"}];
 }
 const cache=new Map();
+/* Prime time is 9 pm to 3 am on weekdays and 7 pm to 4 am on weekends (Saturday and Sunday evenings), IST.
+   A channel's prime block runs from its first "prime" part to midnight as written in js/channels.js (or from ch.prime).
+   That block is stretched over tonight's prime window, and its overflow past midnight fills this morning's early hours,
+   which belong to last night's prime time. 6 am stays fixed; the hours either side of it are fitted proportionally. */
+const weekendEve=d=>{const w=new Date(d+IST).getUTCDay(); return w===0||w===6};
+const primeFrom=ch=>ch.prime!=null?ch.prime:(ch.parts.find(p=>/prime/i.test(p.label))||{}).from;
+function primeWarp(ch,dayStart){const P=ch.festival?null:primeFrom(ch); if(P==null||P<=0||P>=24) return null;
+  const start=weekendEve(dayStart)?19:21, tail=weekendEve(dayStart-DAY)?4:3, len=24-start+tail;
+  const M=P>6?6:0; // 6 am stays put, so mornings and daytime keep their times; only the night and evening move
+  return h=>h>=P?start+(h-P)*len/(24-P):h>=M?M+(h-M)*(start-M)/(P-M):tail+h*(M-tail)/M}
+// The hours (in day-relative IST hours) a part occupies today; a stretch past midnight wraps to the morning
+function partSpans(warp,p){if(!warp) return [[p.from,p.to]];
+  const a=warp(p.from), b=warp(p.to);
+  return b<=24?[[a,b]]:a>=24?[[a-24,b-24]]:[[a,24],[0,b-24]]}
 function buildDay(ch,dayStart){
   const k=ch.key+"|"+dayStart; if(cache.has(k)) return cache.get(k);
-  const slots=[];
+  const slots=[], warp=primeWarp(ch,dayStart);
   (ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart))).forEach((p,pi)=>{
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
     let order=shuffle(pool,rnd), i=0;
-    let t=dayStart+p.from*HOUR; const end=dayStart+p.to*HOUR;
-    while(t<end){
-      if(i>=order.length){order=shuffle(pool,rnd);i=0}
-      const v=order[i++]; const e=Math.min(t+v.min*MIN,end);
-      slots.push({start:t,end:e,v,part:p,ch}); t=e;
+    for(const [from,to] of partSpans(warp,p)){
+      let t=dayStart+from*HOUR; const end=dayStart+to*HOUR;
+      while(t<end){
+        if(i>=order.length){order=shuffle(pool,rnd);i=0}
+        const v=order[i++]; const e=Math.min(t+v.min*MIN,end);
+        slots.push({start:t,end:e,v,part:p,ch}); t=e;
+      }
     }
   });
+  slots.sort((x,y)=>x.start-y.start);
   cache.set(k,slots); return slots;
 }
 
