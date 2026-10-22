@@ -45,15 +45,14 @@ if (S) {
     if (was && now < was * 0.7) fail(`js/feeds.js has ${now} videos, down from ${was} in the last commit (more than 30% gone)`);
   } catch { warn("no git history to compare the feed count with"); }
 
-  // 5. Each channel's hours cover the whole day, with no gaps or overlaps
+  // 5. Each channel's parts make sense. (The scheduler closes the hours between regular parts itself and lays
+  // fixed-time shows over them, so whole-day coverage is checked by the schedule test below, not here.)
   for (const c of CHANNELS) {
     if (c.festival) continue;
-    let t = 0;
-    for (const p of [...c.parts].sort((a, b) => a.from - b.from)) {
-      if (p.from !== t) fail(`${c.name}: hours ${p.from < t ? "overlap" : "have a gap"} at ${Math.min(t, p.from)}:00`);
-      t = p.to;
-    }
-    if (t !== 24) fail(`${c.name}: hours end at ${t}:00, not 24:00`);
+    for (const p of c.parts) if (!(p.from >= 0 && p.from < p.to && p.to <= 24)) fail(`${c.name}: part "${p.label}" has hours ${p.from}–${p.to}`);
+    if (!c.parts.some(p => !p.fixed)) fail(`${c.name}: has only fixed-time shows`);
+    const fixed = c.parts.filter(p => p.fixed).sort((a, b) => a.from - b.from);
+    fixed.forEach((p, i) => i && p.from < fixed[i - 1].to && fail(`${c.name}: fixed shows "${fixed[i - 1].label}" and "${p.label}" overlap`));
   }
   const nums = CHANNELS.map(c => c.n);
   if (new Set(nums).size !== nums.length) fail("two channels share a number");

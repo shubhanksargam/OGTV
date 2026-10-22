@@ -1,0 +1,39 @@
+# Newsroom's shows (Vantage with Palki Sharma, Firstpost, IGR) every hour, so today's episodes air today:
+# refreshes only the news category of js/feeds.js and redeploys when an episode is new.
+name: Refresh news shows and sports highlights
+on:
+  schedule:
+    - cron: "20 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: site-data
+  cancel-in-progress: false
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: node scripts/fetch-feeds.mjs news,cricket,football,khel,world,paisa
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: Check the new data before it ships
+        run: node scripts/check.mjs   # a failure stops here: nothing is committed and the site keeps its last good data
+      - name: Commit and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet js/feeds.js; then echo "No new episodes"; exit 0; fi
+          sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d%H%M)#" index.html
+          node scripts/build-pages.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Refresh news shows and sports highlights"
+          git pull -q --rebase && git push -q
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

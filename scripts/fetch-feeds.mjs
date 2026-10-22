@@ -6,6 +6,7 @@
 // A source is a creator ("id": channel ID, latest ~15 uploads) or a playlist ("playlist": ID, first "take" videos).
 // "match"/"skip" are case-insensitive regexes on the title, e.g. only trailers from a music label.
 // "keepDays" keeps videos from earlier runs that are newer than that many days.
+// "maxDays" keeps only videos uploaded in the last that many days (e.g. this week's match highlights).
 // "authors": only videos uploaded by these channels (use fan-made playlists to find films, keep official uploads only).
 // "list": "popular" reads the channel's most popular uploads instead of its latest (used for Blockbusters).
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
@@ -100,10 +101,10 @@ async function detailsFromApi(ids) {
   const out = {};
   for (let i = 0; i < ids.length; i += 50) {
     const url = "https://www.googleapis.com/youtube/v3/videos?part=contentDetails,status,snippet&key=" + KEY + "&id=" + ids.slice(i, i + 50).join(",");
-    for (const it of JSON.parse(await get(url)).items || []) {
-      const d = it.contentDetails.duration.match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
+    for (const it of JSON.parse(await get(url)).items || []) { // an upcoming or live stream has no duration yet: it gets 0 s and is dropped
+      const d = (it.contentDetails.duration || "").match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
       const sec = (+d[1] || 0) * 86400 + (+d[2] || 0) * 3600 + (+d[3] || 0) * 60 + (+d[4] || 0);
-      out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle,
+      out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle, pub: it.snippet.publishedAt?.slice(0, 10),
         ok: it.status.embeddable && it.status.privacyStatus === "public" && it.snippet.liveBroadcastContent === "none" && !it.contentDetails.contentRating?.ytRating};
     }
   }
@@ -132,12 +133,17 @@ async function previous() {
   } catch { return []; }
 }
 
+const sinceDays = n => new Date(Date.now() + 5.5 * 3600e3 - n * 86400e3).toISOString().slice(0, 10);
 const keyOf = f => (f.id || f.playlist) + "|" + f.cat + (f.tag ? "|" + f.tag : "") + (f.match ? "|m" : ""); // a filtered source is distinct from the same channel unfiltered // one source can feed several categories (Star Sports: cricket, football, khel)
 async function fetchFeed(f, old) {
   try {
     const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await uploads(f.id, f.list === "popular");
     const match = f.match && new RegExp(f.match, "i"), skip = f.skip && new RegExp(f.skip, "i");
     const info = KEY ? await detailsFromApi(entries.map(e => e.id)) : {};
+    if (f.maxDays && !KEY && f.id) { // the uploads page has no dates; the RSS feed has them for the latest 15
+      const pubs = new Map((await rss(f.id).catch(() => [])).map(x => [x.id, x.pub]));
+      for (const e of entries) e.pub ||= pubs.get(e.id);
+    }
     const items = []; let unread = 0;
     for (const e of entries) {
       const d = KEY ? info[e.id] : await (e.title && e.sec ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null)); // listed with title + length: no watch page needed
@@ -147,6 +153,7 @@ async function fetchFeed(f, old) {
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
+      if (f.maxDays && !((e.pub || d.pub || "") >= sinceDays(f.maxDays))) continue;
       items.push({id: e.id, t: cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
@@ -188,7 +195,8 @@ await Promise.all(Array.from({length: 6}, async () => {
 // Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
 const bySource = new Map(feeds.map(f => [keyOf(f), f]));
 const passes = v => { const f = bySource.get(v.feed); if (!f) return true;
-  return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t)); };
+  return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t))
+    && !(f.maxDays && !((v.pub || "") >= sinceDays(f.maxDays))); };
 // Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
 const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").split(/full|hindi|movie|film|\||-|4k|hd|comedy|action|horror|drama|romantic|thriller|superhit|blockbuster/)[0].replace(/[^a-z0-9]/g, "");
 const seen = new Set(), items = results.flat().filter(passes).filter(v => {

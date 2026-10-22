@@ -300,6 +300,22 @@ $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingCli
   wakeUI(now&&!inBottom); inBottom=now});
 function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
 $("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():wakeUI(true)); // tap the video: open, or close the strip
+// Swipe to surf on phones and tablets: across the picture in plain full screen, or the tube of the retro TV.
+// Left or up is the next channel, right or down the one before; short movements stay taps.
+function swipeSurf(el){if(!el)return; let x0=0,y0=0,t0=0;
+  el.addEventListener("touchstart",e=>{const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now()},{passive:true});
+  el.addEventListener("touchend",e=>{const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Date.now()-t0>800||Math.max(Math.abs(dx),Math.abs(dy))<45) return;
+    e.preventDefault(); const next=Math.abs(dx)>Math.abs(dy)?dx<0:dy<0;
+    tune(cur+(next?1:-1)); if(retro) osdChannel(cur); else showBanner()},{passive:false})}
+swipeSurf($("fsCatch")); swipeSurf(document.querySelector(".crt-glass"));
+// iPhone Safari can't put a page in true full screen; once per visit, say how: add OGTV to the Home Screen
+if(/iPhone|iPod/.test(navigator.userAgent)&&!(navigator.standalone||matchMedia("(display-mode: standalone)").matches)){
+  let shown=false; try{shown=sessionStorage.getItem("ogtv-ios-tip")==="1"}catch(e){}
+  if(!shown) setTimeout(()=>{const tip=document.createElement("button"); tip.className="ios-tip"; tip.type="button";
+    tip.innerHTML="For true full screen, tap <b>Share</b> then <b>Add to Home Screen</b>. Swipe to change channel.";
+    tip.addEventListener("click",()=>tip.remove()); document.body.appendChild(tip); setTimeout(()=>tip.remove(),9000);
+    try{sessionStorage.setItem("ogtv-ios-tip","1")}catch(e){}},6500)}
 function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomFull()?"Exit full screen":"Full screen";
   sc.classList.toggle("pseudo-fs",roomFull()&&!retro); // plain look: the bare screen fills the room
   if(!roomFull()) try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}
@@ -319,7 +335,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
 const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
-  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
+  india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",dailybrief:"The Daily Brief",zmarkets:"Markets by Zerodha",firstsports:"First Sports",latest:"latest highlights",talent:"Hustle & I-Popstar",vantagenew:"Vantage, latest",vantage:"Vantage",palki:"Palki Sharma",fpshows:"Firstpost shows",igr:"IGR",trending:"trending",voices:"voices",stars:"stars",indie:"indie",chart:"charts",worldcharts:"world charts",alltime:"all-time hits",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
 let osdTimer=0;
