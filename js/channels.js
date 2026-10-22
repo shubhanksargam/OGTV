@@ -173,13 +173,15 @@ const CHANNELS = [
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
   // ---- Entertainment ----
   {key:"aangan",n:36,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, KBC & Taarak Mehta",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
-    {from:0,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
+    {from:0,to:1,  cat:"aangan",  tag:"talent",alt:"geet",label:"Repeat: MTV Hustle & I-Popstar"},
+    {from:1,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
     {from:6,to:7,  cat:"aangan",  tag:"kahani",alt:"bhakti",label:"Subah ki kahani"},
     {from:7,to:9,  cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife & nature"},
     {from:9,to:11, cat:"aangan",  tag:"dd",label:"Doordarshan classics: Bharat Ek Khoj"},
     {from:11,to:13,cat:"aangan",  tag:"dd",label:"Doordarshan classics"},
-    {from:13,to:15,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Discovery afternoon"},
+    {from:14,to:15,cat:"aangan",  tag:"talent",alt:"geet",label:"Music talent: MTV Hustle & I-Popstar"},
+    {from:13,to:14,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",srcSkip:"Binocs|Peekaboo|Bodhaguru|Unacademy",preferMin:15,label:"Discovery afternoon"},
     {from:15,to:16,cat:"aangan",  tag:"kahani",label:"Dopahar ki kahani"},
     {from:16,to:17,cat:"aangan",  tag:"kavi",label:"Kavi sammelan"},
     {from:17,to:18,cat:"hasya",   lang:"hi",src:"Kapil Sharma|Ashish Chanchlani|Rakesh Addlakha|Taarak Mehta",label:"Family comedy"},
