@@ -135,7 +135,7 @@ const CHANNELS = [
     {from:15,to:20,cat:"football",preferMin:15,label:"Football, all afternoon"},
     {from:20,to:24,cat:"football",tag:"latest",alt:"football",label:"Prime time: this week's match highlights"}]},
   {key:"classics",n:17,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
-  {key:"worldsport",n:18,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis & world fixtures",parts:[
+  {key:"worldsport",n:18,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis, NBA & world sport",parts:[
     {from:0,to:4,  cat:"khel",tag:"olympic",label:"Olympic classics"},
     {from:4,to:7,  cat:"world",tag:"more",alt:"world",label:"Golf, cycling & swimming"},
     {from:7,to:10, cat:"world",tag:"tennis",alt:"world",label:"Tennis: ATP, WTA & the Grand Slams"},
@@ -144,7 +144,7 @@ const CHANNELS = [
     {from:16,to:19,cat:"khel",tag:"olympic",alt:"world",label:"Olympics & world athletics"},
     {from:19,to:21,cat:"world",tag:"latest",alt:"world",label:"Prime time: this week in world sport"},
     {from:21,to:22,cat:"world",tag:"latest",src:"Formula 1|MotoGP",alt:"world",label:"Race night: the latest from F1 & MotoGP"},
-    {from:22,to:23,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: FIFA, NBA, rugby, hockey"},
+    {from:22,to:23,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: NBA, NHL, rugby & basketball"},
     {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- Lifestyle ----
   {key:"bhakti",n:19,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[
