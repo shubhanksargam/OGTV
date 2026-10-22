@@ -51,11 +51,11 @@ function festivalParts(dayStart){
 }
 const cache=new Map();
 const cutOut=(spans,holes)=>holes.reduce((acc,[a,b])=>acc.flatMap(([x,y])=>y<=a||x>=b?[[x,y]]:[...(x<a?[[x,a]]:[]),...(y>b?[[b,y]]:[])]),spans);
-/* Prime time is 9 pm to 3 am on weekdays and 7 pm to 4 am on weekends (Saturday and Sunday evenings), IST.
+/* Prime time is 9 pm to 3 am on weekdays and 7 pm to 4 am on weekends (Friday and Saturday evenings), IST.
    A channel's prime block runs from its first "prime" part to midnight as written in js/channels.js (or from ch.prime).
    That block is stretched over tonight's prime window, and its overflow past midnight fills this morning's early hours,
    which belong to last night's prime time. 6 am stays fixed; the hours either side of it are fitted proportionally. */
-const weekendEve=d=>{const w=new Date(d+IST).getUTCDay(); return w===0||w===6};
+const weekendEve=d=>{const w=new Date(d+IST).getUTCDay(); return w===5||w===6};
 const primeFrom=ch=>ch.prime!=null?ch.prime:(ch.parts.find(p=>/prime/i.test(p.label))||{}).from;
 function primeWarp(ch,dayStart){const P=ch.festival||ch.group==="News"?null:primeFrom(ch); // news keeps its fixed bulletin times
   if(P==null||P<=0||P>=24) return null;
