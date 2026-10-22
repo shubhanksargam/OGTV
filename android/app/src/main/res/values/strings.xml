@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline">OGTV needs the internet\n\nTrying again by itself. Press OK to try now.</string>
+    <string name="back_again">Press Back again to leave OGTV</string>
+    <string name="old_webview">For smooth playback, update Android System WebView in your TV\'s app store</string>
+</resources>

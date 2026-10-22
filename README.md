@@ -69,6 +69,16 @@ Scripts load in that order as plain `<script>` tags. No build step.
 - A video that won't play is skipped and the channel moves to the next one.
 - **NEW** in the guide marks videos uploaded in the last 30 days.
 
+## TV app (Fire TV and Android TV)
+
+`android/` is a small Kotlin app: one full-screen WebView on `https://ogtv.thebharat.si/?app=tv`, so the schedule, feeds and look all come from the site and nightly refreshes need no app update. No libraries and no Google Play services, so one APK runs on Fire TV (Fire OS 5 and up) and Android TV.
+
+- **TV mode** (`?app=tv`, or the app's `OGTV-AndroidTV` user agent): sound with no tap, always full screen, no cursor or click-only buttons. Try it in a browser at `http://localhost:8000/?app=tv` and call `ogtv.remote("up")` in the console.
+- **Remote:** the app sends each key to `ogtv.remote(name)` in [js/app.js](js/app.js). Up/down, channel and ⏩/⏪ keys change channel; Menu swaps retro and plain; in plain, ←/→ open the channel strip and OK tunes; play/pause is sound; digits tune; Back closes the strip, then Back twice leaves the app. Leaving the app pauses it; coming back rejoins the programme live.
+- **Build:** `cd android` then `./gradlew assembleDebug` (needs the Android SDK and JDK 17+; Android Studio's `jbr` works as `JAVA_HOME`). The APK is `android/app/build/outputs/apk/debug/app-debug.apk`.
+- **Put it on a Fire TV Stick:** on the stick turn on Settings → My Fire TV → Developer options → ADB debugging (tap About → the device name 7 times if Developer options is hidden), note its IP under About → Network, then `adb connect <ip>:5555` and `adb install -r android/app/build/outputs/apk/debug/app-debug.apk`. OGTV appears under Your Apps.
+- **Release signing:** set `OGTV_KEYSTORE`, `OGTV_KEYSTORE_PASS` (and optionally `OGTV_KEY_ALIAS`, `OGTV_KEY_PASS`) as environment variables or in `android/keystore.properties` (not committed), then `./gradlew assembleRelease`.
+
 ## Traffic monitoring
 
 - `js/analytics.js` sends visits and events to GoatCounter once `GC_CODE` is set (no cookies). Events: `start`, `ch-NN-key` (10 s on a channel), `watch-5m/15m/30m/60m/2h`, `live-none-<group>`, `play-error-<code>`, `blocked`, `retro-on`, `fullscreen`.

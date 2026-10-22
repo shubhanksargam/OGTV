@@ -1,5 +1,9 @@
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
+// Inside the OGTV TV app (Android TV, Fire TV): the app passes ?app=tv and tags its user agent. Sound needs no tap
+// there, the app is already full screen, and the remote reaches the page through window.ogtv (end of this file).
+const TV_APP=/[?&]app=tv\b/.test(location.search)||/OGTV-AndroidTV/.test(navigator.userAgent);
+if(TV_APP) document.documentElement.classList.add("tv-app");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 {const n=+new URLSearchParams(location.search).get("ch")||window.OGTV_CH, i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
@@ -155,7 +159,7 @@ function openIris(){if(opened||started||!logoDone||!(videoUp||capped))return; op
    glint and a hall tail. A context made now tells us whether sound is allowed yet ("running"). */
 const AC=window.AudioContext||window.webkitAudioContext;
 let bloomed=false, identAc=null; try{identAc=AC?new AC():null}catch(e){}
-primed=!!identAc&&identAc.state==="running"; // sound allowed: the channel opens silently and fades up after the ident
+primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the channel opens silently and fades up after the ident
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
@@ -377,6 +381,7 @@ setRetro(retro); vfd();
 // visitor does something). Exit full screen leaves it.
 function autoFull(){
   if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
+  if(TV_APP) return; // the app is full screen already
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
     if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro,#fs,#home"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
@@ -438,4 +443,34 @@ setInterval(tick,1000);
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
 setInterval(()=>{if(!started||document.hidden)return; watchedSec+=15; const m=MILESTONES[watchedSec]; if(m) track("watch-"+m,"Watched "+m)},15e3);
 setInterval(renderGuide,60e3);
+
+/* ---------- TV app remote ----------
+   The app turns each remote key into ogtv.remote(name). Up/down and the channel keys change channel (up is the
+   next number, as on a TV); in the plain look left/right browse the strip and OK tunes, in the retro set they
+   change channel too. Menu swaps retro and plain, play/pause is sound, digits tune as on the keyboard.
+   remote("back") returns false when there is nothing to close, and the app then offers to exit. */
+const stripOn=()=>$("screen").classList.contains("strip-on");
+const press=key=>document.body.dispatchEvent(new KeyboardEvent("keydown",{key,bubbles:true,cancelable:true}));
+function step(d){tune(cur+d); if(retro) osdChannel(cur)}
+window.ogtv={
+  remote(k){
+    if(k==="back"){if(stripOn()){closeStrip(); return true} return false}
+    if(!started) return true; // the ident plays through
+    if(/^[0-9]$/.test(k)){press(k); return true}
+    if(isFull()&&(k==="left"||k==="right"||(k==="ok"&&stripOn()))){press({left:"ArrowLeft",right:"ArrowRight",ok:"Enter"}[k]); return true}
+    switch(k){
+      case "up": case "chup": case "ff": case "right": step(1); break;
+      case "down": case "chdown": case "rew": case "left": step(-1); break;
+      case "ok": if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)} break;
+      case "menu": case "red": setRetro(!retro); if(retro) track("retro-on","Retro mode on"); break;
+      case "playpause": toggleSound(); if(retro) osdVolume(); break;
+      case "cc": case "green": toggleSubs(); break;
+      default: return false;
+    }
+    return true;
+  },
+  pause(){if(MODE==="yt"&&player) player.pauseVideo(); keepAwake(false)}, // the app went to the background
+  resume(){playingKey=null; tick()}, // back in front: rejoin the programme at this moment
+};
+if(TV_APP) track("app-tv-start","TV app opened");
 setTimeout(()=>{const g=document.querySelector(".gscroll");if(g)g.scrollLeft=0},0);
