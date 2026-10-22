@@ -17,7 +17,7 @@ async function liveNow(channelId) {
   if (!m) return null; // no player on the page: not live
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   if (!v.isLive || ps.status !== "OK" || ps.playableInEmbed !== true) return null;
-  return {id: v.videoId, t: roman(v.title).replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
+  return {id: v.videoId, t: roman(v.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
 }
 
 const LIVE = {}, report = [];

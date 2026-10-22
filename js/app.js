@@ -1,11 +1,13 @@
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
+// Titles, creator names and labels come from YouTube and fan playlists: escape them wherever they go into HTML
+const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}, esc=t=>String(t??"").replace(/[&<>"']/g,c=>ESC[c]);
 // Inside the OGTV TV app (Android TV, Fire TV): the app passes ?app=tv and tags its user agent. Sound needs no tap
 // there, the app is already full screen, and the remote reaches the page through window.ogtv (end of this file).
 const TV_APP=/[?&]app=tv\b/.test(location.search)||/OGTV-AndroidTV/.test(navigator.userAgent);
 if(TV_APP) document.documentElement.classList.add("tv-app");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
-{const n=+new URLSearchParams(location.search).get("ch")||window.OGTV_CH, i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
+{const m=document.querySelector('meta[name="ogtv-ch"]'), n=+new URLSearchParams(location.search).get("ch")||+(m&&m.content), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&Date.now()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
@@ -13,11 +15,11 @@ const onAir=s=>s.live?s.v.src+": "+s.v.t:s.v.t;
 
 function renderChannels(){
   const now=Date.now();
-  $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<h5 class="ch-group">${c.group}</h5>`:"";
+  $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<h5 class="ch-group">${esc(c.group)}</h5>`:"";
     return `${head}<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
       <span class="num">${c.n}</span>
-      <span style="min-width:0"><span class="nm"><strong>${c.name}</strong><em>${c.en}</em></span>
-      <span class="on">${badge(s)}${onAir(s)}</span></span></button>`}).join("");
+      <span style="min-width:0"><span class="nm"><strong>${esc(c.name)}</strong><em>${esc(c.en)}</em></span>
+      <span class="on">${badge(s)}${esc(onAir(s))}</span></span></button>`}).join("");
 }
 $("chlist").addEventListener("click",e=>{const b=e.target.closest(".ch");if(b)tune(+b.dataset.i)});
 
@@ -29,9 +31,9 @@ function renderGuide(){
   CHANNELS.forEach((c,i)=>{
     const lane=slotsBetween(c,a,b).map(s=>{const x=Math.max(s.start,a),y=Math.min(s.end,b);
       const on=now>=s.start&&now<s.end;
-      return `<button class="prog${on?' nowp':''}" data-i="${i}" style="left:${(x-a)/MIN*PX+1}px;width:${(y-x)/MIN*PX-3}px" title="${onAir(s).replace(/"/g,"&quot;")}">
-        <b>${badge(s)}${onAir(s)}</b><small>${fmt(s.start)}</small></button>`}).join("");
-    rows+=`<div class="grow${i===cur?" gcur":""}"${i===cur?' aria-current="true"':""}><div class="glabel">${c.n} ${c.name}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
+      return `<button class="prog${on?' nowp':''}" data-i="${i}" style="left:${(x-a)/MIN*PX+1}px;width:${(y-x)/MIN*PX-3}px" title="${esc(onAir(s))}">
+        <b>${badge(s)}${esc(onAir(s))}</b><small>${fmt(s.start)}</small></button>`}).join("");
+    rows+=`<div class="grow${i===cur?" gcur":""}"${i===cur?' aria-current="true"':""}><div class="glabel">${c.n} ${esc(c.name)}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
   });
   rows+=`<div class="nowline" style="left:${18+120+(now-a)/MIN*PX}px"></div>`;
   $("grid").innerHTML=rows;
@@ -219,7 +221,6 @@ $("maximize").addEventListener("click",toggleFullscreen);
    controls and cursor fade after a few idle seconds. */
 const isFull=()=>$("screen").classList.contains("pseudo-fs"); // the plain full-screen look (strip, banner, digits)
 const roomFull=()=>(document.fullscreenElement||document.webkitFullscreenElement)===$("room")||$("room").classList.contains("pseudo-fs"); // full screen in either look
-const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}, esc=t=>String(t).replace(/[&<>"]/g,c=>ESC[c]);
 let browse=cur, uiTimer=0, bannerTimer=0, digitsTimer=0;
 function wakeUI(strip){
   if(!isFull())return; const sc=$("screen");
@@ -239,7 +240,7 @@ const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view
 function renderStrip(smooth=true){
   const now=Date.now(), strip=$("strip"), mid=stripMid(), w=copyWidth();
   const row=copy=>CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
-    const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${c.group}</span>`:"";
+    const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${esc(c.group)}</span>`:"";
     return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
       <span class="sc-bar"><i style="width:${pct}%"></i></span></button>`}).join("");
@@ -392,18 +393,19 @@ function autoFull(){
 autoFull();
 $("screen").addEventListener("dblclick",toggleFullscreen);
 
+const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)+"&t="+sec+"s";
 function showCard(msg){
   const now=Date.now(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
   const card=$("card"); card.hidden=false;
   if(MODE==="yt"){ // interstitial between programmes
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
-      <h2>${onAir(nx)}</h2><p>${msg||catLabel(nx.v.cat)+" · "+LANG_LABEL[nx.v.lang]+" · starts at "+fmt(nx.start)}</p>
+      <h2>${esc(onAir(nx))}</h2><p>${esc(msg||catLabel(nx.v.cat)+" · "+LANG_LABEL[nx.v.lang]+" · starts at "+fmt(nx.start))}</p>
       <span class="count" id="count"></span>`;
   }else{
-    card.innerHTML=`<span class="kicker">On air now · ${catLabel(s.v.cat)} · ${LANG_LABEL[s.v.lang]}</span>
-      <h2>${s.v.t}</h2><p>${s.v.src}. Started at ${fmt(s.start)}, ends at ${fmt(s.end)}.</p>
-      <a class="watch" id="watch" href="https://www.youtube.com/watch?v=${s.v.id}&t=${off}s" target="_blank" rel="noopener">Watch from this moment on YouTube</a>`;
+    card.innerHTML=`<span class="kicker">On air now · ${esc(catLabel(s.v.cat))} · ${esc(LANG_LABEL[s.v.lang])}</span>
+      <h2>${esc(s.v.t)}</h2><p>${esc(s.v.src)}. Started at ${fmt(s.start)}, ends at ${fmt(s.end)}.</p>
+      <a class="watch" id="watch" href="${ytLink(s.v.id,off)}" target="_blank" rel="noopener">Watch from this moment on YouTube</a>`;
   }
 }
 
@@ -421,17 +423,17 @@ function tick(){
     $("nowTitle").textContent=onAir(s);
     const hh=h=>String(Math.floor(h)%24).padStart(2,"0")+":"+String(Math.round(h%1*60)).padStart(2,"0"); // 6.5 → 06:30
     const hours=s.part.from===0&&s.part.to===24?"":`: ${hh(s.part.from)}–${hh(s.part.to)}`; // all-day blocks need no hours
-    $("why").innerHTML=`<span>On air because</span><span class="chip">${s.part.label}${hours}</span>`
-      +(s.live?"":`<span class="chip">${catLabel(s.part.cat)}${s.part.tag?" · "+(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
+    $("why").innerHTML=`<span>On air because</span><span class="chip">${esc(s.part.label)}${hours}</span>`
+      +(s.live?"":`<span class="chip">${esc(catLabel(s.part.cat))}${s.part.tag?" · "+esc(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
-    $("next").innerHTML=s.live?`Live from <b>${s.v.src}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${onAir(nx)}`;
+    $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
     renderChannels();
   }
   $("nowTime").textContent=s.live?`LIVE · ${LANG_LABEL[s.v.lang]}`:`${fmt(s.start)} – ${fmt(s.end)} · ${LANG_LABEL[s.v.lang]}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
   if(MODE==="yt"&&ended){const c=$("count");if(c){const r=Math.ceil((s.end-now)/1000);c.textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")}}
-  if(MODE==="fallback"){const w=$("watch");if(w)w.href=`https://www.youtube.com/watch?v=${s.v.id}&t=${Math.floor((now-s.start)/1000)}s`}
+  if(MODE==="fallback"){const w=$("watch");if(w)w.href=ytLink(s.v.id,Math.floor((now-s.start)/1000))}
 }
 
 // About section numbers come from the data, so they stay right as channels and creators change
