@@ -1,0 +1,6 @@
+# Local media and tooling, never part of the site
+Videos/
+*.mp4
+node_modules/
+.DS_Store
+Thumbs.db
