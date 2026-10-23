@@ -322,15 +322,15 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:contrast(1.15)}
 .static::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.35))}
-/* The OGTV on the static is a rubber stamp: charcoal ink with a double-ruled frame, a slight hand tilt, worn grain in
+/* The OGTV on the static is a stamped watermark: translucent charcoal ink with a double-ruled frame, a slight hand tilt, worn grain in
    the ink, inked onto the picture (multiply); it lands with a quick press, a small overshoot, and settles */
 .static .ident{position:relative;z-index:1;font-size:clamp(2.2rem,8vw,4.6rem);color:#3b3942;display:inline-flex;padding:.2em .38em;
-  border:.07em solid currentColor;border-radius:.22em;rotate:-4deg;mix-blend-mode:multiply;opacity:.9;
+  border:.07em solid currentColor;border-radius:.22em;rotate:-4deg;mix-blend-mode:multiply;opacity:.42;
   -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 0 0 0 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 0 0 0 1.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   -webkit-mask-size:240px 240px;mask-size:240px 240px;animation:stamp .5s cubic-bezier(.2,.9,.3,1.2) .15s both}
 .static .ident::before{content:"";position:absolute;inset:.09em;border:.03em solid currentColor;border-radius:.15em;pointer-events:none} /* the inner rule */
-@keyframes stamp{0%{opacity:0;scale:1.7}55%{opacity:.9;scale:.97}78%{scale:1.015}100%{opacity:.9;scale:1}} /* pressed down onto the picture */
+@keyframes stamp{0%{opacity:0;scale:1.7}55%{opacity:.5;scale:.97}78%{scale:1.015}100%{opacity:.42;scale:1}} /* pressed into the picture, then left as a faint watermark */
 .static .ident .logo,.static .ident .logo-mark{color:#3b3942} /* the logo in a soft charcoal grey on the static */
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .bug-mark{width:40px;height:32px;color:var(--marigold);filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
