@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.thebharat.si/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/just-news/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/obJeNqSznnA/hqdefault.jpg</video:thumbnail_loc><video:title>Ab kabhi badtamizi nahin karega ye inphluensar! Aamir Shaukeen arrest</video:title>
-      <video:description>Ab kabhi badtamizi nahin karega ye inphluensar! Aamir Shaukeen arrest, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/obJeNqSznnA</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ypOhJK6AwxI/hqdefault.jpg</video:thumbnail_loc><video:title>NATO&apos;s Defence Dilemma: Why Its Top Member Is Looking To India As Russia Looms Large</video:title>
+      <video:description>NATO&apos;s Defence Dilemma: Why Its Top Member Is Looking To India As Russia Looms Large, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ypOhJK6AwxI</video:player_loc><video:duration>3600</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/obJeNqSznnA/hqdefault.jpg</video:thumbnail_loc><video:title>Ab kabhi badtamizi nahin karega ye inphluensar! Aamir Shaukeen arrest</video:title>
@@ -12,9 +12,9 @@
       <video:player_loc>https://www.youtube.com/embed/obJeNqSznnA</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/newsroom/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/VNE1mxg2XBI/hqdefault.jpg</video:thumbnail_loc><video:title>Bajaj Finance, now thinking like a bank</video:title>
-      <video:description>Bajaj Finance, now thinking like a bank, now on Newsroom, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/VNE1mxg2XBI</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/5CcxTp3PG24/hqdefault.jpg</video:thumbnail_loc><video:title>The fiber optics powering India’s AI play</video:title>
+      <video:description>The fiber optics powering India’s AI play, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/5CcxTp3PG24</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/purvaiya/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/LnLgxGN1Jng/hqdefault.jpg</video:thumbnail_loc><video:title>Ranchi: More Than Just a Capital City</video:title>
@@ -52,9 +52,9 @@
       <video:player_loc>https://www.youtube.com/embed/9CBBSaEoEE0</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/paisa/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/VNE1mxg2XBI/hqdefault.jpg</video:thumbnail_loc><video:title>Bajaj Finance, now thinking like a bank</video:title>
-      <video:description>Bajaj Finance, now thinking like a bank, now on Paisa, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/VNE1mxg2XBI</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/5CcxTp3PG24/hqdefault.jpg</video:thumbnail_loc><video:title>The fiber optics powering India’s AI play</video:title>
+      <video:description>The fiber optics powering India’s AI play, now on Paisa, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/5CcxTp3PG24</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/baatcheet/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/BV7QRw8wtjs/hqdefault.jpg</video:thumbnail_loc><video:title>How To Build An Unbreakable Mind &amp; Push Beyond Your Limits</video:title>
@@ -72,14 +72,14 @@
       <video:player_loc>https://www.youtube.com/embed/3ciRKaqTZ9M</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/khel/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/OaCRE46BpLA/hqdefault.jpg</video:thumbnail_loc><video:title>Karthikeyan Murali beats greatest talent in chess Yagiz Kaan Erdogmus</video:title>
-      <video:description>Karthikeyan Murali beats greatest talent in chess Yagiz Kaan Erdogmus, now on Khel, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/OaCRE46BpLA</video:player_loc><video:duration>1380</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KWmo11rmWzs/hqdefault.jpg</video:thumbnail_loc><video:title>The KING MASSACRE</video:title>
+      <video:description>The KING MASSACRE, now on Khel, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/KWmo11rmWzs</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/football/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/K8TiBKu3a-Y/hqdefault.jpg</video:thumbnail_loc><video:title>Jack Hinshelwood Rates His Premier League Goals for Brighton</video:title>
-      <video:description>Jack Hinshelwood Rates His Premier League Goals for Brighton, now on Football, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/K8TiBKu3a-Y</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/EjpJhlIkbKQ/hqdefault.jpg</video:thumbnail_loc><video:title>Match Highlights</video:title>
+      <video:description>Match Highlights, now on Football, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/EjpJhlIkbKQ</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/cricket-classics/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/GonKz9d_PFk/hqdefault.jpg</video:thumbnail_loc><video:title>37 SIXES in ONE Season 💥 Heinrich Klaasen’s Record-breaking Run</video:title>
@@ -87,9 +87,9 @@
       <video:player_loc>https://www.youtube.com/embed/GonKz9d_PFk</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/international-sports/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/OaCRE46BpLA/hqdefault.jpg</video:thumbnail_loc><video:title>Karthikeyan Murali beats greatest talent in chess Yagiz Kaan Erdogmus</video:title>
-      <video:description>Karthikeyan Murali beats greatest talent in chess Yagiz Kaan Erdogmus, now on International Sports, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/OaCRE46BpLA</video:player_loc><video:duration>1380</video:duration><video:publication_date>2026-10-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KWmo11rmWzs/hqdefault.jpg</video:thumbnail_loc><video:title>The KING MASSACRE</video:title>
+      <video:description>The KING MASSACRE, now on International Sports, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/KWmo11rmWzs</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-10-23T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/bhakti/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/i6ZPDxpR9MI/hqdefault.jpg</video:thumbnail_loc><video:title>Vo raja khatu da</video:title>
