@@ -80,11 +80,11 @@ function drawNoise(){
   const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=60+Math.random()*195|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
   nctx.putImageData(nimg,0,0);
 }
-function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false;
+function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false; staticSound.start();
   const id=$("ident"); id.style.animation="none"; void id.offsetWidth; id.style.animation=""; drawNoise()}
 function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
   const wait=Math.max(0,1200-(Date.now()-staticSince));
-  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true},wait)}
+  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop()},wait)}
 
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, playingId=null, ended=false, muted=true, skips=0, bufTimer=0;
@@ -144,7 +144,7 @@ function fallback(){
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;muted=!muted;muted?player.mute():player.unMute();
-  $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(muted) interlude.stop()}
+  $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(muted){interlude.stop(); staticSound.stop()}}
 /* Opening ident plays through by itself: OGTV forms, the bloom sounds as the iris opens, then the channel plays and
    its sound fades in. Browsers allow sound only once the visitor has done something (or has used the site before):
    a tap, click or key at any point in the ident lets it in, without skipping; with none the ident is silent and
@@ -321,8 +321,32 @@ const interlude=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),2200)}
   return {start,stop};
 })();
+/* The static's sound: a soft, high "no signal". A short bright crackle with a faint whistle gliding down, then a gentle
+   hiss that ebbs away while the static stays up; it fades out as the picture returns. Quiet, silent when muted,
+   follows the volume, and plays only where the browser allows sound. */
+const staticSound=(()=>{
+  let ac=null, out=null;
+  function start(){stop(); if(!AC||muted||!started)return;
+    try{const a=ac=new AC(); a.resume().then(()=>{if(a!==ac)return; if(a.state!=="running"){a.close(); ac=null; return}
+      const sr=a.sampleRate, t=a.currentTime+0.02, noise=a.createBuffer(1,sr*2,sr), d=noise.getChannelData(0);
+      for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+      const o=out=a.createGain(); o.gain.value=0.6*Math.max(0.05,vol/70); o.connect(a.destination);
+      const hiss=a.createBufferSource(), hp=a.createBiquadFilter(), lp=a.createBiquadFilter(), g=a.createGain();
+      hiss.buffer=noise; hiss.loop=true; hp.type="highpass"; hp.frequency.value=1200;
+      lp.type="lowpass"; lp.frequency.setValueAtTime(9000,t); lp.frequency.exponentialRampToValueAtTime(4500,t+1.2);
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.09,t+0.03); // bright crackle, then ebbing
+      g.gain.exponentialRampToValueAtTime(0.035,t+0.5); g.gain.exponentialRampToValueAtTime(0.008,t+5);
+      hiss.connect(hp); hp.connect(lp); lp.connect(g); g.connect(o); hiss.start(t);
+      const w=a.createOscillator(), wg=a.createGain(); w.frequency.setValueAtTime(2900,t); w.frequency.exponentialRampToValueAtTime(2300,t+0.7); // the whistle
+      wg.gain.setValueAtTime(0.0001,t); wg.gain.exponentialRampToValueAtTime(0.012,t+0.04); wg.gain.exponentialRampToValueAtTime(0.0001,t+0.9);
+      w.connect(wg); wg.connect(o); w.start(t); w.stop(t+1)}).catch(()=>{})}catch(e){}}
+  function stop(){const a=ac, o=out; ac=out=null; if(!a)return;
+    try{if(o){o.gain.cancelScheduledValues(a.currentTime); o.gain.setValueAtTime(o.gain.value,a.currentTime); o.gain.setTargetAtTime(0,a.currentTime,0.12)}}catch(e){}
+    setTimeout(()=>a.close().catch(()=>{}),800)}
+  return {start,stop};
+})();
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
-  if(muted){player.mute(); interlude.stop(); return} player.unMute(); player.playVideo(); checkSound()}
+  if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
