@@ -228,7 +228,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .retro-btn[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink);border-color:var(--marigold)}
 .vhs{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;display:none}
 .screen.retro .vhs{display:block;z-index:3} /* over the picture and the Coming up next card alike; controls, banner and strip stay above */
-.screen.retro .card.interlude{filter:blur(.4px) contrast(1.06)} /* the black card on tape: a touch soft, with a faint colour fringe */
+.screen.retro .card.interlude{filter:url(#crt) blur(.4px) contrast(1.06)} /* the black card on tape: a touch soft, with a faint colour fringe */
 .screen.retro .card.interlude h2,.screen.retro .card.interlude .count{text-shadow:-1px 0 rgba(255,70,70,.35),1px 0 rgba(70,200,255,.35)}
 .screen.retro #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg) blur(.45px)}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
@@ -325,6 +325,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* HBO-style intro static while a channel tunes in: bright fine snow, logo resolving out of it */
 .static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:contrast(1.15)}
+.screen.retro .static,.screen.retro .card{filter:url(#crt)} /* retro: the static and cards bend with the tube (see app.js); YouTube's video can't be warped by a page */
 .static::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.35))}
 /* The OGTV on the static is a plain, still watermark: translucent charcoal grey, blended into the picture (multiply),
    there from the first frame of the static, with no animation */

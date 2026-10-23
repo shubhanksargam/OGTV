@@ -324,6 +324,30 @@ const interlude=(()=>{
 /* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
    long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
    volume, and plays only where the browser allows sound. */
+/* Retro: the picture bends like a curved CRT tube. A barrel warp through an SVG displacement map: the centre stays, the
+   picture bulges, its edges bow outward and the corners fall away into the rim. The map is drawn to the screen's own size and redrawn when it changes;
+   retro CSS applies filter:url(#crt) to the layers the page draws itself (the static, Coming up next); browsers do not
+   let a page warp YouTube's cross-origin video, which keeps the tube's glass shading instead. */
+(()=>{
+  const NS="http://www.w3.org/2000/svg", svg=document.createElementNS(NS,"svg"), K=0.14; // K: how strongly it bulges
+  svg.setAttribute("width","0"); svg.setAttribute("height","0"); svg.setAttribute("aria-hidden","true"); svg.style.position="absolute";
+  const filter=document.createElementNS(NS,"filter"), map=document.createElementNS(NS,"feImage"), warp=document.createElementNS(NS,"feDisplacementMap");
+  filter.id="crt"; [["x","0"],["y","0"],["width","100%"],["height","100%"],["color-interpolation-filters","sRGB"]].forEach(([k,v])=>filter.setAttribute(k,v));
+  map.setAttribute("preserveAspectRatio","none"); map.setAttribute("result","map");
+  [["in","SourceGraphic"],["in2","map"],["xChannelSelector","R"],["yChannelSelector","G"]].forEach(([k,v])=>warp.setAttribute(k,v));
+  filter.append(map,warp); svg.append(filter); document.body.append(svg);
+  let W0=0,H0=0;
+  function build(W,H){ // each pixel: where to sample from, as a shift scaled into the red (x) and green (y) channels
+    const w=160, h=Math.max(2,Math.round(w*H/W)), c=document.createElement("canvas"); c.width=w; c.height=h;
+    const g=c.getContext("2d"), img=g.createImageData(w,h), d=img.data, scale=0.5*K*Math.max(W,H);
+    for(let j=0;j<h;j++) for(let i=0;i<w;i++){const u=i/(w-1)-.5, v=j/(h-1)-.5, r2=u*u+v*v, p=(j*w+i)*4;
+      d[p]=Math.round(255*(.5+u*K*(r2-.25)*W/scale)); d[p+1]=Math.round(255*(.5+v*K*(r2-.25)*H/scale)); d[p+2]=128; d[p+3]=255} // r2-.25: the middle of each edge stays on the rim, only the corners curve away
+    g.putImageData(img,0,0); const url=c.toDataURL();
+    map.setAttribute("href",url); map.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",url);
+    [["x",0],["y",0],["width",W],["height",H]].forEach(([k,v])=>map.setAttribute(k,v)); warp.setAttribute("scale",scale)}
+  if(window.ResizeObserver) new ResizeObserver(([e])=>{const W=Math.round(e.contentRect.width), H=Math.round(e.contentRect.height);
+    if(W&&H&&(W!==W0||H!==H0)){W0=W; H0=H; build(W,H)}}).observe($("screen"));
+})();
 const staticSound=(()=>{
   let ac=null, out=null;
   function start(){stop(); if(!AC||muted||!started||!retro)return; // only the retro TV hisses
