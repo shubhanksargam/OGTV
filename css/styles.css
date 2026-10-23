@@ -344,6 +344,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .card.interlude{animation:card-fade .8s ease both}
 .card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
 .card.interlude .kicker{animation-delay:.15s}.card.interlude h2{animation-delay:.45s}.card.interlude p{animation-delay:.8s}.card.interlude .count{animation-delay:1.1s}
+/* ...set in the brand's wide sans, all capitals, light and widely spaced, centred on black */
+.card.interlude{background:#000;align-items:center;text-align:center;gap:clamp(14px,2.4vh,22px)}
+.card.interlude .kicker{font:400 clamp(.6rem,1.05vw,.74rem)/1 "Unbounded",var(--body);letter-spacing:.42em;margin-right:-.42em;color:var(--marigold)}
+.card.interlude .kicker::after{content:"";display:block;width:2.4em;height:1px;margin:1.3em auto 0;background:currentColor;opacity:.55}
+.card.interlude h2{font:300 clamp(1.15rem,2.9vw,2.1rem)/1.3 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.06em;color:#f4f1ec;max-width:26ch}
+.card.interlude p{font:300 clamp(.58rem,.95vw,.7rem)/1.6 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.26em;color:rgba(244,241,236,.5);max-width:none}
+.card.interlude .count{font:300 clamp(1.5rem,3.2vw,2.4rem)/1 "Unbounded",var(--body);letter-spacing:.08em;color:rgba(244,241,236,.85);margin-top:.5em}
 @keyframes card-fade{from{opacity:0}to{opacity:1}}
 @keyframes card-in{from{opacity:0;transform:translateY(8px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){.card.interlude>*{animation-name:card-fade}}
