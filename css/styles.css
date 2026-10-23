@@ -354,6 +354,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .card.interlude p{font:300 clamp(.58rem,.95vw,.7rem)/1.6 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.26em;color:rgba(244,241,236,.5);max-width:none}
 .card.interlude .count{font:300 clamp(1.5rem,3.2vw,2.4rem)/1 "Unbounded",var(--body);letter-spacing:.08em;color:rgba(244,241,236,.85);margin-top:.5em}
 @keyframes card-fade{from{opacity:0}to{opacity:1}}
+.card.interlude.fading{animation:card-out .8s ease forwards} /* the next programme appears from behind it */
+@keyframes card-out{from{opacity:1}to{opacity:0}}
 @keyframes card-in{from{opacity:0;transform:translateY(8px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){.card.interlude>*{animation-name:card-fade}}
 

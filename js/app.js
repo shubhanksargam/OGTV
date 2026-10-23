@@ -105,8 +105,8 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); keepAwake(true); skips=0; retries=0}
-              else if(e.data===S.BUFFERING){if(started) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
+              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0}
+              else if(e.data===S.BUFFERING){if(started&&!handing) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED) keepAwake(false);
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
@@ -564,10 +564,17 @@ autoFull();
 $("screen").addEventListener("dblclick",toggleFullscreen);
 
 const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)+"&t="+sec+"s";
+// After Coming up next the new programme isn't announced with static: the card stays up while it loads, then fades
+// away once the picture is playing (or after 8 s at most), so the programme appears from behind it.
+let handing=false, handTimer=0;
+function handOver(){handing=true; clearTimeout(handTimer); handTimer=setTimeout(fadeCard,8000)}
+function fadeCard(){if(!handing)return; handing=false; clearTimeout(handTimer); const c=$("card"); c.classList.add("fading");
+  setTimeout(()=>{if(!c.classList.contains("fading"))return; c.hidden=true; c.classList.remove("fading")},850)}
 function showCard(msg){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
-  const card=$("card"); card.hidden=false; card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
+  handing=false; const card=$("card"); card.hidden=false; card.classList.remove("fading");
+  card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
   if(MODE==="yt"){ // interstitial between programmes
     if(!msg) interlude.start((s.end-now)/1000); // the jingle fills the gap
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
@@ -587,9 +594,10 @@ function tick(){
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey){
     if(playingKey&&reloadNow()){location.reload(); return}
+    const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; ended=false; interlude.stop(); // next programme: the jingle fades out
     const off=Math.floor((now-s.start)/1000);
-    if(MODE==="yt"&&player){$("card").hidden=true;if(started)showStatic(); // the ident covers the first tune-in
+    if(MODE==="yt"&&player){if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
