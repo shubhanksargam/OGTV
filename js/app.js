@@ -321,9 +321,9 @@ const interlude=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),2200)}
   return {start,stop};
 })();
-/* The static's sound: a soft, high "no signal". A short bright crackle with a faint whistle gliding down, then a gentle
-   hiss that ebbs away while the static stays up; it fades out as the picture returns. Quiet, silent when muted,
-   follows the volume, and plays only where the browser allows sound. */
+/* The static's sound: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
+   long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
+   volume, and plays only where the browser allows sound. */
 const staticSound=(()=>{
   let ac=null, out=null;
   function start(){stop(); if(!AC||muted||!started)return;
@@ -333,13 +333,12 @@ const staticSound=(()=>{
       const o=out=a.createGain(); o.gain.value=0.6*Math.max(0.05,vol/70); o.connect(a.destination);
       const hiss=a.createBufferSource(), hp=a.createBiquadFilter(), lp=a.createBiquadFilter(), g=a.createGain();
       hiss.buffer=noise; hiss.loop=true; hp.type="highpass"; hp.frequency.value=1200;
-      lp.type="lowpass"; lp.frequency.setValueAtTime(9000,t); lp.frequency.exponentialRampToValueAtTime(4500,t+1.2);
-      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.09,t+0.03); // bright crackle, then ebbing
-      g.gain.exponentialRampToValueAtTime(0.035,t+0.5); g.gain.exponentialRampToValueAtTime(0.008,t+5);
+      lp.type="lowpass"; lp.frequency.value=7000;
+      g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.06,t+0.03); // in at once, then steady
       hiss.connect(hp); hp.connect(lp); lp.connect(g); g.connect(o); hiss.start(t);
-      const w=a.createOscillator(), wg=a.createGain(); w.frequency.setValueAtTime(2900,t); w.frequency.exponentialRampToValueAtTime(2300,t+0.7); // the whistle
-      wg.gain.setValueAtTime(0.0001,t); wg.gain.exponentialRampToValueAtTime(0.012,t+0.04); wg.gain.exponentialRampToValueAtTime(0.0001,t+0.9);
-      w.connect(wg); wg.connect(o); w.start(t); w.stop(t+1)}).catch(()=>{})}catch(e){}}
+      const w=a.createOscillator(), wg=a.createGain(); w.frequency.value=2600; // the whistle, steady under the hiss
+      wg.gain.setValueAtTime(0.0001,t); wg.gain.exponentialRampToValueAtTime(0.008,t+0.04);
+      w.connect(wg); wg.connect(o); w.start(t)}).catch(()=>{})}catch(e){}}
   function stop(){const a=ac, o=out; ac=out=null; if(!a)return;
     try{if(o){o.gain.cancelScheduledValues(a.currentTime); o.gain.setValueAtTime(o.gain.value,a.currentTime); o.gain.setTargetAtTime(0,a.currentTime,0.12)}}catch(e){}
     setTimeout(()=>a.close().catch(()=>{}),800)}
