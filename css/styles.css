@@ -12,16 +12,17 @@
   --marigold-ink:#1d1206;
   --sindoor:#e5483a;     /* LIVE */
   --peacock:#3fb8a8;     /* rule chips */
-  --display:"Mukta", system-ui, sans-serif; /* channel names: the same bold Mukta as the full-screen panel */
-  --body:"Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display:"Unbounded", system-ui, -apple-system, "Segoe UI", sans-serif; /* one face for all text: the logo's wide sans */
+  --body:"Unbounded", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 html,body{background:var(--room);color:var(--ink)}
-body{font-family:var(--body);font-size:17px;line-height:1.45;
+body{font-family:var(--body);font-size:15px;line-height:1.5;font-weight:300;text-transform:uppercase;letter-spacing:.05em; /* all text: light, spaced capitals */
   padding-left:max(16px, env(safe-area-inset-left,0px));
   padding-right:max(16px, env(safe-area-inset-right,0px));
   padding-block:16px 40px}
 .wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
 button{font:inherit;color:inherit;cursor:pointer}
+button,select,input,textarea{text-transform:inherit;letter-spacing:inherit} /* form controls follow the capitals too */
 button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
 
 /* header */
@@ -30,9 +31,9 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* OGTV logo: the O is a TV screen with an on-air light; mark from the #ogmark symbol, word in Unbounded */
 .logo{display:inline-flex;align-items:center;gap:.1em;line-height:1;font-family:"Unbounded",var(--body);font-weight:700;letter-spacing:-.045em;color:var(--ink)}
 .logo-mark{width:1.05em;height:.84em;flex:none;color:var(--marigold)}
-.brand h1{font-size:2rem;margin:0;font-weight:700}
+.brand h1{font-size:2rem;margin:0;font-weight:500}
 .tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
-.clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:700}
+.clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:500}
 .clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
 
 /* main grid */
@@ -42,12 +43,12 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* Channel list toggle: Hide in the panel; a tab on the right edge brings it back */
 .remote-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .hide-list{display:inline-flex;align-items:center;gap:2px;min-height:36px;padding:0 10px 0 6px;border:1px solid var(--line);border-radius:999px;
-  background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;flex-direction:row-reverse}
+  background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:500;cursor:pointer;flex-direction:row-reverse}
 .hide-list:hover{color:var(--ink);border-color:var(--muted)}
 .show-list{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px;
   padding:14px 8px;border:1px solid var(--line);border-right:0;border-radius:12px 0 0 12px;background:var(--panel);color:var(--ink);cursor:pointer;
   box-shadow:-8px 0 24px rgba(0,0,0,.35)}
-.show-list span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:.85rem;letter-spacing:.08em}
+.show-list span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:500;font-size:.85rem;letter-spacing:.08em}
 .show-list:hover{background:var(--panel-2)}
 
 .tv{display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -108,7 +109,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @media (max-width:640px){.vfd{order:-1}.vfd-n{font-size:1.5rem}.vfd-name{font-size:1rem}}
 @media (prefers-reduced-motion:reduce){.vfd-name.scroll i{animation:none}}
 .knob-wrap{display:flex;flex-direction:column;align-items:center;gap:5px}
-.knob-wrap small{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#4a3520;text-shadow:0 1px 0 rgba(255,248,230,.5)}
+.knob-wrap small{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:#4a3520;text-shadow:0 1px 0 rgba(255,248,230,.5)}
 .knob{position:relative;width:clamp(40px,4.6vw,66px);aspect-ratio:1;border-radius:50%;border:0;padding:0;cursor:pointer;
   background:radial-gradient(circle at 50% 50%,#3b322b 0 46%,transparent 47%),repeating-conic-gradient(#1f1915 0 5deg,#3d342d 5deg 10deg);
   box-shadow:0 4px 8px rgba(0,0,0,.5),0 0 0 2px #1a1410,inset 0 1px 1px rgba(255,255,255,.25);
@@ -127,7 +128,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .vbars i{width:.22em;height:100%;background:#8dff9a;box-shadow:0 0 6px rgba(120,255,140,.8)}
 .knob:focus-visible{outline:2px solid var(--marigold);outline-offset:4px}
 .keys{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
-.key{min-height:34px;padding:0 4px;border:0;border-radius:5px;cursor:pointer;font:700 .68rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#3a2a18;
+.key{min-height:34px;padding:0 4px;border:0;border-radius:5px;cursor:pointer;font:500 .68rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:#3a2a18;
   background:linear-gradient(180deg,#fbf3e2,#e2d3b4 70%,#cdbb96);box-shadow:0 3px 0 #6e5a3c,0 4px 6px rgba(0,0,0,.35),inset 0 1px 0 #fff;
   transition:transform .08s,box-shadow .08s,background .2s}
 .key-wide{grid-column:1/-1}
@@ -221,7 +222,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   .rg-outer,.rg-inner{stroke-dashoffset:0}.start .intro-mark,.start .logo-word i{transform:none;opacity:1}.rg-blip,.iris-edge{display:none}}
 @keyframes blink{50%{opacity:.35}}
 /* Retro camcorder mode: warm VHS colour, scanlines, grain, tracking band and a VCR readout */
-.retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:700;letter-spacing:.06em;cursor:pointer}
+.retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:500;letter-spacing:.06em;cursor:pointer}
 .home-btn{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}.home-btn svg{color:var(--marigold)}.home-btn:hover{border-color:var(--marigold)}
 .retro-btn[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink);border-color:var(--marigold)}
 .vhs{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;display:none}
@@ -249,11 +250,11 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .fs:hover{background:rgba(0,0,0,.8)}
 /* Subtitles on/off, beside full screen; struck through when off */
 .cc{position:absolute;left:72px;bottom:14px;z-index:4;height:48px;min-width:48px;padding:0 12px;border-radius:999px;border:0;cursor:pointer;
-  background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.06em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  background:rgba(0,0,0,.55);color:#fff;font:500 .9rem/1 var(--body);letter-spacing:.06em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .cc:hover{background:rgba(0,0,0,.8)}
 /* Retro on the screen itself, only in full screen (the header has its own button) */
 .retro-fs{display:none;position:absolute;left:130px;bottom:14px;z-index:4;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
-  background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  background:rgba(0,0,0,.55);color:#fff;font:500 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .retro-fs:hover{background:rgba(0,0,0,.8)}
 .retro-fs[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink)}
 .screen:fullscreen .retro-fs,.screen:-webkit-full-screen .retro-fs,.screen.pseudo-fs .retro-fs{display:block;z-index:6;transition:bottom .3s ease,opacity .4s}
@@ -289,35 +290,35 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   opacity:0;transform:translateY(18px);transition:opacity .35s ease,transform .35s ease,bottom .35s ease}
 .screen.banner-on .banner{opacity:1;transform:none}
 .screen.strip-on .banner{bottom:calc(5vh + 190px)} /* above the buttons, which sit above the strip */
-.bn-n{font:700 clamp(2.6rem,5vw,4.4rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold);min-width:1.5em;text-align:center}
+.bn-n{font:500 clamp(2.6rem,5vw,4.4rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold);min-width:1.5em;text-align:center}
 .bn-body{display:flex;flex-direction:column;gap:6px;min-width:0}
-.bn-name{font-weight:700;font-size:clamp(1.1rem,2vw,1.45rem);color:#fff}
+.bn-name{font-weight:500;font-size:clamp(1.1rem,2vw,1.45rem);color:#fff}
 .bn-name em{font-style:normal;font-weight:500;color:var(--muted);margin-left:8px;font-size:.8em}
 .bn-title{font-size:clamp(1rem,1.7vw,1.25rem);color:#f4f2ee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bn-meta{font-size:clamp(.85rem,1.3vw,1rem);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.strip{position:absolute;left:0;right:0;bottom:0;display:flex;gap:14px;overflow-x:auto;padding:70px 4vw 5vh;scroll-snap-type:x proximity;scrollbar-width:none;
+.strip{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;overflow-x:auto;padding:70px 4vw 5vh;scroll-snap-type:x proximity;scrollbar-width:none;
   background:linear-gradient(transparent,rgba(8,7,12,.94) 50%);opacity:0;transform:translateY(34px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
 .strip::-webkit-scrollbar{display:none}
 .screen.strip-on .strip{opacity:1;transform:none}
 .screen.strip-on .sc{pointer-events:auto} /* only the cards catch clicks; the rest of the video closes the strip */
 .sc{flex:none;width:236px;scroll-snap-align:center;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;text-align:left;padding:14px 16px;border-radius:16px;
   border:1px solid rgba(255,255,255,.1);background:rgba(30,26,41,.88);color:#fff;font:inherit;cursor:pointer;transition:transform .2s ease,border-color .2s,background .2s}
-.sc-n{grid-row:1/3;align-self:center;font:700 1.9rem/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold)}
-.sc-name{font-weight:700;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sc-now{font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-n{grid-row:1/3;align-self:center;font:500 1.9rem/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold)}
+.sc-name{font-weight:500;font-size:.82rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-now{font-size:.66rem;line-height:1.3;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sc-bar{grid-column:1/3;height:4px;margin-top:8px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
 .sc-bar i{display:block;height:100%;background:var(--marigold)}
 .sc.on{border-color:var(--marigold);background:rgba(58,40,20,.9)}
 .sc.focus,.sc:hover{transform:translateY(-8px) scale(1.04);border-color:#fff;background:rgba(48,42,64,.96)}
 .sc:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.digits{position:absolute;top:5vh;right:4vw;font:700 clamp(3rem,7vw,6rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:#fff;
+.digits{position:absolute;top:5vh;right:4vw;font:500 clamp(3rem,7vw,6rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:#fff;
   text-shadow:0 6px 30px rgba(0,0,0,.6);opacity:0;transition:opacity .2s}
 .screen.digits-on .digits{opacity:1}
 @media (prefers-reduced-motion:reduce){.banner,.strip,.sc{transition:none}}
 /* LIVE badge on live channels */
-.livedot{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;background:var(--sindoor);color:#fff;border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px}
+.livedot{font-style:normal;font-size:.62rem;font-weight:500;letter-spacing:.08em;background:var(--sindoor);color:#fff;border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px}
 /* NEW badge: uploaded in the last 30 days */
-.new{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;background:var(--marigold);color:var(--marigold-ink);
+.new{font-style:normal;font-size:.62rem;font-weight:500;letter-spacing:.08em;background:var(--marigold);color:var(--marigold-ink);
   border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px}
 .prog .new{font-size:0;padding:0;width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:1px}
 /* HBO-style intro static while a channel tunes in: bright fine snow, logo resolving out of it */
@@ -330,18 +331,18 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .static .ident .logo,.static .ident .logo-mark{color:#3b3942} /* the logo in a soft charcoal grey on the static */
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .bug-mark{width:40px;height:32px;color:var(--marigold);filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
-.chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.chanbug{font-family:var(--display);font-weight:500;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
-  padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+  padding:12px 20px;font-weight:500;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
 [hidden]{display:none!important}
 .card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;
   padding:6% 8%;background:radial-gradient(120% 90% at 20% 10%,#3a2a4f 0%,#1a1424 55%,#0e0b14 100%)}
-.card .kicker{color:var(--marigold);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
-.card h2{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
+.card .kicker{color:var(--marigold);font-weight:500;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
+.card h2{font-family:var(--display);font-weight:500;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
 .card p{margin:0;color:var(--muted);max-width:52ch}
-.card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
+.card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:500;
   padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
-.card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:700}
+.card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:500}
 /* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
 .card.interlude{animation:card-fade .8s ease both}
 .card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
@@ -368,22 +369,22 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .why{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.92rem;color:var(--muted)}
 .chip{border:1px solid var(--peacock);color:var(--peacock);border-radius:999px;padding:2px 10px;font-size:.85rem;font-weight:500}
 .next{font-size:.98rem}
-.next b{color:var(--marigold);font-weight:700}
+.next b{color:var(--marigold);font-weight:500}
 
 /* remote / channel list */
 .remote{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px}
 #chlist{overflow-y:auto;max-height:min(68vh,560px);scrollbar-width:thin}
 /* Group headings in the channel list and the full-screen strip */
-.ch-group{margin:14px 8px 4px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);font-weight:700}
-.sc-group{flex:none;align-self:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--marigold);font-weight:700;margin:0 -2px}
-.remote h4{margin:6px 8px 6px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ch-group{margin:14px 8px 4px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);font-weight:500}
+.sc-group{flex:none;align-self:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold);font-weight:500;margin:0 -2px}
+.remote h4{margin:6px 8px 6px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .ch{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;text-align:left;background:transparent;
   border:0;border-radius:10px;padding:10px 10px;min-height:64px}
 .ch:hover{background:var(--panel-2)}
 .ch[aria-current="true"]{background:var(--panel-2);box-shadow:inset 3px 0 0 var(--marigold)}
-.ch .num{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.3rem;color:var(--marigold);text-align:center}
+.ch .num{font-variant-numeric:tabular-nums;font-weight:500;font-size:1.3rem;color:var(--marigold);text-align:center}
 .ch .nm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.ch .nm strong{font-family:var(--display);font-weight:700;font-size:1.1rem}
+.ch .nm strong{font-family:var(--display);font-weight:500;font-size:1.1rem}
 .ch .nm em{font-style:normal;color:var(--muted);font-size:.85rem}
 .ch .on{display:block;color:var(--muted);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hint{color:var(--muted);font-size:.85rem;margin:6px 8px 4px}
@@ -392,14 +393,14 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* guide */
 .guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 0 10px}
 .guide-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:0 18px 10px}
-.guide-head h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.35rem}
+.guide-head h4{margin:0;font-family:var(--display);font-weight:500;font-size:1.35rem}
 .guide-head span{color:var(--muted);font-size:.9rem}
 .gscroll{overflow-x:auto;position:relative}
 .grid{position:relative;padding:0 18px}
 .trow{display:flex;height:30px;position:relative;margin-left:120px}
 .tick{position:absolute;top:6px;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateX(-50%)}
 .grow{display:flex;align-items:stretch;height:58px;margin-bottom:6px}
-.glabel{width:112px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-weight:700;font-size:1rem;
+.glabel{width:124px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-weight:500;font-size:.68rem;line-height:1.25;letter-spacing:.02em;overflow-wrap:anywhere;
   position:sticky;left:0;background:var(--panel);z-index:2;padding-left:2px}
 .glane{position:relative;flex:none}
 .prog{position:absolute;top:0;bottom:0;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);
@@ -419,20 +420,20 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .note strong{color:var(--ink)}
 /* All-channels directory and channel-page intro: plain links and text search engines read */
 .directory{border-top:1px solid var(--line);margin-top:12px;padding:28px 2px 8px}
-.directory h2,.seo-intro h2{margin:0 0 16px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.directory h2,.seo-intro h2{margin:0 0 16px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 32px}
 .directory h3{margin:0 0 6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold)}
 .directory ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.directory a{color:var(--ink);text-decoration:none;font-weight:700}.directory a:hover{color:var(--marigold)}
+.directory a{color:var(--ink);text-decoration:none;font-weight:500}.directory a:hover{color:var(--marigold)}
 .directory li span{color:var(--muted);font-size:.88rem}
 .seo-intro{padding:20px 2px 0}.seo-intro p{margin:0;color:var(--muted);max-width:75ch;line-height:1.55}
 /* About, at the very bottom */
 .about{border-top:1px solid var(--line);margin-top:12px;padding:28px 2px 40px;display:flex;flex-direction:column;gap:20px}
 .about-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.about-head h2{margin:0;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.about-head h2{margin:0;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .about-logo{font-size:1.3rem;opacity:.9}
 .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px 32px}
-.about h3{margin:0 0 6px;font-size:1.02rem;color:var(--ink);font-weight:700}
+.about h3{margin:0 0 6px;font-size:1.02rem;color:var(--ink);font-weight:500}
 .about p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55;max-width:60ch}
 .about a{color:var(--marigold)}.about a:hover{color:#ffc27a}
 .about .credit{border-top:1px solid var(--line);padding-top:16px;font-size:.82rem;letter-spacing:.04em;color:var(--muted);opacity:.85}
@@ -483,9 +484,9 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app #keyFs,.tv-app #keyRetro{display:none!important}
 /* Questions on the home page */
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
-.faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .faq details{border-top:1px solid var(--line);padding:10px 0}
-.faq summary{cursor:pointer;font-weight:700;color:var(--ink);list-style-position:outside}
+.faq summary{cursor:pointer;font-weight:500;color:var(--ink);list-style-position:outside}
 .faq summary:focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
 .faq details p{margin:8px 0 0;color:var(--muted);max-width:75ch;line-height:1.55}
 /* Phones: size full screen to the visible area (Safari's bars don't count), and the one-time iPhone tip */
