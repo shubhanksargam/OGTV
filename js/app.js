@@ -24,7 +24,8 @@ function renderChannels(){
 $("chlist").addEventListener("click",e=>{const b=e.target.closest(".ch");if(b)tune(+b.dataset.i)});
 
 function renderGuide(){
-  const now=tvNow(), a=Math.floor(now/(30*MIN))*30*MIN, b=a+3*HOUR, PX=6; // 6px per minute
+  const now=tvNow(), a=Math.floor(now/(30*MIN))*30*MIN, b=a+3*HOUR, g=document.querySelector(".gscroll");
+  const PX=Math.max(300,(g&&g.clientWidth||960)-36-120)/60; // one hour fills the visible guide; the rest of the 3 hours scrolls
   const W=(b-a)/MIN*PX;
   let ticks="";for(let t=a;t<=b;t+=30*MIN) ticks+=`<span class="tick" style="left:${(t-a)/MIN*PX}px">${fmt(t)}</span>`;
   let rows=`<div class="trow" style="width:${W}px">${ticks}</div>`;
@@ -41,6 +42,8 @@ function renderGuide(){
 // The guide marks the channel you're on; tuning moves the mark without redrawing the guide
 function markGuide(){document.querySelectorAll("#grid .grow").forEach((r,k)=>{r.classList.toggle("gcur",k===cur); k===cur?r.setAttribute("aria-current","true"):r.removeAttribute("aria-current")})}
 $("grid").addEventListener("click",e=>{const b=e.target.closest(".prog");if(b)tune(+b.dataset.i)});
+let guideW=0, guideT=0; // keep one hour to a screen as the window changes
+addEventListener("resize",()=>{clearTimeout(guideT); guideT=setTimeout(()=>{const g=document.querySelector(".gscroll"); if(g&&g.clientWidth!==guideW){guideW=g.clientWidth; renderGuide()}},150)});
 
 // A channel counts as watched after 10 s on it, so flicking past doesn't inflate it
 let watchTimer=0;
