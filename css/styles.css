@@ -361,7 +361,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 
 .now{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
 .now-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
-.now h3{margin:0;font-size:1.3rem;line-height:1.25;text-wrap:balance;min-width:0}
+.now h3{margin:0;font:400 1.05rem/1.35 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.05em;text-wrap:balance;min-width:0} /* the programme's title in the brand's spaced capitals, like All channels */
 .meta{color:var(--muted);font-size:.95rem;font-variant-numeric:tabular-nums}
 .bar{height:8px;background:var(--panel-2);border-radius:99px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--marigold);width:0}
