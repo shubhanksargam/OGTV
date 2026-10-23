@@ -321,12 +321,12 @@ const interlude=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),2200)}
   return {start,stop};
 })();
-/* The static's sound: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
+/* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
    long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
    volume, and plays only where the browser allows sound. */
 const staticSound=(()=>{
   let ac=null, out=null;
-  function start(){stop(); if(!AC||muted||!started)return;
+  function start(){stop(); if(!AC||muted||!started||!retro)return; // only the retro TV hisses
     try{const a=ac=new AC(); a.resume().then(()=>{if(a!==ac)return; if(a.state!=="running"){a.close(); ac=null; return}
       const sr=a.sampleRate, t=a.currentTime+0.02, noise=a.createBuffer(1,sr*2,sr), d=noise.getChannelData(0);
       for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
@@ -466,7 +466,7 @@ document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=true; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")!=="0"}catch(e){} // every visit and channel page opens in retro; turning it off lasts for this tab only
-function setRetro(on){retro=on; $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
+function setRetro(on){retro=on; if(!on) staticSound.stop(); $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd();
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
 function osd(){if(!retro)return; const d=new Date(tvNow()+IST), p=n=>String(n).padStart(2,"0");
