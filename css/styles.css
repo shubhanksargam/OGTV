@@ -225,7 +225,9 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .home-btn{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}.home-btn svg{color:var(--marigold)}.home-btn:hover{border-color:var(--marigold)}
 .retro-btn[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink);border-color:var(--marigold)}
 .vhs{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;display:none}
-.screen.retro .vhs{display:block}
+.screen.retro .vhs{display:block;z-index:3} /* over the picture and the Coming up next card alike; controls, banner and strip stay above */
+.screen.retro .card.interlude{filter:blur(.4px) contrast(1.06)} /* the black card on tape: a touch soft, with a faint colour fringe */
+.screen.retro .card.interlude h2,.screen.retro .card.interlude .count{text-shadow:-1px 0 rgba(255,70,70,.35),1px 0 rgba(70,200,255,.35)}
 .screen.retro #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg) blur(.45px)}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
   repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
