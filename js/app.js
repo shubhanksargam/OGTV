@@ -333,9 +333,21 @@ const interlude=(()=>{
   // starting an interlude costs next to nothing: making an AudioContext and its reverb took a visible ~0.2 s.
   let ctx=null, chain=null, noise=null, master=null, pump=0, run=0;
   function warm(){if(!AC||ctx)return; try{ctx=new AC(); chain=identOut(ctx,0.35); noise=noiseBuf(ctx)}catch(e){ctx=null}}
-  function start(sec){stop(); if(!AC||muted||sec<6)return; warm(); if(!ctx)return; const me=++run, a=ctx;
+  // Crackle-free: synthesising dozens of voices live while the next video loads can outrun the audio thread, which
+  // clicks. So ~40 s before a programme ends, the coming gap's music is rendered in the background (prep, from the
+  // video's remaining time) and the gap just plays that clip. If it isn't ready, or the gap turns out more than 2 s
+  // different, the music is made live as before.
+  let ready=null, prepping=0;
+  function prep(sec){if(!window.OfflineAudioContext||!AC||sec<6||prepping||ready&&Math.abs(ready.sec-sec)<1)return; warm(); if(!ctx)return;
+    try{const sr=ctx.sampleRate, oac=new OfflineAudioContext(2,Math.ceil((sec+0.5)*sr),sr), {out,verb}=identOut(oac,0.35), m=oac.createGain(), p=prepping=sec;
+      m.connect(out); session(oac,0.05,sec,m,verb,true).ahead(Infinity);
+      oac.startRendering().then(buf=>{if(prepping===p) ready={sec,buf}}).catch(()=>{}).then(()=>{if(prepping===p) prepping=0})}catch(e){prepping=0}}
+  function start(sec){stop(); if(!AC||muted||sec<6){ready=null; return} warm(); if(!ctx)return; const me=++run, a=ctx;
+    const clip=ready&&Math.abs(ready.sec-sec)<=2?ready.buf:null; ready=null;
     a.resume().then(()=>{if(me!==run||a.state!=="running")return;
       const level=Math.max(0.05,vol/70), m=master=a.createGain(), t=a.currentTime+0.1;
+      if(clip){const src=a.createBufferSource(); src.buffer=clip; m.gain.setValueAtTime(level,t); src.connect(m); m.connect(a.destination); src.start(t); // the rendered gap
+        setTimeout(()=>{if(me===run) stop()},(sec+4)*1000); return}
       m.gain.setValueAtTime(0,t); m.gain.linearRampToValueAtTime(level,t+0.6); m.connect(chain.out); // fades in with the bloom
       const s=session(a,t,sec,m,chain.verb,true,noise);
       const go=()=>{if(me!==run)return; if(s.ahead(document.hidden?Infinity:a.currentTime+3)) pump=setTimeout(go,500)}; go(); // a few bars ahead; all at once in a hidden tab
@@ -346,7 +358,7 @@ const interlude=(()=>{
   // The standard piece, rendered offline with its natural ending (for an audio file)
   function render(sr=44100){const sec=4+15*BAR+0.5, oac=new OfflineAudioContext(2,Math.ceil((sec+4)*sr),sr), {out,verb}=identOut(oac,0.35), m=oac.createGain();
     m.connect(out); session(oac,0.05,sec,m,verb,false).ahead(Infinity); return oac.startRendering()}
-  return {start,stop,warm,render,plan};
+  return {start,stop,warm,prep,render,plan};
 })();
 /* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
    long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
@@ -614,9 +626,12 @@ function showCard(msg){
   }
 }
 
+let prepKey=null; // the programme whose closing gap's music has been prepared
 function tick(){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
+  if(MODE==="yt"&&player&&!ended&&!s.live&&prepKey!==key&&!muted) try{const d=player.getDuration(), c=player.getCurrentTime(); // 40 s from the end:
+    if(d>0&&d-c<40&&d-c>8){prepKey=key; interlude.prep((s.end-now)/1000-(d-c))}}catch(e){} // render the coming gap's music
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey){
