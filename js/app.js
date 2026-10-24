@@ -113,8 +113,8 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){rejoin();hideStatic(); applySubs(); videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0}
-              else if(e.data===S.BUFFERING){if(started&&!handing) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
+              if(e.data===S.PLAYING){rejoin();hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+              else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now()}
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
@@ -127,8 +127,8 @@ let wakeLock=null, wantAwake=false;
 // Pause and play: from the page (Space or K), a TV remote, the phone's or a Bluetooth speaker's play/pause button or
 // the lock screen, which all reach the video. OGTV is TV, so playing again rejoins the channel where it is now, not
 // where it was paused.
-let pausedAt=0;
-function rejoin(){if(!pausedAt)return; pausedAt=0; try{const s=slotAt(CHANNELS[cur],tvNow()); if(s.live||!player)return;
+let pausedAt=0, resumedAt=0, subsFor=null;
+function rejoin(){if(!pausedAt)return; const away=Date.now()-pausedAt; pausedAt=0; resumedAt=Date.now(); if(away<15e3)return; try{const s=slotAt(CHANNELS[cur],tvNow()); if(s.live||!player)return; // a quick pause just carries on
   const off=(tvNow()-s.start)/1000; if(Math.abs(player.getCurrentTime()-off)>4) player.seekTo(off,true)}catch(e){}}
 function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=player.getPlayerState()}catch(e){return}
   if(st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING){player.pauseVideo(); pausedAt=Date.now()}
@@ -463,7 +463,7 @@ $("hideList").addEventListener("click",()=>setList(true));
 let subs=false; try{localStorage.removeItem("ogtv-subs"); subs=localStorage.getItem("ogtv-cc")==="on"}catch(e){} // old key saved "on" for everyone
 function applySubs(){if(MODE!=="yt"||!player)return;
   try{subs?player.loadModule("captions"):(player.setOption("captions","track",{}),player.unloadModule("captions"))}catch(e){}}
-function setSubs(on){subs=on; $("cc").setAttribute("aria-pressed",on); $("keyCc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
+function setSubs(on){subsFor=playingId; subs=on; $("cc").setAttribute("aria-pressed",on); $("keyCc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
   applySubs()}
 const toggleSubs=()=>{setSubs(!subs); try{localStorage.setItem("ogtv-cc",subs?"on":"off")}catch(e){} if(subs) track("subs-on","Subtitles on")};
 $("cc").addEventListener("click",toggleSubs);
