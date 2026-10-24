@@ -125,11 +125,10 @@ window.onYouTubeIframeAPIReady=()=>{
 // taken again on return. Browsers without Wake Lock simply behave as before.
 let wakeLock=null, wantAwake=false;
 // Pause and play: from the page (Space or K), a TV remote, the phone's or a Bluetooth speaker's play/pause button or
-// the lock screen, which all reach the video. OGTV is TV, so playing again rejoins the channel where it is now, not
-// where it was paused.
+// the lock screen, which all reach the video. Play is instant: it carries on exactly where it paused (seeking to the
+// channel's moment made the video reload for a second or two); the channel catches up at the next programme change.
 let pausedAt=0, resumedAt=0, subsFor=null;
-function rejoin(){if(!pausedAt)return; const away=Date.now()-pausedAt; pausedAt=0; resumedAt=Date.now(); if(away<15e3)return; try{const s=slotAt(CHANNELS[cur],tvNow()); if(s.live||!player)return; // a quick pause just carries on
-  const off=(tvNow()-s.start)/1000; if(Math.abs(player.getCurrentTime()-off)>4) player.seekTo(off,true)}catch(e){}}
+function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resumed: no static while it picks up
 function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(!ended){player.pauseVideo(); pausedAt=Date.now()}}
 function playNow(){if(MODE!=="yt"||!player||ended)return; rejoin(); player.playVideo()}
 function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=player.getPlayerState()}catch(e){return}
