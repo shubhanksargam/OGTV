@@ -235,7 +235,15 @@ primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the chann
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
-runIdent();
+// The intro waits on its first frame behind a play button (the TV app starts by itself). Pressing it (a tap or click
+// anywhere on the intro, Enter or Space) is the viewer's go-ahead for sound on every device and browser, so the intro
+// plays with its music and the channel's sound fades in after it.
+function begin(e){const st=$("start"); if(!st.classList.contains("wait"))return;
+  if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
+  st.classList.remove("wait"); primed=true; if(identAc) identAc.resume().catch(()=>{});
+  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
+  if(!TV_APP) track("play","Play pressed"); runIdent()}
+if(TV_APP) begin(); else {$("start").addEventListener("click",begin); addEventListener("keydown",begin); $("playBtn").focus({preventScroll:true})}
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
@@ -320,7 +328,11 @@ function checkSound(){ // refused (muted again or paused by the browser): carry 
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
 // Sound refused after the ident: the first tap or key turns it on (during the ident, the ident handles it)
 let soundTapAt=0;
-["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(!started||soundTapped)return; soundTapped=true; if(muted){soundTapAt=Date.now(); setSound(true)}},true));
+// (Sound controls and the M key are left to toggle it themselves; turning it on here as well switched it straight off)
+const SOUND_CONTROLS="#sound,#keyMute,#knobVol";
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,e=>{if(!started||soundTapped)return;
+  if(e.key==="m"||e.key==="M"||(e.target.closest&&e.target.closest(SOUND_CONTROLS)))return;
+  soundTapped=true; if(muted){soundTapAt=Date.now(); setSound(true)}},true));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
 // In retro mode full screen shows the whole TV set, which works just as it does in the page; otherwise the screen alone

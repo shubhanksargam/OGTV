@@ -199,6 +199,17 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .start.open .hud{animation:hud-out 1.3s cubic-bezier(.5,0,.3,1) forwards}
 .start.open .iris-edge{animation:iris-edge 1.5s cubic-bezier(.6,0,.2,1) .1s forwards}
 .start.out{animation:intro-out .4s ease forwards} /* skipped */
+/* The intro waits on its first frame behind a play button; pressing it plays the intro with its music */
+.start.wait,.start.wait *,.start.wait *::before,.start.wait *::after{animation-play-state:paused!important}
+.start.wait{cursor:pointer}.start.wait .hud{visibility:hidden}
+.play-btn{display:none}
+.start.wait .play-btn{display:grid;place-items:center;position:absolute;left:50%;top:46%;translate:-50% -50%;z-index:2;width:clamp(78px,14vmin,118px);aspect-ratio:1;padding:0;
+  border-radius:50%;border:1px solid rgba(242,160,61,.55);background:radial-gradient(closest-side,rgba(242,160,61,.16),rgba(242,160,61,.04) 70%,transparent);
+  color:var(--marigold);cursor:pointer;box-shadow:0 0 44px rgba(242,160,61,.18),inset 0 0 18px rgba(242,160,61,.12);transition:scale .2s ease,border-color .2s ease;
+  animation:play-breathe 2.6s ease-in-out infinite!important;animation-play-state:running!important}
+.play-btn svg{width:38%;height:38%;margin-left:9%;fill:currentColor;filter:drop-shadow(0 0 8px rgba(242,160,61,.55))}
+.start.wait .play-btn:hover,.start.wait .play-btn:focus-visible{border-color:rgba(242,160,61,.95);scale:1.05;outline:none}
+@keyframes play-breathe{50%{box-shadow:0 0 72px rgba(242,160,61,.32),inset 0 0 24px rgba(242,160,61,.2);border-color:rgba(242,160,61,.85)}}
 @keyframes intro-fade{to{opacity:1}}
 @keyframes grid-run{to{background-position:0 64px}}
 @keyframes horizon{to{transform:scaleX(1)}}
