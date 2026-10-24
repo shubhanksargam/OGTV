@@ -78,9 +78,13 @@ addEventListener("keydown",e=>{
 const noise=$("noise"), nctx=noise.getContext("2d"), nimg=nctx.createImageData(noise.width,noise.height);
 const stillNoise=matchMedia("(prefers-reduced-motion: reduce)").matches;
 let staticOn=false, staticSince=0, staticRAF=0;
-function drawNoise(){
-  if(staticOn&&!stillNoise) staticRAF=requestAnimationFrame(drawNoise);
-  const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=60+Math.random()*195|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
+// The snow always moves: every frame, or ~8 frames a second under Reduce Motion (common on iPhones, where a single
+// still frame looked frozen). Its contrast is in the pixels, not a CSS filter, which iOS Safari can fail to repaint.
+let noiseAt=0;
+function drawNoise(ts){
+  if(staticOn) staticRAF=requestAnimationFrame(drawNoise);
+  if(stillNoise&&ts&&ts-noiseAt<120) return; noiseAt=ts||0;
+  const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=50+Math.random()*200|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
   nctx.putImageData(nimg,0,0);
 }
 function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false; staticSound.start();
