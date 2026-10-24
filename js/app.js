@@ -113,10 +113,10 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){rejoin();remote.sync(true);hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+              if(e.data===S.PLAYING){rejoin();remote.sync(true);$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
               else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
-              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.sync(false)}
+              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.sync(false); $("set").classList.add("idle")}
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
@@ -139,7 +139,7 @@ function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=pla
 // play and pause, and the buttons are answered here (play, pause; next and previous change channel). The lock screen
 // shows the programme and channel.
 const remote=(()=>{
-  const ms=navigator.mediaSession; if(!ms||TV_APP) return {sync(){},meta(){}};
+  const ms=navigator.mediaSession; if(!ms||TV_APP) return {sync(){},meta(){},prime(){}};
   const el=new Audio("/audio/silence.mp3?v=1"); el.loop=true; el.preload="auto"; el.setAttribute("playsinline","");
   const act=(k,fn)=>{try{ms.setActionHandler(k,fn)}catch(e){}};
   act("play",()=>{playNow(); sync(true)}); act("pause",()=>{pauseNow(); sync(false)}); act("stop",()=>{pauseNow(); sync(false)});
@@ -148,9 +148,15 @@ const remote=(()=>{
   function sync(on){if(on){if(el.paused) el.play().catch(()=>{}); ms.playbackState="playing"} else {el.pause(); ms.playbackState="paused"}}
   function meta(title,channel){try{ms.metadata=new MediaMetadata({title,artist:channel,album:"OGTV",
     artwork:[{src:"/img/apple-touch-icon.png",sizes:"180x180",type:"image/png"}]})}catch(e){}}
-  // A track can only start after the viewer has touched the page; take over on the first touch while the channel plays
-  ["pointerup","keydown"].forEach(ev=>addEventListener(ev,()=>{try{if(MODE==="yt"&&player&&player.getPlayerState()===YT.PlayerState.PLAYING) sync(true)}catch(e){}},true));
-  return {sync,meta};
+  // A track can only start after a touch on the page itself (a touch on the video lands in YouTube's frame, not here).
+  // So the first touch, click or key anywhere on the page, the ident included, unlocks it (play, then pause unless the
+  // channel is playing); from then on it follows the channel by itself and the buttons come here straight away.
+  let unlocked=false;
+  const playing=()=>{try{return MODE==="yt"&&player&&player.getPlayerState()===YT.PlayerState.PLAYING}catch(e){return false}};
+  function prime(){if(unlocked){if(playing()) sync(true); return}
+    el.play().then(()=>{unlocked=true; if(playing()) ms.playbackState="playing"; else el.pause()}).catch(()=>{})}
+  ["pointerup","touchend","click","keydown"].forEach(ev=>addEventListener(ev,prime,true));
+  return {sync,meta,prime};
 })();
 async function keepAwake(on){wantAwake=on;
   try{if(on&&!wakeLock&&navigator.wakeLock&&document.visibilityState==="visible"){wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{wakeLock=null})}
@@ -294,7 +300,7 @@ const staticSound=(()=>{
   return {start,stop};
 })();
 function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
-  if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
+  if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound(); remote.prime()}
 function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
@@ -546,7 +552,7 @@ function showCard(msg){
   handing=false; const card=$("card"); card.hidden=false; card.classList.remove("fading");
   card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
   if(MODE==="yt"){ // interstitial between programmes
-    if(!msg){clearTimeout(bannerTimer); $("screen").classList.remove("banner-on")} // the channel banner never covers Coming up next
+    if(!msg){clearTimeout(bannerTimer); $("screen").classList.remove("banner-on"); $("set").classList.add("idle")} // the TV's red light is off between programmes // the channel banner never covers Coming up next
     if(!msg) interlude.start((s.end-now)/1000); // the jingle fills the gap
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
       <h2>${esc(onAir(nx))}</h2><p>${esc(msg||catLabel(nx.v.cat)+" · "+LANG_LABEL[nx.v.lang]+" · starts at "+fmt(nx.start))}</p>

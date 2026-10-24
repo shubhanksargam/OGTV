@@ -136,7 +136,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .key:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
 .grille{display:none;flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
   box-shadow:inset 0 2px 4px rgba(0,0,0,.45)}
-.led{width:8px;height:8px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 6px #ff4a3a,0 0 14px rgba(255,74,58,.6)}
+.led{width:8px;height:8px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 6px #ff4a3a,0 0 14px rgba(255,74,58,.6);transition:background .3s,box-shadow .3s}
+.set.idle .led{background:#5a2b25;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)} /* paused or between programmes: the light goes out */
 @media (max-width:640px){
   .set.on .set-face{flex-direction:column}
   .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{display:none} /* too small a tube for the date */
