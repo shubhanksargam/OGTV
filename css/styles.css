@@ -145,6 +145,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   .set.on .grille{display:none}
   .knob-wrap{flex-direction:column;gap:4px}.knob{width:40px} /* labels under the knobs, so all three sit in one row */
   .knob-wrap small{font-size:.52rem;letter-spacing:.14em}
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .knob-wrap{margin-top:10px} /* the knobs sit a little lower on the phone panel */
   .grille{min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
 }
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
