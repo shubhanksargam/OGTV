@@ -228,6 +228,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* the black card on tape: a faint colour fringe on the title (no filter on the card, which made its animation stutter) */
 .screen.retro .card.interlude h2,.screen.retro .card.interlude .count{text-shadow:-1px 0 rgba(255,70,70,.35),1px 0 rgba(70,200,255,.35)}
 .screen.retro #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg) blur(.45px)}
+/* The retro mode knob's settings, each peeling off one more effect: Steady drops the tracking band that sweeps down the
+   picture, Tinted drops the lines and grain but keeps the tape colour and contrast, Clean drops the colour too, Quiet
+   also silences the static (in app.js) */
+/* Steady is the default. While Coming up next is on screen the TV always shows Full, whatever the knob says */
+.screen.retro.fx-steady:not(:has(> .card.interlude:not([hidden]))) .vhs::after{display:none}
+.screen.retro.fx-nolines:not(:has(> .card.interlude:not([hidden]))) .vhs{display:none}
+.screen.retro.fx-clean:not(:has(> .card.interlude:not([hidden]))) #yt{filter:none}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
   repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
   radial-gradient(110% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
@@ -483,7 +490,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* TV app (Android TV, Fire TV): no pointer, so no cursor and none of the click-only buttons; the remote does it all */
 .tv-app,.tv-app *{cursor:none!important}
 .tv-app,.tv-app body{overflow:hidden;scrollbar-width:none}.tv-app ::-webkit-scrollbar{display:none} /* the room covers the page; no page scrollbar at the edge */
-.tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app #keyFs,.tv-app #keyRetro{display:none!important}
+.tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app #keyFs,.tv-app #modeWrap{display:none!important}
 /* Questions on the home page */
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
 .faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}

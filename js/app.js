@@ -212,160 +212,35 @@ function bloomNotes(ac,t){
    out when the next programme starts, keeps quiet when muted, follows the volume, comes round again after a short
    breath if the gap is long, and plays only where the browser allows sound. */
 const interlude=(()=>{
-  const hz=m=>440*Math.pow(2,(m-69)/12);
-  /* OGTV Interlude, D major, 85⅓ BPM. A 16-bar score: bars 1–2 are the intro bloom; a felt-piano theme (A F# E D, the
-     glint's notes walking home) over pads moving Dadd9 Bm11 Gmaj9 Asus2 | Dadd9 F#m7 Gmaj9 A6sus, an arpeggio bed,
-     ping-pong echo and a sub. Hans Zimmer colours carry it: a low drone, a soft ticking clock, a low-string ostinato
-     swelling into a riser, one deep braam with a boom at the lift and an organ glow; then it thins out and lands
-     home on the bloom.
-     It plays for exactly the length of the gap: the opening bloom first, the theme cycling as long as needed, and
-     the settle and closing bloom placed so the music fades out as the next programme starts. A ~46 s gap plays the
-     16 bars as written. Bars are scheduled a few seconds ahead, a few at a time, so nothing stalls the page. */
-  const BEAT=60/(256/3), BAR=BEAT*4, SIX=BEAT/4;
-  const CHORDS=[[0,2,[50,54,57,64,69],38],[2,2,[47,54,57,62,64],35],[4,2,[43,50,54,57,59],31],[6,2,[45,52,57,59,62],33],
-    [8,2,[50,54,57,64,69],38],[10,2,[49,54,57,61,64],30],[12,2,[43,50,54,57,59],31],[14,1,[45,52,54,57,62],33],[15,1,[50,54,57,64,69],38]]; // [bar, bars, pad, bass]
-  const THEME={2:[[0,69,.9],[1,66,.7],[2,64,.75],[4,62,.85],[8,66,.6],[10,64,.6],[11,62,.55],[12,59,.7]], // bar: [eighth, note, velocity]
-    4:[[0,71,.85],[1,69,.65],[2,66,.7],[4,62,.8],[8,69,.6],[10,66,.6],[12,64,.65]],
-    6:[[0,69,.85],[1,64,.6],[2,62,.65],[4,59,.75],[8,64,.6],[9,66,.6],[10,69,.7],[12,74,.8]],
-    8:[[0,74,.9],[1,69,.7],[2,66,.7],[4,64,.75],[6,62,.6],[8,69,.65],[10,66,.6],[11,64,.55],[12,62,.7]],
-    10:[[0,73,.85],[1,69,.65],[2,66,.65],[4,64,.75],[8,66,.6],[10,64,.55],[12,61,.65]],
-    12:[[0,71,.75],[2,69,.6],[4,66,.6],[10,62,.55]], 14:[[0,69,.7],[2,66,.55],[4,64,.5]], 15:[[0,62,.7],[0,74,.35]]};
-  const chordOf=b=>CHORDS.find(([s,n])=>b>=s&&b<s+n);
-  const noiseBuf=ac=>{const b=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate), d=b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; return b};
-  // Which score bars to play, end to end, to fill sec seconds with the closing bloom starting about 4 s before the end
-  function plan(sec){
-    const L=Math.max(1,Math.floor((sec-4)/BAR)+1); if(L===1) return [0];
-    const head=L>=3?[0,1]:[0], tail=L>=10?[12,13,14,15]:L>=4?[14,15]:[15], mid=[];
-    while(head.length+mid.length+tail.length<L) mid.push(2+mid.length%10); // the theme cycles bars 3–12 of the score
-    return [...head,...mid,...tail];
-  }
-  // One performance: builds the shared parts now and each bar on request. fadeEnd: fade to silence at the end of sec.
-  function session(ac,t,sec,master,verb,fadeEnd,shared){
-    const sr=ac.sampleRate, hum=()=>(Math.random()-.5)*0.016, vary=v=>v*(0.9+Math.random()*0.2), bars=plan(sec), END=t+sec;
-    const noise=shared||noiseBuf(ac);
-    const env=(g,at,peak,a,d)=>{g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(peak,at+a); g.gain.exponentialRampToValueAtTime(0.0001,at+a+d)};
-    // ping-pong echo, dotted eighth, darkened each pass
-    const echo=ac.createGain(), dl=ac.createDelay(), dr=ac.createDelay(), fb=ac.createGain(), tone=ac.createBiquadFilter(), pl=ac.createStereoPanner(), pr=ac.createStereoPanner();
-    dl.delayTime.value=dr.delayTime.value=BEAT*0.75; fb.gain.value=0.32; tone.type="lowpass"; tone.frequency.value=2600; pl.pan.value=-0.6; pr.pan.value=0.6;
-    echo.gain.value=0.28; echo.connect(dl); dl.connect(pl); pl.connect(master); dl.connect(dr); dr.connect(pr); pr.connect(master); dr.connect(tone); tone.connect(fb); fb.connect(dl);
-    const verbSend=ac.createGain(); verbSend.gain.value=0.9; verbSend.connect(verb);
-    const glint=(f,at,v)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=f;
-      g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(v,at+0.25); g.gain.exponentialRampToValueAtTime(0.0001,at+2.2);
-      o.connect(g); g.connect(master); g.connect(verbSend); o.start(at); o.stop(at+2.4)};
-    const bloomAt=(at,level)=>{ // the intro bloom
-      const lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
-      lp.frequency.setValueAtTime(250,at); lp.frequency.exponentialRampToValueAtTime(3200,at+0.6); lp.frequency.exponentialRampToValueAtTime(900,at+2.4);
-      pad.gain.value=0.0001; pad.gain.setValueAtTime(0.0001,at); pad.gain.exponentialRampToValueAtTime(0.16*level,at+0.35); pad.gain.setTargetAtTime(0.0001,at+1.2,0.6);
-      lp.connect(pad); pad.connect(master); pad.connect(verb);
-      [146.83,185,220,329.63,440].forEach(f=>[-7,7].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=f; o.detune.value=c; o.connect(lp); o.start(at); o.stop(at+4)}));
-      [1174.66,1760].forEach((f,i)=>glint(f,at+0.15+i*0.08,0.05*level))};
-    const padAt=(notes,at,dur)=>{ // warm detuned-saw pad, breathing filter, long release into the next chord
-      const lp=ac.createBiquadFilter(), g=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.7;
-      lp.frequency.setValueAtTime(450,at); lp.frequency.linearRampToValueAtTime(1500,at+dur*0.5); lp.frequency.linearRampToValueAtTime(850,at+dur);
-      g.gain.value=0; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(0.05,at+1.4); g.gain.setTargetAtTime(0,at+dur,0.6);
-      lp.connect(g); g.connect(master); g.connect(verb);
-      notes.forEach(m=>[-6,6].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(m); o.detune.value=c; o.connect(lp); o.start(at); o.stop(at+dur+3)}))};
-    const key=(m,at,vel,pan,send,bright)=>{ // felt piano: soft sine body, a little chorus, a brief felt attack and hammer
-      const f=hz(m), g=ac.createGain(), lp=ac.createBiquadFilter(), p=ac.createStereoPanner(), dec=Math.max(1.4,3.4-(m-55)*0.08);
-      lp.type="lowpass"; lp.frequency.value=Math.min(6000,f*4.5)*bright; p.pan.value=pan;
-      g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(vel*0.2,at+0.006);
-      g.gain.exponentialRampToValueAtTime(vel*0.07,at+0.3); g.gain.exponentialRampToValueAtTime(0.0001,at+dec);
-      [[f,"sine",1,0],[f,"sine",0.5,5],[f*2,"triangle",0.12,0]].forEach(([fr,type,lev,det])=>{const o=ac.createOscillator(), og=ac.createGain();
-        o.type=type; o.frequency.value=fr; o.detune.value=det; og.gain.value=lev; if(type==="triangle"){og.gain.setValueAtTime(lev,at); og.gain.exponentialRampToValueAtTime(0.001,at+0.18)}
-        o.connect(og); og.connect(g); o.start(at); o.stop(at+dec+0.1)});
-      const h=ac.createBufferSource(), hl=ac.createBiquadFilter(), hg=ac.createGain(); h.buffer=noise; hl.type="lowpass"; hl.frequency.value=1400;
-      hg.gain.setValueAtTime(vel*0.02,at); hg.gain.exponentialRampToValueAtTime(0.0001,at+0.02); h.connect(hl); hl.connect(hg); hg.connect(g); h.start(at); h.stop(at+0.03);
-      g.connect(lp); lp.connect(p); p.connect(master); p.connect(verbSend); if(send) p.connect(echo)};
-    // Hans Zimmer colours
-    const organAt=(notes,at,dur)=>{ // Interstellar-style organ glow: soft triangles, octave doubled, slow swell
-      const g=ac.createGain(); g.gain.value=0; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(0.012,at+2); g.gain.setTargetAtTime(0,at+dur,0.8);
-      g.connect(master); g.connect(verbSend);
-      notes.forEach(m=>[0,12].forEach(o8=>{const o=ac.createOscillator(); o.type="triangle"; o.frequency.value=hz(m+o8); o.connect(g); o.start(at); o.stop(at+dur+4)}))};
-    { const lp=ac.createBiquadFilter(), g=ac.createGain(); lp.type="lowpass"; lp.frequency.value=320; // the drone: D and A, low, all through
-      g.gain.value=0; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.035,t+Math.min(4,sec/3)); g.gain.setValueAtTime(0.035,Math.max(t+Math.min(4,sec/3),END-2));
-      g.gain.linearRampToValueAtTime(0,END); lp.connect(g); g.connect(master);
-      [38,45].forEach(m=>[-5,5].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(m); o.detune.value=c; o.connect(lp); o.start(t); o.stop(END+0.5)})) }
-    const ost=ac.createBiquadFilter(); ost.type="lowpass"; ost.Q.value=1.2; ost.frequency.value=700; ost.connect(master); ost.connect(verb); // the low-string ostinato's body
-    const string=(m,at,v)=>{const g=ac.createGain(); env(g,at,v,0.006,0.16); g.connect(ost);
-      [m,m+12].forEach(n=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(n); o.connect(g); o.start(at); o.stop(at+0.2)})};
-    const tick=(at,hi)=>{const s=ac.createBufferSource(), bp=ac.createBiquadFilter(), g=ac.createGain(), p=ac.createStereoPanner(); // the clock, soft
-      s.buffer=noise; bp.type="bandpass"; bp.frequency.value=hi?3600:2600; bp.Q.value=7; p.pan.value=hi?0.2:-0.2; env(g,at,0.09,0.002,0.03);
-      s.connect(bp); bp.connect(g); g.connect(p); p.connect(master); s.start(at,Math.random()); s.stop(at+0.05)};
-    const riser=(from,to)=>{const s=ac.createBufferSource(), bp=ac.createBiquadFilter(), g=ac.createGain(); s.buffer=noise; s.loop=true;
-      bp.type="bandpass"; bp.Q.value=2; bp.frequency.setValueAtTime(300,from); bp.frequency.exponentialRampToValueAtTime(5000,to);
-      g.gain.setValueAtTime(0.0001,from); g.gain.exponentialRampToValueAtTime(0.07,to-0.03); g.gain.linearRampToValueAtTime(0,to);
-      s.connect(bp); bp.connect(g); g.connect(master); g.connect(verbSend); s.start(from); s.stop(to+0.05)};
-    const braam=(at,level)=>{ // one deep brass-like hit: detuned saws, saturated, filter swelling open then closing
-      const pre=ac.createGain(), ws=ac.createWaveShaper(), curve=new Float32Array(1024), lp=ac.createBiquadFilter(), g=ac.createGain();
-      for(let i=0;i<1024;i++) curve[i]=Math.tanh(2.2*(i/1023*2-1)); ws.curve=curve; pre.gain.value=0.22; lp.type="lowpass"; lp.Q.value=2;
-      lp.frequency.setValueAtTime(110,at); lp.frequency.exponentialRampToValueAtTime(850,at+0.9); lp.frequency.exponentialRampToValueAtTime(200,at+4.5);
-      env(g,at,0.13*level,0.12,4.8); pre.connect(ws); ws.connect(lp); lp.connect(g); g.connect(master); g.connect(verb);
-      [26,38,45,50].forEach(m=>[-12,12].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(m); o.detune.value=c; o.connect(pre); o.start(at); o.stop(at+5.2)}))};
-    const boom=(at,level)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.setValueAtTime(68,at); o.frequency.exponentialRampToValueAtTime(30,at+0.6);
-      env(g,at,0.5*level,0.005,1.8); o.connect(g); g.connect(master); o.start(at); o.stop(at+2);
-      const s=ac.createBufferSource(), lp=ac.createBiquadFilter(), ng=ac.createGain(); s.buffer=noise; lp.type="lowpass"; lp.frequency.value=220;
-      env(ng,at,0.35*level,0.003,0.35); s.connect(lp); lp.connect(ng); ng.connect(master); ng.connect(verb); s.start(at); s.stop(at+0.4)};
-    const sub=(m,at,dur)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=hz(m);
-      g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.11,at+0.08); g.gain.exponentialRampToValueAtTime(0.05,at+dur*0.8); g.gain.exponentialRampToValueAtTime(0.0001,at+dur+0.3);
-      o.connect(g); g.connect(master); o.start(at); o.stop(at+dur+0.4)};
-    if(fadeEnd){const g=master.gain; g.setValueAtTime(g.value,Math.max(t+0.7,END-1.5)); g.linearRampToValueAtTime(0,END)} // silent as the next programme starts
-    let next=0;
-    function bar(k){const b=bars[k], tb=t+k*BAR, c=chordOf(b), pad=c[2], bass=c[3];
-      if(b===0) bloomAt(tb,1); if(b===15) bloomAt(tb,0.75); // the blooms: opening and home
-      if(b===c[0]){const dur=BAR*(c[1]===2&&bars[k+1]===b+1?2:1); // a chord starts: its pad, sub, organ and glint
-        if(b===0) padAt(pad,tb+0.6,dur-0.6); else if(b!==15) padAt(pad,tb,dur);
-        if(b>=4&&b<=14) sub(bass,tb,dur);
-        if(b>=8&&b<=12) organAt(pad,tb,dur);
-        if(b===4||b===8||b===12) glint(hz(pad[4]+24),tb+0.05,0.03)}
-      if(b>=4&&b<=11){ // the build: arpeggio bed, low-string ostinato (accents 3+3+2, opening up towards the lift), the clock
-        ost.frequency.setTargetAtTime(b<8?700+(b-4)*100:b<10?1100+(b-8)*300:1700,tb,0.8);
-        const tones=pad.slice(1).map(m=>m+12), pat=[0,2,1,3,2,1,3,2], lv=b<6?0.022:b<8?0.032:0.042;
-        for(let e=0;e<8;e++) key(tones[pat[e]],tb+e*BEAT/2+hum(),vary(0.22),e%2?0.35:-0.35,false,0.55);
-        for(let i=0;i<16;i++) string(bass+12,tb+i*SIX,[0,3,6,8,11,14].includes(i)?lv:lv*0.4);
-        tick(tb,true); tick(tb+2*BEAT,false)}
-      if(b===12) ost.frequency.setTargetAtTime(900,tb,0.8);
-      if(b===6&&bars[k+1]===7&&bars[k+2]===8) riser(tb,tb+2*BAR);
-      if(b===8){braam(tb,1); boom(tb,1)} if(b===12) boom(tb,0.45); // the lift, and the settle
-      (THEME[b]||[]).forEach(([e,m,v])=>key(m,tb+e*BEAT/2+hum(),vary(v),(m-66)*0.04,true,1))}
-    return {ahead(until){while(next<bars.length&&t+next*BAR<until) bar(next++); return next<bars.length}}; // schedule bars starting before 'until'
-  }
-  // One audio engine for every interlude, made with its reverb and noise in idle time soon after the ident (warm), so
-  // starting an interlude costs next to nothing: making an AudioContext and its reverb took a visible ~0.2 s.
-  let ctx=null, chain=null, noise=null, master=null, pump=0, run=0;
-  function warm(){if(!AC||ctx)return; try{ctx=new AC(); chain=identOut(ctx,0.35); noise=noiseBuf(ctx)}catch(e){ctx=null}}
-  // Crackle-free: synthesising dozens of voices live while the next video loads can outrun the audio thread, which
-  // clicks. So ~40 s before a programme ends, the coming gap's music is rendered in the background (prep, from the
-  // video's remaining time) and the gap just plays that clip. If it isn't ready, or the gap turns out more than 2 s
-  // different, the music is made live as before.
-  let ready=null, prepping=0;
-  function prep(sec){if(!window.OfflineAudioContext||!AC||sec<6||prepping||ready&&Math.abs(ready.sec-sec)<1)return; warm(); if(!ctx)return;
-    try{const sr=ctx.sampleRate, oac=new OfflineAudioContext(2,Math.ceil((sec+0.5)*sr),sr), {out,verb}=identOut(oac,0.35), m=oac.createGain(), p=prepping=sec;
-      m.connect(out); session(oac,0.05,sec,m,verb,true).ahead(Infinity);
-      oac.startRendering().then(buf=>{if(prepping===p) ready={sec,buf}}).catch(()=>{}).then(()=>{if(prepping===p) prepping=0})}catch(e){prepping=0}}
-  function start(sec){stop(); if(!AC||muted||sec<6){ready=null; return} warm(); if(!ctx)return; const me=++run, a=ctx;
-    const clip=ready&&Math.abs(ready.sec-sec)<=2?ready.buf:null; ready=null;
-    a.resume().then(()=>{if(me!==run||a.state!=="running")return;
-      const level=Math.max(0.05,vol/70), m=master=a.createGain(), t=a.currentTime+0.1;
-      if(clip){const src=a.createBufferSource(); src.buffer=clip; m.gain.setValueAtTime(level,t); src.connect(m); m.connect(a.destination); src.start(t); // the rendered gap
-        setTimeout(()=>{if(me===run) stop()},(sec+4)*1000); return}
-      m.gain.setValueAtTime(0,t); m.gain.linearRampToValueAtTime(level,t+0.6); m.connect(chain.out); // fades in with the bloom
-      const s=session(a,t,sec,m,chain.verb,true,noise);
-      const go=()=>{if(me!==run)return; if(s.ahead(document.hidden?Infinity:a.currentTime+3)) pump=setTimeout(go,500)}; go(); // a few bars ahead; all at once in a hidden tab
-      setTimeout(()=>{if(me===run) stop()},(sec+4)*1000)}).catch(()=>{})}
-  function stop(){run++; clearTimeout(pump); const m=master; master=null; if(!m||!ctx)return; const a=ctx;
-    try{m.gain.cancelScheduledValues(a.currentTime); m.gain.setValueAtTime(m.gain.value,a.currentTime); m.gain.setTargetAtTime(0,a.currentTime,0.35)}catch(e){}
-    setTimeout(()=>{try{m.disconnect()}catch(e){}},2200)}
-  // The standard piece, rendered offline with its natural ending (for an audio file)
-  function render(sr=44100){const sec=4+15*BAR+0.5, oac=new OfflineAudioContext(2,Math.ceil((sec+4)*sr),sr), {out,verb}=identOut(oac,0.35), m=oac.createGain();
-    m.connect(out); session(oac,0.05,sec,m,verb,false).ahead(Infinity); return oac.startRendering()}
-  return {start,stop,warm,prep,render,plan};
+  /* The OGTV Interlude: a recorded 90 s piece (audio/interlude.mp3: the intro bloom, a felt-piano theme with Hans Zimmer
+     colours, a slow last crescendo and the closing bloom; 95.7 s with its reverb tail). Every gap plays it from the
+     start; a gap longer than 90 s starts it again at 90 s while the first pass's tail rings on underneath; whatever the
+     gap's length, it fades out over its last seconds as the next programme arrives. Streamed through two audio
+     elements (one starts while the other's tail rings) into one gain, for the fades. */
+  const SRC="/audio/interlude.mp3?v=1", LOOP=90;
+  let ctx=null, out=null, els=[], timers=[], run=0;
+  function warm(){if(!AC||ctx)return;
+    try{ctx=new AC(); out=ctx.createGain(); out.gain.value=0; out.connect(ctx.destination);
+      for(let i=0;i<2;i++){const el=new Audio(SRC); el.preload="auto"; ctx.createMediaElementSource(el).connect(out); els.push(el)}}catch(e){ctx=null}}
+  function start(sec){stop(true); if(!AC||muted||sec<6)return; warm(); if(!ctx)return; const me=++run;
+    ctx.resume().then(()=>{if(me!==run||ctx.state!=="running")return;
+      const now=ctx.currentTime, level=Math.max(0.05,vol/100), fade=Math.min(4,sec/3), g=out.gain;
+      g.cancelScheduledValues(now); g.setValueAtTime(0,now); g.linearRampToValueAtTime(level,now+0.8); // in with the bloom
+      g.setValueAtTime(level,now+Math.max(0.8,sec-fade)); g.linearRampToValueAtTime(0,now+sec); // out as the next programme arrives
+      let k=0; const pass=()=>{if(me!==run)return; const el=els[k++%2]; el.currentTime=0; el.play().catch(()=>{});
+        if((k)*LOOP<sec) timers.push(setTimeout(pass,LOOP*1000))}; // from the top again at 90 s
+      pass(); timers.push(setTimeout(()=>{if(me===run) stop(true)},(sec+0.5)*1000))}).catch(()=>{})}
+  function stop(quiet){run++; timers.forEach(clearTimeout); timers=[]; if(!ctx)return; const now=ctx.currentTime, g=out.gain;
+    if(!quiet){g.cancelScheduledValues(now); g.setValueAtTime(g.value,now); g.linearRampToValueAtTime(0,now+1.2)} // cut short: a quick fade
+    const me=run; setTimeout(()=>{if(me===run) els.forEach(el=>{el.pause(); el.currentTime=0})},quiet?0:1300)}
+  return {start,stop:()=>stop(false),warm};
 })();
 /* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
    long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
    volume, and plays only where the browser allows sound. */
 const staticSound=(()=>{
   let ac=null, out=null;
-  function start(){stop(); if(!AC||muted||!started||!retro)return; // only the retro TV hisses
+  function start(){stop(); if(!AC||muted||!started||!retro||fxLevel>=4)return; // only the retro TV hisses, and not in its Quiet mode
     try{const a=ac=new AC(); a.resume().then(()=>{if(a!==ac)return; if(a.state!=="running"){a.close(); ac=null; return}
       const sr=a.sampleRate, t=a.currentTime+0.02, noise=a.createBuffer(1,sr*2,sr), d=noise.getChannelData(0);
       for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
@@ -580,7 +455,27 @@ $("cc").addEventListener("click",toggleSubs);
 $("keyCc").addEventListener("click",toggleSubs);
 $("keyFs").addEventListener("click",toggleFullscreen);
 $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); // Home is full screen in the current look (retro by default)
-$("keyRetro").addEventListener("click",()=>setRetro(false)); // in full screen this swaps to the plain full-screen look
+/* Retro's mode knob, where Exit retro was. Each setting peels off one more effect: Full (all of it), Steady (no tracking
+   band sweeping down), Tinted (the tape colour and contrast but no lines or grain), Clean (no VCR effects at all), Quiet
+   (no static hiss on channel changes), Normal (retro off;
+   in full screen that swaps to the plain full-screen look). Remembered for the tab, like retro itself. */
+const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Normal"], FX_DEG=[-75,-45,-15,15,45,75], FX_OFF=5;
+let fxLevel=1; try{const v=sessionStorage.getItem("ogtv-fx"); if(v!==null) fxLevel=Math.min(FX_OFF-1,Math.max(0,+v||0))}catch(e){} // Steady unless chosen otherwise
+function showFx(n){$("knobMode").title="Mode: "+FX_NAMES[n]; $("knobMode").style.setProperty("--rot",FX_DEG[n]+"deg")}
+function setFx(n,osdToo){n=Math.max(0,Math.min(FX_OFF,n)); if(osdToo) tvOsd(`<b>MODE</b> ${FX_NAMES[n].toUpperCase()}`);
+  if(n===FX_OFF){fxLevel=1; try{sessionStorage.setItem("ogtv-fx","1")}catch(e){} showFx(1); setRetro(false); return} // back at Steady next time
+  fxLevel=n; try{sessionStorage.setItem("ogtv-fx",String(n))}catch(e){}
+  const sc=$("screen"); sc.classList.toggle("fx-steady",n>=1); sc.classList.toggle("fx-nolines",n>=2); sc.classList.toggle("fx-clean",n>=3);
+  if(n>=4) staticSound.stop(); showFx(n)}
+let fxPreview=0;
+turnable($("knobMode"),{
+  onTurn:d=>{fxPreview=Math.max(0,Math.min(FX_OFF,fxLevel+Math.round(d/30))); $("knobMode").style.setProperty("--rot",FX_DEG[fxPreview]+"deg"); tvOsd(`<b>MODE</b> ${FX_NAMES[fxPreview].toUpperCase()}`)},
+  onDone:()=>setFx(fxPreview,true),
+  onClick:()=>setFx(fxLevel+1,true)});
+$("knobMode").addEventListener("wheel",e=>{e.preventDefault(); setFx(fxLevel+(e.deltaY>0?1:-1),true)},{passive:false});
+$("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
+  setFx(fxLevel+(k==="ArrowRight"||k==="ArrowUp"?1:-1),true)});
+setFx(fxLevel);
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
 $("showList").addEventListener("click",()=>setList(false));
@@ -593,7 +488,7 @@ function autoFull(){
   if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
   if(TV_APP) return; // the app is full screen already
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
-    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#keyRetro,#fs,#home"))||e.key==="Escape") return;
+    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#knobMode,#fs,#home"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
     const r=req.call(room);
     if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
@@ -626,12 +521,9 @@ function showCard(msg){
   }
 }
 
-let prepKey=null; // the programme whose closing gap's music has been prepared
 function tick(){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
-  if(MODE==="yt"&&player&&!ended&&!s.live&&prepKey!==key&&!muted) try{const d=player.getDuration(), c=player.getCurrentTime(); // 40 s from the end:
-    if(d>0&&d-c<40&&d-c>8){prepKey=key; interlude.prep((s.end-now)/1000-(d-c))}}catch(e){} // render the coming gap's music
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey){
