@@ -67,6 +67,7 @@ addEventListener("keydown",e=>{
     else digitTimer=setTimeout(()=>{tuneNumber(+digits);digits=""},900);
   }
   else if(e.key==="m"||e.key==="M") toggleSound();
+  else if((e.key===" "||e.key==="k"||e.key==="K")&&!(e.target.closest&&e.target.closest("button,a"))){e.preventDefault(); togglePause()}
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="c"||e.key==="C") setList(!listHidden);
@@ -112,10 +113,10 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState;
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){hideStatic(); applySubs(); videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0}
+              if(e.data===S.PLAYING){rejoin();hideStatic(); applySubs(); videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0}
               else if(e.data===S.BUFFERING){if(started&&!handing) bufTimer=setTimeout(showStatic,800); // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
-              else if(e.data===S.PAUSED) keepAwake(false);
+              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now()}
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
@@ -123,6 +124,15 @@ window.onYouTubeIframeAPIReady=()=>{
 // mid-programme; it is let go when playback stops. Browsers drop the lock when the tab is hidden, so it is
 // taken again on return. Browsers without Wake Lock simply behave as before.
 let wakeLock=null, wantAwake=false;
+// Pause and play: from the page (Space or K), a TV remote, the phone's or a Bluetooth speaker's play/pause button or
+// the lock screen, which all reach the video. OGTV is TV, so playing again rejoins the channel where it is now, not
+// where it was paused.
+let pausedAt=0;
+function rejoin(){if(!pausedAt)return; pausedAt=0; try{const s=slotAt(CHANNELS[cur],tvNow()); if(s.live||!player)return;
+  const off=(tvNow()-s.start)/1000; if(Math.abs(player.getCurrentTime()-off)>4) player.seekTo(off,true)}catch(e){}}
+function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=player.getPlayerState()}catch(e){return}
+  if(st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING){player.pauseVideo(); pausedAt=Date.now()}
+  else{rejoin(); player.playVideo()}}
 async function keepAwake(on){wantAwake=on;
   try{if(on&&!wakeLock&&navigator.wakeLock&&document.visibilityState==="visible"){wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{wakeLock=null})}
       else if(!on&&wakeLock){const l=wakeLock; wakeLock=null; await l.release()}}catch(e){wakeLock=null}}
@@ -219,24 +229,26 @@ const interlude=(()=>{
   /* The OGTV Interlude: a recorded 90 s piece (audio/interlude.mp3: the intro bloom, a felt-piano theme with Hans Zimmer
      colours, a slow last crescendo and the closing bloom; 95.7 s with its reverb tail). Every gap plays it from the
      start; a gap longer than 90 s starts it again at 90 s while the first pass's tail rings on underneath; whatever the
-     gap's length, it fades out over its last seconds as the next programme arrives. Streamed through two audio
-     elements (one starts while the other's tail rings) into one gain, for the fades. */
+     gap's length, it fades out over its last seconds as the next programme arrives. It is decoded once and played
+     through Web Audio, not an <audio> element: a media element on the page takes over the phone's and Bluetooth
+     speakers' play/pause buttons (and the lock screen) from the video. */
   const SRC="/audio/interlude.mp3?v=1", LOOP=90;
-  let ctx=null, out=null, els=[], timers=[], run=0;
-  function warm(){if(!AC||ctx)return;
-    try{ctx=new AC(); out=ctx.createGain(); out.gain.value=0; out.connect(ctx.destination);
-      for(let i=0;i<2;i++){const el=new Audio(SRC); el.preload="auto"; ctx.createMediaElementSource(el).connect(out); els.push(el)}}catch(e){ctx=null}}
+  let ctx=null, out=null, buf=null, loading=null, srcs=[], timer=0, run=0;
+  function warm(){if(!AC)return; try{if(!ctx){ctx=new AC(); out=ctx.createGain(); out.gain.value=0; out.connect(ctx.destination)}
+      if(ctx.state==="running"&&!srcs.length) ctx.suspend().catch(()=>{}); // nothing playing yet
+      if(!buf&&!loading) loading=fetch(SRC).then(x=>x.arrayBuffer()).then(d=>new Promise((ok,no)=>ctx.decodeAudioData(d,ok,no))).then(b=>{buf=b}).catch(()=>{}).then(()=>{loading=null})}catch(e){ctx=null}}
   function start(sec){stop(true); if(!AC||muted||sec<6)return; warm(); if(!ctx)return; const me=++run;
-    ctx.resume().then(()=>{if(me!==run||ctx.state!=="running")return;
-      const now=ctx.currentTime, level=Math.max(0.05,vol/100), fade=Math.min(4,sec/3), g=out.gain;
+    Promise.all([ctx.resume(),loading]).then(()=>{if(me!==run||ctx.state!=="running"||!buf)return;
+      const now=ctx.currentTime+0.05, level=Math.max(0.05,vol/100), fade=Math.min(4,sec/3), g=out.gain;
       g.cancelScheduledValues(now); g.setValueAtTime(0,now); g.linearRampToValueAtTime(level,now+0.8); // in with the bloom
       g.setValueAtTime(level,now+Math.max(0.8,sec-fade)); g.linearRampToValueAtTime(0,now+sec); // out as the next programme arrives
-      let k=0; const pass=()=>{if(me!==run)return; const el=els[k++%2]; el.currentTime=0; el.play().catch(()=>{});
-        if((k)*LOOP<sec) timers.push(setTimeout(pass,LOOP*1000))}; // from the top again at 90 s
-      pass(); timers.push(setTimeout(()=>{if(me===run) stop(true)},(sec+0.5)*1000))}).catch(()=>{})}
-  function stop(quiet){run++; timers.forEach(clearTimeout); timers=[]; if(!ctx)return; const now=ctx.currentTime, g=out.gain;
+      for(let k=0;k*LOOP<sec;k++){const src=ctx.createBufferSource(); src.buffer=buf; src.connect(out); // from the top again at 90 s
+        src.start(now+k*LOOP); src.stop(now+Math.min(sec+0.2,k*LOOP+buf.duration)); srcs.push(src)}
+      timer=setTimeout(()=>{if(me===run) stop(true)},(sec+0.5)*1000)}).catch(()=>{})}
+  function stop(quiet){run++; clearTimeout(timer); if(!ctx)return; const now=ctx.currentTime, g=out.gain, old=srcs; srcs=[];
     if(!quiet){g.cancelScheduledValues(now); g.setValueAtTime(g.value,now); g.linearRampToValueAtTime(0,now+1.2)} // cut short: a quick fade
-    const me=run; setTimeout(()=>{if(me===run) els.forEach(el=>{el.pause(); el.currentTime=0})},quiet?0:1300)}
+    old.forEach(x=>{try{x.stop(now+(quiet?0:1.3))}catch(e){}})
+    const me=run; setTimeout(()=>{if(me===run&&ctx.state==="running") ctx.suspend().catch(()=>{})},quiet?50:1500)} // silent between gaps, so the phone's play/pause goes to the video
   return {start,stop:()=>stop(false),warm};
 })();
 /* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
@@ -613,13 +625,13 @@ window.ogtv={
       case "down": case "chdown": case "rew": case "left": step(-1); break;
       case "ok": if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)} break;
       case "menu": case "red": setRetro(!retro); if(retro) track("retro-on","Retro mode on"); break;
-      case "playpause": toggleSound(); if(retro) osdVolume(); break;
+      case "playpause": togglePause(); break;
       case "cc": case "green": toggleSubs(); break;
       default: return false;
     }
     return true;
   },
-  pause(){if(MODE==="yt"&&player) player.pauseVideo(); keepAwake(false)}, // the app went to the background
+  pause(){if(MODE==="yt"&&player) player.pauseVideo(); pausedAt=Date.now(); keepAwake(false)}, // the app went to the background
   resume(){playingKey=null; tick()}, // back in front: rejoin the programme at this moment
 };
 if(TV_APP) track("app-tv-start","TV app opened");
