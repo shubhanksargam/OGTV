@@ -157,6 +157,7 @@ const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
+  setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
   if(!soundTapped) soundIn()}
 function soundIn(){if(!primed)return; // not allowed yet: unmuting would make the browser pause the video; the first tap turns it on
   if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
@@ -212,12 +213,15 @@ function bloomNotes(ac,t){
    breath if the gap is long, and plays only where the browser allows sound. */
 const interlude=(()=>{
   const hz=m=>440*Math.pow(2,(m-69)/12);
-  /* OGTV Interlude: 16 bars at 85⅓ BPM = 45 s, D major. Bars 1–2 are the intro bloom; a felt-piano theme
-     (A F# E D, the glint's notes walking home) over pads moving Dadd9 Bm11 Gmaj9 Asus2 | Dadd9 F#m7 Gmaj9 A6sus,
-     an arpeggio bed, ping-pong echo and a sub. Hans Zimmer colours carry it: a low drone, a soft ticking clock, a
-     low-string ostinato swelling into a riser, one deep braam with a boom at the lift and an organ glow; then it thins
-     out and lands home on the bloom. */
-  const BEAT=60/(256/3), BAR=BEAT*4, SIX=BEAT/4, LEN=BAR*16;
+  /* OGTV Interlude, D major, 85⅓ BPM. A 16-bar score: bars 1–2 are the intro bloom; a felt-piano theme (A F# E D, the
+     glint's notes walking home) over pads moving Dadd9 Bm11 Gmaj9 Asus2 | Dadd9 F#m7 Gmaj9 A6sus, an arpeggio bed,
+     ping-pong echo and a sub. Hans Zimmer colours carry it: a low drone, a soft ticking clock, a low-string ostinato
+     swelling into a riser, one deep braam with a boom at the lift and an organ glow; then it thins out and lands
+     home on the bloom.
+     It plays for exactly the length of the gap: the opening bloom first, the theme cycling as long as needed, and
+     the settle and closing bloom placed so the music fades out as the next programme starts. A ~46 s gap plays the
+     16 bars as written. Bars are scheduled a few seconds ahead, a few at a time, so nothing stalls the page. */
+  const BEAT=60/(256/3), BAR=BEAT*4, SIX=BEAT/4;
   const CHORDS=[[0,2,[50,54,57,64,69],38],[2,2,[47,54,57,62,64],35],[4,2,[43,50,54,57,59],31],[6,2,[45,52,57,59,62],33],
     [8,2,[50,54,57,64,69],38],[10,2,[49,54,57,61,64],30],[12,2,[43,50,54,57,59],31],[14,1,[45,52,54,57,62],33],[15,1,[50,54,57,64,69],38]]; // [bar, bars, pad, bass]
   const THEME={2:[[0,69,.9],[1,66,.7],[2,64,.75],[4,62,.85],[8,66,.6],[10,64,.6],[11,62,.55],[12,59,.7]], // bar: [eighth, note, velocity]
@@ -226,15 +230,28 @@ const interlude=(()=>{
     8:[[0,74,.9],[1,69,.7],[2,66,.7],[4,64,.75],[6,62,.6],[8,69,.65],[10,66,.6],[11,64,.55],[12,62,.7]],
     10:[[0,73,.85],[1,69,.65],[2,66,.65],[4,64,.75],[8,66,.6],[10,64,.55],[12,61,.65]],
     12:[[0,71,.75],[2,69,.6],[4,66,.6],[10,62,.55]], 14:[[0,69,.7],[2,66,.55],[4,64,.5]], 15:[[0,62,.7],[0,74,.35]]};
-  function interludeNotes(ac,t,master,verb){
-    const sr=ac.sampleRate, hum=()=>(Math.random()-.5)*0.016, vary=v=>v*(0.9+Math.random()*0.2);
-    const noise=ac.createBuffer(1,sr*2,sr), nd=noise.getChannelData(0); for(let i=0;i<nd.length;i++) nd[i]=Math.random()*2-1;
+  const chordOf=b=>CHORDS.find(([s,n])=>b>=s&&b<s+n);
+  const noiseBuf=ac=>{const b=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate), d=b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; return b};
+  // Which score bars to play, end to end, to fill sec seconds with the closing bloom starting about 4 s before the end
+  function plan(sec){
+    const L=Math.max(1,Math.floor((sec-4)/BAR)+1); if(L===1) return [0];
+    const head=L>=3?[0,1]:[0], tail=L>=10?[12,13,14,15]:L>=4?[14,15]:[15], mid=[];
+    while(head.length+mid.length+tail.length<L) mid.push(2+mid.length%10); // the theme cycles bars 3–12 of the score
+    return [...head,...mid,...tail];
+  }
+  // One performance: builds the shared parts now and each bar on request. fadeEnd: fade to silence at the end of sec.
+  function session(ac,t,sec,master,verb,fadeEnd,shared){
+    const sr=ac.sampleRate, hum=()=>(Math.random()-.5)*0.016, vary=v=>v*(0.9+Math.random()*0.2), bars=plan(sec), END=t+sec;
+    const noise=shared||noiseBuf(ac);
     const env=(g,at,peak,a,d)=>{g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(peak,at+a); g.gain.exponentialRampToValueAtTime(0.0001,at+a+d)};
     // ping-pong echo, dotted eighth, darkened each pass
     const echo=ac.createGain(), dl=ac.createDelay(), dr=ac.createDelay(), fb=ac.createGain(), tone=ac.createBiquadFilter(), pl=ac.createStereoPanner(), pr=ac.createStereoPanner();
     dl.delayTime.value=dr.delayTime.value=BEAT*0.75; fb.gain.value=0.32; tone.type="lowpass"; tone.frequency.value=2600; pl.pan.value=-0.6; pr.pan.value=0.6;
     echo.gain.value=0.28; echo.connect(dl); dl.connect(pl); pl.connect(master); dl.connect(dr); dr.connect(pr); pr.connect(master); dr.connect(tone); tone.connect(fb); fb.connect(dl);
     const verbSend=ac.createGain(); verbSend.gain.value=0.9; verbSend.connect(verb);
+    const glint=(f,at,v)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=f;
+      g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(v,at+0.25); g.gain.exponentialRampToValueAtTime(0.0001,at+2.2);
+      o.connect(g); g.connect(master); g.connect(verbSend); o.start(at); o.stop(at+2.4)};
     const bloomAt=(at,level)=>{ // the intro bloom
       const lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
       lp.frequency.setValueAtTime(250,at); lp.frequency.exponentialRampToValueAtTime(3200,at+0.6); lp.frequency.exponentialRampToValueAtTime(900,at+2.4);
@@ -242,9 +259,6 @@ const interlude=(()=>{
       lp.connect(pad); pad.connect(master); pad.connect(verb);
       [146.83,185,220,329.63,440].forEach(f=>[-7,7].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=f; o.detune.value=c; o.connect(lp); o.start(at); o.stop(at+4)}));
       [1174.66,1760].forEach((f,i)=>glint(f,at+0.15+i*0.08,0.05*level))};
-    const glint=(f,at,v)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=f;
-      g.gain.value=0.0001; g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(v,at+0.25); g.gain.exponentialRampToValueAtTime(0.0001,at+2.2);
-      o.connect(g); g.connect(master); g.connect(verbSend); o.start(at); o.stop(at+2.4)};
     const padAt=(notes,at,dur)=>{ // warm detuned-saw pad, breathing filter, long release into the next chord
       const lp=ac.createBiquadFilter(), g=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.7;
       lp.frequency.setValueAtTime(450,at); lp.frequency.linearRampToValueAtTime(1500,at+dur*0.5); lp.frequency.linearRampToValueAtTime(850,at+dur);
@@ -267,12 +281,11 @@ const interlude=(()=>{
       const g=ac.createGain(); g.gain.value=0; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(0.012,at+2); g.gain.setTargetAtTime(0,at+dur,0.8);
       g.connect(master); g.connect(verbSend);
       notes.forEach(m=>[0,12].forEach(o8=>{const o=ac.createOscillator(); o.type="triangle"; o.frequency.value=hz(m+o8); o.connect(g); o.start(at); o.stop(at+dur+4)}))};
-    const drone=()=>{const lp=ac.createBiquadFilter(), g=ac.createGain(); lp.type="lowpass"; lp.frequency.value=320; // D and A, low, all through
-      g.gain.value=0; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.03,t+4); g.gain.linearRampToValueAtTime(0.045,t+BAR*8);
-      g.gain.linearRampToValueAtTime(0.03,t+BAR*13); g.gain.linearRampToValueAtTime(0,t+LEN+2); lp.connect(g); g.connect(master);
-      [38,45].forEach(m=>[-5,5].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(m); o.detune.value=c; o.connect(lp); o.start(t); o.stop(t+LEN+2.5)}))};
-    const ost=ac.createBiquadFilter(); ost.type="lowpass"; ost.Q.value=1.2; ost.connect(master); ost.connect(verb); // the low-string ostinato's body
-    ost.frequency.setValueAtTime(700,t+BAR*4); ost.frequency.linearRampToValueAtTime(1100,t+BAR*8); ost.frequency.linearRampToValueAtTime(1700,t+BAR*10); ost.frequency.linearRampToValueAtTime(900,t+BAR*12);
+    { const lp=ac.createBiquadFilter(), g=ac.createGain(); lp.type="lowpass"; lp.frequency.value=320; // the drone: D and A, low, all through
+      g.gain.value=0; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.035,t+Math.min(4,sec/3)); g.gain.setValueAtTime(0.035,Math.max(t+Math.min(4,sec/3),END-2));
+      g.gain.linearRampToValueAtTime(0,END); lp.connect(g); g.connect(master);
+      [38,45].forEach(m=>[-5,5].forEach(c=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(m); o.detune.value=c; o.connect(lp); o.start(t); o.stop(END+0.5)})) }
+    const ost=ac.createBiquadFilter(); ost.type="lowpass"; ost.Q.value=1.2; ost.frequency.value=700; ost.connect(master); ost.connect(verb); // the low-string ostinato's body
     const string=(m,at,v)=>{const g=ac.createGain(); env(g,at,v,0.006,0.16); g.connect(ost);
       [m,m+12].forEach(n=>{const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.value=hz(n); o.connect(g); o.start(at); o.stop(at+0.2)})};
     const tick=(at,hi)=>{const s=ac.createBufferSource(), bp=ac.createBiquadFilter(), g=ac.createGain(), p=ac.createStereoPanner(); // the clock, soft
@@ -295,34 +308,45 @@ const interlude=(()=>{
     const sub=(m,at,dur)=>{const o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=hz(m);
       g.gain.setValueAtTime(0.0001,at); g.gain.exponentialRampToValueAtTime(0.11,at+0.08); g.gain.exponentialRampToValueAtTime(0.05,at+dur*0.8); g.gain.exponentialRampToValueAtTime(0.0001,at+dur+0.3);
       o.connect(g); g.connect(master); o.start(at); o.stop(at+dur+0.4)};
-  
-    bloomAt(t,1); bloomAt(t+BAR*15,0.75); drone(); // opens on the intro bloom, lands home on it
-    CHORDS.forEach(([b,n,pad,bass],ci)=>{const at=t+b*BAR, dur=n*BAR;
-      if(ci<CHORDS.length-1) padAt(pad,ci===0?at+0.6:at,ci===0?dur-0.6:dur);
-      if(b>=4&&b<=14) sub(bass,at,dur);
-      if(b>=8&&b<=12) organAt(pad,at,dur);
-      if(b===4||b===8||b===12) glint(hz(pad[4]+24),at+0.05,0.03);
-      for(let bar=b;bar<b+n;bar++){
-        if(bar>=4&&bar<=11) for(let e=0;e<8;e++){ // arpeggio bed (eighths)
-          const tones=pad.slice(1).map(m=>m+12), pat=[0,2,1,3,2,1,3,2];
-          key(tones[pat[e]],t+bar*BAR+e*BEAT/2+hum(),vary(0.22),e%2?0.35:-0.35,false,0.55)}
-        if(bar>=4&&bar<=11) for(let i=0;i<16;i++){ // low-string ostinato in sixteenths, accents 3+3+2, swelling towards the lift
-          const acc=[0,3,6,8,11,14].includes(i), lv=bar<6?0.022:bar<8?0.032:0.042;
-          string(bass+12,t+bar*BAR+i*SIX,acc?lv:lv*0.4)}
-        if(bar>=4&&bar<=11) for(let q=0;q<4;q+=2) tick(t+bar*BAR+q*BEAT,q===0)}}); // a soft tick on beats 1 and 3
-    riser(t+BAR*6,t+BAR*8); braam(t+BAR*8,1); boom(t+BAR*8,1); boom(t+BAR*12,0.45); // the lift
-    Object.entries(THEME).forEach(([bar,notes])=>notes.forEach(([e,m,v])=>key(m,t+bar*BAR+e*BEAT/2+hum(),vary(v),(m-66)*0.04,true,1)));
+    if(fadeEnd){const g=master.gain; g.setValueAtTime(g.value,Math.max(t+0.7,END-1.5)); g.linearRampToValueAtTime(0,END)} // silent as the next programme starts
+    let next=0;
+    function bar(k){const b=bars[k], tb=t+k*BAR, c=chordOf(b), pad=c[2], bass=c[3];
+      if(b===0) bloomAt(tb,1); if(b===15) bloomAt(tb,0.75); // the blooms: opening and home
+      if(b===c[0]){const dur=BAR*(c[1]===2&&bars[k+1]===b+1?2:1); // a chord starts: its pad, sub, organ and glint
+        if(b===0) padAt(pad,tb+0.6,dur-0.6); else if(b!==15) padAt(pad,tb,dur);
+        if(b>=4&&b<=14) sub(bass,tb,dur);
+        if(b>=8&&b<=12) organAt(pad,tb,dur);
+        if(b===4||b===8||b===12) glint(hz(pad[4]+24),tb+0.05,0.03)}
+      if(b>=4&&b<=11){ // the build: arpeggio bed, low-string ostinato (accents 3+3+2, opening up towards the lift), the clock
+        ost.frequency.setTargetAtTime(b<8?700+(b-4)*100:b<10?1100+(b-8)*300:1700,tb,0.8);
+        const tones=pad.slice(1).map(m=>m+12), pat=[0,2,1,3,2,1,3,2], lv=b<6?0.022:b<8?0.032:0.042;
+        for(let e=0;e<8;e++) key(tones[pat[e]],tb+e*BEAT/2+hum(),vary(0.22),e%2?0.35:-0.35,false,0.55);
+        for(let i=0;i<16;i++) string(bass+12,tb+i*SIX,[0,3,6,8,11,14].includes(i)?lv:lv*0.4);
+        tick(tb,true); tick(tb+2*BEAT,false)}
+      if(b===12) ost.frequency.setTargetAtTime(900,tb,0.8);
+      if(b===6&&bars[k+1]===7&&bars[k+2]===8) riser(tb,tb+2*BAR);
+      if(b===8){braam(tb,1); boom(tb,1)} if(b===12) boom(tb,0.45); // the lift, and the settle
+      (THEME[b]||[]).forEach(([e,m,v])=>key(m,tb+e*BEAT/2+hum(),vary(v),(m-66)*0.04,true,1))}
+    return {ahead(until){while(next<bars.length&&t+next*BAR<until) bar(next++); return next<bars.length}}; // schedule bars starting before 'until'
   }
-  let ac=null, master=null, again=0;
-  function start(sec){stop(); if(!AC||muted||sec<6)return;
-    try{const a=ac=new AC(); a.resume().then(()=>{if(a!==ac)return; if(a.state!=="running"){a.close(); ac=null; return}
-      const {out,verb}=identOut(a,0.35*Math.max(0.05,vol/70)), m=master=a.createGain(), t=a.currentTime+0.1; m.connect(out);
-      m.gain.setValueAtTime(0,t); m.gain.linearRampToValueAtTime(1,t+0.6); interludeNotes(a,t,m,verb);
-      if(sec>LEN+8) again=setTimeout(()=>start(sec-LEN-4),(LEN+4)*1000)}).catch(()=>{})}catch(e){}}
-  function stop(){clearTimeout(again); const a=ac, m=master; ac=master=null; if(!a)return;
-    try{if(m){m.gain.cancelScheduledValues(a.currentTime); m.gain.setValueAtTime(m.gain.value,a.currentTime); m.gain.setTargetAtTime(0,a.currentTime,0.35)}}catch(e){}
-    setTimeout(()=>a.close().catch(()=>{}),2200)}
-  return {start,stop};
+  // One audio engine for every interlude, made with its reverb and noise in idle time soon after the ident (warm), so
+  // starting an interlude costs next to nothing: making an AudioContext and its reverb took a visible ~0.2 s.
+  let ctx=null, chain=null, noise=null, master=null, pump=0, run=0;
+  function warm(){if(!AC||ctx)return; try{ctx=new AC(); chain=identOut(ctx,0.35); noise=noiseBuf(ctx)}catch(e){ctx=null}}
+  function start(sec){stop(); if(!AC||muted||sec<6)return; warm(); if(!ctx)return; const me=++run, a=ctx;
+    a.resume().then(()=>{if(me!==run||a.state!=="running")return;
+      const level=Math.max(0.05,vol/70), m=master=a.createGain(), t=a.currentTime+0.1;
+      m.gain.setValueAtTime(0,t); m.gain.linearRampToValueAtTime(level,t+0.6); m.connect(chain.out); // fades in with the bloom
+      const s=session(a,t,sec,m,chain.verb,true,noise);
+      const go=()=>{if(me!==run)return; if(s.ahead(document.hidden?Infinity:a.currentTime+3)) pump=setTimeout(go,500)}; go(); // a few bars ahead; all at once in a hidden tab
+      setTimeout(()=>{if(me===run) stop()},(sec+4)*1000)}).catch(()=>{})}
+  function stop(){run++; clearTimeout(pump); const m=master; master=null; if(!m||!ctx)return; const a=ctx;
+    try{m.gain.cancelScheduledValues(a.currentTime); m.gain.setValueAtTime(m.gain.value,a.currentTime); m.gain.setTargetAtTime(0,a.currentTime,0.35)}catch(e){}
+    setTimeout(()=>{try{m.disconnect()}catch(e){}},2200)}
+  // The standard piece, rendered offline with its natural ending (for an audio file)
+  function render(sr=44100){const sec=4+15*BAR+0.5, oac=new OfflineAudioContext(2,Math.ceil((sec+4)*sr),sr), {out,verb}=identOut(oac,0.35), m=oac.createGain();
+    m.connect(out); session(oac,0.05,sec,m,verb,false).ahead(Infinity); return oac.startRendering()}
+  return {start,stop,warm,render,plan};
 })();
 /* The static's sound, in retro mode only: a soft, high "no signal". A steady hiss with a faint steady whistle under it, constant for as
    long as the static stays up; it fades out quickly as the picture returns. Quiet, silent when muted, follows the
