@@ -134,7 +134,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .key#keyCc[aria-pressed="true"]{background:linear-gradient(180deg,#ffd9a0,#f2a03d)} /* lit while subtitles are on */
 .key#keyMute[aria-pressed="true"]{background:linear-gradient(180deg,#ffb3a8,#e5483a);color:#fff}  /* lit red while muted */
 .key:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
-.grille{flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
+.grille{display:none;flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
   box-shadow:inset 0 2px 4px rgba(0,0,0,.45)}
 .led{width:8px;height:8px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 6px #ff4a3a,0 0 14px rgba(255,74,58,.6)}
 @media (max-width:640px){
@@ -142,12 +142,12 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{display:none} /* too small a tube for the date */
   .set.on .set-panel{flex-direction:row;flex-wrap:wrap;width:auto;justify-content:space-between;padding:8px 12px;gap:10px}
   .keys{display:flex;width:100%;order:5}.key{flex:1;min-height:34px}
-  .set.on .grille{display:none}
+  .set.on .grille{display:none;display:none}
   .knob-wrap{flex-direction:column;gap:4px}.knob{width:40px} /* labels under the knobs, so all three sit in one row */
   .knob-wrap small{font-size:.52rem;letter-spacing:.14em}
   .room:not(:fullscreen):not(.pseudo-fs) .set.on .knob-wrap{margin-top:10px} /* the knobs sit a little lower on the phone panel */
   .room:not(:fullscreen):not(.pseudo-fs) .set.on .set-brand{margin-left:12px;margin-top:10px} /* the logo a little in from the edge, level with the knobs */
-  .grille{min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
+  .grille{display:none;min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
 }
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* Opening ident, futuristic: out of black a hairline horizon and a faint grid rise, holographic HUD rings boot
@@ -483,7 +483,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .room:is(:fullscreen,.pseudo-fs) .knob{width:clamp(36px,4.4vmax,72px)}
 .room:is(:fullscreen,.pseudo-fs) .keys{display:grid;grid-template-columns:1fr 1fr;width:100%;order:0}
 .room:is(:fullscreen,.pseudo-fs) .key{flex:none;min-height:clamp(26px,2.4vmax,38px);font-size:clamp(.55rem,.8vmax,.75rem)}
-.room:is(:fullscreen,.pseudo-fs) .set.on .grille{display:block;min-height:20px}
+.room:is(:fullscreen,.pseudo-fs) .set.on .grille{display:none;display:block;min-height:20px}
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass{pointer-events:auto} /* clicks on the picture stay with the page (first click: true full screen), not YouTube */
 .room:is(:fullscreen,.pseudo-fs) .set-brand{font-size:clamp(.95rem,1.8vmax,1.7rem)}
 .vhs .osd{display:none!important} /* retro view: no PLAY sign, date or time on the picture, in any view */
@@ -497,7 +497,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .knob{width:clamp(32px,5.4cqw,66px)}
 .knob-wrap small{font-size:clamp(.5rem,.85cqw,.6rem)}
 .key{min-height:clamp(24px,2.9cqw,34px);font-size:clamp(.52rem,.95cqw,.68rem)}
-.grille{min-height:clamp(12px,2.5cqw,36px)}
+.grille{display:none;min-height:clamp(12px,2.5cqw,36px)}
 @media (max-width:640px){.knob{width:40px}.key{min-height:34px;font-size:.68rem}}
 /* TV app (Android TV, Fire TV): no pointer, so no cursor and none of the click-only buttons; the remote does it all */
 .tv-app,.tv-app *{cursor:none!important}
@@ -521,3 +521,4 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
   padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(20,17,28,.94);color:var(--ink);font:500 .95rem/1.4 var(--body);
   box-shadow:0 10px 30px rgba(0,0,0,.5);text-align:center;cursor:pointer}
 .ios-tip b{color:var(--marigold)}
+.room:is(:fullscreen,.pseudo-fs) .set.on .set-panel{justify-content:space-evenly} /* no speaker grille: the controls spread down the panel */
