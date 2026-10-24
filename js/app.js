@@ -489,6 +489,7 @@ setRetro(retro); vfd();
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
 // visitor does something). Exit full screen leaves it.
 function autoFull(){
+  if(!TV_APP&&matchMedia("(pointer:coarse) and (hover:none)").matches) return; // phones and tablets open in the normal view; Maximize is a tap away
   if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
   if(TV_APP) return; // the app is full screen already
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
@@ -514,6 +515,7 @@ function showCard(msg){
   handing=false; const card=$("card"); card.hidden=false; card.classList.remove("fading");
   card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
   if(MODE==="yt"){ // interstitial between programmes
+    if(!msg){clearTimeout(bannerTimer); $("screen").classList.remove("banner-on")} // the channel banner never covers Coming up next
     if(!msg) interlude.start((s.end-now)/1000); // the jingle fills the gap
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
       <h2>${esc(onAir(nx))}</h2><p>${esc(msg||catLabel(nx.v.cat)+" · "+LANG_LABEL[nx.v.lang]+" · starts at "+fmt(nx.start))}</p>

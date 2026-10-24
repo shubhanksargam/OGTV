@@ -75,7 +75,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:none;box-shadow:none} /* clear glass: no glare, shading or edge glow; kept for catching clicks in full screen */
 /* In the set, full screen, subtitles and sound live on the panel as push keys, so the tube shows only the picture */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) :is(.fs,.cc,.sound){display:none!important}
-.tv.retro-on .maximize{display:none}
+
 /* Retro full screen: the whole set, centred in a dim room, sized to fit; everything works as in the page */
 /* Retro full screen: see the end of this file */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .fs{left:6%}
@@ -143,7 +143,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   .set.on .set-panel{flex-direction:row;flex-wrap:wrap;width:auto;justify-content:space-between;padding:8px 12px;gap:10px}
   .keys{display:flex;width:100%;order:5}.key{flex:1;min-height:34px}
   .set.on .grille{display:none}
-  .knob-wrap{flex-direction:row;gap:8px}.knob{width:40px}
+  .knob-wrap{flex-direction:column;gap:4px}.knob{width:40px} /* labels under the knobs, so all three sit in one row */
+  .knob-wrap small{font-size:.52rem;letter-spacing:.14em}
   .grille{min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
 }
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -294,6 +295,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.5);
   opacity:0;transform:translateY(18px);transition:opacity .35s ease,transform .35s ease,bottom .35s ease}
 .screen.banner-on .banner{opacity:1;transform:none}
+.screen:has(> .card.interlude:not([hidden])) .banner{opacity:0!important} /* Coming up next stays in full view on small screens */
 .screen.strip-on .banner{bottom:calc(5vh + 190px)} /* above the buttons, which sit above the strip */
 .bn-n{font:700 clamp(2.6rem,5vw,4.4rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold);min-width:1.5em;text-align:center}
 .bn-body{display:flex;flex-direction:column;gap:6px;min-width:0}
