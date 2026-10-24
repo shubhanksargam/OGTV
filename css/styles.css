@@ -182,7 +182,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .rg-blip{opacity:0;animation:intro-fade 0.39s ease 1.56s forwards,spin 3.12s cubic-bezier(.5,0,.5,1) 1.56s infinite}
 .rg-blip circle{fill:#fff;filter:drop-shadow(0 0 4px #9fe6ff)}
 .start-logo{position:relative;font-size:clamp(3rem,12vw,7rem)}
-.start-logo .logo{filter:drop-shadow(0 0 22px rgba(242,160,61,.32))}
+.start-logo .logo{position:relative;filter:drop-shadow(0 0 22px rgba(242,160,61,.32))}
 .intro-dot{animation:intro-glow 1.56s ease-in-out 2.3s}
 .start .intro-mark{opacity:0;animation:intro-mark 0.91s cubic-bezier(.2,.8,.2,1) 1s forwards} /* the O glitches in like the letters */
 .start .logo-word i{font-style:normal;display:inline-block;opacity:0;transform:translateY(.08em);animation:intro-letter 0.91s cubic-bezier(.2,.8,.2,1) forwards}
@@ -199,17 +199,43 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .start.open .hud{animation:hud-out 1.3s cubic-bezier(.5,0,.3,1) forwards}
 .start.open .iris-edge{animation:iris-edge 1.5s cubic-bezier(.6,0,.2,1) .1s forwards}
 .start.out{animation:intro-out .4s ease forwards} /* skipped */
-/* The intro waits on its first frame behind a play button; pressing it plays the intro with its music */
-.start.wait,.start.wait *,.start.wait *::before,.start.wait *::after{animation-play-state:paused!important}
-.start.wait{cursor:pointer}.start.wait .hud{visibility:hidden}
-.play-btn{display:none}
-.start.wait .play-btn{display:grid;place-items:center;position:absolute;left:50%;top:46%;translate:-50% -50%;z-index:2;width:clamp(78px,14vmin,118px);aspect-ratio:1;padding:0;
-  border-radius:50%;border:1px solid rgba(242,160,61,.55);background:radial-gradient(closest-side,rgba(242,160,61,.16),rgba(242,160,61,.04) 70%,transparent);
-  color:var(--marigold);cursor:pointer;box-shadow:0 0 44px rgba(242,160,61,.18),inset 0 0 18px rgba(242,160,61,.12);transition:scale .2s ease,border-color .2s ease;
-  animation:play-breathe 2.6s ease-in-out infinite!important;animation-play-state:running!important}
-.play-btn svg{width:38%;height:38%;margin-left:9%;fill:currentColor;filter:drop-shadow(0 0 8px rgba(242,160,61,.55))}
-.start.wait .play-btn:hover,.start.wait .play-btn:focus-visible{border-color:rgba(242,160,61,.95);scale:1.05;outline:none}
-@keyframes play-breathe{50%{box-shadow:0 0 72px rgba(242,160,61,.32),inset 0 0 24px rgba(242,160,61,.2);border-color:rgba(242,160,61,.85)}}
+/* Once OGTV has formed the intro asks for a press (class ask). The O is a TV screen, so the play mark appears on it:
+   it resolves out of blur and colour fringe like the letters did, the screen glows softly behind it, and the red
+   on-air light blinks slowly like a set on standby; under the logo a line of direction in the interlude's capitals
+   settles in. A press (class go) flashes the screen on like a CRT and sends a pulse out of the O; then the intro plays
+   out with its music and the channel takes over. */
+.play-btn{position:absolute;left:0;top:50%;translate:0 -50%;width:1.05em;height:.84em;padding:0;border:0;border-radius:30%/38%;background:none;
+  color:var(--marigold);cursor:pointer;visibility:hidden}
+.start.ask .play-btn{visibility:visible}
+.start.ask{cursor:pointer}
+.play-btn:focus{outline:none}.play-btn:focus-visible{outline:2px solid var(--marigold);outline-offset:6px}
+.play-btn svg{display:block;width:100%;height:100%;overflow:visible}
+.pb-screen{fill:url(#pbGlow);opacity:0}
+.pb-flash{fill:#fff8ec;opacity:0}
+.pb-tri{fill:#f6efe3;opacity:0;transform-box:fill-box;transform-origin:center;transition:scale .2s ease}
+.start.ask .pb-tri{animation:pb-tri .9s cubic-bezier(.2,.8,.2,1) .1s forwards}
+.start.ask .pb-screen{animation:pb-screen 3.2s ease-in-out .4s infinite alternate}
+.start.ask .intro-dot{animation:standby 2.2s ease-in-out .6s infinite}
+.start.ask .play-btn:hover .pb-tri,.play-btn:focus-visible .pb-tri{scale:1.12}
+.ask-line{position:absolute;left:50%;top:calc(100% + clamp(18px,4vh,36px));translate:-50% 0;visibility:hidden}
+.start.ask .ask-line{visibility:visible}
+.ask-text{display:block;font:400 clamp(.56rem,1.1vw,.72rem)/1 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.42em;margin-right:-.42em;white-space:nowrap;color:rgba(244,241,236,.72);opacity:0}
+.start.ask .ask-text{animation:ask-text 1.1s cubic-bezier(.2,.8,.2,1) .7s forwards}
+.play-btn::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1.5px solid var(--marigold);opacity:0;pointer-events:none}
+.start.go .play-btn::after{animation:pb-pulse .8s cubic-bezier(.2,.7,.3,1) forwards}
+.start.go .pb-flash{animation:pb-flash .5s ease-out forwards}
+.start.go .pb-tri{animation:pb-out .35s ease-in forwards}
+.start.go .intro-dot{animation:none;opacity:1}
+.start.go .ask-text{transition:opacity .4s ease;opacity:0}
+@keyframes pb-tri{0%{opacity:0;scale:.8;filter:blur(8px) drop-shadow(-3px 0 rgba(80,220,255,.9)) drop-shadow(3px 0 rgba(255,70,120,.9))}
+  45%{opacity:1;filter:blur(0) drop-shadow(-1.5px 0 rgba(80,220,255,.7)) drop-shadow(1.5px 0 rgba(255,70,120,.7))}
+  100%{opacity:1;scale:1;filter:blur(0) drop-shadow(0 0 0 transparent) drop-shadow(0 0 0 transparent)}}
+@keyframes pb-screen{from{opacity:.3}to{opacity:1}}
+@keyframes standby{50%{opacity:.3}}
+@keyframes ask-text{from{opacity:0;letter-spacing:.8em;margin-right:-.8em}to{opacity:1;letter-spacing:.42em;margin-right:-.42em}}
+@keyframes pb-flash{0%{opacity:0}25%{opacity:.95}100%{opacity:0}}
+@keyframes pb-out{to{opacity:0;scale:1.5}}
+@keyframes pb-pulse{from{opacity:.9;scale:1}to{opacity:0;scale:2.6}}
 @keyframes intro-fade{to{opacity:1}}
 @keyframes grid-run{to{background-position:0 64px}}
 @keyframes horizon{to{transform:scaleX(1)}}
@@ -229,7 +255,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes iris-open{to{--iris:66vmax}}
 @keyframes iris-edge{0%{opacity:0;width:0}12%{opacity:1}70%{opacity:.8}100%{opacity:0;width:132vmax}}
 @keyframes intro-out{to{opacity:0}}
-@media (prefers-reduced-motion:reduce){.start{animation:intro-out .5s ease 1.4s forwards}
+@media (prefers-reduced-motion:reduce){.start.open{animation:intro-out .5s ease forwards}
+  .start.ask .pb-tri,.start.ask .ask-text{opacity:1}.start.ask .pb-screen{opacity:.7}
   .start *,.start *::before{animation:none!important}
   .fx-grid,.fx-core,.hud-frame,.rg-ticks,.rg-arcs{opacity:1}.fx-horizon{transform:none}
   .rg-outer,.rg-inner{stroke-dashoffset:0}.start .intro-mark,.start .logo-word i{transform:none;opacity:1}.rg-blip,.iris-edge{display:none}}

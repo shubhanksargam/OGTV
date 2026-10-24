@@ -221,12 +221,24 @@ function soundIn(){if(!primed)return; // not allowed yet: unmuting would make th
 // and the ident hands over as it finishes.
 let videoUp=false, logoDone=false, capped=false, opened=false;
 function runIdent(){
-  if(REDUCED){introTimer=setTimeout(()=>start(true),1900); bloomTimer=setTimeout(bloom,1300); return}
-  let formed=false; const formedNow=()=>{if(formed)return; formed=true; setTimeout(()=>{logoDone=true; openIris()},1250); setTimeout(()=>{capped=true; openIris()},7250)};
+  if(REDUCED){logoDone=capped=true; ask(); return}
+  let formed=false; const formedNow=()=>{if(formed)return; formed=true; setTimeout(()=>{logoDone=true; ask(); openIris()},1250); setTimeout(()=>{capped=true; openIris()},7250)};
   document.querySelector(".start .logo-word i:nth-child(3)").addEventListener("animationend",formedNow,{once:true});
   setTimeout(formedNow,6000)} // in case the animation never reports (a hidden tab)
-function openIris(){if(opened||started||!logoDone||!(videoUp||capped))return; opened=true;
-  $("start").classList.add("open"); bloomTimer=setTimeout(bloom,100); introTimer=setTimeout(()=>start(true),1700)}
+function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))return; opened=true;
+  $("start").classList.add("open"); bloomTimer=setTimeout(bloom,100); introTimer=setTimeout(()=>start(true),REDUCED?600:1700)}
+// Once OGTV has formed the intro asks for a press of the play button (the TV app goes straight on). The press (the
+// button, a tap or click anywhere on the intro, Enter or Space) is the viewer's go-ahead for sound on every device and
+// browser: the intro plays out with its music and the channel's sound fades in after it.
+let asked=false, pressed=false;
+function ask(){if(asked||started)return; asked=true; if(TV_APP){pressPlay(); return} $("start").classList.add("ask")}
+function pressPlay(e){if(!asked||pressed||started)return;
+  if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
+  pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
+  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
+  if(TV_APP){openIris(); return}
+  track("play","Play pressed"); $("start").classList.add("go"); setTimeout(openIris,350)} // the pulse leaves the ring first
+$("start").addEventListener("click",pressPlay); addEventListener("keydown",pressPlay);
 /* Ident sound, made with Web Audio (no files): as the iris opens, a warm D major add-9 chord blooms with a high
    glint and a hall tail. A context made now tells us whether sound is allowed yet ("running"). */
 const AC=window.AudioContext||window.webkitAudioContext;
@@ -235,15 +247,7 @@ primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the chann
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
-// The intro waits on its first frame behind a play button (the TV app starts by itself). Pressing it (a tap or click
-// anywhere on the intro, Enter or Space) is the viewer's go-ahead for sound on every device and browser, so the intro
-// plays with its music and the channel's sound fades in after it.
-function begin(e){const st=$("start"); if(!st.classList.contains("wait"))return;
-  if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
-  st.classList.remove("wait"); primed=true; if(identAc) identAc.resume().catch(()=>{});
-  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
-  if(!TV_APP) track("play","Play pressed"); runIdent()}
-if(TV_APP) begin(); else {$("start").addEventListener("click",begin); addEventListener("keydown",begin); $("playBtn").focus({preventScroll:true})}
+runIdent();
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
