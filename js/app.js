@@ -111,12 +111,12 @@ window.onYouTubeIframeAPIReady=()=>{
               player.playVideo();if(!muted)checkSound();$("sound").hidden=false;
               playingKey=firstKey;tick(); // reloads only if the programme changed while loading
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
-            onStateChange:e=>{const S=YT.PlayerState;
+            onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){rejoin();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+              if(e.data===S.PLAYING){rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
               else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
-              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); $("set").classList.add("idle")}
+              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
               else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
@@ -133,15 +133,38 @@ function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(!ended)
 function playNow(){if(MODE!=="yt"||!player||ended)return; rejoin(); player.playVideo()}
 function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=player.getPlayerState()}catch(e){return}
   st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING?pauseNow():playNow()}
-// The phone's media buttons (a Bluetooth speaker or headphones, the lock screen) belong to YouTube's own player, the
-// one thing playing: it sets its own play and pause handlers and title. Nothing else on the page competes for them (a
-// silent track once did, and the buttons flipped between the two until a press went to the wrong one).
-// Safari keeps a web video in Now Playing while it is paused only if it was once played from a touch; a video that
-// started by itself drops out a few seconds after a pause, and a speaker's play then went nowhere. So every touch,
-// click or key on the page while the channel plays tells the player to play (it already is, so nothing changes on
-// screen). Safari passes the touch on with that message, which makes the video one the viewer started.
-function claimMedia(){try{if(MODE==="yt"&&player&&!ended){const st=player.getPlayerState(); if(st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING) player.playVideo()}}catch(e){}}
-if(!TV_APP) ["touchend","click","keydown"].forEach(ev=>addEventListener(ev,claimMedia,true));
+// ?debug: an on-screen log of the player and the media buttons, for tracking down device-specific trouble
+const dbg=/[?&]debug\b/.test(location.search)?(()=>{const box=document.createElement("pre"), lines=[], t0=Date.now();
+  box.style.cssText="position:fixed;left:6px;bottom:6px;z-index:999;max-width:94vw;margin:0;padding:6px 8px;border-radius:6px;background:rgba(0,0,0,.82);color:#7fffa0;font:11px/1.35 ui-monospace,monospace;white-space:pre-wrap;pointer-events:none;text-transform:none;letter-spacing:0";
+  document.body.append(box); document.addEventListener("visibilitychange",()=>log("page "+document.visibilityState));
+  function log(m){lines.push(((Date.now()-t0)/1000).toFixed(1)+"s "+m); if(lines.length>16) lines.shift(); box.textContent=lines.join("\n")}
+  log(navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,90)); return log})():()=>{};
+// The phone's media buttons (Bluetooth speakers and headphones, the media notification, the lock screen).
+// On computers and iPhones they go to YouTube's own player, which sets its own play and pause handlers; that works.
+// On Android, Chrome lets go of a paused video's media session after a few seconds, so a speaker's play then went
+// nowhere. So on Android OGTV holds the session itself: a silent 30 s track keeps playing for as long as the TV is on,
+// paused or not (a track that paused along with the video was dropped too), the page tells Android whether the channel
+// is playing or paused, and the buttons are answered here. The track can only start after the viewer has touched the
+// page (a touch on the video counts); after 15 minutes paused it stops, and the TV is off.
+const remote=(()=>{
+  const ms=navigator.mediaSession;
+  if(!ms||TV_APP||!/Android/.test(navigator.userAgent)) return {playing(){},paused(){},meta(){}};
+  const el=new Audio("/audio/silence.mp3?v=2"); el.loop=true; el.preload="auto"; el.setAttribute("playsinline","");
+  let offTimer=0;
+  function on(){clearTimeout(offTimer); if(el.paused) el.play().then(()=>dbg("track on")).catch(e=>dbg("track refused: "+e.name))}
+  function state(st){ms.playbackState=st; dbg("session "+st);
+    if(st==="paused") offTimer=setTimeout(()=>{el.pause(); dbg("track off: paused 15 min")},15*60e3)}
+  const act=(k,fn)=>{try{ms.setActionHandler(k,fn)}catch(e){}};
+  act("play",()=>{dbg("button: play"); on(); state("playing"); playNow()});
+  act("pause",()=>{dbg("button: pause"); on(); state("paused"); pauseNow()});
+  act("stop",()=>{dbg("button: stop"); clearTimeout(offTimer); ms.playbackState="paused"; el.pause(); pauseNow()});
+  act("nexttrack",()=>{dbg("button: next"); tune(cur+1)}); act("previoustrack",()=>{dbg("button: previous"); tune(cur-1)});
+  ["seekbackward","seekforward","seekto"].forEach(k=>act(k,null)); // live TV: no seeking
+  ["touchend","click","keydown"].forEach(ev=>addEventListener(ev,on,true)); // the first touch lets the track start
+  function meta(title,channel){try{ms.metadata=new MediaMetadata({title,artist:channel,album:"OGTV",
+    artwork:[{src:"/img/apple-touch-icon.png",sizes:"180x180",type:"image/png"}]})}catch(e){}}
+  return {playing(){on(); state("playing")},paused(){on(); state("paused")},meta}; // the track keeps playing either way
+})();
 async function keepAwake(on){wantAwake=on;
   try{if(on&&!wakeLock&&navigator.wakeLock&&document.visibilityState==="visible"){wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{wakeLock=null})}
       else if(!on&&wakeLock){const l=wakeLock; wakeLock=null; await l.release()}}catch(e){wakeLock=null}}
@@ -556,7 +579,7 @@ function tick(){
   if(key!==playingKey){
     if(playingKey&&reloadNow()){location.reload(); return}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
-    playingKey=key; playingId=s.v.id; ended=false; interlude.stop(); // next programme: the jingle fades out
+    playingKey=key; playingId=s.v.id; ended=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     const off=Math.floor((now-s.start)/1000);
     if(MODE==="yt"&&player){if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
