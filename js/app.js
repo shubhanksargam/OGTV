@@ -222,7 +222,7 @@ function soundIn(){if(!primed)return; // not allowed yet: unmuting would make th
 let videoUp=false, logoDone=false, capped=false, opened=false;
 function runIdent(){
   if(REDUCED){logoDone=capped=true; ask(); return}
-  let formed=false; const formedNow=()=>{if(formed)return; formed=true; setTimeout(()=>{logoDone=true; ask(); openIris()},1250); setTimeout(()=>{capped=true; openIris()},7250)};
+  let formed=false; const formedNow=()=>{if(formed)return; formed=true; logoDone=true; ask(); openIris(); setTimeout(()=>{capped=true; openIris()},7250)};
   document.querySelector(".start .logo-word i:nth-child(3)").addEventListener("animationend",formedNow,{once:true});
   setTimeout(formedNow,6000)} // in case the animation never reports (a hidden tab)
 function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))return; opened=true;
@@ -563,7 +563,10 @@ function autoFull(){
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
     if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#knobMode,#fs,#home"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
-    const r=req.call(room);
+    if(!started){const w=setInterval(()=>{if(!started)return; clearInterval(w); // full screen sits above the intro, so it waits for the iris
+      if(navigator.userActivation&&!navigator.userActivation.isActive){addEventListener("click",up,true); addEventListener("keydown",up,true); return} goFull()},100); return}
+    goFull()};
+  const goFull=()=>{if(!room.classList.contains("pseudo-fs"))return; const r=(room.requestFullscreen||room.webkitRequestFullscreen).call(room);
     if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
   addEventListener("click",up,true); addEventListener("keydown",up,true);
 }
