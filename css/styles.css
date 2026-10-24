@@ -283,6 +283,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen .bug{display:none} /* the corner watermark is a full-screen thing; normal view stays clean */
 .screen:fullscreen .bug,.screen:-webkit-full-screen .bug,.screen.pseudo-fs .bug{display:flex}
 .fs-catch,.fs-ui{display:none}
+.tap-catch{display:none} /* the page's TV (not full screen): taps on the picture come to the page, not YouTube */
+.room:not(:fullscreen):not(.pseudo-fs) .screen:not(.pseudo-fs):not(:fullscreen) .tap-catch{display:block;position:absolute;inset:0;z-index:1;touch-action:manipulation;cursor:pointer}
 .screen:fullscreen .fs-catch,.screen:-webkit-full-screen .fs-catch,.screen.pseudo-fs .fs-catch{display:block;position:absolute;inset:0;z-index:2}
 .screen:fullscreen .fs-ui,.screen:-webkit-full-screen .fs-ui,.screen.pseudo-fs .fs-ui{display:block}
 .screen.fs-idle .fs-catch{cursor:none}

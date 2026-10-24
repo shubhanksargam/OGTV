@@ -129,10 +129,15 @@ let wakeLock=null, wantAwake=false;
 // channel's moment made the video reload for a second or two); the channel catches up at the next programme change.
 let pausedAt=0, resumedAt=0, subsFor=null;
 function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resumed: no static while it picks up
-function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(!ended){player.pauseVideo(); pausedAt=Date.now()}}
-function playNow(){if(MODE!=="yt"||!player||ended)return; rejoin(); player.playVideo()}
-function togglePause(){if(MODE!=="yt"||!player||ended)return; let st; try{st=player.getPlayerState()}catch(e){return}
-  st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING?pauseNow():playNow()}
+// Between programmes (Coming up next) pause hushes the jingle and play brings it back for the rest of the gap.
+let gapHushed=false;
+function tvPlaying(){try{if(MODE!=="yt"||!player)return false; if(ended)return !gapHushed;
+  const st=player.getPlayerState(); return st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING}catch(e){return false}}
+function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(ended){gapHushed=true; remote.paused()} else {player.pauseVideo(); pausedAt=Date.now()}}
+function playNow(){if(MODE!=="yt"||!player)return;
+  if(ended){if(gapHushed){gapHushed=false; const s=slotAt(CHANNELS[cur],tvNow()); interlude.start((s.end-tvNow())/1000); remote.playing()} return}
+  rejoin(); player.playVideo()}
+function togglePause(){tvPlaying()?pauseNow():playNow()}
 // ?debug: an on-screen log of the player and the media buttons, for tracking down device-specific trouble
 const dbg=/[?&]debug\b/.test(location.search)?(()=>{const box=document.createElement("pre"), lines=[], t0=Date.now();
   box.style.cssText="position:fixed;left:6px;bottom:6px;z-index:999;max-width:94vw;margin:0;padding:6px 8px;border-radius:6px;background:rgba(0,0,0,.82);color:#7fffa0;font:11px/1.35 ui-monospace,monospace;white-space:pre-wrap;pointer-events:none;text-transform:none;letter-spacing:0";
@@ -155,8 +160,10 @@ const remote=(()=>{
   function state(st){ms.playbackState=st; dbg("session "+st);
     if(st==="paused") offTimer=setTimeout(()=>{el.pause(); dbg("track off: paused 15 min")},15*60e3)}
   const act=(k,fn)=>{try{ms.setActionHandler(k,fn)}catch(e){}};
-  act("play",()=>{dbg("button: play"); on(); state("playing"); playNow()});
-  act("pause",()=>{dbg("button: pause"); on(); state("paused"); pauseNow()});
+  // While the track plays Chrome reports the session as playing even when the channel is paused, so a speaker's single
+  // play/pause button can arrive as "pause" both ways: pause toggles, and play only ever plays.
+  act("play",()=>{dbg("button: play (tv "+(tvPlaying()?"playing":"paused")+")"); on(); if(!tvPlaying()) playNow()});
+  act("pause",()=>{dbg("button: pause (tv "+(tvPlaying()?"playing":"paused")+")"); on(); togglePause()});
   act("stop",()=>{dbg("button: stop"); clearTimeout(offTimer); ms.playbackState="paused"; el.pause(); pauseNow()});
   act("nexttrack",()=>{dbg("button: next"); tune(cur+1)}); act("previoustrack",()=>{dbg("button: previous"); tune(cur-1)});
   ["seekbackward","seekforward","seekto"].forEach(k=>act(k,null)); // live TV: no seeking
@@ -312,7 +319,8 @@ function checkSound(){ // refused (muted again or paused by the browser): carry 
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
 // Sound refused after the ident: the first tap or key turns it on (during the ident, the ident handles it)
-["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(!started||soundTapped)return; soundTapped=true; if(muted) setSound(true)},true));
+let soundTapAt=0;
+["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{if(!started||soundTapped)return; soundTapped=true; if(muted){soundTapAt=Date.now(); setSound(true)}},true));
 $("sound").addEventListener("click",toggleSound);
 /* Full screen the TV (with its overlays). iPhone Safari can't fullscreen an element, so the screen fills the window instead. */
 // In retro mode full screen shows the whole TV set, which works just as it does in the page; otherwise the screen alone
@@ -544,7 +552,11 @@ function autoFull(){
   addEventListener("click",up,true); addEventListener("keydown",up,true);
 }
 autoFull();
-$("screen").addEventListener("dblclick",toggleFullscreen);
+// In the TV on the page a tap on the picture pauses or plays, as YouTube's own tap did; the picture itself no longer
+// takes touches, so YouTube's double-tap skip (±10 s) is gone. No double tap does anything: a quick second tap is
+// ignored, and the tap that turns the sound on doesn't also pause.
+let lastTap=0;
+$("tapCatch").addEventListener("click",()=>{const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800) return; lastTap=now; togglePause()});
 
 const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)+"&t="+sec+"s";
 // After Coming up next the new programme isn't announced with static: the card stays up while it loads, then fades
@@ -579,7 +591,7 @@ function tick(){
   if(key!==playingKey){
     if(playingKey&&reloadNow()){location.reload(); return}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
-    playingKey=key; playingId=s.v.id; ended=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
+    playingKey=key; playingId=s.v.id; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     const off=Math.floor((now-s.start)/1000);
     if(MODE==="yt"&&player){if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
