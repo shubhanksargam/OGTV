@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.thebharat.si/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/just-news/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uVMYQRly2uU/hqdefault.jpg</video:thumbnail_loc><video:title>Raja Kolander: vo Serial Killer jo insan ko markar unki khopri ka sup pita tha! Wanted EP 12</video:title>
-      <video:description>Raja Kolander: vo Serial Killer jo insan ko markar unki khopri ka sup pita tha! Wanted EP 12, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/uVMYQRly2uU</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ivw76ekLdzM/hqdefault.jpg</video:thumbnail_loc><video:title>“He Ended Up in Tihar Jail.” Alok Sama on His New Book &amp; How the Successful Commit Cost…</video:title>
+      <video:description>“He Ended Up in Tihar Jail.” Alok Sama on His New Book &amp; How the Successful Commit Cost…, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ivw76ekLdzM</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uVMYQRly2uU/hqdefault.jpg</video:thumbnail_loc><video:title>Raja Kolander: vo Serial Killer jo insan ko markar unki khopri ka sup pita tha! Wanted EP 12</video:title>
@@ -12,9 +12,9 @@
       <video:player_loc>https://www.youtube.com/embed/uVMYQRly2uU</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/newsroom/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/4wxKZAYW6-I/hqdefault.jpg</video:thumbnail_loc><video:title>Weekly Tidbits: 24th Oct</video:title>
-      <video:description>Weekly Tidbits: 24th Oct, now on Newsroom, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/4wxKZAYW6-I</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ivw76ekLdzM/hqdefault.jpg</video:thumbnail_loc><video:title>“He Ended Up in Tihar Jail.” Alok Sama on His New Book &amp; How the Successful Commit Cost…</video:title>
+      <video:description>“He Ended Up in Tihar Jail.” Alok Sama on His New Book &amp; How the Successful Commit Cost…, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ivw76ekLdzM</video:player_loc><video:duration>1500</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/purvaiya/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/kMHtJFCsZuY/hqdefault.jpg</video:thumbnail_loc><video:title>Bihar MLC Election: anant sinh ke nishkasan ke bad samarthakon ne manaya jashn!</video:title>
@@ -72,14 +72,14 @@
       <video:player_loc>https://www.youtube.com/embed/D66XVp0S_Dw</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/khel/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/keAWnVQztsY/hqdefault.jpg</video:thumbnail_loc><video:title>Anish Giri Supremacy</video:title>
-      <video:description>Anish Giri Supremacy, now on Khel, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/keAWnVQztsY</video:player_loc><video:duration>840</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/DJbuulcuTh8/hqdefault.jpg</video:thumbnail_loc><video:title>The Incredible Rise of World Chess Champion D. Gukesh</video:title>
+      <video:description>The Incredible Rise of World Chess Champion D. Gukesh, now on Khel, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/DJbuulcuTh8</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/football/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Z6JQ-agb4yY/hqdefault.jpg</video:thumbnail_loc><video:title>When the Premier League witnessed Ballon D&apos;or worthy brilliance! |</video:title>
-      <video:description>When the Premier League witnessed Ballon D&apos;or worthy brilliance! |, now on Football, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/Z6JQ-agb4yY</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/UbmVgexANeQ/hqdefault.jpg</video:thumbnail_loc><video:title>Odisha FC vs NorthEast United FC</video:title>
+      <video:description>Odisha FC vs NorthEast United FC, now on Football, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/UbmVgexANeQ</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/cricket-classics/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/D66XVp0S_Dw/hqdefault.jpg</video:thumbnail_loc><video:title>The sixes make the headlines. The years of hard work tell the real story! 💪</video:title>
@@ -87,9 +87,9 @@
       <video:player_loc>https://www.youtube.com/embed/D66XVp0S_Dw</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-24T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/international-sports/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/F3aaTsKR1hM/hqdefault.jpg</video:thumbnail_loc><video:title>Drivers React After Qualifying</video:title>
-      <video:description>Drivers React After Qualifying, now on International Sports, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/F3aaTsKR1hM</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/DJbuulcuTh8/hqdefault.jpg</video:thumbnail_loc><video:title>The Incredible Rise of World Chess Champion D. Gukesh</video:title>
+      <video:description>The Incredible Rise of World Chess Champion D. Gukesh, now on International Sports, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/DJbuulcuTh8</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-10-25T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/bhakti/</loc><lastmod>2026-10-25</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/aN0_2BuK0lc/hqdefault.jpg</video:thumbnail_loc><video:title>Amrit Gaathayein: How did Sanyasi Shankaracharya gain knowledge of Grihastha Jeevan in…</video:title>
