@@ -20,7 +20,7 @@ const {feeds, blockChannels = [], noSouthIn = [], noBhojpuriIn = []} = JSON.pars
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
-const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
+const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
 const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|(telugu|tamil|malayalam|kannada)/i,
   SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
 const KEY = process.env.YT_API_KEY;
