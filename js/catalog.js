@@ -101,6 +101,8 @@ const CATALOG = [
   {id:"3AezKmLwiTo",t:"Nalanda in 2030: the top 10 projects",cat:"biharlife",tag:"infra",lang:"hi",min:8,src:"Chandradev Zone"},
   {id:"Uh622oIQx7k",t:"Rajgir's international cricket stadium from the air",cat:"biharlife",tag:"infra",lang:"hi",min:6,src:"Skyline Cinematics"},
   {id:"3BnItvPAtjE",t:"Bihar Sharif: the Bharaopar flyover",cat:"biharlife",tag:"infra",lang:"hi",min:6,src:"Local Info By TS"},
+  {id:"l7FucqhBA0c",t:"West Patna from above: the metro and Gola Road",cat:"biharlife",tag:"infra",lang:"hi",min:4,src:"SoaringBK"},
+  {id:"fWKSQErIpb0",t:"Patna Junction & Mithapur from above",cat:"biharlife",tag:"infra",lang:"hi",min:5,src:"SoaringBK"},
   // Purvaiya: niche Nalanda district (Rajgir, Pawapuri)
   {id:"jkmHX2VB2_E",t:"Rajgir Zoo Safari: the full tour",cat:"biharlife",tag:"vlogs",lang:"hi",min:20,src:"Vlogs With Sans"},
   {id:"OjAQt2vGurE",t:"Unexplored places of Rajgir",cat:"biharlife",tag:"vlogs",lang:"hi",min:7,src:"Shubron"},
