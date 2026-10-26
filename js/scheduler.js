@@ -99,7 +99,8 @@ function buildDay(ch,dayStart){
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
-    const fresh=()=>p.newest?newestFirst(pool):shuffle(pool,rnd);
+    const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
+    const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
     let order=fresh(), i=0, n=0;
     const boosts=!p.boost?[]:CATALOG.filter(v=>!BAD.has(v.id)&&(p.boost.id?v.id===p.boost.id:v.tag===p.boost.tag&&[].concat(p.cat).includes(v.cat))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j); // p.boost {id or tag, every}: that song (or those, in turn) every so many
     const boost=boosts.length>0;
