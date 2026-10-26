@@ -63,6 +63,32 @@ const CATALOG = [
   {id:"esoQhorc1As",t:"3 easy science experiments with water",cat:"vigyan",lang:"hi",min:6,src:"Unacademy Live Laboratory"},
   {id:"vnfiSiR9cvI",t:"The human liver · Hindi",cat:"vigyan",lang:"hi",min:30,src:"Infinity Stream"},
   {id:"z4aOiALk2Fk",t:"The human brain · Hindi",cat:"vigyan",lang:"hi",min:34,src:"Infinity Stream"},
+  // Purvaiya: Legends of Bihar (Nalanda, the Mauryas, Dinkar, Khan Sir), alongside the legends feeds
+  {id:"XMDpjjNlL0I",t:"Nalanda University: a heritage for the world",cat:"biharlife",tag:"legends",lang:"hi",min:29,src:"Infinity Stream"},
+  {id:"UlUsB-YskrE",t:"The complete story of Nalanda: from creation to destruction",cat:"biharlife",tag:"legends",lang:"hi",min:36,src:"kwy true tale"},
+  {id:"FrvimejENnY",t:"Nalanda University: from shadows to the spotlight · History Hunter",cat:"biharlife",tag:"legends",lang:"hi",min:9,src:"Discovery Channel India"},
+  {id:"EViwHo9a9ao",t:"The rise of Magadh · Khan Sir",cat:"biharlife",tag:"legends",lang:"hi",min:35,src:"KGS Bihar Exams"},
+  {id:"rnDum-g8YYw",t:"The real story of UP & Bihar · Khan Sir",cat:"biharlife",tag:"legends",lang:"hi",min:24,src:"Khan Global Studies"},
+  {id:"znUkgeisaNw",t:"Industry tour of Bihar · Khan Sir",cat:"biharlife",tag:"legends",lang:"hi",min:22,src:"Khan Global Studies"},
+  {id:"K_BAYwjZjVs",t:"Mahakavi: Ramdhari Singh Dinkar · Kumar Vishwas",cat:"biharlife",tag:"legends",lang:"hi",min:38,src:"ABP News"},
+  {id:"VThvLs0u2v8",t:"Virasat: Ramdhari Singh Dinkar",cat:"biharlife",tag:"legends",lang:"hi",min:59,src:"Sansad TV"},
+  {id:"EVW4_gsZ070",t:"Ramdhari Singh 'Dinkar' · a film by Ritu Goel",cat:"biharlife",tag:"legends",lang:"hi",min:30,src:"Sahitya Akademi"},
+  {id:"S2sNa405g8s",t:"The entire history of the Maurya Empire",cat:"biharlife",tag:"legends",lang:"hi",min:21,src:"Flashback Frenzy"},
+  {id:"PDuLCOtzJZc",t:"Chandragupta Maurya: his remarkable rise to power",cat:"biharlife",tag:"legends",lang:"hi",min:16,src:"OnlyIAS Extended"},
+  {id:"daff83ALIgo",t:"The true story of Chandragupta Maurya",cat:"biharlife",tag:"legends",lang:"hi",min:22,src:"Elevate beyond"},
+  // Purvaiya: niche documentaries on Parasnath (Sammed Shikharji) and Giridih, on alternate days
+  {id:"VYAaYrP6u9U",t:"Johar Giridih",cat:"biharlife",tag:"parasnath",lang:"hi",min:30,src:"DD Jharkhand"},
+  {id:"X0NoM0nzSZA",t:"The history of Giridih",cat:"biharlife",tag:"parasnath",lang:"hi",min:13,src:"Usri Dhara"},
+  {id:"kSEkYq9FMCM",t:"India: the dark side of mica mining",cat:"biharlife",tag:"parasnath",lang:"hi",min:43,src:"imineo Documentaires"},
+  {id:"LMKKwfnOXd8",t:"Giridih: the holy land of Jharkhand",cat:"biharlife",tag:"parasnath",lang:"hi",min:5,src:"Nomadic Kunj"},
+  {id:"wdNo1I0F6vY",t:"Parasnath: a 70 km solo journey to Jharkhand's highest peak",cat:"biharlife",tag:"parasnath",lang:"hi",min:9,src:"Sajid shah 33"},
+  {id:"3-uIxwxr2OQ",t:"Parasnath Hill, Giridih: the 27 km trek",cat:"biharlife",tag:"parasnath",lang:"hi",min:25,src:"Aesthetic Nitish"},
+  {id:"VGaf2zYqKis",t:"Parasnath Hill: Madhuban and the Jain temples",cat:"biharlife",tag:"parasnath",lang:"hi",min:18,src:"Amit Sharma Visuals"},
+  {id:"25YSPWCaPic",t:"Parasnath Hill: Santhal tribals and the Jain community",cat:"biharlife",tag:"parasnath",lang:"hi",min:12,src:"Adivasi Stories"},
+  {id:"mMq_zI4sQUQ",t:"The Parasnath Hill question, explained",cat:"biharlife",tag:"parasnath",lang:"hi",min:11,src:"Sanskriti IAS"},
+  {id:"S0PY8BoGNgY",t:"Sammed Shikharji: the untold story",cat:"biharlife",tag:"parasnath",lang:"hi",min:5,src:"Dharmbhashi"},
+  // Classic Films: Nadiya Ke Paar (1982)
+  {id:"D4dsSqRuQsg",t:"Nadiya Ke Paar (1982) · Sachin, Sadhana Singh",cat:"retro",lang:"hi",min:150,src:"Rajshri"},
   // Punjabi: 52 Bars, which Punjabi and Gym bring round every few songs (their parts' boost)
   {id:"4DfVxVeqk2o",t:"52 Bars · Karan Aujla, Ikky",cat:"punjabi",lang:"hi",min:4,src:"Karan Aujla"},
 ];

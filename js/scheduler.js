@@ -36,6 +36,7 @@ function pick(part){
   if(!pool.length) pool=inCat.filter(ok);
   if(!pool.length&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // e.g. Kids falls back to science
   if(!pool.length&&part.tag) pool=inCat.filter(ok);
+  if(part.tag&&pool.length&&pool.length<6&&typeof part.alt==="string") pool=pool.concat(inCats(part.alt).filter(v=>ok(v)&&!pool.includes(v))); // an artist set still filling up: never two songs on loop
   if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
@@ -92,7 +93,9 @@ function buildDay(ch,dayStart){
   // a set left on for weeks keeps only yesterday onwards
   if(cache.size>CHANNELS.length*4){const keep=istDayStart(tvNow())-DAY; for(const key of cache.keys()) if(+key.split("|")[1]<keep) cache.delete(key)}
   const slots=[], warp=primeWarp(ch,dayStart);
-  const parts=ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(p,dayStart));
+  const wkend=[0,6].includes(new Date(dayStart+IST).getUTCDay()); // p.weekend: Saturday and Sunday take those settings
+  const odd=Math.round(dayStart/DAY)%2===1; // p.otherDay: every other day takes those settings
+  const parts=ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);

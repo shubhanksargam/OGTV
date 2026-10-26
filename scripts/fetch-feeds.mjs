@@ -16,9 +16,11 @@ import {roman} from "./roman.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds, blockChannels = [], noSouthIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = [], noSouthIn = [], noBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
+// Purvaiya plays no modern Bhojpuri (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
+const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /bhojpuri|भोजपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
 const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|(telugu|tamil|malayalam|kannada)/i,
   SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
 const KEY = process.env.YT_API_KEY;
@@ -153,6 +155,7 @@ async function fetchFeed(f, old) {
       if (!KEY) await sleep(300);
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
       if (NO_SOUTH.has(f.cat) && (SOUTH_TITLE.test(d.title) || SOUTH_AUTHOR.test(d.author || ""))) continue;
+      if (NO_BHOJPURI.has(f.cat) && BHOJPURI.test(d.title + " " + (d.author || ""))) continue;
       if (f.authors && !f.authors.includes(d.author)) continue; // fan playlists: only official uploaders
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
@@ -199,7 +202,7 @@ await Promise.all(Array.from({length: 6}, async () => {
 // Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
 const bySource = new Map(feeds.map(f => [keyOf(f), f]));
 const passes = v => { const f = bySource.get(v.feed); if (!f) return true;
-  return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t))
+  return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t)) && !(NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) && !(NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))
     && !(f.maxDays && !((v.pub || "") >= sinceDays(f.maxDays))); };
 // Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
 const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").split(/full|hindi|movie|film|\||-|4k|hd|comedy|action|horror|drama|romantic|thriller|superhit|blockbuster/)[0].replace(/[^a-z0-9]/g, "");
