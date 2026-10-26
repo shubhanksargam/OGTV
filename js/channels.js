@@ -66,10 +66,11 @@ const CHANNELS = [
     {from:13,to:14,cat:"bihar",preferMin:15,label:"Afternoon news"},
     {from:14,to:15,cat:"biharlife",tag:"tourism",alt:"biharlife",label:"Jharkhand: Netarhat, Betla & the waterfalls"},
     {from:15,to:16,cat:"biharlife",tag:"vlogs",alt:"biharlife",label:"Niche vlogs: village life & hidden Bihar and Jharkhand",otherDay:{tag:"parasnath",label:"Parasnath & Giridih: niche documentaries"}},
-    {from:16,to:17,cat:"biharlife",tag:"legends",alt:"biharlife",label:"Legends of Bihar, back to back"},
+    {from:16,to:17,cat:"biharlife",tag:"gurus",alt:"biharlife",label:"Bihar's gurus: Anand Kumar & HC Verma"},
     {from:17,to:19,cat:"biharlife",tag:"folk",alt:"biharlife",label:"Shaam ke lokgeet: Maithili & Nagpuri",weekend:{tag:"sharda",label:"Weekend: Sharda Sinha & Nadiya Ke Paar, back to back"}},
     {from:19,to:22,cat:"bihar",preferMin:15,label:"Prime-time regional news"},
-    {from:22,to:24,cat:"biharlife",tag:"legends",alt:"biharlife",label:"Late night: Legends of Bihar, back to back"}]},
+    {from:22,to:23,cat:"biharlife",tag:"legends",alt:"biharlife",label:"Late night: Legends of Bihar, back to back"},
+    {from:23,to:24,cat:"biharlife",tag:"gurus",alt:"biharlife",label:"Late night: Anand Kumar & HC Verma"}]},
   // ---- Knowledge ----
   {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
   {key:"vigyan",n:6,group:"Knowledge",name:"Vigyan",en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},

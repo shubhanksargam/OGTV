@@ -7035,7 +7035,6 @@ const FEED = [
 {"id":"rVSoDs6Tw6I","t":"Kathal ka achar banane ka aisa naya tarika ki salon sal kharab na ho","cat":"biharlife","lang":"hi","tag":"heritage","min":17,"src":"Roots Tale: Madhubani","pub":"2023-06-19"},
 {"id":"RjlDA7VxhVM","t":"Khula aakash - kala ke manch se aatmanirbhata - imli dasgupta nirmata - anil kumar mishra","cat":"biharlife","lang":"hi","tag":"heritage","min":26,"src":"DD Bihar","pub":"2026-10-09"},
 {"id":"S--hNZNUhEs","t":"Mundari loknrity ki manmohak prastuti","cat":"biharlife","lang":"hi","tag":"heritage","min":26,"src":"DD Jharkhand","pub":"2026-10-22"},
-{"id":"_RHfvL_vwGg","t":"Jharkhand ke santhali lokgit","cat":"biharlife","lang":"hi","tag":"heritage","min":26,"src":"DD Jharkhand","pub":"2026-10-17"},
 {"id":"-xQZc5kuZ0c","t":"Ubharte kalakar- sangharsh se suron tak: nagpuri gayak brijesh tigga ki kahani","cat":"biharlife","lang":"hi","tag":"heritage","min":30,"src":"DD Jharkhand","pub":"2026-10-17"},
 {"id":"BSLliDvjyBE","t":"Palamu darshan- navratri vishesh bhakti git","cat":"biharlife","lang":"hi","tag":"heritage","min":29,"src":"DD Jharkhand","pub":"2026-10-16"},
 {"id":"dkJLK848KKw","t":"Ubharte kalakar- nagpuri suron ka yuva sitara kappu nayak! apni aavaj se bana rahe naee pahchan","cat":"biharlife","lang":"hi","tag":"heritage","min":27,"src":"DD Jharkhand","pub":"2026-10-08"},

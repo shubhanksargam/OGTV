@@ -87,6 +87,15 @@ const CATALOG = [
   {id:"25YSPWCaPic",t:"Parasnath Hill: Santhal tribals and the Jain community",cat:"biharlife",tag:"parasnath",lang:"hi",min:12,src:"Adivasi Stories"},
   {id:"mMq_zI4sQUQ",t:"The Parasnath Hill question, explained",cat:"biharlife",tag:"parasnath",lang:"hi",min:11,src:"Sanskriti IAS"},
   {id:"S0PY8BoGNgY",t:"Sammed Shikharji: the untold story",cat:"biharlife",tag:"parasnath",lang:"hi",min:5,src:"Dharmbhashi"},
+  // Purvaiya: Bihar's gurus, Anand Kumar (Super 30) and HC Verma
+  {id:"mOCWmyKaDF8",t:"Anand Kumar: the story of Super 30's struggle",cat:"biharlife",tag:"gurus",lang:"hi",min:22,src:"Josh Talks"},
+  {id:"y-HrWDZuySg",t:"Super 30: empowering through education · Anand Kumar",cat:"biharlife",tag:"gurus",lang:"hi",min:44,src:"Talks at Google"},
+  {id:"XU2x1RXjMvg",t:"Super guru of Super 30 · Anand Kumar",cat:"biharlife",tag:"gurus",lang:"hi",min:38,src:"Richa Anirudh"},
+  {id:"WILzD9WnLp4",t:"The reality of Super 30 · Anand Kumar",cat:"biharlife",tag:"gurus",lang:"hi",min:20,src:"The Lallantop"},
+  {id:"pRp6_Ti0-T0",t:"Anand Kumar in conversation with Rajeev Masand",cat:"biharlife",tag:"gurus",lang:"hi",min:26,src:"CNN-News18"},
+  {id:"oIcEwfvRrOs",t:"Anand Kumar in conversation with BBC Hindi",cat:"biharlife",tag:"gurus",lang:"hi",min:18,src:"BBC News Hindi"},
+  {id:"o2mERiqlxZg",t:"A talk by HC Verma",cat:"biharlife",tag:"gurus",lang:"hi",min:72,src:"TEQIP IIT Kanpur"},
+  {id:"VS6bvGw7Nro",t:"Unfiltered with HC Verma: his journey",cat:"biharlife",tag:"gurus",lang:"hi",min:73,src:"The Rocket Media"},
   // Classic Films: Nadiya Ke Paar (1982)
   {id:"D4dsSqRuQsg",t:"Nadiya Ke Paar (1982) · Sachin, Sadhana Singh",cat:"retro",lang:"hi",min:150,src:"Rajshri"},
   // Punjabi: 52 Bars, which Punjabi and Gym bring round every few songs (their parts' boost)
