@@ -16,7 +16,7 @@ import {roman} from "./roman.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds, blockChannels = [], noSouthIn = [], noBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = [], blockVideos = [], noSouthIn = [], noBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
@@ -161,7 +161,7 @@ async function fetchFeed(f, old) {
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
       if (f.maxDays && !((e.pub || d.pub || "") >= sinceDays(f.maxDays))) continue;
-      items.push({id: e.id, t: f.retitle || cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
+      items.push({id: e.id, t: f.retitle ? `${f.retitle} · ${items.length + 1}` : cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
     // A few unread: keep their previous entries rather than silently dropping them.
@@ -201,11 +201,17 @@ await Promise.all(Array.from({length: 6}, async () => {
 }));
 // Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
 const bySource = new Map(feeds.map(f => [keyOf(f), f]));
-const passes = v => { const f = bySource.get(v.feed); if (!f) return true;
+const BLOCKED_IDS = new Set(blockVideos);
+const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))) return false;
+  if (v.cat !== "trailers" && /\b(official )?(trailer|teaser)\b/i.test(v.t)) return false; // trailers play only on Trailers
+  const f = bySource.get(v.feed); if (!f) return true;
   return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t)) && !(NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) && !(NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))
     && !(f.maxDays && !((v.pub || "") >= sinceDays(f.maxDays))); };
 // Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
 const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").split(/full|hindi|movie|film|\||-|4k|hd|comedy|action|horror|drama|romantic|thriller|superhit|blockbuster/)[0].replace(/[^a-z0-9]/g, "");
+const sameTitle = {}; for (const v of results.flat()) { const k = v.cat + "|" + v.t.toLowerCase(); sameTitle[k] = (sameTitle[k] || 0) + 1 }
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+for (const v of results.flat()) if (sameTitle[v.cat + "|" + v.t.toLowerCase()] >= 3 && v.pub && !/ · \d+$/.test(v.t)) v.t += ` · ${+v.pub.slice(8, 10)} ${MONTHS[+v.pub.slice(5, 7) - 1]} ${v.pub.slice(0, 4)}`;
 const seen = new Set(), items = results.flat().filter(passes).filter(v => {
   const k = ["premium", "retro", "masters"].includes(v.cat) && filmKey(v).length > 3 ? "film:" + v.cat + filmKey(v) : v.id + v.cat; // a song may be on two channels
   return !seen.has(k) && seen.add(k);
