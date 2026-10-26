@@ -482,28 +482,27 @@ function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage
   if(MODE==="yt"&&player) player.setVolume(vol);
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
   osdVolume()}
-// Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click:
-// onClick gets -1 for the knob's left half (back, down) and 1 for its right half (forward, up).
+// Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click.
 function turnable(el,{onTurn,onDone,onClick}){
   let start=null;
   const ang=e=>{const r=el.getBoundingClientRect(); return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};
-  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); const r=el.getBoundingClientRect(); start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false,side:e.clientX<r.left+r.width/2?-1:1}; el.classList.add("turning")});
+  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false}; el.classList.add("turning")});
   el.addEventListener("pointermove",e=>{if(!start)return; const a=ang(e); let d=a-start.last; if(d>180)d-=360; if(d<-180)d+=360;
     start.last=a; start.turned+=d; if(Math.hypot(e.clientX-start.x,e.clientY-start.y)>5) start.moved=true; if(start.moved) onTurn(start.turned)});
-  const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick(st.side)};
+  const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick()};
   el.addEventListener("pointerup",end); el.addEventListener("pointercancel",end);
 }
 let chPreview=0;
 turnable($("knobCh"),{
   onTurn:d=>{$("knobCh").style.setProperty("--rot",(cur*CH_STEP+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
   onDone:()=>{chPreview!==cur?tune(chPreview):knobs()},
-  onClick:side=>{if(!started) start(); tune(cur+side); osdChannel(cur)}});
+  onClick:()=>{if(!started) start(); tune(cur+1); osdChannel(cur)}});
 let volAtStart=vol;
 $("knobVol").addEventListener("pointerdown",()=>{volAtStart=muted?0:vol});
 turnable($("knobVol"),{
   onTurn:d=>setVol(volAtStart+d/VOL_DEG),
   onDone:()=>{},
-  onClick:side=>{if(!started) start(); if(side<0){if(!muted) setVol(vol-10); else osdVolume()} else if(muted){if(vol===0) setVol(50); else {toggleSound(); osdVolume()}} else setVol(vol+10)}});
+  onClick:()=>{if(!started) start(); if(muted&&vol===0) setVol(50); else {toggleSound(); osdVolume()}}});
 $("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1)); osdChannel(cur)},{passive:false});
 $("knobVol").addEventListener("wheel",e=>{e.preventDefault(); setVol((muted?0:vol)+(e.deltaY>0?-5:5))},{passive:false});
 $("knobCh").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
@@ -546,7 +545,7 @@ let fxPreview=0;
 turnable($("knobMode"),{
   onTurn:d=>{fxPreview=Math.max(0,Math.min(FX_OFF,fxLevel+Math.round(d/30))); $("knobMode").style.setProperty("--rot",FX_DEG[fxPreview]+"deg"); tvOsd(`<b>MODE</b> ${FX_NAMES[fxPreview].toUpperCase()}`)},
   onDone:()=>setFx(fxPreview,true),
-  onClick:side=>setFx(fxLevel+side,true)});
+  onClick:()=>setFx(fxLevel+1,true)});
 $("knobMode").addEventListener("wheel",e=>{e.preventDefault(); setFx(fxLevel+(e.deltaY>0?1:-1),true)},{passive:false});
 $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
   setFx(fxLevel+(k==="ArrowRight"||k==="ArrowUp"?1:-1),true)});
