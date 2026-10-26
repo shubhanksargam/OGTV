@@ -425,7 +425,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
 .card.interlude{animation:card-fade .8s ease both}
 .card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
-.card.interlude .kicker{animation-delay:.15s}.card.interlude h2{animation-delay:.45s}.card.interlude p{animation-delay:.8s}.card.interlude .count{animation-delay:1.1s}
+.card.interlude .kicker{animation-delay:1.25s}.card.interlude h2{animation-delay:1.55s}.card.interlude p{animation-delay:1.9s}.card.interlude .count{animation-delay:2.2s} /* the text begins 0.45 s after the black has fully come up (0.8 s) */
 /* ...set in the brand's wide sans, all capitals, light and widely spaced, centred on black */
 .card.interlude{background:#000;align-items:center;text-align:center;gap:clamp(14px,2.4vh,22px)}
 .card.interlude .kicker{font:400 clamp(.6rem,1.05vw,.74rem)/1 "Unbounded",var(--body);letter-spacing:.42em;margin-right:-.42em;color:var(--marigold)}
