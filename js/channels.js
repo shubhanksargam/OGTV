@@ -284,7 +284,7 @@ const CHANNELS = [
     {from:2,to:5,  cat:"biharlife",tag:"vlogs",alt:"biharlife",label:"Night vlogs: Curly Tales, village life & hidden Bihar and Jharkhand",otherDay:{tag:"infra",label:"Night watch: building Bihar & Jharkhand"}},
     {from:5,to:7,  cat:"biharlife",tag:"legends",alt:"biharlife",label:"Legends of Bihar: Dinkar, Chanakya, Chandragupta, Nalanda, Khan Sir & the Bihar Museum"},
     {from:7,to:10, cat:"bihar",preferMin:15,label:"Bihar & Jharkhand news"},
-    {from:10,to:11,cat:"biharlife",tag:"tourism",alt:"biharlife",label:"Ghoomo Bihar: Nalanda, Rajgir, Bodh Gaya"},
+    {from:10,to:11,cat:"biharlife",tag:"tourism",alt:"biharlife",boost:{tag:"guide",every:2},label:"Ghoomo Bihar: Nalanda, Rajgir, Bodh Gaya, with the songs of Guide"},
     {from:11,to:12,cat:"biharlife",tag:"infra",alt:"biharlife",label:"Building Bihar & Jharkhand: Patna, Giridih, Deoghar & Nalanda"},
     {from:12,to:13,cat:"biharlife",tag:"food",alt:"biharlife",label:"Litti chokha & the Bihar plate"},
     {from:13,to:14,cat:"bihar",preferMin:15,label:"Afternoon news"},
