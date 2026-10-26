@@ -122,10 +122,10 @@ const CATALOG = [
   // Purvaiya: songs of Guide (1965), woven into the Nalanda hour
   {id:"dbZW8Dral8o",t:"Gaata Rahe Mera Dil · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:5,src:"Guide (1965)"},
   {id:"lqBCgkBKlDc",t:"Aaj Phir Jeene Ki Tamanna Hai · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:4,src:"Guide (1965)"},
-  {id:"C5JY3ms8ycI",t:"Piya Tose Naina Laage Re · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:9,src:"Guide (1965)"},
-  {id:"yvqE7a_3V9c",t:"Tere Mere Sapne · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:4,src:"Guide (1965)"},
-  {id:"kY6Pdy_dz9M",t:"Din Dhal Jaye · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:5,src:"Guide (1965)"},
-  {id:"zL6xDwUivZA",t:"Wahan Kaun Hai Tera · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:5,src:"Guide (1965)"},
+  {id:"7cEpfhOYi7U",t:"Piya Tose Naina Laage Re · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:13,src:"Guide (1965)"},
+  {id:"42zACVzxsOg",t:"Tere Mere Sapne · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:9,src:"Guide (1965)"},
+  {id:"hu2khgJn7Vg",t:"Din Dhal Jaye · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:5,src:"Guide (1965)"},
+  {id:"nezFXDk4jYA",t:"Wahan Kaun Hai Tera · Guide (1965)",cat:"biharlife",tag:"guide",lang:"hi",min:5,src:"Guide (1965)"},
   // Purvaiya: Curly Tales in Bihar
   {id:"ltPN3ZrAASI",t:"Witnessing Chhath Puja in Bihar · I Love My India",cat:"biharlife",tag:"vlogs",lang:"hi",min:27,src:"Curly Tales"},
   {id:"bF1uSSUee2A",t:"Madhubani, Darbhanga & Saharsa · Dil Se Bihari E3",cat:"biharlife",tag:"vlogs",lang:"hi",min:24,src:"Curly Tales"},
@@ -150,8 +150,6 @@ const CATALOG = [
   {id:"oIcEwfvRrOs",t:"Anand Kumar in conversation with BBC Hindi",cat:"biharlife",tag:"gurus",lang:"hi",min:18,src:"BBC News Hindi"},
   {id:"o2mERiqlxZg",t:"A talk by HC Verma",cat:"biharlife",tag:"gurus",lang:"hi",min:72,src:"TEQIP IIT Kanpur"},
   {id:"VS6bvGw7Nro",t:"Unfiltered with HC Verma: his journey",cat:"biharlife",tag:"gurus",lang:"hi",min:73,src:"The Rocket Media"},
-  // Classic Films: Nadiya Ke Paar (1982)
-  {id:"D4dsSqRuQsg",t:"Nadiya Ke Paar (1982) · Sachin, Sadhana Singh",cat:"retro",lang:"hi",min:150,src:"Rajshri"},
   // Punjabi: 52 Bars, which Punjabi and Gym bring round every few songs (their parts' boost)
   {id:"4DfVxVeqk2o",t:"52 Bars · Karan Aujla, Ikky",cat:"punjabi",lang:"hi",min:4,src:"Karan Aujla"},
 ];
