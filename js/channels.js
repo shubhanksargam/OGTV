@@ -183,7 +183,7 @@ const CHANNELS = [
     {from:7,to:21,preferMin:15,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
     {from:21,to:24,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   // ---- Entertainment ----
-  {key:"aangan",n:24,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, KBC & Taarak Mehta",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
+  {key:"aangan",n:24,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, Taarak Mehta & mushaira",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:1,  cat:"aangan",  tag:"talent",alt:"geet",label:"Repeat: MTV Hustle & I-Popstar"},
     {from:1,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
@@ -199,7 +199,7 @@ const CHANNELS = [
     {from:18,to:19,cat:"vigyan",lang:"hi",langExcept:"Discovery|National Geographic|Nat Geo",src:"Discovery|discovery\\+|Animal Planet|National Geographic|Nat Geo",label:"Wildlife at dusk"},
     {from:19,to:20,cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",festival:true,label:"Evening aarti"},
     {from:20,to:21,cat:"aangan",  tag:"sitcom",src:"Taarak Mehta",label:"Prime time: Taarak Mehta Ka Ooltah Chashmah"},
-    {from:21,to:22,cat:"aangan",  tag:"kbc",label:"Kaun Banega Crorepati"},
+    {from:21,to:22,cat:"aangan",  tag:"sitcom",label:"Prime time: Taarak Mehta & family sitcoms"},
     {from:22,to:23,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
     {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
   {key:"hasya",n:25,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},

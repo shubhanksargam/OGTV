@@ -21,7 +21,7 @@ const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders n
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
 const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
-const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|(telugu|tamil|malayalam|kannada)/i,
+const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|\b(telugu|tamil|malayalam|kannada)\b/i,
   SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
@@ -205,6 +205,7 @@ const BLOCKED_IDS = new Set(blockVideos);
 const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))) return false;
   if (v.cat !== "trailers" && /\b(official )?(trailer|teaser)\b/i.test(v.t)) return false; // trailers play only on Trailers
   const f = bySource.get(v.feed); if (!f) return true;
+  if (v.min < (f.minMin ?? 3) || v.min > (f.maxMin ?? 60)) return false; // kept videos meet today's length rules too
   return (!f.match || new RegExp(f.match, "i").test(v.t)) && !(f.skip && new RegExp(f.skip, "i").test(v.t)) && !(NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) && !(NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))
     && !(f.maxDays && !((v.pub || "") >= sinceDays(f.maxDays))); };
 // Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
