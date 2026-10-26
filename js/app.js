@@ -207,7 +207,7 @@ function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;muted=!mu
    the channel starts muted until the first tap or key. */
 let started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0;
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened");
+function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened"); setTimeout(guideLater,600);
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
   setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
@@ -427,15 +427,17 @@ $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingCli
   wakeUI(now&&!inBottom); inBottom=now});
 function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
 $("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():wakeUI(true)); // tap the video: open, or close the strip
-// Swipe to surf on phones and tablets: across the picture in plain full screen, or the tube of the retro TV.
-// Left or up is the next channel, right or down the one before; short movements stay taps.
+// Swipe to surf on phones and tablets: across the picture, in full screen or in the page, or across the retro TV's tube.
+// Left or up is the next channel, right or down the one before; short movements stay taps. In the page only sideways
+// swipes surf, so scrolling the page never changes the channel.
 function swipeSurf(el){if(!el)return; let x0=0,y0=0,t0=0;
   el.addEventListener("touchstart",e=>{const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now()},{passive:true});
   el.addEventListener("touchend",e=>{const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
     if(Date.now()-t0>800||Math.max(Math.abs(dx),Math.abs(dy))<45) return;
+    if(!roomFull()&&!$("room").classList.contains("pseudo-fs")&&Math.abs(dy)>=Math.abs(dx)) return;
     e.preventDefault(); const next=Math.abs(dx)>Math.abs(dy)?dx<0:dy<0;
     tune(cur+(next?1:-1)); if(retro) osdChannel(cur); else showBanner()},{passive:false})}
-swipeSurf($("fsCatch")); swipeSurf(document.querySelector(".crt-glass"));
+swipeSurf($("fsCatch")); swipeSurf(document.querySelector(".crt-glass")); swipeSurf($("tapCatch"));
 // iPhone Safari can't put a page in true full screen; once per visit, say how: add OGTV to the Home Screen
 if(/iPhone|iPod/.test(navigator.userAgent)&&!(navigator.standalone||matchMedia("(display-mode: standalone)").matches)){
   let shown=false; try{shown=sessionStorage.getItem("ogtv-ios-tip")==="1"}catch(e){}
@@ -480,27 +482,28 @@ function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage
   if(MODE==="yt"&&player) player.setVolume(vol);
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
   osdVolume()}
-// Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click.
+// Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click:
+// onClick gets -1 for the knob's left half (back, down) and 1 for its right half (forward, up).
 function turnable(el,{onTurn,onDone,onClick}){
   let start=null;
   const ang=e=>{const r=el.getBoundingClientRect(); return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};
-  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false}; el.classList.add("turning")});
+  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); const r=el.getBoundingClientRect(); start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false,side:e.clientX<r.left+r.width/2?-1:1}; el.classList.add("turning")});
   el.addEventListener("pointermove",e=>{if(!start)return; const a=ang(e); let d=a-start.last; if(d>180)d-=360; if(d<-180)d+=360;
     start.last=a; start.turned+=d; if(Math.hypot(e.clientX-start.x,e.clientY-start.y)>5) start.moved=true; if(start.moved) onTurn(start.turned)});
-  const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick()};
+  const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick(st.side)};
   el.addEventListener("pointerup",end); el.addEventListener("pointercancel",end);
 }
 let chPreview=0;
 turnable($("knobCh"),{
   onTurn:d=>{$("knobCh").style.setProperty("--rot",(cur*CH_STEP+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
   onDone:()=>{chPreview!==cur?tune(chPreview):knobs()},
-  onClick:()=>{if(!started) start(); tune(cur+1); osdChannel(cur)}});
+  onClick:side=>{if(!started) start(); tune(cur+side); osdChannel(cur)}});
 let volAtStart=vol;
 $("knobVol").addEventListener("pointerdown",()=>{volAtStart=muted?0:vol});
 turnable($("knobVol"),{
   onTurn:d=>setVol(volAtStart+d/VOL_DEG),
   onDone:()=>{},
-  onClick:()=>{if(!started) start(); if(muted&&vol===0) setVol(50); else {toggleSound(); osdVolume()}}});
+  onClick:side=>{if(!started) start(); if(side<0){if(!muted) setVol(vol-10); else osdVolume()} else if(muted){if(vol===0) setVol(50); else {toggleSound(); osdVolume()}} else setVol(vol+10)}});
 $("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1)); osdChannel(cur)},{passive:false});
 $("knobVol").addEventListener("wheel",e=>{e.preventDefault(); setVol((muted?0:vol)+(e.deltaY>0?-5:5))},{passive:false});
 $("knobCh").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
@@ -543,7 +546,7 @@ let fxPreview=0;
 turnable($("knobMode"),{
   onTurn:d=>{fxPreview=Math.max(0,Math.min(FX_OFF,fxLevel+Math.round(d/30))); $("knobMode").style.setProperty("--rot",FX_DEG[fxPreview]+"deg"); tvOsd(`<b>MODE</b> ${FX_NAMES[fxPreview].toUpperCase()}`)},
   onDone:()=>setFx(fxPreview,true),
-  onClick:()=>setFx(fxLevel+1,true)});
+  onClick:side=>setFx(fxLevel+side,true)});
 $("knobMode").addEventListener("wheel",e=>{e.preventDefault(); setFx(fxLevel+(e.deltaY>0?1:-1),true)},{passive:false});
 $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
   setFx(fxLevel+(k==="ArrowRight"||k==="ArrowUp"?1:-1),true)});
@@ -566,7 +569,7 @@ function autoFull(){
     if(!started){const w=setInterval(()=>{if(!started)return; clearInterval(w); // full screen sits above the intro, so it waits for the iris
       if(navigator.userActivation&&!navigator.userActivation.isActive){addEventListener("click",up,true); addEventListener("keydown",up,true); return} goFull()},100); return}
     goFull()};
-  const goFull=()=>{if(!room.classList.contains("pseudo-fs"))return; const r=(room.requestFullscreen||room.webkitRequestFullscreen).call(room);
+  const goFull=()=>{if(!room.classList.contains("pseudo-fs"))return; fullAskedAt=Date.now(); const r=(room.requestFullscreen||room.webkitRequestFullscreen).call(room);
     if(r&&r.then) r.then(()=>{room.classList.remove("pseudo-fs"); if(screen.orientation&&screen.orientation.lock) screen.orientation.lock("landscape").catch(()=>{})}).catch(()=>{})};
   addEventListener("click",up,true); addEventListener("keydown",up,true);
 }
@@ -574,8 +577,15 @@ autoFull();
 // In the TV on the page a tap on the picture pauses or plays, as YouTube's own tap did; the picture itself no longer
 // takes touches, so YouTube's double-tap skip (±10 s) is gone. No double tap does anything: a quick second tap is
 // ignored, and the tap that turns the sound on doesn't also pause.
-let lastTap=0;
+let lastTap=0, fullAskedAt=0;
 $("tapCatch").addEventListener("click",()=>{const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800) return; lastTap=now; togglePause()});
+// Maximized: Pause/Play sits with the full-screen buttons, and in retro mode a tap on the tube pauses or plays (not the
+// click that turned on true full screen). The button follows the channel, however it was paused or played.
+const PAUSE_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>', PLAY_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg>';
+function playIcon(on){const b=$("pauseFs"); b.innerHTML=on?PAUSE_ICON:PLAY_ICON; b.setAttribute("aria-label",on?"Pause":"Play"); b.title=on?"Pause (K)":"Play (K)"}
+{const p0=remote.playing,p1=remote.paused; remote.playing=()=>{p0(); playIcon(true)}; remote.paused=()=>{p1(); playIcon(false)}}
+$("pauseFs").addEventListener("click",()=>{togglePause(); wakeUI(false)});
+document.querySelector(".crt-glass").addEventListener("click",()=>{if(!retro||Date.now()-fullAskedAt<600) return; const now=Date.now(); if(now-lastTap<400) return; lastTap=now; togglePause()});
 
 const ytLink=(id,sec)=>"https://www.youtube.com/watch?v="+encodeURIComponent(id)+"&t="+sec+"s";
 // After Coming up next the new programme isn't announced with static: the card stays up while it loads, then fades
@@ -636,7 +646,7 @@ $("aboutChannels").textContent=CHANNELS.length;
 $("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
-renderChannels(); renderGuide(); tick(); loadYT();
+renderChannels(); tick(); loadYT(); // the guide is built after the intro (guideLater), so the intro has the phone to itself
 setInterval(guarded(tick,"tick"),1000);
 // Watch-time milestones while the page is visible: how long people stay
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
@@ -698,4 +708,7 @@ window.ogtv={
   resume(){playingKey=null; tick()}, // back in front: rejoin the programme at this moment
 };
 if(TV_APP) track("app-tv-start","TV app opened");
-setTimeout(()=>{const g=document.querySelector(".gscroll");if(g)g.scrollLeft=0},0);
+// The programme guide is built once the intro has handed over (or after 12 s if no one presses play), then scrolled to now
+let guideBuilt=false;
+function guideLater(){if(guideBuilt)return; guideBuilt=true; renderGuide(); requestAnimationFrame(()=>{const g=document.querySelector(".gscroll"); if(g) g.scrollLeft=0})}
+setTimeout(guideLater,12000);

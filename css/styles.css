@@ -236,6 +236,24 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes pb-flash{0%{opacity:0}25%{opacity:.95}100%{opacity:0}}
 @keyframes pb-out{to{opacity:0;scale:1.5}}
 @keyframes pb-pulse{from{opacity:.9;scale:1}to{opacity:0;scale:2.6}}
+/* Phones and tablets: the same intro, moved only by fades, slides and scales, which the GPU animates on its own while
+   the page loads underneath (blur, glow, drawn strokes and a moving grid need the main thread, and stutter while it's busy) */
+@media (pointer:coarse){
+  .start .intro-mark,.start .logo-word i{animation-name:intro-lite}
+  .rg-outer,.rg-inner{stroke-dashoffset:0;animation:none}
+  .rg-ticks,.rg-arcs{animation:none;opacity:1}
+  .rg-blip{animation:intro-fade .39s ease 1.56s forwards}
+  .hud-rings{animation:rings-lite 1.5s cubic-bezier(.2,.8,.2,1) .15s both;will-change:transform,opacity}
+  .fx-grid{animation:intro-fade 1.82s ease .13s forwards;will-change:opacity}
+  .fx-core{filter:none;animation:intro-fade 1.56s ease .65s forwards;will-change:opacity}
+  .intro-dot{animation:none}
+  .start.ask .pb-tri{animation-name:pb-lite}
+}
+@keyframes intro-lite{from{opacity:0;transform:translateY(.08em) scale(.94)}to{opacity:1;transform:none}}
+@keyframes rings-lite{from{opacity:0;scale:.88}to{opacity:1;scale:1}}
+@keyframes pb-lite{from{opacity:0;scale:.8}to{opacity:1;scale:1}}
+/* Everything below the TV is laid out only when scrolled near, so the first screen is quick to draw */
+.guide,.main ~ section,.faq,footer.about{content-visibility:auto;contain-intrinsic-size:auto 900px}
 @keyframes intro-fade{to{opacity:1}}
 @keyframes grid-run{to{background-position:0 64px}}
 @keyframes horizon{to{transform:scaleX(1)}}
@@ -307,6 +325,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .retro-fs,.screen:-webkit-full-screen .retro-fs,.screen.pseudo-fs .retro-fs{display:block;z-index:6;transition:bottom .3s ease,opacity .4s}
 .screen.fs-idle .retro-fs{opacity:0!important;pointer-events:none}
 .screen.strip-on .retro-fs{bottom:calc(5vh + 126px);opacity:1!important}
+/* Pause/Play in maximized view, bottom right, coming and going with the other full-screen buttons */
+.pause-fs{display:none;position:absolute;right:14px;bottom:14px;z-index:6;width:48px;height:48px;border-radius:999px;border:0;place-items:center;
+  background:rgba(0,0,0,.55);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer;transition:bottom .3s ease,opacity .4s}
+.pause-fs:hover{background:rgba(0,0,0,.8)}
+.screen:fullscreen .pause-fs,.screen:-webkit-full-screen .pause-fs,.screen.pseudo-fs .pause-fs{display:grid}
+.screen.fs-idle .pause-fs{opacity:0!important;pointer-events:none}
+.screen.strip-on .pause-fs{bottom:calc(5vh + 126px);opacity:1!important}
 /* "Maximize for the best experience" under the TV */
 .maximize{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 4px;border:0;background:none;
   color:var(--muted);font:500 .92rem/1 var(--body);cursor:pointer}
@@ -322,7 +347,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .bug,.screen:-webkit-full-screen .bug,.screen.pseudo-fs .bug{display:flex}
 .fs-catch,.fs-ui{display:none}
 .tap-catch{display:none} /* the page's TV (not full screen): taps on the picture come to the page, not YouTube */
-.room:not(:fullscreen):not(.pseudo-fs) .screen:not(.pseudo-fs):not(:fullscreen) .tap-catch{display:block;position:absolute;inset:0;z-index:1;touch-action:manipulation;cursor:pointer}
+.room:not(:fullscreen):not(.pseudo-fs) .screen:not(.pseudo-fs):not(:fullscreen) .tap-catch{display:block;position:absolute;inset:0;z-index:1;touch-action:pan-y;cursor:pointer}
 .screen:fullscreen .fs-catch,.screen:-webkit-full-screen .fs-catch,.screen.pseudo-fs .fs-catch{display:block;position:absolute;inset:0;z-index:2}
 .screen:fullscreen .fs-ui,.screen:-webkit-full-screen .fs-ui,.screen.pseudo-fs .fs-ui{display:block}
 .screen.fs-idle .fs-catch{cursor:none}
