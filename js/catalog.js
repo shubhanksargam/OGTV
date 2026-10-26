@@ -87,6 +87,21 @@ const CATALOG = [
   {id:"25YSPWCaPic",t:"Parasnath Hill: Santhal tribals and the Jain community",cat:"biharlife",tag:"parasnath",lang:"hi",min:12,src:"Adivasi Stories"},
   {id:"mMq_zI4sQUQ",t:"The Parasnath Hill question, explained",cat:"biharlife",tag:"parasnath",lang:"hi",min:11,src:"Sanskriti IAS"},
   {id:"S0PY8BoGNgY",t:"Sammed Shikharji: the untold story",cat:"biharlife",tag:"parasnath",lang:"hi",min:5,src:"Dharmbhashi"},
+  // Purvaiya: Curly Tales in Bihar
+  {id:"ltPN3ZrAASI",t:"Witnessing Chhath Puja in Bihar · I Love My India",cat:"biharlife",tag:"vlogs",lang:"hi",min:27,src:"Curly Tales"},
+  {id:"bF1uSSUee2A",t:"Madhubani, Darbhanga & Saharsa · Dil Se Bihari E3",cat:"biharlife",tag:"vlogs",lang:"hi",min:24,src:"Curly Tales"},
+  {id:"gPtxpqr4Ar8",t:"Amit Sial explores Gayaji, the city of moksha",cat:"biharlife",tag:"vlogs",lang:"hi",min:22,src:"Curly Tales"},
+  {id:"vj9d3a5-s1o",t:"The three river islands of Kahalgaon · Dil Se Bihari E5",cat:"biharlife",tag:"vlogs",lang:"hi",min:26,src:"Curly Tales"},
+  {id:"EIfn3LU0RVs",t:"Cooking a Bihari breakfast with Sanjay Mishra · Tere Gully Mein",cat:"biharlife",tag:"vlogs",lang:"hi",min:23,src:"Curly Tales"},
+  {id:"K3lmpNR_Ig4",t:"Elli AvrRam explores Patna · India With Elli S2 E2",cat:"biharlife",tag:"vlogs",lang:"hi",min:21,src:"Curly Tales"},
+  {id:"zGns2g0GfT8",t:"Childhood memories in Patna, 15 years on · Dil Se Bihari E1",cat:"biharlife",tag:"vlogs",lang:"hi",min:29,src:"Curly Tales"},
+  {id:"TG1iFYzDMN8",t:"Patna's historical & spiritual sites · India With Elli S2 E3",cat:"biharlife",tag:"vlogs",lang:"hi",min:12,src:"Curly Tales"},
+  // Purvaiya: the Bihar Museum and Patna Museum, with the legends
+  {id:"Pr_nkj3O8JI",t:"The wonder that is the Bihar Museum",cat:"biharlife",tag:"legends",lang:"hi",min:30,src:"Manoj Grover"},
+  {id:"hk1qNyiEiL4",t:"Bihar Museum, Patna: the full tour",cat:"biharlife",tag:"legends",lang:"hi",min:18,src:"Vlogster Rahul"},
+  {id:"xZwela6wDbc",t:"Why the Bihar Museum is world famous: a full inside tour",cat:"biharlife",tag:"legends",lang:"hi",min:14,src:"Gaurang Vlogs"},
+  {id:"rfC9IS5F3Ik",t:"Bihar Museum: full tour & guide",cat:"biharlife",tag:"legends",lang:"hi",min:19,src:"Vlogs With Sans"},
+  {id:"vI26GX-4zYI",t:"Patna Museum: Bihar's treasure house",cat:"biharlife",tag:"legends",lang:"hi",min:19,src:"Vlogster Rahul"},
   // Purvaiya: Bihar's gurus, Anand Kumar (Super 30) and HC Verma
   {id:"mOCWmyKaDF8",t:"Anand Kumar: the story of Super 30's struggle",cat:"biharlife",tag:"gurus",lang:"hi",min:22,src:"Josh Talks"},
   {id:"y-HrWDZuySg",t:"Super 30: empowering through education · Anand Kumar",cat:"biharlife",tag:"gurus",lang:"hi",min:44,src:"Talks at Google"},
