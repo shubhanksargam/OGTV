@@ -91,8 +91,7 @@ const CHANNELS = [
     {from:13,to:20,cat:"niche",label:"Curious finds"},
     {from:20,to:24,cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"From the archives"}]},
   // ---- Sports ----
-  {key:"classics",n:13,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
-  {key:"cricket",n:14,group:"Sports",name:"Cricket",en:"Today's highlights from every major match, India & IPL first",parts:[  // "latest": the last 3 days' uploads from boards, leagues and broadcasters, refreshed hourly
+  {key:"cricket",n:13,group:"Sports",name:"Cricket",en:"Today's highlights from every major match, India & IPL first",parts:[  // "latest": the last 3 days' uploads from boards, leagues and broadcasters, refreshed hourly
     {from:0,to:3,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Repeat: India & IPL, latest highlights"},
     {from:3,to:7,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",label:"Overnight: every major match, latest highlights"},
     {from:7,to:9,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Morning repeat: India & IPL"},
@@ -103,7 +102,7 @@ const CHANNELS = [
     {from:20,to:23,cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Prime time: India & IPL, latest match highlights"},
     {from:23,to:23.5,cat:"firstsports",newest:true,fixed:true,alt:"cricket",label:"11 pm: First Sports with Rupha Ramani, the day in cricket"},
     {from:23.5,to:24,cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",label:"Around the world: today's matches"}]},
-  {key:"khel",n:15,group:"Sports",name:"Khel",en:"Olympics, Asian Games & Indian sport",parts:[
+  {key:"khel",n:14,group:"Sports",name:"Khel",en:"Olympics, Asian Games & Indian sport",parts:[
     {from:0,to:6,  cat:"khel",tag:"olympic",alt:"khel",label:"Olympic moments"},
     {from:6,to:9,  cat:"khel",tag:"latest",alt:"khel",label:"Morning repeat: the latest in Indian sport"},
     {from:9,to:13, cat:"khel",tag:"olympic",alt:"khel",label:"Olympics, Asian Games & Commonwealth Games"},
@@ -115,6 +114,7 @@ const CHANNELS = [
     {from:22,to:23,cat:"khel",tag:"prime",src:"ChessBase|Diamond League",alt:"khel",label:"Gukesh, Pragg & Neeraj"},
     {from:23,to:23.5,cat:"firstsports",newest:true,fixed:true,alt:"khel",label:"11 pm: First Sports with Rupha Ramani"},
     {from:23.5,to:24,cat:"khel",tag:"prime",alt:"khel",label:"India's big moments"}]},
+  {key:"classics",n:15,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
   {key:"football",n:16,group:"Sports",name:"Football",en:"This week's matches: Premier League, LaLiga, UCL, ISL & more",parts:[  // "latest": the last 3 days' uploads, refreshed hourly
     {from:0,to:3,  cat:"football",tag:"latest",alt:"football",label:"Repeat: the latest match highlights"},
     {from:3,to:7,  cat:"football",preferMin:15,label:"Football through the night"},

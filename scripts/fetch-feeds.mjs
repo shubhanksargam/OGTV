@@ -20,7 +20,7 @@ const {feeds, blockChannels = [], noSouthIn = [], noBhojpuriIn = []} = JSON.pars
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
-const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
+const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
 const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|(telugu|tamil|malayalam|kannada)/i,
   SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
 const KEY = process.env.YT_API_KEY;
@@ -161,7 +161,7 @@ async function fetchFeed(f, old) {
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
       if (f.maxDays && !((e.pub || d.pub || "") >= sinceDays(f.maxDays))) continue;
-      items.push({id: e.id, t: cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
+      items.push({id: e.id, t: f.retitle || cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
     // A few unread: keep their previous entries rather than silently dropping them.
