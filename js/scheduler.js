@@ -97,12 +97,13 @@ function buildDay(ch,dayStart){
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
     const fresh=()=>p.newest?newestFirst(pool):shuffle(pool,rnd);
-    let order=fresh(), i=0;
+    let order=fresh(), i=0, n=0;
+    const boost=p.boost&&CATALOG.find(v=>v.id===p.boost.id&&!BAD.has(v.id)); // p.boost {id,every}: that song every so many
     for(const [from,to] of spans){
       let t=dayStart+from*HOUR; const end=dayStart+to*HOUR;
       while(t<end){
         if(i>=order.length){order=fresh();i=0}
-        const v=order[i++]; const e=Math.min(t+v.min*MIN,end);
+        const v=boost&&++n%p.boost.every===0?boost:order[i++]; const e=Math.min(t+v.min*MIN,end);
         if(!flex) slots.push({start:t,end:e,v,part:p,ch});
         else for(const [a,b] of cutOut([[t,e]],fixed)) slots.push({start:a,end:b,v,part:p,ch}); // around the fixed shows
         t=e;

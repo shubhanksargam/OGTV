@@ -63,6 +63,8 @@ const CATALOG = [
   {id:"esoQhorc1As",t:"3 easy science experiments with water",cat:"vigyan",lang:"hi",min:6,src:"Unacademy Live Laboratory"},
   {id:"vnfiSiR9cvI",t:"The human liver · Hindi",cat:"vigyan",lang:"hi",min:30,src:"Infinity Stream"},
   {id:"z4aOiALk2Fk",t:"The human brain · Hindi",cat:"vigyan",lang:"hi",min:34,src:"Infinity Stream"},
+  // Punjabi: 52 Bars, which Punjabi and Gym bring round every few songs (their parts' boost)
+  {id:"4DfVxVeqk2o",t:"52 Bars · Karan Aujla, Ikky",cat:"punjabi",lang:"hi",min:4,src:"Karan Aujla"},
 ];
 const CAT_LABEL={firstsports:"First Sports",desipop:"Desi pop",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
   khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",

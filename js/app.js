@@ -532,10 +532,10 @@ $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); //
    (no static hiss on channel changes), Normal (retro off;
    in full screen that swaps to the plain full-screen look). Remembered for the tab, like retro itself. */
 const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Normal"], FX_DEG=[-75,-45,-15,15,45,75], FX_OFF=5;
-let fxLevel=1; try{const v=sessionStorage.getItem("ogtv-fx"); if(v!==null) fxLevel=Math.min(FX_OFF-1,Math.max(0,+v||0))}catch(e){} // Steady unless chosen otherwise
+let fxLevel=2; try{const v=sessionStorage.getItem("ogtv-fx"); if(v!==null) fxLevel=Math.min(FX_OFF-1,Math.max(0,+v||0))}catch(e){} // Tinted unless chosen otherwise
 function showFx(n){$("knobMode").title="Mode: "+FX_NAMES[n]; $("knobMode").style.setProperty("--rot",FX_DEG[n]+"deg")}
 function setFx(n,osdToo){n=Math.max(0,Math.min(FX_OFF,n)); if(osdToo) tvOsd(`<b>MODE</b> ${FX_NAMES[n].toUpperCase()}`);
-  if(n===FX_OFF){fxLevel=1; try{sessionStorage.setItem("ogtv-fx","1")}catch(e){} showFx(1); setRetro(false); return} // back at Steady next time
+  if(n===FX_OFF){fxLevel=2; try{sessionStorage.setItem("ogtv-fx","2")}catch(e){} showFx(2); setRetro(false); return} // back at Tinted next time
   fxLevel=n; try{sessionStorage.setItem("ogtv-fx",String(n))}catch(e){}
   const sc=$("screen"); sc.classList.toggle("fx-steady",n>=1); sc.classList.toggle("fx-nolines",n>=2); sc.classList.toggle("fx-clean",n>=3);
   if(n>=4) staticSound.stop(); showFx(n)}

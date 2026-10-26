@@ -273,10 +273,10 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* The retro mode knob's settings, each peeling off one more effect: Steady drops the tracking band that sweeps down the
    picture, Tinted drops the lines and grain but keeps the tape colour and contrast, Clean drops the colour too, Quiet
    also silences the static (in app.js) */
-/* Steady is the default. While Coming up next is on screen the TV always shows Full, whatever the knob says */
-.screen.retro.fx-steady:not(:has(> .card.interlude:not([hidden]))) .vhs::after{display:none}
-.screen.retro.fx-nolines:not(:has(> .card.interlude:not([hidden]))) .vhs{display:none}
-.screen.retro.fx-clean:not(:has(> .card.interlude:not([hidden]))) #yt{filter:none}
+/* Tinted is the default, and the knob holds through Coming up next too */
+.screen.retro.fx-steady .vhs::after{display:none}
+.screen.retro.fx-nolines .vhs{display:none}
+.screen.retro.fx-clean #yt{filter:none}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
   repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
   radial-gradient(110% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}

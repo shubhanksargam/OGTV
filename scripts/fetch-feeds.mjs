@@ -16,8 +16,11 @@ import {roman} from "./roman.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds, blockChannels = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = [], noSouthIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
+// South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
+const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|(telugu|tamil|malayalam|kannada)/i,
+  SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
@@ -149,6 +152,7 @@ async function fetchFeed(f, old) {
       const d = KEY ? info[e.id] : await (e.title && e.sec ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null)); // listed with title + length: no watch page needed
       if (!KEY) await sleep(300);
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
+      if (NO_SOUTH.has(f.cat) && (SOUTH_TITLE.test(d.title) || SOUTH_AUTHOR.test(d.author || ""))) continue;
       if (f.authors && !f.authors.includes(d.author)) continue; // fan playlists: only official uploaders
       const min = Math.ceil(d.sec / 60);
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
