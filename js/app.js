@@ -466,7 +466,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
   india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",dailybrief:"The Daily Brief",zmarkets:"Markets by Zerodha",firstsports:"First Sports",latest:"latest highlights",talent:"Hustle & I-Popstar",vantagenew:"Vantage, latest",vantage:"Vantage",palki:"Palki Sharma",fpshows:"Firstpost shows",igr:"IGR",trending:"trending",voices:"voices",stars:"stars",indie:"indie",chart:"charts",worldcharts:"world charts",alltime:"all-time hits",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
-const CH_STEP=360/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // volume sweeps -135° (silent) to +135° (full)
+const CH_STEP=360*5/CHANNELS.length, chRot=i=>i*CH_STEP%360, VOL_DEG=2.7, VOL_MIN=-135; // all the channels take five turns of the knob; volume sweeps -135° (silent) to +135° (full)
 let osdTimer=0;
 function tvOsd(html){const o=$("tvOsd"); o.innerHTML=html; o.classList.add("on"); clearTimeout(osdTimer); osdTimer=setTimeout(()=>o.classList.remove("on"),1600)}
 const osdChannel=i=>tvOsd(`<b>CH ${String(CHANNELS[i].n).padStart(2,"0")}</b> ${esc(CHANNELS[i].name.toUpperCase())}`);
@@ -477,7 +477,7 @@ function vfd(){const c=CHANNELS[cur], name=$("vfdName"), box=name.parentElement;
   box.classList.remove("scroll"); name.style.removeProperty("--dist");
   requestAnimationFrame(()=>{const over=name.scrollWidth-box.clientWidth;
     if(over>2){name.style.setProperty("--dist",-(over+8)+"px"); name.style.setProperty("--dur",Math.max(4,over/14)+"s"); box.classList.add("scroll")}})}
-function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",(cur*CH_STEP)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
+function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",chRot(cur)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
 function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage.setItem("ogtv-vol",vol)}catch(e){}
   if(MODE==="yt"&&player) player.setVolume(vol);
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
@@ -497,7 +497,7 @@ function turnable(el,{onTurn,onDone,onClick}){
 }
 let chPreview=0;
 turnable($("knobCh"),{
-  onTurn:d=>{$("knobCh").style.setProperty("--rot",(cur*CH_STEP+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
+  onTurn:d=>{$("knobCh").style.setProperty("--rot",(chRot(cur)+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
   onDone:()=>{chPreview!==cur?tune(chPreview):knobs()},
   onClick:side=>{if(!started) start(); tune(cur+side); osdChannel(cur)}});
 let volAtStart=vol;
