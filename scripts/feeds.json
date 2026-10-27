@@ -1,7 +1,7 @@
 {
   "_about": "YouTube creators whose latest uploads fill each category. Run: node scripts/fetch-feeds.mjs  (writes js/feeds.js). minMin/maxMin filter by length in minutes. blockChannels: uploaders whose videos are never used, whichever source lists them.",
   "blockChannels": ["Grow Music", "Wave Music"],
-  "blockVideos": ["aEIUVfKCRic", "VKHs0g-Zw0o", "CzjG7V1XpXA", "UVbcaG2tfSE", "7Rv0Pi8eLUU", "XqcoLh40yVI", "D4dsSqRuQsg", "V2bN58-i4hM","5ESfx6dl2qg","wMDOli6JDBQ","80gdBnOLEzA","0tD-uHWbPFk"],
+  "blockVideos": ["8iOdRWkCU1g", "5cs6x6Z8ixk", "tubirm9a6fs", "xW_VEai5oyU", "fJBtvgsZN94", "egfo1l8_RKw", "gUGgpHkeAYQ", "6txms8Rb24w", "VYUyDDIPwKE", "ST1FkE1dGGE", "y8G8Y7fWQiU", "cRn3g1IT4Mc", "1vnJFzjRwbk", "_z0nfVJ3pSs", "TX81rV_Pfks", "oG_0JhSqJ0k", "3XD2rRc4L9U", "a0Krf9DGHU0", "1Kf9gmyavM4", "d2Kk6blGkBk", "4hyiJJP3pGU", "OheDR35-POg", "cJ69GcEhnrk", "MmQoWVAy6Ko", "dGiSWJqM798", "jA329_Tgymo", "Vx0nWUKKCNw", "uy0SQ6R6VFs", "oa-F9HVaUws", "z0toD0Fs7kA", "LjZbq0yVb-o", "0DfyIaFCqJg", "3GjBjXRT6wA", "xr1Tg2Pl11o", "aEIUVfKCRic", "VKHs0g-Zw0o", "CzjG7V1XpXA", "UVbcaG2tfSE", "7Rv0Pi8eLUU", "XqcoLh40yVI", "D4dsSqRuQsg", "V2bN58-i4hM","5ESfx6dl2qg","wMDOli6JDBQ","80gdBnOLEzA","0tD-uHWbPFk"],
   "noBhojpuriIn": ["biharlife", "bihar"],
   "noSouthIn": ["desipop", "bollywood", "global", "hits2000", "hits2010", "punjabi", "anthems", "drive", "gym", "raag", "geet", "bhakti", "premium", "masters", "retro"],
   "feeds": [
