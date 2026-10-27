@@ -41,8 +41,8 @@ const ytChannel=s=>{const d=DESC.get(s.v.id); return d&&d.a||s.v.src}; // until 
 function descHtml(id){const d=DESC.get(id), open=gDescOpen.has(id); if(!d||!d.d) return "";
   return `<p class="ldtext${open?" open":""}">${esc(d.d)}</p>`+(d.d.length>110||d.d.includes("\n")?`<button class="ldmore" data-d="${id}" aria-expanded="${open}">${open?"Less":"More"}</button>`:"")}
 function fillDesc(id){const d=DESC.get(id);
-  document.querySelectorAll(`#glist .ldesc[data-d="${id}"]`).forEach(el=>{el.innerHTML=descHtml(id)});
-  if(d&&d.a) document.querySelectorAll(`#glist .lby[data-a="${id}"]`).forEach(el=>{el.textContent="by "+d.a})}
+  document.querySelectorAll(`.ldesc[data-d="${id}"]`).forEach(el=>{el.innerHTML=descHtml(id)}); // in the guide and the card under the TV
+  if(d&&d.a) document.querySelectorAll(`.lby[data-a="${id}"]`).forEach(el=>{el.textContent="by "+d.a})}
 
 function renderGuide(){const now=tvNow(); gB=guideEnd(now); if(gAt&&gAt<=now) gAt=0; // a chosen hour that has come round is now
   $("gday").textContent="Today, "+dayName(now)+" · India Standard Time"; renderTimes(now); renderList(now)}
@@ -58,14 +58,25 @@ function markTimes(){const row=$("gtimes"); row.querySelectorAll(".gt").forEach(
   if(on&&row.scrollWidth>row.clientWidth&&(b.offsetLeft<row.scrollLeft||b.offsetLeft+b.offsetWidth>row.scrollLeft+row.clientWidth)) row.scrollLeft=b.offsetLeft-row.clientWidth/3})}
 
 // Each channel's programme at the chosen hour and the one after; "Rest of today" opens the channel's whole day
-function renderList(now){const el=$("glist"), t=gAt||now, f=document.activeElement, keep={};
-  const back=f&&el.contains(f)?(f.dataset.k?`.lmore[data-k="${f.dataset.k}"]`:f.dataset.d?`.ldmore[data-d="${f.dataset.d}"]`:f.dataset.i?`.lwatch[data-i="${f.dataset.i}"]`:""):""; // focus and scroll survive the minute's redraw
-  el.querySelectorAll(".lday").forEach(d=>keep[d.dataset.k]=d.scrollTop);
+function renderList(now){const t=gAt||now;
   let h=`<p class="lwhen">${gAt?`On at <b>${fmt(gAt)}</b> today`:"On <b>now</b>"}, channel by channel</p>`;
   CHANNELS.forEach((c,i)=>{if(c.group&&c.group!==(CHANNELS[i-1]||{}).group) h+=`<h5 class="lgroup">${esc(c.group)}</h5>`; h+=listRow(c,i,t,now)});
-  el.innerHTML=h; el.querySelectorAll(".lday").forEach(d=>d.scrollTop=keep[d.dataset.k]||0);
+  redraw($("glist"),h)}
+// Cards are redrawn every minute: focus and an open day's scroll survive it
+function redraw(el,html){const f=document.activeElement, keep={};
+  const back=f&&el.contains(f)?(f.dataset.k?`.lmore[data-k="${f.dataset.k}"]`:f.dataset.d?`.ldmore[data-d="${f.dataset.d}"]`:f.dataset.i?`.lwatch[data-i="${f.dataset.i}"]`:""):"";
+  el.querySelectorAll(".lday").forEach(d=>keep[d.dataset.k]=d.scrollTop);
+  el.innerHTML=html; el.querySelectorAll(".lday").forEach(d=>d.scrollTop=keep[d.dataset.k]||0);
   if(back){const n=el.querySelector(back); if(n) n.focus({preventScroll:true})}}
-function listRow(c,i,t,now){const day=guideSlots(c,t,gB), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
+// The panel under the TV is one card: what's on (tick() fills its title, times and why; here its YouTube channel and
+// description) beside the channel it's on, as in the guide, with what's next (tick() too) and the rest of its day
+const gOpenNow=new Set(); // the day opens here apart from the guide's
+function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=day[0]; if(!s) return;
+  const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live) wantDesc(id);
+  redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
+  redraw($("nowYt"),s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span><div class="ldesc" data-d="${id}">${descHtml(id)}</div>`);
+  redraw($("nowDay"),more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":"Rest of today · "+more}</button>`+(open?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:""):"")}
+function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
   const on=now>=s.start&&now<s.end, more=day.length>1?unit(c,day.length):"", id=s.v.id; if(!s.live) wantDesc(id);
   const meta=s.live?"Live stream":(on?"On now · until ":"Until ")+fmt(s.end)+" · "+Math.round((s.end-s.start)/MIN)+" min";
   return `<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
@@ -87,16 +98,20 @@ function dayList(day,now){let h="", head="";
 function markGuide(){document.querySelectorAll("#guide [data-ch]").forEach(r=>{const on=+r.dataset.ch===cur; r.classList.toggle("gcur",on); on?r.setAttribute("aria-current","true"):r.removeAttribute("aria-current");
   const w=r.querySelector(".lwatch"); if(w) w.textContent=on?"Watching":"Watch"})}
 // Tuning from the guide: if the TV has scrolled out of sight (a phone, far down the list), it comes back into view
-function watchFromGuide(i){tune(i); const r=$("screen").getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight-80) $("main-tv").scrollIntoView({behavior:smooth(),block:"start"})}
-$("glist").addEventListener("click",e=>{const w=e.target.closest(".lwatch,.lhead"), m=e.target.closest(".lmore"), d=e.target.closest(".ldmore");
+function watchFromGuide(i){if(i!==cur) tune(i); const r=$("screen").getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight-80) $("main-tv").scrollIntoView({behavior:smooth(),block:"start"})}
+function cardClick(e){const root=e.currentTarget, w=e.target.closest(".lwatch,.lhead"), m=e.target.closest(".lmore"), d=e.target.closest(".ldmore");
   if(w) return watchFromGuide(+w.dataset.i);
-  if(d){const id=d.dataset.d; gDescOpen.has(id)?gDescOpen.delete(id):gDescOpen.add(id); fillDesc(id); const n=$("glist").querySelector(`.ldmore[data-d="${id}"]`); if(n) n.focus({preventScroll:true}); return}
+  if(d){const id=d.dataset.d; gDescOpen.has(id)?gDescOpen.delete(id):gDescOpen.add(id); fillDesc(id); const n=root.querySelector(`.ldmore[data-d="${id}"]`); if(n) n.focus({preventScroll:true}); return}
   if(!m) return;
-  const k=m.dataset.k, row=m.closest(".lrow"), i=+row.dataset.ch, now=tvNow(); gOpen.has(k)?gOpen.delete(k):gOpen.add(k);
-  row.outerHTML=listRow(CHANNELS[i],i,gAt||now,now); $("glist").querySelector(`.lmore[data-k="${k}"]`).focus({preventScroll:true})});
+  const k=m.dataset.k, row=m.closest(".lrow"), now=tvNow();
+  if(!row){gOpenNow.has(k)?gOpenNow.delete(k):gOpenNow.add(k); renderNowCard()} // the panel under the TV
+  else {const i=+row.dataset.ch; gOpen.has(k)?gOpen.delete(k):gOpen.add(k); row.outerHTML=listRow(CHANNELS[i],i,gAt||now,now)}
+  root.querySelector(`.lmore[data-k="${k}"]`).focus({preventScroll:true})}
+$("glist").addEventListener("click",cardClick);
+$("nowPanel").addEventListener("click",cardClick);
 $("gtimes").addEventListener("click",e=>{const b=e.target.closest(".gt"); if(!b) return; gAt=+b.dataset.t; markTimes(); renderList(tvNow())});
 // Each minute: what's on now moves on, and an hour that has come round drops off the buttons
-function guideTick(){if(guideBuilt) renderGuide()}
+function guideTick(){if(guideBuilt) renderGuide(); renderNowCard()}
 
 // A channel counts as watched after 10 s on it, so flicking past doesn't inflate it
 let watchTimer=0;
@@ -702,6 +717,7 @@ function tick(){
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
+    renderNowCard();
   }
   $("nowTime").textContent=s.live?`LIVE · ${LANG_LABEL[s.v.lang]}`:`${fmt(s.start)} – ${fmt(s.end)} · ${LANG_LABEL[s.v.lang]}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";

@@ -448,7 +448,17 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes card-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}} /* opacity and movement only: smooth on any device */
 @media (prefers-reduced-motion:reduce){.card.interlude>*{animation-name:card-fade}}
 
-.now{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+/* Under the TV, one card: what's on, with its YouTube channel, description and why it's on (left), and the channel it's
+   on, as in the programme guide, with what's next and the rest of its day (right; under it on a phone) */
+.now{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px 22px;align-items:start}
+.now-main,.now-side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.now-main>:empty,.now-side>:empty{display:none}
+.now-side{align-self:stretch;padding-left:22px;border-left:1px solid var(--line)}
+.now-yt .lby{margin-top:0}
+.nowch{display:flex;align-items:center;gap:10px}
+.nowch .lname{font:400 1rem/1.3 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.05em} /* the channel in the same spaced capitals as the programme's title */
+.now-side .lmore{margin-top:0}
+@media (max-width:760px){.now{grid-template-columns:minmax(0,1fr)}.now-side{padding:14px 0 0;border-left:0;border-top:1px solid var(--line)}}
 .now-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
 .now h3{margin:0;font:400 1.05rem/1.35 "Unbounded",var(--body);text-transform:uppercase;letter-spacing:.05em;text-wrap:balance;min-width:0} /* the programme's title in the brand's spaced capitals, like All channels */
 .meta{color:var(--muted);font-size:.95rem;font-variant-numeric:tabular-nums}
