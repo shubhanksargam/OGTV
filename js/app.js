@@ -489,13 +489,15 @@ function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
   osdVolume()}
 // Drag a knob round its centre; onTurn gets the total degrees turned so far, onDone when let go. A press without turning is a click:
-// onClick gets 1 (up) or -1 (down). With the knob pointing between 0° and 180° the right half goes up and the left down;
-// from 180° to 360° it flips, as if pushing the pointer round the dial.
+// onClick gets 1 (up) or -1 (down): the pointer moves one step towards where you click, clockwise (up) for a click just
+// clockwise of it, anticlockwise (down) for one just anticlockwise. It's measured from where the pointer really is on
+// screen, so it works the same at any angle and on a set turned on its side.
 function turnable(el,{onTurn,onDone,onClick}){
   let start=null;
   const ang=e=>{const r=el.getBoundingClientRect(); return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};
-  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); const r=el.getBoundingClientRect(), rot=((parseFloat(el.style.getPropertyValue("--rot"))||0)%360+360)%360;
-    start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false,side:(e.clientX<r.left+r.width/2?-1:1)*(rot<180?1:-1)}; el.classList.add("turning")});
+  el.addEventListener("pointerdown",e=>{e.preventDefault(); el.setPointerCapture(e.pointerId); const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2, q=el.querySelector("i").getBoundingClientRect();
+    const toward=(Math.atan2(e.clientY-cy,e.clientX-cx)-Math.atan2(q.top+q.height/2-cy,q.left+q.width/2-cx))*180/Math.PI;
+    start={a:ang(e),last:ang(e),turned:0,x:e.clientX,y:e.clientY,moved:false,side:((toward%360+540)%360-180)>=0?1:-1}; el.classList.add("turning")});
   el.addEventListener("pointermove",e=>{if(!start)return; const a=ang(e); let d=a-start.last; if(d>180)d-=360; if(d<-180)d+=360;
     start.last=a; start.turned+=d; if(Math.hypot(e.clientX-start.x,e.clientY-start.y)>5) start.moved=true; if(start.moved) onTurn(start.turned)});
   const end=()=>{if(!start)return; const st=start; start=null; el.classList.remove("turning"); st.moved?onDone(st.turned):onClick(st.side)};
