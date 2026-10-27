@@ -13,37 +13,90 @@ const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
 const onAir=s=>s.live?s.v.src+": "+s.v.t:s.v.t;
 
-function renderChannels(){
-  const now=tvNow();
-  $("chlist").innerHTML=CHANNELS.map((c,i)=>{const s=slotAt(c,now), head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<h5 class="ch-group">${esc(c.group)}</h5>`:"";
-    return `${head}<button class="ch" id="ch-${c.key}" data-i="${i}" aria-current="${i===cur}">
-      <span class="num">${c.n}</span>
-      <span style="min-width:0"><span class="nm"><strong>${esc(c.name)}</strong><em>${esc(c.en)}</em></span>
-      <span class="on">${badge(s)}${esc(onAir(s))}</span></span></button>`}).join("");
-}
-$("chlist").addEventListener("click",e=>{const b=e.target.closest(".ch");if(b)tune(+b.dataset.i)});
 
-function renderGuide(){
-  const now=tvNow(), a=Math.floor(now/(30*MIN))*30*MIN, b=a+3*HOUR, g=document.querySelector(".gscroll");
-  const PX=Math.max(300,(g&&g.clientWidth||960)-36-120)/60; // one hour fills the visible guide; the rest of the 3 hours scrolls
-  const W=(b-a)/MIN*PX;
-  let ticks="";for(let t=a;t<=b;t+=30*MIN) ticks+=`<span class="tick" style="left:${(t-a)/MIN*PX}px">${fmt(t)}</span>`;
-  let rows=`<div class="trow" style="width:${W}px">${ticks}</div>`;
-  CHANNELS.forEach((c,i)=>{
-    const lane=slotsBetween(c,a,b).map(s=>{const x=Math.max(s.start,a),y=Math.min(s.end,b);
-      const on=now>=s.start&&now<s.end;
-      return `<button class="prog${on?' nowp':''}" data-i="${i}" style="left:${(x-a)/MIN*PX+1}px;width:${(y-x)/MIN*PX-3}px" title="${esc(onAir(s))}">
-        <b>${badge(s)}${esc(onAir(s))}</b><small>${fmt(s.start)}</small></button>`}).join("");
-    rows+=`<div class="grow${i===cur?" gcur":""}"${i===cur?' aria-current="true"':""}><div class="glabel">${c.n} ${esc(c.name)}</div><div class="glane" style="width:${W}px">${lane}</div></div>`;
-  });
-  rows+=`<div class="nowline" style="left:${18+120+(now-a)/MIN*PX}px"></div>`;
-  $("grid").innerHTML=rows;
-}
+/* Programme guide, which is also the channel list: every channel, channel by channel, for the rest of today (at least
+   the next 3 hours), in IST. Each card shows the programme at the chosen hour (Now, or an hour button) with its YouTube
+   channel and description, the one after it, and opens into the channel's whole day. Tap a card's name or Watch to tune. */
+const WEEKDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const dayName=t=>{const d=new Date(t+IST); return WEEKDAYS[d.getUTCDay()]+" "+d.getUTCDate()+" "+MONTHS[d.getUTCMonth()]};
+const smooth=()=>matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";
+try{localStorage.removeItem("ogtv-list")}catch(e){} // the old channel panel's setting
+let gAt=0, gB=0, gHours=""; // gAt: the chosen hour (0 = now); gB: where the guide ends; gHours: which hour buttons are drawn
+const gOpen=new Set(), gDescOpen=new Set(); // channels whose whole day is open; descriptions shown in full
+const guideEnd=now=>Math.max(istDayStart(now)+DAY,Math.floor(now/(30*MIN))*30*MIN+3*HOUR);
+const unit=(c,n)=>n+" "+(c.group==="Music"||c.festival?"songs":n===1?"programme":"programmes");
+// A channel's programmes from a to b: a live stream's hour blocks join into one, and the seconds left at a block's end go
+function guideSlots(c,a,b){const out=[];
+  for(const s of slotsBetween(c,a,b)){const last=out[out.length-1]; if(!s.live&&s.end-s.start<MIN) continue;
+    if(last&&s.live&&last.live&&last.v.id===s.v.id&&last.end===s.start){last.end=s.end; continue}
+    out.push({...s})}
+  return out}
+
+// YouTube's own details for a video: the channel that uploaded it and its description, from desc/<id>.json (written by
+// scripts/fetch-descriptions.mjs), fetched the first time the guide shows the video
+const DESC=new Map(); // id → {a: YouTube channel, d: description}, null when there is no file, "" while loading
+function wantDesc(id){if(DESC.has(id)) return; DESC.set(id,"");
+  fetch("desc/"+id+".json").then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{DESC.set(id,j&&typeof j==="object"?j:null); fillDesc(id)})}
+const ytChannel=s=>{const d=DESC.get(s.v.id); return d&&d.a||s.v.src}; // until the file arrives, the source's own name
+function descHtml(id){const d=DESC.get(id), open=gDescOpen.has(id); if(!d||!d.d) return "";
+  return `<p class="ldtext${open?" open":""}">${esc(d.d)}</p>`+(d.d.length>110||d.d.includes("\n")?`<button class="ldmore" data-d="${id}" aria-expanded="${open}">${open?"Less":"More"}</button>`:"")}
+function fillDesc(id){const d=DESC.get(id);
+  document.querySelectorAll(`#glist .ldesc[data-d="${id}"]`).forEach(el=>{el.innerHTML=descHtml(id)});
+  if(d&&d.a) document.querySelectorAll(`#glist .lby[data-a="${id}"]`).forEach(el=>{el.textContent="by "+d.a})}
+
+function renderGuide(){const now=tvNow(); gB=guideEnd(now); if(gAt&&gAt<=now) gAt=0; // a chosen hour that has come round is now
+  $("gday").textContent="Today, "+dayName(now)+" · India Standard Time"; renderTimes(now); renderList(now)}
+// The hours left today as buttons (Now, then each full hour), with the part of the day each run starts
+const DAYPART={5:"Morning",12:"Afternoon",17:"Evening",21:"Night"};
+function renderTimes(now){const first=Math.floor((now+IST)/HOUR+1)*HOUR-IST, key=first+"|"+gB; if(key===gHours) return; gHours=key;
+  let h=`<button class="gt gt-now" data-t="0" aria-pressed="${!gAt}">Now</button>`;
+  for(let t=first;t<gB;t+=HOUR){const hr=new Date(t+IST).getUTCHours(), mid=(t+IST)%DAY===0;
+    if(mid||DAYPART[hr]) h+=`<span class="gdp">${mid?"After midnight":DAYPART[hr]}</span>`;
+    h+=`<button class="gt" data-t="${t}" aria-pressed="${gAt===t}">${fmt(t)}</button>`}
+  $("gtimes").innerHTML=h; markTimes()}
+function markTimes(){const row=$("gtimes"); row.querySelectorAll(".gt").forEach(b=>{const on=+b.dataset.t===gAt; b.setAttribute("aria-pressed",on);
+  if(on&&row.scrollWidth>row.clientWidth&&(b.offsetLeft<row.scrollLeft||b.offsetLeft+b.offsetWidth>row.scrollLeft+row.clientWidth)) row.scrollLeft=b.offsetLeft-row.clientWidth/3})}
+
+// Each channel's programme at the chosen hour and the one after; "Rest of today" opens the channel's whole day
+function renderList(now){const el=$("glist"), t=gAt||now, f=document.activeElement, keep={};
+  const back=f&&el.contains(f)?(f.dataset.k?`.lmore[data-k="${f.dataset.k}"]`:f.dataset.d?`.ldmore[data-d="${f.dataset.d}"]`:f.dataset.i?`.lwatch[data-i="${f.dataset.i}"]`:""):""; // focus and scroll survive the minute's redraw
+  el.querySelectorAll(".lday").forEach(d=>keep[d.dataset.k]=d.scrollTop);
+  let h=`<p class="lwhen">${gAt?`On at <b>${fmt(gAt)}</b> today`:"On <b>now</b>"}, channel by channel</p>`;
+  CHANNELS.forEach((c,i)=>{if(c.group&&c.group!==(CHANNELS[i-1]||{}).group) h+=`<h5 class="lgroup">${esc(c.group)}</h5>`; h+=listRow(c,i,t,now)});
+  el.innerHTML=h; el.querySelectorAll(".lday").forEach(d=>d.scrollTop=keep[d.dataset.k]||0);
+  if(back){const n=el.querySelector(back); if(n) n.focus({preventScroll:true})}}
+function listRow(c,i,t,now){const day=guideSlots(c,t,gB), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
+  const on=now>=s.start&&now<s.end, more=day.length>1?unit(c,day.length):"", id=s.v.id; if(!s.live) wantDesc(id);
+  const meta=s.live?"Live stream":(on?"On now · until ":"Until ")+fmt(s.end)+" · "+Math.round((s.end-s.start)/MIN)+" min";
+  return `<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
+    +`<div class="lhead" data-i="${i}"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div>`
+    +`<button class="lwatch" data-i="${i}" aria-label="Watch ${esc(c.name)} now">${i===cur?"Watching":"Watch"}</button></div>`
+    +`<ol class="lprogs"><li class="lat${on?" lon":""}"><time>${s.live?"Live":fmt(s.start)}</time><div><b>${badge(s)}${esc(s.live?onAir(s):s.v.t)}</b>`
+    +(s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>`)+`<small>${meta}</small>`
+    +(on&&!s.live?`<i class="lbar"><i style="width:${((now-s.start)/(s.end-s.start)*100).toFixed(1)}%"></i></i>`:"")
+    +(s.live?"":`<div class="ldesc" data-d="${id}">${descHtml(id)}</div>`)+`</div></li>`
+    +(nx?`<li class="lnx"><time>${fmt(nx.start)}</time><div>${badge(nx)}${esc(onAir(nx))}${nx.live?"":` <span>· ${esc(nx.v.src)}</span>`}</div></li>`:"")+`</ol>`
+    +(more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":(gAt?fmt(gAt)+" onwards":"Rest of today")+" · "+more}</button>`:"")
+    +(open&&more?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:"")+`</article>`}
+function dayList(day,now){let h="", head="";
+  for(const s of day){const label=s.live?"Live":s.part.label; if(label!==head){head=label; h+=`<li class="lpart">${esc(label)}</li>`}
+    h+=`<li${now>=s.start&&now<s.end?' class="lon"':""}><time>${fmt(s.start)}</time><span>${badge(s)}${esc(onAir(s))}${s.live?"":`<em>${esc(s.v.src)}</em>`}</span><small>${s.live?"":Math.round((s.end-s.start)/MIN)+" min"}</small></li>`}
+  return h}
+
 // The guide marks the channel you're on; tuning moves the mark without redrawing the guide
-function markGuide(){document.querySelectorAll("#grid .grow").forEach((r,k)=>{r.classList.toggle("gcur",k===cur); k===cur?r.setAttribute("aria-current","true"):r.removeAttribute("aria-current")})}
-$("grid").addEventListener("click",e=>{const b=e.target.closest(".prog");if(b)tune(+b.dataset.i)});
-let guideW=0, guideT=0; // keep one hour to a screen as the window changes
-addEventListener("resize",()=>{clearTimeout(guideT); guideT=setTimeout(()=>{const g=document.querySelector(".gscroll"); if(g&&g.clientWidth!==guideW){guideW=g.clientWidth; renderGuide()}},150)});
+function markGuide(){document.querySelectorAll("#guide [data-ch]").forEach(r=>{const on=+r.dataset.ch===cur; r.classList.toggle("gcur",on); on?r.setAttribute("aria-current","true"):r.removeAttribute("aria-current");
+  const w=r.querySelector(".lwatch"); if(w) w.textContent=on?"Watching":"Watch"})}
+// Tuning from the guide: if the TV has scrolled out of sight (a phone, far down the list), it comes back into view
+function watchFromGuide(i){tune(i); const r=$("screen").getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight-80) $("main-tv").scrollIntoView({behavior:smooth(),block:"start"})}
+$("glist").addEventListener("click",e=>{const w=e.target.closest(".lwatch,.lhead"), m=e.target.closest(".lmore"), d=e.target.closest(".ldmore");
+  if(w) return watchFromGuide(+w.dataset.i);
+  if(d){const id=d.dataset.d; gDescOpen.has(id)?gDescOpen.delete(id):gDescOpen.add(id); fillDesc(id); const n=$("glist").querySelector(`.ldmore[data-d="${id}"]`); if(n) n.focus({preventScroll:true}); return}
+  if(!m) return;
+  const k=m.dataset.k, row=m.closest(".lrow"), i=+row.dataset.ch, now=tvNow(); gOpen.has(k)?gOpen.delete(k):gOpen.add(k);
+  row.outerHTML=listRow(CHANNELS[i],i,gAt||now,now); $("glist").querySelector(`.lmore[data-k="${k}"]`).focus({preventScroll:true})});
+$("gtimes").addEventListener("click",e=>{const b=e.target.closest(".gt"); if(!b) return; gAt=+b.dataset.t; markTimes(); renderList(tvNow())});
+// Each minute: what's on now moves on, and an hour that has come round drops off the buttons
+function guideTick(){if(guideBuilt) renderGuide()}
 
 // A channel counts as watched after 10 s on it, so flicking past doesn't inflate it
 let watchTimer=0;
@@ -52,11 +105,12 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
   countChannel(); browse=cur; clearDigits(); markGuide();
   try{const q=new URLSearchParams(location.search); q.set("ch",CHANNELS[cur].n); history.replaceState(null,"","?"+q)}catch(e){}
-  playingKey=null; renderChannels(); tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
+  playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
+  if($("help").open)return; // while Help is open, keys are for it (Esc closes it)
   if(!started)return; // the ident plays through (a key during it only lets the sound in)
   if(isFull()&&fsKey(e)) return;
   if(e.key==="ArrowUp"){e.preventDefault();tune(cur-1)}
@@ -70,8 +124,9 @@ addEventListener("keydown",e=>{
   else if((e.key===" "||e.key==="k"||e.key==="K")&&!(e.target.closest&&e.target.closest("button,a"))){e.preventDefault(); togglePause()}
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
-  else if(e.key==="c"||e.key==="C") setList(!listHidden);
+  else if((e.key==="c"||e.key==="C")&&!isFull()) $("guide").scrollIntoView({behavior:smooth(),block:"start"}); // the channels are in the guide
   else if(e.key==="s"||e.key==="S") toggleSubs();
+  else if(e.key==="h"||e.key==="H"||e.key==="?") openHelp();
   else if(e.key==="Escape"&&$("room").classList.contains("pseudo-fs")) toggleFullscreen();
 });
 
@@ -522,12 +577,15 @@ $("knobVol").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k))
   setVol((muted?0:vol)+(k==="ArrowRight"||k==="ArrowUp"?5:-5))});
 $("retro").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on")});
 $("retroFs").addEventListener("click",()=>{setRetro(!retro); if(retro) track("retro-on","Retro mode on"); wakeUI(false)});
-/* Hide the channel list on the right; the TV then takes the full width */
-let listHidden=true; try{listHidden=localStorage.getItem("ogtv-list")!=="shown"}catch(e){} // hidden unless the viewer opened it
-function setList(hide){listHidden=hide; $("remote").hidden=hide; $("showList").hidden=!hide;
-  document.querySelector(".main").classList.toggle("list-hidden",hide);
-  try{localStorage.setItem("ogtv-list",hide?"hidden":"shown")}catch(e){}}
-$("hideList").addEventListener("click",()=>setList(true));
+/* Help: everything about using OGTV, in a dialog from the button beside Retro mode (or H). Its topics jump within it */
+const help=$("help");
+function openHelp(){if(help.open) return; try{help.showModal()}catch(e){help.setAttribute("open","")} help.scrollTop=0; track("help","Help opened")}
+const closeHelp=()=>{try{help.close()}catch(e){help.removeAttribute("open")}};
+["helpBtn","helpFs","keyHelp"].forEach(id=>$(id).addEventListener("click",openHelp)); // the header, beside Retro mode in full screen, the TV set
+$("helpClose").addEventListener("click",closeHelp);
+help.addEventListener("click",e=>{if(e.target===help) closeHelp()}); // a click on the dimmed page around it
+help.querySelector(".help-toc").addEventListener("click",e=>{const a=e.target.closest("a"); if(!a) return; e.preventDefault();
+  const t=help.querySelector(a.getAttribute("href")); if(t) help.scrollTo({top:t.offsetTop-help.querySelector(".help-top").offsetHeight-6,behavior:smooth()})});
 /* Subtitles: off unless the viewer turns them on (remembered); reapplied as each video starts */
 let subs=false; try{localStorage.removeItem("ogtv-subs"); subs=localStorage.getItem("ogtv-cc")==="on"}catch(e){} // old key saved "on" for everyone
 function applySubs(){if(MODE!=="yt"||!player)return;
@@ -563,8 +621,6 @@ $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)
 setFx(fxLevel);
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setSubs(subs);
-$("showList").addEventListener("click",()=>setList(false));
-setList(listHidden);
 setRetro(retro); vfd();
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
@@ -574,7 +630,7 @@ function autoFull(){
   if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
   if(TV_APP) return; // the app is full screen already
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
-    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#knobMode,#fs,#home"))||e.key==="Escape") return;
+    if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#knobMode,#fs,#home,#helpFs,#keyHelp"))||e.key==="Escape") return;
     const req=room.requestFullscreen||room.webkitRequestFullscreen; if(!req) return;
     if(!started){const w=setInterval(()=>{if(!started)return; clearInterval(w); // full screen sits above the intro, so it waits for the iris
       if(navigator.userActivation&&!navigator.userActivation.isActive){addEventListener("click",up,true); addEventListener("keydown",up,true); return} goFull()},100); return}
@@ -646,7 +702,6 @@ function tick(){
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
-    renderChannels();
   }
   $("nowTime").textContent=s.live?`LIVE · ${LANG_LABEL[s.v.lang]}`:`${fmt(s.start)} – ${fmt(s.end)} · ${LANG_LABEL[s.v.lang]}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
@@ -659,19 +714,19 @@ $("aboutChannels").textContent=CHANNELS.length;
 $("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
-renderChannels(); tick(); loadYT(); // the guide is built after the intro (guideLater), so the intro has the phone to itself
+tick(); loadYT(); // the guide is built after the intro (guideLater), so the intro has the phone to itself
 setInterval(guarded(tick,"tick"),1000);
 // Watch-time milestones while the page is visible: how long people stay
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
 setInterval(()=>{if(!started||document.hidden)return; watchedSec+=15; const m=MILESTONES[watchedSec]; if(m) track("watch-"+m,"Watched "+m)},15e3);
-setInterval(guarded(renderGuide,"guide"),60e3);
+setInterval(guarded(guideTick,"guide"),60e3);
 
 // Live streams start and stop all day. The live list is re-read every 10 minutes, so a set left on picks up a
 // stream that went on air after it was switched on (a channel whose stream changed retunes on the next tick)
 async function refreshLive(){
   try{const r=await fetch("js/live.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) return; const j=await r.json();
     if(!j||typeof j!=="object"||JSON.stringify(j)===JSON.stringify(LIVE)) return;
-    for(const k of Object.keys(LIVE)) delete LIVE[k]; Object.assign(LIVE,j); renderChannels(); renderGuide()}catch(e){}}
+    for(const k of Object.keys(LIVE)) delete LIVE[k]; Object.assign(LIVE,j); renderGuide()}catch(e){}}
 setInterval(refreshLive,10*MIN);
 // A new version of the site (code, or the nightly feeds) loads itself at the next change of programme, so the
 // viewer only sees a normal programme change. In a browser that waits until nobody has touched it for 30 minutes.
@@ -689,7 +744,7 @@ async function syncClock(){
   try{const t0=Date.now(), r=await fetch("robots.txt?t="+t0,{method:"HEAD",cache:"no-store"}), t1=Date.now(), d=Date.parse(r.headers.get("date"));
     if(!d) return; const off=d+500-(t0+t1)/2, was=clockSkew; // the header has whole seconds: +500 ms is its middle
     clockSkew=Math.abs(off)>3e3?Math.round(off):0;
-    if(Math.abs(clockSkew-was)>5e3){track("clock-skew","Device clock off by "+Math.round(off/1000)+" s"); if(MODE==="yt"&&player) replay(); renderChannels(); renderGuide()}}catch(e){}}
+    if(Math.abs(clockSkew-was)>5e3){track("clock-skew","Device clock off by "+Math.round(off/1000)+" s"); if(MODE==="yt"&&player) replay(); renderGuide()}}catch(e){}}
 syncClock(); setInterval(syncClock,HOUR);
 
 /* ---------- TV app remote ----------
@@ -721,7 +776,7 @@ window.ogtv={
   resume(){playingKey=null; tick()}, // back in front: rejoin the programme at this moment
 };
 if(TV_APP) track("app-tv-start","TV app opened");
-// The programme guide is built once the intro has handed over (or after 12 s if no one presses play), then scrolled to now
+// The programme guide is built once the intro has handed over (or after 12 s if no one presses play)
 let guideBuilt=false;
-function guideLater(){if(guideBuilt)return; guideBuilt=true; renderGuide(); requestAnimationFrame(()=>{const g=document.querySelector(".gscroll"); if(g) g.scrollLeft=0})}
+function guideLater(){if(guideBuilt)return; guideBuilt=true; renderGuide()}
 setTimeout(guideLater,12000);

@@ -33,7 +33,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=216">
+<link rel="stylesheet" href="css/styles.css?v=218">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="ogcut" maskUnits="userSpaceOnUse" x="0" y="0" width="150" height="120"><rect width="150" height="120" fill="#fff"/><circle cx="129" cy="21" r="23" fill="#000"/></mask><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18" mask="url(#ogcut)"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)"/></symbol></defs></svg>
@@ -44,6 +44,7 @@
     <div class="tools">
       <button class="retro-btn home-btn" id="home" title="Home: full screen"><svg viewBox="0 0 150 120" width="20" height="16" aria-hidden="true"><use href="#ogmark"></use></svg>Home</button>
       <button class="retro-btn" id="retro" aria-pressed="false" title="Retro mode (R)">Retro mode</button>
+      <button class="retro-btn help-btn" id="helpBtn" aria-haspopup="dialog" title="Help (H)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.1 1-1.1 1.8v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.25" fill="currentColor"/></svg>Help</button>
       <div class="clock" id="clock" aria-live="off" hidden>--:--<small>IST</small></div>
     </div>
   </header>
@@ -67,6 +68,7 @@
         <button class="sound" id="sound" hidden>Turn sound on</button>
         <button class="cc" id="cc" aria-pressed="true" aria-label="Subtitles" title="Subtitles (S)">CC</button>
         <button class="retro-fs" id="retroFs" aria-pressed="false" title="Retro mode (R)">Retro mode</button>
+        <button class="help-fs" id="helpFs" aria-haspopup="dialog" title="Help (H)">Help</button>
         <button class="pause-fs" id="pauseFs" aria-label="Pause" title="Pause (K)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button>
         <button class="fs" id="fs" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
         <div class="tv-osd" id="tvOsd" aria-live="polite"></div>
@@ -82,6 +84,7 @@
         <span class="keys">
           <button class="key" id="keyMute" aria-pressed="false" title="Sound (M)">Mute</button>
           <button class="key" id="keyCc" aria-pressed="true" title="Subtitles (S)">CC</button>
+          <button class="key key-help" id="keyHelp" aria-haspopup="dialog" title="Help (H)">Help</button>
           <button class="key key-wide" id="keyFs" title="Full screen (F)">Full screen</button>
         </span>
         <span class="led" aria-hidden="true"></span>
@@ -94,18 +97,13 @@
         <div class="next" id="next"></div>
       </div>
     </div>
-
-    <nav class="remote" id="remote" aria-label="Channels">
-      <div class="remote-head"><h4>Channels</h4><button class="hide-list" id="hideList" aria-label="Hide channel list" title="Hide channels (C)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hide</button></div>
-      <div id="chlist"></div>
-      <p class="hint">Remote keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> hide channels</p>
-    </nav>
   </section>
-  <button class="show-list" id="showList" hidden aria-label="Show channel list" title="Show channels (C)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Channels</span></button>
 
-  <section class="guide" aria-label="Programme guide">
-    <div class="guide-head"><h4>Programme guide</h4><span id="gspan">Next 3 hours · India Standard Time</span></div>
-    <div class="gscroll"><div class="grid" id="grid"></div></div>
+  <section class="guide" id="guide" aria-labelledby="guide-h">
+    <div class="guide-head"><h4 id="guide-h">Programme guide</h4><span class="gday" id="gday">Today · India Standard Time</span></div>
+    <div class="gtimes" id="gtimes" role="group" aria-label="What's on at"></div>
+    <div class="glist" id="glist"></div>
+    <p class="hint ghint">Keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>K</kbd> pause, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> channels, <kbd>H</kbd> help</p>
   </section>
 
   <section class="seo-intro"><h2>Khabar on OGTV</h2><p>Khabar on OGTV: Hindi news &amp; analysis, free and always on. Videos from The Lallantop, BBC News Hindi, Khabargaon and Newslaundry Hindi.</p></section>
@@ -187,13 +185,95 @@
   </footer>
 </div>
 
-<script src="js/analytics.js?v=216"></script>
-<script src="js/catalog.js?v=216"></script>
+<dialog class="help" id="help" aria-labelledby="help-h">
+  <div class="help-top"><h2 id="help-h">How to use OGTV</h2><button class="help-x" id="helpClose">Close</button></div>
+  <nav class="help-toc" aria-label="Help topics"><a href="#h-start">Getting started</a><a href="#h-surf">Changing channel</a><a href="#h-guide">Programme guide</a><a href="#h-sound">Sound, pause &amp; subtitles</a><a href="#h-full">Full screen</a><a href="#h-retro">Retro mode</a><a href="#h-app">Install as an app</a><a href="#h-keys">Keyboard</a><a href="#h-trouble">If something goes wrong</a></nav>
+  <section id="h-start"><h3>Getting started</h3>
+    <p>OGTV is free TV made from YouTube: channels that are always on, from news and cricket to bhajans, films and music, in Hindi and English. There is nothing to sign up for.</p>
+    <ul>
+      <li>Tap <b>Press to start</b> once, so your browser lets the sound play.</li>
+      <li>Every channel runs to a schedule, so everyone watching sees the same moment, like real TV. You will often join a programme part-way through; that is normal.</li>
+      <li>Between programmes a <b>Coming up next</b> card shows what starts next.</li>
+      <li>Under the TV: the programme's title and times, a bar showing how far in it is, <b>On air because</b> (the time slot and topic that put it on air) and what's next.</li>
+    </ul></section>
+  <section id="h-surf"><h3>Changing channel</h3>
+    <ul>
+      <li><b>Phone or tablet:</b> swipe sideways across the picture, left for the next channel and right for the one before.</li>
+      <li><b>Programme guide:</b> tap <b>Watch</b> or a channel's name.</li>
+      <li><b>Keyboard:</b> <kbd>↓</kbd> for the next channel, <kbd>↑</kbd> for the one before, or type its number (two digits for 10 and up: <kbd>1</kbd> <kbd>2</kbd> is channel 12).</li>
+      <li><b>Retro TV:</b> turn the <b>Channel</b> knob.</li>
+      <li><b>Headphones, car or lock screen:</b> the next and previous track buttons change channel.</li>
+      <li><b>Share a channel:</b> the address in your browser always points to the channel you're watching. Copy it and send it.</li>
+    </ul></section>
+  <section id="h-guide"><h3>Programme guide</h3>
+    <p>Below the TV is every channel, in groups: News, Knowledge, Sports, Lifestyle, Entertainment and Music. Press <kbd>C</kbd> to jump there.</p>
+    <ul>
+      <li>Each card shows what's on, the YouTube channel it comes from, its description (tap <b>More</b> to read it all), how long is left, and what's next.</li>
+      <li>Tap an hour (<b>13:00</b>, <b>21:00</b>…) to see what every channel plays then. <b>Now</b> brings you back.</li>
+      <li><b>Rest of today</b> opens a channel's whole day, programme by programme.</li>
+      <li><i class="new">NEW</i> marks videos uploaded in the last 30 days; <i class="livedot">LIVE</i> marks a live stream.</li>
+      <li>The channel you're watching is outlined in orange, and its button says <b>Watching</b>.</li>
+      <li>All times are India Standard Time. Later programmes can change a little when new videos arrive overnight.</li>
+    </ul></section>
+  <section id="h-sound"><h3>Sound, pause and subtitles</h3>
+    <ul>
+      <li><b>Sound:</b> if the picture plays silently, tap <b>Turn sound on</b>. <kbd>M</kbd> turns the sound off and on. On the retro TV, use the <b>Volume</b> knob (click it to mute) or the <b>Mute</b> key.</li>
+      <li><b>Pause:</b> tap the picture, or press <kbd>K</kbd> or <kbd>Space</kbd>. In full screen, use the pause button.</li>
+      <li><b>Subtitles:</b> the <b>CC</b> button or <kbd>S</kbd> turns YouTube's subtitles on or off for every programme. OGTV remembers your choice.</li>
+    </ul></section>
+  <section id="h-full"><h3>Full screen</h3>
+    <ul>
+      <li>Tap <b>Home</b>, <b>Maximize for the best experience</b> or the full-screen button on the picture, or press <kbd>F</kbd>.</li>
+      <li>The channel's name appears as you change channel, and the buttons fade when you leave them alone.</li>
+      <li>To see every channel in a strip, move the mouse to the bottom, tap the picture, or press <kbd>←</kbd> <kbd>→</kbd>. Tap a channel or press <kbd>Enter</kbd> to watch it. Swiping up or down changes channel too.</li>
+      <li>On iPhone, OGTV fills the browser window. For true full screen, add it to your Home Screen (see Install as an app).</li>
+      <li><kbd>Esc</kbd> leaves full screen.</li>
+    </ul></section>
+  <section id="h-retro"><h3>Retro mode</h3>
+    <p>OGTV opens in an old wooden TV set. <b>Retro mode</b> (or <kbd>R</kbd>) switches it off and on.</p>
+    <ul>
+      <li><b>Channel knob:</b> drag it round, scroll over it, or click just to one side of its pointer to move one channel.</li>
+      <li><b>Mode knob:</b> how old the picture looks. <b>Full</b>: every tape effect. <b>Steady</b>: no rolling band. <b>Tinted</b> (where it starts): tape colours only. <b>Clean</b>: a clear picture. <b>Quiet</b>: no static hiss between channels either. <b>Normal</b>: retro off. Click it for the next setting.</li>
+      <li><b>Volume knob:</b> turn it to set the volume; click it to mute or unmute.</li>
+      <li>The keys beside the knobs are <b>Mute</b>, <b>CC</b> (subtitles) and <b>Full screen</b>.</li>
+    </ul></section>
+  <section id="h-app"><h3>Install as an app</h3>
+    <ul>
+      <li><b>Android:</b> in Chrome's menu (⋮), choose <b>Install app</b> or <b>Add to Home screen</b>.</li>
+      <li><b>iPhone and iPad:</b> in Safari, tap <b>Share</b>, then <b>Add to Home Screen</b>.</li>
+      <li><b>Other browsers:</b> look for <b>Install app</b> or <b>Add to Home screen</b> in the browser's menu.</li>
+      <li>OGTV then opens full screen, like any other app.</li>
+    </ul></section>
+  <section id="h-keys"><h3>Keyboard</h3>
+    <dl class="help-keys">
+      <dt><kbd>↓</kbd> <kbd>↑</kbd></dt><dd>Next channel, the one before</dd>
+      <dt><kbd>0</kbd>–<kbd>9</kbd></dt><dd>Go to a channel by its number</dd>
+      <dt><kbd>M</kbd></dt><dd>Sound off and on</dd>
+      <dt><kbd>K</kbd> or <kbd>Space</kbd></dt><dd>Pause and play</dd>
+      <dt><kbd>F</kbd></dt><dd>Full screen</dd>
+      <dt><kbd>←</kbd> <kbd>→</kbd> <kbd>Enter</kbd></dt><dd>In full screen: browse the channel strip, then watch</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Leave full screen, or close this help</dd>
+      <dt><kbd>R</kbd></dt><dd>Retro mode off and on</dd>
+      <dt><kbd>S</kbd></dt><dd>Subtitles</dd>
+      <dt><kbd>C</kbd></dt><dd>Go to the programme guide</dd>
+      <dt><kbd>H</kbd></dt><dd>This help</dd>
+    </dl></section>
+  <section id="h-trouble"><h3>If something goes wrong</h3>
+    <ul>
+      <li>A video that won't play is skipped, and the channel moves on by itself.</li>
+      <li>No sound? Tap <b>Turn sound on</b>, or press <kbd>M</kbd>.</li>
+      <li>Picture stuck? Reload the page. You rejoin each channel where it is now.</li>
+      <li>OGTV picks up new videos every night. An open page updates itself quietly between programmes once you haven't touched it for a while.</li>
+    </ul></section>
+</dialog>
+
+<script src="js/analytics.js?v=218"></script>
+<script src="js/catalog.js?v=218"></script>
 <script src="js/feeds.js?v=202610272124"></script>
 <script src="js/live.js?v=202610162154"></script>
-<script src="js/festivals.js?v=216"></script>
-<script src="js/channels.js?v=216"></script>
-<script src="js/scheduler.js?v=216"></script>
-<script src="js/app.js?v=216"></script>
+<script src="js/festivals.js?v=218"></script>
+<script src="js/channels.js?v=218"></script>
+<script src="js/scheduler.js?v=218"></script>
+<script src="js/app.js?v=218"></script>
 </body>
 </html>

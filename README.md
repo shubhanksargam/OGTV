@@ -19,13 +19,15 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `js/catalog.js` | Hand-picked videos: YouTube ID, title, category, language, length in minutes |
 | `js/feeds.js` | Generated: latest uploads from the creators in `scripts/feeds.json` |
 | `scripts/fetch-feeds.mjs` | Rebuilds `js/feeds.js` (`node scripts/fetch-feeds.mjs`, or `... khel,geet` for some categories); which source each video came from goes to `scripts/feeds-state.json` |
-| `scripts/check.mjs` | Checks script syntax, feed data, channel hours and the schedule (`node scripts/check.mjs`); runs on every push and before every automatic refresh commits |
+| `scripts/fetch-descriptions.mjs` | Writes `desc/<id>.json`, each video's YouTube channel and cleaned-up description for the programme guide (`node scripts/fetch-descriptions.mjs [max]`); the videos on air soonest first, skipping ones already done |
+| `desc/` | Generated: one small file per video, fetched by the guide only when it shows that video |
+| `scripts/check.mjs` | Checks script syntax, feed data, channel hours, the schedule and the description files (`node scripts/check.mjs`); runs on every push and before every automatic refresh commits |
 | `js/live.js`, `js/live.json` | Generated: which channels in `scripts/live.json` are live right now (open pages re-read the JSON every 10 minutes) |
 | `js/festivals.js` | Festival calendar for the Festivals channel (add next year's dates before Oct 2027) |
 | `scripts/fetch-live.mjs` | Rebuilds `js/live.js` (`node scripts/fetch-live.mjs`) |
 | `js/channels.js` | Channels and their rules (time blocks in IST and what each block plays) |
 | `js/scheduler.js` | Builds each day's schedule deterministically from the rules |
-| `js/app.js` | Player, channel list, programme guide, remote keys |
+| `js/app.js` | Player, programme guide (which is also the channel list), help, remote keys |
 
 Scripts load in that order as plain `<script>` tags. No build step.
 
@@ -47,7 +49,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 **Festivals channel** — plays the `cat` of whichever row in `js/festivals.js` covers today (`from`–`to`), or the next festival coming up. Festival song playlists live in `scripts/feeds.json` under `fest-*` categories and are only refetched within 30 days of their festival.
 
-**Nightly refresh** — `.github/workflows/refresh-feeds.yml` reruns the feed script at 03:00 IST and commits `js/feeds.js` when there are new videos. Run it by hand from the repo's Actions tab → Refresh feeds → Run workflow. For more reliable lookups, add a YouTube Data API key as a repository secret named `YT_API_KEY`.
+**Nightly refresh** — `.github/workflows/refresh-feeds.yml` reruns the feed script at 03:00 IST, then the description script, and commits `js/feeds.js` and `desc/` when there is anything new. Run it by hand from the repo's Actions tab → Refresh feeds → Run workflow. For more reliable lookups, add a YouTube Data API key as a repository secret named `YT_API_KEY`. Descriptions in particular need it: without a key they come from watch pages, which YouTube stops serving (HTTP 429) after a couple of hundred in a few minutes, so the ~15,000 videos would fill in over weeks; with a key, one run does them all.
 
 **A rule** — each channel in `js/channels.js` has `parts`. Each part is a block of hours in IST:
 
@@ -66,10 +68,11 @@ Scripts load in that order as plain `<script>` tags. No build step.
 - The first tap ("Press to start") lets the browser play with sound.
 - `?ch=8` in the address opens channel 8. Type two digits on the keyboard for channels 10 and up.
 - Subtitles: the **CC** button on the screen or `S` turns YouTube's subtitles off (or back on) for every video. Remembered per browser.
-- The channel list starts hidden (the TV fills the width); the **Channels** tab on the right edge or `C` opens it, and the choice is remembered.
+- **Help** (beside **Retro mode** in the header; in full screen beside the on-screen Retro mode button and as a key on the retro TV set; or `H`) explains every part of the site.
 - Full screen: the button on the screen, double-click, or `F`. In full screen a banner shows each channel change, moving the mouse to the bottom (or tapping, or `←`/`→`) opens a strip of all channels (`Enter` tunes), the OGTV mark and channel name sit in the corner, and controls fade when idle. On iPhone the screen fills the browser window instead.
 - VHS mode: the **VHS mode** button (header, or on the screen in full screen) or `R` adds a camcorder look (VHS colour, scanlines, grain, PLAY readout). Remembered per browser.
 - A video that won't play is skipped and the channel moves to the next one.
+- The programme guide, under the TV, is also the channel list (`C` jumps there). It covers the rest of today (at least the next 3 hours) in IST, channel by channel. Each card shows the programme on at the chosen hour (**Now**, or an hour button), the YouTube channel it comes from, its YouTube description (two lines, **More** for the rest), and what follows. **Rest of today** opens the channel's whole day, and **Watch** or the channel's name tunes in.
 - **NEW** in the guide marks videos uploaded in the last 30 days.
 
 ## TV app (Fire TV and Android TV)

@@ -78,6 +78,13 @@ else try {
   if (esc(`<img src=x onerror="a('b')">&`) !== "&lt;img src=x onerror=&quot;a(&#39;b&#39;)&quot;&gt;&amp;") fail("js/app.js: esc() no longer escapes HTML");
 } catch (e) { fail("js/app.js: the esc() helper does not run: " + e.message); }
 
+// 9. Programme descriptions for the guide (desc/<id>.json, from scripts/fetch-descriptions.mjs): valid, plain text
+{
+  const dir = new URL("desc/", ROOT), files = (() => { try { return readdirSync(dir).filter(f => f.endsWith(".json")); } catch { return []; } })();
+  const broken = files.filter(f => { try { const j = JSON.parse(read("desc/" + f)); return typeof j.a !== "string" || typeof j.d !== "string" || /[<>]/.test(j.a + j.d); } catch { return true; } });
+  if (broken.length) fail(`${broken.length} description file(s) in desc/ are broken: ${broken.slice(0, 5).join(", ")}`);
+}
+
 for (const w of warnings) console.log((process.env.GITHUB_ACTIONS ? "::warning::" : "warning: ") + w);
 for (const e of errors) console.log((process.env.GITHUB_ACTIONS ? "::error::" : "error: ") + e);
 console.log(errors.length ? `${errors.length} problem(s) found` : "All checks passed");

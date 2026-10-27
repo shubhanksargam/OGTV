@@ -1,4 +1,4 @@
-/* Layout: a living-room TV — big screen left, channel remote right, programme guide underneath.
+/* Layout: a living-room TV — the big screen, with the programme guide (which is also the channel list) underneath.
    Single committed dark look (a lit screen in a dim room), large type for viewers 14–80. */
 :root{
   color-scheme: dark;
@@ -36,19 +36,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
 
 /* main grid */
-.main{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:20px;align-items:start}
-@media (max-width:860px){.main{grid-template-columns:1fr}}
-.main.list-hidden{grid-template-columns:minmax(0,1fr)}
-/* Channel list toggle: Hide in the panel; a tab on the right edge brings it back */
-.remote-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.hide-list{display:inline-flex;align-items:center;gap:2px;min-height:36px;padding:0 10px 0 6px;border:1px solid var(--line);border-radius:999px;
-  background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;flex-direction:row-reverse}
-.hide-list:hover{color:var(--ink);border-color:var(--muted)}
-.show-list{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:14px 8px;border:1px solid var(--line);border-right:0;border-radius:12px 0 0 12px;background:var(--panel);color:var(--ink);cursor:pointer;
-  box-shadow:-8px 0 24px rgba(0,0,0,.35)}
-.show-list span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:.85rem;letter-spacing:.08em}
-.show-list:hover{background:var(--panel-2)}
+.main{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+
 
 .tv{display:flex;flex-direction:column;gap:12px;min-width:0}
 .screen{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;
@@ -130,6 +119,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:linear-gradient(180deg,#fbf3e2,#e2d3b4 70%,#cdbb96);box-shadow:0 3px 0 #6e5a3c,0 4px 6px rgba(0,0,0,.35),inset 0 1px 0 #fff;
   transition:transform .08s,box-shadow .08s,background .2s}
 .key-wide{grid-column:1/-1}
+.key-help{display:none} /* the set's Help key, only in full screen (elsewhere the header's Help is there) */
 .key:active,.key[aria-pressed="true"]{transform:translateY(2px);box-shadow:0 1px 0 #6e5a3c,0 1px 2px rgba(0,0,0,.35),inset 0 1px 3px rgba(0,0,0,.25)}
 .key#keyCc[aria-pressed="true"]{background:linear-gradient(180deg,#ffd9a0,#f2a03d)} /* lit while subtitles are on */
 .key#keyMute[aria-pressed="true"]{background:linear-gradient(180deg,#ffb3a8,#e5483a);color:#fff}  /* lit red while muted */
@@ -290,6 +280,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:700;letter-spacing:.06em;cursor:pointer}
 .home-btn{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}.home-btn svg{color:var(--marigold)}.home-btn:hover{border-color:var(--marigold)}
 .retro-btn[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink);border-color:var(--marigold)}
+.help-btn{color:var(--ink)}.help-btn svg{color:var(--marigold)}.help-btn:hover{border-color:var(--marigold)}
+@media (max-width:420px){.tools{gap:8px}.retro-btn{padding:8px 11px;letter-spacing:.03em}.home-btn,.help-btn{gap:6px}} /* Home, Retro mode and Help in one row on a phone */
 .vhs{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;display:none}
 .screen.retro .vhs{display:block;z-index:3} /* over the picture and the Coming up next card alike; controls, banner and strip stay above */
 /* the black card on tape: a faint colour fringe on the title (no filter on the card, which made its animation stutter) */
@@ -332,6 +324,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .retro-fs,.screen:-webkit-full-screen .retro-fs,.screen.pseudo-fs .retro-fs{display:block;z-index:6;transition:bottom .3s ease,opacity .4s}
 .screen.fs-idle .retro-fs{opacity:0!important;pointer-events:none}
 .screen.strip-on .retro-fs{bottom:calc(5vh + 126px);opacity:1!important}
+/* Help beside it, also only in full screen, where the header's Help is out of sight */
+.help-fs{display:none;position:absolute;left:256px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+  background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4);transition:bottom .3s ease,opacity .4s}
+.help-fs:hover{background:rgba(0,0,0,.8)}
+.screen:fullscreen .help-fs,.screen:-webkit-full-screen .help-fs,.screen.pseudo-fs .help-fs{display:block}
+.screen.fs-idle .help-fs{opacity:0!important;pointer-events:none}
+.screen.strip-on .help-fs{bottom:calc(5vh + 126px);opacity:1!important}
 /* Pause/Play in maximized view, bottom right, coming and going with the other full-screen buttons */
 .pause-fs{display:none;position:absolute;right:14px;bottom:14px;z-index:6;width:48px;height:48px;border-radius:999px;border:0;place-items:center;
   background:rgba(0,0,0,.55);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer;transition:bottom .3s ease,opacity .4s}
@@ -402,7 +401,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 /* NEW badge: uploaded in the last 30 days */
 .new{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;background:var(--marigold);color:var(--marigold-ink);
   border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px}
-.prog .new{font-size:0;padding:0;width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:1px}
 /* HBO-style intro static while a channel tunes in: bright fine snow, logo resolving out of it */
 .static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block} /* no CSS filter: iOS Safari can stop repainting a filtered canvas */
@@ -461,50 +459,104 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .next{font-size:.98rem}
 .next b{color:var(--marigold);font-weight:700}
 
-/* remote / channel list */
-.remote{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:4px}
-#chlist{overflow-y:auto;max-height:min(68vh,560px);scrollbar-width:thin}
-/* Group headings in the channel list and the full-screen strip */
-.ch-group{margin:14px 8px 4px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);font-weight:700}
+/* Group headings in the full-screen strip */
 .sc-group{flex:none;align-self:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--marigold);font-weight:700;margin:0 -2px}
-.remote h4{margin:6px 8px 6px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.ch{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;text-align:left;background:transparent;
-  border:0;border-radius:10px;padding:10px 10px;min-height:64px}
-.ch:hover{background:var(--panel-2)}
-.ch[aria-current="true"]{background:var(--panel-2);box-shadow:inset 3px 0 0 var(--marigold)}
-.ch .num{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.3rem;color:var(--marigold);text-align:center}
-.ch .nm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.ch .nm strong{font-family:var(--display);font-weight:700;font-size:1.1rem}
-.ch .nm em{font-style:normal;color:var(--muted);font-size:.85rem}
-.ch .on{display:block;color:var(--muted);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hint{color:var(--muted);font-size:.85rem;margin:6px 8px 4px}
 kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:.8rem}
 
-/* guide */
-.guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 0 10px}
-.guide-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:0 18px 10px}
+/* guide, which is also the channel list: a card per channel with the programme at the chosen hour (its YouTube channel
+   and description), the next one, and the day on request */
+.guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 0 12px}
+.guide-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;padding:0 18px 12px}
 .guide-head h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.35rem}
-.guide-head span{color:var(--muted);font-size:.9rem}
-.gscroll{overflow-x:auto;position:relative}
-.grid{position:relative;padding:0 18px}
-.trow{display:flex;height:30px;position:relative;margin-left:120px}
-.tick{position:absolute;top:6px;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateX(-50%)}
-.grow{display:flex;align-items:stretch;height:58px;margin-bottom:6px}
-.glabel{width:112px;flex:none;margin-right:8px;display:flex;align-items:center;font-family:var(--display);font-weight:700;font-size:1rem;
-  position:sticky;left:0;background:var(--panel);z-index:2;padding-left:2px}
-.glane{position:relative;flex:none}
-.prog{position:absolute;top:0;bottom:0;border-radius:8px;background:var(--panel-2);border:1px solid var(--line);
-  padding:6px 9px;overflow:hidden;font-size:.86rem;line-height:1.25;text-align:left;min-width:0}
-.prog b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prog small{color:var(--muted);font-variant-numeric:tabular-nums}
-.prog.nowp{border-color:var(--marigold)}
-/* The channel you're watching: tinted row, marigold label with a marker, its current show lit */
-.grow.gcur{background:linear-gradient(90deg,rgba(242,160,61,.2),rgba(242,160,61,.09));border-radius:10px;box-shadow:inset 3px 0 0 var(--marigold)}
-.grow.gcur .glabel{color:var(--marigold);background:linear-gradient(rgba(242,160,61,.14),rgba(242,160,61,.14)),var(--panel)}
-.grow.gcur .glabel::before{content:"▶";font-size:.6rem;margin-right:6px}
-.grow.gcur .prog{border-color:rgba(242,160,61,.45)}
-.grow.gcur .prog.nowp{background:rgba(242,160,61,.22);border-color:var(--marigold);box-shadow:0 0 0 1px var(--marigold),0 0 14px rgba(242,160,61,.3)}
-.nowline{position:absolute;top:0;bottom:0;width:2px;background:var(--sindoor);z-index:1;pointer-events:none}
+.gday{color:var(--muted);font-size:.9rem}
+/* Hour buttons: one swipeable row on a touch screen, wrapped onto two lines on a wide screen with a mouse */
+.gtimes{position:relative;display:flex;align-items:center;gap:8px;overflow-x:auto;padding:0 18px 12px;scrollbar-width:none}
+.gtimes::-webkit-scrollbar{display:none}
+.gt{flex:none;min-height:40px;padding:0 13px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);
+  font-weight:700;font-size:.95rem;font-variant-numeric:tabular-nums}
+.gt:hover{border-color:var(--muted)}
+.gt-now::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sindoor);margin-right:7px;vertical-align:1px}
+.gt[aria-pressed="true"]{background:var(--marigold);border-color:var(--marigold);color:var(--marigold-ink)}
+.gt-now[aria-pressed="true"]::before{background:var(--marigold-ink)}
+.gdp{flex:none;margin-left:6px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+@media (min-width:720px) and (pointer:fine){.gtimes{flex-wrap:wrap;overflow:visible;row-gap:8px}.gt{min-height:36px;padding:0 11px;font-size:.9rem}}
+@media (max-width:719px){.gtimes{position:sticky;top:0;z-index:5;background:var(--panel);padding-top:10px;margin-top:-10px;padding-inline:12px;
+  box-shadow:0 10px 12px -10px rgba(0,0,0,.6)}.guide-head{padding-inline:14px}.guide-head h4{font-size:1.2rem}} /* the hours stay at hand down a phone's long list */
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:10px;align-items:start;padding:2px 18px 6px}
+.lwhen{grid-column:1/-1;margin:0;color:var(--muted);font-size:.95rem}
+.lwhen b{color:var(--ink)}
+.lgroup{grid-column:1/-1;margin:12px 0 0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold);font-weight:700}
+.lrow{min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.lrow.gcur{border-color:var(--marigold);box-shadow:inset 3px 0 0 var(--marigold)}
+.lhead{display:flex;align-items:center;gap:10px;cursor:pointer}
+.lnum{min-width:1.5em;color:var(--marigold);font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.lnm{flex:1;min-width:0}
+.lname{margin:0;font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.2}
+.lhead:hover .lname{color:var(--marigold)}
+.len{display:block;color:var(--muted);font-size:.82rem;line-height:1.3}
+.lwatch{flex:none;min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font-weight:700;font-size:.85rem}
+.lwatch::before{content:"▶";font-size:.7em;margin-right:6px;color:var(--marigold)}
+.lwatch:hover{border-color:var(--marigold)}
+.lrow.gcur .lwatch{background:var(--marigold);border-color:var(--marigold);color:var(--marigold-ink)}
+.lrow.gcur .lwatch::before{color:var(--marigold-ink)}
+.lprogs,.lday{list-style:none;margin:10px 0 0;padding:0}
+.lprogs li,.lday li{display:grid;grid-template-columns:3.3em minmax(0,1fr);gap:10px;align-items:baseline}
+.lprogs time,.lday time{font-weight:700;font-variant-numeric:tabular-nums}
+.lat b{display:block;font-weight:500;font-size:1.02rem;line-height:1.3;overflow-wrap:anywhere}
+.lby{display:block;margin-top:2px;color:var(--peacock);font-size:.86rem;font-weight:500;overflow-wrap:anywhere}
+.lat small{display:block;margin-top:2px;color:var(--muted);font-size:.84rem;font-variant-numeric:tabular-nums}
+.lat.lon time{color:var(--marigold)}
+.lbar{display:block;height:4px;margin-top:6px;border-radius:99px;background:var(--line);overflow:hidden;font-style:normal}
+.lbar i{display:block;height:100%;background:var(--marigold)}
+/* YouTube's description: two lines, More for the rest */
+.ldtext{margin:8px 0 0;color:#d9cfc0;font-size:.88rem;line-height:1.45;white-space:pre-line;overflow-wrap:anywhere;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ldtext.open{display:block;-webkit-line-clamp:none}
+.ldmore{margin-top:2px;padding:4px 0;min-height:32px;border:0;background:transparent;color:var(--marigold);font-weight:700;font-size:.84rem}
+.lnx{margin-top:10px;color:var(--muted);font-size:.92rem}
+.lnx div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lnx time{color:var(--ink);font-weight:500}
+.lmore{display:block;width:100%;margin-top:10px;min-height:38px;padding:0 12px;border:1px dashed var(--line);border-radius:8px;background:transparent;
+  color:var(--muted);font-weight:700;font-size:.85rem;text-align:left}
+.lmore::after{content:"";float:right;width:7px;height:7px;margin-top:.45em;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.lmore[aria-expanded="true"]::after{transform:rotate(-135deg);margin-top:.7em}
+.lmore:hover{color:var(--ink);border-color:var(--muted)}
+.lday{max-height:min(55vh,460px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--line);padding-top:4px;font-size:.92rem}
+.lday li{grid-template-columns:3.3em minmax(0,1fr) auto;padding:5px 2px;border-bottom:1px solid rgba(58,51,80,.6)}
+.lday li span{overflow-wrap:anywhere}
+.lday li em{display:block;font-style:normal;color:var(--muted);font-size:.8rem}
+.lday li small{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lday .lpart{display:block;position:sticky;top:0;padding:8px 2px 4px;background:var(--panel-2);border-bottom:0;color:var(--peacock);font-size:.75rem;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.lday li.lon{color:var(--marigold)}
+.lday li.lon time::after{content:" ●";font-size:.6em;vertical-align:2px}
+.ghint{margin:14px 18px 2px}
+@media (pointer:coarse){.ghint{display:none}} /* keyboard keys mean nothing on a phone */
+@media (max-width:719px){.glist{padding:2px 12px 6px}.lrow{padding:12px}}
+
+/* Help: everything about using OGTV, in a dialog over the page (the whole screen on a phone) */
+.help-btn{display:inline-flex;align-items:center;gap:7px}
+.help{box-sizing:border-box;width:min(760px,calc(100vw - 24px));max-width:none;max-height:min(88vh,900px);padding:0 24px 24px;border:1px solid var(--line);border-radius:16px;
+  background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.6);overscroll-behavior:contain}
+.help::backdrop{background:rgba(8,6,14,.75)}
+.help-top{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 12px;background:var(--panel)}
+.help h2{margin:0;font-family:var(--display);font-weight:700;font-size:1.45rem}
+.help-x{flex:none;min-height:42px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font-weight:700}
+.help-x:hover{border-color:var(--marigold)}
+.help-toc{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:4px}
+.help-toc a{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:700}
+.help-toc a:hover{border-color:var(--marigold);color:var(--marigold)}
+.help section{padding-top:18px}
+.help h3{margin:0 0 8px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold)}
+.help p,.help li,.help dd{font-size:1rem;line-height:1.55}
+.help p{margin:0 0 8px}
+.help ul{margin:0;padding-left:1.2em;display:grid;gap:7px}
+.help-keys{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 18px;margin:0;align-items:baseline}
+.help-keys dt{white-space:nowrap}
+.help-keys dd{margin:0}
+.help .new,.help .livedot{font-size:.7rem}
+@media (max-width:640px){.help{width:100%;height:100%;max-height:none;margin:0;border:0;border-radius:0;padding:0 16px 28px}}
 
 .note{color:var(--muted);font-size:.92rem;max-width:80ch}
 .note strong{color:var(--ink)}
@@ -554,7 +606,8 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
   gap:clamp(8px,1.3vmax,18px);padding:clamp(8px,1.2vmax,16px) clamp(6px,.9vmax,12px)}
 .room:is(:fullscreen,.pseudo-fs) .knob-wrap{flex-direction:column;gap:4px}
 .room:is(:fullscreen,.pseudo-fs) .knob{width:clamp(36px,4.4vmax,72px)}
-.room:is(:fullscreen,.pseudo-fs) .keys{display:grid;grid-template-columns:1fr 1fr;width:100%;order:0}
+.room:is(:fullscreen,.pseudo-fs) .keys{display:grid;grid-template-columns:repeat(3,1fr);width:100%;order:0}
+.room:is(:fullscreen,.pseudo-fs) .key-help{display:block}
 .room:is(:fullscreen,.pseudo-fs) .key{flex:none;min-height:clamp(26px,2.4vmax,38px);font-size:clamp(.55rem,.8vmax,.75rem)}
 .room:is(:fullscreen,.pseudo-fs) .set.on .grille{display:none;display:block;min-height:20px}
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass{pointer-events:auto} /* clicks on the picture stay with the page (first click: true full screen), not YouTube */
@@ -575,7 +628,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* TV app (Android TV, Fire TV): no pointer, so no cursor and none of the click-only buttons; the remote does it all */
 .tv-app,.tv-app *{cursor:none!important}
 .tv-app,.tv-app body{overflow:hidden;scrollbar-width:none}.tv-app ::-webkit-scrollbar{display:none} /* the room covers the page; no page scrollbar at the edge */
-.tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app #keyFs,.tv-app #modeWrap{display:none!important}
+.tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app .screen .help-fs,.tv-app #keyFs,.tv-app #keyHelp,.tv-app #modeWrap{display:none!important}
 /* Questions on the home page */
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
 .faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
