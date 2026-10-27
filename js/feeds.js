@@ -1684,8 +1684,6 @@ const FEED = [
 {"id":"F0kGDmdp6-M","t":"Role of Space Technology in daily lives by Dr P Veeramuthuvel","cat":"gyaan","lang":"en","min":24,"src":"ISRO","pub":"2024-11-08"},
 {"id":"dE9_agbvZ74","t":"India's Human Space Flight Program by Shri Hanamantray Baluragi","cat":"gyaan","lang":"en","min":36,"src":"ISRO","pub":"2024-11-07"},
 {"id":"cJccLAlejC8","t":"Space Transportation System - Present and Future by Shri S Sivakumar","cat":"gyaan","lang":"en","min":33,"src":"ISRO","pub":"2024-11-06"},
-{"id":"VKHs0g-Zw0o","t":"Preventing natural disasters on Earth challenges associated","cat":"gyaan","lang":"en","min":3,"src":"ISRO","pub":"2024-09-22"},
-{"id":"CzjG7V1XpXA","t":"How ISRO is able to succeed even in tougher missions?","cat":"gyaan","lang":"en","min":3,"src":"ISRO","pub":"2024-09-02"},
 {"id":"RsRTI0Hj0YI","t":"India's Most Secret Military Project (BrahMos Missile)","cat":"gyaan","lang":"hi","min":33,"src":"Mohak Mangal","pub":"2026-10-26"},
 {"id":"0AXbi2n5pcE","t":"Gadkari Ji: Please Help","cat":"gyaan","lang":"hi","min":23,"src":"Mohak Mangal","pub":"2026-10-06"},
 {"id":"DV9pVzqQPR0","t":"Dear bollywood, STOP THIS!!!","cat":"gyaan","lang":"hi","min":15,"src":"Mohak Mangal","pub":"2026-09-28"},

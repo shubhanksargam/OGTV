@@ -277,11 +277,14 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes iris-open{to{--iris:66vmax}}
 @keyframes iris-edge{0%{opacity:0;width:0}12%{opacity:1}70%{opacity:.8}100%{opacity:0;width:132vmax}}
 @keyframes intro-out{to{opacity:0}}
+@keyframes rm-fade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.start.open{animation:intro-out .5s ease forwards}
-  .start.ask .pb-tri,.start.ask .ask-text{opacity:1}.start.ask .pb-screen{opacity:.7}
+  .start .intro-mark,.start .logo-word i{animation:rm-fade .9s ease forwards!important} /* fades only: no movement */
+  .start.ask .pb-tri,.start.ask .ask-text{animation:rm-fade .9s ease .2s forwards!important}.start.ask .pb-screen{opacity:.7}
+  .start.open{animation:intro-out .5s ease forwards!important}
   .start *,.start *::before{animation:none!important}
   .fx-grid,.fx-core,.hud-frame,.rg-ticks,.rg-arcs{opacity:1}.fx-horizon{transform:none}
-  .rg-outer,.rg-inner{stroke-dashoffset:0}.start .intro-mark,.start .logo-word i{transform:none;opacity:1}.rg-blip,.iris-edge{display:none}}
+  .rg-outer,.rg-inner{stroke-dashoffset:0}.start .intro-mark,.start .logo-word i{transform:none}.rg-blip,.iris-edge{display:none}}
 @keyframes blink{50%{opacity:.35}}
 /* Retro camcorder mode: warm VHS colour, scanlines, grain, tracking band and a VCR readout */
 .retro-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;color:var(--muted);font-weight:700;letter-spacing:.06em;cursor:pointer}
@@ -291,7 +294,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.retro .vhs{display:block;z-index:3} /* over the picture and the Coming up next card alike; controls, banner and strip stay above */
 /* the black card on tape: a faint colour fringe on the title (no filter on the card, which made its animation stutter) */
 .screen.retro .card.interlude h2,.screen.retro .card.interlude .count{text-shadow:-1px 0 rgba(255,70,70,.35),1px 0 rgba(70,200,255,.35)}
-.screen.retro #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg) blur(.45px)}
+.screen #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg) blur(.45px)}
 /* The retro mode knob's settings, each peeling off one more effect: Steady drops the tracking band that sweeps down the
    picture, Tinted drops the lines and grain but keeps the tape colour and contrast, Clean drops the colour too, Quiet
    also silences the static (in app.js) */

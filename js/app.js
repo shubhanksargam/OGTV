@@ -113,11 +113,11 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+              if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
               else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
-              else if(e.data===S.ENDED){if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
+              else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
             onError:e=>skip(e.data)}});
 };
 // While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
@@ -128,6 +128,9 @@ let wakeLock=null, wantAwake=false;
 // the lock screen, which all reach the video. Play is instant: it carries on exactly where it paused (seeking to the
 // channel's moment made the video reload for a second or two); the channel catches up at the next programme change.
 let pausedAt=0, resumedAt=0, subsFor=null;
+// YouTube's ENDED counts only when it's this programme's video, at its end (not a stale one from the video before)
+function atRealEnd(){try{const v=player.getVideoData&&player.getVideoData().video_id, d=player.getDuration(), t=player.getCurrentTime();
+  return !(v&&playingId&&v!==playingId)&&!(d>0&&d-t>3)}catch(e){return true}}
 function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resumed: no static while it picks up
 // Between programmes (Coming up next) pause hushes the jingle and play brings it back for the rest of the gap.
 let gapHushed=false;
@@ -221,7 +224,7 @@ function soundIn(){if(!primed)return; // not allowed yet: unmuting would make th
 // and the ident hands over as it finishes.
 let videoUp=false, logoDone=false, capped=false, opened=false;
 function runIdent(){
-  if(REDUCED){logoDone=capped=true; ask(); return}
+  if(REDUCED){setTimeout(()=>{logoDone=capped=true; ask()},1300); return} // OGTV fades in first, then the line of direction
   let formed=false; const formedNow=()=>{if(formed)return; formed=true; logoDone=true; ask(); openIris(); setTimeout(()=>{capped=true; openIris()},7250)};
   document.querySelector(".start .logo-word i:nth-child(3)").addEventListener("animationend",formedNow,{once:true});
   setTimeout(formedNow,6000)} // in case the animation never reports (a hidden tab)
@@ -466,7 +469,10 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
   india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",dailybrief:"The Daily Brief",zmarkets:"Markets by Zerodha",firstsports:"First Sports",latest:"latest highlights",talent:"Hustle & I-Popstar",vantagenew:"Vantage, latest",vantage:"Vantage",palki:"Palki Sharma",fpshows:"Firstpost shows",igr:"IGR",trending:"trending",voices:"voices",stars:"stars",indie:"indie",chart:"charts",worldcharts:"world charts",alltime:"all-time hits",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
-const CH_STEP=360*5/CHANNELS.length, chRot=i=>i*CH_STEP%360, VOL_DEG=2.7, VOL_MIN=-135; // all the channels take five turns of the knob; volume sweeps -135° (silent) to +135° (full)
+const CH_STEP=360*5/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // all the channels take five turns of the knob; volume sweeps -135° (silent) to +135° (full)
+// The Channel knob's angle keeps counting as it turns, so each change moves it the short way round (never a spin back)
+let chIdx=cur, chAngle=cur*CH_STEP;
+function chRot(){const n=CHANNELS.length; let d=((cur-chIdx)%n+n)%n; if(d>n/2) d-=n; chAngle+=d*CH_STEP; chIdx=cur; return chAngle}
 let osdTimer=0;
 function tvOsd(html){const o=$("tvOsd"); o.innerHTML=html; o.classList.add("on"); clearTimeout(osdTimer); osdTimer=setTimeout(()=>o.classList.remove("on"),1600)}
 const osdChannel=i=>tvOsd(`<b>CH ${String(CHANNELS[i].n).padStart(2,"0")}</b> ${esc(CHANNELS[i].name.toUpperCase())}`);
@@ -477,7 +483,7 @@ function vfd(){const c=CHANNELS[cur], name=$("vfdName"), box=name.parentElement;
   box.classList.remove("scroll"); name.style.removeProperty("--dist");
   requestAnimationFrame(()=>{const over=name.scrollWidth-box.clientWidth;
     if(over>2){name.style.setProperty("--dist",-(over+8)+"px"); name.style.setProperty("--dur",Math.max(4,over/14)+"s"); box.classList.add("scroll")}})}
-function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",chRot(cur)+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
+function knobs(){$("keyMute").setAttribute("aria-pressed",muted); $("keyMute").textContent=muted?"Sound":"Mute"; $("knobCh").style.setProperty("--rot",chRot()+"deg"); $("knobVol").style.setProperty("--rot",(VOL_MIN+(muted?0:vol)*VOL_DEG)+"deg")}
 function setVol(v){vol=Math.max(0,Math.min(100,Math.round(v))); try{localStorage.setItem("ogtv-vol",vol)}catch(e){}
   if(MODE==="yt"&&player) player.setVolume(vol);
   if(vol===0&&!muted) setSound(false); else if(vol>0&&muted) setSound(true); else knobs();
@@ -497,7 +503,7 @@ function turnable(el,{onTurn,onDone,onClick}){
 }
 let chPreview=0;
 turnable($("knobCh"),{
-  onTurn:d=>{$("knobCh").style.setProperty("--rot",(chRot(cur)+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
+  onTurn:d=>{$("knobCh").style.setProperty("--rot",(chAngle+d)+"deg"); chPreview=(cur+Math.round(d/CH_STEP)+CHANNELS.length*10)%CHANNELS.length; osdChannel(chPreview)},
   onDone:()=>{chPreview!==cur?tune(chPreview):knobs()},
   onClick:side=>{if(!started) start(); tune(cur+side); osdChannel(cur)}});
 let volAtStart=vol;
@@ -505,7 +511,7 @@ $("knobVol").addEventListener("pointerdown",()=>{volAtStart=muted?0:vol});
 turnable($("knobVol"),{
   onTurn:d=>setVol(volAtStart+d/VOL_DEG),
   onDone:()=>{},
-  onClick:side=>{if(!started) start(); if(side<0){if(!muted) setVol(vol-10); else osdVolume()} else if(muted){if(vol===0) setVol(50); else {toggleSound(); osdVolume()}} else setVol(vol+10)}});
+  onClick:side=>{if(!started) start(); if(side<0){if(!muted) setVol(vol-10); else osdVolume()} else setVol((muted?0:vol)+10)}}); // muted counts as 0, so up is always one step
 $("knobCh").addEventListener("wheel",e=>{e.preventDefault(); tune(cur+(e.deltaY>0?1:-1)); osdChannel(cur)},{passive:false});
 $("knobVol").addEventListener("wheel",e=>{e.preventDefault(); setVol((muted?0:vol)+(e.deltaY>0?-5:5))},{passive:false});
 $("knobCh").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
