@@ -541,13 +541,13 @@ $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); //
 /* Retro's mode knob, where Exit retro was. Each setting peels off one more effect: Full (all of it), Steady (no tracking
    band sweeping down), Tinted (the tape colour and contrast but no lines or grain), Clean (no VCR effects at all), Quiet
    (no static hiss on channel changes), Normal (retro off;
-   in full screen that swaps to the plain full-screen look). Remembered for the tab, like retro itself. */
+   in full screen that swaps to the plain full-screen look). Every visit and reload starts at Tinted. */
 const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Normal"], FX_DEG=[-75,-45,-15,15,45,75], FX_OFF=5;
-let fxLevel=2; try{const v=sessionStorage.getItem("ogtv-fx"); if(v!==null) fxLevel=Math.min(FX_OFF-1,Math.max(0,+v||0))}catch(e){} // Tinted unless chosen otherwise
+let fxLevel=2; // Tinted
 function showFx(n){$("knobMode").title="Mode: "+FX_NAMES[n]; $("knobMode").style.setProperty("--rot",FX_DEG[n]+"deg")}
 function setFx(n,osdToo){n=Math.max(0,Math.min(FX_OFF,n)); if(osdToo) tvOsd(`<b>MODE</b> ${FX_NAMES[n].toUpperCase()}`);
-  if(n===FX_OFF){fxLevel=2; try{sessionStorage.setItem("ogtv-fx","2")}catch(e){} showFx(2); setRetro(false); return} // back at Tinted next time
-  fxLevel=n; try{sessionStorage.setItem("ogtv-fx",String(n))}catch(e){}
+  if(n===FX_OFF){fxLevel=2; showFx(2); setRetro(false); return} // back at Tinted next time
+  fxLevel=n;
   const sc=$("screen"); sc.classList.toggle("fx-steady",n>=1); sc.classList.toggle("fx-nolines",n>=2); sc.classList.toggle("fx-clean",n>=3);
   if(n>=4) staticSound.stop(); showFx(n)}
 let fxPreview=0;
