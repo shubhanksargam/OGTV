@@ -95,7 +95,7 @@ function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolvin
   setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop()},wait)}
 
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
-let MODE="loading", player=null, playingKey=null, playingId=null, ended=false, muted=true, skips=0, bufTimer=0;
+let MODE="loading", player=null, playingKey=null, playingId=null, playingEnd=0, ended=false, muted=true, skips=0, bufTimer=0;
 const slotKey=(ch,s)=>s.live?ch.key+s.v.id:ch.key+s.start+s.v.id; // a live stream keeps playing across hour blocks
 function loadYT(){
   const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
@@ -117,7 +117,7 @@ window.onYouTubeIframeAPIReady=()=>{
               else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
-              else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else {ended=true;hideStatic();showCard();keepAwake(false)}}},
+              else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
             onError:e=>skip(e.data)}});
 };
 // While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
@@ -623,15 +623,18 @@ function showCard(msg){
 function tick(){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
+  if(ended&&!handing&&MODE==="yt"&&player){try{if(player.getPlayerState()===YT.PlayerState.PLAYING&&!atRealEnd()){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true; if(!muted) player.unMute()}}catch(e){}}
+  let finishing=false; // the programme before is still on its last seconds (it started late): let it end first
+  if(key!==playingKey&&playingKey&&!ended&&MODE==="yt"&&player&&now-playingEnd<30e3){try{finishing=player.getPlayerState()===YT.PlayerState.PLAYING&&player.getVideoData().video_id===playingId&&player.getDuration()-player.getCurrentTime()<=30}catch(e){}}
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
-  if(key!==playingKey){
+  if(key!==playingKey&&!finishing){
     if(playingKey&&reloadNow()){location.reload(); return}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
-    playingKey=key; playingId=s.v.id; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
+    playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     const off=Math.floor((now-s.start)/1000);
     if(MODE==="yt"&&player){if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
-      player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute()}
+      player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute(); else player.unMute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
     const hh=h=>String(Math.floor(h)%24).padStart(2,"0")+":"+String(Math.round(h%1*60)).padStart(2,"0"); // 6.5 → 06:30
