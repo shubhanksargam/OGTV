@@ -1,0 +1,1 @@
+{"a":"DataExpert","d":"In this video we discuss the various types of slowly changing dimensions and how SCD type 2 is the best by far.\nSlowly changing dimensions and idempotent pipelines are very closely related!\nMake sure your pipeline produces the same results every time it's ran with the same parameters!"}
