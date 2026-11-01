@@ -294,6 +294,16 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.retro.fx-steady .vhs::after{display:none}
 .screen.retro.fx-nolines .vhs{display:none}
 .screen.retro.fx-clean #yt{filter:none}
+/* Android: the tape colour is a wash over the picture instead of a filter on the video. A filtered video is drawn
+   again through an extra pass for every frame, about twice the graphics work; over a long session that kept a phone's
+   graphics chip hot until it slowed down (green pictures, a stuttering ident until it was left to cool). The wash costs
+   next to nothing. The grain blends normally there too, as a blend mode costs the same extra pass */
+.tint{display:none}
+.android .screen #yt{filter:none}
+.android .tint{display:block;position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 50%,transparent 58%,rgba(24,10,0,.30)),rgba(255,138,40,.07)}
+.android .screen.retro.fx-clean .tint{display:none}
+.android .vhs .grain{mix-blend-mode:normal;opacity:.07}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
   repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
   radial-gradient(110% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}

@@ -6,6 +6,8 @@ const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}, esc=t=>S
 // there, the app is already full screen, and the remote reaches the page through window.ogtv (end of this file).
 const TV_APP=/[?&]app=tv\b/.test(location.search)||/OGTV-AndroidTV/.test(navigator.userAgent);
 if(TV_APP) document.documentElement.classList.add("tv-app");
+// Android phones and TV sticks get the tape colour as a wash over the picture, not as a filter on the video (styles.css)
+if(/Android/.test(navigator.userAgent)) document.documentElement.classList.add("android");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 {const m=document.querySelector('meta[name="ogtv-ch"]'), n=+new URLSearchParams(location.search).get("ch")||+(m&&m.content), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
@@ -146,17 +148,21 @@ addEventListener("keydown",e=>{
 });
 
 /* ---------- Intro static: covers the blank screen while a channel tunes in or buffers ---------- */
-const noise=$("noise"), nctx=noise.getContext("2d"), nimg=nctx.createImageData(noise.width,noise.height);
+const noise=$("noise"), nctx=noise.getContext("2d");
 const stillNoise=matchMedia("(prefers-reduced-motion: reduce)").matches;
 let staticOn=false, staticSince=0, staticRAF=0;
-// The snow always moves: every frame, or ~8 frames a second under Reduce Motion (common on iPhones, where a single
-// still frame looked frozen). Its contrast is in the pixels, not a CSS filter, which iOS Safari can fail to repaint.
-let noiseAt=0;
+// The snow always moves: 30 frames a second on any screen, or ~8 under Reduce Motion (common on iPhones, where a
+// single still frame looked frozen). Its contrast is in the pixels, not a CSS filter, which iOS Safari can fail to repaint.
+// Eight frames of snow are made once and shuffled: fresh snow on every refresh of a 120 Hz phone screen kept its
+// processor and graphics chip busy whenever a channel tuned in or stalled, on top of the video.
+let noiseAt=0, noiseLast=0; const noiseFrames=[];
 function drawNoise(ts){
   if(staticOn) staticRAF=requestAnimationFrame(drawNoise);
-  if(stillNoise&&ts&&ts-noiseAt<120) return; noiseAt=ts||0;
-  const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=50+Math.random()*200|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
-  nctx.putImageData(nimg,0,0);
+  if(ts&&ts-noiseAt<(stillNoise?120:30)) return; noiseAt=ts||0;
+  if(!noiseFrames.length) for(let f=0;f<8;f++){const img=nctx.createImageData(noise.width,noise.height), d=img.data;
+    for(let i=0;i<d.length;i+=4){const v=50+Math.random()*200|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255} noiseFrames.push(img)}
+  noiseLast=(noiseLast+1+Math.floor(Math.random()*(noiseFrames.length-1)))%noiseFrames.length; // never the same frame twice running
+  nctx.putImageData(noiseFrames[noiseLast],0,0);
 }
 function showStatic(){staticSince=Date.now(); if(staticOn)return; staticOn=true; $("static").hidden=false; staticSound.start();
   const id=$("ident"); id.style.animation="none"; void id.offsetWidth; id.style.animation=""; drawNoise()}
