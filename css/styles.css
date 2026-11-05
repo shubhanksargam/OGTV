@@ -414,6 +414,14 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
 .sound{position:absolute;right:14px;bottom:14px;z-index:4;background:var(--marigold);color:var(--marigold-ink);border:0;border-radius:999px;
   padding:12px 20px;font-weight:700;font-size:1.05rem;min-height:48px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+/* Sound that needs a tap on the picture itself (app.js, soundRefused): the layers over the picture let taps through to it */
+.screen.tap-sound :is(.tap-catch,.fs-catch,.crt-glass,.static){pointer-events:none!important} /* not Coming up next: under it YouTube can show suggested videos */
+.tap-hint{position:absolute;top:12px;right:14px;z-index:4;pointer-events:none;display:flex;align-items:center;gap:8px;padding:8px 14px;
+  border-radius:999px;background:rgba(14,12,20,.84);color:#fff;font-weight:700;font-size:.95rem;line-height:1.2;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.tap-hint svg{color:var(--marigold);flex:none}
+.tap-hint.pulse{animation:tap-pulse .6s ease 3}
+@keyframes tap-pulse{50%{transform:scale(1.07);box-shadow:0 0 0 3px var(--marigold)}}
+@media (max-width:600px){.tap-hint{top:8px;right:10px;padding:6px 11px;gap:6px;font-size:.8rem}.tap-hint svg{width:15px;height:15px}}
 [hidden]{display:none!important}
 .card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;
   padding:6% 8%;background:radial-gradient(120% 90% at 20% 10%,#3a2a4f 0%,#1a1424 55%,#0e0b14 100%)}

@@ -188,7 +188,7 @@ window.onYouTubeIframeAPIReady=()=>{
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
               else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
-            onError:e=>skip(e.data)}});
+            onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()}});
 };
 // While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
 // mid-programme; it is let go when playback stops. Browsers drop the lock when the tab is hidden, so it is
@@ -272,13 +272,13 @@ function fallback(){
   MODE="fallback"; hideStatic(); playingKey=null; tick(); videoUp=true; openIris();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
-function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;muted=!muted;muted?player.mute():player.unMute();
+function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;if(muted&&needTap){tapHint();return}muted=!muted;muted?player.mute():player.unMute();
   $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(muted){interlude.stop(); staticSound.stop()}}
 /* Opening ident plays through by itself: OGTV forms, the bloom sounds as the iris opens, then the channel plays and
    its sound fades in. Browsers allow sound only once the visitor has done something (or has used the site before):
    a tap, click or key at any point in the ident lets it in, without skipping; with none the ident is silent and
    the channel starts muted until the first tap or key. */
-let started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0;
+let started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0, needTap=false; // needTap: sound only after a tap on the picture (soundRefused)
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
 function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened"); setTimeout(guideLater,600);
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
@@ -286,6 +286,7 @@ function start(done){if(started)return; started=true; clearTimeout(introTimer); 
   setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
   if(!soundTapped) soundIn()}
 function soundIn(){if(!primed)return; // not allowed yet: unmuting would make the browser pause the video; the first tap turns it on
+  if(needTap){tapHint(); return}
   if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
   const fade=setInterval(()=>{v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
 // The iris opens onto the channel already playing. Timing follows the animation itself (it can start before this
@@ -308,7 +309,7 @@ function ask(){if(asked||started)return; asked=true; if(TV_APP){pressPlay(); ret
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
-  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
+  if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
   if(TV_APP){openIris(); return}
   track("play","Play pressed"); $("start").classList.add("go"); setTimeout(openIris,350)} // the pulse leaves the ring first
 $("start").addEventListener("click",pressPlay); addEventListener("keydown",pressPlay);
@@ -318,7 +319,7 @@ const AC=window.AudioContext||window.webkitAudioContext;
 let bloomed=false, identAc=null; try{identAc=AC?new AC():null}catch(e){}
 primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the channel opens silently and fades up after the ident
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
-  if(MODE==="yt"&&player){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
+  if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
 runIdent();
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
@@ -398,11 +399,26 @@ const staticSound=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),800)}
   return {start,stop};
 })();
-function setSound(on){muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
+function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
-    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()}},900)}
+    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
+      if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
+    else if(needTap) tapMode(false)},900)}
+/* Some browsers let a video make sound only after a tap on the video itself: the built-in browsers of apps such as X,
+   Instagram and WhatsApp (Android WebViews), where OGTV's Sound button, knob and keys can't turn it on. YouTube tells
+   the page when the browser refuses (onAutoplayBlocked): the channel carries on muted, picture first, the layers over
+   the picture let taps through to it, and "Tap the picture for sound" shows. Such a tap counts inside YouTube's player
+   for a few seconds, and the sound is turned on within them; after that it is allowed for every programme. */
+function soundRefused(){dbg("sound refused: waiting for a tap on the picture"); if(TV_APP||MODE!=="yt"||!player)return;
+  muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs(); tapMode(true); if(started) tapHint()}
+function tapMode(on){needTap=on; $("screen").classList.toggle("tap-sound",on); $("tapHint").hidden=!on}
+function tapHint(){tapMode(true); const h=$("tapHint"); h.classList.remove("pulse"); void h.offsetWidth; h.classList.add("pulse")}
+// A tap inside YouTube's player takes the focus into it, so the page sees its own window lose focus
+addEventListener("blur",()=>setTimeout(()=>{const f=player&&player.getIframe&&player.getIframe();
+  if(!needTap||!f||document.activeElement!==f)return; dbg("tap on the picture: sound on");
+  soundTapped=true; player.setVolume(vol); setSound(true,true); f.blur()},0)); // focus back, so a second tap is seen too
 // Sound refused after the ident: the first tap or key turns it on (during the ident, the ident handles it)
 let soundTapAt=0;
 // (Sound controls and the M key are left to toggle it themselves; turning it on here as well switched it straight off)
