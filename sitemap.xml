@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.thebharat.si/</loc><lastmod>2026-11-05</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://ogtv.thebharat.si/tv/just-news/</loc><lastmod>2026-11-05</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KAfLcQW6R4M/hqdefault.jpg</video:thumbnail_loc><video:title>&apos;Iran War Cost Trump His Own Base&apos;: John Bolton on GOP&apos;s Midterm Rout</video:title>
-      <video:description>&apos;Iran War Cost Trump His Own Base&apos;: John Bolton on GOP&apos;s Midterm Rout, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/KAfLcQW6R4M</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-11-05T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/9fLXQgUBNbM/hqdefault.jpg</video:thumbnail_loc><video:title>Democrats Win US Midterms</video:title>
+      <video:description>Democrats Win US Midterms, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/9fLXQgUBNbM</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-05T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/khabar/</loc><lastmod>2026-11-05</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/X9k9kAI1fdQ/hqdefault.jpg</video:thumbnail_loc><video:title>Amerika men rejim chenj, Trump ko vot kyon nahin mile? US midterm election results</video:title>
@@ -127,9 +127,9 @@
       <video:player_loc>https://www.youtube.com/embed/gKjwSQyc5Js</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-11-05T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/purvaiya/</loc><lastmod>2026-11-05</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/RGmyueDheio/hqdefault.jpg</video:thumbnail_loc><video:title>Himanta Biswa Sarma vs Rahul Gandhi:purniya men himanta ka hallabol, rahul gandhi par sidh…</video:title>
-      <video:description>Himanta Biswa Sarma vs Rahul Gandhi:purniya men himanta ka hallabol, rahul gandhi par sidh…, now on Purvaiya, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/RGmyueDheio</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-05T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Qo6946abfR0/hqdefault.jpg</video:thumbnail_loc><video:title>Bihar men kaisa rahega divali tak mausam ka hal, bari apdet</video:title>
+      <video:description>Bihar men kaisa rahega divali tak mausam ka hal, bari apdet, now on Purvaiya, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Qo6946abfR0</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-05T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.thebharat.si/tv/fiction/</loc><lastmod>2026-11-05</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ejO1Y-sCc60/hqdefault.jpg</video:thumbnail_loc><video:title>Dinner Party</video:title>
