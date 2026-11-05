@@ -4,7 +4,7 @@
 import {readFile, writeFile, mkdir, rm} from "node:fs/promises";
 
 const ROOT = new URL("..", import.meta.url);
-const SITE = "https://ogtv.thebharat.si";
+const SITE = "https://ogtv.co.in";
 const read = p => readFile(new URL(p, ROOT), "utf8");
 const CHANNELS = new Function((await read("js/channels.js")) + ";return CHANNELS")();
 const feedSrc = await read("js/feeds.js");
@@ -60,7 +60,7 @@ const FAQ = [
   ["Is OGTV free?", "Yes. There is no sign-up and no subscription. Videos play from YouTube, so they work on any phone, laptop or smart TV with a browser."],
   ["Is OGTV a YouTube alternative?", "It is a different way to watch YouTube. Instead of searching and scrolling, you flip through channels like on TV, and every channel runs to a schedule, so everyone tuned in sees the same moment."],
   ["How is OGTV different from OTT apps like Netflix, Hotstar or JioCinema?", "OTT apps ask you to pick from a library and usually charge a subscription. OGTV is free live-style TV: channels that are always on, like cable TV, with no account and nothing to choose before watching."],
-  ["Is there an OGTV app for phone or TV?", "Yes. Open ogtv.thebharat.si and choose Install app (or Add to Home screen) in your browser. It then opens full screen like an app on Android, iPhone, laptops and smart TVs."],
+  ["Is there an OGTV app for phone or TV?", "Yes. Open ogtv.co.in and choose Install app (or Add to Home screen) in your browser. It then opens full screen like an app on Android, iPhone, laptops and smart TVs."],
   ["Which channels does OGTV have?", `${[...new Set(CHANNELS.map(c => c.group || "OGTV"))].join(", ")}: ${CHANNELS.map(c => c.name).join(", ")}.`], // from the channel list, so renames follow
 ];
 function faqHtml() {
@@ -82,7 +82,7 @@ const CSP = ["default-src 'self'",
   "base-uri 'self'", "form-action 'none'", "object-src 'none'"].join("; ");
 
 function seoBlock({title, description, url, ch, video, chan}) {
-  // name/alternateName/application-name: what Google shows as the site name (OGTV, not the domain thebharat.si)
+  // name/alternateName/application-name: what Google shows as the site name (OGTV, not the domain)
   const site = {"@type": "WebSite", name: "OGTV", alternateName: ["OG TV", "OGTV India"], url: SITE + "/", description: HOME.description,
     inLanguage: ["hi", "en"], publisher: {"@type": "Organization", name: "OGTV", logo: SITE + "/img/og.png"}};
   const app = {"@type": "WebApplication", name: "OGTV", url: SITE + "/", applicationCategory: "EntertainmentApplication", operatingSystem: "Android, iOS, Windows, macOS, Smart TV browsers",

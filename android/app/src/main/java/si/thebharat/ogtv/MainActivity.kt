@@ -203,7 +203,7 @@ class MainActivity : Activity() {
     }
 
     companion object {
-        const val SITE_HOST = "ogtv.thebharat.si"
+        const val SITE_HOST = "ogtv.co.in"
         const val START_URL = "https://$SITE_HOST/?app=tv"
         const val RETRY_FIRST = 3_000L
         const val RETRY_MAX = 60_000L

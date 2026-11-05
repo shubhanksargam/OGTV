@@ -77,7 +77,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 ## TV app (Fire TV and Android TV)
 
-`android/` is a small Kotlin app: one full-screen WebView on `https://ogtv.thebharat.si/?app=tv`, so the schedule, feeds and look all come from the site and nightly refreshes need no app update. No libraries and no Google Play services, so one APK runs on Fire TV (Fire OS 5 and up) and Android TV.
+`android/` is a small Kotlin app: one full-screen WebView on `https://ogtv.co.in/?app=tv`, so the schedule, feeds and look all come from the site and nightly refreshes need no app update. No libraries and no Google Play services, so one APK runs on Fire TV (Fire OS 5 and up) and Android TV.
 
 - **TV mode** (`?app=tv`, or the app's `OGTV-AndroidTV` user agent): sound with no tap, always full screen, no cursor or click-only buttons. Try it in a browser at `http://localhost:8000/?app=tv` and call `ogtv.remote("up")` in the console.
 - **Remote:** the app sends each key to `ogtv.remote(name)` in [js/app.js](js/app.js). Up/down, channel and ⏩/⏪ keys change channel; Menu swaps retro and plain; in plain, ←/→ open the channel strip and OK tunes; play/pause is sound; digits tune; Back closes the strip, then Back twice leaves the app. Leaving the app pauses it; coming back rejoins the programme live.

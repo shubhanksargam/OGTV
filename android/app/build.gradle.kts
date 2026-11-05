@@ -1,6 +1,6 @@
 import java.util.Properties
 
-// OGTV for Android TV and Fire TV: one full-screen WebView on the live site (https://ogtv.thebharat.si/?app=tv).
+// OGTV for Android TV and Fire TV: one full-screen WebView on the live site (https://ogtv.co.in/?app=tv).
 // No libraries, so the same APK runs on Fire OS (no Google Play services) and Android TV.
 plugins {
     id("com.android.application")
