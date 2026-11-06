@@ -1,6 +1,10 @@
 # OGTV
 
-A 24×7 TV-style website for Indian viewers: 34 channels of Hindi and English YouTube, two of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
+**Watch OGTV: [https://ogtv.co.in](https://ogtv.co.in)**
+
+Free, with no sign-up. It works in any browser on phones, laptops and smart TVs. Each channel also has its own page, such as [ogtv.co.in/tv/cricket](https://ogtv.co.in/tv/cricket/). The old address, ogtv.thebharat.si, now redirects here.
+
+A 24×7 TV-style website for Indian viewers: 40 channels of Hindi and English YouTube, two of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
 
 ## Run it
 
