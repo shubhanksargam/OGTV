@@ -55,7 +55,7 @@ class MainActivity : Activity() {
                 javaScriptEnabled = true
                 domStorageEnabled = true // volume and subtitles are remembered in localStorage
                 mediaPlaybackRequiresUserGesture = false // sound from the start, no "press to start"
-                userAgentString = "$userAgentString OGTV-AndroidTV/${version()}"
+                userAgentString = tvUserAgent(userAgentString)
             }
             webViewClient = Client()
             webChromeClient = object : WebChromeClient() {
@@ -206,6 +206,14 @@ class MainActivity : Activity() {
     // ---------- Helpers ----------
 
     private fun js(code: String) = web.evaluateJavascript(code, null)
+
+    // A desktop browser's user agent (with this WebView's Chrome version and the OGTV-AndroidTV tag the page looks
+    // for). With Android's own user agent YouTube serves its touch-screen player, whose pause and skip buttons wait
+    // for a tap that never comes on a TV; the desktop player with controls off shows a clean picture.
+    private fun tvUserAgent(webViewAgent: String): String {
+        val chrome = Regex("Chrome/([\\d.]+)").find(webViewAgent)?.groupValues?.get(1) ?: "120.0.0.0"
+        return "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chrome Safari/537.36 OGTV-AndroidTV/${version()}"
+    }
 
     private fun version() = try {
         packageManager.getPackageInfo(packageName, 0).versionName ?: "1"
