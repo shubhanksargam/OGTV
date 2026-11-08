@@ -660,10 +660,10 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 @keyframes intro-tv{0%{opacity:0;transform:translateY(.08em) scale(1.04)}45%{opacity:1}100%{opacity:1;transform:none}}
 .tv-app .intro-dot{animation:none}
 .tv-app .start{-webkit-mask-image:none;mask-image:none}
-.tv-app .start.open{animation:iris-tv 1.1s cubic-bezier(.6,0,.2,1) .1s forwards}
-.tv-app .start.open .hud{animation:hud-tv 1s cubic-bezier(.5,0,.3,1) forwards}
+.tv-app .start.open{animation:iris-tv 1.1s cubic-bezier(.6,0,.2,1) .55s forwards} /* after the flash and pulse (.go) */
+.tv-app .start.open .hud{animation:hud-tv 1s cubic-bezier(.5,0,.3,1) .45s forwards}
 .tv-app .iris-edge{width:100vmax} /* drawn once, full size; the opening only scales it */
-.tv-app .start.open .iris-edge{animation:iris-edge-tv 1.1s cubic-bezier(.6,0,.2,1) .1s forwards}
+.tv-app .start.open .iris-edge{animation:iris-edge-tv 1.1s cubic-bezier(.6,0,.2,1) .55s forwards}
 @keyframes iris-tv{to{opacity:0}}
 @keyframes hud-tv{to{transform:scale(1.35);opacity:0}}
 .tv-app .start.ask .pb-tri{animation-name:pb-lite} /* the play mark appears by fade and scale, without the blur */

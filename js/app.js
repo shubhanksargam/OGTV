@@ -309,18 +309,16 @@ let asked=false, pressed=false;
 function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once the play mark has shown and the channel is playing behind the intro, the intro presses
 // play itself, so the flash, the pulse, the iris and the music run straight into the picture, as after a press on the website
-let askedAt=0, tvGoing=false;
-function tvGo(){if(!TV_APP||!asked||pressed||started||tvGoing||!(videoUp||capped)||Date.now()-askedAt<1000)return; tvGoing=true; whenQuiet(pressPlay)}
-// Calls fn once the page has been free for about half a second (five 100 ms timers on time), or after cap ms. On a TV,
-// YouTube's player freezes the page for seconds just after the picture appears; the exposition waits that out.
-function whenQuiet(fn,cap=6000){const t0=Date.now(); let calm=0, last=t0;
-  const tick=()=>{const now=Date.now(); calm=now-last<150?calm+1:0; last=now; if(calm>=5||now-t0>cap) fn(); else setTimeout(tick,100)};
-  setTimeout(tick,100)}
+let askedAt=0;
+function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.now()-askedAt>=1000) pressPlay()}
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
-  if(!TV_APP) track("play","Play pressed"); $("start").classList.add("go"); setTimeout(openIris,350)} // the pulse leaves the ring first
+  // TV app: the whole exposition starts at once and runs off the page's thread (YouTube's player keeps it busy for
+  // seconds as the picture appears): the iris is delayed in CSS (.tv-app rules), the music on the audio clock
+  if(TV_APP){$("start").classList.add("go","open"); opened=true; bloom(.45); introTimer=setTimeout(()=>start(true),2200); return}
+  track("play","Play pressed"); $("start").classList.add("go"); setTimeout(openIris,350)} // the pulse leaves the ring first
 $("start").addEventListener("click",pressPlay); addEventListener("keydown",pressPlay);
 /* Ident sound, made with Web Audio (no files): as the iris opens, a warm D major add-9 chord blooms with a high
    glint and a hall tail. A context made now tells us whether sound is allowed yet ("running"). */
@@ -338,11 +336,11 @@ function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall se
   for(let c=0;c<2;c++){const d=ir.getChannelData(c); for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,4)}
   verb.buffer=ir; const wet=ac.createGain(); wet.gain.value=0.3; verb.connect(wet); wet.connect(out); return {out,verb};
 }
-function bloom(){
+function bloom(delay=0){ // delay: seconds on the audio clock
   clearTimeout(bloomTimer); if(bloomed||!AC)return; bloomed=true;
   try{const ac=identAc&&identAc.state!=="closed"?identAc:new AC();
     const asked=performance.now(); // allowed only later (a tap after the iris) is too late for it
-    ac.resume().then(()=>{if(ac.state!=="running"||performance.now()-asked>1500){ac.close();return} bloomNotes(ac,ac.currentTime+0.03); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
+    ac.resume().then(()=>{if(ac.state!=="running"||performance.now()-asked>1500){ac.close();return} bloomNotes(ac,ac.currentTime+0.03+delay); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
 }
 function bloomNotes(ac,t){
   const {out,verb}=identOut(ac,0.4), lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
