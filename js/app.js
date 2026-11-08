@@ -117,8 +117,8 @@ function guideTick(){if(guideBuilt) renderGuide(); renderNowCard()}
 let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
-let lastCh=null; // the channel before this one, for the remote's last-channel key
-function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(to!==cur) lastCh=cur; cur=to;
+let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
+function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
   try{const q=new URLSearchParams(location.search); q.set("ch",CHANNELS[cur].n); history.replaceState(null,"","?"+q)}catch(e){}
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
