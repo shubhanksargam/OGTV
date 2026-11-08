@@ -2,8 +2,10 @@ package si.thebharat.ogtv
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -42,6 +44,8 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) // never dim mid-programme
+        // Debug builds only: the page can be inspected from a laptop (chrome://inspect over adb)
+        if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0) WebView.setWebContentsDebuggingEnabled(true)
 
         web = WebView(this).apply {
             setBackgroundColor(Color.BLACK)
@@ -81,6 +85,8 @@ class MainActivity : Activity() {
     // ---------- The remote ----------
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        // The TV's own volume-up key brings OGTV's sound back too, so turning the TV up is never met with silence
+        if (event.keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.action == KeyEvent.ACTION_DOWN) js("window.ogtv&&ogtv.remote('unmute')")
         val name = KEYS[event.keyCode] ?: return super.dispatchKeyEvent(event) // volume, home etc. stay with the system
         if (event.action != KeyEvent.ACTION_DOWN) return true
         if (name == "back") {
@@ -92,8 +98,19 @@ class MainActivity : Activity() {
             return true
         }
         if (event.repeatCount > 0 && name !in REPEATS) return true // holding a key surfs, but doesn't toggle
-        js("window.ogtv&&ogtv.remote('$name')")
+        if (name == "volup" || name == "voldown") volume(name == "volup")
+        else js("window.ogtv&&ogtv.remote('$name')")
         return true
+    }
+
+    // Up and down on the D-pad set the volume. Where the TV lets apps move its own volume (most smart TVs), that
+    // volume moves, with the TV's own volume bar, and turning it up also brings OGTV's sound back if it was off.
+    // Where the volume is fixed (a stick whose TV or soundbar sets the level over HDMI), OGTV's own volume moves.
+    private fun volume(up: Boolean) {
+        val audio = getSystemService(AUDIO_SERVICE) as AudioManager
+        if (audio.isVolumeFixed) return js("window.ogtv&&ogtv.remote('${if (up) "volup" else "voldown"}')")
+        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC, if (up) AudioManager.ADJUST_RAISE else AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI)
+        if (up) js("window.ogtv&&ogtv.remote('unmute')")
     }
 
     // The page closes what is open (the channel strip); with nothing open, Back twice leaves the app
@@ -209,10 +226,11 @@ class MainActivity : Activity() {
         const val RETRY_MAX = 60_000L
         const val MIN_CHROME = 80
 
-        // Remote keys and what the page calls them. Fire TV remotes have the D-pad, OK, Back, Menu and
-        // the media keys; Android TV remotes add numbers, channel keys and the colour keys.
+        // Remote keys and what the page calls them, laid out like a TV remote: left/right change channel and
+        // up/down set the volume (handled here, see volume()). Fire TV remotes have the D-pad, OK, Back, Menu and
+        // the media keys; Android TV remotes add numbers, channel keys, Info, Guide and the colour keys.
         val KEYS: Map<Int, String> = buildMap {
-            put(KeyEvent.KEYCODE_DPAD_UP, "up"); put(KeyEvent.KEYCODE_DPAD_DOWN, "down")
+            put(KeyEvent.KEYCODE_DPAD_UP, "volup"); put(KeyEvent.KEYCODE_DPAD_DOWN, "voldown")
             put(KeyEvent.KEYCODE_DPAD_LEFT, "left"); put(KeyEvent.KEYCODE_DPAD_RIGHT, "right")
             for (k in listOf(KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER, KeyEvent.KEYCODE_BUTTON_A)) put(k, "ok")
             for (k in listOf(KeyEvent.KEYCODE_BACK, KeyEvent.KEYCODE_ESCAPE, KeyEvent.KEYCODE_BUTTON_B)) put(k, "back")
@@ -222,12 +240,17 @@ class MainActivity : Activity() {
             }
             put(KeyEvent.KEYCODE_CHANNEL_UP, "chup"); put(KeyEvent.KEYCODE_PAGE_UP, "chup")
             put(KeyEvent.KEYCODE_CHANNEL_DOWN, "chdown"); put(KeyEvent.KEYCODE_PAGE_DOWN, "chdown")
-            for (k in listOf(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, KeyEvent.KEYCODE_MEDIA_PLAY, KeyEvent.KEYCODE_MEDIA_PAUSE, KeyEvent.KEYCODE_MUTE)) put(k, "playpause")
+            put(KeyEvent.KEYCODE_LAST_CHANNEL, "last")
+            put(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, "playpause"); put(KeyEvent.KEYCODE_MEDIA_PLAY, "play")
+            put(KeyEvent.KEYCODE_MEDIA_PAUSE, "pause"); put(KeyEvent.KEYCODE_MEDIA_STOP, "pause")
+            put(KeyEvent.KEYCODE_MUTE, "mute") // the TV's own mute key (VOLUME_MUTE) stays with the TV
             put(KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, "ff"); put(KeyEvent.KEYCODE_MEDIA_NEXT, "ff")
             put(KeyEvent.KEYCODE_MEDIA_REWIND, "rew"); put(KeyEvent.KEYCODE_MEDIA_PREVIOUS, "rew")
+            put(KeyEvent.KEYCODE_INFO, "info"); put(KeyEvent.KEYCODE_GUIDE, "list")
             put(KeyEvent.KEYCODE_MENU, "menu"); put(KeyEvent.KEYCODE_PROG_RED, "red")
             put(KeyEvent.KEYCODE_PROG_GREEN, "green"); put(KeyEvent.KEYCODE_CAPTIONS, "cc")
+            put(KeyEvent.KEYCODE_PROG_YELLOW, "list"); put(KeyEvent.KEYCODE_PROG_BLUE, "info")
         }
-        val REPEATS = setOf("up", "down", "left", "right", "chup", "chdown", "ff", "rew")
+        val REPEATS = setOf("volup", "voldown", "left", "right", "chup", "chdown", "ff", "rew")
     }
 }

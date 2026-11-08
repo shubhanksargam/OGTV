@@ -117,7 +117,8 @@ function guideTick(){if(guideBuilt) renderGuide(); renderNowCard()}
 let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
-function tune(i){cur=(i+CHANNELS.length)%CHANNELS.length;
+let lastCh=null; // the channel before this one, for the remote's last-channel key
+function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
   try{const q=new URLSearchParams(location.search); q.set("ch",CHANNELS[cur].n); history.replaceState(null,"","?"+q)}catch(e){}
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
@@ -542,7 +543,7 @@ function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomF
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
-let retro=true; try{localStorage.removeItem("ogtv-retro"); retro=sessionStorage.getItem("ogtv-retro")!=="0"}catch(e){} // every visit and channel page opens in retro; turning it off lasts for this tab only
+let retro=!TV_APP; try{localStorage.removeItem("ogtv-retro"); const s=sessionStorage.getItem("ogtv-retro"); retro=TV_APP?s==="1":s!=="0"}catch(e){} // every visit and channel page opens in retro, the TV app in the plain look; a change lasts for this tab (or app session) only
 function setRetro(on){retro=on; if(!on) staticSound.stop(); $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd();
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
@@ -780,25 +781,40 @@ async function syncClock(){
 syncClock(); setInterval(syncClock,HOUR);
 
 /* ---------- TV app remote ----------
-   The app turns each remote key into ogtv.remote(name). Up/down and the channel keys change channel (up is the
-   next number, as on a TV); in the plain look left/right browse the strip and OK tunes, in the retro set they
-   change channel too. Menu swaps retro and plain, play/pause is sound, digits tune as on the keyboard.
+   The app turns each remote key into ogtv.remote(name), and the remote works like a TV's: left/right, the channel
+   keys and ⏩/⏪ change channel (right is the next number); up/down set the volume (the app moves the TV's own
+   volume and sends "unmute"; where the TV's volume is fixed, as on a stick, it sends volup/voldown and OGTV's own
+   volume moves). OK opens the channel list in the plain look (left/right browse it, OK tunes) and shows the channel
+   in the retro set; Info shows what's on; the last-channel key goes back to the channel before; play and pause do
+   that; Menu turns the Mode knob one step (Normal is retro off; the next press brings it back at Full) and the red
+   key swaps retro and plain; digits tune as on the keyboard. "up"/"down" are channel keys from app 1.0.
    remote("back") returns false when there is nothing to close, and the app then offers to exit. */
 const stripOn=()=>$("screen").classList.contains("strip-on");
 const press=key=>document.body.dispatchEvent(new KeyboardEvent("keydown",{key,bubbles:true,cancelable:true}));
 function step(d){tune(cur+d); if(retro) osdChannel(cur)}
+function nowInfo(){if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)}}
+const channelList=()=>isFull()?wakeUI(true):nowInfo(); // the retro set has no channel list
 window.ogtv={
   remote(k){
     if(k==="back"){if(stripOn()){closeStrip(); return true} return false}
     if(!started) return true; // the ident plays through
     if(/^[0-9]$/.test(k)){press(k); return true}
-    if(isFull()&&(k==="left"||k==="right"||(k==="ok"&&stripOn()))){press({left:"ArrowLeft",right:"ArrowRight",ok:"Enter"}[k]); return true}
+    if(stripOn()&&(k==="left"||k==="right"||k==="ok")){press({left:"ArrowLeft",right:"ArrowRight",ok:"Enter"}[k]); if(k==="ok") closeStrip(); return true} // browsing the channel list; OK tunes and closes it
     switch(k){
-      case "up": case "chup": case "ff": case "right": step(1); break;
-      case "down": case "chdown": case "rew": case "left": step(-1); break;
-      case "ok": if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)} break;
-      case "menu": case "red": setRetro(!retro); if(retro) track("retro-on","Retro mode on"); break;
+      case "right": case "chup": case "ff": case "up": step(1); break;
+      case "left": case "chdown": case "rew": case "down": step(-1); break;
+      case "volup": setVol((muted?0:vol)+5); break; // setVol shows the level and turns the sound on above 0
+      case "voldown": setVol((muted?0:vol)-5); break;
+      case "unmute": if(muted) setSound(true); break;
+      case "mute": toggleSound(); if(retro) osdVolume(); break;
+      case "ok": case "list": channelList(); break;
+      case "info": nowInfo(); break;
+      case "last": if(lastCh!==null) step(lastCh-cur); break;
+      case "menu": if(!retro){setRetro(true); setFx(0,true)} else setFx(fxLevel+1,true); break; // the Mode knob, one step: … Quiet, Normal (retro off), then Full again
+      case "red": setRetro(!retro); if(retro) track("retro-on","Retro mode on"); break;
       case "playpause": togglePause(); break;
+      case "play": playNow(); break;
+      case "pause": pauseNow(); break;
       case "cc": case "green": toggleSubs(); break;
       default: return false;
     }
