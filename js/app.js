@@ -309,8 +309,13 @@ let asked=false, pressed=false;
 function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once the play mark has shown and the channel is playing behind the intro, the intro presses
 // play itself, so the flash, the pulse, the iris and the music run straight into the picture, as after a press on the website
-let askedAt=0;
-function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.now()-askedAt>=1000) pressPlay()}
+let askedAt=0, tvGoing=false;
+function tvGo(){if(!TV_APP||!asked||pressed||started||tvGoing||!(videoUp||capped)||Date.now()-askedAt<1000)return; tvGoing=true; whenQuiet(pressPlay)}
+// Calls fn once the page has been free for about half a second (five 100 ms timers on time), or after cap ms. On a TV,
+// YouTube's player freezes the page for seconds just after the picture appears; the exposition waits that out.
+function whenQuiet(fn,cap=6000){const t0=Date.now(); let calm=0, last=t0;
+  const tick=()=>{const now=Date.now(); calm=now-last<150?calm+1:0; last=now; if(calm>=5||now-t0>cap) fn(); else setTimeout(tick,100)};
+  setTimeout(tick,100)}
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
