@@ -294,6 +294,10 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.retro.fx-steady .vhs::after{display:none}
 .screen.retro.fx-nolines .vhs{display:none}
 .screen.retro.fx-clean #yt{filter:none}
+/* TV app: a filter on the video makes the TV's graphics chip redraw every frame (measured: 40% of frames dropped at
+   1080p), so Normal is the plain picture and the retro tint goes without its blur, the costliest part */
+.tv-app .screen #yt{filter:none}
+.tv-app .screen.retro:not(.fx-clean) #yt{filter:saturate(1.45) contrast(1.12) brightness(1.04) sepia(.2) hue-rotate(-8deg)}
 .vhs::before{content:"";position:absolute;inset:0;z-index:1;background:
   repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),
   radial-gradient(110% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
