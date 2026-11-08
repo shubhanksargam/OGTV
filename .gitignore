@@ -4,3 +4,4 @@ Videos/
 node_modules/
 .DS_Store
 Thumbs.db
+!android/app/src/main/res/raw/*.mp4
