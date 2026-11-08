@@ -25,6 +25,8 @@ import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 
 /**
  * OGTV on the TV: the live site in one full-screen WebView. The page keeps the schedule, the player and the
@@ -77,6 +79,10 @@ class MainActivity : Activity() {
             addView(web)
             addView(offline)
         })
+        // YouTube shows its touch-screen overlay (title, centre pause, More videos) to a TV's browser, which reports no
+        // hover, and that overlay waits for a tap a remote never gives: a style inside YouTube's frame keeps it hidden
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT))
+            WebViewCompat.addDocumentStartJavaScript(web, YT_STYLE, setOf("https://www.youtube.com", "https://www.youtube-nocookie.com"))
         web.requestFocus()
         web.loadUrl(START_URL)
         warnOldWebView()
@@ -233,6 +239,13 @@ class MainActivity : Activity() {
         const val RETRY_FIRST = 3_000L
         const val RETRY_MAX = 60_000L
         const val MIN_CHROME = 80
+
+        // Runs at the start of every YouTube frame: hides the player's own overlay (OGTV drives the player itself)
+        const val YT_STYLE = """(function(){var css="ytm-watch-player-controls,.player-controls-content,.player-controls-background,""" +
+            """player-top-controls,player-middle-controls,player-bottom-controls,.ytp-pause-overlay,.ytp-chrome-top,.ytp-gradient-top""" +
+            """{display:none!important}";function add(){var s=document.createElement("style");s.textContent=css;""" +
+            """(document.head||document.documentElement).appendChild(s)}if(document.documentElement)add();""" +
+            """else document.addEventListener("readystatechange",add,{once:true})})();"""
 
         // Remote keys and what the page calls them, laid out like a TV remote: left/right change channel and
         // up/down set the volume (handled here, see volume()). Fire TV remotes have the D-pad, OK, Back, Menu and

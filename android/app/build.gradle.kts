@@ -1,7 +1,7 @@
 import java.util.Properties
 
 // OGTV for Android TV and Fire TV: one full-screen WebView on the live site (https://ogtv.co.in/?app=tv).
-// No libraries, so the same APK runs on Fire OS (no Google Play services) and Android TV.
+// One small library (androidx.webkit, no Google Play services), so the same APK runs on Fire OS and Android TV.
 plugins {
     id("com.android.application")
 }
@@ -21,8 +21,8 @@ android {
         applicationId = "si.thebharat.ogtv"
         minSdk = 22 // Fire OS 5 (Fire TV Stick 1st gen) and up
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
     }
 
     signingConfigs {
@@ -45,4 +45,8 @@ android {
             if (signing("OGTV_KEYSTORE") != null) signingConfig = signingConfigs.getByName("release")
         }
     }
+}
+
+dependencies {
+    implementation("androidx.webkit:webkit:1.12.1") // a style inside YouTube's frame (MainActivity.YT_STYLE)
 }
