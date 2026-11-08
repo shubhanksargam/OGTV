@@ -637,10 +637,11 @@ $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); //
    (no static hiss on channel changes), Normal (retro off;
    in full screen that swaps to the plain full-screen look). Every visit and reload starts at Tinted. */
 const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Normal"], FX_DEG=[-75,-45,-15,15,45,75], FX_OFF=5;
-let fxLevel=2; // Tinted
+const FX_START=TV_APP?3:2; // Tinted on the website, Clean in the TV app (no effects on the picture, which a TV redraws slowly)
+let fxLevel=FX_START;
 function showFx(n){$("knobMode").title="Mode: "+FX_NAMES[n]; $("knobMode").style.setProperty("--rot",FX_DEG[n]+"deg")}
 function setFx(n,osdToo){n=Math.max(0,Math.min(FX_OFF,n)); if(osdToo) tvOsd(`<b>MODE</b> ${FX_NAMES[n].toUpperCase()}`);
-  if(n===FX_OFF){fxLevel=2; showFx(2); setRetro(false); return} // back at Tinted next time
+  if(n===FX_OFF){fxLevel=FX_START; showFx(FX_START); setRetro(false); return} // back at the start setting next time
   fxLevel=n;
   const sc=$("screen"); sc.classList.toggle("fx-steady",n>=1); sc.classList.toggle("fx-nolines",n>=2); sc.classList.toggle("fx-clean",n>=3);
   if(n>=4) staticSound.stop(); showFx(n)}
@@ -788,12 +789,13 @@ syncClock(); setInterval(syncClock,HOUR);
    volume and sends "unmute"; where the TV's volume is fixed, as on a stick, it sends volup/voldown and OGTV's own
    volume moves). OK opens the channel list in the plain look (left/right browse it, OK tunes) and shows the channel
    in the retro set; Info shows what's on; the last-channel key goes back to the channel before; play and pause do
-   that; Menu turns the Mode knob one step (Normal is retro off; the next press brings it back at Full) and the red
+   that; Menu turns the Mode knob one setting per press (from Normal: Clean, Quiet, Full, Steady, Tinted, Normal) and the red
    key swaps retro and plain; digits tune as on the keyboard. "up"/"down" are channel keys from app 1.0.
    remote("back") returns false when there is nothing to close, and the app then offers to exit. */
 const stripOn=()=>$("screen").classList.contains("strip-on");
 const press=key=>document.body.dispatchEvent(new KeyboardEvent("keydown",{key,bubbles:true,cancelable:true}));
 function step(d){tune(cur+d); if(retro) osdChannel(cur)}
+const MENU_FX=[3,4,0,1,2,FX_OFF]; // Menu from Normal: Clean, Quiet, Full, Steady, Tinted, then Normal again
 function nowInfo(){if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)}}
 const channelList=()=>isFull()?wakeUI(true):nowInfo(); // the retro set has no channel list
 window.ogtv={
@@ -812,7 +814,8 @@ window.ogtv={
       case "ok": case "list": channelList(); break;
       case "info": nowInfo(); break;
       case "last": if(lastCh!==null) step(lastCh-cur); break;
-      case "menu": if(!retro){setRetro(true); setFx(0,true)} else setFx(fxLevel+1,true); break; // the Mode knob, one step: … Quiet, Normal (retro off), then Full again
+      case "menu": {const i=MENU_FX.indexOf(retro?fxLevel:FX_OFF), n=MENU_FX.at((i+1)%MENU_FX.length); // the Mode knob, one setting per press
+        if(n===FX_OFF) setFx(FX_OFF,true); else {if(!retro) setRetro(true); setFx(n,true)} break}
       case "red": setRetro(!retro); if(retro) track("retro-on","Retro mode on"); break;
       case "playpause": togglePause(); break;
       case "play": playNow(); break;
