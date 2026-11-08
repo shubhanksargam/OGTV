@@ -647,6 +647,20 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .tv-app,.tv-app *{cursor:none!important}
 .tv-app,.tv-app body{overflow:hidden;scrollbar-width:none}.tv-app ::-webkit-scrollbar{display:none} /* the room covers the page; no page scrollbar at the edge */
 .tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app .screen .help-fs,.tv-app #keyFs,.tv-app #keyHelp{display:none!important} /* the Mode knob stays: the remote's Menu key turns it */
+/* TV app intro: the same OGTV forming and iris, moved only with opacity and transform, which a TV's graphics chip
+   animates by itself. The page's main thread is busy for seconds at start-up (the video list, then YouTube's player,
+   which in a TV's WebView shares that thread); blur, text-shadow and the iris mask would stutter with it. */
+.tv-app .start .logo-word i,.tv-app .start .intro-mark{animation-name:intro-tv}
+@keyframes intro-tv{0%{opacity:0;transform:translateY(.08em) scale(1.04)}45%{opacity:1}100%{opacity:1;transform:none}}
+.tv-app .intro-dot{animation:none}
+.tv-app .start{-webkit-mask-image:none;mask-image:none}
+.tv-app .start.open{animation:iris-tv 1.1s cubic-bezier(.6,0,.2,1) .1s forwards}
+.tv-app .start.open .hud{animation:hud-tv 1s cubic-bezier(.5,0,.3,1) forwards}
+.tv-app .iris-edge{width:100vmax} /* drawn once, full size; the opening only scales it */
+.tv-app .start.open .iris-edge{animation:iris-edge-tv 1.1s cubic-bezier(.6,0,.2,1) .1s forwards}
+@keyframes iris-tv{to{opacity:0}}
+@keyframes hud-tv{to{transform:scale(1.35);opacity:0}}
+@keyframes iris-edge-tv{0%{opacity:0;transform:scale(.02)}12%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:scale(1.32)}}
 /* Questions on the home page */
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
 .faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
