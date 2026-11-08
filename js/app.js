@@ -289,8 +289,9 @@ function start(done){if(started)return; started=true; startedAt=Date.now(); clea
 function soundIn(){if(!primed)return; // not allowed yet: unmuting would make the browser pause the video; the first tap turns it on
   if(needTap){tapHint(); return}
   if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
-  if(TV_APP){player.setVolume(0); const t0=Date.now(); // the TV app: the channel's sound rises gently over 3 s as the picture takes over, slow at first
-    const rise=setInterval(()=>{const k=Math.min(1,(Date.now()-t0)/3000); player.setVolume(Math.round(vol*k*k)); if(k>=1)clearInterval(rise)},100); return}
+  if(TV_APP){player.setVolume(0); let k=0; // the TV app: the channel's sound rises gently over about 3 s as the picture takes over, slow at
+    // first; counted in steps, not by the clock, so a stall (YouTube keeps a TV's page busy just then) pauses the rise rather than jumping it
+    const rise=setInterval(()=>{k=Math.min(1,k+0.034); player.setVolume(Math.round(vol*k*k)); if(k>=1)clearInterval(rise)},100); return}
   const fade=setInterval(()=>{v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
 // The iris opens onto the channel already playing. Timing follows the animation itself (it can start before this
 // script runs): 1.25 s after the V of OGTV settles the logo is complete; if the picture isn't up by then the ident
