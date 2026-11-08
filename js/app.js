@@ -309,7 +309,7 @@ function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))
 // button, a tap or click anywhere on the intro, Enter or Space) is the viewer's go-ahead for sound on every device and
 // browser: the intro plays out with its music and the channel's sound fades in after it.
 let asked=false, pressed=false;
-function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); setTimeout(tvGo,1100)}}
+function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); prepareChime(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once OGTV has formed and the channel is playing behind the intro, the intro goes on by itself
 let askedAt=0;
 function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.now()-askedAt>=1000) pressPlay()}
@@ -325,12 +325,13 @@ $("start").addEventListener("click",pressPlay); addEventListener("keydown",press
 /* Ident sound, made with Web Audio (no files): as the iris opens, a warm D major add-9 chord blooms with a high
    glint and a hall tail. A context made now tells us whether sound is allowed yet ("running"). */
 const AC=window.AudioContext||window.webkitAudioContext;
-let bloomed=false, identAc=null; try{identAc=AC?new AC():null}catch(e){}
+let bloomed=false, identAc=null; try{identAc=AC&&!TV_APP?new AC():null}catch(e){} // the TV app plays its chime as a clip (below)
 primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the channel opens silently and fades up after the ident
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
 runIdent();
+if(TV_APP) setTimeout(prepareChime,0); // ready long before the hand-over
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
@@ -340,15 +341,28 @@ function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall se
 }
 function bloom(delay=0){ // delay: seconds on the audio clock
   clearTimeout(bloomTimer); if(bloomed||!AC)return; bloomed=true;
+  if(TV_APP){if(tvChime){tvChime.currentTime=0; tvChime.play().catch(()=>{})} return}
   try{const ac=identAc&&identAc.state!=="closed"?identAc:new AC();
-    // The TV app's sound is always allowed: the notes go straight onto the audio clock. Waiting for resume() there
-    // could take seconds (YouTube's player keeps a TV's page busy as the picture appears) and the 1.5 s rule dropped it.
-    if(TV_APP&&ac.state==="running"){bloomNotes(ac,ac.currentTime+0.03+delay); setTimeout(()=>ac.close(),6000); return}
     const asked=performance.now(); // allowed only later (a tap after the iris) is too late for it
     ac.resume().then(()=>{if(ac.state!=="running"||performance.now()-asked>1500){ac.close();return} bloomNotes(ac,ac.currentTime+0.03+delay); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
 }
+/* TV app: a TV's browser can send live Web Audio to a low-latency output that never reaches the speakers (a Sony
+   BRAVIA: silent, while the video's sound plays), so the chime is rendered once, offline, while the intro shows, and
+   played as an ordinary audio clip, the way the video's sound plays */
+let tvChime=null;
+function prepareChime(){if(!TV_APP||tvChime||!window.OfflineAudioContext)return;
+  try{const sr=48000, off=new OfflineAudioContext(2,Math.round(sr*3.3),sr); bloomNotes(off,0.03);
+    off.startRendering().then(buf=>{tvChime=new Audio(URL.createObjectURL(wavBlob(buf))); tvChime.preload="auto"}).catch(()=>{})}catch(e){}}
+function wavBlob(buf){ // 16-bit stereo PCM
+  const n=buf.length, a=buf.getChannelData(0), b=buf.numberOfChannels>1?buf.getChannelData(1):a, v=new DataView(new ArrayBuffer(44+n*4));
+  const str=(o,s)=>{for(let i=0;i<s.length;i++) v.setUint8(o+i,s.charCodeAt(i))}, pcm=x=>Math.max(-1,Math.min(1,x))*32767;
+  str(0,"RIFF"); v.setUint32(4,36+n*4,true); str(8,"WAVE"); str(12,"fmt "); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,2,true);
+  v.setUint32(24,buf.sampleRate,true); v.setUint32(28,buf.sampleRate*4,true); v.setUint16(32,4,true); v.setUint16(34,16,true); str(36,"data"); v.setUint32(40,n*4,true);
+  for(let i=0;i<n;i++){v.setInt16(44+i*4,pcm(a[i]),true); v.setInt16(46+i*4,pcm(b[i]),true)}
+  return new Blob([v.buffer],{type:"audio/wav"})}
 function bloomNotes(ac,t){
-  const {out,verb}=identOut(ac,0.4), lp=ac.createBiquadFilter(), pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
+  const {out,verb}=identOut(ac,TV_APP?1:0.4), lp=ac.createBiquadFilter(), // about 8 dB louder on a TV's speakers, where the soft level was lost (the limiter keeps it clean)
+    pad=ac.createGain(); lp.type="lowpass"; lp.Q.value=0.8;
   lp.frequency.setValueAtTime(250,t); lp.frequency.exponentialRampToValueAtTime(3200,t+0.6); lp.frequency.exponentialRampToValueAtTime(900,t+2.4);
   pad.gain.value=0.0001; pad.gain.setValueAtTime(0.0001,t); pad.gain.exponentialRampToValueAtTime(0.16,t+0.35); pad.gain.setTargetAtTime(0.0001,t+1.2,0.45);
   lp.connect(pad); pad.connect(out); pad.connect(verb);
