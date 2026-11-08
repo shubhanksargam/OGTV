@@ -177,7 +177,7 @@ window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
   const s=slotAt(CHANNELS[cur],tvNow()), firstKey=slotKey(CHANNELS[cur],s);
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
-    events:{onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute()} // sound allowed: open it silently, it fades up after the ident
+    events:{onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute(); if(TV_APP) player.setVolume(0)} // sound allowed: open it silently, it fades up after the ident
               else {player.setVolume(vol);muted?player.mute():player.unMute()}
               player.playVideo();if(!muted)checkSound();$("sound").hidden=false;
               playingKey=firstKey;tick(); // reloads only if the programme changed while loading
@@ -289,6 +289,8 @@ function start(done){if(started)return; started=true; startedAt=Date.now(); clea
 function soundIn(){if(!primed)return; // not allowed yet: unmuting would make the browser pause the video; the first tap turns it on
   if(needTap){tapHint(); return}
   if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
+  if(TV_APP){player.setVolume(0); const t0=Date.now(); // the TV app: the channel's sound rises gently over 3 s as the picture takes over, slow at first
+    const rise=setInterval(()=>{const k=Math.min(1,(Date.now()-t0)/3000); player.setVolume(Math.round(vol*k*k)); if(k>=1)clearInterval(rise)},100); return}
   const fade=setInterval(()=>{v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
 // The iris opens onto the channel already playing. Timing follows the animation itself (it can start before this
 // script runs): 1.25 s after the V of OGTV settles the logo is complete; if the picture isn't up by then the ident
@@ -313,7 +315,7 @@ function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.no
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
-  if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
+  if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute(); if(TV_APP) player.setVolume(0)} // allowed now; fades up after the intro (the TV app sets 0 again: YouTube unmutes at 0 to 5)
   // TV app: OGTV's glow flashes up with the chime and dissolves into the channel (.tv-app rules), all off the page's
   // thread, which YouTube's player keeps busy for seconds as the picture appears; the chime runs on the audio clock
   if(TV_APP){$("start").classList.add("open"); opened=true; bloom(.05); introTimer=setTimeout(()=>start(true),1300); return}
@@ -338,6 +340,9 @@ function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall se
 function bloom(delay=0){ // delay: seconds on the audio clock
   clearTimeout(bloomTimer); if(bloomed||!AC)return; bloomed=true;
   try{const ac=identAc&&identAc.state!=="closed"?identAc:new AC();
+    // The TV app's sound is always allowed: the notes go straight onto the audio clock. Waiting for resume() there
+    // could take seconds (YouTube's player keeps a TV's page busy as the picture appears) and the 1.5 s rule dropped it.
+    if(TV_APP&&ac.state==="running"){bloomNotes(ac,ac.currentTime+0.03+delay); setTimeout(()=>ac.close(),6000); return}
     const asked=performance.now(); // allowed only later (a tap after the iris) is too late for it
     ac.resume().then(()=>{if(ac.state!=="running"||performance.now()-asked>1500){ac.close();return} bloomNotes(ac,ac.currentTime+0.03+delay); setTimeout(()=>ac.close(),5000)}).catch(()=>{})}catch(e){}
 }
@@ -410,7 +415,7 @@ function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on
 function checkSound(tries=0){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     // The TV app always allows sound: a player that is still loading is asked again, and the TV never goes quiet by itself
-    if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); checkSound(tries+1)} return}
+    if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1)} return}
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
       if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
     else if(needTap) tapMode(false)},900)}
