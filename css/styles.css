@@ -650,7 +650,9 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* TV app intro: the same OGTV forming and iris, moved only with opacity and transform, which a TV's graphics chip
    animates by itself. The page's main thread is busy for seconds at start-up (the video list, then YouTube's player,
    which in a TV's WebView shares that thread); blur, text-shadow and the iris mask would stutter with it. */
-.tv-app .start .logo-word i,.tv-app .start .intro-mark{animation-name:intro-tv}
+.tv-app .start .logo-word i{animation-name:intro-tv}
+/* the O fades in, then drops its own layer (no "forwards"): kept as a layer, its cut-out mask showed as a dark square */
+.tv-app .start .intro-mark{opacity:1;animation:intro-tv .91s cubic-bezier(.2,.8,.2,1) 1s backwards}
 @keyframes intro-tv{0%{opacity:0;transform:translateY(.08em) scale(1.04)}45%{opacity:1}100%{opacity:1;transform:none}}
 .tv-app .intro-dot{animation:none}
 .tv-app .start{-webkit-mask-image:none;mask-image:none}
