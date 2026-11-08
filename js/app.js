@@ -6,6 +6,11 @@ const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}, esc=t=>S
 // there, the app is already full screen, and the remote reaches the page through window.ogtv (end of this file).
 const TV_APP=/[?&]app=tv\b/.test(location.search)||/OGTV-AndroidTV/.test(navigator.userAgent);
 if(TV_APP) document.documentElement.classList.add("tv-app");
+// The TV app from 1.5 plays the opening itself, natively (it marks the page before it draws): the page shows no intro of
+// its own (the app says so in its user agent), tells the app when its picture is up (ogtv.ready), and starts the channel's sound when the app's iris has
+// opened (ogtv.introDone)
+const NATIVE_INTRO=/OGTV-NativeIntro\//.test(navigator.userAgent)||document.documentElement.classList.contains("native-intro");
+if(NATIVE_INTRO) document.documentElement.classList.add("native-intro");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 {const m=document.querySelector('meta[name="ogtv-ch"]'), n=+new URLSearchParams(location.search).get("ch")||+(m&&m.content), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
 const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
@@ -335,8 +340,8 @@ primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the chann
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
-runIdent();
-if(TV_APP) setTimeout(prepareChime,0); // ready long before the hand-over
+if(!NATIVE_INTRO) runIdent();
+if(TV_APP&&!NATIVE_INTRO) setTimeout(prepareChime,0); // ready long before the hand-over
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
@@ -857,6 +862,8 @@ window.ogtv={
   },
   pause(){if(MODE==="yt"&&player) player.pauseVideo(); pausedAt=Date.now(); keepAwake(false)}, // the app went to the background
   resume(){playingKey=null; tick()}, // back in front: rejoin the programme at this moment
+  ready(){return videoUp||MODE==="fallback"}, // the app's intro waits for the picture
+  introDone(){if(!started) start(true)}, // the app's iris is open: the channel's sound rises
 };
 if(TV_APP) track("app-tv-start","TV app opened");
 // The programme guide is built once the intro has handed over (or after 12 s if no one presses play)

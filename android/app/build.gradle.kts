@@ -21,8 +21,8 @@ android {
         applicationId = "si.thebharat.ogtv"
         minSdk = 22 // Fire OS 5 (Fire TV Stick 1st gen) and up
         targetSdk = 36
-        versionCode = 5
-        versionName = "1.4"
+        versionCode = 6
+        versionName = "1.5"
     }
 
     signingConfigs {

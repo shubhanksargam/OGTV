@@ -41,6 +41,8 @@ class MainActivity : Activity() {
     private var retryMs = RETRY_FIRST
     private var lastBack = 0L
     private var paused = false
+    private var intro: IntroView? = null
+    private val introTick = Handler(Looper.getMainLooper())
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,11 +76,15 @@ class MainActivity : Activity() {
             text = getString(R.string.offline)
             visibility = View.GONE
         }
+        // The opening plays natively over the page while it loads (see IntroView)
+        intro = IntroView(this) { introDone() }
         setContentView(FrameLayout(this).apply {
             setBackgroundColor(Color.BLACK)
             addView(web)
+            addView(intro)
             addView(offline)
         })
+        introTick.postDelayed(pollPicture, 1000)
         // YouTube shows its touch-screen overlay (title, centre pause, More videos) to a TV's browser, which reports no
         // hover, and that overlay waits for a tap a remote never gives: a style inside YouTube's frame keeps it hidden
         if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
@@ -90,6 +96,27 @@ class MainActivity : Activity() {
         web.requestFocus()
         web.loadUrl(START_URL)
         warnOldWebView()
+    }
+
+    // ---------- The opening ----------
+
+    // Asks the page whether its picture is up; the intro holds at its play mark until then
+    private val pollPicture = object : Runnable {
+        override fun run() {
+            val i = intro ?: return
+            web.evaluateJavascript("window.ogtv&&ogtv.ready?ogtv.ready():false") { up -> if (up == "true") i.pictureReady() }
+            introTick.postDelayed(this, 250)
+        }
+    }
+
+    // The iris is open: the page starts the channel's sound
+    private fun introDone() {
+        val i = intro ?: return
+        intro = null
+        introTick.removeCallbacksAndMessages(null)
+        (i.parent as? FrameLayout)?.removeView(i)
+        web.requestFocus()
+        js("window.ogtv&&ogtv.introDone&&ogtv.introDone()")
     }
 
     // ---------- The remote ----------
@@ -144,6 +171,7 @@ class MainActivity : Activity() {
 
     override fun onPause() {
         super.onPause()
+        intro?.skip()
         paused = true
         js("window.ogtv&&ogtv.pause()")
         web.onPause()
@@ -158,6 +186,7 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         main.removeCallbacksAndMessages(null)
+        introTick.removeCallbacksAndMessages(null)
         web.destroy()
         super.onDestroy()
     }
@@ -198,6 +227,7 @@ class MainActivity : Activity() {
     private fun allowed(u: Uri) = u.host == SITE_HOST || u.scheme == "about"
 
     private fun offlineNow() {
+        intro?.skip()
         failed = true
         offline.visibility = View.VISIBLE
         offline.requestFocus()
@@ -218,11 +248,11 @@ class MainActivity : Activity() {
     private fun js(code: String) = web.evaluateJavascript(code, null)
 
     // A desktop browser's user agent (with this WebView's Chrome version and the OGTV-AndroidTV tag the page looks
-    // for). With Android's own user agent YouTube serves its touch-screen player, whose pause and skip buttons wait
+    // for, and OGTV-NativeIntro: this app plays the opening itself). With Android's own user agent YouTube serves its touch-screen player, whose pause and skip buttons wait
     // for a tap that never comes on a TV; the desktop player with controls off shows a clean picture.
     private fun tvUserAgent(webViewAgent: String): String {
         val chrome = Regex("Chrome/([\\d.]+)").find(webViewAgent)?.groupValues?.get(1) ?: "120.0.0.0"
-        return "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chrome Safari/537.36 OGTV-AndroidTV/${version()}"
+        return "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$chrome Safari/537.36 OGTV-AndroidTV/${version()} OGTV-NativeIntro/1"
     }
 
     private fun version() = try {
@@ -244,8 +274,9 @@ class MainActivity : Activity() {
         const val RETRY_MAX = 60_000L
         const val MIN_CHROME = 80
 
-        // Runs at the start of the OGTV page: marks it as the TV app before anything is drawn
-        const val TV_CLASS = """(function(){var a=function(){document.documentElement.classList.add("tv-app")};""" +
+        // Runs at the start of the OGTV page: marks it as the TV app, which plays the opening itself (IntroView),
+        // before anything is drawn
+        const val TV_CLASS = """(function(){var a=function(){document.documentElement.classList.add("tv-app","native-intro")};""" +
             """if(document.documentElement)a();else document.addEventListener("readystatechange",a,{once:true})})();"""
 
         // Runs at the start of every YouTube frame: hides the player's own overlay (OGTV drives the player itself)
