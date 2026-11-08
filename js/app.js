@@ -311,8 +311,13 @@ function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))
 let asked=false, pressed=false;
 function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); prepareChime(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once OGTV has formed and the channel is playing behind the intro, the intro goes on by itself
-let askedAt=0;
-function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.now()-askedAt>=1000) pressPlay()}
+let askedAt=0, tvGoing=false;
+function tvGo(){if(!TV_APP||!asked||pressed||started||tvGoing||!(videoUp||capped)||Date.now()-askedAt<1000)return; tvGoing=true; whenQuiet(pressPlay,2000)}
+// Calls fn once the page has been free for half a second (five 100 ms timers on time), or after cap ms. In the second
+// after the picture starts, YouTube's player keeps a TV's page busy (tasks up to 0.7 s); the exposition goes after it.
+function whenQuiet(fn,cap){const t0=Date.now(); let calm=0, last=t0;
+  const tick=()=>{const now=Date.now(); calm=now-last<150?calm+1:0; last=now; if(calm>=5||now-t0>cap) fn(); else setTimeout(tick,100)};
+  setTimeout(tick,100)}
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
