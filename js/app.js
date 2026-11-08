@@ -185,7 +185,7 @@ window.onYouTubeIframeAPIReady=()=>{
             onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
               clearTimeout(bufTimer); clearTimeout(stallTimer);
               if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
-              else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3) bufTimer=setTimeout(showStatic,800); // no static while a resume catches up // a brief stall shows no static; the ident covers loading
+              else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
               else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
               else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
@@ -279,9 +279,9 @@ function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;if(muted&
    its sound fades in. Browsers allow sound only once the visitor has done something (or has used the site before):
    a tap, click or key at any point in the ident lets it in, without skipping; with none the ident is silent and
    the channel starts muted until the first tap or key. */
-let started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0, needTap=false; // needTap: sound only after a tap on the picture (soundRefused)
+let startedAt=0, started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0, needTap=false; // needTap: sound only after a tap on the picture (soundRefused)
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function start(done){if(started)return; started=true; clearTimeout(introTimer); track("start","Opened"); setTimeout(guideLater,600);
+function start(done){if(started)return; started=true; startedAt=Date.now(); clearTimeout(introTimer); track("start","Opened"); setTimeout(guideLater,600);
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
   setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
@@ -307,17 +307,16 @@ function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))
 // browser: the intro plays out with its music and the channel's sound fades in after it.
 let asked=false, pressed=false;
 function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); setTimeout(tvGo,1100)}}
-// The TV app needs no press: once the play mark has shown and the channel is playing behind the intro, the intro presses
-// play itself, so the flash, the pulse, the iris and the music run straight into the picture, as after a press on the website
+// The TV app needs no press: once OGTV has formed and the channel is playing behind the intro, the intro goes on by itself
 let askedAt=0;
 function tvGo(){if(TV_APP&&asked&&!pressed&&!started&&(videoUp||capped)&&Date.now()-askedAt>=1000) pressPlay()}
 function pressPlay(e){if(!asked||pressed||started)return;
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()} // allowed now; fades up after the intro
-  // TV app: the whole exposition starts at once and runs off the page's thread (YouTube's player keeps it busy for
-  // seconds as the picture appears): the iris is delayed in CSS (.tv-app rules), the music on the audio clock
-  if(TV_APP){$("start").classList.add("go","open"); opened=true; bloom(.45); introTimer=setTimeout(()=>start(true),2200); return}
+  // TV app: OGTV's glow flashes up with the chime and dissolves into the channel (.tv-app rules), all off the page's
+  // thread, which YouTube's player keeps busy for seconds as the picture appears; the chime runs on the audio clock
+  if(TV_APP){$("start").classList.add("open"); opened=true; bloom(.05); introTimer=setTimeout(()=>start(true),1300); return}
   track("play","Play pressed"); $("start").classList.add("go"); setTimeout(openIris,350)} // the pulse leaves the ring first
 $("start").addEventListener("click",pressPlay); addEventListener("keydown",pressPlay);
 /* Ident sound, made with Web Audio (no files): as the iris opens, a warm D major add-9 chord blooms with a high

@@ -651,24 +651,29 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .tv-app,.tv-app *{cursor:none!important}
 .tv-app,.tv-app body{overflow:hidden;scrollbar-width:none}.tv-app ::-webkit-scrollbar{display:none} /* the room covers the page; no page scrollbar at the edge */
 .tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app .screen .help-fs,.tv-app #keyFs,.tv-app #keyHelp{display:none!important} /* the Mode knob stays: the remote's Menu key turns it */
-/* TV app intro: the same OGTV forming and iris, moved only with opacity and transform, which a TV's graphics chip
-   animates by itself. The page's main thread is busy for seconds at start-up (the video list, then YouTube's player,
-   which in a TV's WebView shares that thread); blur, text-shadow and the iris mask would stutter with it. */
-.tv-app .start .logo-word i{animation-name:intro-tv}
-/* the O fades in, then drops its own layer (no "forwards"): kept as a layer, its cut-out mask showed as a dark square */
-.tv-app .start .intro-mark{opacity:1;animation:intro-tv .91s cubic-bezier(.2,.8,.2,1) 1s backwards}
-@keyframes intro-tv{0%{opacity:0;transform:translateY(.08em) scale(1.04)}45%{opacity:1}100%{opacity:1;transform:none}}
-.tv-app .intro-dot{animation:none}
-.tv-app .start{-webkit-mask-image:none;mask-image:none}
-.tv-app .start.open{animation:iris-tv 1.1s cubic-bezier(.6,0,.2,1) .55s forwards} /* after the flash and pulse (.go) */
-.tv-app .start.open .hud{animation:hud-tv 1s cubic-bezier(.5,0,.3,1) .45s forwards}
-.tv-app .iris-edge{width:100vmax} /* drawn once, full size; the opening only scales it */
-.tv-app .start.open .iris-edge{animation:iris-edge-tv 1.1s cubic-bezier(.6,0,.2,1) .55s forwards}
-@keyframes iris-tv{to{opacity:0}}
-@keyframes hud-tv{to{transform:scale(1.35);opacity:0}}
-.tv-app .start.ask .pb-tri{animation-name:pb-lite} /* the play mark appears by fade and scale, without the blur */
-.tv-app .ask-line{display:none} /* the TV app presses play itself */
-@keyframes iris-edge-tv{0%{opacity:0;transform:scale(.02)}12%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:scale(1.32)}}
+/* TV app intro, minimal like a streaming app's: on a dark screen the O and its red light fade up and settle, G T V
+   slide in after it, and a soft warm glow breathes behind OGTV while the channel loads. When the picture is ready the
+   glow flashes up with the chime and OGTV dissolves into the channel. Only opacity and transform move, which a TV's
+   graphics chip animates by itself while YouTube's player keeps the page busy. The app sets .tv-app before the page
+   draws, so this is the only intro the TV shows (the website's intro, then a restart, looked like OGTV twice). */
+.tv-app .start{-webkit-mask-image:none;mask-image:none;background:radial-gradient(70% 60% at 50% 46%,#121019 0%,#060509 70%)}
+.tv-app .start .play-btn,.tv-app .start .ask-line,.tv-app .start .iris-edge{display:none}
+.tv-app .start .intro-mark{opacity:1;animation:tv-o .9s cubic-bezier(.2,.8,.2,1) .2s backwards}
+.tv-app .start .logo-word i{opacity:1;transform:none;animation:tv-letter .7s cubic-bezier(.2,.8,.2,1) backwards}
+.tv-app .start .logo-word i:nth-child(1){animation-delay:.55s}.tv-app .start .logo-word i:nth-child(2){animation-delay:.63s}.tv-app .start .logo-word i:nth-child(3){animation-delay:.71s}
+.tv-app .start .intro-dot,.tv-app .start.ask .intro-dot{animation:none}
+.tv-app .start-logo::before{content:"";position:absolute;inset:-70% -35%;z-index:-1;pointer-events:none;opacity:0;
+  background:radial-gradient(closest-side,rgba(242,160,61,.30),rgba(229,72,58,.10) 55%,transparent);animation:tv-glow-in 1.2s ease-out 1.3s forwards,tv-breathe 2.6s ease-in-out 2.5s infinite alternate}
+.tv-app .start.open{animation:tv-out .9s cubic-bezier(.4,0,.2,1) .25s forwards}
+.tv-app .start.open .hud{animation:tv-logo-out 1.1s cubic-bezier(.4,0,.2,1) .1s forwards}
+.tv-app .start.open .start-logo::before{animation:tv-flash .7s ease-out forwards}
+@keyframes tv-o{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes tv-letter{from{opacity:0;transform:translateX(-.14em)}to{opacity:1;transform:none}}
+@keyframes tv-glow-in{from{opacity:0}to{opacity:.75}}
+@keyframes tv-breathe{from{opacity:.75}to{opacity:.4}}
+@keyframes tv-flash{from{opacity:.6}25%{opacity:1}to{opacity:0}}
+@keyframes tv-out{to{opacity:0}}
+@keyframes tv-logo-out{to{transform:scale(1.08);opacity:0}}
 /* Questions on the home page */
 .faq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
 .faq h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}

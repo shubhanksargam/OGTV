@@ -81,8 +81,12 @@ class MainActivity : Activity() {
         })
         // YouTube shows its touch-screen overlay (title, centre pause, More videos) to a TV's browser, which reports no
         // hover, and that overlay waits for a tap a remote never gives: a style inside YouTube's frame keeps it hidden
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT))
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
             WebViewCompat.addDocumentStartJavaScript(web, YT_STYLE, setOf("https://www.youtube.com", "https://www.youtube-nocookie.com"))
+            // The page's TV look from its very first frame: app.js sets it too, but only once its scripts have loaded,
+            // and switching mid-intro restarted the intro (OGTV appeared twice)
+            WebViewCompat.addDocumentStartJavaScript(web, TV_CLASS, setOf("https://$SITE_HOST"))
+        }
         web.requestFocus()
         web.loadUrl(START_URL)
         warnOldWebView()
@@ -239,6 +243,10 @@ class MainActivity : Activity() {
         const val RETRY_FIRST = 3_000L
         const val RETRY_MAX = 60_000L
         const val MIN_CHROME = 80
+
+        // Runs at the start of the OGTV page: marks it as the TV app before anything is drawn
+        const val TV_CLASS = """(function(){var a=function(){document.documentElement.classList.add("tv-app")};""" +
+            """if(document.documentElement)a();else document.addEventListener("readystatechange",a,{once:true})})();"""
 
         // Runs at the start of every YouTube frame: hides the player's own overlay (OGTV drives the player itself)
         const val YT_STYLE = """(function(){var css="ytm-watch-player-controls,.player-controls-content,.player-controls-background,""" +
