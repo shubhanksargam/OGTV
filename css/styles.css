@@ -413,6 +413,21 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
    there from the first frame of the static, with no animation */
 .static .ident{position:relative;z-index:1;font-size:clamp(2.2rem,8vw,4.6rem);color:#3b3942;opacity:.45} /* no blend mode: it could freeze the snow under it on iPhone */
 .static .ident .logo,.static .ident .logo-mark{color:#3b3942} /* the logo in a soft charcoal grey on the static */
+/* Retro mode only: what's on, over the tuning static, in the exact style and size of the knobs' own OSD readout
+   (.tv-osd). The plain full-screen look already shows this in its banner on every channel change, so this is
+   retro-only. */
+.static-info{display:none;position:relative;z-index:1;margin-top:.6em;text-align:center;font-family:"VT323",ui-monospace,monospace;
+  font-size:clamp(1.1rem,3vw,2.2rem);letter-spacing:.08em;color:#8dff9a;
+  text-shadow:0 0 6px rgba(120,255,140,.8),0 0 16px rgba(80,255,120,.35),2px 2px 0 rgba(0,0,0,.6);line-height:1.3}
+.screen.retro .static-info{display:block}
+.static-info b{font-weight:400;color:#c8ffd0}
+/* Plain look, minimized only: full screen already gets this from the real banner on every tune(), so this is the
+   minimized-only stand-in for it, over the tuning static -- same bn-* parts, same look, just flowed in place of
+   the banner's own absolute vw/vh positioning (which only makes sense full screen). */
+.static-info-plain{display:none;position:relative;z-index:1;margin-top:.8em;align-items:center;gap:16px;max-width:88%;
+  padding:14px 22px 14px 16px;border-radius:18px;background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 16px 40px rgba(0,0,0,.5);text-align:left}
+.screen:not(.retro):not(.pseudo-fs):not(:fullscreen) .static-info-plain{display:flex}
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .bug-mark{width:40px;height:32px;color:var(--marigold);filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
 .chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
@@ -435,16 +450,11 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
   padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
 .card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:700}
-/* Paused mid-programme (K, Space, remote or the pause button): OGTV's own frosted layer masks the raw YouTube
-   frame underneath (its own pause icon, title and "More videos" panel) without touching the player itself --
-   the pause is still a real pauseVideo() call; only the signs that would otherwise show through are covered. */
-.pause-screen{position:absolute;inset:0;z-index:2;display:none;place-items:center;pointer-events:none; /* click-through: every existing way to resume (tap, K, remote) keeps working unchanged */
-  background:rgba(10,8,14,.4);backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15)}
-.pause-screen:not([hidden]){display:grid}
-.pause-screen-inner{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 7%}
-.ps-icon{color:var(--marigold);filter:drop-shadow(0 2px 12px rgba(0,0,0,.45))}
-.ps-title{font-family:var(--display);font-weight:700;color:var(--ink);font-size:clamp(1rem,2.6vw,1.5rem);line-height:1.2;text-wrap:balance}
-.ps-hint{color:var(--muted);font-size:.85rem;letter-spacing:.02em}
+/* Paused mid-programme (K, Space, remote or the pause button): the picture stays sharp -- no blur, which looked
+   grainy over some footage -- just a flat black wash, the same in every mode; nothing else drawn over it. The pause
+   is still a real pauseVideo() call, this is only what's drawn over it. */
+.pause-screen{position:absolute;inset:0;z-index:2;display:none;pointer-events:none;background:rgba(8,6,10,.6)} /* click-through: every existing way to resume (tap, K, remote) keeps working unchanged */
+.pause-screen:not([hidden]){display:block}
 @media (max-width:600px){.pause-screen-inner{gap:6px}.ps-icon{width:32px;height:32px}.ps-hint{font-size:.76rem}}
 /* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
 .card.interlude{animation:card-fade .8s ease both}

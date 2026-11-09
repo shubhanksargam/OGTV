@@ -33,7 +33,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=238">
+<link rel="stylesheet" href="css/styles.css?v=246">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="ogcut" maskUnits="userSpaceOnUse" x="0" y="0" width="150" height="120"><rect width="150" height="120" fill="#fff"/><circle cx="129" cy="21" r="23" fill="#000"/></mask><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18" mask="url(#ogcut)"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)"/></symbol></defs></svg>
@@ -56,10 +56,10 @@
         <div id="yt"></div>
         <div class="tap-catch" id="tapCatch" aria-hidden="true"></div>
         <div class="vhs" aria-hidden="true"><i class="grain"></i><span class="osd osd-play">PLAY &#9654;</span><span class="osd osd-time" id="osdTime"></span></div>
-        <div class="static" id="static" aria-hidden="true" hidden><canvas id="noise" width="400" height="225"></canvas><span class="ident" id="ident"><span class="logo"><svg class="logo-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="logo-word">GTV</span></span></span></div>
+        <div class="static" id="static" aria-hidden="true" hidden><canvas id="noise" width="400" height="225"></canvas><span class="ident" id="ident"><span class="logo"><svg class="logo-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="logo-word">GTV</span></span></span><span class="static-info" id="staticInfo"></span><span class="static-info-plain" id="staticInfoPlain"></span></div>
         <div class="bug"><svg class="bug-mark" viewBox="0 0 150 120" aria-hidden="true"><use href="#ogmark"></use></svg><span class="chanbug" id="chanbug"></span></div>
         <div class="card" id="card" hidden></div>
-        <div class="pause-screen" id="pauseScreen" hidden><div class="pause-screen-inner"><svg class="ps-icon" viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg><span class="ps-title" id="psTitle"></span><span class="ps-hint">Press play to resume</span></div></div>
+        <div class="pause-screen" id="pauseScreen" hidden></div>
         <div class="fs-catch" id="fsCatch" aria-hidden="true"></div>
         <div class="fs-ui">
           <div class="banner" id="banner" aria-live="polite"></div>
@@ -112,7 +112,7 @@
     <div class="guide-head"><h4 id="guide-h">Programme guide</h4><span class="gday" id="gday">Today · India Standard Time</span></div>
     <div class="gtimes" id="gtimes" role="group" aria-label="What's on at"></div>
     <div class="glist" id="glist"></div>
-    <p class="hint ghint">Keys: <kbd>↑</kbd> <kbd>↓</kbd> change channel, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>K</kbd> pause, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> channels, <kbd>H</kbd> help</p>
+    <p class="hint ghint">Keys: <kbd>←</kbd> <kbd>→</kbd> change channel, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>K</kbd> pause, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> channels, <kbd>H</kbd> help</p>
   </section>
 
   <section class="seo-intro"><h2>Bachche on OGTV</h2><p>Bachche on OGTV: kids, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream. Also on this channel: ChuChu TV Storytime, DW Documentary Hindi, Peekaboo Kidz and Discovery.</p></section>
@@ -209,7 +209,7 @@
     <ul>
       <li><b>Phone or tablet:</b> swipe sideways across the picture, left for the next channel and right for the one before.</li>
       <li><b>Programme guide:</b> tap <b>Watch</b> or a channel's name.</li>
-      <li><b>Keyboard:</b> <kbd>↓</kbd> for the next channel, <kbd>↑</kbd> for the one before, or type its number (two digits for 10 and up: <kbd>1</kbd> <kbd>2</kbd> is channel 12).</li>
+      <li><b>Keyboard:</b> <kbd>→</kbd> for the next channel, <kbd>←</kbd> for the one before, or type its number (two digits for 10 and up: <kbd>1</kbd> <kbd>2</kbd> is channel 12).</li>
       <li><b>Retro TV:</b> turn the <b>Channel</b> knob.</li>
       <li><b>Headphones, car or lock screen:</b> the next and previous track buttons change channel.</li>
       <li><b>Share a channel:</b> the address in your browser always points to the channel you're watching. Copy it and send it.</li>
@@ -227,14 +227,14 @@
   <section id="h-sound"><h3>Sound, pause and subtitles</h3>
     <ul>
       <li><b>Sound:</b> if the picture plays silently, tap <b>Turn sound on</b>. <kbd>M</kbd> turns the sound off and on. On the retro TV, use the <b>Volume</b> knob (click it to mute) or the <b>Mute</b> key. Opened from an app such as X, Instagram or WhatsApp? Its built-in browser wants a tap on the picture itself: when <b>Tap the picture for sound</b> shows, tap the picture once.</li>
-      <li><b>Pause:</b> tap the picture, or press <kbd>K</kbd> or <kbd>Space</kbd>. In full screen, use the pause button.</li>
+      <li><b>Pause:</b> tap or click the picture, or press <kbd>K</kbd> or <kbd>Space</kbd>. In full screen, use the pause button.</li>
       <li><b>Subtitles:</b> the <b>CC</b> button or <kbd>S</kbd> turns YouTube's subtitles on or off for every programme. OGTV remembers your choice.</li>
     </ul></section>
   <section id="h-full"><h3>Full screen</h3>
     <ul>
       <li>Tap <b>Home</b>, <b>Maximize for the best experience</b> or the full-screen button on the picture, or press <kbd>F</kbd>.</li>
       <li>The channel's name appears as you change channel, and the buttons fade when you leave them alone.</li>
-      <li>To see every channel in a strip, move the mouse to the bottom, tap the picture, or press <kbd>←</kbd> <kbd>→</kbd>. Tap a channel or press <kbd>Enter</kbd> to watch it. Swiping up or down changes channel too.</li>
+      <li>To see every channel in a strip, move the mouse to the bottom. Tap a channel to watch it. Swiping up or down changes channel too, and the arrow keys always change channel, even here.</li>
       <li>On iPhone, OGTV fills the browser window. For true full screen, add it to your Home Screen (see Install as an app).</li>
       <li><kbd>Esc</kbd> leaves full screen.</li>
     </ul></section>
@@ -255,12 +255,11 @@
     </ul></section>
   <section id="h-keys"><h3>Keyboard</h3>
     <dl class="help-keys">
-      <dt><kbd>↓</kbd> <kbd>↑</kbd></dt><dd>Next channel, the one before</dd>
+      <dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Next channel, the one before (anywhere, including full screen)</dd>
       <dt><kbd>0</kbd>–<kbd>9</kbd></dt><dd>Go to a channel by its number</dd>
       <dt><kbd>M</kbd></dt><dd>Sound off and on</dd>
       <dt><kbd>K</kbd> or <kbd>Space</kbd></dt><dd>Pause and play</dd>
       <dt><kbd>F</kbd></dt><dd>Full screen</dd>
-      <dt><kbd>←</kbd> <kbd>→</kbd> <kbd>Enter</kbd></dt><dd>In full screen: browse the channel strip, then watch</dd>
       <dt><kbd>Esc</kbd></dt><dd>Leave full screen, or close this help</dd>
       <dt><kbd>R</kbd></dt><dd>Retro mode off and on</dd>
       <dt><kbd>S</kbd></dt><dd>Subtitles</dd>
@@ -276,13 +275,13 @@
     </ul></section>
 </dialog>
 
-<script src="js/analytics.js?v=238"></script>
-<script src="js/catalog.js?v=238"></script>
+<script src="js/analytics.js?v=246"></script>
+<script src="js/catalog.js?v=246"></script>
 <script src="js/feeds.js?v=20261109"></script>
 <script src="js/live.js?v=202610162154"></script>
 <script src="js/festivals.js?v=237"></script>
-<script src="js/channels.js?v=238"></script>
-<script src="js/scheduler.js?v=238"></script>
-<script src="js/app.js?v=238"></script>
+<script src="js/channels.js?v=246"></script>
+<script src="js/scheduler.js?v=246"></script>
+<script src="js/app.js?v=246"></script>
 </body>
 </html>
