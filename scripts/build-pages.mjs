@@ -6,13 +6,13 @@ import {readFile, writeFile, mkdir, rm} from "node:fs/promises";
 const ROOT = new URL("..", import.meta.url);
 const SITE = "https://ogtv.co.in";
 const read = p => readFile(new URL(p, ROOT), "utf8");
-const CHANNELS = new Function((await read("js/channels.js")) + ";return CHANNELS")();
+const {CHANNELS, chSlug} = new Function((await read("js/channels.js")) + ";return {CHANNELS, chSlug}")();
 const feedSrc = await read("js/feeds.js");
 const FEED = JSON.parse(feedSrc.slice(feedSrc.indexOf("["), feedSrc.lastIndexOf("]") + 1));
 const today = new Date().toISOString().slice(0, 10);
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
-const slug = c => c.name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const slug = chSlug; // js/channels.js: the same name the app puts in ?ch= links
 
 // The creators a channel actually plays, most videos first: the words people search for
 function sources(c) {
@@ -146,7 +146,7 @@ await rm(new URL("tv/", ROOT), {recursive: true, force: true});
 for (const c of CHANNELS) {
   const url = `${SITE}/tv/${slug(c)}/`, description = describe(c), s = c.live ? LIVE[c.live].map(x => x.src) : sources(c);
   let page = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->",
-    seoBlock({title: `${c.name}: ${c.en} | OGTV free Indian TV`, description, url, ch: c.n, video: featured(c), chan: c}));
+    seoBlock({title: `${c.name}: ${c.en} | OGTV free Indian TV`, description, url, ch: slug(c), video: featured(c), chan: c})); // by name, not number: a cached page still opens its own channel after a renumbering
   // a short visible intro, unique to the page
   page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${rest(s, description).length ? ` Also on this channel: ${esc(list(rest(s, description)))}.` : ""}</p></section>\n\n  <!-- channels:start`);
   await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});

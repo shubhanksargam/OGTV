@@ -23,7 +23,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"OGTV","alternateName":["OG TV","OGTV India"],"url":"https://ogtv.co.in/","description":"OGTV is a free Indian TV app: 40 always-on channels in Hindi & English. Live news, cricket, Olympics, Bollywood, bhajans, KBC and Taarak Mehta. No sign-up.","inLanguage":["hi","en"],"publisher":{"@type":"Organization","name":"OGTV","logo":"https://ogtv.co.in/img/og.png"}},{"@type":"VideoObject","name":"Dipavli speshal masaledar suran ki sabji","description":"Dipavli speshal masaledar suran ki sabji, now on Rasoi, a free always-on channel on OGTV.","thumbnailUrl":["https://i.ytimg.com/vi/b8RtKnJpzGg/hqdefault.jpg"],"uploadDate":"2026-11-07T00:00:00.000Z","duration":"PT5M","embedUrl":"https://www.youtube.com/embed/b8RtKnJpzGg","inLanguage":"hi"}]}</script>
-<meta name="ogtv-ch" content="21">
+<meta name="ogtv-ch" content="rasoi">
 <!-- seo:end -->
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -33,7 +33,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Mukta:wght@400;500;700&family=VT323&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=247">
+<link rel="stylesheet" href="css/styles.css?v=260">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="ogcut" maskUnits="userSpaceOnUse" x="0" y="0" width="150" height="120"><rect width="150" height="120" fill="#fff"/><circle cx="129" cy="21" r="23" fill="#000"/></mask><symbol id="ogmark" viewBox="0 0 150 120"><rect x="9" y="9" width="132" height="102" rx="38" fill="none" stroke="currentColor" stroke-width="18" mask="url(#ogcut)"/><circle cx="129" cy="21" r="14" fill="var(--live-dot,#e5483a)"/></symbol></defs></svg>
@@ -68,7 +68,6 @@
         </div>
         <button class="sound" id="sound" hidden>Turn sound on</button>
         <div class="tap-hint" id="tapHint" aria-live="polite" hidden><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Tap the picture for sound</div>
-        <button class="cc" id="cc" aria-pressed="true" aria-label="Subtitles" title="Subtitles (S)">CC</button>
         <button class="retro-fs" id="retroFs" aria-pressed="false" title="Retro mode (R)">Retro mode</button>
         <button class="help-fs" id="helpFs" aria-haspopup="dialog" title="Help (H)">Help</button>
         <button class="pause-fs" id="pauseFs" aria-label="Pause" title="Pause (K)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button>
@@ -85,7 +84,6 @@
         <span class="knob-wrap"><button class="knob" id="knobVol" aria-label="Volume knob: turn, scroll or use arrow keys to set the volume; click for sound on or off" title="Volume"><i></i></button><small>Volume</small></span>
         <span class="keys">
           <button class="key" id="keyMute" aria-pressed="false" title="Sound (M)">Mute</button>
-          <button class="key" id="keyCc" aria-pressed="true" title="Subtitles (S)">CC</button>
           <button class="key key-help" id="keyHelp" aria-haspopup="dialog" title="Help (H)">Help</button>
           <button class="key key-wide" id="keyFs" title="Full screen (F)">Full screen</button>
         </span>
@@ -112,7 +110,7 @@
     <div class="guide-head"><h4 id="guide-h">Programme guide</h4><span class="gday" id="gday">Today · India Standard Time</span></div>
     <div class="gtimes" id="gtimes" role="group" aria-label="What's on at"></div>
     <div class="glist" id="glist"></div>
-    <p class="hint ghint">Keys: <kbd>←</kbd> <kbd>→</kbd> change channel, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>K</kbd> pause, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>S</kbd> subtitles, <kbd>C</kbd> channels, <kbd>H</kbd> help</p>
+    <p class="hint ghint">Keys: <kbd>←</kbd> <kbd>→</kbd> change channel, <kbd>↑</kbd> <kbd>↓</kbd> volume, <kbd>1</kbd>–<kbd>40</kbd> jump (type two digits for 10+), <kbd>M</kbd> sound, <kbd>K</kbd> pause, <kbd>F</kbd> full screen, <kbd>R</kbd> retro mode, <kbd>C</kbd> channels, <kbd>H</kbd> help</p>
   </section>
 
   <section class="seo-intro"><h2>Rasoi on OGTV</h2><p>Rasoi on OGTV: cooking, free and always on. Videos from Kabita's Kitchen, Nisha Madhulika, Sanjeev Kapoor Khazana and Hebbars Kitchen Hindi. Also on this channel: Masala Kitchen, CookingShooking Hindi, Your Food Lab and Chef Ranveer Brar.</p></section>
@@ -146,32 +144,32 @@
       </ul></section>
       <section><h3>Lifestyle</h3><ul>
         <li><a href="/tv/bhakti/">18 · Bhakti</a> <span>Devotional</span></li>
-        <li><a href="/tv/festivals/">19 · Festivals</a> <span>Festival songs, folk &amp; bhajans</span></li>
-        <li><a href="/tv/sehat/">20 · Sehat</a> <span>Sports fitness, army &amp; Soviet-style training, yoga</span></li>
-        <li><a href="/tv/rasoi/">21 · Rasoi</a> <span>Cooking</span></li>
-        <li><a href="/tv/safar/">22 · Safar</a> <span>Travel, India &amp; the world</span></li>
-        <li><a href="/tv/bachche/">23 · Bachche</a> <span>Kids</span></li>
+        <li><a href="/tv/sehat/">19 · Sehat</a> <span>Sports fitness, army &amp; Soviet-style training, yoga</span></li>
+        <li><a href="/tv/rasoi/">20 · Rasoi</a> <span>Cooking</span></li>
+        <li><a href="/tv/safar/">21 · Safar</a> <span>Travel, India &amp; the world</span></li>
+        <li><a href="/tv/bachche/">22 · Bachche</a> <span>Kids</span></li>
       </ul></section>
       <section><h3>Entertainment</h3><ul>
-        <li><a href="/tv/aangan/">24 · Aangan</a> <span>Family TV: DD classics, Taarak Mehta &amp; mushaira</span></li>
-        <li><a href="/tv/comedy/">25 · Comedy</a> <span>Stand-up, sketches &amp; shows</span></li>
-        <li><a href="/tv/purvaiya/">26 · Purvaiya</a> <span>Regional news, legends, travel &amp; vlogs</span></li>
-        <li><a href="/tv/fiction/">27 · Fiction</a> <span>Web series, short films &amp; DD classics</span></li>
-        <li><a href="/tv/retro-movies/">28 · Retro Movies</a> <span>Classic Hindi films</span></li>
-        <li><a href="/tv/classics/">29 · Classics</a> <span>Great films from India &amp; the world</span></li>
+        <li><a href="/tv/aangan/">23 · Aangan</a> <span>Family TV: DD classics, Taarak Mehta &amp; mushaira</span></li>
+        <li><a href="/tv/comedy/">24 · Comedy</a> <span>Stand-up, sketches &amp; shows</span></li>
+        <li><a href="/tv/purvaiya/">25 · Purvaiya</a> <span>Regional news, legends, travel &amp; vlogs</span></li>
+        <li><a href="/tv/fiction/">26 · Fiction</a> <span>Web series, short films &amp; DD classics</span></li>
+        <li><a href="/tv/retro-movies/">27 · Retro Movies</a> <span>Classic Hindi films</span></li>
+        <li><a href="/tv/classics/">28 · Classics</a> <span>Great films from India &amp; the world</span></li>
       </ul></section>
       <section><h3>Music</h3><ul>
-        <li><a href="/tv/desi-pop/">30 · Desi Pop</a> <span>Diljit, Shubh, Arijit, Amit Trivedi &amp; India's OG artists</span></li>
-        <li><a href="/tv/deccan-chargers/">31 · Deccan Chargers</a> <span>Telugu, Tamil, Malayalam &amp; Kannada bangers, and the classics</span></li>
+        <li><a href="/tv/desi-pop/">29 · Desi Pop</a> <span>Diljit, Shubh, Arijit, Amit Trivedi &amp; India's OG artists</span></li>
+        <li><a href="/tv/drive/">30 · Drive</a> <span>Road-trip songs</span></li>
+        <li><a href="/tv/festivals/">31 · Festivals</a> <span>Festival songs, folk &amp; bhajans</span></li>
         <li><a href="/tv/2010s-hits/">32 · 2010s Hits</a> <span>Bollywood 2010-2019</span></li>
         <li><a href="/tv/2000s-hits/">33 · 2000s Hits</a> <span>Bollywood 2000-2009</span></li>
-        <li><a href="/tv/sadabahar/">34 · Sadabahar</a> <span>Evergreen songs</span></li>
-        <li><a href="/tv/punjabi/">35 · Punjabi</a> <span>Punjabi bangers</span></li>
+        <li><a href="/tv/deccan-chargers/">34 · Deccan Chargers</a> <span>Telugu, Tamil, Malayalam &amp; Kannada bangers, and the classics</span></li>
+        <li><a href="/tv/anthems/">35 · Anthems</a> <span>Coldplay &amp; friends</span></li>
         <li><a href="/tv/global-hits/">36 · Global Hits</a> <span>The world's top hits, every language</span></li>
-        <li><a href="/tv/anthems/">37 · Anthems</a> <span>Coldplay &amp; friends</span></li>
-        <li><a href="/tv/gym/">38 · Gym</a> <span>Punjabi, desi hip-hop, rap, rock &amp; phonk bangers</span></li>
-        <li><a href="/tv/drive/">39 · Drive</a> <span>Road-trip songs</span></li>
-        <li><a href="/tv/raag/">40 · Raag</a> <span>Sitar, santoor, classical voices &amp; Coke Studio</span></li>
+        <li><a href="/tv/gym/">37 · Gym</a> <span>Punjabi, desi hip-hop, rap, rock &amp; phonk bangers</span></li>
+        <li><a href="/tv/punjabi/">38 · Punjabi</a> <span>Punjabi bangers</span></li>
+        <li><a href="/tv/raag/">39 · Raag</a> <span>Sitar, santoor, classical voices &amp; Coke Studio</span></li>
+        <li><a href="/tv/sadabahar/">40 · Sadabahar</a> <span>Evergreen songs</span></li>
       </ul></section>
     </div>
   </nav>
@@ -196,7 +194,7 @@
 
 <dialog class="help" id="help" aria-labelledby="help-h">
   <div class="help-top"><h2 id="help-h">How to use OGTV</h2><button class="help-x" id="helpClose">Close</button></div>
-  <nav class="help-toc" aria-label="Help topics"><a href="#h-start">Getting started</a><a href="#h-surf">Changing channel</a><a href="#h-guide">Programme guide</a><a href="#h-sound">Sound, pause &amp; subtitles</a><a href="#h-full">Full screen</a><a href="#h-retro">Retro mode</a><a href="#h-app">Install as an app</a><a href="#h-keys">Keyboard</a><a href="#h-trouble">If something goes wrong</a></nav>
+  <nav class="help-toc" aria-label="Help topics"><a href="#h-start">Getting started</a><a href="#h-surf">Changing channel</a><a href="#h-guide">Programme guide</a><a href="#h-sound">Sound &amp; pause</a><a href="#h-full">Full screen</a><a href="#h-retro">Retro mode</a><a href="#h-app">Install as an app</a><a href="#h-keys">Keyboard</a><a href="#h-trouble">If something goes wrong</a></nav>
   <section id="h-start"><h3>Getting started</h3>
     <p>OGTV is free TV made from YouTube: channels that are always on, from news and cricket to bhajans, films and music, in Hindi and English. There is nothing to sign up for.</p>
     <ul>
@@ -207,7 +205,7 @@
     </ul></section>
   <section id="h-surf"><h3>Changing channel</h3>
     <ul>
-      <li><b>Phone or tablet:</b> swipe sideways across the picture, left for the next channel and right for the one before.</li>
+      <li><b>Phone or tablet:</b> swipe sideways across the picture, left for the next channel and right for the one before. On the retro TV the set shows the channel it lands on.</li>
       <li><b>Programme guide:</b> tap <b>Watch</b> or a channel's name.</li>
       <li><b>Keyboard:</b> <kbd>→</kbd> for the next channel, <kbd>←</kbd> for the one before, or type its number (two digits for 10 and up: <kbd>1</kbd> <kbd>2</kbd> is channel 12).</li>
       <li><b>Retro TV:</b> turn the <b>Channel</b> knob.</li>
@@ -224,17 +222,16 @@
       <li>The channel you're watching is outlined in orange, and its button says <b>Watching</b>.</li>
       <li>All times are India Standard Time. Later programmes can change a little when new videos arrive overnight.</li>
     </ul></section>
-  <section id="h-sound"><h3>Sound, pause and subtitles</h3>
+  <section id="h-sound"><h3>Sound and pause</h3>
     <ul>
-      <li><b>Sound:</b> if the picture plays silently, tap <b>Turn sound on</b>. <kbd>M</kbd> turns the sound off and on. On the retro TV, use the <b>Volume</b> knob (click it to mute) or the <b>Mute</b> key. Opened from an app such as X, Instagram or WhatsApp? Its built-in browser wants a tap on the picture itself: when <b>Tap the picture for sound</b> shows, tap the picture once.</li>
-      <li><b>Pause:</b> tap or click the picture, or press <kbd>K</kbd> or <kbd>Space</kbd>. In full screen, use the pause button.</li>
-      <li><b>Subtitles:</b> the <b>CC</b> button or <kbd>S</kbd> turns YouTube's subtitles on or off for every programme. OGTV remembers your choice.</li>
+      <li><b>Sound:</b> if the picture plays silently, tap <b>Turn sound on</b>. <kbd>M</kbd> turns the sound off and on, and <kbd>↑</kbd> <kbd>↓</kbd> set the volume. On the retro TV, use the <b>Volume</b> knob (click it to mute) or the <b>Mute</b> key. Opened from an app such as X, Instagram or WhatsApp? Its built-in browser wants a tap on the picture itself: when <b>Tap the picture for sound</b> shows, tap the picture once.</li>
+      <li><b>Pause:</b> tap or click the picture (in full screen too), press <kbd>K</kbd> or <kbd>Space</kbd>, or use the pause button in full screen.</li>
     </ul></section>
   <section id="h-full"><h3>Full screen</h3>
     <ul>
       <li>Tap <b>Home</b>, <b>Maximize for the best experience</b> or the full-screen button on the picture, or press <kbd>F</kbd>.</li>
       <li>The channel's name appears as you change channel, and the buttons fade when you leave them alone.</li>
-      <li>To see every channel in a strip, move the mouse to the bottom. Tap a channel to watch it. Swiping up or down changes channel too, and the arrow keys always change channel, even here.</li>
+      <li>To see every channel in a strip, move the mouse to the bottom. Click a channel to watch it, or move along the strip with <kbd>←</kbd> <kbd>→</kbd> and press <kbd>Enter</kbd>. On a phone or tablet, swipe sideways to change channel and up or down to set the volume.</li>
       <li>On iPhone, OGTV fills the browser window. For true full screen, add it to your Home Screen (see Install as an app).</li>
       <li><kbd>Esc</kbd> leaves full screen.</li>
     </ul></section>
@@ -244,7 +241,7 @@
       <li><b>Channel knob:</b> drag it round, scroll over it, or click just to one side of its pointer to move one channel.</li>
       <li><b>Mode knob:</b> how old the picture looks. <b>Full</b>: every tape effect. <b>Steady</b>: no rolling band. <b>Tinted</b> (where it starts): tape colours only. <b>Clean</b>: a clear picture. <b>Quiet</b>: no static hiss between channels either. <b>Normal</b>: retro off. Click it for the next setting.</li>
       <li><b>Volume knob:</b> turn it to set the volume; click it to mute or unmute.</li>
-      <li>The keys beside the knobs are <b>Mute</b>, <b>CC</b> (subtitles) and <b>Full screen</b>.</li>
+      <li>The keys beside the knobs are <b>Mute</b> and <b>Full screen</b>.</li>
     </ul></section>
   <section id="h-app"><h3>Install as an app</h3>
     <ul>
@@ -255,14 +252,14 @@
     </ul></section>
   <section id="h-keys"><h3>Keyboard</h3>
     <dl class="help-keys">
-      <dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Next channel, the one before (anywhere, including full screen)</dd>
+      <dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>The channel before, the next one (with the full-screen strip open: move along it, <kbd>Enter</kbd> to watch)</dd>
       <dt><kbd>0</kbd>–<kbd>9</kbd></dt><dd>Go to a channel by its number</dd>
+      <dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Volume up, down</dd>
       <dt><kbd>M</kbd></dt><dd>Sound off and on</dd>
       <dt><kbd>K</kbd> or <kbd>Space</kbd></dt><dd>Pause and play</dd>
       <dt><kbd>F</kbd></dt><dd>Full screen</dd>
       <dt><kbd>Esc</kbd></dt><dd>Leave full screen, or close this help</dd>
       <dt><kbd>R</kbd></dt><dd>Retro mode off and on</dd>
-      <dt><kbd>S</kbd></dt><dd>Subtitles</dd>
       <dt><kbd>C</kbd></dt><dd>Go to the programme guide</dd>
       <dt><kbd>H</kbd></dt><dd>This help</dd>
     </dl></section>
@@ -275,13 +272,13 @@
     </ul></section>
 </dialog>
 
-<script src="js/analytics.js?v=247"></script>
-<script src="js/catalog.js?v=247"></script>
+<script src="js/analytics.js?v=260"></script>
+<script src="js/catalog.js?v=260"></script>
 <script src="js/feeds.js?v=20261109"></script>
 <script src="js/live.js?v=202610162154"></script>
 <script src="js/festivals.js?v=237"></script>
-<script src="js/channels.js?v=247"></script>
-<script src="js/scheduler.js?v=247"></script>
-<script src="js/app.js?v=247"></script>
+<script src="js/channels.js?v=260"></script>
+<script src="js/scheduler.js?v=260"></script>
+<script src="js/app.js?v=260"></script>
 </body>
 </html>

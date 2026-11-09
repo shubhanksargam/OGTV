@@ -12,7 +12,9 @@ if(TV_APP) document.documentElement.classList.add("tv-app");
 const NATIVE_INTRO=/OGTV-NativeIntro\//.test(navigator.userAgent)||document.documentElement.classList.contains("native-intro");
 if(NATIVE_INTRO) document.documentElement.classList.add("native-intro");
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
-{const m=document.querySelector('meta[name="ogtv-ch"]'), n=+new URLSearchParams(location.search).get("ch")||+(m&&m.content), i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)cur=i} // ?ch=8, or a /tv/<channel>/ page, opens that channel
+// A channel from an address: its name (?ch=desi-pop, or a /tv/<channel>/ page), a renamed channel's old name, or a number
+const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex(c=>/^\d+$/.test(v)?c.n===+v:chSlug(c)===v||(c.oldSlugs||[]).includes(v))};
+{const m=document.querySelector('meta[name="ogtv-ch"]'), i=chFind(new URLSearchParams(location.search).get("ch")||(m&&m.content)); if(i>=0)cur=i}
 const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
@@ -125,28 +127,29 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
 function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
-  try{const q=new URLSearchParams(location.search); q.set("ch",CHANNELS[cur].n); history.replaceState(null,"","?"+q)}catch(e){}
+  try{const q=new URLSearchParams(location.search); q.set("ch",chSlug(CHANNELS[cur])); history.replaceState(null,"","?"+q)}catch(e){} // the address names the channel, so a copied link survives renumbering
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
 let digits="", digitTimer=0;
-function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0)tune(i)}
+function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0){tune(i); if(retro) osdChannel(cur)}}
 addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
   if($("help").open)return; // while Help is open, keys are for it (Esc closes it)
   if(!started)return; // the ident plays through (a key during it only lets the sound in)
   if(isFull()&&fsKey(e)) return;
-  if(e.key==="ArrowUp"||e.key==="ArrowLeft"){e.preventDefault();tune(cur-1)}
-  else if(e.key==="ArrowDown"||e.key==="ArrowRight"){e.preventDefault();tune(cur+1)}
+  // Like the TV remote: left/right change channel, up/down set the volume; in retro each shows the set's own readout,
+  // exactly as turning the Channel or Volume knob does (setVol shows the volume itself)
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault(); tune(cur+(e.key==="ArrowRight"?1:-1)); if(retro) osdChannel(cur)}
+  else if(e.key==="ArrowUp"||e.key==="ArrowDown"){e.preventDefault(); setVol((muted?0:vol)+(e.key==="ArrowUp"?5:-5))}
   else if(/^[0-9]$/.test(e.key)){ // "1" then "2" = channel 12; waits a moment for a second digit
     digits+=e.key; clearTimeout(digitTimer); showDigits();
     if(digits.length>=2||+digits*10>CHANNELS[CHANNELS.length-1].n){tuneNumber(+digits);digits=""}
     else digitTimer=setTimeout(()=>{tuneNumber(+digits);digits=""},900);
   }
-  else if(e.key==="m"||e.key==="M") toggleSound();
+  else if(e.key==="m"||e.key==="M"){toggleSound(); if(retro) osdVolume()} // as the set's Mute key
   else if((e.key===" "||e.key==="k"||e.key==="K")&&!(e.target.closest&&e.target.closest("button,a"))){e.preventDefault(); togglePause()}
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if((e.key==="c"||e.key==="C")&&!isFull()) $("guide").scrollIntoView({behavior:smooth(),block:"start"}); // the channels are in the guide
-  else if(e.key==="s"||e.key==="S") toggleSubs();
   else if(e.key==="h"||e.key==="H"||e.key==="?") openHelp();
   else if(e.key==="Escape"&&$("room").classList.contains("pseudo-fs")) toggleFullscreen();
 });
@@ -171,10 +174,11 @@ function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)re
 // banner on every tune() already, so this element only needs to cover minimized plain. Kept current on every call
 // so a channel switch mid-static still shows the channel you're tuning to, not the one you left.
 function updateStaticInfo(){const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now), nx=s.live?null:slotAt(ch,s.end);
-  if(retro) $("staticInfo").innerHTML=esc(onAir(s)).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
-  else if(!isFull()) $("staticInfoPlain").innerHTML=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
+  if(retro) $("staticInfo").textContent=onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
+  else if(!isFull()){const el=$("staticInfoPlain"), h=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
-    <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`}
+    <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`;
+    if(el._h!==h){el._h=h; el.innerHTML=h}}} // rewritten only when it changes
 function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
   const wait=Math.max(0,1200-(Date.now()-staticSince));
   setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop()},wait)}
@@ -196,6 +200,7 @@ const playerEvents={
     if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
     else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
       stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
+    else if(e.data===S.UNSTARTED||e.data===S.CUED) stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},12e3) // ready but never started (YouTube sometimes ignores the play): try the programme again -- unless the browser blocked autoplay and the picture is waiting for the viewer's tap
     else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended&&!staticOn) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth); never while static is covering a tune-in, so the two overlays can't clash
     else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
   onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()};
@@ -215,11 +220,17 @@ window.onYouTubeIframeAPIReady=()=>{
 // reach into YouTube's iframe and hide (unlike the TV app's native WebView, no website is ever allowed to). A newly
 // created embed doesn't trigger it: confirmed by repeatedly destroying and recreating the player across channel
 // switches and finding the picture clean every time, where loadVideoById reliably showed the chrome every time.
+// Until the new embed is ready its API methods don't exist, so it waits as pendingPlayer with `player` null: every
+// "MODE!=="yt"||!player" guard then skips it (a key, knob or sound check in that second does nothing rather than throw).
+let pendingPlayer=null;
 function recreatePlayer(s){
-  try{player.destroy()}catch(e){}
+  for(const p of [player,pendingPlayer]) if(p) try{p.destroy()}catch(e){}
+  player=null;
   const fresh=document.createElement("div"); fresh.id="yt"; $("yt").replaceWith(fresh);
-  player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
-    events:{...playerEvents, onReady:()=>{player.setVolume(vol); muted?player.mute():player.unMute(); player.playVideo(); if(!muted)checkSound(); $("sound").hidden=false}}});
+  const p=pendingPlayer=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
+    events:{...playerEvents, onReady:()=>{if(p!==pendingPlayer)return; player=p; pendingPlayer=null;
+      player.setVolume(vol); muted?player.mute():player.unMute(); player.playVideo(); if(!muted)checkSound(); $("sound").hidden=false}}});
+  clearTimeout(stallTimer); stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},15e3); // never even ready (the embed didn't load): try again; its first state change takes over
 }
 // While a channel is playing the screen stays on (Screen Wake Lock), so a phone or laptop doesn't dim and lock
 // mid-programme; it is let go when playback stops. Browsers drop the lock when the tab is hidden, so it is
@@ -237,9 +248,9 @@ function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resu
 let gapHushed=false;
 function tvPlaying(){try{if(MODE!=="yt"||!player)return false; if(ended)return !gapHushed;
   const st=player.getPlayerState(); return st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING}catch(e){return false}}
-// Pausing mid-programme leaves YouTube's own frame on screen (its pause icon, title and "More videos" panel); OGTV's
-// own frosted pause-screen covers it the instant the real pauseVideo() call goes out, click-through so every way of
-// resuming still works, and comes off the instant play resumes. The ended/interstitial gap already has its own card.
+// Pausing mid-programme: a flat dark wash goes over the picture the instant the real pauseVideo() call goes out,
+// click-through so every way of resuming still works, and comes off the instant play resumes. The ended/interstitial
+// gap already has its own card.
 function showPauseScreen(){$("pauseScreen").hidden=false}
 function hidePauseScreen(){$("pauseScreen").hidden=true}
 function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(ended){gapHushed=true; remote.paused()} else {player.pauseVideo(); pausedAt=Date.now(); showPauseScreen()}}
@@ -303,7 +314,7 @@ function skip(code){
     skips=12; retryTimer=setTimeout(replay,60e3); return}
   if(playingId) markBad(playingId); playingKey=null; tick(); renderGuide();
 }
-addEventListener("online",()=>{retries=0; if(MODE==="yt"&&player) replay()});
+addEventListener("online",()=>{retries=0; if(MODE==="yt") replay()}); // also while a new player is still loading (player null)
 function fallback(){
   MODE="fallback"; hideStatic(); playingKey=null; tick(); videoUp=true; openIris();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
@@ -326,8 +337,8 @@ function soundIn(){if(!primed)return; // not allowed yet: unmuting would make th
   if(MODE==="yt"&&player) player.setVolume(0); setSound(true); if(MODE!=="yt"||!player)return; let v=0; // fade up to the viewer's level
   if(TV_APP){player.setVolume(0); let k=0; // the TV app: the channel's sound rises gently over about 3 s as the picture takes over, slow at
     // first; counted in steps, not by the clock, so a stall (YouTube keeps a TV's page busy just then) pauses the rise rather than jumping it
-    const rise=setInterval(()=>{k=Math.min(1,k+0.034); player.setVolume(Math.round(vol*k*k)); if(k>=1)clearInterval(rise)},100); return}
-  const fade=setInterval(()=>{v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
+    const rise=setInterval(()=>{if(!player){clearInterval(rise); return} k=Math.min(1,k+0.034); player.setVolume(Math.round(vol*k*k)); if(k>=1)clearInterval(rise)},100); return} // the programme changed mid-rise: the new player opens at the viewer's level
+  const fade=setInterval(()=>{if(!player){clearInterval(fade); return} v=Math.min(vol,v+vol/10); player.setVolume(v); if(v>=vol)clearInterval(fade)},80)}
 // The iris opens onto the channel already playing. Timing follows the animation itself (it can start before this
 // script runs): 1.25 s after the V of OGTV settles the logo is complete; if the picture isn't up by then the ident
 // holds there (rings still turning) until it is, up to 6 s more. Then the iris opens, the bloom sounds with it,
@@ -555,8 +566,8 @@ function settleStrip(){ // keep the middle of the view inside the middle copy, w
   const strip=$("strip"), w=copyWidth(), mid=stripMid(); if(!w)return;
   if(mid<w) strip.scrollLeft+=w; else if(mid>=2*w) strip.scrollLeft-=w;
 }
-function showBanner(force){
-  if(!isFull()&&!force)return;
+function showBanner(){
+  if(!isFull())return;
   const c=CHANNELS[cur], now=tvNow(), s=slotAt(c,now), nx=s.live?null:slotAt(c,s.end);
   $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
@@ -564,8 +575,10 @@ function showBanner(force){
   const sc=$("screen"); sc.classList.add("banner-on"); clearTimeout(bannerTimer);
   bannerTimer=setTimeout(()=>sc.classList.remove("banner-on"),4500);
 }
-function showDigits(){if(!isFull())return; const last=CHANNELS[CHANNELS.length-1].n;
-  $("digits").textContent=digits+(digits.length<2&&+digits*10<=last?"_":""); $("screen").classList.add("digits-on");
+function showDigits(){const last=CHANNELS[CHANNELS.length-1].n, typed=digits+(digits.length<2&&+digits*10<=last?"_":"");
+  if(retro){tvOsd(`<b>CH ${typed}</b>`); return} // the set's readout, as the Channel knob previews while it turns
+  if(!isFull())return;
+  $("digits").textContent=typed; $("screen").classList.add("digits-on");
   clearTimeout(digitsTimer); digitsTimer=setTimeout(clearDigits,1500)}
 function clearDigits(){$("screen").classList.remove("digits-on")}
 function fsKey(e){ // keys that only mean something in full screen
@@ -585,19 +598,21 @@ let inBottom=false;
 $("fsCatch").addEventListener("mousemove",e=>{const r=$("screen").getBoundingClientRect(), now=e.clientY>r.top+r.height*.8;
   wakeUI(now&&!inBottom); inBottom=now});
 function closeStrip(){const sc=$("screen"); sc.classList.remove("strip-on"); browse=cur; inBottom=true; wakeUI(false)}
-// Full screen: a single click pauses or plays, like the minimized screen's tap -- unless the strip is open, where a
-// click just closes it (so browsing it doesn't also pause).
-$("fsCatch").addEventListener("click",()=>$("screen").classList.contains("strip-on")?closeStrip():togglePause());
-// Swipe to surf on phones and tablets: across the picture, in full screen or in the page, or across the retro TV's tube.
-// Left or up is the next channel, right or down the one before; short movements stay taps. In the page only sideways
-// swipes surf, so scrolling the page never changes the channel.
+// Swipes on phones and tablets, across the picture (in full screen or in the page) or the retro TV's tube: left is the
+// next channel, right the one before; short movements stay taps. Sideways changes channel; in full screen, up or down sets the volume (up is louder), like the keyboard's and the TV
+// remote's arrows, each showing what changed (the set's readout in retro, as its knobs do). Timed by the touches
+// themselves: just after a switch the page is busy and a quick swipe can reach these handlers late.
 function swipeSurf(el){if(!el)return; let x0=0,y0=0,t0=0;
-  el.addEventListener("touchstart",e=>{const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now()},{passive:true});
-  el.addEventListener("touchend",e=>{const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
-    if(Date.now()-t0>800||Math.max(Math.abs(dx),Math.abs(dy))<45) return;
-    if(!roomFull()&&!$("room").classList.contains("pseudo-fs")&&Math.abs(dy)>=Math.abs(dx)) return;
-    e.preventDefault(); const next=Math.abs(dx)>Math.abs(dy)?dx<0:dy<0;
-    tune(cur+(next?1:-1)); if(retro) osdChannel(cur); else showBanner()},{passive:false})}
+  el.addEventListener("touchstart",e=>{const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=e.timeStamp},{passive:true});
+  el.addEventListener("touchend",e=>{const t=e.changedTouches[0]; let dx=t.clientX-x0, dy=t.clientY-y0;
+    if(e.timeStamp-t0>800||Math.max(Math.abs(dx),Math.abs(dy))<45) return;
+    const full=roomFull()||$("room").classList.contains("pseudo-fs");
+    if(full&&retro&&matchMedia("(orientation:portrait)").matches) [dx,dy]=[dy,-dx]; // the set lies on its side (rotated 90°): read the swipe along it
+    const across=Math.abs(dx)>Math.abs(dy);
+    if(!across&&!full) return; // in the page, up and down scroll it
+    e.preventDefault();
+    if(across){tune(cur+(dx<0?1:-1)); if(retro) osdChannel(cur); else showBanner()}
+    else setVol((muted?0:vol)+(dy<0?10:-10))},{passive:false})} // setVol shows the level, as the Volume knob does
 // Also on .static and .card: both sit above fsCatch/tapCatch while a glitch or "Coming up next" is showing, so without
 // their own listener a swipe during either would be swallowed instead of changing channel.
 swipeSurf($("fsCatch")); swipeSurf(document.querySelector(".crt-glass")); swipeSurf($("tapCatch")); swipeSurf($("static")); swipeSurf($("card"));
@@ -691,16 +706,11 @@ $("helpClose").addEventListener("click",closeHelp);
 help.addEventListener("click",e=>{if(e.target===help) closeHelp()}); // a click on the dimmed page around it
 help.querySelector(".help-toc").addEventListener("click",e=>{const a=e.target.closest("a"); if(!a) return; e.preventDefault();
   const t=help.querySelector(a.getAttribute("href")); if(t) help.scrollTo({top:t.offsetTop-help.querySelector(".help-top").offsetHeight-6,behavior:smooth()})});
-/* Subtitles: off unless the viewer turns them on (remembered); reapplied as each video starts */
-let subs=false; try{localStorage.removeItem("ogtv-subs"); subs=localStorage.getItem("ogtv-cc")==="on"}catch(e){} // old key saved "on" for everyone
+/* Subtitles: the CC button didn't reliably work, so it's off the page for now -- always off, reapplied as each video
+   starts in case YouTube or the browser tries to turn its captions on by itself. */
 function applySubs(){if(MODE!=="yt"||!player)return;
-  try{subs?player.loadModule("captions"):(player.setOption("captions","track",{}),player.unloadModule("captions"))}catch(e){}}
-function setSubs(on){subsFor=playingId; subs=on; $("cc").setAttribute("aria-pressed",on); $("keyCc").setAttribute("aria-pressed",on); $("cc").setAttribute("aria-label",on?"Subtitles on":"Subtitles off");
-  applySubs()}
-const toggleSubs=()=>{setSubs(!subs); try{localStorage.setItem("ogtv-cc",subs?"on":"off")}catch(e){} if(subs) track("subs-on","Subtitles on")};
-$("cc").addEventListener("click",toggleSubs);
+  try{player.setOption("captions","track",{}); player.unloadModule("captions")}catch(e){}}
 // The TV set's push keys: the same controls as the on-screen buttons, which step aside while the set is showing
-$("keyCc").addEventListener("click",toggleSubs);
 $("keyFs").addEventListener("click",toggleFullscreen);
 $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); // Home is full screen in the current look (retro by default)
 /* Retro's mode knob, where Exit retro was. Each setting peels off one more effect: Full (all of it), Steady (no tracking
@@ -726,7 +736,6 @@ $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)
   setFx(fxLevel+(k==="ArrowRight"||k==="ArrowUp"?1:-1),true)});
 setFx(fxLevel);
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
-setSubs(subs);
 setRetro(retro); vfd();
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
@@ -751,6 +760,10 @@ autoFull();
 // ignored, and the tap that turns the sound on doesn't also pause.
 let lastTap=0, fullAskedAt=0;
 $("tapCatch").addEventListener("click",()=>{const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800) return; lastTap=now; togglePause()});
+// Full screen in the plain look: a click pauses or plays too, except the click that made it true full screen or turned
+// the sound on, and except while the channel strip is open (that click just closes it, so browsing doesn't pause)
+$("fsCatch").addEventListener("click",()=>{if($("screen").classList.contains("strip-on")){closeStrip(); return}
+  const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800||now-fullAskedAt<600) return; lastTap=now; togglePause()});
 // Maximized: Pause/Play sits with the full-screen buttons, and in retro mode a tap on the tube pauses or plays (not the
 // click that turned on true full screen). The button follows the channel, however it was paused or played.
 const PAUSE_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>', PLAY_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg>';
@@ -796,7 +809,7 @@ function tick(){
     if(playingKey&&reloadNow()){location.reload(); return}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
-    if(MODE==="yt"&&player){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
+    if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
       recreatePlayer(s)}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
@@ -890,7 +903,6 @@ window.ogtv={
       case "playpause": togglePause(); break;
       case "play": playNow(); break;
       case "pause": pauseNow(); break;
-      case "cc": case "green": toggleSubs(); break;
       default: return false;
     }
     return true;

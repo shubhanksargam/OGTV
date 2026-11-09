@@ -21,11 +21,11 @@ for (const f of readdirSync(new URL("js/", ROOT)).filter(f => f.endsWith(".js"))
 let S;
 try {
   S = new Function(["catalog", "feeds", "live", "festivals", "channels", "scheduler"].map(f => read(`js/${f}.js`)).join("\n")
-    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN};")();
+    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug};")();
 } catch (e) { fail("the site's scripts fail to load together: " + e.message); }
 
 if (S) {
-  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN} = S;
+  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug} = S;
 
   // 3. Every video is playable and displays properly
   const bad = (what, list) => list.length && fail(`${list.length} video(s) ${what}: ${list.slice(0, 5).map(v => v.id || JSON.stringify(v)).join(", ")}`);
@@ -56,6 +56,9 @@ if (S) {
   }
   const nums = CHANNELS.map(c => c.n);
   if (new Set(nums).size !== nums.length) fail("two channels share a number");
+  if (nums.some((n, i) => n !== i + 1)) fail("channel numbers should run 1, 2, 3… in the order js/channels.js lists them");
+  const names = CHANNELS.flatMap(c => [chSlug(c), ...(c.oldSlugs || [])]); // ?ch=<name> links and /tv/<name>/ pages
+  if (new Set(names).size !== names.length) fail("two channels share an address name (or an old one): " + names.filter((n, i) => names.indexOf(n) !== i).join(", "));
 
   // 6. The schedule: every channel has a programme at every half hour for the next two days
   const start = istDayStart(Date.now());

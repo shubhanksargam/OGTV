@@ -62,13 +62,12 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .set.on .screen:not(.pseudo-fs){border-radius:6% / 9%;box-shadow:0 0 0 2px #050404} /* the tube's shape, no glow */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .crt-glass{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;
   background:none;box-shadow:none} /* clear glass: no glare, shading or edge glow; kept for catching clicks in full screen */
-/* In the set, full screen, subtitles and sound live on the panel as push keys, so the tube shows only the picture */
-.set.on .screen:not(.pseudo-fs):not(:fullscreen) :is(.fs,.cc,.sound){display:none!important}
+/* In the set, full screen and sound live on the panel as push keys, so the tube shows only the picture */
+.set.on .screen:not(.pseudo-fs):not(:fullscreen) :is(.fs,.sound){display:none!important}
 
 /* Retro full screen: the whole set, centred in a dim room, sized to fit; everything works as in the page */
 /* Retro full screen: see the end of this file */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .fs{left:6%}
-.set.on .screen:not(.pseudo-fs):not(:fullscreen) .cc{left:calc(6% + 58px)}
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .sound{right:6%}
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-time{left:6%;bottom:calc(7% + 60px)} /* above the buttons */
 .set.on .screen:not(.pseudo-fs):not(:fullscreen) .osd-play{right:7%;top:9%}
@@ -120,8 +119,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   transition:transform .08s,box-shadow .08s,background .2s}
 .key-wide{grid-column:1/-1}
 .key-help{display:none} /* the set's Help key, only in full screen (elsewhere the header's Help is there) */
+.key#keyMute{grid-column:1/-1} /* a row of its own, as wide as Full screen below it; beside Help in full screen (see the end of this file) */
 .key:active,.key[aria-pressed="true"]{transform:translateY(2px);box-shadow:0 1px 0 #6e5a3c,0 1px 2px rgba(0,0,0,.35),inset 0 1px 3px rgba(0,0,0,.25)}
-.key#keyCc[aria-pressed="true"]{background:linear-gradient(180deg,#ffd9a0,#f2a03d)} /* lit while subtitles are on */
 .key#keyMute[aria-pressed="true"]{background:linear-gradient(180deg,#ffb3a8,#e5483a);color:#fff}  /* lit red while muted */
 .key:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
 .grille{display:none;flex:1;width:100%;min-height:36px;border-radius:8px;background:repeating-linear-gradient(180deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450);
@@ -316,12 +315,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .fs{position:absolute;left:14px;bottom:14px;z-index:4;width:48px;height:48px;border-radius:999px;border:0;display:grid;place-items:center;
   background:rgba(0,0,0,.55);color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer}
 .fs:hover{background:rgba(0,0,0,.8)}
-/* Subtitles on/off, beside full screen; struck through when off */
-.cc{position:absolute;left:72px;bottom:14px;z-index:4;height:48px;min-width:48px;padding:0 12px;border-radius:999px;border:0;cursor:pointer;
-  background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.06em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-.cc:hover{background:rgba(0,0,0,.8)}
 /* Retro on the screen itself, only in full screen (the header has its own button) */
-.retro-fs{display:none;position:absolute;left:130px;bottom:14px;z-index:4;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+.retro-fs{display:none;position:absolute;left:72px;bottom:14px;z-index:4;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
   background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .retro-fs:hover{background:rgba(0,0,0,.8)}
 .retro-fs[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink)}
@@ -329,7 +324,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.fs-idle .retro-fs{opacity:0!important;pointer-events:none}
 .screen.strip-on .retro-fs{bottom:calc(5vh + 126px);opacity:1!important}
 /* Help beside it, also only in full screen, where the header's Help is out of sight */
-.help-fs{display:none;position:absolute;left:256px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+.help-fs{display:none;position:absolute;left:198px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
   background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4);transition:bottom .3s ease,opacity .4s}
 .help-fs:hover{background:rgba(0,0,0,.8)}
 .screen:fullscreen .help-fs,.screen:-webkit-full-screen .help-fs,.screen.pseudo-fs .help-fs{display:block}
@@ -346,8 +341,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .maximize{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 4px;border:0;background:none;
   color:var(--muted);font:500 .92rem/1 var(--body);cursor:pointer}
 .maximize:hover{color:var(--marigold)}
-.cc[aria-pressed="false"]{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-thickness:2px}
-.screen:fullscreen .cc,.screen.pseudo-fs .cc{opacity:.35}.screen:fullscreen .cc:hover,.screen.pseudo-fs .cc:hover{opacity:1}
 .screen:fullscreen{aspect-ratio:auto;width:100vw;height:100vh;max-width:none;border-radius:0}
 .screen:-webkit-full-screen{aspect-ratio:auto;width:100vw;height:100vh;max-width:none;border-radius:0}
 .screen.pseudo-fs{position:fixed;inset:0;z-index:40;aspect-ratio:auto;max-width:none;border-radius:0}
@@ -361,18 +354,24 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen:fullscreen .fs-catch,.screen:-webkit-full-screen .fs-catch,.screen.pseudo-fs .fs-catch{display:block;position:absolute;inset:0;z-index:2}
 .screen:fullscreen .fs-ui,.screen:-webkit-full-screen .fs-ui,.screen.pseudo-fs .fs-ui{display:block}
 .screen.fs-idle .fs-catch{cursor:none}
-.screen:fullscreen.fs-idle .fs,.screen:fullscreen.fs-idle .cc,.screen:fullscreen.fs-idle .sound,
-.screen:-webkit-full-screen.fs-idle .fs,.screen:-webkit-full-screen.fs-idle .cc,.screen:-webkit-full-screen.fs-idle .sound,
-.screen.pseudo-fs.fs-idle .fs,.screen.pseudo-fs.fs-idle .cc,.screen.pseudo-fs.fs-idle .sound{opacity:0!important;pointer-events:none;transition:opacity .4s} /* full screen only */
-/* Full screen, subtitles and sound stay usable above the channel strip */
-.screen:fullscreen .fs,.screen:fullscreen .cc,.screen:fullscreen .sound,.screen:-webkit-full-screen .fs,.screen:-webkit-full-screen .cc,.screen:-webkit-full-screen .sound,
-.screen.pseudo-fs .fs,.screen.pseudo-fs .cc,.screen.pseudo-fs .sound{z-index:6;transition:bottom .3s ease,opacity .4s}
-.screen.strip-on .fs,.screen.strip-on .cc,.screen.strip-on .sound{bottom:calc(5vh + 126px);opacity:1!important}
+.screen:fullscreen.fs-idle .fs,.screen:fullscreen.fs-idle .sound,
+.screen:-webkit-full-screen.fs-idle .fs,.screen:-webkit-full-screen.fs-idle .sound,
+.screen.pseudo-fs.fs-idle .fs,.screen.pseudo-fs.fs-idle .sound{opacity:0!important;pointer-events:none;transition:opacity .4s} /* full screen only */
+/* Full screen and sound stay usable above the channel strip */
+.screen:fullscreen .fs,.screen:fullscreen .sound,.screen:-webkit-full-screen .fs,.screen:-webkit-full-screen .sound,
+.screen.pseudo-fs .fs,.screen.pseudo-fs .sound{z-index:6;transition:bottom .3s ease,opacity .4s}
+.screen:fullscreen .sound,.screen:-webkit-full-screen .sound,.screen.pseudo-fs .sound{right:72px} /* beside Pause/Play (right 14px, 48px wide), not under it */
+.screen.strip-on .fs,.screen.strip-on .sound{bottom:calc(5vh + 126px);opacity:1!important}
+/* A narrow full screen (a phone held upright) has no room for Sound between Help and Pause: it sits just above Pause */
+@media (max-width:560px){
+  .screen:fullscreen .sound,.screen:-webkit-full-screen .sound,.screen.pseudo-fs .sound{right:14px;bottom:72px}
+  .screen.strip-on .sound{bottom:calc(5vh + 184px)}
+  .fs-ui .banner{bottom:140px}.screen.strip-on .fs-ui .banner{bottom:calc(5vh + 244px)}} /* the channel banner clears the lifted Sound button (more specific than the .banner rules below) */
 .fs-ui{position:absolute;inset:0;z-index:5;pointer-events:none}
-.banner{position:absolute;left:4vw;bottom:max(6vh,82px);display:flex;gap:24px;align-items:center;max-width:min(72vw,940px);padding:18px 28px 18px 20px;border-radius:22px;
+.banner{position:absolute;left:50%;bottom:max(6vh,82px);display:flex;gap:24px;align-items:center;max-width:min(72vw,940px);padding:18px 28px 18px 20px;border-radius:22px;
   background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.5);
-  opacity:0;transform:translateY(18px);transition:opacity .35s ease,transform .35s ease,bottom .35s ease}
-.screen.banner-on .banner{opacity:1;transform:none}
+  opacity:0;transform:translate(-50%,18px);transition:opacity .35s ease,transform .35s ease,bottom .35s ease}
+.screen.banner-on .banner{opacity:1;transform:translateX(-50%)}
 .screen:has(> .card.interlude:not([hidden])) .banner{opacity:0!important} /* Coming up next stays in full view on small screens */
 .screen.strip-on .banner{bottom:calc(5vh + 190px)} /* above the buttons, which sit above the strip */
 .bn-n{font:700 clamp(2.6rem,5vw,4.4rem)/1 "Unbounded",var(--body);letter-spacing:-.04em;color:var(--marigold);min-width:1.5em;text-align:center}
@@ -406,28 +405,36 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .new{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;background:var(--marigold);color:var(--marigold-ink);
   border-radius:3px;padding:1px 4px;margin-right:5px;vertical-align:1px}
 /* HBO-style intro static while a channel tunes in: bright fine snow, logo resolving out of it */
-.static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;display:grid;place-items:center}
+.static{position:absolute;inset:0;z-index:1;background:#777;overflow:hidden;touch-action:pan-y} /* like .tap-catch under it: sideways swipes come to the page (they surf), upright ones scroll it */
 .static canvas{position:absolute;inset:0;width:100%;height:100%;display:block} /* no CSS filter: iOS Safari can stop repainting a filtered canvas */
 .static::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.35))}
 /* The OGTV on the static is a plain, still watermark: translucent charcoal grey, blended into the picture (multiply),
-   there from the first frame of the static, with no animation */
-.static .ident{position:relative;z-index:1;font-size:clamp(2.2rem,8vw,4.6rem);color:#3b3942;opacity:.45} /* no blend mode: it could freeze the snow under it on iPhone */
+   there from the first frame of the static, with no animation. Centred on its own (not in flow with the text below,
+   which would pull it off-centre) by covering the whole picture and centring within that. */
+.static .ident{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;
+  font-size:clamp(2.2rem,8vw,4.6rem);color:#3b3942;opacity:.45} /* no blend mode: it could freeze the snow under it on iPhone */
 .static .ident .logo,.static .ident .logo-mark{color:#3b3942} /* the logo in a soft charcoal grey on the static */
 /* Retro mode only: what's on, over the tuning static, in the exact style and size of the knobs' own OSD readout
    (.tv-osd). The plain full-screen look already shows this in its banner on every channel change, so this is
-   retro-only. */
-.static-info{display:none;position:relative;z-index:1;margin-top:.6em;text-align:center;font-family:"VT323",ui-monospace,monospace;
+   retro-only. Positioned on its own near the bottom, independently of the centred logo above. */
+.static-info,.static-info-plain{pointer-events:none} /* display only: a swipe must land on the static itself -- these are rewritten while it shows, and a touch whose element is replaced mid-swipe never ends */
+.static-info{display:none;position:absolute;left:50%;bottom:10%;transform:translateX(-50%);z-index:1;width:88%;
+  text-align:center;font-family:"VT323",ui-monospace,monospace;
   font-size:clamp(1.1rem,3vw,2.2rem);letter-spacing:.08em;color:#8dff9a;
   text-shadow:0 0 6px rgba(120,255,140,.8),0 0 16px rgba(80,255,120,.35),2px 2px 0 rgba(0,0,0,.6);line-height:1.3}
 .screen.retro .static-info{display:block}
-.static-info b{font-weight:400;color:#c8ffd0}
 /* Plain look, minimized only: full screen already gets this from the real banner on every tune(), so this is the
-   minimized-only stand-in for it, over the tuning static -- same bn-* parts, same look, just flowed in place of
-   the banner's own absolute vw/vh positioning (which only makes sense full screen). */
-.static-info-plain{display:none;position:relative;z-index:1;margin-top:.8em;align-items:center;gap:16px;max-width:88%;
-  padding:14px 22px 14px 16px;border-radius:18px;background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+   minimized-only stand-in for it, over the tuning static -- same bn-* parts, same look, sized against the screen's
+   own width (cqw), not the full viewport, so it doesn't balloon on a small phone screen. */
+.static-info-plain{display:none;position:absolute;left:50%;bottom:10%;transform:translateX(-50%);z-index:1;
+  align-items:center;gap:12px;max-width:84%;
+  padding:10px 16px 10px 12px;border-radius:16px;background:rgba(14,12,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   box-shadow:0 0 0 1px rgba(255,255,255,.08),0 16px 40px rgba(0,0,0,.5);text-align:left}
 .screen:not(.retro):not(.pseudo-fs):not(:fullscreen) .static-info-plain{display:flex}
+.screen:not(.pseudo-fs):not(:fullscreen) .static-info-plain .bn-n{font-size:clamp(1.6rem,8cqw,2.6rem)}
+.screen:not(.pseudo-fs):not(:fullscreen) .static-info-plain .bn-name{font-size:clamp(.8rem,3.6cqw,1rem)}
+.screen:not(.pseudo-fs):not(:fullscreen) .static-info-plain .bn-title{font-size:clamp(.78rem,3.2cqw,.95rem)}
+.screen:not(.pseudo-fs):not(:fullscreen) .static-info-plain .bn-meta{font-size:clamp(.68rem,2.8cqw,.82rem)}
 .bug{position:absolute;top:12px;left:14px;display:flex;gap:8px;align-items:center;pointer-events:none;z-index:3}
 .bug-mark{width:40px;height:32px;color:var(--marigold);filter:drop-shadow(0 1px 4px rgba(0,0,0,.7))} /* channel watermark */
 .chanbug{font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8)}
@@ -442,7 +449,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes tap-pulse{50%{transform:scale(1.07);box-shadow:0 0 0 3px var(--marigold)}}
 @media (max-width:600px){.tap-hint{top:8px;right:10px;padding:6px 11px;gap:6px;font-size:.8rem}.tap-hint svg{width:15px;height:15px}}
 [hidden]{display:none!important}
-.card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;
+.card{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:12px;touch-action:pan-y; /* sideways swipes surf, as on the picture */
   padding:6% 8%;background:radial-gradient(120% 90% at 20% 10%,#3a2a4f 0%,#1a1424 55%,#0e0b14 100%)}
 .card .kicker{color:var(--marigold);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
 .card h2{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,3.4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance}
@@ -455,7 +462,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
    is still a real pauseVideo() call, this is only what's drawn over it. */
 .pause-screen{position:absolute;inset:0;z-index:2;display:none;pointer-events:none;background:rgba(8,6,10,.6)} /* click-through: every existing way to resume (tap, K, remote) keeps working unchanged */
 .pause-screen:not([hidden]){display:block}
-@media (max-width:600px){.pause-screen-inner{gap:6px}.ps-icon{width:32px;height:32px}.ps-hint{font-size:.76rem}}
 /* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
 .card.interlude{animation:card-fade .8s ease both}
 .card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
@@ -632,10 +638,11 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
    knobs, keys, grille), centred in a dim room. Held upright, the set turns on its side to fill the screen;
    where the browser can, the screen also locks to landscape. Sizes follow the long side (vmax) so the set
    keeps its proportions either way. */
+html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar over its right edge, and nothing scrolls behind it */
 .room:is(:fullscreen,.pseudo-fs){display:block;position:fixed;inset:0;z-index:40;padding:0;overflow:hidden;
   background:radial-gradient(70% 60% at 50% 42%,#2a2133 0%,#120e17 62%,#07060a 100%)}
 .room:is(:fullscreen,.pseudo-fs) .set.on{position:absolute;left:0;top:0;margin:0;width:100vw;height:100vh;display:flex;box-sizing:border-box;
-  padding:clamp(10px,1.7vmax,26px);border-radius:0} /* the cabinet is the whole display, edge to edge */
+  padding:clamp(10px,1.7vmax,26px);border-radius:clamp(10px,1.2vmax,22px)} /* the cabinet is the whole display, edge to edge, its corners slightly rounded against the dark room */
 .room:is(:fullscreen,.pseudo-fs) .set.on::before,.room:is(:fullscreen,.pseudo-fs) .set.on::after{display:none} /* no room for legs */
 @media (orientation:portrait){ /* held upright: the set lies on its side, still filling the display */
   .room:is(:fullscreen,.pseudo-fs) .set.on{left:50%;top:50%;width:100vh;height:100vw;transform:translate(-50%,-50%) rotate(90deg)}
@@ -649,8 +656,9 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
   gap:clamp(8px,1.3vmax,18px);padding:clamp(8px,1.2vmax,16px) clamp(6px,.9vmax,12px)}
 .room:is(:fullscreen,.pseudo-fs) .knob-wrap{flex-direction:column;gap:4px}
 .room:is(:fullscreen,.pseudo-fs) .knob{width:clamp(36px,4.4vmax,72px)}
-.room:is(:fullscreen,.pseudo-fs) .keys{display:grid;grid-template-columns:repeat(3,1fr);width:100%;order:0}
+.room:is(:fullscreen,.pseudo-fs) .keys{display:grid;grid-template-columns:1fr 1fr;width:100%;order:0} /* Sound | Help, then Exit full screen across both */
 .room:is(:fullscreen,.pseudo-fs) .key-help{display:block}
+.room:is(:fullscreen,.pseudo-fs) .key#keyMute{grid-column:auto}
 .room:is(:fullscreen,.pseudo-fs) .key{flex:none;min-height:clamp(26px,2.4vmax,38px);font-size:clamp(.55rem,.8vmax,.75rem)}
 .room:is(:fullscreen,.pseudo-fs) .set.on .grille{display:none;display:block;min-height:20px}
 .room:is(:fullscreen,.pseudo-fs) .set.on .screen .crt-glass{pointer-events:auto} /* clicks on the picture stay with the page (first click: true full screen), not YouTube */
@@ -671,7 +679,8 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 /* TV app (Android TV, Fire TV): no pointer, so no cursor and none of the click-only buttons; the remote does it all */
 .tv-app,.tv-app *{cursor:none!important}
 .tv-app,.tv-app body{overflow:hidden;scrollbar-width:none}.tv-app ::-webkit-scrollbar{display:none} /* the room covers the page; no page scrollbar at the edge */
-.tv-app .screen .fs,.tv-app .screen .cc,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app .screen .help-fs,.tv-app #keyFs,.tv-app #keyHelp{display:none!important} /* the Mode knob stays: the remote's Menu key turns it */
+.tv-app .screen .fs,.tv-app .screen .sound,.tv-app .screen .retro-fs,.tv-app .screen .help-fs,.tv-app #keyFs,.tv-app #keyHelp{display:none!important} /* the Mode knob stays: the remote's Menu key turns it */
+.tv-app .room .keys .key#keyMute{grid-column:1/-1} /* the only key left on the TV app's set */
 /* TV app intro, minimal like a streaming app's: on a dark screen the O and its red light fade up and settle, G T V
    slide in after it, and a soft warm glow breathes behind OGTV while the channel loads. When the picture is ready the
    glow flashes up with the chime and OGTV dissolves into the channel. Only opacity and transform move, which a TV's
