@@ -223,6 +223,11 @@ window.onYouTubeIframeAPIReady=()=>{
 // Until the new embed is ready its API methods don't exist, so it waits as pendingPlayer with `player` null: every
 // "MODE!=="yt"||!player" guard then skips it (a key, knob or sound check in that second does nothing rather than throw).
 let pendingPlayer=null;
+// A browser that wants a tap on YouTube's own player before it allows sound (Brave, the in-app browsers of X,
+// Instagram, WhatsApp...) would want it again from every new player: once it refuses, channels switch inside the
+// same player instead (loadVideoById), so that one tap keeps the sound on every channel -- at the cost of YouTube's own
+// controls showing after a switch on touch screens, which a new player avoids.
+let keepPlayer=false;
 function recreatePlayer(s){
   for(const p of [player,pendingPlayer]) if(p) try{p.destroy()}catch(e){}
   player=null;
@@ -484,7 +489,10 @@ function checkSound(tries=0){ // refused (muted again or paused by the browser):
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     // The TV app always allows sound: a player that is still loading is asked again, and the TV never goes quiet by itself
     if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1)} return}
-    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
+    // Still loading (a new channel takes a few seconds to start): not a refusal yet -- look again once it's going.
+    // Judging it "unstarted" at 900 ms muted every channel flip, on every browser.
+    if((st===YT.PlayerState.UNSTARTED||st===YT.PlayerState.BUFFERING||st===YT.PlayerState.CUED)&&tries<12){checkSound(tries+1); return}
+    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
       if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
     else if(needTap) tapMode(false)},900)}
 /* Some browsers let a video make sound only after a tap on the video itself: the built-in browsers of apps such as X,
@@ -493,7 +501,7 @@ function checkSound(tries=0){ // refused (muted again or paused by the browser):
    the picture let taps through to it, and "Tap the picture for sound" shows. Such a tap counts inside YouTube's player
    for a few seconds, and the sound is turned on within them; after that it is allowed for every programme. */
 function soundRefused(){dbg("sound refused: waiting for a tap on the picture"); if(TV_APP||MODE!=="yt"||!player)return;
-  muted=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs(); tapMode(true); if(started) tapHint()}
+  muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs(); tapMode(true); if(started) tapHint()}
 function tapMode(on){needTap=on; $("screen").classList.toggle("tap-sound",on); $("tapHint").hidden=!on}
 function tapHint(){tapMode(true); const h=$("tapHint"); h.classList.remove("pulse"); void h.offsetWidth; h.classList.add("pulse")}
 // A tap inside YouTube's player takes the focus into it, so the page sees its own window lose focus
@@ -810,7 +818,8 @@ function tick(){
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
-      recreatePlayer(s)}
+      if(keepPlayer&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.floor((now-s.start)/1000)}); if(muted)player.mute(); else player.unMute()}
+      else recreatePlayer(s)}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
     const hh=h=>String(Math.floor(h)%24).padStart(2,"0")+":"+String(Math.round(h%1*60)).padStart(2,"0"); // 6.5 → 06:30

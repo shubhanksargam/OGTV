@@ -149,13 +149,7 @@ const CHANNELS = [
     {from:22,to:23,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: NBA, NHL, rugby & basketball"},
     {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- Lifestyle ----
-  {key:"bhakti",n:18,group:"Lifestyle",name:"Bhakti",en:"Devotional",parts:[
-    {from:0,to:6,  cat:"bhakti",label:"Devotional"},
-    {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},
-    {from:6.5,to:7,cat:"bhakti",tag:"chalisa",label:"Shree Hanuman Chalisa"},
-    {from:7,to:8,  cat:"bhakti",src:"Hariharan",alt:"bhakti",label:"Hariharan bhajans"},
-    {from:8,to:24, cat:"bhakti",label:"Devotional, all day"}]},
-  {key:"sehat",prime:20,n:19,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
+  {key:"sehat",prime:20,n:18,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
     {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
     {from:7,to:9,  cat:"sehat",tag:"army",alt:"sehat",label:"Army training: morning PT"},
@@ -168,20 +162,20 @@ const CHANNELS = [
     {from:20,to:21,cat:"sehat",tag:"learn",label:"Fitness explained"},
     {from:21,to:22,cat:"sehat",tag:"soviet",alt:"sehat",label:"Soviet-style training: kettlebells & weightlifting"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
-  {key:"rasoi",n:20,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
-  {key:"safar",prime:17,n:21,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
+  {key:"rasoi",n:19,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
+  {key:"safar",prime:17,n:20,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
     {from:0,to:6,  cat:"safar",tag:"world",preferMin:20,label:"Long journeys"},
     {from:6,to:7,  cat:"safar",tag:"scenic",alt:"safar",label:"Scenic mornings"},
     {from:7,to:14, cat:"safar",tag:"india",preferMin:15,label:"Travel India"},
     {from:14,to:17,cat:"safar",tag:"world",label:"Around the world"},
     {from:17,to:21,cat:"safar",tag:"india",preferMin:15,label:"Indian road trips"},
     {from:21,to:24,cat:"safar",tag:"world",preferMin:20,label:"The world at night"}]},
-  {key:"bachche",n:22,group:"Lifestyle",name:"Bachche",en:"Kids",parts:[
+  {key:"bachche",n:21,group:"Lifestyle",name:"Bachche",en:"Kids",parts:[
     {from:0,to:7,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Early science"},
     {from:7,to:21,preferMin:15,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
     {from:21,to:24,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   // ---- Entertainment ----
-  {key:"aangan",n:23,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, Taarak Mehta & mushaira",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
+  {key:"aangan",n:22,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, Taarak Mehta & mushaira",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:1,  cat:"aangan",  tag:"talent",alt:"geet",label:"Repeat: MTV Hustle & I-Popstar"},
     {from:1,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
@@ -200,8 +194,8 @@ const CHANNELS = [
     {from:21,to:22,cat:"aangan",  tag:"sitcom",label:"Prime time: Taarak Mehta & family sitcoms"},
     {from:22,to:23,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
     {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
-  {key:"hasya",n:24,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
-  {key:"bihar",n:25,group:"Entertainment",name:"Purvaiya",oldSlugs:["bihar-jharkhand"],en:"Regional news, legends, travel & vlogs",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
+  {key:"hasya",n:23,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
+  {key:"bihar",n:24,group:"Entertainment",name:"Purvaiya",oldSlugs:["bihar-jharkhand"],en:"Regional news, legends, travel & vlogs",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
     {from:0,to:2,  cat:"biharlife",tag:"legends",alt:"biharlife",label:"After midnight: Legends of Bihar",weekend:{tag:"sharda",label:"Weekend: Sharda Sinha & Nadiya Ke Paar, back to back"}},
     {from:2,to:5,  cat:"biharlife",tag:"vlogs",alt:"biharlife",label:"Night vlogs: Curly Tales, village life & hidden Bihar and Jharkhand",otherDay:{tag:"infra",label:"Night watch: building Bihar & Jharkhand"}},
     {from:5,to:7,  cat:"biharlife",tag:"legends",alt:"biharlife",label:"Legends of Bihar: Dinkar, Chanakya, Chandragupta, Nalanda, Khan Sir & the Bihar Museum"},
@@ -217,7 +211,7 @@ const CHANNELS = [
     {from:19,to:22,cat:"bihar",preferMin:15,label:"Prime-time regional news"},
     {from:22,to:23,cat:"biharlife",tag:"legends",alt:"biharlife",label:"Late night: Legends of Bihar, back to back"},
     {from:23,to:24,cat:"biharlife",tag:"gurus",alt:"biharlife",label:"Late night: Anand Kumar & HC Verma"}]},
-  {key:"fiction",n:26,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
+  {key:"fiction",n:25,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
     {from:0,to:2,  cat:"fiction",src:"ALTER|DUST",label:"Midnight thrillers"},
     {from:2,to:6,  cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
     {from:6,to:10, cat:"fiction",tag:"mytho",label:"Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga"},
@@ -225,58 +219,61 @@ const CHANNELS = [
     {from:14,to:18,cat:"fiction",tag:"dd",label:"Old but gold: Byomkesh, Fauji, Malgudi Days"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
-  {key:"retro",n:27,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
+  {key:"retro",n:26,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
     {from:0,to:6,  cat:"retro",label:"Late-night classics"},
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
-  {key:"premium",n:28,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
+  {key:"premium",n:27,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
     {from:0,to:6,  cat:"premium",src:"Mosfilm",label:"World cinema after midnight"},
     {from:6,to:14, cat:"premium",srcSkip:"Mosfilm",label:"Bollywood hits"},
     {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
     {from:18,to:22,cat:"premium",srcSkip:"Mosfilm",label:"Prime-time blockbuster"},
     {from:22,to:24,cat:"premium",src:"Mosfilm",label:"World cinema classics"}]},
   // ---- Music ----
-  {key:"bollywood",n:29,group:"Music",name:"Desi Pop",en:"Diljit, Shubh, Arijit, Amit Trivedi & India's OG artists",oldSlugs:["bollywood-now"],parts:[  // Indian languages but the South's (Deccan Chargers has those); artist spotlights back to back, by request
-    {from:0,to:2,  cat:"desipop",tag:"diljit",alt:"desipop",label:"Diljit Dosanjh, back to back"},
-    {from:2,to:4,  cat:"desipop",tag:"voices",srcSkip:"Arijit",alt:"desipop",label:"OG voices: Shreya Ghoshal, Daler Mehndi, Atif Aslam & KK"},
-    {from:4,to:6,  cat:"desipop",tag:"diljit",alt:"desipop",label:"Diljit Dosanjh, back to back"},
-    {from:6,to:8,  cat:"desipop",tag:"indie",alt:"desipop",label:"OG desi artists: DIVINE, Seedhe Maut, KR$NA, Karan Aujla & Prateek Kuhad"},
-    {from:8,to:9,  cat:"desipop",tag:"shubh",alt:"desipop",label:"Shubh, back to back"},
+  {key:"bollywood",n:28,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],parts:[  // Indian languages but the South's (Deccan Chargers has those); artist spotlights back to back, by request: India's YouTube chart 5 h, Shreya Ghoshal 4 h, Arijit 3 h, modern film classics (Dhurandhar, Ramayana...) 2.3 h and Diljit 0.5 h a day
+    {from:0,to:2,  cat:"modern",alt:"desipop",boost:{tag:"dhurandhar",every:5},label:"Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits"},
+    {from:2,to:4,  cat:"desipop",tag:"voices",srcSkip:"Arijit|Shreya",alt:"desipop",label:"OG voices: Daler Mehndi, Atif Aslam & KK"}, // Arijit and Shreya have hours of their own
+    {from:4,to:5,  cat:"desipop",tag:"diljit",alt:"desipop",boost:{tag:"diljitfilm",every:3},label:"Diljit Dosanjh: Naina, Naram Kaalja & the Punjabi hits"}, // his one hour a day, by request
+    {from:5,to:7,  cat:"desipop",tag:"indie",alt:"desipop",label:"OG desi artists: DIVINE, Seedhe Maut, KR$NA, Karan Aujla & Prateek Kuhad"},
+    {from:7,to:9,  cat:"desipop",src:"Shreya",alt:"desipop",label:"Shreya Ghoshal, back to back"},
     {from:9,to:10, cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
-    {from:10,to:12,cat:"desipop",tag:"diljit",alt:"desipop",label:"Diljit Dosanjh, back to back"},
+    {from:10,to:12,cat:"desipop",tag:"trending",alt:"desipop",label:"Trending now: India's top songs this week"},
     {from:12,to:13,cat:"raag",tag:"coke",alt:"desipop",label:"Coke Studio bests"},
     {from:13,to:14,cat:"desipop",tag:"wasseypur",alt:"desipop",label:"Gangs of Wasseypur & Sneha Khanwalkar"},
-    {from:14,to:16,cat:"desipop",tag:"diljit",alt:"desipop",label:"Diljit Dosanjh, back to back"},
-    {from:16,to:17,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
-    {from:17,to:18,cat:"desipop",tag:"shubh",alt:"desipop",label:"Shubh, back to back"},
-    {from:18,to:20,cat:"desipop",tag:"diljit",alt:"desipop",label:"Prime time: Diljit Dosanjh, back to back"},
-    {from:20,to:21,cat:"desipop",tag:"amit",alt:"desipop",label:"Prime time: Amit Trivedi, back to back"},
-    {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Arijit Singh, back to back"}]},
-  {key:"drive",n:30,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
+    {from:14,to:15,cat:"desipop",tag:"shubh",alt:"desipop",label:"Shubh, back to back"},
+    {from:15,to:16,cat:"modern",alt:"desipop",boost:{tag:"dhurandhar",every:5},label:"Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits"},
+    {from:16,to:17,cat:"desipop",src:"Shreya",alt:"desipop",label:"Shreya Ghoshal, back to back"},
+    {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
+    {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",label:"Prime time: trending now, India's top songs this week"},
+    {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"}]},
+  {key:"drive",n:29,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
-  {key:"festival",n:31,group:"Music",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
-  {key:"hits2010",n:32,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:33,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"deccan",n:34,group:"Music",name:"Deccan Chargers",en:"Telugu, Tamil, Malayalam & Kannada bangers, and the classics",parts:[  // the one channel outside Hindi & English, by request; lots of Anirudh
-    {from:0,to:3,  cat:"deccan",tag:"classic",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, SPB & Yesudas"},
-    {from:3,to:5,  cat:"deccan",tag:"classic",alt:"deccan",label:"Dawn classics: Rajkumar & the golden era"},
-    {from:5,to:7,  cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
-    {from:7,to:8,  cat:"deccan",tag:"vibe",alt:"deccan",label:"Vidya Vox, Sushin Shyam & the new sound"},
-    {from:8,to:9,  cat:"deccan",tag:"malayalam",alt:"deccan",label:"Malayalam bangers"},
-    {from:9,to:11, cat:"deccan",src:"Anirudh|Sai Abhyankkar|Thaman",alt:"deccan",label:"Anirudh & co: Sai Abhyankkar, Thaman"},
-    {from:11,to:12,cat:"deccan",tag:"vibe",alt:"deccan",label:"Vidya Vox, Sushin Shyam & the new sound"},
-    {from:12,to:13,cat:"deccan",tag:"telugu",alt:"deccan",label:"Telugu mass"},
-    {from:13,to:15,cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
-    {from:15,to:16,cat:"deccan",tag:"vibe",alt:"deccan",label:"Vidya Vox, Sushin Shyam & the new sound"},
-    {from:16,to:18,cat:"deccan",src:"Anirudh|Sai Abhyankkar|Thaman",alt:"deccan",label:"Anirudh & co: Sai Abhyankkar, Thaman"},
-    {from:18,to:19,cat:"deccan",tag:"vibe",alt:"deccan",label:"Prime time: Vidya Vox, Sushin Shyam & the new sound"},
-    {from:19,to:20,cat:"deccan",tag:"tamil",alt:"deccan",label:"Prime time: Tamil kuthu & bangers"},
-    {from:20,to:22,cat:"deccan",tag:"anirudh",alt:"deccan",label:"Prime time: Anirudh, back to back"},
-    {from:22,to:23,cat:"deccan",tag:"vibe",alt:"deccan",label:"Late night: Vidya Vox, Sushin Shyam & the new sound"},
-    {from:23,to:24,cat:"deccan",src:"Anirudh|Sai Abhyankkar|Thaman",alt:"deccan",label:"Late night: Anirudh & co"}]},
-  {key:"anthems",n:35,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"english",n:36,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
+  {key:"festival",n:30,group:"Music",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
+  {key:"hits2010",n:31,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:32,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"deccan",n:33,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day
+    {from:0,to:2,   cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, back to back"},
+    {from:2,to:3,   cat:"deccan",tag:"keeravani",alt:"deccan",label:"M. M. Keeravaani, back to back"},
+    {from:3,to:5,   cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
+    {from:5,to:6,   cat:"deccan",tag:"rahman",alt:"deccan",label:"A. R. Rahman, back to back"},
+    {from:6,to:7,   cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Morning melodies: Ilaiyaraaja"},
+    {from:7,to:8,   cat:"deccan",src:"Sai Abhyankkar",alt:"deccan",label:"Sai Abhyankkar, back to back"},
+    {from:8,to:10,  cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
+    {from:10,to:11, cat:"deccan",tag:"rahman",alt:"deccan",label:"A. R. Rahman, back to back"},
+    {from:11,to:12, cat:"deccan",tag:"malayalam",alt:"deccan",label:"Malayalam bangers"},
+    {from:12,to:13, cat:"deccan",tag:"telugu",alt:"deccan",label:"Telugu mass"},
+    {from:13,to:15, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
+    {from:15,to:16, cat:"deccan",tag:"keeravani",alt:"deccan",label:"M. M. Keeravaani, back to back"},
+    {from:16,to:17, cat:"deccan",src:"Anirudh|Sai Abhyankkar|Thaman",alt:"deccan",label:"Anirudh & co: Sai Abhyankkar, Thaman"},
+    {from:17,to:18, cat:"deccan",src:"Sai Abhyankkar",alt:"deccan",label:"Sai Abhyankkar, back to back"},
+    {from:18,to:19, cat:"deccan",tag:"tamil",alt:"deccan",label:"Prime time: Tamil kuthu & bangers"},
+    {from:19,to:21, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Prime time: Anirudh, back to back"},
+    {from:21,to:22, cat:"deccan",tag:"rahman",alt:"deccan",label:"Prime time: A. R. Rahman, back to back"},
+    {from:22,to:23, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Late night: Anirudh, back to back"},
+    {from:23,to:24, cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Late night: Ilaiyaraaja, back to back"}]},
+  {key:"anthems",n:34,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"english",n:35,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
     {from:0,to:3,  cat:"global",tag:"alltime",alt:"global",label:"Billion-view classics"},
     {from:3,to:6,  cat:"global",tag:"worldcharts",alt:"global",label:"World tour: Seoul, Tokyo & Johannesburg charts"},
     {from:6,to:9,  cat:"global",tag:"chart",alt:"global",label:"Morning chart: this week's global top 100"},
@@ -284,7 +281,7 @@ const CHANNELS = [
     {from:12,to:15,cat:"global",tag:"chart",alt:"global",label:"Daily global chart"},
     {from:15,to:18,cat:"global",tag:"alltime",alt:"global",label:"All-time most viewed"},
     {from:18,to:24,cat:"global",tag:"chart",alt:"global",label:"Prime time: the global top 100, US & UK charts"}]},
-  {key:"gym",n:37,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
+  {key:"gym",n:36,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
     {from:4,to:6,  cat:"gym",tag:"rock",alt:"gym",label:"Early riser: rock"},
     {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Morning set: Punjabi gym bangers"},
@@ -294,20 +291,20 @@ const CHANNELS = [
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
     {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
-  {key:"punjabi",n:38,group:"Music",name:"Punjabi",en:"Punjabi bangers",parts:[  // Diljit and Shubh back to back, and 52 Bars a lot, by request
+  {key:"punjabi",n:37,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
     {from:0,to:2,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
-    {from:2,to:4,  cat:"punjabi",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
+    {from:2,to:4,  cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
     {from:4,to:6,  cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
-    {from:6,to:8,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
-    {from:8,to:10, cat:"punjabi",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
+    {from:6,to:8,  cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Karan Aujla, back to back: Softly, Wavy, Tauba Tauba & the chartbusters"},
+    {from:8,to:10, cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
     {from:10,to:12,cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
     {from:12,to:14,cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
-    {from:14,to:16,cat:"punjabi",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
+    {from:14,to:16,cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Karan Aujla, back to back"},
     {from:16,to:18,cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
     {from:18,to:20,cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Prime time: Diljit Dosanjh, back to back"},
-    {from:20,to:22,cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Prime time: Shubh, back to back"},
-    {from:22,to:24,cat:"punjabi",boost:{id:"4DfVxVeqk2o",every:5},label:"Late night bangers"}]},
-  {key:"raag",n:39,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+    {from:20,to:22,cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Prime time: Karan Aujla, back to back"},
+    {from:22,to:24,cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Late night bangers"}]},
+  {key:"raag",n:38,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
     {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
     {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
     {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
@@ -315,7 +312,7 @@ const CHANNELS = [
     {from:17,to:20,cat:"raag",tag:"vocal",label:"Evening thumri & khayal"},
     {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
-  {key:"geet",n:40,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[  // Kishore Kumar and Mukesh back to back, by request
+  {key:"geet",n:39,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[  // Kishore Kumar and Mukesh back to back, by request
     {from:0,to:2,  cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
     {from:2,to:4,  cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
     {from:4,to:6,  cat:"geet",label:"Evergreen"},
@@ -328,6 +325,16 @@ const CHANNELS = [
     {from:18,to:20,cat:"geet",tag:"kishore",alt:"geet",label:"Prime time: Kishore Kumar, back to back"},
     {from:20,to:22,cat:"geet",tag:"mukesh",alt:"geet",label:"Prime time: Mukesh, back to back"},
     {from:22,to:24,cat:"geet",label:"Late-night evergreen"}]},
+  {key:"bhakti",n:40,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
+    {from:0,to:5,  cat:"bhakti",label:"Devotional"},
+    {from:5,to:6,  cat:"bhakti",festivalNext:true,label:"Devotional"},
+    {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},
+    {from:6.5,to:7,cat:"bhakti",tag:"chalisa",label:"Shree Hanuman Chalisa"},
+    {from:7,to:8,  cat:"bhakti",src:"Hariharan",alt:"bhakti",label:"Hariharan bhajans"},
+    {from:8,to:11, cat:"bhakti",festivalNext:true,label:"Devotional"},
+    {from:11,to:17,cat:"bhakti",label:"Devotional"},
+    {from:17,to:21,cat:"bhakti",festivalNext:true,label:"Evening devotional"},
+    {from:21,to:24,cat:"bhakti",label:"Devotional"}]},
 ];
 // A channel's name in addresses, for its /tv/<name>/ page and ?ch=<name> links ("Desi Pop" -> desi-pop). Unlike its
 // number it stays the same when channels are reordered, so shared links keep pointing at the same channel.

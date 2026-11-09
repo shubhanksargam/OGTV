@@ -31,6 +31,7 @@ function pick(part){
   const re=rx(part.match); // part.match: title must match, e.g. snack recipes
   const srcRe=rx(part.src), skipRe=rx(part.srcSkip), srcOk=v=>(!srcRe||srcRe.test(v.src))&&(!skipRe||!skipRe.test(v.src)); // part.src / srcSkip: which creators
   let pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
+  if(!pool.length&&part.strict&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // part.strict: the match is a must (Bhakti's festival bhajans) -- none left, its own category, never the unmatched rest
   if(!pool.length&&re&&part.tag) pool=inCat.filter(v=>ok(v)&&srcOk(v)&&v.tag===part.tag); // e.g. no India match this week: the rest of the latest
   if(!pool.length) pool=inCat.filter(v=>ok(v)&&srcOk(v));
   if(!pool.length) pool=inCat.filter(ok);
@@ -49,7 +50,19 @@ function pick(part){
 function festivalOn(dayStart){const d=new Date(dayStart+IST).toISOString().slice(0,10);
   return (typeof FESTIVALS==="undefined"?[]:FESTIVALS).find(x=>x.from<=d&&d<=x.to)||null}
 // A part with festival:true plays that festival's songs while one is on (e.g. Aangan's evening slot)
-const onFestival=(p,dayStart)=>{const f=p.festival&&festivalOn(dayStart);
+// A part with festivalNext:true (Bhakti) follows the Hindu festival that is on, or else the next one within two weeks,
+// with only its devotional songs: festival categories also hold film and party songs (Diwali's "Lamberghini"). Only
+// festivals with plenty of bhajans count; Karva Chauth, Raksha Bandhan and Lohri songs are film songs and folk.
+const BHAKTI_FEST=/^fest-(navratri|ram|diwali|chhath|shivratri|holi|janmashtami|ganesh)$/;
+const DEVOTIONAL=String.raw`^(?!.*(?:\bdj\b|dhamaka|remix|mashup)).*(?:bhajan|aarti|aarati|\barti\b|chalisa|stuti|vandana|mantra|stotra|ashtak|\bpuja\b|pooja|pujan|bhakti|kirtan|amritwani|maiya|\bmata\b|\bdevi\b|bhagwan|chhath|lakshmi|laxmi|ganesh|ganpati|\bshiv\b|shiva|shivay|shivji|shankar|shambhu|bholenath|mahadev|\bram\b|shri ram|siya ram|krishna|kanha|shyam|radhe|hanuman|bajrang|durga|\bambe\b|jagdamba|mardini|\bbraj\b|barsana|deenanath|suraj|surya)`; // no "geet" (film songs say it too), "shiv" whole (not the singer Shivi), "ambe" whole (not "Lamberghini"), and no DJ remixes
+function bhaktiFestival(dayStart){const d=new Date(dayStart+IST).toISOString().slice(0,10);
+  const list=(typeof FESTIVALS==="undefined"?[]:FESTIVALS).filter(x=>BHAKTI_FEST.test(x.cat));
+  const on=list.find(x=>x.from<=d&&d<=x.to); if(on) return {f:on,on:true};
+  const nx=list.find(x=>x.from>d&&(Date.parse(x.from)-Date.parse(d))/DAY<=14); return nx?{f:nx,on:false}:null}
+const onFestival=(p,dayStart)=>{
+  if(p.festivalNext){const b=bhaktiFestival(dayStart); if(!b) return p;
+    return {...p,cat:b.f.cat,match:DEVOTIONAL,strict:true,src:undefined,srcSkip:undefined,alt:p.cat,label:b.on?`${b.f.name}: bhajans & aartis`:`Coming up, ${b.f.name}: bhajans & aartis`}}
+  const f=p.festival&&festivalOn(dayStart);
   return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,label:`${f.name} songs`}:p};
 /* Festivals channel: today's festival from js/festivals.js, else the next one */
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];

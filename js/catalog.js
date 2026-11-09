@@ -149,8 +149,27 @@ const CATALOG = [
   {id:"VS6bvGw7Nro",t:"Unfiltered with HC Verma: his journey",cat:"biharlife",tag:"gurus",lang:"hi",min:73,src:"The Rocket Media"},
   // Punjabi: 52 Bars, which Punjabi and Gym bring round every few songs (their parts' boost)
   {id:"4DfVxVeqk2o",t:"52 Bars · Karan Aujla, Ikky",cat:"punjabi",lang:"hi",min:4,src:"Karan Aujla"},
+  // Desi Pop: Diljit's Bollywood songs, which his hour brings round every few songs (its boost); official uploads only
+  {id:"KPUqnTWKnO8",t:"Naina · Crew · Diljit Dosanjh, Badshah",cat:"desipop",tag:"diljitfilm",lang:"hi",min:3,src:"Tips Official",pub:"2025-06-17"},
+  {id:"l-rcfNr1PiA",t:"Ishq Di Baajiyaan · Soorma · Diljit Dosanjh, Taapsee",cat:"desipop",tag:"diljitfilm",lang:"hi",min:5,src:"Sony Music India",pub:"2018-08-30"},
+  {id:"i4KYUfX7iO8",t:"Naram Kaalja · Amar Singh Chamkila · Diljit, A.R. Rahman",cat:"desipop",tag:"diljitfilm",lang:"hi",min:5,src:"Saregama Music",pub:"2024-05-29"},
+  // Modern classics: the rest of Dhurandhar's songs (Gehra Hua, Shararat and the sequel's come in from the charts)
+  {id:"amdOdzmAbSk",t:"Ishq Jalakar - Karvaan · Dhurandhar · Ranveer Singh",cat:"modern",tag:"dhurandhar",lang:"hi",min:3,src:"Saregama Music",pub:"2026-03-18"},
+  {id:"JWux9POAQzU",t:"Naal Nachna · Dhurandhar · Ranveer Singh, Sara Arjun",cat:"modern",tag:"dhurandhar",lang:"hi",min:2,src:"Saregama Music",pub:"2026-03-06"},
+  {id:"VWCBZpvjZfc",t:"Lutt Le Gaya · Dhurandhar · Ranveer Singh, Akshaye Khanna",cat:"modern",tag:"dhurandhar",lang:"hi",min:2,src:"Saregama Music",pub:"2026-01-03"},
+  {id:"WzoSWtDDo1M",t:"Dhurandhar - Title Track · Shashwat Sachdev",cat:"modern",tag:"dhurandhar",lang:"hi",min:3,src:"Shashwat Sachdev",pub:"2025-12-01"},
+  {id:"GX9x62kFsVU",t:"Gehra Hua",cat:"modern",tag:"dhurandhar",lang:"hi",min:4,src:"Modern classics: India's chart, film songs"},
+  {id:"YyepU5ztLf4",t:"Shararat",cat:"modern",tag:"dhurandhar",lang:"hi",min:4,src:"Modern classics: India's chart, film songs"},
+  {id:"F2m4HPLvj-4",t:"JAIYE SAJANA (Video): Dhurandhar The Revenge",cat:"modern",tag:"dhurandhar",lang:"hi",min:3,src:"Modern classics: India's chart, film songs"},
+  {id:"dESIGVxSSCE",t:"Dhurandhar The Revenge - AARI AARI (Video)| Ranveer Singh",cat:"modern",tag:"dhurandhar",lang:"hi",min:3,src:"Modern classics: new Bollywood hits"},
+  // Punjabi: Karan Aujla's chartbusters that his own sources miss (posted by other channels), in his hours too
+  {id:"vsWxs1tuwDk",t:"Winning Speech (Music Video) Karan Aujla",cat:"punjabi",tag:"aujla",lang:"multi",min:4,src:"Karan Aujla: official music videos",pub:"2024-05-16"},
+  {id:"CeFQO9MQNqs",t:"Badshah X Karan Aujla - Players",cat:"punjabi",tag:"aujla",lang:"hi",min:3,src:"Punjabi gym workout",pub:"2022-12-21"},
+  {id:"N_n-02-0ae0",t:"Karan Aujla, Avvy Sra - White Brown Black (8K Video)",cat:"punjabi",tag:"aujla",lang:"hi",min:3,src:"Desi Melodies"},
+  {id:"V23eW2KEIuU",t:"DAYTONA (MUSIC VIDEO) KARAN AUJLA| IKKY",cat:"punjabi",tag:"aujla",lang:"hi",min:4,src:"YouTube Music: Desi Hip Hop Workout",pub:"2025-10-07"},
+  {id:"4DfVxVeqk2o",t:"52 Bars · Karan Aujla, Ikky",cat:"punjabi",tag:"aujla",lang:"hi",min:4,src:"Karan Aujla"},
 ];
-const CAT_LABEL={firstsports:"First Sports",desipop:"Desi pop",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
+const CAT_LABEL={firstsports:"First Sports",desipop:"Desi pop",modern:"Modern classics",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
   khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",
   cricket:"Cricket",football:"Football",live:"Live",khabar:"Hindi news",news:"English news",bihar:"Bihar & Jharkhand news",punjabi:"Punjabi",
   hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems",classics:"Cricket classics",raag:"Indian classical",niche:"Niche",fiction:"Fiction",retro:"Classic films",premium:"Classics",masters:"Indian masters"};
