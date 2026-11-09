@@ -171,7 +171,7 @@ function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)re
 // banner on every tune() already, so this element only needs to cover minimized plain. Kept current on every call
 // so a channel switch mid-static still shows the channel you're tuning to, not the one you left.
 function updateStaticInfo(){const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now), nx=s.live?null:slotAt(ch,s.end);
-  if(retro) $("staticInfo").innerHTML=`<b>CH ${String(ch.n).padStart(2,"0")}</b> ${esc(ch.name.toUpperCase())}<br>${esc(onAir(s)).toUpperCase()}`;
+  if(retro) $("staticInfo").innerHTML=esc(onAir(s)).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
   else if(!isFull()) $("staticInfoPlain").innerHTML=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
     <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`}
