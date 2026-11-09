@@ -485,13 +485,16 @@ const staticSound=(()=>{
 })();
 function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
-function checkSound(tries=0){ // refused (muted again or paused by the browser): carry on muted, picture first
+function checkSound(tries=0,asks=0){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
     // The TV app always allows sound: a player that is still loading is asked again, and the TV never goes quiet by itself
     if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1)} return}
     // Still loading (a new channel takes a few seconds to start): not a refusal yet -- look again once it's going.
     // Judging it "unstarted" at 900 ms muted every channel flip, on every browser.
-    if((st===YT.PlayerState.UNSTARTED||st===YT.PlayerState.BUFFERING||st===YT.PlayerState.CUED)&&tries<12){checkSound(tries+1); return}
+    if((st===YT.PlayerState.UNSTARTED||st===YT.PlayerState.BUFFERING||st===YT.PlayerState.CUED)&&tries<12){checkSound(tries+1,asks); return}
+    // A new player can still report the mute it was made with for a moment after unMute(): playing but "muted" is asked
+    // again (a browser that refuses pauses the video, or YouTube reports it) before it counts as a refusal
+    if(player.isMuted()&&st===YT.PlayerState.PLAYING&&asks<3){player.unMute(); checkSound(tries,asks+1); return}
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
       if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
     else if(needTap) tapMode(false)},900)}
