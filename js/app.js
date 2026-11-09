@@ -228,6 +228,7 @@ let pendingPlayer=null;
 // same player instead (loadVideoById), so that one tap keeps the sound on every channel -- at the cost of YouTube's own
 // controls showing after a switch on touch screens, which a new player avoids.
 let keepPlayer=false;
+const HOVER=matchMedia("(hover: hover)").matches; // a mouse or trackpad: loadVideoById shows no touch chrome
 function recreatePlayer(s){
   for(const p of [player,pendingPlayer]) if(p) try{p.destroy()}catch(e){}
   player=null;
@@ -486,7 +487,11 @@ const staticSound=(()=>{
 function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(tries=0,asks=0){ // refused (muted again or paused by the browser): carry on muted, picture first
-  setTimeout(()=>{if(MODE!=="yt"||!player||muted)return; const st=player.getPlayerState();
+  setTimeout(()=>{if(MODE!=="yt"||!player||muted)return;
+    // A hidden page (another tab or app in front) is never judged: the browser may hold a new video back until it is
+    // seen, and calling that a refusal muted the next programme for good. The sound stays on; it's checked on return.
+    if(document.hidden){soundOnReturn=true; return}
+    const st=player.getPlayerState();
     // The TV app always allows sound: a player that is still loading is asked again, and the TV never goes quiet by itself
     if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1)} return}
     // Still loading (a new channel takes a few seconds to start): not a refusal yet -- look again once it's going.
@@ -504,7 +509,12 @@ function checkSound(tries=0,asks=0){ // refused (muted again or paused by the br
    the picture let taps through to it, and "Tap the picture for sound" shows. Such a tap counts inside YouTube's player
    for a few seconds, and the sound is turned on within them; after that it is allowed for every programme. */
 function soundRefused(){dbg("sound refused: waiting for a tap on the picture"); if(TV_APP||MODE!=="yt"||!player)return;
+  if(document.hidden){soundOnReturn=true; return} // not judged while the page can't be seen (see checkSound)
   muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs(); tapMode(true); if(started) tapHint()}
+// Back in view after a sound check was put off: the sound is asked for again, and judged now
+let soundOnReturn=false;
+document.addEventListener("visibilitychange",()=>{if(document.hidden||!soundOnReturn)return; soundOnReturn=false;
+  if(MODE==="yt"&&player&&!muted&&!needTap){player.unMute(); player.playVideo(); checkSound()}});
 function tapMode(on){needTap=on; $("screen").classList.toggle("tap-sound",on); $("tapHint").hidden=!on}
 function tapHint(){tapMode(true); const h=$("tapHint"); h.classList.remove("pulse"); void h.offsetWidth; h.classList.add("pulse")}
 // A tap inside YouTube's player takes the focus into it, so the page sees its own window lose focus
@@ -808,6 +818,11 @@ function showCard(msg){
   }
 }
 
+// A channel can keep some songs' picture covered (Desi Pop, by request: revealing, item-song or sexual visuals, or
+// marked 18+): the song plays on behind OGTV's own card. Flagged by the nightly fetch (cover: 1) or the channel's rule.
+const covered=(ch,s)=>!s.live&&(s.v.cover===1||!!ch.cover&&((ch.cover.ids||[]).includes(s.v.id)||!!ch.cover.match&&rx(ch.cover.match).test(s.v.t)));
+function showCover(ch,s){const on=covered(ch,s); $("coverCard").hidden=!on; if(!on)return;
+  const by=ytChannel(s); $("coverTitle").textContent=onAir(s); $("coverBy").textContent=/^YouTube Charts/.test(by)?ch.name:by}
 function tick(){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
@@ -818,10 +833,15 @@ function tick(){
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey&&!finishing){
     if(playingKey&&reloadNow()){location.reload(); return}
+    if(playingKey&&nextFeed){swapFeed(); return tick()}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
+    showCover(ch,s); // before its picture can come up
     if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
-      if(keepPlayer&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.floor((now-s.start)/1000)}); if(muted)player.mute(); else player.unMute()}
+      // A hidden page (another tab or app in front) keeps its player for the next programme: the browser lets a player
+      // that is already playing carry on with sound, where a new one can be held back, silent, until the page is seen.
+      // Only where there's hover: YouTube's touch chrome after loadVideoById (see recreatePlayer) is a no-hover thing.
+      if((keepPlayer||document.hidden&&HOVER)&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.floor((now-s.start)/1000)}); if(muted)player.mute(); else player.unMute()}
       else recreatePlayer(s)}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
@@ -859,17 +879,26 @@ async function refreshLive(){
     if(!j||typeof j!=="object"||JSON.stringify(j)===JSON.stringify(LIVE)) return;
     for(const k of Object.keys(LIVE)) delete LIVE[k]; Object.assign(LIVE,j); renderGuide()}catch(e){}}
 setInterval(refreshLive,10*MIN);
-// A new version of the site (code, or the nightly feeds) loads itself at the next change of programme, so the
-// viewer only sees a normal programme change. In a browser that waits until nobody has touched it for 30 minutes.
+// A new version of the site goes in at the next change of programme, so the viewer only sees a normal programme change.
+// New song lists (js/feeds.js: the hourly news, the nightly music) are swapped in place, with no reload: a page that
+// reloads itself has had no click yet, and a browser holds its sound back, so a set left playing in a tab came back
+// muted. New code reloads the page: always in the TV app (it always has sound); in a browser only after 30 minutes
+// untouched and when no sound would be lost (muted, or never started).
 const stamp=(html,f)=>(html.match(new RegExp(f.replace(/\./g,"\\.")+"\\?v=([^\"']+)"))||[])[1];
 const loadedStamp=f=>{const el=document.querySelector(`script[src^="${f}?"]`); return el?stamp(el.outerHTML,f):""};
-let newVersion=false, lastTouch=Date.now();
+let newCode=false, nextFeed=null, feedStamp=loadedStamp("js/feeds.js"), lastTouch=Date.now();
 ["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{lastTouch=Date.now()},true));
+const HANDPICKED=(()=>{const f=new Set(typeof FEED==="undefined"?[]:FEED); return CATALOG.filter(v=>!f.has(v))})(); // js/catalog.js's own
 async function checkVersion(){
-  try{const html=await (await fetch("index.html?t="+Date.now(),{cache:"no-store"})).text();
-    newVersion=["js/app.js","js/feeds.js"].some(f=>{const v=stamp(html,f); return v&&v!==loadedStamp(f)})}catch(e){}}
+  try{const html=await (await fetch("index.html?t="+Date.now(),{cache:"no-store"})).text(), code=stamp(html,"js/app.js"), feeds=stamp(html,"js/feeds.js");
+    newCode=!!code&&code!==loadedStamp("js/app.js");
+    if(feeds&&feeds!==feedStamp){const t=await (await fetch("js/feeds.js?v="+feeds)).text();
+      nextFeed=JSON.parse(t.slice(t.indexOf("["),t.lastIndexOf("]")+1)); feedStamp=feeds}}catch(e){}}
 setInterval(checkVersion,HOUR);
-const reloadNow=()=>newVersion&&(TV_APP||Date.now()-lastTouch>30*MIN);
+// Today's schedules are rebuilt from the new lists (the same for every viewer); this moment's programme is taken from them
+function swapFeed(){const f=nextFeed, ids=new Set(HANDPICKED.map(v=>v.id)); nextFeed=null;
+  CATALOG.length=0; CATALOG.push(...HANDPICKED,...f.filter(v=>!ids.has(v.id))); byCat=null; cache.clear(); renderGuide()}
+const reloadNow=()=>newCode&&(TV_APP||Date.now()-lastTouch>30*MIN&&(muted||!started));
 // The server's clock (the Date header) is the reference: a device more than 3 s off plays on the corrected clock
 async function syncClock(){
   try{const t0=Date.now(), r=await fetch("robots.txt?t="+t0,{method:"HEAD",cache:"no-store"}), t1=Date.now(), d=Date.parse(r.headers.get("date"));

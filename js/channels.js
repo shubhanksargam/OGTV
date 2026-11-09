@@ -231,21 +231,27 @@ const CHANNELS = [
     {from:18,to:22,cat:"premium",srcSkip:"Mosfilm",label:"Prime-time blockbuster"},
     {from:22,to:24,cat:"premium",src:"Mosfilm",label:"World cinema classics"}]},
   // ---- Music ----
-  {key:"bollywood",n:28,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],parts:[  // Indian languages but the South's (Deccan Chargers has those); artist spotlights back to back, by request: India's YouTube chart 5 h, Shreya Ghoshal 4 h, Arijit 3 h, modern film classics (Dhurandhar, Ramayana...) 2.3 h and Diljit 0.5 h a day
+  {key:"bollywood",n:28,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
+   // Songs whose picture stays covered, by request (revealing, item-song or sexual visuals, or marked 18+): the song plays
+   // on behind OGTV's own card. Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
+   // titles naming such a film or performer, and songs named one by one (ZiD's "Saanson Ko", which started it)
+   cover:{match:String.raw`\b(zid|murder( [23])?|jism( 2)?|hate story|ragini mms|the dirty picture|khamoshiyan|wajah tum ho|mastizaade|grand masti|kyaa super kool|gandii baat|julie 2|ek paheli leela|one night stand|raaz (3|reboot)|sunny leone|mallika sherawat|poonam pandey|nora fatehi|rakhi sawant|claudia ciesla|item (song|number)|hot (songs?|scenes?|videos?)|bikini|bed ?scenes?|18 ?\+|uncensored|unrated|nude|naked|topless)\b`,
+     ids:["fzDEaX1OY98","4F2jDMgioqk","0bAVd9jJE2Q","kPmAJPUVY8I"]}, // Saanson Ko (video, lyrical), Aashiq Banaya Aapne, Balma
+   parts:[  // Indian languages but the South's (Deccan Chargers has those; the chart's songs with only foreign artists go to Global Hits); artist spotlights back to back, by request: India's YouTube chart 5 h, Shreya Ghoshal 4 h, Arijit 3 h, modern film classics (Dhurandhar, Ramayana...) 2.3 h, Diljit 0.5 h and Hanumankind 0.5 h a day, his songs dropped in through the morning, midday and prime time
     {from:0,to:2,  cat:"modern",alt:"desipop",boost:{tag:"dhurandhar",every:5},label:"Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits"},
     {from:2,to:4,  cat:"desipop",tag:"voices",srcSkip:"Arijit|Shreya",alt:"desipop",label:"OG voices: Daler Mehndi, Atif Aslam & KK"}, // Arijit and Shreya have hours of their own
     {from:4,to:5,  cat:"desipop",tag:"diljit",alt:"desipop",boost:{tag:"diljitfilm",every:3},label:"Diljit Dosanjh: Naina, Naram Kaalja & the Punjabi hits"}, // his one hour a day, by request
-    {from:5,to:7,  cat:"desipop",tag:"indie",alt:"desipop",label:"OG desi artists: DIVINE, Seedhe Maut, KR$NA, Karan Aujla & Prateek Kuhad"},
+    {from:5,to:7,  cat:"desipop",tag:"indie",srcSkip:"Hanumankind",alt:"desipop",boost:{src:"Hanumankind",every:7},label:"OG desi artists: DIVINE, Seedhe Maut, KR$NA, Hanumankind & Karan Aujla"}, // Hanumankind only by the boost, so his half hour stays half an hour
     {from:7,to:9,  cat:"desipop",src:"Shreya",alt:"desipop",label:"Shreya Ghoshal, back to back"},
     {from:9,to:10, cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
-    {from:10,to:12,cat:"desipop",tag:"trending",alt:"desipop",label:"Trending now: India's top songs this week"},
+    {from:10,to:12,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:12},label:"Trending now: India's top songs this week"},
     {from:12,to:13,cat:"raag",tag:"coke",alt:"desipop",label:"Coke Studio bests"},
     {from:13,to:14,cat:"desipop",tag:"wasseypur",alt:"desipop",label:"Gangs of Wasseypur & Sneha Khanwalkar"},
     {from:14,to:15,cat:"desipop",tag:"shubh",alt:"desipop",label:"Shubh, back to back"},
     {from:15,to:16,cat:"modern",alt:"desipop",boost:{tag:"dhurandhar",every:5},label:"Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits"},
     {from:16,to:17,cat:"desipop",src:"Shreya",alt:"desipop",label:"Shreya Ghoshal, back to back"},
     {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
-    {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",label:"Prime time: trending now, India's top songs this week"},
+    {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:16},label:"Prime time: trending now, India's top songs this week"},
     {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"}]},
   {key:"drive",n:29,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up
@@ -263,7 +269,8 @@ const CHANNELS = [
     {from:10,to:11, cat:"deccan",tag:"rahman",alt:"deccan",label:"A. R. Rahman, back to back"},
     {from:11,to:12, cat:"deccan",tag:"malayalam",alt:"deccan",label:"Malayalam bangers"},
     {from:12,to:13, cat:"deccan",tag:"telugu",alt:"deccan",label:"Telugu mass"},
-    {from:13,to:15, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
+    {from:13,to:14, cat:"deccan",tag:"chart",alt:"deccan",label:"Trending now: the South's songs on India's YouTube chart"}, // sorted off Desi Pop's chart (scripts/home.mjs), by request
+    {from:14,to:15, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
     {from:15,to:16, cat:"deccan",tag:"keeravani",alt:"deccan",label:"M. M. Keeravaani, back to back"},
     {from:16,to:17, cat:"deccan",src:"Anirudh|Sai Abhyankkar|Thaman",alt:"deccan",label:"Anirudh & co: Sai Abhyankkar, Thaman"},
     {from:17,to:18, cat:"deccan",src:"Sai Abhyankkar",alt:"deccan",label:"Sai Abhyankkar, back to back"},

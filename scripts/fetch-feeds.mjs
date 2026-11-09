@@ -9,10 +9,13 @@
 // "maxDays" keeps only videos uploaded in the last that many days (e.g. this week's match highlights).
 // "authors": only videos uploaded by these channels (use fan-made playlists to find films, keep official uploads only).
 // "list": "popular" reads the channel's most popular uploads instead of its latest (used for Blockbusters).
+// "route": sorts each song by scripts/home.mjs (YouTube's India chart): {"south": {cat, tag, lang}, "foreign": {...}} sends
+//   South Indian and foreign songs to those categories instead, null leaves them out; desi songs stay in "cat".
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
 import {roman} from "./roman.mjs";
+import {homeOf, coverOf, SOUTH_LABEL} from "./home.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
@@ -36,7 +39,7 @@ async function isReel(id) {
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
 const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
 const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|\b(telugu|tamil|malayalam|kannada)\b/i,
-  SOUTH_AUTHOR = /telugu|tamil|malayalam|kannada|aditya music|lahari|think music|sony music south|sonymusicsouth|mango music|mangli|anirudh|excel movies|anand audio|saregama south|divo|u1 records|sun ?tv|sun music/i;
+  SOUTH_AUTHOR = new RegExp(SOUTH_LABEL.source + "|excel movies", "i"); // the India chart's sorting (home.mjs) leaves Excel Movies out: its chart songs are Hindi (Mirzapur)
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
@@ -168,7 +171,7 @@ async function fetchFeed(f, old) {
       const d = KEY ? info[e.id] : await (e.title && e.sec ? detailsFromPlaylist(e) : detailsFromPage(e.id)).catch(() => (unread++, null)); // listed with title + length: no watch page needed
       if (!KEY) await sleep(300);
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
-      if (NO_SOUTH.has(f.cat) && (SOUTH_TITLE.test(d.title) || SOUTH_AUTHOR.test(d.author || ""))) continue;
+      if (NO_SOUTH.has(f.cat) && !f.route && (SOUTH_TITLE.test(d.title) || SOUTH_AUTHOR.test(d.author || ""))) continue; // a routed source sorts its South songs later
       if (NO_BHOJPURI.has(f.cat) && BHOJPURI.test(d.title + " " + (d.author || ""))) continue;
       if (f.authors && !f.authors.includes(d.author)) continue; // fan playlists: only official uploaders
       const min = Math.ceil(d.sec / 60);
@@ -189,6 +192,60 @@ async function fetchFeed(f, old) {
     console.log(`FAILED ${f.src} (${err.message}); kept ${kept.length} from last run`);
     return kept;
   }
+}
+
+// Sources with "route" (YouTube's India chart): each song is sorted once by scripts/home.mjs and remembered in
+// scripts/homes.json ("desi", "desi cover" for a picture Desi Pop covers, "south te", "foreign"). HOME_RULES goes up
+// whenever home.mjs changes, so every song is sorted again.
+const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 2;
+const homes = await readFile(HOMES, "utf8").then(JSON.parse).catch(() => ({}));
+if (homes.rules !== HOME_RULES) Object.assign(homes, {rules: HOME_RULES, videos: {}});
+// What sorting needs. The watch page has it all, with the language YouTube hears (its auto-captions); the API stands in
+// when the page can't be read
+async function songInfo(id) {
+  try {
+    const m = (await get("https://www.youtube.com/watch?v=" + id, 2)).match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});(?:var |<\/script>)/s);
+    const p = m && JSON.parse(m[1]), v = p?.videoDetails;
+    if (v?.videoId) return {title: v.title || "", author: v.author || "", ch: v.channelId, kw: v.keywords || [], desc: v.shortDescription || "",
+      lang: (p.captions?.playerCaptionsTracklistRenderer?.captionTracks || []).find(t => t.kind === "asr")?.languageCode || ""};
+  } catch {}
+  if (!KEY) return null;
+  const s = JSON.parse(await get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${KEY}`)).items?.[0]?.snippet;
+  return s ? {title: s.title, author: s.channelTitle, ch: s.channelId, kw: s.tags || [], desc: s.description || "", lang: s.defaultAudioLanguage || ""} : null;
+}
+const countries = new Map(); // uploader -> the country its channel names ("" for none), asked once a run
+function countryOf(ch) {
+  if (!countries.has(ch)) countries.set(ch, (async () => KEY
+    ? JSON.parse(await get(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${ch}&key=${KEY}`)).items?.[0]?.snippet?.country || ""
+    : ((await get("https://www.youtube.com/channel/" + ch + "/about")).match(/"country":\{?"?(?:simpleText":")?([^",}]+)/) || [])[1] || "")()
+    .catch(() => null)); // not known this time: the song is sorted next run
+  return countries.get(ch);
+}
+const sorting = new Map();
+function homeFor(id) {
+  if (homes.videos[id]) return homes.videos[id];
+  if (!sorting.has(id)) sorting.set(id, (async () => {
+    const d = await songInfo(id).catch(() => null); if (!d) return null;
+    const country = d.ch ? await countryOf(d.ch) : ""; if (country === null) return null;
+    if (!KEY) await sleep(300);
+    const home = homeOf({...d, country});
+    return (homes.videos[id] = home + (home === "desi" && coverOf(d) ? " cover" : ""));
+  })());
+  return sorting.get(id);
+}
+// A routed source's songs, fresh and kept alike, each to its home; if most can't be sorted (YouTube blocking), last run's list
+async function routeAll(items, f, kept) {
+  const found = [];
+  for (const v of items) found.push(await homeFor(v.id)); // one at a time: a new song reads its watch page
+  const unsorted = found.filter(h => !h).length;
+  if (unsorted * 2 > items.length && kept.length) { console.log(`  could not sort ${unsorted} of ${items.length} from ${f.src}; kept last run's`); return kept }
+  return items.flatMap((v, i) => {
+    if (!found[i]) return [];
+    const [home, more] = found[i].split(" "), to = home === "desi" ? undefined : f.route[home]; // more: a South language, or "cover"
+    if (to === null) return [];
+    const {tag: _, cover: __, ...song} = v, tag = to ? to.tag : f.tag;
+    return [{...song, cat: to?.cat || f.cat, lang: !to ? f.lang : more && more !== "multi" ? more : to.lang || f.lang, ...(tag && {tag}), ...(more === "cover" && {cover: 1})}];
+  });
 }
 
 // Festival songs are refreshed only in the 30 days before a festival (and during it); otherwise last run's are kept
@@ -212,6 +269,7 @@ await Promise.all(Array.from({length: 6}, async () => {
       const m = f.match && new RegExp(f.match, "i"), k = f.skip && new RegExp(f.skip, "i"); // earlier finds still have to pass today's filters
       results[i].push(...kept.filter(v => (v.pub || "") >= since && !results[i].some(x => x.id === v.id) && (!m || m.test(v.t)) && !(k && k.test(v.t))));
     }
+    if (!skipNow && f.route) results[i] = await routeAll(results[i], f, kept);
   }
 }));
 // Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
@@ -225,10 +283,13 @@ const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH
     && !(f.maxDays && !((v.pub || "") >= sinceDays(f.maxDays))); };
 // Movie channels: the same film from two studios (e.g. HD and 4K uploads) plays once; the earlier source wins
 const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").split(/full|hindi|movie|film|\||-|4k|hd|comedy|action|horror|drama|romantic|thriller|superhit|blockbuster/)[0].replace(/[^a-z0-9]/g, "");
-const sameTitle = {}; for (const v of results.flat()) { const k = v.cat + "|" + v.t.toLowerCase(); sameTitle[k] = (sameTitle[k] || 0) + 1 }
+// A song routed onto another channel comes last, so that channel's own copy (with its creator and tag) is the one kept
+const routed = v => { const f = bySource.get(v.feed); return !!f?.route && v.cat !== f.cat };
+const flat = results.flat(), ordered = [...flat.filter(v => !routed(v)), ...flat.filter(routed)];
+const sameTitle = {}; for (const v of ordered) { const k = v.cat + "|" + v.t.toLowerCase(); sameTitle[k] = (sameTitle[k] || 0) + 1 }
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-for (const v of results.flat()) if (sameTitle[v.cat + "|" + v.t.toLowerCase()] >= 3 && v.pub && !/ · \d+$/.test(v.t)) v.t += ` · ${+v.pub.slice(8, 10)} ${MONTHS[+v.pub.slice(5, 7) - 1]} ${v.pub.slice(0, 4)}`;
-const seen = new Set(), items = results.flat().filter(passes).filter(v => {
+for (const v of ordered) if (sameTitle[v.cat + "|" + v.t.toLowerCase()] >= 3 && v.pub && !/ · \d+$/.test(v.t)) v.t += ` · ${+v.pub.slice(8, 10)} ${MONTHS[+v.pub.slice(5, 7) - 1]} ${v.pub.slice(0, 4)}`;
+const seen = new Set(), items = ordered.filter(passes).filter(v => {
   const k = ["premium", "retro", "masters"].includes(v.cat) && filmKey(v).length > 3 ? "film:" + v.cat + filmKey(v) : v.id + v.cat; // a song may be on two channels
   return !seen.has(k) && seen.add(k);
 })
@@ -241,4 +302,7 @@ const body = "/* Generated by scripts/fetch-feeds.mjs from scripts/feeds.json. D
 await writeFile(OUT, body);
 await writeFile(REELS_FILE, JSON.stringify(reelSeen) + "\n");
 await writeFile(STATE, "{\n" + items.map(v => JSON.stringify(v.id + "|" + v.cat) + ": " + JSON.stringify(v.feed)).join(",\n") + "\n}\n");
+const onRouted = new Set(ordered.filter(v => bySource.get(v.feed)?.route).map(v => v.id)); // songs off every routed list are forgotten
+await writeFile(HOMES, `{"rules": ${HOME_RULES}, "videos": {\n` + Object.keys(homes.videos).filter(id => onRouted.has(id)).sort()
+  .map(id => JSON.stringify(id) + ": " + JSON.stringify(homes.videos[id])).join(",\n") + "\n}}\n");
 console.log(`${items.length} videos written to js/feeds.js`);

@@ -110,18 +110,25 @@ function buildDay(ch,dayStart){
   const odd=Math.round(dayStart/DAY)%2===1; // p.otherDay: every other day takes those settings
   const parts=ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
+  // p.boost {id, tag or src, every}: that song, or those songs in turn, every so many. Several parts with the same boost
+  // share one run through it a day, in that day's shuffled order, so its songs come round in turn and none repeats early
+  const boostRuns=new Map();
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
     const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
     const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
     let order=fresh(), i=0, n=0;
-    const boosts=!p.boost?[]:CATALOG.filter(v=>!BAD.has(v.id)&&(p.boost.id?v.id===p.boost.id:v.tag===p.boost.tag&&[].concat(p.cat).includes(v.cat))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j); // p.boost {id or tag, every}: that song (or those, in turn) every so many
-    const boost=boosts.length>0;
+    let run=null;
+    if(p.boost){const b=p.boost, cats=[].concat(p.cat), re=rx(b.src), bk=b.id||JSON.stringify([b.tag,b.src,cats]);
+      run=boostRuns.get(bk);
+      if(!run){const list=CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
+        boostRuns.set(bk,run={list:shuffle(list,seeded(k+"|boost|"+bk)),at:0})}
+      if(!run.list.length) run=null}
     for(const [from,to] of spans){
       let t=dayStart+from*HOUR; const end=dayStart+to*HOUR;
       while(t<end){
         if(i>=order.length){order=fresh();i=0}
-        const v=boost&&++n%p.boost.every===0?boosts[(n/p.boost.every-1)%boosts.length]:order[i++]; const e=Math.min(t+v.min*MIN,end);
+        const v=run&&++n%p.boost.every===0?run.list[run.at++%run.list.length]:order[i++]; const e=Math.min(t+v.min*MIN,end);
         if(!flex) slots.push({start:t,end:e,v,part:p,ch});
         else for(const [a,b] of cutOut([[t,e]],fixed)) slots.push({start:a,end:b,v,part:p,ch}); // around the fixed shows
         t=e;

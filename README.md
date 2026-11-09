@@ -49,6 +49,8 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 **A creator feed** — add a line to `scripts/feeds.json` with the YouTube channel ID (`"id"`, starts with `UC`) or a playlist ID (`"playlist"`, plus `"take"` for how many), category and language, then run `node scripts/fetch-feeds.mjs`. `"match"`/`"skip"` filter by title, e.g. only trailers. Only uploads that allow embedding, aren't live, are family-safe and fit `minMin`–`maxMin` (default 3–60 minutes) are kept, so Shorts drop out.
 
+**YouTube's India chart** — its sources have `"route"`: each song is sorted once by `scripts/home.mjs` (remembered in `scripts/homes.json`). Songs in Telugu, Tamil, Kannada or Malayalam go to Deccan Chargers' trending hour, songs with only foreign artists on them go to Global Hits, and everything else stays on Desi Pop (any desi artist on a song keeps it there). Desi Pop also covers the picture of songs with revealing, item-song or sexual visuals, or marked 18+: the song plays on behind OGTV's own card. Those songs are flagged by their tags (`cover: 1`) or by the channel's `cover` rule in `js/channels.js`.
+
 **Live channels** — a channel with `live:"news"` plays the first on-air stream from that group in `scripts/live.json`, and its `parts` when nothing is live. `.github/workflows/refresh-live.yml` rechecks every 30 minutes and commits `js/live.js` only when it changes. Only official channels' own streams are used.
 
 **Festivals channel** — plays the `cat` of whichever row in `js/festivals.js` covers today (`from`–`to`), or the next festival coming up. Festival song playlists live in `scripts/feeds.json` under `fest-*` categories and are only refetched within 30 days of their festival.
