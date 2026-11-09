@@ -189,10 +189,10 @@ window.onYouTubeIframeAPIReady=()=>{
               $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."},
             onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
               clearTimeout(bufTimer); clearTimeout(stallTimer);
-              if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+              if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
               else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
                 stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
-              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle")}
+              else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth)
               else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
             onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()}});
 };
@@ -212,10 +212,15 @@ function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resu
 let gapHushed=false;
 function tvPlaying(){try{if(MODE!=="yt"||!player)return false; if(ended)return !gapHushed;
   const st=player.getPlayerState(); return st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING}catch(e){return false}}
-function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(ended){gapHushed=true; remote.paused()} else {player.pauseVideo(); pausedAt=Date.now()}}
+// Pausing mid-programme leaves YouTube's own frame on screen (its pause icon, title and "More videos" panel); OGTV's
+// own frosted pause-screen covers it the instant the real pauseVideo() call goes out, click-through so every way of
+// resuming still works, and comes off the instant play resumes. The ended/interstitial gap already has its own card.
+function showPauseScreen(){const s=slotAt(CHANNELS[cur],tvNow()); $("psTitle").textContent=onAir(s); $("pauseScreen").hidden=false}
+function hidePauseScreen(){$("pauseScreen").hidden=true}
+function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(ended){gapHushed=true; remote.paused()} else {player.pauseVideo(); pausedAt=Date.now(); showPauseScreen()}}
 function playNow(){if(MODE!=="yt"||!player)return;
   if(ended){if(gapHushed){gapHushed=false; const s=slotAt(CHANNELS[cur],tvNow()); interlude.start((s.end-tvNow())/1000); remote.playing()} return}
-  rejoin(); player.playVideo()}
+  hidePauseScreen(); rejoin(); player.playVideo()}
 function togglePause(){tvPlaying()?pauseNow():playNow()}
 // ?debug: an on-screen log of the player and the media buttons, for tracking down device-specific trouble
 const dbg=/[?&]debug\b/.test(location.search)?(()=>{const box=document.createElement("pre"), lines=[], t0=Date.now();
@@ -761,7 +766,7 @@ function tick(){
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     const off=Math.floor((now-s.start)/1000);
-    if(MODE==="yt"&&player){if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
+    if(MODE==="yt"&&player){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;if(started)showStatic()} // the ident covers the first tune-in
       player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:off});if(muted)player.mute(); else player.unMute()}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);

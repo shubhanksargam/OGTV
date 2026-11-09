@@ -435,6 +435,17 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .card a.watch{align-self:flex-start;background:var(--marigold);color:var(--marigold-ink);text-decoration:none;font-weight:700;
   padding:12px 20px;border-radius:999px;min-height:48px;display:inline-flex;align-items:center}
 .card .count{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:700}
+/* Paused mid-programme (K, Space, remote or the pause button): OGTV's own frosted layer masks the raw YouTube
+   frame underneath (its own pause icon, title and "More videos" panel) without touching the player itself --
+   the pause is still a real pauseVideo() call; only the signs that would otherwise show through are covered. */
+.pause-screen{position:absolute;inset:0;z-index:2;display:none;place-items:center;pointer-events:none; /* click-through: every existing way to resume (tap, K, remote) keeps working unchanged */
+  background:rgba(10,8,14,.4);backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15)}
+.pause-screen:not([hidden]){display:grid}
+.pause-screen-inner{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 7%}
+.ps-icon{color:var(--marigold);filter:drop-shadow(0 2px 12px rgba(0,0,0,.45))}
+.ps-title{font-family:var(--display);font-weight:700;color:var(--ink);font-size:clamp(1rem,2.6vw,1.5rem);line-height:1.2;text-wrap:balance}
+.ps-hint{color:var(--muted);font-size:.85rem;letter-spacing:.02em}
+@media (max-width:600px){.pause-screen-inner{gap:6px}.ps-icon{width:32px;height:32px}.ps-hint{font-size:.76rem}}
 /* "Coming up next" opens with the interlude's bloom: the card fades in, then each line rises out of a soft blur as the chord swells */
 .card.interlude{animation:card-fade .8s ease both}
 .card.interlude>*{animation:card-in 1.4s cubic-bezier(.25,.7,.25,1) both}
