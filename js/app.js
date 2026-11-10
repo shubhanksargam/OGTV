@@ -15,6 +15,10 @@ let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit op
 // A channel from an address: its name (?ch=desi-pop, or a /tv/<channel>/ page), a renamed channel's old name, or a number
 const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex(c=>/^\d+$/.test(v)?c.n===+v:chSlug(c)===v||(c.oldSlugs||[]).includes(v))};
 {const m=document.querySelector('meta[name="ogtv-ch"]'), i=chFind(new URLSearchParams(location.search).get("ch")||(m&&m.content)); if(i>=0)cur=i}
+// A page that reloaded itself for new code (resumeMark) comes straight back to the channel it was playing, with no
+// intro: the note it left in this tab is read once, and only within a minute
+const RESUME=(()=>{try{const r=JSON.parse(sessionStorage.getItem("ogtv-resume")||"null"); sessionStorage.removeItem("ogtv-resume"); return r&&Date.now()-r.at<60e3?r:null}catch(e){return null}})();
+if(RESUME){const i=chFind(RESUME.ch); if(i>=0) cur=i}
 const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
@@ -333,7 +337,7 @@ function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;if(muted&
    the channel starts muted until the first tap or key. */
 let startedAt=0, started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0, needTap=false; // needTap: sound only after a tap on the picture (soundRefused)
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function start(done){if(started)return; started=true; startedAt=Date.now(); clearTimeout(introTimer); track("start","Opened"); setTimeout(guideLater,600);
+function start(done){if(started)return; started=true; startedAt=Date.now(); clearTimeout(introTimer); if(!RESUME) track("start","Opened"); // a resume after a reload is the same viewing setTimeout(guideLater,600);
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
   setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
@@ -389,8 +393,11 @@ primed=TV_APP||!!identAc&&identAc.state==="running"; // sound allowed: the chann
 function unlock(){if(started||!identAc)return; primed=true; identAc.resume().catch(()=>{}); // a gesture during the ident
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute()}} // allowed now; fades up after the ident
 ["pointerup","click","keydown"].forEach(ev=>addEventListener(ev,unlock,true)); // (taps count on release)
-if(!NATIVE_INTRO) runIdent();
-if(TV_APP&&!NATIVE_INTRO) setTimeout(prepareChime,0); // ready long before the hand-over
+// Back from a reload for new code: no intro, the channel starts at once -- muted in a browser (it reloads only when
+// muted, and a reloaded page has had no click; the first tap or key brings the sound as usual), the TV app as its sound was
+if(RESUME){$("start").hidden=true; if(!RESUME.sound) primed=false; setTimeout(()=>start(true),0)}
+else if(!NATIVE_INTRO) runIdent();
+if(TV_APP&&!NATIVE_INTRO&&!RESUME) setTimeout(prepareChime,0); // ready long before the hand-over
 function identOut(ac,vol){ // a limiter so nothing clips, a level, and a hall send
   const sr=ac.sampleRate, lim=ac.createDynamicsCompressor(); lim.threshold.value=-10; lim.ratio.value=12; lim.attack.value=0.002; lim.release.value=0.2; lim.connect(ac.destination);
   const out=ac.createGain(); out.gain.value=vol; out.connect(lim);
@@ -486,20 +493,23 @@ const staticSound=(()=>{
 })();
 function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
-function checkSound(tries=0,asks=0){ // refused (muted again or paused by the browser): carry on muted, picture first
-  setTimeout(()=>{if(MODE!=="yt"||!player||muted)return;
+function checkSound(tries=0,asks=0,p=player){ // refused (muted again or paused by the browser): carry on muted, picture first
+  setTimeout(()=>{if(MODE!=="yt"||!player||muted||p!==player)return; // a newer player has its own check
     // A hidden page (another tab or app in front) is never judged: the browser may hold a new video back until it is
     // seen, and calling that a refusal muted the next programme for good. The sound stays on; it's checked on return.
     if(document.hidden){soundOnReturn=true; return}
     const st=player.getPlayerState();
     // The TV app always allows sound: a player that is still loading is asked again, and the TV never goes quiet by itself
-    if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1)} return}
-    // Still loading (a new channel takes a few seconds to start): not a refusal yet -- look again once it's going.
-    // Judging it "unstarted" at 900 ms muted every channel flip, on every browser.
-    if((st===YT.PlayerState.UNSTARTED||st===YT.PlayerState.BUFFERING||st===YT.PlayerState.CUED)&&tries<12){checkSound(tries+1,asks); return}
+    if(TV_APP){if(player.isMuted()&&tries<15){player.unMute(); if(!started) player.setVolume(0); checkSound(tries+1,0,p)} return}
+    // Not started yet: still loading, or YouTube's own ad before the programme (the player says "unstarted" for as long
+    // as the ad runs, often past 11 s). Not a refusal -- a refusing browser says so (onAutoplayBlocked) or pauses the
+    // video -- so it's looked at again until the programme plays; a player that never starts is the stall watchdog's.
+    // Judging "unstarted" a refusal muted channel flips: at 900 ms every time, and at 11 s now and then on the live site.
+    // Only after nearly a minute, longer than any ad, is it taken for a browser that blocks sound without saying so.
+    if((st===YT.PlayerState.UNSTARTED||st===YT.PlayerState.BUFFERING||st===YT.PlayerState.CUED)&&tries<60){checkSound(tries+1,asks,p); return}
     // A new player can still report the mute it was made with for a moment after unMute(): playing but "muted" is asked
     // again (a browser that refuses pauses the video, or YouTube reports it) before it counts as a refusal
-    if(player.isMuted()&&st===YT.PlayerState.PLAYING&&asks<3){player.unMute(); checkSound(tries,asks+1); return}
+    if(player.isMuted()&&st===YT.PlayerState.PLAYING&&asks<3){player.unMute(); checkSound(tries,asks+1,p); return}
     if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
       if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
     else if(needTap) tapMode(false)},900)}
@@ -832,7 +842,7 @@ function tick(){
   $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey&&!finishing){
-    if(playingKey&&reloadNow()){location.reload(); return}
+    if(playingKey&&reloadNow()){resumeMark(); location.reload(); return}
     if(playingKey&&nextFeed){swapFeed(); return tick()}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
@@ -899,6 +909,9 @@ setInterval(checkVersion,HOUR);
 function swapFeed(){const f=nextFeed, ids=new Set(HANDPICKED.map(v=>v.id)); nextFeed=null;
   CATALOG.length=0; CATALOG.push(...HANDPICKED,...f.filter(v=>!ids.has(v.id))); byCat=null; cache.clear(); renderGuide()}
 const reloadNow=()=>newCode&&(TV_APP||Date.now()-lastTouch>30*MIN&&(muted||!started));
+// The reloaded page comes straight back to this channel, playing (RESUME, near the top): a note in this tab's session
+// storage. A viewer still on the intro gets the intro again.
+function resumeMark(){if(!started)return; try{sessionStorage.setItem("ogtv-resume",JSON.stringify({at:Date.now(),ch:chSlug(CHANNELS[cur]),sound:!muted}))}catch(e){}}
 // The server's clock (the Date header) is the reference: a device more than 3 s off plays on the corrected clock
 async function syncClock(){
   try{const t0=Date.now(), r=await fetch("robots.txt?t="+t0,{method:"HEAD",cache:"no-store"}), t1=Date.now(), d=Date.parse(r.headers.get("date"));
