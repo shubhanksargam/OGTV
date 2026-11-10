@@ -52,7 +52,7 @@ const CATALOG = [
   {id:"HuqaOWc3wsc",t:"India vs Pakistan · hockey highlights",cat:"khel",lang:"hi",min:10,src:"FIH Hockey"},
   {id:"H7q7q1IwEY4",t:"India beat Pakistan to reach the final · 2011 World Cup",cat:"khel",lang:"hi",min:10,src:"ICC"},
   {id:"IXKu3w5-glc",t:"IND v AUS · 2016 T20 World Cup · Hindi highlights",cat:"khel",lang:"hi",min:8,src:"ICC"},
-  // Vigyan (science)
+  // Discover (science; was Vigyan)
   {id:"p9pPjASnnxw",t:"Quantum mechanics in simple words",cat:"vigyan",lang:"en",min:8,src:"Science ABC"},
   {id:"5-2NLHB4Gxg",t:"Work, force & energy · Dr. Binocs",cat:"vigyan",lang:"en",min:7,src:"Peekaboo Kidz"},
   {id:"suQDwZcnJdg",t:"Gravity · Dr. Binocs",cat:"vigyan",lang:"en",min:4,src:"Peekaboo Kidz"},

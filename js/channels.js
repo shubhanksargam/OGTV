@@ -85,7 +85,7 @@ const CHANNELS = [
     {from:23.5,to:24,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"11:30 pm: Vantage with Palki Sharma"}]},
   // ---- Knowledge ----
   {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
-  {key:"vigyan",n:6,group:"Knowledge",name:"Vigyan",en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
+  {key:"vigyan",n:6,group:"Knowledge",name:"Discover",oldSlugs:["vigyan"],en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
   {key:"curious",n:7,group:"Knowledge",name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,preferMin:15,cat:"curious",label:"Explainers"}]},
   {key:"data",n:8,group:"Knowledge",name:"India in Data",en:"Maps, charts & stories",parts:[{from:0,to:24,preferMin:15,cat:"data",label:"Data stories"}]},
   {key:"classroom",n:9,group:"Knowledge",name:"Classroom",en:"Data & AI engineering, UPSC & lectures",parts:[  // niche courses back to back, by request

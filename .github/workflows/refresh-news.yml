@@ -23,17 +23,23 @@ jobs:
       - run: node scripts/fetch-feeds.mjs news,cricket,football,khel,world,paisa,magadh
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      # the live streams too: GitHub runs the 30-minute live job only a few times a day, so this hourly run also catches
+      # a news channel's new broadcast
+      - run: node scripts/fetch-live.mjs
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
       - name: Check the new data before it ships
         run: node scripts/check.mjs   # a failure stops here: nothing is committed and the site keeps its last good data
       - name: Commit and redeploy if anything changed
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet js/feeds.js; then echo "No new episodes"; exit 0; fi
-          sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d%H%M)#" index.html
+          if git diff --quiet js/feeds.js && git diff --quiet js/live.js; then echo "No new episodes or streams"; exit 0; fi
+          git diff --quiet js/feeds.js || sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d%H%M)#" index.html
+          git diff --quiet js/live.js || sed -i -E "s#js/live\.js\?v=[^\"]*#js/live.js?v=$(date -u +%Y%m%d%H%M)#" index.html
           node scripts/build-pages.mjs
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A && git commit -qm "Refresh news shows and sports highlights"
+          git add -A && git commit -qm "Refresh news shows, sports highlights and live streams"
           git pull -q --rebase && git push -q
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
