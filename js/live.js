@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "lmfjyeZfG_Q",
-   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren LIVE | Sonia Gandhi Book | Delhi",
+   "id": "MC1zgE_33r8",
+   "t": "Jaipur Maulana Beaten LIVE : maulana ki kort men aisi pitaee nahin dekhi hogi! LIVE | Raja",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,8 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "cHextG1OL-E",
-   "t": "NVIDIA News LIVE | Spy Scandal, Billion-Dollar Fallout: Jensen Huang's Biggest Crisis Yet",
+   "id": "dahzxrc5_v0",
+   "t": "Sonia Gandhi Memoir | Memoir Or Political Manifesto? Sonia Gandhi's Take On India's Defini",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -62,8 +62,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "NpS9m0oG7iQ",
-   "t": "US House LIVE: Lawmakers May Vote on Massie's Impeachment Resolution Against Pete Hegseth ",
+   "id": "m_RvaZY4YUs",
+   "t": "Hegseth Impeachment Vote LIVE: US House Braces For Crucial Vote | Trump | Iran War | N18G",
    "src": "CNN-News18",
    "lang": "en"
   }
