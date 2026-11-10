@@ -33,7 +33,33 @@ const CHANNELS = [
     {from:21,to:22,cat:"khabar",src:"The Lallantop",match:"LT Show|Duniyadari|Netanagri|Kitabwala|Tarikh",newest:true,label:"Prime time, 9 pm: The Lallantop"},
     {from:22,to:23,cat:"khabar",src:"BBC News Hindi",newest:true,label:"10 pm: BBC News Hindi"},
     {from:23,to:24,cat:"khabar",src:"Khabargaon|Newslaundry",newest:true,label:"11 pm: Khabargaon & Newslaundry"}]},
-  {key:"news",n:3,group:"News",name:"Newsroom",en:"Vantage with Palki Sharma, Firstpost, IGR & world news",parts:[  // a fixed daily line-up; each show plays its newest episode first
+  // Bihar & Jharkhand news, by request: a fixed daily line-up, newest first, refreshed with the hourly news run. Doordarshan's
+  // bulletins from Patna and Ranchi (tag bulletin), News18 Bihar Jharkhand's day's roundups (roundup), ETV Bharat's ground
+  // reports (reports), the region's channels' latest (updates), analysis of the region's stories from Prabhat Khabar,
+  // The Lallantop, BBC News Hindi, Khabargaon and Newslaundry (analysis), and their Bihar & Jharkhand series (deep).
+  // days: posted in the last so many days. Weekends close with the week's roundup
+  {key:"magadh",n:3,group:"News",name:"Magadh Times",en:"Bihar & Jharkhand news: bulletins, the day's & week's roundups, deep analysis",parts:[
+    {from:0,to:6,  cat:"magadh",tag:"deep",preferMin:10,alt:"magadh",label:"Raat: deep dives, Bihar's chief ministers, ground reports & elections"},
+    {from:6,to:7,  cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"6 am: Subah ki khabar, the latest from Bihar & Jharkhand"},
+    {from:7,to:7.5,cat:"magadh",tag:"bulletin",src:"DD News Bihar",newest:true,alt:"magadh",label:"7 am: DD News Bihar bulletin"},
+    {from:7.5,to:8,cat:"magadh",tag:"bulletin",src:"Jharkhand DD News",newest:true,alt:"magadh",label:"7:30 am: Jharkhand DD News, Pradeshik Samachar"},
+    {from:8,to:9,  cat:"magadh",tag:"analysis",newest:true,alt:"magadh",label:"8 am: Analysis, what's moving Bihar & Jharkhand"},
+    {from:9,to:11, cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"Latest updates, newest first"},
+    {from:11,to:12,cat:"magadh",tag:"reports",newest:true,alt:"magadh",label:"11 am: Ground reports, ETV Bharat Bihar & Jharkhand"},
+    {from:12,to:13,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"Noon: Aaj ki badi khabren, the big stories so far"},
+    {from:13,to:14,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"1 pm: DD bulletins from Patna & Ranchi"},
+    {from:14,to:16,cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"Afternoon updates, newest first"},
+    {from:16,to:17,cat:"magadh",tag:"reports",newest:true,alt:"magadh",label:"4 pm: Ground reports"},
+    {from:17,to:18,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"5 pm: Evening bulletins, DD News Bihar & Jharkhand DD News"},
+    {from:18,to:19,cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"6 pm: Latest updates"},
+    {from:19,to:20,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"Prime time, 7 pm: the day in Bihar & Jharkhand",
+     weekend:{days:7,newest:false,preferMin:15,label:"Weekend, 7 pm: Hafte ki khabar, the week's big stories"}},
+    {from:20,to:21,cat:"magadh",tag:"analysis",newest:true,alt:"magadh",label:"8 pm: Deep analysis",
+     weekend:{days:7,label:"Weekend, 8 pm: the week's analysis"}},
+    {from:21,to:22,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"9 pm: The latest bulletins"},
+    {from:22,to:23,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"10 pm: Aaj ki badi khabren, the day's roundup"},
+    {from:23,to:24,cat:"magadh",tag:"deep",preferMin:10,alt:"magadh",label:"11 pm: Deep dives on Bihar & Jharkhand"}]},
+  {key:"news",n:4,group:"News",name:"Newsroom",en:"Vantage with Palki Sharma, Firstpost, IGR & world news",parts:[  // a fixed daily line-up; each show plays its newest episode first
     {from:0,to:0.5,cat:"paisa",tag:"dailybrief",newest:true,fixed:true,alt:"paisa",label:"12 am: The Daily Brief by Markets by Zerodha"},
     {from:0.5,to:1,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"Midnight repeat: Vantage with Palki Sharma"},
     {from:1,to:2,cat:"news",tag:"palki",src:"Flashback",newest:true,alt:"news",label:"1 am: Flashback with Palki Sharma"},
@@ -58,11 +84,11 @@ const CHANNELS = [
     {from:23,to:23.5,cat:"news",tag:"fpshows",src:"Honest Truth",newest:true,alt:"news",label:"11 pm: The Honest Truth"},
     {from:23.5,to:24,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"11:30 pm: Vantage with Palki Sharma"}]},
   // ---- Knowledge ----
-  {key:"gyaan",n:4,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
-  {key:"vigyan",n:5,group:"Knowledge",name:"Vigyan",en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
-  {key:"curious",n:6,group:"Knowledge",name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,preferMin:15,cat:"curious",label:"Explainers"}]},
-  {key:"data",n:7,group:"Knowledge",name:"India in Data",en:"Maps, charts & stories",parts:[{from:0,to:24,preferMin:15,cat:"data",label:"Data stories"}]},
-  {key:"classroom",n:8,group:"Knowledge",name:"Classroom",en:"Data & AI engineering, UPSC & lectures",parts:[  // niche courses back to back, by request
+  {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
+  {key:"vigyan",n:6,group:"Knowledge",name:"Vigyan",en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
+  {key:"curious",n:7,group:"Knowledge",name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,preferMin:15,cat:"curious",label:"Explainers"}]},
+  {key:"data",n:8,group:"Knowledge",name:"India in Data",en:"Maps, charts & stories",parts:[{from:0,to:24,preferMin:15,cat:"data",label:"Data stories"}]},
+  {key:"classroom",n:9,group:"Knowledge",name:"Classroom",en:"Data & AI engineering, UPSC & lectures",parts:[  // niche courses back to back, by request
     {from:0,to:2,  cat:"classroom",src:"NPTEL|MIT|Stanford",preferMin:25,alt:"classroom",label:"Lectures: NPTEL, MIT & Stanford"},
     {from:2,to:4,  cat:"classroom",src:"Karpathy",inOrder:true,alt:"classroom",label:"AI engineering: Karpathy's Zero to Hero, back to back"},
     {from:4,to:6,  cat:"classroom",tag:"dehi",inOrder:true,alt:"classroom",label:"Data engineering in Hindi: Manish Kumar, Spark & Azure"},
@@ -77,7 +103,7 @@ const CHANNELS = [
     {from:19,to:20,cat:"classroom",tag:"upscx",alt:"classroom",label:"UPSC explainers: Dr Vikas Divyakirti's Concept Talk"},
     {from:20,to:22,cat:"classroom",src:"Krish Naik",inOrder:true,alt:"classroom",label:"AI engineering: Krish Naik on generative AI, RAG & agents"},
     {from:22,to:24,cat:"classroom",src:"DataTalksClub",inOrder:true,alt:"classroom",label:"Data Engineering Zoomcamp, back to back"}]},
-  {key:"tech",n:9,group:"Knowledge",name:"Tech",en:"Gadgets, explainers, cars & bikes",parts:[
+  {key:"tech",n:10,group:"Knowledge",name:"Tech",en:"Gadgets, explainers, cars & bikes",parts:[
     {from:0,to:7,  cat:"tech",tag:"deep",alt:"tech",preferMin:15,label:"Late-night deep dives"},
     {from:7,to:10, cat:"tech",tag:"news",maxMin:15,label:"Morning tech news"},
     {from:10,to:13,cat:"tech",tag:"review",label:"New gadgets"},
@@ -86,7 +112,7 @@ const CHANNELS = [
     {from:17,to:19,cat:"tech",tag:"review",preferMin:12,label:"Prime-time gadgets"},
     {from:19,to:21,cat:"tech",tag:"auto",preferMin:12,label:"Machines & motors"},
     {from:21,to:24,cat:"tech",tag:"explain",preferMin:12,label:"Hi-tech explained"}]},
-  {key:"paisa",n:10,group:"Knowledge",name:"Paisa",en:"Money: The Daily Brief, Markets by Zerodha & investing",parts:[
+  {key:"paisa",n:11,group:"Knowledge",name:"Paisa",en:"Money: The Daily Brief, Markets by Zerodha & investing",parts:[
     {from:0,to:0.5,cat:"paisa",tag:"dailybrief",newest:true,fixed:true,alt:"paisa",label:"12 am: The Daily Brief"},
     {from:0.5,to:3,cat:"paisa",tag:"dailybrief",alt:"paisa",label:"The Daily Brief: past episodes"},
     {from:3,to:6,  cat:"paisa",preferMin:15,label:"Money & investing"},
@@ -98,14 +124,14 @@ const CHANNELS = [
     {from:17,to:20,cat:"paisa",tag:"dailybrief",alt:"paisa",label:"The Daily Brief: past episodes"},
     {from:20,to:21,cat:"paisa",tag:"zmarkets",alt:"paisa",label:"Markets by Zerodha"},
     {from:21,to:24,cat:"paisa",tag:"dailybrief",alt:"paisa",label:"Prime time: The Daily Brief, back to back"}]},
-  {key:"baatcheet",n:11,group:"Knowledge",name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,preferMin:30,cat:"baatcheet",label:"Long conversations"}]},
-  {key:"niche",prime:20,n:12,group:"Knowledge",name:"Niche",en:"Rare, offbeat & curious",parts:[
+  {key:"baatcheet",n:12,group:"Knowledge",name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,preferMin:30,cat:"baatcheet",label:"Long conversations"}]},
+  {key:"niche",prime:20,n:13,group:"Knowledge",name:"Niche",en:"Rare, offbeat & curious",parts:[
     {from:0,to:9,  cat:"niche",label:"Offbeat world"},
     {from:9,to:13, cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"Rare India"},
     {from:13,to:20,cat:"niche",label:"Curious finds"},
     {from:20,to:24,cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"From the archives"}]},
   // ---- Sports ----
-  {key:"cricket",n:13,group:"Sports",name:"Cricket",en:"Today's highlights from every major match, India & IPL first",parts:[  // "latest": the last 3 days' uploads from boards, leagues and broadcasters, refreshed hourly
+  {key:"cricket",n:14,group:"Sports",name:"Cricket",en:"Today's highlights from every major match, India & IPL first",parts:[  // "latest": the last 3 days' uploads from boards, leagues and broadcasters, refreshed hourly
     {from:0,to:3,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Repeat: India & IPL, latest highlights"},
     {from:3,to:7,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",label:"Overnight: every major match, latest highlights"},
     {from:7,to:9,  cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Morning repeat: India & IPL"},
@@ -116,7 +142,7 @@ const CHANNELS = [
     {from:20,to:23,cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",match:"india|\bind\b|indw|ipl|wpl|ranji|syed mushtaq|vijay hazare|duleep|irani|deodhar",label:"Prime time: India & IPL, latest match highlights"},
     {from:23,to:23.5,cat:"firstsports",newest:true,fixed:true,alt:"cricket",label:"11 pm: First Sports with Rupha Ramani, the day in cricket"},
     {from:23.5,to:24,cat:"cricket",tag:"latest",preferMin:8,alt:"cricket",label:"Around the world: today's matches"}]},
-  {key:"khel",n:14,group:"Sports",name:"Khel",en:"Olympics, Asian Games & Indian sport",parts:[
+  {key:"khel",n:15,group:"Sports",name:"Khel",en:"Olympics, Asian Games & Indian sport",parts:[
     {from:0,to:6,  cat:"khel",tag:"olympic",alt:"khel",label:"Olympic moments"},
     {from:6,to:9,  cat:"khel",tag:"latest",alt:"khel",label:"Morning repeat: the latest in Indian sport"},
     {from:9,to:13, cat:"khel",tag:"olympic",alt:"khel",label:"Olympics, Asian Games & Commonwealth Games"},
@@ -128,8 +154,8 @@ const CHANNELS = [
     {from:22,to:23,cat:"khel",tag:"prime",src:"ChessBase|Diamond League",alt:"khel",label:"Gukesh, Pragg & Neeraj"},
     {from:23,to:23.5,cat:"firstsports",newest:true,fixed:true,alt:"khel",label:"11 pm: First Sports with Rupha Ramani"},
     {from:23.5,to:24,cat:"khel",tag:"prime",alt:"khel",label:"India's big moments"}]},
-  {key:"classics",n:15,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
-  {key:"football",n:16,group:"Sports",name:"Football",en:"This week's matches: Premier League, LaLiga, UCL, ISL & more",parts:[  // "latest": the last 3 days' uploads, refreshed hourly
+  {key:"classics",n:16,group:"Sports",name:"Cricket Classics",en:"World Cups & great finishes",parts:[{from:0,to:24,preferMin:15,cat:"classics",alt:"cricket",label:"From the archive"}]},
+  {key:"football",n:17,group:"Sports",name:"Football",en:"This week's matches: Premier League, LaLiga, UCL, ISL & more",parts:[  // "latest": the last 3 days' uploads, refreshed hourly
     {from:0,to:3,  cat:"football",tag:"latest",alt:"football",label:"Repeat: the latest match highlights"},
     {from:3,to:7,  cat:"football",preferMin:15,label:"Football through the night"},
     {from:7,to:9,  cat:"football",tag:"latest",alt:"football",label:"Morning repeat: the latest matches"},
@@ -137,7 +163,7 @@ const CHANNELS = [
     {from:13,to:15,cat:"football",tag:"latest",alt:"football",label:"Afternoon repeat: the latest matches"},
     {from:15,to:20,cat:"football",preferMin:15,label:"Football, all afternoon"},
     {from:20,to:24,cat:"football",tag:"latest",alt:"football",label:"Prime time: this week's match highlights"}]},
-  {key:"worldsport",n:17,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis, NBA & world sport",parts:[
+  {key:"worldsport",n:18,group:"Sports",name:"International Sports",en:"Olympics, F1, tennis, NBA & world sport",parts:[
     {from:0,to:4,  cat:"khel",tag:"olympic",label:"Olympic classics"},
     {from:4,to:7,  cat:"world",tag:"more",alt:"world",label:"Golf, cycling & swimming"},
     {from:7,to:10, cat:"world",tag:"tennis",alt:"world",label:"Tennis: ATP, WTA & the Grand Slams"},
@@ -149,7 +175,7 @@ const CHANNELS = [
     {from:22,to:23,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: NBA, NHL, rugby & basketball"},
     {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- Lifestyle ----
-  {key:"sehat",prime:20,n:18,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
+  {key:"sehat",prime:20,n:19,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
     {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
     {from:7,to:9,  cat:"sehat",tag:"army",alt:"sehat",label:"Army training: morning PT"},
@@ -162,20 +188,20 @@ const CHANNELS = [
     {from:20,to:21,cat:"sehat",tag:"learn",label:"Fitness explained"},
     {from:21,to:22,cat:"sehat",tag:"soviet",alt:"sehat",label:"Soviet-style training: kettlebells & weightlifting"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
-  {key:"rasoi",n:19,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
-  {key:"safar",prime:17,n:20,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
+  {key:"rasoi",n:20,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
+  {key:"safar",prime:17,n:21,group:"Lifestyle",name:"Safar",en:"Travel, India & the world",parts:[
     {from:0,to:6,  cat:"safar",tag:"world",preferMin:20,label:"Long journeys"},
     {from:6,to:7,  cat:"safar",tag:"scenic",alt:"safar",label:"Scenic mornings"},
     {from:7,to:14, cat:"safar",tag:"india",preferMin:15,label:"Travel India"},
     {from:14,to:17,cat:"safar",tag:"world",label:"Around the world"},
     {from:17,to:21,cat:"safar",tag:"india",preferMin:15,label:"Indian road trips"},
     {from:21,to:24,cat:"safar",tag:"world",preferMin:20,label:"The world at night"}]},
-  {key:"bachche",n:21,group:"Lifestyle",name:"Bachche",en:"Kids",parts:[
+  {key:"bachche",n:22,group:"Lifestyle",name:"Bachche",en:"Kids",parts:[
     {from:0,to:7,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Early science"},
     {from:7,to:21,preferMin:15,cat:"bachche",alt:"vigyan",label:"Stories & rhymes"},
     {from:21,to:24,preferMin:15,cat:"vigyan",alt:"bachche",maxMin:15,label:"Bedtime science"}]},
   // ---- Entertainment ----
-  {key:"aangan",n:22,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, Taarak Mehta & mushaira",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
+  {key:"aangan",n:23,group:"Entertainment",name:"Aangan",en:"Family TV: DD classics, Taarak Mehta & mushaira",parts:[  // the family TV of an Indian home: aarti, DD classics, kahaniyan, kavi sammelan, wildlife, sitcoms; no news, no Bollywood
     {from:0,to:1,  cat:"aangan",  tag:"talent",alt:"geet",label:"Repeat: MTV Hustle & I-Popstar"},
     {from:1,to:5,  cat:"geet",    lang:"hi",label:"Late-night sadabahar"},
     {from:5,to:6,  cat:"bhakti",  lang:"hi",match:"aarti|aarati|aartiyan|chalisa|vandana|stuti|bhajan",label:"Morning aarti"},
@@ -194,8 +220,8 @@ const CHANNELS = [
     {from:21,to:22,cat:"aangan",  tag:"sitcom",label:"Prime time: Taarak Mehta & family sitcoms"},
     {from:22,to:23,cat:"aangan",  tag:"sitcom",srcSkip:"Taarak Mehta",label:"Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati"},
     {from:23,to:24,cat:"aangan",  tag:"mushaira",alt:"aangan",label:"Mushaira & ghazal"}]},
-  {key:"hasya",n:23,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
-  {key:"bihar",n:24,group:"Entertainment",name:"Purvaiya",oldSlugs:["bihar-jharkhand"],en:"Regional news, legends, travel & vlogs",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
+  {key:"hasya",n:24,group:"Entertainment",name:"Comedy",en:"Stand-up, sketches & shows",parts:[{from:0,to:24,preferMin:15,cat:"hasya",label:"Hindi & English comedy"}]},
+  {key:"bihar",n:25,group:"Entertainment",name:"Purvaiya",oldSlugs:["bihar-jharkhand"],en:"Regional news, legends, travel & vlogs",live:"bihar",liveHours:[[7,10],[13,14],[19,22]],parts:[
     {from:0,to:2,  cat:"biharlife",tag:"legends",alt:"biharlife",label:"After midnight: Legends of Bihar",weekend:{tag:"sharda",label:"Weekend: Sharda Sinha & Nadiya Ke Paar, back to back"}},
     {from:2,to:5,  cat:"biharlife",tag:"vlogs",alt:"biharlife",label:"Night vlogs: Curly Tales, village life & hidden Bihar and Jharkhand",otherDay:{tag:"infra",label:"Night watch: building Bihar & Jharkhand"}},
     {from:5,to:7,  cat:"biharlife",tag:"legends",alt:"biharlife",label:"Legends of Bihar: Dinkar, Chanakya, Chandragupta, Nalanda, Khan Sir & the Bihar Museum"},
@@ -211,7 +237,7 @@ const CHANNELS = [
     {from:19,to:22,cat:"bihar",preferMin:15,label:"Prime-time regional news"},
     {from:22,to:23,cat:"biharlife",tag:"legends",alt:"biharlife",label:"Late night: Legends of Bihar, back to back"},
     {from:23,to:24,cat:"biharlife",tag:"gurus",alt:"biharlife",label:"Late night: Anand Kumar & HC Verma"}]},
-  {key:"fiction",n:25,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
+  {key:"fiction",n:26,group:"Entertainment",name:"Fiction",en:"Web series, short films & DD classics",parts:[
     {from:0,to:2,  cat:"fiction",src:"ALTER|DUST",label:"Midnight thrillers"},
     {from:2,to:6,  cat:"fiction",src:"Omeleto|DUST",label:"World short films"},
     {from:6,to:10, cat:"fiction",tag:"mytho",label:"Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga"},
@@ -219,19 +245,24 @@ const CHANNELS = [
     {from:14,to:18,cat:"fiction",tag:"dd",label:"Old but gold: Byomkesh, Fauji, Malgudi Days"},
     {from:18,to:22,cat:"fiction",src:"TVF|Dice Media|Terribly Tiny|Royal Stag|FilterCopy|Pocket Films",label:"Prime-time stories"},
     {from:22,to:24,cat:"fiction",src:"Omeleto|DUST|ALTER",label:"Late-night shorts"}]},
-  {key:"retro",n:26,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
+  {key:"retro",n:27,group:"Entertainment",name:"Retro Movies",en:"Classic Hindi films",parts:[
     {from:0,to:6,  cat:"retro",label:"Late-night classics"},
     {from:6,to:12, cat:"retro",label:"Morning show"},
     {from:12,to:18,cat:"retro",label:"Matinee"},
     {from:18,to:24,cat:"retro",label:"Prime-time classics"}]},
-  {key:"premium",n:27,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
+  {key:"premium",n:28,group:"Entertainment",name:"Classics",en:"Great films from India & the world",parts:[
     {from:0,to:6,  cat:"premium",src:"Mosfilm",label:"World cinema after midnight"},
     {from:6,to:14, cat:"premium",srcSkip:"Mosfilm",label:"Bollywood hits"},
     {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
     {from:18,to:22,cat:"premium",srcSkip:"Mosfilm",label:"Prime-time blockbuster"},
     {from:22,to:24,cat:"premium",src:"Mosfilm",label:"World cinema classics"}]},
   // ---- Music ----
-  {key:"bollywood",n:28,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
+  // Hand-picked, by request: only these songs (category "select": js/catalog.js and scripts/feeds.json), shuffled together.
+  // mix: each set takes its turn, its songs in their own shuffled run, so none repeats before the rest of its set has played;
+  // a set's share of the day is the square root of its size, so Aujla's sixty-odd videos don't drown Saiyaara's ten
+  {key:"select",n:29,group:"Music",name:"Select",en:"Dhurandhar, Saiyaara, Diljit, Karan Aujla & Mirzapur",parts:[
+    {from:0,to:24,cat:"select",mix:[{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Select: Dhurandhar, Saiyaara, Diljit, Aujla & Mirzapur"}]},
+  {key:"bollywood",n:30,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
    // Songs whose picture stays covered, by request (revealing, item-song or sexual visuals, or marked 18+): the song plays
    // on behind OGTV's own card. Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
    // titles naming such a film or performer, and songs named one by one (ZiD's "Saanson Ko", which started it)
@@ -253,12 +284,19 @@ const CHANNELS = [
     {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
     {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:16},label:"Prime time: trending now, India's top songs this week"},
     {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"}]},
-  {key:"drive",n:29,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  // festival: songs for today's festival from js/festivals.js, or the next one coming up
-  {key:"festival",n:30,group:"Music",name:"Festivals",en:"Festival songs, folk & bhajans",festival:true,parts:[]},
-  {key:"hits2010",n:31,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:32,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"deccan",n:33,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day
+  {key:"drive",n:31,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
+  // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
+  // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
+  // skip: festivals whose songs are all worship, passed over for the next one; exclude: titles, excludeSrc: sources never played
+  {key:"festival",n:32,group:"Music",name:"Vibe",oldSlugs:["festivals"],en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
+    skip:"^fest-(ram|chhath|shivratri|janmashtami|gurpurab)$",
+    exclude:String.raw`bhajan|aarti|aarati|\barti\b|chalisa|stuti|vandana|vandna|mantra|stotra|stotr|ashtak|shatakam|shlok|\bpuja\b|pooja|pujan|bhakti|kirtan|shabad|gurbani|qawwal|qavval|kavvali|\bnaat\b|vrat katha|amritwani|maiya|\bmata\b|\bdevi\b|bhagwan|bhagvan|lakshmi|laxmi|ganesh|ganpati|ganapati|bappa|\bshiv\b|shiva|shankar|shambh|bhole|bhola|mahadev|mahakal|\bram\b|shri ram|siya ram|krishna|krishn\b|kanha|govind|gopal|shyam|radhe|hanuman|bajrang|durga|\bambe\b|jagdamba|mardini|aigiri|jhanki|chhath|carol|hymn|holy night|silent night|stille nacht|manger|allah|khwaja|khvaja|maula`,
+    excludeSrc:"bhakti|bhajan|shabad|kirtan|qawwal|choir|sounds of isha|sanskrit channel|tilak|mayapur|barsana|lathmar|vrat katha|mardini",
+    min:12, // festivals left with fewer songs than this are passed over too
+    ahead:14, party:["fest-diwali","fest-newyear","fest-holi","fest-lohri"]},parts:[]}, // a festival's songs from two weeks before it; party songs in between
+  {key:"hits2010",n:33,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:34,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"deccan",n:35,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day
     {from:0,to:2,   cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, back to back"},
     {from:2,to:3,   cat:"deccan",tag:"keeravani",alt:"deccan",label:"M. M. Keeravaani, back to back"},
     {from:3,to:5,   cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
@@ -279,8 +317,8 @@ const CHANNELS = [
     {from:21,to:22, cat:"deccan",tag:"rahman",alt:"deccan",label:"Prime time: A. R. Rahman, back to back"},
     {from:22,to:23, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Late night: Anirudh, back to back"},
     {from:23,to:24, cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Late night: Ilaiyaraaja, back to back"}]},
-  {key:"anthems",n:34,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"english",n:35,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
+  {key:"anthems",n:36,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"english",n:37,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
     {from:0,to:3,  cat:"global",tag:"alltime",alt:"global",label:"Billion-view classics"},
     {from:3,to:6,  cat:"global",tag:"worldcharts",alt:"global",label:"World tour: Seoul, Tokyo & Johannesburg charts"},
     {from:6,to:9,  cat:"global",tag:"chart",alt:"global",label:"Morning chart: this week's global top 100"},
@@ -288,7 +326,7 @@ const CHANNELS = [
     {from:12,to:15,cat:"global",tag:"chart",alt:"global",label:"Daily global chart"},
     {from:15,to:18,cat:"global",tag:"alltime",alt:"global",label:"All-time most viewed"},
     {from:18,to:24,cat:"global",tag:"chart",alt:"global",label:"Prime time: the global top 100, US & UK charts"}]},
-  {key:"gym",n:36,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
+  {key:"gym",n:38,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
     {from:4,to:6,  cat:"gym",tag:"rock",alt:"gym",label:"Early riser: rock"},
     {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Morning set: Punjabi gym bangers"},
@@ -298,7 +336,7 @@ const CHANNELS = [
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
     {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
-  {key:"punjabi",n:37,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
+  {key:"punjabi",n:39,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
     {from:0,to:2,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
     {from:2,to:4,  cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
     {from:4,to:6,  cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
@@ -311,7 +349,7 @@ const CHANNELS = [
     {from:18,to:20,cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Prime time: Diljit Dosanjh, back to back"},
     {from:20,to:22,cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Prime time: Karan Aujla, back to back"},
     {from:22,to:24,cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Late night bangers"}]},
-  {key:"raag",n:38,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+  {key:"raag",n:40,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
     {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
     {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
     {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
@@ -319,7 +357,7 @@ const CHANNELS = [
     {from:17,to:20,cat:"raag",tag:"vocal",label:"Evening thumri & khayal"},
     {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
-  {key:"geet",n:39,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[  // Kishore Kumar and Mukesh back to back, by request
+  {key:"geet",n:41,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[  // Kishore Kumar and Mukesh back to back, by request
     {from:0,to:2,  cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
     {from:2,to:4,  cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
     {from:4,to:6,  cat:"geet",label:"Evergreen"},
@@ -332,7 +370,7 @@ const CHANNELS = [
     {from:18,to:20,cat:"geet",tag:"kishore",alt:"geet",label:"Prime time: Kishore Kumar, back to back"},
     {from:20,to:22,cat:"geet",tag:"mukesh",alt:"geet",label:"Prime time: Mukesh, back to back"},
     {from:22,to:24,cat:"geet",label:"Late-night evergreen"}]},
-  {key:"bhakti",n:40,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
+  {key:"bhakti",n:42,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
     {from:0,to:5,  cat:"bhakti",label:"Devotional"},
     {from:5,to:6,  cat:"bhakti",festivalNext:true,label:"Devotional"},
     {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},

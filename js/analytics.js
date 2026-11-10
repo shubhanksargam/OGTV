@@ -3,6 +3,7 @@
 const GC_CODE = "shubhank";
 
 window.goatcounter = {no_onload: true}; // we count the visit ourselves, without the ?ch= query
+const LANDING = location.pathname; // the page the visit opened on, before tuning rewrites the address to /tv/<channel>/
 function track(name, title){ // events show up as paths in the GoatCounter dashboard
   if(!GC_CODE) return;
   const send=()=>window.goatcounter.count({path:name, title:title||name, event:true});
@@ -14,7 +15,7 @@ if(GC_CODE){
   s.integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+"; s.crossOrigin="anonymous";
   s.dataset.goatcounter=`https://${GC_CODE}.goatcounter.com/count`;
   // the visit is counted by page: "/" or a /tv/<channel>/ landing page
-  s.onload=()=>{window.goatcounter.count({path:location.pathname, title:document.title}); (window.__gcQueue||[]).forEach(f=>f()); window.__gcQueue=[]};
+  s.onload=()=>{window.goatcounter.count({path:LANDING, title:document.title}); (window.__gcQueue||[]).forEach(f=>f()); window.__gcQueue=[]};
   document.head.appendChild(s);
 }
 // Script errors show up in the dashboard as js-error-… events (at most 5 a visit), so a broken screen doesn't go unnoticed

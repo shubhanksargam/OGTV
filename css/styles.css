@@ -575,7 +575,9 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .lat.lon time{color:var(--marigold)}
 .lbar{display:block;height:4px;margin-top:6px;border-radius:99px;background:var(--line);overflow:hidden;font-style:normal}
 .lbar i{display:block;height:100%;background:var(--marigold)}
-/* YouTube's description: two lines, More for the rest */
+/* YouTube's description: the day it was posted, then two lines, More for the rest */
+.ldpost{margin:6px 0 0;color:#b8ad9d;font-size:.8rem;font-weight:600;letter-spacing:.01em}
+.ldpost+.ldtext{margin-top:3px}
 .ldtext{margin:8px 0 0;color:#d9cfc0;font-size:.88rem;line-height:1.45;white-space:pre-line;overflow-wrap:anywhere;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .ldtext.open{display:block;-webkit-line-clamp:none}

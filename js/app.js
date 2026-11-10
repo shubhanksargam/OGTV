@@ -15,6 +15,12 @@ let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit op
 // A channel from an address: its name (?ch=desi-pop, or a /tv/<channel>/ page), a renamed channel's old name, or a number
 const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex(c=>/^\d+$/.test(v)?c.n===+v:chSlug(c)===v||(c.oldSlugs||[]).includes(v))};
 {const m=document.querySelector('meta[name="ogtv-ch"]'), i=chFind(new URLSearchParams(location.search).get("ch")||(m&&m.content)); if(i>=0)cur=i}
+// The address names the channel the way the channel list's links do, /tv/<channel>/ (by request: one address per channel),
+// so a copied link opens that channel's own page and survives renumbering. Other parameters (app=tv, debug) stay.
+// An old ?ch= link still tunes, and its address is tidied the same way
+function showAddress(){try{const q=new URLSearchParams(location.search); q.delete("ch"); const s=q.toString();
+  history.replaceState(null,"","/tv/"+chSlug(CHANNELS[cur])+"/"+(s?"?"+s:"")+location.hash)}catch(e){}}
+if(new URLSearchParams(location.search).has("ch")) showAddress();
 // A page that reloaded itself for new code (resumeMark) comes straight back to the channel it was playing, with no
 // intro: the note it left in this tab is read once, and only within a minute
 const RESUME=(()=>{try{const r=JSON.parse(sessionStorage.getItem("ogtv-resume")||"null"); sessionStorage.removeItem("ogtv-resume"); return r&&Date.now()-r.at<60e3?r:null}catch(e){return null}})();
@@ -23,6 +29,9 @@ const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
 const onAir=s=>s.live?s.v.src+": "+s.v.t:s.v.t;
+// The language a video is shown in: the songs tagged "multi" (Desi Pop and the modern classics) read Hindi, by request;
+// only Deccan Chargers' own keep "Indian languages"
+const langName=v=>v.lang==="multi"&&v.cat!=="deccan"?LANG_LABEL.hi:LANG_LABEL[v.lang]||"";
 
 
 /* Programme guide, which is also the channel list: every channel, channel by channel, for the rest of today (at least
@@ -49,10 +58,14 @@ const DESC=new Map(); // id → {a: YouTube channel, d: description}, null when 
 function wantDesc(id){if(DESC.has(id)) return; DESC.set(id,"");
   fetch("desc/"+id+".json").then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{DESC.set(id,j&&typeof j==="object"?j:null); fillDesc(id)})}
 const ytChannel=s=>{const d=DESC.get(s.v.id); return d&&d.a||s.v.src}; // until the file arrives, the source's own name
-function descHtml(id){const d=DESC.get(id), open=gDescOpen.has(id); if(!d||!d.d) return "";
-  return `<p class="ldtext${open?" open":""}">${esc(d.d)}</p>`+(d.d.length>110||d.d.includes("\n")?`<button class="ldmore" data-d="${id}" aria-expanded="${open}">${open?"Less":"More"}</button>`:"")}
+// The day the video went up on YouTube, at the top of its description (by request); pub is "YYYY-MM-DD" when known
+const postedOn=pub=>{const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(pub||""); return m?`Posted ${+m[3]} ${MONTHS[m[2]-1]} ${m[1]}`:""};
+function descHtml(id,pub){const d=DESC.get(id), open=gDescOpen.has(id), p=postedOn(pub||d&&d.p), when=p?`<p class="ldpost">${p}</p>`:""; // the song list's date, else the one in the description file
+  if(!d||!d.d) return when;
+  return when+`<p class="ldtext${open?" open":""}">${esc(d.d)}</p>`+(d.d.length>110||d.d.includes("\n")?`<button class="ldmore" data-d="${id}" aria-expanded="${open}">${open?"Less":"More"}</button>`:"")}
+const descDiv=v=>`<div class="ldesc" data-d="${v.id}" data-p="${esc(v.pub||"")}">${descHtml(v.id,v.pub)}</div>`;
 function fillDesc(id){const d=DESC.get(id);
-  document.querySelectorAll(`.ldesc[data-d="${id}"]`).forEach(el=>{el.innerHTML=descHtml(id)}); // in the guide and the card under the TV
+  document.querySelectorAll(`.ldesc[data-d="${id}"]`).forEach(el=>{el.innerHTML=descHtml(id,el.dataset.p)}); // in the guide and the card under the TV
   if(d&&d.a) document.querySelectorAll(`.lby[data-a="${id}"]`).forEach(el=>{el.textContent="by "+d.a})}
 
 function renderGuide(){const now=tvNow(); gB=guideEnd(now); if(gAt&&gAt<=now) gAt=0; // a chosen hour that has come round is now
@@ -85,7 +98,7 @@ const gOpenNow=new Set(); // the day opens here apart from the guide's
 function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=day[0]; if(!s) return;
   const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live) wantDesc(id);
   redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
-  redraw($("nowYt"),s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span><div class="ldesc" data-d="${id}">${descHtml(id)}</div>`);
+  redraw($("nowYt"),s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
   redraw($("nowDay"),more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":"Rest of today · "+more}</button>`+(open?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:""):"")}
 function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
   const on=now>=s.start&&now<s.end, more=day.length>1?unit(c,day.length):"", id=s.v.id; if(!s.live) wantDesc(id);
@@ -96,7 +109,7 @@ function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0
     +`<ol class="lprogs"><li class="lat${on?" lon":""}"><time>${s.live?"Live":fmt(s.start)}</time><div><b>${badge(s)}${esc(s.live?onAir(s):s.v.t)}</b>`
     +(s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>`)+`<small>${meta}</small>`
     +(on&&!s.live?`<i class="lbar"><i style="width:${((now-s.start)/(s.end-s.start)*100).toFixed(1)}%"></i></i>`:"")
-    +(s.live?"":`<div class="ldesc" data-d="${id}">${descHtml(id)}</div>`)+`</div></li>`
+    +(s.live?"":descDiv(s.v))+`</div></li>`
     +(nx?`<li class="lnx"><time>${fmt(nx.start)}</time><div>${badge(nx)}${esc(onAir(nx))}${nx.live?"":` <span>· ${esc(nx.v.src)}</span>`}</div></li>`:"")+`</ol>`
     +(more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":(gAt?fmt(gAt)+" onwards":"Rest of today")+" · "+more}</button>`:"")
     +(open&&more?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:"")+`</article>`}
@@ -131,7 +144,7 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
 function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
-  try{const q=new URLSearchParams(location.search); q.set("ch",chSlug(CHANNELS[cur])); history.replaceState(null,"","?"+q)}catch(e){} // the address names the channel, so a copied link survives renumbering
+  showAddress();
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0){tune(i); if(retro) osdChannel(cur)}}
@@ -672,7 +685,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // The TV set's knobs turn like real ones: drag round, scroll, or arrow keys when focused. Channel steps
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
-const TAG_NAMES={coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
+const TAG_NAMES={bulletin:"DD bulletins",roundup:"the day's roundup",reports:"ground reports",updates:"latest updates",analysis:"analysis",deep:"deep dives",coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
   india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",dailybrief:"The Daily Brief",zmarkets:"Markets by Zerodha",firstsports:"First Sports",latest:"latest highlights",talent:"Hustle & I-Popstar",vantagenew:"Vantage, latest",vantage:"Vantage",palki:"Palki Sharma",fpshows:"Firstpost shows",igr:"IGR",trending:"trending",voices:"voices",stars:"stars",indie:"indie",chart:"charts",worldcharts:"world charts",alltime:"all-time hits",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360*5/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // all the channels take five turns of the knob; volume sweeps -135° (silent) to +135° (full)
@@ -819,10 +832,10 @@ function showCard(msg){
     if(!msg){clearTimeout(bannerTimer); $("screen").classList.remove("banner-on"); $("set").classList.add("idle")} // the TV's red light is off between programmes // the channel banner never covers Coming up next
     if(!msg) interlude.start((s.end-now)/1000); // the jingle fills the gap
     card.innerHTML=`<span class="kicker">${msg?"Programme unavailable":"Coming up next"}</span>
-      <h2>${esc(onAir(nx))}</h2><p>${esc(msg||catLabel(nx.v.cat)+" · "+LANG_LABEL[nx.v.lang]+" · starts at "+fmt(nx.start))}</p>
+      <h2>${esc(onAir(nx))}</h2><p>${esc(msg||catLabel(nx.v.cat)+" · "+langName(nx.v)+" · starts at "+fmt(nx.start))}</p>
       <span class="count" id="count"></span>`;
   }else{
-    card.innerHTML=`<span class="kicker">On air now · ${esc(catLabel(s.v.cat))} · ${esc(LANG_LABEL[s.v.lang])}</span>
+    card.innerHTML=`<span class="kicker">On air now · ${esc(catLabel(s.v.cat))} · ${esc(langName(s.v))}</span>
       <h2>${esc(s.v.t)}</h2><p>${esc(s.v.src)}. Started at ${fmt(s.start)}, ends at ${fmt(s.end)}.</p>
       <a class="watch" id="watch" href="${ytLink(s.v.id,off)}" target="_blank" rel="noopener">Watch from this moment on YouTube</a>`;
   }
@@ -864,7 +877,7 @@ function tick(){
     $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
     renderNowCard();
   }
-  $("nowTime").textContent=s.live?`LIVE · ${LANG_LABEL[s.v.lang]}`:`${fmt(s.start)} – ${fmt(s.end)} · ${LANG_LABEL[s.v.lang]}`;
+  $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:`${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
   if(MODE==="yt"&&ended){const c=$("count");if(c){const r=Math.ceil((s.end-now)/1000);c.textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")}}
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=ytLink(s.v.id,Math.floor((now-s.start)/1000))}
@@ -906,8 +919,8 @@ async function checkVersion(){
       nextFeed=JSON.parse(t.slice(t.indexOf("["),t.lastIndexOf("]")+1)); feedStamp=feeds}}catch(e){}}
 setInterval(checkVersion,HOUR);
 // Today's schedules are rebuilt from the new lists (the same for every viewer); this moment's programme is taken from them
-function swapFeed(){const f=nextFeed, ids=new Set(HANDPICKED.map(v=>v.id)); nextFeed=null;
-  CATALOG.length=0; CATALOG.push(...HANDPICKED,...f.filter(v=>!ids.has(v.id))); byCat=null; cache.clear(); renderGuide()}
+function swapFeed(){const f=nextFeed, ids=new Set(HANDPICKED.map(v=>v.id+"|"+v.cat)); nextFeed=null; // a hand-picked entry stands in for the feed's copy in its own category only
+  CATALOG.length=0; CATALOG.push(...HANDPICKED,...f.filter(v=>!ids.has(v.id+"|"+v.cat))); byCat=null; cache.clear(); renderGuide()}
 const reloadNow=()=>newCode&&(TV_APP||Date.now()-lastTouch>30*MIN&&(muted||!started));
 // The reloaded page comes straight back to this channel, playing (RESUME, near the top): a note in this tab's session
 // storage. A viewer still on the intro gets the intro again.

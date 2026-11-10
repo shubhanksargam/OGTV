@@ -27,7 +27,7 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `desc/` | Generated: one small file per video, fetched by the guide only when it shows that video |
 | `scripts/check.mjs` | Checks script syntax, feed data, channel hours, the schedule and the description files (`node scripts/check.mjs`); runs on every push and before every automatic refresh commits |
 | `js/live.js`, `js/live.json` | Generated: which channels in `scripts/live.json` are live right now (open pages re-read the JSON every 10 minutes) |
-| `js/festivals.js` | Festival calendar for the Festivals channel (add next year's dates before Oct 2027) |
+| `js/festivals.js` | Festival calendar for the Vibe channel (add next year's dates before Oct 2027) |
 | `scripts/fetch-live.mjs` | Rebuilds `js/live.js` (`node scripts/fetch-live.mjs`) |
 | `js/channels.js` | Channels and their rules (time blocks in IST and what each block plays) |
 | `js/scheduler.js` | Builds each day's schedule deterministically from the rules |
@@ -53,7 +53,13 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 **Live channels** — a channel with `live:"news"` plays the first on-air stream from that group in `scripts/live.json`, and its `parts` when nothing is live. `.github/workflows/refresh-live.yml` rechecks every 30 minutes and commits `js/live.js` only when it changes. Only official channels' own streams are used.
 
-**Festivals channel** — plays the `cat` of whichever row in `js/festivals.js` covers today (`from`–`to`), or the next festival coming up. Festival song playlists live in `scripts/feeds.json` under `fest-*` categories and are only refetched within 30 days of their festival.
+**Vibe (the festivals channel)** — plays the `cat` of whichever row in `js/festivals.js` covers today (`from`–`to`), or the next festival when its songs start within two weeks, and party songs (Diwali, New Year, Holi, Lohri) in between. It never plays devotional songs: the channel's `festival` rule in `js/channels.js` lists the titles and sources it leaves out (bhajans, aartis, kirtans, shabads, qawwalis, carols) and the festivals it passes over because their songs are all worship (Dussehra and Ram Navami, Chhath, Shivratri, Janmashtami, Guru Nanak Jayanti); those play on Bhakti. Festival song playlists live in `scripts/feeds.json` under `fest-*` categories and are only refetched within 30 days of their festival.
+
+**Magadh Times** — Bihar & Jharkhand news, channel 3. Category `magadh`, refreshed by the hourly news run (`refresh-news.yml`): Doordarshan's regional bulletins from Patna and Ranchi (`bulletin`), News18 Bihar Jharkhand's day's roundups (`roundup`), ETV Bharat's ground reports (`reports`), the region's channels' latest, filtered to Bihar and Jharkhand stories (`updates`), analysis from Prabhat Khabar, The Lallantop, BBC News Hindi, Khabargaon and Newslaundry (`analysis`), and their Bihar & Jharkhand series (`deep`). A part's `days` keeps it to videos posted in the last so many days (the day's roundup; the weekend's week in review).
+
+**Addresses** — every channel has one address, `/tv/<channel>/`, the page the channel list links to; tuning writes it into the address bar (other parameters such as `app=tv` stay), and an old `?ch=<channel>` link still tunes and is tidied the same way.
+
+**Select** — a hand-picked channel: only the songs in category `select` (Dhurandhar, Saiyaara and Diljit's film songs in `js/catalog.js`; Diljit, Karan Aujla and Mirzapur from `scripts/feeds.json`). Its `mix` plays each set in turn, a set's share being the square root of its size, so a big set doesn't drown a small one. To add songs, give them `cat:"select"` and a tag, and add the tag to the `mix`.
 
 **Nightly refresh** — `.github/workflows/refresh-feeds.yml` reruns the feed script at 03:00 IST, then the description script, and commits `js/feeds.js` and `desc/` when there is anything new. Run it by hand from the repo's Actions tab → Refresh feeds → Run workflow. For more reliable lookups, add a YouTube Data API key as a repository secret named `YT_API_KEY`. Descriptions in particular need it: without a key they come from watch pages, which YouTube stops serving (HTTP 429) after a couple of hundred in a few minutes, so the ~15,000 videos would fill in over weeks; with a key, one run does them all.
 

@@ -26,11 +26,14 @@ function inCats(cats){
 }
 function pick(part){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
-  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src))); // part.lang: only that language, never a fallback to others
+  const exT=rx(part.exclude), exS=rx(part.excludeSrc); // part.exclude / excludeSrc: titles and sources never played, not even as a fallback (Vibe's devotional songs)
+  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src)))&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src)); // part.lang: only that language, never a fallback to others
   const inCat=inCats(part.cat); // cat may list several categories
   const re=rx(part.match); // part.match: title must match, e.g. snack recipes
   const srcRe=rx(part.src), skipRe=rx(part.srcSkip), srcOk=v=>(!srcRe||srcRe.test(v.src))&&(!skipRe||!skipRe.test(v.src)); // part.src / srcSkip: which creators
-  let pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
+  const fresh=v=>!part.days||!!v.pub&&tvNow()-Date.parse(v.pub)<=part.days*DAY; // part.days: posted in the last so many days (Magadh Times' roundups), else the rest
+  let pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin)&&fresh(v));
+  if(!pool.length&&part.days) pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
   if(!pool.length&&part.strict&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // part.strict: the match is a must (Bhakti's festival bhajans) -- none left, its own category, never the unmatched rest
   if(!pool.length&&re&&part.tag) pool=inCat.filter(v=>ok(v)&&srcOk(v)&&v.tag===part.tag); // e.g. no India match this week: the rest of the latest
   if(!pool.length) pool=inCat.filter(v=>ok(v)&&srcOk(v));
@@ -64,17 +67,24 @@ const onFestival=(p,dayStart)=>{
     return {...p,cat:b.f.cat,match:DEVOTIONAL,strict:true,src:undefined,srcSkip:undefined,alt:p.cat,label:b.on?`${b.f.name}: bhajans & aartis`:`Coming up, ${b.f.name}: bhajans & aartis`}}
   const f=p.festival&&festivalOn(dayStart);
   return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,label:`${f.name} songs`}:p};
-/* Festivals channel: today's festival from js/festivals.js, else the next one */
+/* Vibe (the Festivals channel): today's festival from js/festivals.js, else the next one. ch.festival {skip, exclude,
+   excludeSrc, min}: the festivals it passes over, the songs it never plays (devotional ones, by request), and how many
+   songs a festival needs left to be celebrated at all */
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-function festivalParts(dayStart){
+function festivalParts(dayStart,cfg){
+  cfg=typeof cfg==="object"?cfg:{};
   const d=new Date(dayStart+IST).toISOString().slice(0,10), days=(a,b)=>Math.round((Date.parse(b)-Date.parse(a))/DAY);
-  const list=typeof FESTIVALS==="undefined"?[]:FESTIVALS;
+  const base={from:0,to:24,exclude:cfg.exclude,excludeSrc:cfg.excludeSrc}, skip=rx(cfg.skip), exT=rx(cfg.exclude), exS=rx(cfg.excludeSrc);
+  const songs=cat=>inCats(cat).filter(v=>!BAD.has(v.id)&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src))).length;
+  const list=(typeof FESTIVALS==="undefined"?[]:FESTIVALS).filter(x=>!(skip&&skip.test(x.cat))&&(!cfg.min||songs(x.cat)>=cfg.min));
+  const party=cfg.party||"fest-newyear"; // between festivals: party songs, never devotional
   const f=list.find(x=>x.from<=d&&d<=x.to);
   if(f){const n=days(f.day,d), when=n===0?"today":n<0?`in ${-n} day${n===-1?"":"s"}`:`day ${n+1}`;
-    return [{from:0,to:24,cat:f.cat,alt:"bhakti",label:`${f.name} · ${when}`}]}
+    return [{...base,cat:f.cat,alt:party,label:`${f.name} · ${when}`}]}
   const nx=list.find(x=>x.from>d);
-  if(nx){const [,m,dd]=nx.day.split("-"); return [{from:0,to:24,cat:nx.cat,alt:"bhakti",label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
-  return [{from:0,to:24,cat:"bhakti",label:"Devotional songs"}];
+  // cfg.ahead: how many days before its songs start a festival is played as "next up" (else weeks of Christmas songs in November)
+  if(nx&&(!cfg.ahead||days(d,nx.from)<=cfg.ahead)){const [,m,dd]=nx.day.split("-"); return [{...base,cat:nx.cat,alt:party,label:`Next up: ${nx.name}, ${+dd} ${MONTHS[m-1]}`}]}
+  return [{...base,cat:party,alt:"fest-newyear",label:"Party songs"}];
 }
 const cache=new Map();
 const cutOut=(spans,holes)=>holes.reduce((acc,[a,b])=>acc.flatMap(([x,y])=>y<=a||x>=b?[[x,y]]:[...(x<a?[[x,a]]:[]),...(y>b?[[b,y]]:[])]),spans);
@@ -108,7 +118,7 @@ function buildDay(ch,dayStart){
   const slots=[], warp=primeWarp(ch,dayStart);
   const wkend=[0,6].includes(new Date(dayStart+IST).getUTCDay()); // p.weekend: Saturday and Sunday take those settings
   const odd=Math.round(dayStart/DAY)%2===1; // p.otherDay: every other day takes those settings
-  const parts=ch.festival?festivalParts(dayStart):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
+  const parts=ch.festival?festivalParts(dayStart,ch.festival):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
   // p.boost {id, tag or src, every}: that song, or those songs in turn, every so many. Several parts with the same boost
   // share one run through it a day, in that day's shuffled order, so its songs come round in turn and none repeats early
@@ -124,11 +134,20 @@ function buildDay(ch,dayStart){
       if(!run){const list=CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
         boostRuns.set(bk,run={list:shuffle(list,seeded(k+"|boost|"+bk)),at:0})}
       if(!run.list.length) run=null}
+    // p.mix [{tag, src or match, w}]: several sets played together (Select). Each takes its turn by weight (w, else the square
+    // root of its size), spread evenly through the day; within a set the songs come in a shuffled run, none twice before the
+    // rest have played. Songs in no set don't play; if no set has any, the part plays its pool as usual
+    let mixNext=null;
+    if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), l=pool.filter(v=>(!m.tag||v.tag===m.tag)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
+        return {l,w:m.w||Math.sqrt(l.length),r:seeded(k+"|"+pi+"|mix"+j),o:[],at:0,c:0}}).filter(s=>s.l.length), W=sets.reduce((a,s)=>a+s.w,0);
+      if(sets.length) mixNext=()=>{let b=null; for(const s of sets){s.c+=s.w; if(!b||s.c>b.c) b=s} b.c-=W; // smooth weighted round-robin
+        if(b.at>=b.o.length){const last=b.o[b.o.length-1]; b.o=shuffle(b.l,b.r); b.at=0; if(b.o.length>2&&b.o[0]===last) b.o.push(b.o.shift())} // a new run never opens with the song just played
+        return b.o[b.at++]}}
     for(const [from,to] of spans){
       let t=dayStart+from*HOUR; const end=dayStart+to*HOUR;
       while(t<end){
-        if(i>=order.length){order=fresh();i=0}
-        const v=run&&++n%p.boost.every===0?run.list[run.at++%run.list.length]:order[i++]; const e=Math.min(t+v.min*MIN,end);
+        if(!mixNext&&i>=order.length){order=fresh();i=0}
+        const v=run&&++n%p.boost.every===0?run.list[run.at++%run.list.length]:mixNext?mixNext():order[i++]; const e=Math.min(t+v.min*MIN,end);
         if(!flex) slots.push({start:t,end:e,v,part:p,ch});
         else for(const [a,b] of cutOut([[t,e]],fixed)) slots.push({start:a,end:b,v,part:p,ch}); // around the fixed shows
         t=e;
