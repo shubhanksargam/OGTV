@@ -2,20 +2,20 @@
 const LIVE = {
  "news": [
   {
-   "id": "NnsI5dUmp1E",
-   "t": "AAJTAK 2 LIVE | Sonia Gandhi ki kitab kyon ho gaya hangama? | AT2 LIVE",
+   "id": "93DeobbkGMQ",
+   "t": "Khabardar with Sweta Singh LIVE: Congress vivadon men kyon?, chhath speshal trenon ke davo",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "t2i5xmCHK7A",
-   "t": "Sandeep Chaudhary on Ram Mandir LIVE: BJP ne nahin banvaya Ram Mandir? | Akhilesh Yadav | ",
+   "id": "9GD1-Nb4LFs",
+   "t": "Sandeep Chaudhary LIVE: ram ke nam par..rajniti lagi kam par! | UP Election 2027 | Akhiles",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "I_zwdgbQnDU",
-   "t": "Sonia Gandhi Book Launch | PM Modi | Rajiv Gandhi | Babri Masjid | BJP | Ram Mandir | Rahu",
+   "id": "P9Ytn1Xmv9Y",
+   "t": "Tranp ki har ke bad jiska dar tha eeran ne vahi kiya? chaunke muslim desh!LIVE | US Senate",
    "src": "NDTV India",
    "lang": "hi"
   },
@@ -26,26 +26,26 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "48MJQA1F_ZM",
-   "t": "Lawrence Bishnoi..Mumbai Police Big Action LIVE : lorens bishnoee..munbaee pulis ka bhayan",
+   "id": "raZ-50gmpjk",
+   "t": "Massive Bulldozer Action In UP LIVE : yupi ke 3 jilon men buldojar ekshan se macha harkanp",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "_e2ITpry8mA",
-   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Yamuna Safari | Congress | Trump | France Cy",
+   "id": "_uGt3vDL-iI",
+   "t": "Aar Paar With Rubika Liyaquat Live: Sonia Gandhi Book Launch | Rahul Gandhi | Congress | U",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "sWN92zzVsiQ",
-   "t": "LIVE Poora Sach : likh di kitab kya mitenge 'dag'? | Sonia Gandhi | Belonging: A Journey o",
+   "id": "FRGME7BcnTg",
+   "t": "LIVE News Night: divali par Kharge ke bad Imran Masood ka vivadit bayan | Imran Masood | C",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "cHextG1OL-E",
-   "t": "NVIDIA News LIVE | Spy Scandal, Billion-Dollar Fallout: Jensen Huang's Biggest Crisis Yet",
+   "id": "sEOqKzR5eg4",
+   "t": "Tamil Nadu News | Three Contract Workers Die After Inhaling Toxic Gas While Cleaning Waste",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -56,34 +56,34 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "WVrmFYxEJxc",
-   "t": "LIVE: US Secretary of State Marco Rubio Holds a Press Briefing | WION Live",
+   "id": "QcyWBwDllRE",
+   "t": "Saudi Under Attack LIVE : Houthis Claim Major Strikes on Saudi Oil Facilities & Riyadh Air",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "EesY8clmBTk",
-   "t": "LIVE| 'Ilhan Omar In Jail!' | Trump's Brutal Takedown Of Omar After Shock Raid! | US News ",
+   "id": "SqhyG6kpVGE",
+   "t": "US NEWS LIVE: Oval Office Emergency Broadcast, Trump Drops Historic White House Bombshell",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "rfDx1HMvXbQ",
-   "t": "CNN-News18 LIVE TV: Sonia GANDHI Memoir Storm | Belonging | Ozempic Under Scanner | BRASS ",
+   "id": "Nqi3KU6KicY",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "epdmjhejYTU",
-   "t": "Chhath Puja 2026 Update Live : bihar ke in jaghon par is khas andaj men manaee jati hai ch",
+   "id": "wn-U7KbO9J4",
+   "t": "Aaj Ki Taaja Khabar LIVE : aaj ki bari khabren | Sonia Gandhi Book | Delhi Air Pollution |",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "VbEKsijY5bw",
-   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding', dekhie shadi ki bhavy ta",
+   "id": "ZEwAATvXD8E",
+   "t": "JDU-BJP Clash Live Update: NDA men darar... rishton men aaee khatas ? | Nitish Kumar",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   },
