@@ -260,8 +260,8 @@ const CHANNELS = [
   // Hand-picked, by request: only these songs (category "select": js/catalog.js and scripts/feeds.json), shuffled together.
   // mix: each set takes its turn, its songs in their own shuffled run, so none repeats before the rest of its set has played;
   // a set's share of the day is the square root of its size, so Aujla's sixty-odd videos don't drown Saiyaara's ten
-  {key:"select",n:29,group:"Music",name:"Select",en:"Dhurandhar, Saiyaara, Diljit, Karan Aujla & Mirzapur",parts:[
-    {from:0,to:24,cat:"select",mix:[{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Select: Dhurandhar, Saiyaara, Diljit, Aujla & Mirzapur"}]},
+  {key:"select",n:29,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify playlist "Big Dawgs", each song matched to an official upload
+    {from:0,to:24,cat:"select",mix:[{tag:"spotify"},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Favourites"}]},
   {key:"bollywood",n:30,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
    // Songs whose picture stays covered, by request (revealing, item-song or sexual visuals, or marked 18+): the song plays
    // on behind OGTV's own card. Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
@@ -371,7 +371,8 @@ const CHANNELS = [
     {from:20,to:22,cat:"geet",tag:"mukesh",alt:"geet",label:"Prime time: Mukesh, back to back"},
     {from:22,to:24,cat:"geet",label:"Late-night evergreen"}]},
   {key:"bhakti",n:42,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
-    {from:0,to:5,  cat:"bhakti",label:"Devotional"},
+    {from:0,to:4,  cat:"bhakti",label:"Devotional"},
+    {from:4,to:5,  cat:"bhakti",tag:"mrityunjay",label:"4 am, Brahma muhurat: Mahamrityunjay Mantra · Anuradha Paudwal"}, // by request
     {from:5,to:6,  cat:"bhakti",festivalNext:true,label:"Devotional"},
     {from:6,to:6.5,cat:"bhakti",tag:"ashtak",label:"Subah: Sankatmochan Hanuman Ashtak"},
     {from:6.5,to:7,cat:"bhakti",tag:"chalisa",label:"Shree Hanuman Chalisa"},

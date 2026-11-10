@@ -634,6 +634,10 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 32px}
 .directory h3{margin:0 0 6px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold)}
 .directory ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+/* A long group (Music) takes the rest of its row and splits into short columns side by side, not one long list */
+@media (min-width:600px){.directory .wide{grid-column:span 2}.directory .wide ul{display:block;columns:2;column-gap:32px}
+  .directory .wide li{break-inside:avoid;margin-bottom:4px}}
+@media (min-width:1040px){.directory .wide{grid-column:span 3}.directory .wide ul{columns:3}}
 .directory a{color:var(--ink);text-decoration:none;font-weight:700}.directory a:hover{color:var(--marigold)}
 .directory li span{color:var(--muted);font-size:.88rem}
 /* The All channels section alone is set in the brand's wide sans: light, slightly spaced, all capitals */
