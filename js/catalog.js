@@ -211,6 +211,17 @@ const CATALOG = [
   {id:"KPUqnTWKnO8",t:"Naina · Crew · Diljit Dosanjh, Badshah",cat:"select",tag:"diljit",lang:"hi",min:3,src:"Tips Official",pub:"2025-06-17"},
   {id:"l-rcfNr1PiA",t:"Ishq Di Baajiyaan · Soorma · Diljit Dosanjh",cat:"select",tag:"diljit",lang:"hi",min:5,src:"Sony Music India",pub:"2018-08-30"},
   {id:"i4KYUfX7iO8",t:"Naram Kaalja · Amar Singh Chamkila · Diljit, A.R. Rahman",cat:"select",tag:"diljit",lang:"hi",min:6,src:"Saregama Music",pub:"2024-05-29"},
+  // Mirzapur: The Movie (2026), by request, with the series' songs from scripts/feeds.json: its official album
+  // (Universal Music India), the music videos where Excel Movies released one, the album's audio otherwise
+  {id:"SQ4jZ-EAL88",t:"Vaaroon Forever · Mirzapur The Movie · Shreya Ghoshal, Anand Bhaskar",cat:"select",tag:"mirzapur",lang:"hi",min:5,src:"Excel Movies",pub:"2026-08-18"},
+  {id:"dI0cUsz5tFI",t:"Sanson Ki Mala · Mirzapur The Movie · Madhur Sharma",cat:"select",tag:"mirzapur",lang:"hi",min:3,src:"Excel Movies",pub:"2026-09-21"},
+  {id:"kWh6fgcreyw",t:"Do Numbari · Mirzapur The Movie · Dhanda Nyoliwala",cat:"select",tag:"mirzapur",lang:"hi",min:3,src:"Excel Movies",pub:"2026-08-03"},
+  {id:"_rNznQWOh5w",t:"Kaan Phaad · Mirzapur The Movie · John Stewart Eduri, Parry G",cat:"select",tag:"mirzapur",lang:"hi",min:3,src:"Excel Movies",pub:"2026-10-14"},
+  {id:"tT8F5V4L4gM",t:"Ghoom Ghoom · Mirzapur The Movie · Rashmeet Kaur",cat:"select",tag:"mirzapur",lang:"hi",min:4,src:"Rashmeet Kaur - Topic",pub:"2026-08-31"},
+  {id:"sxe1sz1_5TI",t:"Vaaroon Reprise · Mirzapur The Movie · Anand Bhaskar",cat:"select",tag:"mirzapur",lang:"hi",min:3,src:"Anand Bhaskar - Topic",pub:"2026-08-31"},
+  {id:"8HWwHFQ3uAw",t:"Vindhyvasini Ki Jai Ho · Mirzapur The Movie · Junaid Kumar",cat:"select",tag:"mirzapur",lang:"hi",min:4,src:"Junaid Kumar - Topic",pub:"2026-08-31"},
+  {id:"s2Z-SoofsHM",t:"Sajanva Redux · Mirzapur The Movie · Anand Bhaskar",cat:"select",tag:"mirzapur",lang:"hi",min:2,src:"Anand Bhaskar - Topic",pub:"2026-08-31"},
+  {id:"AxLf-o1Qwrs",t:"Mirzapur The Bhaukaal Theme · John Stewart Eduri",cat:"select",tag:"mirzapur",lang:"hi",min:3,src:"John Stewart Eduri - Topic",pub:"2026-08-31"},
   // Select's Big Dawgs set: the user's Spotify playlist "Big Dawgs" (2026-11-10), each song matched to an official upload
   // (artist, label or "- Topic" channel) and checked on its watch page; the number is the song's place in the playlist
 {id:"sqw90xibWaE",t:"Big Dawgs · Hanumankind, Kalmi",cat:"select",tag:"spotify",lang:"en",min:4,src:"Hanumankind - Topic",pub:"2024-08-29"}, // 1

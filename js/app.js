@@ -220,7 +220,7 @@ function loadYT(){
 const playerEvents={
   onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
     clearTimeout(bufTimer); clearTimeout(stallTimer);
-    if(e.data===S.PLAYING){toLiveEdge(); clearTimeout(edgeTimer); edgeTimer=setTimeout(toLiveEdge,5000); if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+    if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
     else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
       stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
     else if(e.data===S.UNSTARTED||e.data===S.CUED) stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},12e3) // ready but never started (YouTube sometimes ignores the play): try the programme again -- unless the browser blocked autoplay and the picture is waiting for the viewer's tap
@@ -270,12 +270,9 @@ let wakeLock=null, wantAwake=false;
 // channel's moment made the video reload for a second or two); the channel catches up at the next programme change.
 let pausedAt=0, resumedAt=0, subsFor=null;
 // YouTube's ENDED counts only when it's this programme's video, at its end (not a stale one from the video before)
-// A live stream plays at its live moment (by request): YouTube starts some an hour back (measured on Aaj Tak, ABP, NDTV,
-// India TV and DD News), and a resume would carry on from the pause. Its duration is the time it has been on air, i.e. its
-// live edge; more than 15 s behind, it jumps there
-let edgeTimer=0; // a second look, once YouTube knows how long the stream has been on air
-function toLiveEdge(){try{if(MODE!=="yt"||!player||!slotAt(CHANNELS[cur],tvNow()).live) return;
-  const d=player.getDuration(), t=player.getCurrentTime(); if(d>0&&d-t>15) player.seekTo(d,true)}catch(e){}}
+// Live streams are never seeked: YouTube starts them at the live moment, and a live stream's getDuration() here can run an
+// hour ahead of the real edge (the same ABP stream, same moment: OGTV's player said 20985 s, a plain one 17305 s, both
+// playing at 17390 s). Seeking to that "edge" (v275) put the player past the broadcast and Just News kept buffering
 function atRealEnd(){try{const v=player.getVideoData&&player.getVideoData().video_id, d=player.getDuration(), t=player.getCurrentTime();
   return !(v&&playingId&&v!==playingId)&&!(d>0&&d-t>3)}catch(e){return true}}
 function rejoin(){if(!pausedAt)return; pausedAt=0; resumedAt=Date.now()} // resumed: no static while it picks up
@@ -292,9 +289,8 @@ function pauseNow(){if(MODE!=="yt"||!player)return; interlude.stop(); if(ended){
 function playNow(){if(MODE!=="yt"||!player)return;
   if(ended){if(gapHushed){gapHushed=false; const s=slotAt(CHANNELS[cur],tvNow()); interlude.start((s.end-tvNow())/1000); remote.playing()} return}
   const wasPaused=pausedAt; hidePauseScreen(); rejoin();
-  // a live stream picks up at the live moment, not where it was paused (by request): it jumps to its live edge, and looks
-  // again 3 s later, as a paused player's idea of the stream's length lags
-  if(wasPaused&&Date.now()-wasPaused>3000&&slotAt(CHANNELS[cur],tvNow()).live){try{player.seekTo(player.getDuration(),true)}catch(e){} clearTimeout(edgeTimer); edgeTimer=setTimeout(toLiveEdge,3000)}
+  // a live stream picks up at the live moment, not where it was paused (by request): loaded again, YouTube starts it there
+  if(wasPaused&&Date.now()-wasPaused>3000&&playingId&&slotAt(CHANNELS[cur],tvNow()).live){try{player.loadVideoById({videoId:playingId}); return}catch(e){}}
   player.playVideo()}
 function togglePause(){tvPlaying()?pauseNow():playNow()}
 // ?debug: an on-screen log of the player and the media buttons, for tracking down device-specific trouble
