@@ -8,8 +8,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "9GD1-Nb4LFs",
-   "t": "Sandeep Chaudhary LIVE: ram ke nam par..rajniti lagi kam par! | UP Election 2027 | Akhiles",
+   "id": "hI_k0GAVZ7A",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 11 November | AQI |",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -50,8 +50,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "QcyWBwDllRE",
-   "t": "Saudi Under Attack LIVE : Houthis Claim Major Strikes on Saudi Oil Facilities & Riyadh Air",
+   "id": "qYMX8VSYXvg",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
    "src": "WION",
    "lang": "en"
   },
