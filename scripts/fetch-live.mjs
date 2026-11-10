@@ -1,5 +1,5 @@
 // Builds js/live.js: which channels in scripts/live.json are streaming live right now.
-// youtube.com/channel/<id>/live points at the channel's current broadcast when there is one.
+// With YT_API_KEY: the Data API (see liveViaApi). Without: youtube.com/channel/<id>/live, which points at the channel's current broadcast.
 // Only streams that are live now and allow embedding are kept.
 // Usage: node scripts/fetch-live.mjs
 import {readFile, writeFile} from "node:fs/promises";
@@ -20,11 +20,31 @@ async function liveNow(channelId) {
   return {id: v.videoId, t: roman(v.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
 }
 
+// With a YouTube Data API key (GitHub's runners): YouTube shows datacenter machines a /live page without the broadcast,
+// so every run there found "nothing live" from 16 Oct 2026. The API asks properly instead: each channel's live-streams
+// playlist ("UULV" + the ID after "UC") lists its current broadcasts first; videos.list says which are live now and
+// embeddable. Of several live at once, the one with the most viewers (a news channel's 24x7 stream). About 2 quota
+// units a channel a run.
+const KEY = process.env.YT_API_KEY;
+const api = async path => { const r = await fetch("https://www.googleapis.com/youtube/v3/" + path + "&key=" + KEY);
+  if (!r.ok) throw Object.assign(new Error("API " + r.status), {status: r.status}); return r.json(); };
+async function liveViaApi(channelId) {
+  const pl = await api(`playlistItems?part=contentDetails&maxResults=20&playlistId=UULV${channelId.slice(2)}`).catch(e => e.status === 404 ? {items: []} : Promise.reject(e));
+  const ids = (pl.items || []).map(it => it.contentDetails.videoId);
+  if (!ids.length) return null;
+  const vs = (await api(`videos?part=snippet,status,liveStreamingDetails&id=${ids.join(",")}`)).items || [];
+  const live = vs.filter(v => v.snippet.liveBroadcastContent === "live" && v.snippet.channelId === channelId && v.status.embeddable && v.status.privacyStatus === "public")
+    .sort((a, b) => (+b.liveStreamingDetails?.concurrentViewers || 0) - (+a.liveStreamingDetails?.concurrentViewers || 0));
+  if (!live.length) return null;
+  return {id: live[0].id, t: roman(live[0].snippet.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
+}
+const find = id => KEY ? liveViaApi(id).catch(e => (console.log(`API: ${e.message}; reading the page instead`), liveNow(id))) : liveNow(id);
+
 const LIVE = {}, report = [];
 for (const [group, list] of Object.entries(groups)) {
   LIVE[group] = [];
   for (const s of list) {
-    const hit = await liveNow(s.id).catch(e => (report.push(`error ${s.src}: ${e.message}`), null));
+    const hit = await find(s.id).catch(e => (report.push(`error ${s.src}: ${e.message}`), null));
     if (hit) LIVE[group].push({...hit, src: s.src, lang: s.lang});
     await new Promise(r => setTimeout(r, 300));
   }

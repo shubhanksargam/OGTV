@@ -139,7 +139,12 @@ function buildDay(ch,dayStart){
     // rest have played. Songs in no set don't play; if no set has any, the part plays its pool as usual
     let mixNext=null;
     if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), l=pool.filter(v=>(!m.tag||v.tag===m.tag)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
-        return {l,w:m.w||Math.sqrt(l.length),r:seeded(k+"|"+pi+"|mix"+j),o:[],at:0,c:0}}).filter(s=>s.l.length), W=sets.reduce((a,s)=>a+s.w,0);
+        return {l,w:m.w||Math.sqrt(l.length),share:m.share,len:l.reduce((a,v)=>a+v.min,0)/(l.length||1),r:seeded(k+"|"+pi+"|mix"+j),o:[],at:0,c:0}}).filter(s=>s.l.length);
+      // m.share: that set's part of the airtime (Select's Spotify songs, 0.5 = 12 h a day, by request); the turn weight is
+      // worked out from the songs' lengths, and the other sets share the rest as before
+      const fixed=sets.filter(s=>s.share>0&&s.share<1), rest=sets.filter(s=>!fixed.includes(s)), R=rest.reduce((a,s)=>a+s.w*s.len,0), S=fixed.reduce((a,s)=>a+s.share,0);
+      if(fixed.length&&rest.length&&S<1) fixed.forEach(s=>{s.w=s.share*R/((1-S)*s.len)});
+      const W=sets.reduce((a,s)=>a+s.w,0);
       if(sets.length) mixNext=()=>{let b=null; for(const s of sets){s.c+=s.w; if(!b||s.c>b.c) b=s} b.c-=W; // smooth weighted round-robin
         if(b.at>=b.o.length){const last=b.o[b.o.length-1]; b.o=shuffle(b.l,b.r); b.at=0; if(b.o.length>2&&b.o[0]===last) b.o.push(b.o.shift())} // a new run never opens with the song just played
         return b.o[b.at++]}}

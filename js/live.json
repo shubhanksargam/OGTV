@@ -1,4 +1,96 @@
 {
- "news": [],
- "bihar": []
+ "news": [
+  {
+   "id": "NnsI5dUmp1E",
+   "t": "AAJTAK 2 LIVE | Sonia Gandhi ki kitab kyon ho gaya hangama? | AT2 LIVE",
+   "src": "Aaj Tak",
+   "lang": "hi"
+  },
+  {
+   "id": "t2i5xmCHK7A",
+   "t": "Sandeep Chaudhary on Ram Mandir LIVE: BJP ne nahin banvaya Ram Mandir? | Akhilesh Yadav | ",
+   "src": "ABP News",
+   "lang": "hi"
+  },
+  {
+   "id": "I_zwdgbQnDU",
+   "t": "Sonia Gandhi Book Launch | PM Modi | Rajiv Gandhi | Babri Masjid | BJP | Ram Mandir | Rahu",
+   "src": "NDTV India",
+   "lang": "hi"
+  },
+  {
+   "id": "YMsFZFp8wp8",
+   "t": "Coffee Par Kurukshetra LIVE | Saurav Sharma: soniya ne kitab men kya-kya likha? | Sonia Ga",
+   "src": "India TV",
+   "lang": "hi"
+  },
+  {
+   "id": "48MJQA1F_ZM",
+   "t": "Lawrence Bishnoi..Mumbai Police Big Action LIVE : lorens bishnoee..munbaee pulis ka bhayan",
+   "src": "Zee News",
+   "lang": "hi"
+  },
+  {
+   "id": "_e2ITpry8mA",
+   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Yamuna Safari | Congress | Trump | France Cy",
+   "src": "News18 India",
+   "lang": "hi"
+  },
+  {
+   "id": "sWN92zzVsiQ",
+   "t": "LIVE Poora Sach : likh di kitab kya mitenge 'dag'? | Sonia Gandhi | Belonging: A Journey o",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "cHextG1OL-E",
+   "t": "NVIDIA News LIVE | Spy Scandal, Billion-Dollar Fallout: Jensen Huang's Biggest Crisis Yet",
+   "src": "NDTV 24x7",
+   "lang": "en"
+  },
+  {
+   "id": "HmyydqDG6Xs",
+   "t": "LIVE: Yogi Adityanath's Big SIR Admission | 1.27 Crore Hindu Voters Deleted In UP SIR? | B",
+   "src": "India Today",
+   "lang": "en"
+  },
+  {
+   "id": "WVrmFYxEJxc",
+   "t": "LIVE: US Secretary of State Marco Rubio Holds a Press Briefing | WION Live",
+   "src": "WION",
+   "lang": "en"
+  },
+  {
+   "id": "EesY8clmBTk",
+   "t": "LIVE| 'Ilhan Omar In Jail!' | Trump's Brutal Takedown Of Omar After Shock Raid! | US News ",
+   "src": "Times Now",
+   "lang": "en"
+  },
+  {
+   "id": "rfDx1HMvXbQ",
+   "t": "CNN-News18 LIVE TV: Sonia GANDHI Memoir Storm | Belonging | Ozempic Under Scanner | BRASS ",
+   "src": "CNN-News18",
+   "lang": "en"
+  }
+ ],
+ "bihar": [
+  {
+   "id": "epdmjhejYTU",
+   "t": "Chhath Puja 2026 Update Live : bihar ke in jaghon par is khas andaj men manaee jati hai ch",
+   "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "VbEKsijY5bw",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding', dekhie shadi ki bhavy ta",
+   "src": "Zee Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "moB73GhUMuQ",
+   "t": "Samrat sarkar ka bara tohpha, DA barha, karmachariyon-penshnars ki balle-balle, janie 32 b",
+   "src": "Kashish News",
+   "lang": "hi"
+  }
+ ]
 }

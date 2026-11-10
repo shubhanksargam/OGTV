@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/fetch-live.mjs
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}   # YouTube hides broadcasts from GitHub's machines; the API doesn't
       - name: Check the new data before it ships
         run: node scripts/check.mjs   # a failure stops here: nothing is committed and the site keeps its last good data
       - name: Commit and redeploy if anything changed
