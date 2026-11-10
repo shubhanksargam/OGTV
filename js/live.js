@@ -2,8 +2,8 @@
 const LIVE = {
  "news": [
   {
-   "id": "93DeobbkGMQ",
-   "t": "Khabardar with Sweta Singh LIVE: Congress vivadon men kyon?, chhath speshal trenon ke davo",
+   "id": "CfxI3taQaxY",
+   "t": "Black and White with Anjana Om Kashyap LIVE: Sonia Gandhi | Belonging A Journey of Love | ",
    "src": "Aaj Tak",
    "lang": "hi"
   },
@@ -14,44 +14,38 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "P9Ytn1Xmv9Y",
-   "t": "Tranp ki har ke bad jiska dar tha eeran ne vahi kiya? chaunke muslim desh!LIVE | US Senate",
+   "id": "XRZ6gabS9f4",
+   "t": "Ijrayal men bara ulatpher? netanyahu par aa gaee bari khabar! | Iran | America | Trump | B",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "YMsFZFp8wp8",
-   "t": "Coffee Par Kurukshetra LIVE | Saurav Sharma: soniya ne kitab men kya-kya likha? | Sonia Ga",
+   "id": "6_XPlub3NJY",
+   "t": "Aaj Ki Baat with Rajat Sharma LIVE: chiniyon ne anti India video kyon banaya ? |China vide",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "raZ-50gmpjk",
-   "t": "Massive Bulldozer Action In UP LIVE : yupi ke 3 jilon men buldojar ekshan se macha harkanp",
+   "id": "lmfjyeZfG_Q",
+   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren LIVE | Sonia Gandhi Book | Delhi",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "_uGt3vDL-iI",
-   "t": "Aar Paar With Rubika Liyaquat Live: Sonia Gandhi Book Launch | Rahul Gandhi | Congress | U",
+   "id": "dprGSSVbc5g",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 146 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "FRGME7BcnTg",
-   "t": "LIVE News Night: divali par Kharge ke bad Imran Masood ka vivadit bayan | Imran Masood | C",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "sEOqKzR5eg4",
-   "t": "Tamil Nadu News | Three Contract Workers Die After Inhaling Toxic Gas While Cleaning Waste",
+   "id": "cHextG1OL-E",
+   "t": "NVIDIA News LIVE | Spy Scandal, Billion-Dollar Fallout: Jensen Huang's Biggest Crisis Yet",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "HmyydqDG6Xs",
-   "t": "LIVE: Yogi Adityanath's Big SIR Admission | 1.27 Crore Hindu Voters Deleted In UP SIR? | B",
+   "id": "kRw1IH64mes",
+   "t": "Rajdeep Sardesai LIVE: Sonia Gandhi's Memoir | What Are Big Takeaways? | BJP vs Congress |",
    "src": "India Today",
    "lang": "en"
   },
@@ -62,35 +56,29 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "SqhyG6kpVGE",
-   "t": "US NEWS LIVE: Oval Office Emergency Broadcast, Trump Drops Historic White House Bombshell",
+   "id": "yZa7G-feSVQ",
+   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "Nqi3KU6KicY",
-   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "id": "NpS9m0oG7iQ",
+   "t": "US House LIVE: Lawmakers May Vote on Massie's Impeachment Resolution Against Pete Hegseth ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "wn-U7KbO9J4",
-   "t": "Aaj Ki Taaja Khabar LIVE : aaj ki bari khabren | Sonia Gandhi Book | Delhi Air Pollution |",
+   "id": "UWeNJKZS3Ys",
+   "t": "Bihar News LIVE : aaj ki bari khabren | Anant Singh Daughter Wedding | JDU BJP Alliance | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "ZEwAATvXD8E",
-   "t": "JDU-BJP Clash Live Update: NDA men darar... rishton men aaee khatas ? | Nitish Kumar",
+   "id": "VbEKsijY5bw",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding', dekhie shadi ki bhavy ta",
    "src": "Zee Bihar Jharkhand",
-   "lang": "hi"
-  },
-  {
-   "id": "moB73GhUMuQ",
-   "t": "Samrat sarkar ka bara tohpha, DA barha, karmachariyon-penshnars ki balle-balle, janie 32 b",
-   "src": "Kashish News",
    "lang": "hi"
   }
  ]
