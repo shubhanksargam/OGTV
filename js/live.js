@@ -2,26 +2,26 @@
 const LIVE = {
  "news": [
   {
-   "id": "Ba5gwABzH38",
-   "t": "Superfast News LIVE: bari khabren phataphat andaj men | Sonia Gandhi | UP Elections 2027 |",
+   "id": "RKhmd9OABkM",
+   "t": "UP Elections 2027 LIVE Updates: yupi chunav men Owaisi aur chandrashekhar aajad ne banaya ",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "qpmN5jVfxOk",
-   "t": "Assam Train Accident LIVE Footage: jahan huaa 'tren hadsa' vahan se sidha | Kolkata Sairan",
+   "id": "t3OSVJFYc-0",
+   "t": "UP New Alliance Update LIVE: yupi men nae gathbandhan ne chaunkaya? | AIMIM | ASP | Owaisi",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "tW_0-5P9QfQ",
-   "t": "Assam Train Accident: kolkata-sairang eksapres hadse ka vidiyo | Train Accident | Railways",
+   "id": "Az5wsjAn8-Y",
+   "t": "Anant sinh ka shahi intjam! LIVE |Anant Singh Daughter Wedding | Patna | Bihar Anant Singh",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "elfZus03CF4",
-   "t": "BJP PC LIVE: BJP ki Press Conference | Congress | Kharge | Sonia Gandhi | Rahul Gandhi | I",
+   "id": "ILKIIcWnnb4",
+   "t": "Kahani Kursi Ki LIVE: bophors, shah bano kes, rajiv ke lie soniya ka diphens! India TV",
    "src": "India TV",
    "lang": "hi"
   },
@@ -32,14 +32,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "idYhU6S6f44",
-   "t": "BJP Press Conference Live : Mallikarjun Kharge par bijepi ka pres Conference | Breaking Ne",
+   "id": "WMkAqut0GNk",
+   "t": "LIVE : Kolkata Airport par viman men haeejaik alart! | Breaking News | Mumbai | Dum Dum Ai",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "51gVNKOkzQw",
-   "t": "11 Baje LIVE : ghat-ghat par chhathi maiya ki jaykar | mahaparv chhath ki jordar taiyariya",
+   "id": "8J-Ir9_jqoU",
+   "t": "Mid Day Prime : DD News",
    "src": "DD News",
    "lang": "hi"
   },
@@ -62,8 +62,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "6jRSWo1MX8A",
-   "t": "BREAKING NEWS LIVE: Trump Signs Arrest Warrant? | Ilhan Omar Under Fire? | Trump on Ilhan ",
+   "id": "0E0g6GRwqrU",
+   "t": "Trump Announcement Live | Nuclear Attack on Iran? Trump Speech LIVE | US-Iran War Latest N",
    "src": "Times Now",
    "lang": "en"
   },
@@ -76,8 +76,8 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "BXw8iby42JE",
-   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | PM Modi | Weather News Today |",
+   "id": "zlqdJB3f2Bw",
+   "t": "Anant Singh Daughter Wedding Update Live: anant sinh ki beti ki shadi men kya-kya khas? | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
