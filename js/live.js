@@ -2,50 +2,50 @@
 const LIVE = {
  "news": [
   {
-   "id": "RKhmd9OABkM",
-   "t": "UP Elections 2027 LIVE Updates: yupi chunav men Owaisi aur chandrashekhar aajad ne banaya ",
+   "id": "S3xatpNZx4o",
+   "t": "Kulgam Attack CCTV Video: Jammu Kashmir men aatankiyon ke hamle ka CCTV vidiyo aaya | Aaj ",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "t3OSVJFYc-0",
-   "t": "UP New Alliance Update LIVE: yupi men nae gathbandhan ne chaunkaya? | AIMIM | ASP | Owaisi",
+   "id": "W0ZF8PcVfH4",
+   "t": "Sandeep Chaudhary LIVE: ABP ne darjanon bar bataya..EC ko ab samajh aaya | Gyanesh Kumar |",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "Az5wsjAn8-Y",
-   "t": "Anant sinh ka shahi intjam! LIVE |Anant Singh Daughter Wedding | Patna | Bihar Anant Singh",
+   "id": "x629cKndkNQ",
+   "t": "Tranp ki har ke bad jiska dar tha eeran ne vahi kiya? chaunke muslim desh!LIVE | US Senate",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "ILKIIcWnnb4",
-   "t": "Kahani Kursi Ki LIVE: bophors, shah bano kes, rajiv ke lie soniya ka diphens! India TV",
+   "id": "CmwYORr2D5M",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma : 3 karor 38 lakh votar kahan gae ? | CM Yogi | Voter Dele",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "4z7xvSqDodw",
-   "t": "Today Big Breaking News LIVE : subah 10 baje ki bari khabren | Sonia Gandhi Book | Delhi P",
+   "id": "FPmA-2-XuKM",
+   "t": "Indian Army Big Action On Terrorists LIVE: pakistan ne karaya J&K men aatanki hamla..khula",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "WMkAqut0GNk",
-   "t": "LIVE : Kolkata Airport par viman men haeejaik alart! | Breaking News | Mumbai | Dum Dum Ai",
+   "id": "QNkjqlaMOgE",
+   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Kulgam Attack | Terror Attack on Jammu Kashm",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "8J-Ir9_jqoU",
-   "t": "Mid Day Prime : DD News",
+   "id": "A_eBEDJ3lwI",
+   "t": "LIVE News Night: kaibinet ke aham phaisle | PM Modi | Chhath Puja | Railway | CM Yogi | Sa",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "mfKU4iMRsxk",
-   "t": "Assam Train Accident LIVE | Watch Train Driver's Last Moments Before Assam Derailment | As",
+   "id": "wmEzH0xaHWM",
+   "t": "Sonia Gandhi Book | Op Blue Star & 'Tears Of Pain': 'Remorse' Or 'Political Whitewash'? | ",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -56,34 +56,34 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "D9ko31su3Bg",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "id": "ZqCk9h7crYQ",
+   "t": "US-Iran War LIVE: US Sends 40,000 Heavy Bombs To Israel, Massive Joint Strike On Iran Soon",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "0E0g6GRwqrU",
-   "t": "Trump Announcement Live | Nuclear Attack on Iran? Trump Speech LIVE | US-Iran War Latest N",
+   "id": "o9V6c7Ux_po",
+   "t": "Trump US Announcement LIVE: Donald Trump Delivers Lockdown Statement From White House | Tr",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "GEyX6nHLiKg",
-   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "id": "llctF929yOU",
+   "t": "US House LIVE: Lawmakers Vote on Massie's Impeachment Resolution Against Pete Hegseth | Tr",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "zlqdJB3f2Bw",
-   "t": "Anant Singh Daughter Wedding Update Live: anant sinh ki beti ki shadi men kya-kya khas? | ",
+   "id": "fARN94Y1WCE",
+   "t": "Nisha Bhagat Case Update LIVE : nisha bhagat kes men chaunkane vala apdet! | Breaking News",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "mj1IEcMqT-o",
-   "t": "Anant Singh Daughter Wedding : anant sinh ki beti shivangi ki shadi men ladma men dikhega ",
+   "id": "yiJoWyV5XME",
+   "t": "Sonia Gandhi Book Belonging: soniya ki kitab...gathbandhan ka hisab ! Nitish Kumar",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
