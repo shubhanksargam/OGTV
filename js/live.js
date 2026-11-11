@@ -2,82 +2,88 @@
 const LIVE = {
  "news": [
   {
-   "id": "CfxI3taQaxY",
-   "t": "Black and White with Anjana Om Kashyap LIVE: Sonia Gandhi | Belonging A Journey of Love | ",
+   "id": "Ba5gwABzH38",
+   "t": "Superfast News LIVE: bari khabren phataphat andaj men | Sonia Gandhi | UP Elections 2027 |",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "hI_k0GAVZ7A",
-   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 11 November | AQI |",
+   "id": "qpmN5jVfxOk",
+   "t": "Assam Train Accident LIVE Footage: jahan huaa 'tren hadsa' vahan se sidha | Kolkata Sairan",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "XRZ6gabS9f4",
-   "t": "Ijrayal men bara ulatpher? netanyahu par aa gaee bari khabar! | Iran | America | Trump | B",
+   "id": "tW_0-5P9QfQ",
+   "t": "Assam Train Accident: kolkata-sairang eksapres hadse ka vidiyo | Train Accident | Railways",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "Us1MMxNvC0U",
-   "t": "Aaj Ki Badi Khabar LIVE: Rampur CRPF Camp News | UP Politics | Owaisi | CM Yogi | AQI Leve",
+   "id": "elfZus03CF4",
+   "t": "BJP PC LIVE: BJP ki Press Conference | Congress | Kharge | Sonia Gandhi | Rahul Gandhi | I",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "MC1zgE_33r8",
-   "t": "Jaipur Maulana Beaten LIVE : maulana ki kort men aisi pitaee nahin dekhi hogi! LIVE | Raja",
+   "id": "4z7xvSqDodw",
+   "t": "Today Big Breaking News LIVE : subah 10 baje ki bari khabren | Sonia Gandhi Book | Delhi P",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "_e2ITpry8mA",
-   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Yamuna Safari | Congress | Trump | France Cy",
+   "id": "idYhU6S6f44",
+   "t": "BJP Press Conference Live : Mallikarjun Kharge par bijepi ka pres Conference | Breaking Ne",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "dahzxrc5_v0",
-   "t": "Sonia Gandhi Memoir | Memoir Or Political Manifesto? Sonia Gandhi's Take On India's Defini",
+   "id": "51gVNKOkzQw",
+   "t": "11 Baje LIVE : ghat-ghat par chhathi maiya ki jaykar | mahaparv chhath ki jordar taiyariya",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "mfKU4iMRsxk",
+   "t": "Assam Train Accident LIVE | Watch Train Driver's Last Moments Before Assam Derailment | As",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "kRw1IH64mes",
-   "t": "Rajdeep Sardesai LIVE: Sonia Gandhi's Memoir | What Are Big Takeaways? | BJP vs Congress |",
+   "id": "STe8-NyI3NY",
+   "t": "India Today LIVE: Political & Global News | Delhi Pollution |Sonia Gandhi | Rahul Gandhi |",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "qYMX8VSYXvg",
+   "id": "D9ko31su3Bg",
    "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "yZa7G-feSVQ",
-   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
+   "id": "6jRSWo1MX8A",
+   "t": "BREAKING NEWS LIVE: Trump Signs Arrest Warrant? | Ilhan Omar Under Fire? | Trump on Ilhan ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "RzhBDyvoZx0",
-   "t": "Live: House Dems Unveil 3 Major Priorities| New Majority Prepares to Take Power | Trump, r",
+   "id": "GEyX6nHLiKg",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "wn-U7KbO9J4",
-   "t": "Aaj Ki Taaja Khabar LIVE : aaj ki bari khabren | Sonia Gandhi Book | Delhi Air Pollution |",
+   "id": "BXw8iby42JE",
+   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | PM Modi | Weather News Today |",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "VbEKsijY5bw",
-   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding', dekhie shadi ki bhavy ta",
+   "id": "mj1IEcMqT-o",
+   "t": "Anant Singh Daughter Wedding : anant sinh ki beti shivangi ki shadi men ladma men dikhega ",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
