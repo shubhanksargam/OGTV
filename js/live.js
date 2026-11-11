@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "uY-SAE3_8HQ",
-   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren LIVE | Kulgam Terror Attack | So",
+   "id": "01YIw8gfhu8",
+   "t": "China Sink Pakistan LIVE: chin ne dubo dala sara pakistan, macha maut ka tandav! | Shehbaz",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -44,8 +44,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "Wl2grxLaoHs",
-   "t": "Sonia Gandhi Book | Op Blue Star & 'Tears Of Pain': 'Remorse' Or 'Political Whitewash'? | ",
+   "id": "mPlN3uG3wU8",
+   "t": "Delhi Air Pollution | Delhi AQI Today | Pollution Alarm Gets Worse: 20 Delhi Diseases Spik",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -56,8 +56,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "D9ko31su3Bg",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "id": "ZqCk9h7crYQ",
+   "t": "US-Iran War LIVE: US Sends 40,000 Heavy Bombs To Israel, Massive Joint Strike On Iran Soon",
    "src": "WION",
    "lang": "en"
   },
@@ -68,8 +68,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "t6PTuldcGm8",
-   "t": "SS United States Sinking Live: Legendary Ocean Liner's Final Voyage | Largest Artificial R",
+   "id": "mExG3wdtkEs",
+   "t": "LIVE: Hakeem Jeffries SLAMS White House! Calls Warning to Hegseth Investigators “Outrageou",
    "src": "CNN-News18",
    "lang": "en"
   }
