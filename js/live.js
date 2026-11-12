@@ -8,8 +8,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "uWnFv9quLds",
-   "t": "UP New Alliance Update LIVE: yupi men auvesi ne kar diya khela? | AIMIM | ASP | Owaisi | C",
+   "id": "_RVv_8e6B5w",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 12 November | AQI |",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -76,8 +76,8 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "94Lav0sSllM",
-   "t": "Bihar News LIVE : aaj ki bari khabren | Anant Singh Daughter Wedding | JDU BJP Alliance | ",
+   "id": "5MMIq6sdqIo",
+   "t": "Aaj Ki Taaja Khabar LIVE : aaj ki bari khabren | Sonia Gandhi Book | Delhi Air Pollution |",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
