@@ -2,95 +2,77 @@
 const LIVE = {
  "news": [
   {
-   "id": "mr1YZOmd1WM",
-   "t": "Dangal With Shil Joshi LIVE : ab aaee bhains siyasat men | UP Election 2027 | Samajwadi Pa",
+   "id": "Ods9KAR_mmk",
+   "t": "PM Modi LIVE From Bharat Agriculture Conference 2026 | Bharat Mandapam",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "RG8Kb5uKUu0",
-   "t": "Big Action on Kulgam Terrorist Attack LIVE: mara gaya bharat ka dushman! | Breaking News |",
+   "id": "g5IKeKz0uyw",
+   "t": "Aaj Ki Taaza Khabar LIVE: rat ki bari khabren | Headlines Today | Hindi News | 12 November",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "6HFxMmXlxZQ",
-   "t": "UP chunav men ovaisi-chandrashekhar kiska karenge bantadhar? LIVE | UP Election | Owaisi |",
+   "id": "yI11h6fpylU",
+   "t": "Pata chal gaya kisne karaya kulgam men aatanki hamla?LIVE | Kulgam Attack | Jammu Kashmir ",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "EdTCOZsM2Uk",
-   "t": "🔴Breaking News Now: TV par PM Modi LIVE | Diwali Milan Samaroh | BJP | India TV",
+   "id": "Nr-BdenBSxQ",
+   "t": "Aaj kI Baat LIVE | Rajat Sharma : ovaisi-chandrashekhar alliance men kitna dam ? AIMIM-Aaz",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "GhKij55WQ5w",
-   "t": "Big Reveal On Kulgam Attack Mastermind LIVE: mil gae kulgam hamle ke mastarmaind! bhari ek",
+   "id": "7S9nW0Zu53g",
+   "t": "China Breaking News LIVE: bhishan hamle ki taiyari men chin, khatre men 2 karor log... LIV",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "-smkaXmExXU",
-   "t": "Goonj With Arpita Aarya Live: Owaisi | Chandrashekhar Azad Ravan | CM Yogi | Akhilesh Yada",
+   "id": "8fVp3FY-RY8",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 148 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "nHZEhZnQEKA",
-   "t": "LIVE 5 Ki Panchayat: bhim-mim ne uraee do larkon ki nind! | AIMIM-ASP Alliance | SP | Cong",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "CIEQu-N6jHg",
-   "t": "Vijay News LIVE | Vijay Meets TVK MLAs In Batches, Assures Them Their Grievances Will Be H",
+   "id": "mvPORLbPJ0A",
+   "t": "LIVE: NVIDIA Resign | NVIDIA CEO Resign | Jensen Huang Resignation | Jensen Huang Resign |",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "d1WlKIbp_C4",
-   "t": "Kulgam Attack LIVE Updates: 2 Foreign Terrorists Suspected, Security Forces Intensify Manh",
+   "id": "e8shegIBXaA",
+   "t": "Rajdeep Sardesai LIVE: Asaduddin Owaisi Exclusive Interview| AIMIM-Azad Samaj Alliance|UP ",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "LfdCEZXK2nA",
-   "t": "Saudi Under Attack LIVE: Houthis Unleash Drone Strike on Saudi Arabia’s Oil Lifeline | WIO",
+   "id": "ZqCk9h7crYQ",
+   "t": "US-Iran War LIVE: US Sends 40,000 Heavy Bombs To Israel, Massive Joint Strike On Iran Soon",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "AAHO4RIYva4",
-   "t": "Trump US Announcement LIVE: Donald Trump Delivers Lockdown Statement From White House | Tr",
+   "id": "zrUGHXE_r5E",
+   "t": "Trump Iran Announcement LIVE: Donald Trump Delivers Major Statement From White House | Tru",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "X_U6r4NnDOY",
-   "t": "LIVE | China Responds to Nvidia Spy Row as Jensen Huang Faces Mounting Pressure | N18G",
+   "id": "zu4syi11V4I",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "N_QVVioDblc",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "id": "HGJk5ziJhEA",
+   "t": "Anant Singh Daughter Wedding Updates LIVE : shivangi ki shadi ka shahi andaj! | Shivangi S",
    "src": "News18 Bihar Jharkhand",
-   "lang": "hi"
-  },
-  {
-   "id": "VxXBkTB9Rog",
-   "t": "Amba Prasad House Controversy : sarkari aavas khali huaa, ab siyasat tej LIVE | Jharkhand ",
-   "src": "Zee Bihar Jharkhand",
-   "lang": "hi"
-  },
-  {
-   "id": "FoAqZIdl4U8",
-   "t": "Shikshakon ke lie shiksha vibhag ke ACS C K anil ne jari kiya ek aur bara aadesh, machi kh",
-   "src": "Kashish News",
    "lang": "hi"
   }
  ]
