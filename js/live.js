@@ -2,38 +2,38 @@
 const LIVE = {
  "news": [
   {
-   "id": "qTi9IOf7g5U",
-   "t": "Black And White Live With Anjana Om Kashyap:Uttar Pradesh Election | Pakistan Pollution | ",
+   "id": "lq8IzsLJXW8",
+   "t": "Superfast News LIVE: bari khabren phataphat andaj men | UP Elections 2027 | Akhilesh Yadav",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "haUupnFthH4",
-   "t": "Sandeep Chaudhary LIVE: sarhe tin karor ka garbarjhala..UP men 'vot ghotala'? | Gyanesh Ku",
+   "id": "uWnFv9quLds",
+   "t": "UP New Alliance Update LIVE: yupi men auvesi ne kar diya khela? | AIMIM | ASP | Owaisi | C",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "si6Oo76a6eY",
-   "t": "Dhirendra Shastri Krishna Controversy | Akhilesh Yadav | Kunda | Raghuraj Pratap Singh | P",
+   "id": "283PwpCw5Uw",
+   "t": "Aaj Ki Taaza Khabar | | Kulgam Terrorist Attack | Akhilesh Yadav | UP Election 2027 | CM Y",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "CmwYORr2D5M",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma : 3 karor 38 lakh votar kahan gae ? | CM Yogi | Voter Dele",
+   "id": "XIRALMRwAwA",
+   "t": "Aaj Ka Rashifal, 12 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "01YIw8gfhu8",
-   "t": "China Sink Pakistan LIVE: chin ne dubo dala sara pakistan, macha maut ka tandav! | Shehbaz",
+   "id": "x315q0pVfgg",
+   "t": "Aaj Ki Taza Khabar LIVE: Kulgam Attack | Delhi Pollution | Sonia Gandhi | Rahul |US-Iran |",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "R9rtPQICEVQ",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 147 | Sonia Gandhi ",
+   "id": "HonAHtaydME",
+   "t": "Today's Breaking News LIVE: Kulgam Attack | Terror Attack in Jammu Kashmir Today | Sonia G",
    "src": "News18 India",
    "lang": "hi"
   },
@@ -44,40 +44,40 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "mPlN3uG3wU8",
-   "t": "Delhi Air Pollution | Delhi AQI Today | Pollution Alarm Gets Worse: 20 Delhi Diseases Spik",
+   "id": "o6vPxp8qQQM",
+   "t": "NDTV LIVE TV: Kulgam Terror Attack | Nvidia CEO's Affair | Sonia Gandhi | Congress | US Ir",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "kbydDo6wQsY",
-   "t": "LIVE: NVIDIA Spygate Scandal | Did Trump White House Ignore Warnings About Jensen Huang? |",
+   "id": "Ah5q4aCcJ6Y",
+   "t": "Kulgam Terror Attack LIVE: LeT Commander Latif Bhat Suspected Behind Attack On CRPF | J&K",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "ZqCk9h7crYQ",
-   "t": "US-Iran War LIVE: US Sends 40,000 Heavy Bombs To Israel, Massive Joint Strike On Iran Soon",
+   "id": "LfdCEZXK2nA",
+   "t": "Saudi Under Attack LIVE: Houthis Unleash Drone Strike on Saudi Arabia’s Oil Lifeline | WIO",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "w44km_aglk0",
-   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
+   "id": "2mLMI8Vox8Q",
+   "t": "LIVE | Trump Declares EMERGENCY From Whitehouse; Drops NUCLEAR Bombshell On Iran, Russia, ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "mExG3wdtkEs",
-   "t": "LIVE: Hakeem Jeffries SLAMS White House! Calls Warning to Hegseth Investigators “Outrageou",
+   "id": "8OcfOuYtoLo",
+   "t": "Scott Colom Victory Speech LIVE: Democrats Makes History In Mississippi Senate Race | N18G",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "YNFnf-6-Z18",
-   "t": "Anant Singh Daughter Wedding Updates LIVE : shivangi ki shadi ka shahi andaj! | Shivangi S",
+   "id": "94Lav0sSllM",
+   "t": "Bihar News LIVE : aaj ki bari khabren | Anant Singh Daughter Wedding | JDU BJP Alliance | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
