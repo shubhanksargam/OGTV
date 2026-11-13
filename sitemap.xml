@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.co.in/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://ogtv.co.in/tv/just-news/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/dundpc0p7rU/hqdefault.jpg</video:thumbnail_loc><video:title>&apos;We Must Work With Trump&apos; James Talarico Makes New Offer</video:title>
-      <video:description>&apos;We Must Work With Trump&apos; James Talarico Makes New Offer, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/dundpc0p7rU</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KJ0tH5Etjz8/hqdefault.jpg</video:thumbnail_loc><video:title>&apos;No One Is Safe&apos;: Iran&apos;s Chilling Threat to US Bases in Europe, NATO &apos;Shaken&apos;</video:title>
+      <video:description>&apos;No One Is Safe&apos;: Iran&apos;s Chilling Threat to US Bases in Europe, NATO &apos;Shaken&apos;, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/KJ0tH5Etjz8</video:player_loc><video:duration>3360</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/khabar/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/UKTFAlJOXfI/hqdefault.jpg</video:thumbnail_loc><video:title>NVIDIA CEO Jensen Huang aur Lori Huang ka talak hoga?</video:title>
@@ -12,14 +12,14 @@
       <video:player_loc>https://www.youtube.com/embed/UKTFAlJOXfI</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/magadh-times/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/9tTzEvOK-xY/hqdefault.jpg</video:thumbnail_loc><video:title>Aaj Ki Taaja Khabar: aaj ki bari khabren · 13 Nov 2026</video:title>
-      <video:description>Aaj Ki Taaja Khabar: aaj ki bari khabren · 13 Nov 2026, now on Magadh Times, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/9tTzEvOK-xY</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/-fa-A6w8RZU/hqdefault.jpg</video:thumbnail_loc><video:title>Aaj Ki Taaja Khabar: aaj ki bari khabren</video:title>
+      <video:description>Aaj Ki Taaja Khabar: aaj ki bari khabren, now on Magadh Times, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/-fa-A6w8RZU</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/newsroom/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/dundpc0p7rU/hqdefault.jpg</video:thumbnail_loc><video:title>&apos;We Must Work With Trump&apos; James Talarico Makes New Offer</video:title>
-      <video:description>&apos;We Must Work With Trump&apos; James Talarico Makes New Offer, now on Newsroom, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/dundpc0p7rU</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/zNVFnVPl57Q/hqdefault.jpg</video:thumbnail_loc><video:title>India’s food inflation gets worrying</video:title>
+      <video:description>India’s food inflation gets worrying, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/zNVFnVPl57Q</video:player_loc><video:duration>1980</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/gyaan/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/N3sZAYwQ1vk/hqdefault.jpg</video:thumbnail_loc><video:title>India&apos;s New Visa Rules: 70% less paperwork</video:title>
@@ -52,9 +52,9 @@
       <video:player_loc>https://www.youtube.com/embed/yjP-gjOoFjY</video:player_loc><video:duration>480</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/paisa/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/jRiP5hghX4s/hqdefault.jpg</video:thumbnail_loc><video:title>A global boom in Chinese yuan bonds</video:title>
-      <video:description>A global boom in Chinese yuan bonds, now on Paisa, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/jRiP5hghX4s</video:player_loc><video:duration>1560</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/zNVFnVPl57Q/hqdefault.jpg</video:thumbnail_loc><video:title>India’s food inflation gets worrying</video:title>
+      <video:description>India’s food inflation gets worrying, now on Paisa, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/zNVFnVPl57Q</video:player_loc><video:duration>1980</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/baatcheet/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/n26Q0SA7z5c/hqdefault.jpg</video:thumbnail_loc><video:title>Build A $100M Brand Using Influencers &amp; Viral Marketing</video:title>
@@ -67,29 +67,29 @@
       <video:player_loc>https://www.youtube.com/embed/uhVBqBs1glQ</video:player_loc><video:duration>1320</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/cricket/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/pMASAz2cBI8/hqdefault.jpg</video:thumbnail_loc><video:title>Sandpaper Incident: Starc Backed Himself, What Will Pat Cummins Do?</video:title>
-      <video:description>Sandpaper Incident: Starc Backed Himself, What Will Pat Cummins Do?, now on Cricket, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/pMASAz2cBI8</video:player_loc><video:duration>1380</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/B2cxWMR3VuI/hqdefault.jpg</video:thumbnail_loc><video:title>Rashid Khan&apos;s Spin Wizardry! 🌀 Incredible Wickets</video:title>
+      <video:description>Rashid Khan&apos;s Spin Wizardry! 🌀 Incredible Wickets, now on Cricket, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/B2cxWMR3VuI</video:player_loc><video:duration>840</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/khel/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KqHy8iGPWK4/hqdefault.jpg</video:thumbnail_loc><video:title>Nihal, Pranesh beaten as Russia takes down Team India</video:title>
-      <video:description>Nihal, Pranesh beaten as Russia takes down Team India, now on Khel, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/KqHy8iGPWK4</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ZQPyEpp1mF0/hqdefault.jpg</video:thumbnail_loc><video:title>GM Vidit Gujrathi and GM Divya Deshmukh were honored by the President of India with the…</video:title>
+      <video:description>GM Vidit Gujrathi and GM Divya Deshmukh were honored by the President of India with the…, now on Khel, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ZQPyEpp1mF0</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/cricket-classics/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Snr-NpsAIks/hqdefault.jpg</video:thumbnail_loc><video:title>Day 4 All Boundaries &amp; Fall Of Wickets</video:title>
-      <video:description>Day 4 All Boundaries &amp; Fall Of Wickets, now on Cricket Classics, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/Snr-NpsAIks</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-11-12T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/B2cxWMR3VuI/hqdefault.jpg</video:thumbnail_loc><video:title>Rashid Khan&apos;s Spin Wizardry! 🌀 Incredible Wickets</video:title>
+      <video:description>Rashid Khan&apos;s Spin Wizardry! 🌀 Incredible Wickets, now on Cricket Classics, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/B2cxWMR3VuI</video:player_loc><video:duration>840</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/football/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/LmYwQUSP7eY/hqdefault.jpg</video:thumbnail_loc><video:title>Pepe Powers Côte d&apos;Ivoire To First Knockout Stage</video:title>
-      <video:description>Pepe Powers Côte d&apos;Ivoire To First Knockout Stage, now on Football, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/LmYwQUSP7eY</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/xT3zd9KZHjQ/hqdefault.jpg</video:thumbnail_loc><video:title>Egypt&apos;s First World Cup Win!</video:title>
+      <video:description>Egypt&apos;s First World Cup Win!, now on Football, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/xT3zd9KZHjQ</video:player_loc><video:duration>660</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/international-sports/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/KqHy8iGPWK4/hqdefault.jpg</video:thumbnail_loc><video:title>Nihal, Pranesh beaten as Russia takes down Team India</video:title>
-      <video:description>Nihal, Pranesh beaten as Russia takes down Team India, now on International Sports, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/KqHy8iGPWK4</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ZQPyEpp1mF0/hqdefault.jpg</video:thumbnail_loc><video:title>GM Vidit Gujrathi and GM Divya Deshmukh were honored by the President of India with the…</video:title>
+      <video:description>GM Vidit Gujrathi and GM Divya Deshmukh were honored by the President of India with the…, now on International Sports, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/ZQPyEpp1mF0</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-11-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/tv/sehat/</loc><lastmod>2026-11-13</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/BIKLKMsAKBY/hqdefault.jpg</video:thumbnail_loc><video:title>Training the NEXT International Sports Phenom</video:title>
