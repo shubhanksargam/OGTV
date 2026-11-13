@@ -8,8 +8,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "XWqVLlObleE",
-   "t": "Sandeep Chaudhary LIVE: 1.27 karor hindu vot kat jana..hakikat ya phasana? | UP SIR | EC |",
+   "id": "uHamiVjmvZo",
+   "t": "Big Action on Kulgam Terrorist Attack LIVE: 11 bajte hi kulgam se aaee hosh urane vali kha",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "oGEEbZO0vQk",
-   "t": "Indian Army Action On Terrorist LIVE : aatanki hamle ke bad sena ke ekshan ko dekh rone la",
+   "id": "gBf0EFxFHdI",
+   "t": "Indian Army Big Action On Terrorist LIVE:ghati men chhipe aatankiyon par sena ka aisa eksh",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,46 +38,40 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "pVCFSDCvDEA",
-   "t": "DECODE Live: Sudhir Chaudhary | Rahul Phone Tapping | Congress | PM Modi | Chinese Vlogger",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "u3R-ROX6tjg",
-   "t": "Assam Bus Collision | 23 Feared Dead, Several Injured In Truck-Bus Collision In Assam's Ka",
+   "id": "fdA_7VLW6oQ",
+   "t": "Jensen Huang News LIVE | 'I'm A Piece Of Sh*t': Inside Jensen Huang's Final Hours As Nvidi",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "XcH4FPdEeXA",
-   "t": "Rajdeep Sardesai Show Live: What Next In Nvidia Espionage Scandal? Jensen Huang | US-China",
+   "id": "bNaJP7t7lQ8",
+   "t": "Microsoft Outage Live News: What Caused The Outage | Outlook | Microsoft 365 Services | In",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "Y7aGr5l4VNc",
-   "t": "LIVE: Iran Launches Retaliatory Strike on US Radar in Bahrain as Trump Mulls Escalation | ",
+   "id": "c6k22Y2m0gs",
+   "t": "Russia-Ukraine War LIVE: Russia Rains Missiles & Drones on Kyiv After Peace Talks Collapse",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "g4xVqgvNNhM",
-   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
+   "id": "JdhPt0Uui0A",
+   "t": "LIVE: Marco Rubio's Chilling Nuclear Warning | America Braces For Major Emergency | US New",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "bJXZA-denR0",
-   "t": "Iran War LIVE: Trump Rejects Iran Deal, Warns of Possible New Strikes | Hormuz & Military ",
+   "id": "3DxA-3AqR7A",
+   "t": "US House LIVE: “Resign or Be Impeached!” Al Green Warns Trump | Impeachment Showdown Inten",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "lg_9hrf4mTI",
-   "t": "Chhath Puja 2026 Live : nahay-khay se shuru huaa aastha ka mahaparv chhath LIVE | Nahay Kh",
+   "id": "ODAM6HDOx2c",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
