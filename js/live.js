@@ -38,8 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "fdA_7VLW6oQ",
-   "t": "Jensen Huang News LIVE | 'I'm A Piece Of Sh*t': Inside Jensen Huang's Final Hours As Nvidi",
+   "id": "u3R-ROX6tjg",
+   "t": "Assam Bus Collision | 23 Feared Dead, Several Injured In Truck-Bus Collision In Assam's Ka",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -56,8 +56,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "JdhPt0Uui0A",
-   "t": "LIVE: Marco Rubio's Chilling Nuclear Warning | America Braces For Major Emergency | US New",
+   "id": "6cV9KyNbB64",
+   "t": "US News Live: Trump's LOCKDOWN BOMBSHELL! America on Edge as Middle East Crisis Explodes",
    "src": "Times Now",
    "lang": "en"
   },
