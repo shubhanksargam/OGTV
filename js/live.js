@@ -14,14 +14,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "_ZLnV5oVKNA",
-   "t": "Bharat Ki Baat Batata Hoon With Syed Suhail : 'baba bageshvar' par nikal aaee lathiyan! Ch",
+   "id": "I6qwq8z6Ah4",
+   "t": "'baba bageshvar' par niklaaaee lathiyan ! bhari baval? hosh urane vali khabar LIVE | Dhire",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "fGHryhpokq4",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma : Microsoft server fail kyon hue ? Microsoft Server Down T",
+   "id": "hZOwNYiKYBs",
+   "t": "Aaj Ki Baat | Rajat Sharma : Microsoft server fail kyon hue ? Microsoft Server Down Today ",
    "src": "India TV",
    "lang": "hi"
   },
@@ -62,22 +62,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "xVGfweFY2yU",
-   "t": "US NEWS LIVE: Trump Suddenly Escorted Out by Secret Service! Press Conference Takes Shocki",
+   "id": "g4xVqgvNNhM",
+   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "Xzn0kEPEURc",
-   "t": "US House LIVE: “Resign or Be Impeached!” Al Green Warns Trump | Impeachment Showdown Inten",
+   "id": "bJXZA-denR0",
+   "t": "Iran War LIVE: Trump Rejects Iran Deal, Warns of Possible New Strikes | Hormuz & Military ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "KrUrFKthxKU",
-   "t": "Anant Singh Daughter Wedding Update Live : anant sinh ki beti ki shadi ko lekar bara apdet",
+   "id": "lg_9hrf4mTI",
+   "t": "Chhath Puja 2026 Live : nahay-khay se shuru huaa aastha ka mahaparv chhath LIVE | Nahay Kh",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
