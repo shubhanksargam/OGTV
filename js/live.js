@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "WBw7E7hJOf4",
-   "t": "DNA LIVE: yuvaon ko apradhi banane vala 'vidiyo gem' Decode, 4000 viman..4 ghante tak hava",
+   "id": "PDDSBm8Kye4",
+   "t": "Pakistan On Russia-Taliban LIVE : taliban men rus ki entri hote hi bilbila utha pakistan! ",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,8 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "QSjINl9ePH8",
-   "t": "S JAISHANKAR INTERVIEW | EAM Jaishankar On India-US Trade Deal Negotiations",
+   "id": "hHYWM4es4dY",
+   "t": "PM Modi News | \"PM Doesn't Tap Phones\": Sam Pitroda Amid Rahul Gandhi's Big Charge",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -70,8 +70,8 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "RBbX5piwGZE",
-   "t": "Nisha Bhagat Case Update LIVE: nisha bhagat kes men aaya chaunkane vala apdet! | Jairam Ma",
+   "id": "OzsSqATRUfc",
+   "t": "Anant Singh Daughter Wedding Updates LIVE : ye naya ‘intjam’ dekhkar chaunk jaenge! | Moka",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
