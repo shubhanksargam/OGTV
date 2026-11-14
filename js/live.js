@@ -38,14 +38,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "oFz-HQwQL7Q",
-   "t": "Total Chess World Championship 2026 LIVE | Day 5: World Championship Tour",
+   "id": "QSjINl9ePH8",
+   "t": "S JAISHANKAR INTERVIEW | EAM Jaishankar On India-US Trade Deal Negotiations",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "KAhdnelYvH0",
-   "t": "Live: Rahul Gandhi Delivers Speech At BHARAT Summit Valedictory Session In Hyderabad | Rah",
+   "id": "8fFjspx1lF0",
+   "t": "India Today LIVE: India Beats Pakistan In U-19 | Rahul Alleges Phone Tapping | Nvidia | PM",
    "src": "India Today",
    "lang": "en"
   },
@@ -62,16 +62,16 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "4JuTb4c-y7c",
-   "t": "LIVE: FAA Chief Reveals Cause Of US Flight Chaos | Equipment Failure, Not Hacking? | LIVE ",
+   "id": "r43fKtdRafg",
+   "t": "Live: Trump-Xi-Putin Summit: Nuclear Deal, Iran War & Global Power Play | Nuclear Talks | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "OzsSqATRUfc",
-   "t": "Anant Singh Daughter Wedding Updates LIVE : ye naya ‘intjam’ dekhkar chaunk jaenge! | Moka",
+   "id": "RBbX5piwGZE",
+   "t": "Nisha Bhagat Case Update LIVE: nisha bhagat kes men aaya chaunkane vala apdet! | Jairam Ma",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
