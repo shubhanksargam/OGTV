@@ -2,20 +2,20 @@
 const LIVE = {
  "news": [
   {
-   "id": "czdSnhpCPJ0",
-   "t": "Superfast News LIVE: bari khabren phataphat andaj men | UP Elections 2027 | PM Modi | Chha",
+   "id": "AojY9utlonE",
+   "t": "America Flights Shutdown LIVE Updates: amerika ke aasman men sankat ke badal... thap ho ga",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "Wj7rFeXf3sc",
-   "t": "UP New Alliance LIVE: ovaisi-chandrashekhar ke sath aate hi ab baspa ne sabhi ko chaunkaya",
+   "id": "WxBOxjI6Aw0",
+   "t": "Big Action on Kulgam Terrorist Attack LIVE: mara gaya bharat ka dushman! | Breaking News |",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "nLhfoeKIZLU",
-   "t": "Chhath Puja: chhath puja par Maharashtra men baval! MNS ne dekhie kya kiya? |Raj Thackeray",
+   "id": "qUsnVe_4HlY",
+   "t": "UP men CM phes bante hi chandrashekhar ka bara ailan! LIVE | Chandrashekhar | Asaduddin | ",
    "src": "NDTV India",
    "lang": "hi"
   },
@@ -38,12 +38,6 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "jti-Ue98yww",
-   "t": "News Punch LIVE : DD News",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
    "id": "r61eKvd6ddI",
    "t": "NDTV Live TV: US Flight Shutdown | Nvidia CEO Jensen Huang | West Asia Tensions | Delhi AQ",
    "src": "NDTV 24x7",
@@ -62,22 +56,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "Monh0AYp4qs",
-   "t": "TRUMP IRAN ANNOUNCEMENT LIVE | US-IRAN War Is Over | Trump Speech Live | US News Live | Tr",
+   "id": "eLmmJ5XKJ4E",
+   "t": "TRUMP'S IRAN ANNOUNCEMENT LIVE | WORLD WAR 3? Trump Threatens to Destroy Iran | US-Iran Wa",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "A5m0MXYvahA",
-   "t": "LIVE: ‘NO MORE STRIKES?’ RUBIO’S IRAN BOMBSHELL: Blockade, Sanctions & the Midterm Fallout",
+   "id": "lzqpm_LZNEE",
+   "t": "ASEAN Summit 2026 LIVE: World Leaders Arrive In Manila For High-Stakes Regional Talks | N1",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "00FaxJehQrw",
-   "t": "Nisha Bhagat Case Update LIVE : nisha bhagat mamle men huaa bahut bara khulasa?Breaking Ne",
+   "id": "cNqJqM1cSvQ",
+   "t": "Anant Singh Daughter Wedding Update Live : anant sinh ki beti ki shadi par phir naya apdet",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
