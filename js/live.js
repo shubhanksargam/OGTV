@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "gBf0EFxFHdI",
-   "t": "Indian Army Big Action On Terrorist LIVE:ghati men chhipe aatankiyon par sena ka aisa eksh",
+   "id": "upjhIeC5-wc",
+   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren | Kulgam Attack | Pollution | Ch",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -44,34 +44,34 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "ijb-9DbHymI",
-   "t": "Delhi Air Pollution LIVE: Toxic Smog Blankets IIT Delhi, North Campus Worst Hit As AQI Tur",
+   "id": "8fFjspx1lF0",
+   "t": "India Today LIVE: Rahul Alleges Phone Tapping | Microsoft | Nvidia | Kaziranga | PM Modi |",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "IjIjzAtbOMo",
-   "t": "Hormuz Explosion LIVE: Massive Blasts Rock Four Tankers in Strait of Hormuz | WION",
+   "id": "_BGS1dguAtI",
+   "t": "Russia-Ukraine War LIVE: Fresh Russian Assault Leaves 30 Injured in Zaporizhzhia | WION",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "n4I3XR55FZA",
+   "id": "fpS-QMhM1Fs",
    "t": "LIVE | Trump Declares EMERGENCY From Whitehouse; Drops NUCLEAR Bombshell On Iran, Russia, ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "JncnIuu4_jA",
-   "t": "US Flights Grounded : Sean Duffy & Markwayne Mullin Address FAA Crisis | Flight Chaos Hits",
+   "id": "Vau6vqnJyfY",
+   "t": "LIVE: SpaceX Starship Explodes! Starship Flight 15 Booster Failure, Major Test Setback | N",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "O95CDGmEJTU",
-   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | Kharna 2026 | Rahul Gandhi | N",
+   "id": "CtCTLsE8PqU",
+   "t": "Aaj Ki Taaja Khabar LIVE : aaj ki bari khabren | Anant Singh | Chhath Puja Nahay Khay Live",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
