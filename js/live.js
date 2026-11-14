@@ -2,26 +2,26 @@
 const LIVE = {
  "news": [
   {
-   "id": "6D9LxW9hxBs",
-   "t": "Black and White with Anjana Om Kashyap LIVE: PM Modi at Kisan Tak | Rahul Gandhi | Jensen ",
+   "id": "czdSnhpCPJ0",
+   "t": "Superfast News LIVE: bari khabren phataphat andaj men | UP Elections 2027 | PM Modi | Chha",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "uHamiVjmvZo",
-   "t": "Big Action on Kulgam Terrorist Attack LIVE: 11 bajte hi kulgam se aaee hosh urane vali kha",
+   "id": "yNFSDd9WK3k",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 14 November | AQI |",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "I6qwq8z6Ah4",
-   "t": "'baba bageshvar' par niklaaaee lathiyan ! bhari baval? hosh urane vali khabar LIVE | Dhire",
+   "id": "JTIpwhDcQiA",
+   "t": "Aaj Ki Taaza Khabar | Baba Bageshwar | Akhilesh | UP Election 2027 | CM Yogi | Chhath | As",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "hZOwNYiKYBs",
-   "t": "Aaj Ki Baat | Rajat Sharma : Microsoft server fail kyon hue ? Microsoft Server Down Today ",
+   "id": "jcjABwLW0Gw",
+   "t": "Aaj Ka Rashifal, 14 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
    "src": "India TV",
    "lang": "hi"
   },
@@ -32,46 +32,46 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "29rjNLJhCWY",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 149 | Rahul Gandhi ",
+   "id": "Fd_sIxi35Qs",
+   "t": "Today's Breaking News LIVE: Sonia Gandhi Book | Kulgam Attack | Air Pollution | Assam Acci",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "u3R-ROX6tjg",
-   "t": "Assam Bus Collision | 23 Feared Dead, Several Injured In Truck-Bus Collision In Assam's Ka",
+   "id": "r61eKvd6ddI",
+   "t": "NDTV Live TV: US Flight Shutdown | Nvidia CEO Jensen Huang | West Asia Tensions | Delhi AQ",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "bNaJP7t7lQ8",
-   "t": "Microsoft Outage Live News: What Caused The Outage | Outlook | Microsoft 365 Services | In",
+   "id": "ijb-9DbHymI",
+   "t": "Delhi Air Pollution LIVE: Toxic Smog Blankets IIT Delhi, North Campus Worst Hit As AQI Tur",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "c6k22Y2m0gs",
-   "t": "Russia-Ukraine War LIVE: Russia Rains Missiles & Drones on Kyiv After Peace Talks Collapse",
+   "id": "IjIjzAtbOMo",
+   "t": "Hormuz Explosion LIVE: Massive Blasts Rock Four Tankers in Strait of Hormuz | WION",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "6cV9KyNbB64",
-   "t": "US News Live: Trump's LOCKDOWN BOMBSHELL! America on Edge as Middle East Crisis Explodes",
+   "id": "n4I3XR55FZA",
+   "t": "LIVE | Trump Declares EMERGENCY From Whitehouse; Drops NUCLEAR Bombshell On Iran, Russia, ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "3DxA-3AqR7A",
-   "t": "US House LIVE: “Resign or Be Impeached!” Al Green Warns Trump | Impeachment Showdown Inten",
+   "id": "JncnIuu4_jA",
+   "t": "US Flights Grounded : Sean Duffy & Markwayne Mullin Address FAA Crisis | Flight Chaos Hits",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "ODAM6HDOx2c",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "id": "O95CDGmEJTU",
+   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | Kharna 2026 | Rahul Gandhi | N",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
