@@ -14,33 +14,27 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "KJ32YTMcOGI",
-   "t": "Antim gend par tuphani chaunka ! pakistan ko haraya! LIVE | IND vs PAK Asia Cup | Full Mat",
+   "id": "MODQHsZ1bMY",
+   "t": "IND vs PAK Asia Cup News LIVE : 337 ran banakar uchhal rahe the pakistanieshiya kap harte ",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "s1_1er5kBNg",
-   "t": "India Beat Pakistan in U19 Asia Cup Final Live: bharat ne phainal men pakistan ko 1 viket ",
+   "id": "0qLNXN-TRlk",
+   "t": "Dinesh Lal Yadav in Aap Ki Adalat LIVE: aap ki adalat men bhojpuri suprastar dinesh lal ya",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "P7aDJNbLRKI",
-   "t": "Indian Army Action On Terrorist LIVE : aatankiyon ki lokeshan milte hi bharat ki sena ka b",
+   "id": "7UOFaxEwd-4",
+   "t": "Big Reveal on Pakistan Terror Attack LIVE : aatanki hamle men mile sabuton ne pakistan ko ",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "yoTiiBqK9Yg",
-   "t": "Aar Paar With Rubika Liyaquat Live: Sonia Book Row | 1984 anti-Sikh riots | Rahul Gandhi |",
+   "id": "zGK3mG-R0ws",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala EP 150 | Rahul Gandhi Chall",
    "src": "News18 India",
-   "lang": "hi"
-  },
-  {
-   "id": "Ko9GbJ_oi3E",
-   "t": "LIVE News Night: kangres vidhayak par rep ka aarop, Congress netritv ki chuppi par saval |",
-   "src": "DD News",
    "lang": "hi"
   },
   {
@@ -50,8 +44,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "CgWcyzBnwi4",
-   "t": "India vs Pakistan U19 Asia Cup Final Live: Ulva's Heroics Seal Dramatic Last-Ball Thriller",
+   "id": "soZU_tW9YX4",
+   "t": "Live: Rajdeep Sardesai Hosts Roundtable On Sonia Gandhi's Memoir | Sonia's Book | Belongin",
    "src": "India Today",
    "lang": "en"
   },
@@ -68,17 +62,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "9kfYjmY1PvU",
-   "t": "Live: 'Resign Or Be Impeached!' Al Green's Fresh Warning To Trump | House Vote Looms | N18",
+   "id": "ilcbsr9gnSQ",
+   "t": "LIVE: U.S Flight Chaos: Thousands Of Flights Cancelled | Duffy & Bedford Briefing | N18G",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "OzsSqATRUfc",
-   "t": "Anant Singh Daughter Wedding Updates LIVE : ye naya ‘intjam’ dekhkar chaunk jaenge! | Moka",
+   "id": "Df-lk8g152M",
+   "t": "Chhath Puja Kharna 2026 LIVE : chhath puja ka dusra din kharna aaj, dekhie khas tasviren |",
    "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "xBmowbKdWcY",
+   "t": "TRE-4, CTET apiyring aur laibreriyan pariksha se lekar sab par khulkar bole shiksha mantri",
+   "src": "Kashish News",
    "lang": "hi"
   }
  ]
