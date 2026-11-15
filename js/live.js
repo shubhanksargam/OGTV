@@ -2,8 +2,8 @@
 const LIVE = {
  "news": [
   {
-   "id": "UW9_C_2rPt8",
-   "t": "Superfast News LIVE: aaj ki bari khabren dekhie phataphat andaj men | Chhath Puja 2026 | C",
+   "id": "nMnEMFHUdaE",
+   "t": "Chhath Mahaparv LIVE: chhath puja karyakram men pahunche CM Yogi, bhagvan sury ko diya arg",
    "src": "Aaj Tak",
    "lang": "hi"
   },
@@ -14,14 +14,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "1B2TDXHRp0Q",
-   "t": "Kulgam men aatanki hamla karne valon ka tagra ilaj shuru?LIVE | Kulgam Attack | Jammu Kash",
+   "id": "WMNhAfHVBcI",
+   "t": "UP chunav se pahle aankron ne chaunkaya, hoga bara ulatpher?LIVE | Akhilesh | CM Yogi | UP",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "rcZkxXcsaME",
-   "t": "Aaj Ki Badi Khabar LIVE: Ganganagar Blast Case | Bharat Summit | U19 Asia Cup | UP Politic",
+   "id": "S1aulQl-JMI",
+   "t": "Chhath Mahaparv Live : desh men chhath mahaparv par shraddha aur bhakti ka mahaul | Delhi ",
    "src": "India TV",
    "lang": "hi"
   },
@@ -62,17 +62,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "-ouBnpk-S5U",
-   "t": "Live: Trump visit sparks chaos in Manila: Anti-US protesters clash with police | ASEAN sum",
+   "id": "L2c9jDZETNk",
+   "t": "Live: Iran war about to explode? 3 US aircraft carriers head to Middle East| Bahrain Attac",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "-_jQEthBHWA",
-   "t": "Anant Singh Daughter Wedding News Live : anant sinh apne damad ko kya-kya de rahe hain? | ",
+   "id": "RUzdtKVC__k",
+   "t": "Chhath Puja 2026 LIVE : chhath mahaparv par har kone se sandhya arghy ki manmohak tasviren",
    "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "xX346Nv5LFM",
+   "t": "Ghar baithe karen udiyman sury ke darshan, Kashish News par dekhie pramukh ghaton ki sidhi",
+   "src": "Kashish News",
    "lang": "hi"
   }
  ]
