@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "ADyLZbEnI4Y",
-   "t": "Big Attack On Pakistan Military Camp LIVE : pakistan bordar par bhishan dhamaka..bichhi la",
+   "id": "P8gJUG5NI1s",
+   "t": "US Big Alert On Trump LIVE : is khuphiya alart ke bad amerika men harkanp! White House |US",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,8 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "fsdiDf9F0G0",
-   "t": "Italian MP Vs BJP LIVE | BJP Targets Rahul Over Italian Leader's 'Vote Chor, Gaddi Chhod' ",
+   "id": "kksnjta7s7c",
+   "t": "Total Chess World Championship 2026 LIVE | Day 6: World Championship Tour",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -56,22 +56,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "FkH2ZZ4cEG4",
-   "t": "LIVE| 'Ilhan Omar In Jail!' | Trump's Brutal Takedown Of Omar After Shock Raid! | US News ",
+   "id": "0p4SAjolbTg",
+   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "kuIy4mUl98o",
-   "t": "LIVE: Blue Wave Alert: 2028 Looking Like a Nightmare For Republicans | US Elections 2028 |",
+   "id": "FiInVZH_BEw",
+   "t": "Lindsay Clancy Trial LIVE: Crucial Retrial Decision Looms in Child Murder Case | What's Ne",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "k-0e3D6r4Ho",
-   "t": "Chhath Puja 2026 Live : patna ke chhath ghat se LIVE | Sandhya Arghya in Patna | Bihar Chh",
+   "id": "-_jQEthBHWA",
+   "t": "Anant Singh Daughter Wedding News Live : anant sinh apne damad ko kya-kya de rahe hain? | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
