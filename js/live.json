@@ -1,50 +1,56 @@
 {
  "news": [
   {
-   "id": "wMrYxg68xl0",
-   "t": "Superfast News LIVE: bari khabren phataphat andaj men | Chhath Puja | UP Elections 2027 | ",
+   "id": "nMnEMFHUdaE",
+   "t": "Chhath Mahaparv LIVE: chhath puja karyakram men pahunche CM Yogi, bhagvan sury ko denge ar",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "2auYm1xyjwE",
-   "t": "Hardeep Singh Puri Resign News LIVE:12 bajte hi yupi se bare neta ke istiphe se hil gaee b",
+   "id": "pw-kgjC1vjw",
+   "t": "UP Breaking News LIVE: bijepi se bara 'istipha'! | Hardeep Singh Puri Resigned From Rajya ",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "ufFIHOReDT4",
-   "t": "Aaj Ki Taaza Khabar | India vs Pakistan | Kulgam Attack | CricketNews | Baba Bageshwar | Y",
+   "id": "UYM_58hfJ8I",
+   "t": "Chhath puja, ghaton se sidha LIVE | Chhath Puja 2026 | Bihar Chhat Puja | Patna | Surya Ar",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "L4sVMCVNEHw",
-   "t": "Kahani Kursi Ki LIVE | Saurav Sharma: yupi men ovaisi bhaeejan, bigarenge akhilesh ka plan",
+   "id": "S1aulQl-JMI",
+   "t": "Chhath Mahaparv Live : desh men chhath mahaparv par shraddha aur bhakti ka mahaul | Delhi ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "0FMa-cTtBEc",
-   "t": "Massive Violence Outburst LIVE: ab in deshon men machi bhishan markat! lakhon logon ne phu",
+   "id": "2Vmtb1tKLrQ",
+   "t": "Chhath Puja 2026 LIVE: dubte suraj ko arghy, chhath ghaton par umra jansailab! Sandhya Arg",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "Sd0eu16S8lg",
-   "t": "Aaj Ki Taaza Khabar LIVE: subah ki 100 khabren | Headlines Today| Hindi News | 14 November",
+   "id": "qV_JWBPIx2s",
+   "t": "Goonj With Arpita Aarya Live: Owaisi | Chandrashekhar Azad | Akhilesh Yadav | CM Yogi | UP",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "-vNAt3_XZ3s",
-   "t": "NDTV LIVE TV: Delhi Air Pollution | Delhi AQI Today | Bay of Bengal Cyclone | Chhath Puja ",
+   "id": "fl02Ag9eEcc",
+   "t": "LIVE Rashtra Manch: 'bharat samit'...bharat ka apman! | Rahul Gandhi | Giacomo Fili Beck |",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "9wwCa21dNa0",
+   "t": "Chhath Puja 2026 LIVE: Devotees Offer Sandhya Arghya To Sun God Across India | Chhath Puja",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "uDpw8D8CaaE",
-   "t": "India Today LIVE: US Air Travel Disruptions| India Beats Pak In U19 Asia Cup| Rahul Gandhi",
+   "id": "HuVpQ-5w_7Q",
+   "t": "LIVE: Italian Minister's 'Vote Chor' Remark Sparks BJP Vs Congress War | Bharat Summit |Ra",
    "src": "India Today",
    "lang": "en"
   },
@@ -55,8 +61,8 @@
    "lang": "en"
   },
   {
-   "id": "F9FrWvi46PI",
-   "t": "Trump US Announcement LIVE: Donald Trump Delivers Lockdown Statement From White House | Tr",
+   "id": "8NdjlE9p-xg",
+   "t": "Trump LIVE: President Trump Delivers Major Nuclear Emergency Warning | US On High? | Trump",
    "src": "Times Now",
    "lang": "en"
   },
@@ -69,9 +75,15 @@
  ],
  "bihar": [
   {
-   "id": "LJasm-nh6-I",
-   "t": "Bihar News LIVE : chhath puja sahit aaj ki bari khabren| Chhath Puja 2026 Live | CM Samrat",
+   "id": "k-0e3D6r4Ho",
+   "t": "Chhath Puja 2026 Live : patna ke chhath ghat se LIVE | Sandhya Arghya in Patna | Bihar Chh",
    "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "MA0lCCpqihI",
+   "t": "Ghar baithe karen astachalgami sury ke darshan, Kashish News par dekhie pramukh ghaton ki ",
+   "src": "Kashish News",
    "lang": "hi"
   }
  ]
