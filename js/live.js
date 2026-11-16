@@ -2,20 +2,20 @@
 const LIVE = {
  "news": [
   {
-   "id": "4JSea1rxPog",
-   "t": "Congress-SP Alliance News LIVE: Mallikarjun Kharge ke ghar kangres ki baithak khatm, gathb",
+   "id": "-mM6fUGUIgM",
+   "t": "Kulgam Encounter LIVE: kulgam men surakshablon ne lashkar ke do aatankiyon ko ghera, donon",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "esqVLaZC5JA",
-   "t": "Big Breaking on UP Seat Sharing LIVE: akhilesh hue raji? kangres-sapa gathbandhan men itni",
+   "id": "1MA2jS-13gY",
+   "t": "Rahul Gandhi News LIVE: miting men sit sheyring par bara bayan | Akhilesh Yadav | Seat Sha",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "wsWOj1MVlDQ",
-   "t": "LIVE : kulgam hamle ke khunkhar aatanki latiph bhatt ko sena ne thoka | Kulgam Attack | Ja",
+   "id": "JFFHjXjK8Nc",
+   "t": "Mara gaya khunkhar aatanki latiph bhat LIVE | Kulgam Attack | Jammu Kashmir | Pakistan",
    "src": "NDTV India",
    "lang": "hi"
   },
@@ -32,14 +32,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "-sShAFmzijU",
+   "id": "lX_R5r8KaAU",
    "t": "Terrorist Lateef Bhat Killed Live: Kulgam aatanki hamle ka badla | Jammu Kashmir |Terror A",
    "src": "News18 India",
    "lang": "hi"
   },
   {
    "id": "uqd6wJ5gqww",
-   "t": "Iss Waqt LIVE : 180 siton par rar,gathbandhan mendrar! | DD News",
+   "t": "Iss Waqt LIVE : UP men 180-200 siton par siyasi khinchtan | Rahul Gandhi | SP-Congress men",
    "src": "DD News",
    "lang": "hi"
   },
@@ -50,8 +50,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "jY_8zGr6DnU",
-   "t": "Kulgam Encounter LIVE: 2 Terrorists Killed During Search Operation In J&K | Indian Army",
+   "id": "qob4qCl50PI",
+   "t": "India Today LIVE: Political & Global News | PM Modi | Rahul Gandhi | Donald Trump | Englis",
    "src": "India Today",
    "lang": "en"
   },
