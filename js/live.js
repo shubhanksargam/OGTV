@@ -2,39 +2,45 @@
 const LIVE = {
  "news": [
   {
-   "id": "8_dn-hDugkE",
-   "t": "Chhath Puja 2026 LIVE: ugte suraj ko arghy ke sath sanpann huaa chhath mahaparv | Patna | ",
+   "id": "4JSea1rxPog",
+   "t": "Congress-SP Alliance News LIVE: Mallikarjun Kharge ke ghar kangres ki baithak khatm, gathb",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "Ft0xt65aXdU",
-   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 16 November | Chhat",
+   "id": "esqVLaZC5JA",
+   "t": "Big Breaking on UP Seat Sharing LIVE: akhilesh hue raji? kangres-sapa gathbandhan men itni",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "YwOnHqnNsfo",
-   "t": "Aaj Ki Taaza Khabar | Chhath Puja 2026 | Mohan Bhagwat | PM Modi | Team India Win Series |",
+   "id": "wsWOj1MVlDQ",
+   "t": "LIVE : kulgam hamle ke khunkhar aatanki latiph bhatt ko sena ne thoka | Kulgam Attack | Ja",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "qXNiCtisM3g",
-   "t": "Yoga With Swami Ramdev LIVE: yog-pranayam dilaenge kamar dard se nijat? | Yoga for Back pa",
+   "id": "mfxCms7smAc",
+   "t": "Kulgam Terrorist Encounter LIVE: kulgam men lashkar ke donon aatanki dher | Indian Army |J",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "-Hcj3v3M-0g",
-   "t": "Aaj Ki Taza Khabar LIVE: Chhath Puja | SIR | CM Yogi | Kulgam | PM Modi | UP Election | In",
+   "id": "0QjIQy82uXw",
+   "t": "Kulgam Attack Terrorists Killed LIVE: kulgam hamle ke aatanki dher LIVE | Indian Army | Pa",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "NIY9IYUJqQA",
-   "t": "Today's Breaking News LIVE: Chhath Puja 2026 | Chhath Mahaparv | Rahul Gandhi | Delhi Air ",
+   "id": "-sShAFmzijU",
+   "t": "Terrorist Lateef Bhat Killed Live: Kulgam aatanki hamle ka badla | Jammu Kashmir |Terror A",
    "src": "News18 India",
+   "lang": "hi"
+  },
+  {
+   "id": "uqd6wJ5gqww",
+   "t": "Iss Waqt LIVE : 180 siton par rar,gathbandhan mendrar! | DD News",
+   "src": "DD News",
    "lang": "hi"
   },
   {
@@ -44,8 +50,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "uDpw8D8CaaE",
-   "t": "India Today LIVE: BJP vs Congress Over Bharat Summit | Amit Shah Vs Rahul Gandhi | Air Pol",
+   "id": "jY_8zGr6DnU",
+   "t": "Kulgam Encounter LIVE: 2 Terrorists Killed During Search Operation In J&K | Indian Army",
    "src": "India Today",
    "lang": "en"
   },
@@ -56,29 +62,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "0p4SAjolbTg",
-   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
+   "id": "VBc0_VGftZQ",
+   "t": "BREAKING NEWS LIVE: Trump Signs Arrest Warrant? | Ilhan Omar Under Fire? | Trump on Ilhan ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "C5tl3U0sHms",
-   "t": "LIVE: Todd Blanche Hearing LIVE | Cory Booker Slams Blanche's Connection With President Tr",
+   "id": "q0z3nx27460",
+   "t": "Pete Hegseth Impeachment Showdown | Caught in His Own Words! Ossoff Turns Up Heat on Hegse",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "ziSah1luhHM",
-   "t": "Anant Singh Daughter Wedding Updates LIVE : ye naya ‘intjam’ dekhkar chaunk jaenge! | Moka",
+   "id": "rxvWBFujenE",
+   "t": "Bihar News LIVE: aaj ki bari khabren| Chhath Puja 2026 | CM Samrat News | Anant Singh | UP",
    "src": "News18 Bihar Jharkhand",
-   "lang": "hi"
-  },
-  {
-   "id": "yc7fVSkVhSE",
-   "t": "Akshara Singh Chhath Puja 2026 : chhath ke antim din paranprik andaj men dikhin akshara si",
-   "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
  ]
