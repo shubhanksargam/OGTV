@@ -2,56 +2,56 @@
 const LIVE = {
  "news": [
   {
-   "id": "nMnEMFHUdaE",
-   "t": "Chhath Mahaparv LIVE: chhath puja karyakram men pahunche CM Yogi, bhagvan sury ko diya arg",
+   "id": "8_dn-hDugkE",
+   "t": "Chhath Puja 2026 LIVE: ugte suraj ko arghy ke sath sanpann huaa chhath mahaparv | Patna | ",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "n--Di6mQXfo",
-   "t": "Aaj Ki Taaza Khabar LIVE: 100 bari khabren | Headlines Today | Hindi News | 15 November | ",
+   "id": "Ft0xt65aXdU",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 16 November | Chhat",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "WMNhAfHVBcI",
-   "t": "UP chunav se pahle aankron ne chaunkaya, hoga bara ulatpher?LIVE | Akhilesh | CM Yogi | UP",
+   "id": "YwOnHqnNsfo",
+   "t": "Aaj Ki Taaza Khabar | Chhath Puja 2026 | Mohan Bhagwat | PM Modi | Team India Win Series |",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "S1aulQl-JMI",
-   "t": "Chhath Mahaparv Live : desh men chhath mahaparv par shraddha aur bhakti ka mahaul | Delhi ",
+   "id": "Bk1sXREPmpM",
+   "t": "Aaj Ka Rashifal, 16 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "P8gJUG5NI1s",
-   "t": "US Big Alert On Trump LIVE : is khuphiya alart ke bad amerika men harkanp! White House |US",
+   "id": "-Hcj3v3M-0g",
+   "t": "Aaj Ki Taza Khabar LIVE: Chhath Puja | SIR | CM Yogi | Kulgam | PM Modi | UP Election | In",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "YCuBTSuQ14Q",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 151 | Chhath Puja 2",
+   "id": "NIY9IYUJqQA",
+   "t": "Today's Breaking News LIVE: Chhath Puja 2026 | Chhath Mahaparv | Rahul Gandhi | Delhi Air ",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "fsdiDf9F0G0",
-   "t": "Italian MP Vs BJP LIVE | BJP Targets Rahul Over Italian Leader's 'Vote Chor, Gaddi Chhod' ",
+   "id": "rSSPoYsOY54",
+   "t": "NDTV Live TV: NVIDIA News | Chhath Puja | Jensen Huang | West Asia Tensions | Delhi AQI | ",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "uDpw8D8CaaE",
-   "t": "India Today LIVE: BJP vs Congress Over Bharat Summit | Amit Shah Vs Rahul Gandhi | Air Pol",
+   "id": "wE5EuqZv508",
+   "t": "LIVE: Sonia Gandhi's Memoir 'Belonging' EXPOSED? | Congress | Gandhi Family | Rajdeep Sard",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "xgxy6E8H4-M",
-   "t": "US Iran War LIVE: Iran's IRGC Launches Drone Attack On US Base In Bahrain | WION",
+   "id": "JiyPLQpIQ2Y",
+   "t": "Saudi Under Attack LIVE: Houthis Launch Fresh Wave of Missile Barrage, Riyadh on High Aler",
    "src": "WION",
    "lang": "en"
   },
@@ -62,23 +62,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "L2c9jDZETNk",
-   "t": "Live: Iran war about to explode? 3 US aircraft carriers head to Middle East| Bahrain Attac",
+   "id": "-5AfVHW2UaY",
+   "t": "Live: War Continues? Iran war about to explode? 3 US aircraft carriers head to Middle East",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "RUzdtKVC__k",
-   "t": "Chhath Puja 2026 LIVE : chhath mahaparv par har kone se sandhya arghy ki manmohak tasviren",
+   "id": "6R2I94Atlms",
+   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | Chhath Puja 2026 | Rahul Gandh",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "xX346Nv5LFM",
-   "t": "Ghar baithe karen udiyman sury ke darshan, Kashish News par dekhie pramukh ghaton ki sidhi",
-   "src": "Kashish News",
+   "id": "-j-vIzLiSMQ",
+   "t": "Chhath Puja 2026 : chhath mahaparv ke chauthe din ugte sury dev ki upasna LIVE",
+   "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
  ]
