@@ -2,82 +2,82 @@
 const LIVE = {
  "news": [
   {
-   "id": "JFTgkM9oLMc",
-   "t": "Aaj Tak LIVE TV: PM Modi | Donald Trump | Rahul Gandhi | BJP Mathura Meeting | SP-Congress",
+   "id": "8Vjjg9N2PpY",
+   "t": "Dangal with Sahil Joshi LIVE: UP Elections | Krishna Janmabhoomi | CM Yogi | Akhilesh Yada",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "0yOeAewXZm4",
-   "t": "Aaj Ki Taja Khabar LIVE: bari khabren phataphat | Headlines Today | 17 November News | Bre",
+   "id": "ifRvOv9h3IM",
+   "t": "Bageshwar Baba Kunda Ram Katha LIVE: katha men aae Pakistani Hindu | | Raja Bhaiya | Dhire",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "woRRRst16EY",
-   "t": "Kulgam hamle ka badla pura! sena ne 2 aatankiyon ko thoka LIVE | Kulgam Attack | Jammu Kas",
+   "id": "90OQy_z7paM",
+   "t": "Kunda se raja bhaiya ki 'ramaktha' sidha LIVE| Bageshwar Baba Ram Katha | Raja Bhaiya | Ku",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "7wnA8v0zGr8",
-   "t": "Aaj Ka Rashifal, 17 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "id": "9YhVhq5Z00I",
+   "t": "PM Modi & Trump Meeting LIVE Updates : modi-tranp ki ‘mahamulakat’ | QUAD Meeting | ASEAN ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "K-puwtjJOuI",
-   "t": "Today Big Breaking News LIVE: subah 7 baje ki bari khabren | UP ELection | PM Modi | Rahul",
+   "id": "RapDeH-FGRo",
+   "t": "India Army Killed Kulgam Terrorists LIVE: 120 ghanton men bharat ne pakistani aatanki ko u",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "bO01ebhG4m8",
-   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: PM Modi | QUAD Summit | Rahul Gandhi | Sonia G",
+   "id": "JQ6Ahjs0lh8",
+   "t": "Goonj With Arpita Aarya Live: CM Yogi | Akhilesh Yadav | Rahul Gandhi | India Bloc Seat Sh",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "SuostxbTsrw",
-   "t": "LIVE: Inaugural Session of National Workshop on ‘Leadership as Mission’ | NITI Aayog",
+   "id": "W_OdL5Fp1HE",
+   "t": "LIVE 5 Ki Panchayat: yupi men votar barhne se kisko tenshan! ECI | UP Elections 2027 | BJP",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "63aNKf29OOY",
-   "t": "NDTV LIVE TV: Hormuz News | PM Modi | Rahul Gandhi | Delhi AQI Today | Bay of Bengal Cyclo",
+   "id": "oyw06qAbWeY",
+   "t": "Sonia Gandhi Book Launch LIVE | \"Hurtful, Unreal Stories\": Why Sonia Gandhi Chose To Write",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "1c5wZT53VwA",
-   "t": "India Today LIVE: US Vs Iran War | PM Modi In Manila | Rahul Gandhi | Nvidia | Quad Summit",
+   "id": "kkoAfQxAQ7I",
+   "t": "LIVE: PM Modi Meets Donald Trump In Manila | India-US Relations | Philippines | ASEAN Summ",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "eyI4qixFMU0",
-   "t": "Saudi Under Attack LIVE: Houthis Unleash Fresh Missile Barrage, Riyadh on Alert | WION",
+   "id": "xgxy6E8H4-M",
+   "t": "US Iran War LIVE: Iran's IRGC Launches Drone Attack On US Base In Bahrain | WION",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "aU2GXKNFe2M",
-   "t": "Donald Trump Speech LIVE | Trump Makes Very Big Announcement | Trump Latest News LIVE | US",
+   "id": "Eu2SisjZrHQ",
+   "t": "Manila Summit LIVE: Trump and Modi Join Global Leaders for High-Stakes ASEAN Meetings | TR",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "44WnuHEnVoI",
-   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "id": "kfZsxYTuasI",
+   "t": "ASEAN Summit 2026 LIVE: Closing Ceremony In Manila, Philippines Hands Over Chairship To Si",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "oGd9li7pt6Q",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "id": "1QrwCznxCrQ",
+   "t": "Anant Singh Daughter Wedding Updates LIVE : shivangi ki shahi shadi men karoron ka intjam!",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
