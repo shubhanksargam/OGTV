@@ -2,82 +2,76 @@
 const LIVE = {
  "news": [
   {
-   "id": "YhERAw00EQQ",
-   "t": "Halla Bol with Anjana Om Kashyap LIVE: Voter List par siyasi sangram | UP Elections | CM Y",
+   "id": "xqZQLo8lOeM",
+   "t": "Black and White with Anjana Om Kashyap: Quad Summit | PM Modi - Trump | Imran Khan | MS Dh",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "rOKHRJ6pVwE",
-   "t": "Bageshwar Baba Ram Katha LIVE: kunda se ram katha | Raja Bhaiya | Kunda | UP News | Dhiren",
+   "id": "96sxOoBiQAE",
+   "t": "Sandeep Chaudhary LIVE: yupi men matdata suchi ka khel...kaun pas, kaun phel? | UP Voter L",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "90OQy_z7paM",
-   "t": "Kunda se raja bhaiya ki 'ramaktha' sidha LIVE| Bageshwar Baba Ram Katha | Raja Bhaiya | Ku",
+   "id": "F6IecqJuNaU",
+   "t": "Kulgam hamle ka badla pura! sena ne 2 aatankiyon ko thoka LIVE | Kulgam Attack | Jammu Kas",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "KdRD0s52L9I",
-   "t": "Coffee Par Kurukshetra LIVE | Saurav Sharma: yupi men kiske 2.58 karor vot lapta? | Draft ",
+   "id": "z4olRgpyeZI",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma : yogi men ram, hanuman, shiv kise dikhe ? | Baba Bageshwa",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "jppXFRa3OBQ",
+   "id": "qC8WtqZcUyk",
    "t": "Today Breaking News LIVE : abhi ki sabse bari khabren LIVE | ASEAN Summit 2026 | PM Modi-T",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "jBjErUfN19w",
-   "t": "Aar Paar With Rubika Liyaquat Live: UP Election 2027 | CM Yogi | Akhilesh Yadav |Krishna J",
+   "id": "xtEHpPSo2z8",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 153 | PM Modi | Don",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "2cjVdBWspwg",
-   "t": "Presentations and Valedictory Session | National Workshop on ‘Leadership as Mission’ | NIT",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "LTNy2hCquBk",
-   "t": "Kulgam CRPF Attack LIVE: CCTV Shows LeT's Lateef Bhat Before Attack | On Camera: Manhunt U",
+   "id": "UU16W_cCXGY",
+   "t": "Total Chess World Championship 2026 LIVE | Total Chess 2026 | Knockout Semifinals Day1",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "kkoAfQxAQ7I",
-   "t": "LIVE: PM Modi Meets Donald Trump In Manila | India-US Relations | Philippines | ASEAN Summ",
+   "id": "D0T4m5XAm6k",
+   "t": "LIVE: After Ram Mandir, Krishna Janmabhoomi New Poll Issue For BJP In UP 2027? | SP vs BJP",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "xgxy6E8H4-M",
-   "t": "US Iran War LIVE: Iran's IRGC Launches Drone Attack On US Base In Bahrain | WION",
+   "id": "gADlSCv4yY4",
+   "t": "US-Iran War LIVE: Pentagon Under Fire After 6 US Soldiers Killed in Kuwait Strike | WION",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "s4JPGVPUD8Q",
-   "t": "Trump News LIVE: Nuclear Emergency In America? | US On High Alert | Trump LIVE | US News L",
+   "id": "kp0-nfDbyY0",
+   "t": "Trump News LIVE: FBI Director Kash Patel UNMASKS The Trump Assassination Plot Details | US",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "kdoFJhhzR9Q",
-   "t": "ASEAN Summit 2026 LIVE: US President Trump Joins President Marcos For Dinner In Manila | N",
+   "id": "k0Znwypm2Mo",
+   "t": "Democrats' Leadership Showdown: Can Jeffries Unite The Party After Midterm Victory | LIVE ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "pUf6mvrF4PE",
-   "t": "Anant Singh Daughter Wedding Updates LIVE : shivangi ki shahi shadi men karoron ka intjam!",
+   "id": "KqA6mXvWb7E",
+   "t": "Bahas Bihar KI LIVE:nitish ke nam par pul siyasat phul| CM Samrat | Nitish Kumar| Bihar Br",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
