@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "qC8WtqZcUyk",
-   "t": "Today Breaking News LIVE : abhi ki sabse bari khabren LIVE | ASEAN Summit 2026 | PM Modi-T",
+   "id": "AdCcRkwc0i8",
+   "t": "Donald Trump On PM Modi LIVE:tranp ke piem modi par bolte hi sare pakistanmen machi khalab",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,8 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "UU16W_cCXGY",
-   "t": "Total Chess World Championship 2026 LIVE | Total Chess 2026 | Knockout Semifinals Day1",
+   "id": "4TaEA2uVuko",
+   "t": "Assam Triple Murder Shocker LIVE: Three Members Of Bhuyan Family Found Dead Inside Locked ",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -50,8 +50,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "gADlSCv4yY4",
-   "t": "US-Iran War LIVE: Pentagon Under Fire After 6 US Soldiers Killed in Kuwait Strike | WION",
+   "id": "eyI4qixFMU0",
+   "t": "Saudi Under Attack LIVE: Houthis Unleash Fresh Missile Barrage, Riyadh on Alert | WION",
    "src": "WION",
    "lang": "en"
   },
