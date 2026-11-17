@@ -2,67 +2,67 @@
 const LIVE = {
  "news": [
   {
-   "id": "1h6PkOnjaqs",
-   "t": "Black and White With Anjana Om Kashyap Live: PM Modi | Congress | SIR Controversy | Sonia ",
+   "id": "JFTgkM9oLMc",
+   "t": "Aaj Tak LIVE TV: PM Modi | Donald Trump | Rahul Gandhi | BJP Mathura Meeting | SP-Congress",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "0OI_iNkDyjw",
-   "t": "Lashkar Terrorist Latif Bhat Encounter News LIVE: mara gaya latiph bhatt | Kulgam Attack |",
+   "id": "0yOeAewXZm4",
+   "t": "Aaj Ki Taja Khabar LIVE: bari khabren phataphat | Headlines Today | 17 November News | Bre",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "pQ-MESHxx50",
-   "t": "500 'pakistani' ko nyota...list se harkanp! |Dhirendra Shashtri | Raja Bhaiya |Kunda Katha",
+   "id": "CthI_4sZswE",
+   "t": "Aatanki ko utha laee sena! bich sarak mari goli? kanpa pakistan LIVE | Kulgam Attack | Jam",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "sG72oHVhG5A",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma: chintan baithak men CM Yogi ne ki jit ki taiyari ! | BJP ",
+   "id": "7wnA8v0zGr8",
+   "t": "Aaj Ka Rashifal, 17 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "mO3l0I1-lxA",
-   "t": "Kulgam Attack Terrorists Killed LIVE : pakistani bordar par sena ne bharat ke bare dushman",
+   "id": "K-puwtjJOuI",
+   "t": "Today Big Breaking News LIVE: subah 7 baje ki bari khabren | UP ELection | PM Modi | Rahul",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "Fn6DLOY8nSA",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 152 | PM Modi | QUA",
+   "id": "OWih7xR4faU",
+   "t": "Today's Breaking News LIVE: Sonia Gandhi Book | Rahul Gandhi | Bharat Summit Row | PM Modi",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "4DPr2UXnH2M",
-   "t": "Kulgam Encounter LIVE: Security Forces Launch Operation In J&K | Terrorist Encounter Updat",
+   "id": "63aNKf29OOY",
+   "t": "NDTV LIVE TV: Hormuz News | PM Modi | Rahul Gandhi | Delhi AQI Today | Bay of Bengal Cyclo",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "oA7XYuiLyh0",
-   "t": "Rajdeep Sardesai LIVE: Yamuna's Toxic Froth Crisis Returns | BJP vs AAP | Who Will Clean U",
+   "id": "NLgtXGkVOSY",
+   "t": "LIVE: PM Modi To Meet Donald Trump In Manila | India-US Ties, Trade Deal In Focus | Quad S",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "xgxy6E8H4-M",
-   "t": "US Iran War LIVE: Iran's IRGC Launches Drone Attack On US Base In Bahrain | WION",
+   "id": "eyI4qixFMU0",
+   "t": "Saudi Under Attack LIVE: Houthis Unleash Fresh Missile Barrage, Riyadh on Alert | WION",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "afqYJUxsRaE",
-   "t": "TRUMP IRAN ANNOUNCEMENT LIVE | US-IRAN War Is Over | Trump Speech Live | US News Live | Tr",
+   "id": "S1c3eSnokSg",
+   "t": "Trump Announcement Live | Nuclear Attack on Iran? Trump Speech LIVE | US-Iran War Latest N",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "lpdGdazWZgE",
+   "id": "44WnuHEnVoI",
    "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
