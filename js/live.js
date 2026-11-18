@@ -2,76 +2,76 @@
 const LIVE = {
  "news": [
   {
-   "id": "xqZQLo8lOeM",
-   "t": "Black and White with Anjana Om Kashyap: Quad Summit | PM Modi - Trump | Imran Khan | MS Dh",
+   "id": "6rsd76nDU4U",
+   "t": "Aaj Tak LIVE: Kulgam Encounter | UP Elections | PM Modi | Rahul Gandhi | SP-Congress Allia",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "96sxOoBiQAE",
-   "t": "Sandeep Chaudhary LIVE: yupi men matdata suchi ka khel...kaun pas, kaun phel? | UP Voter L",
+   "id": "jb-i2ApyrWE",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 18 November | UP El",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "F6IecqJuNaU",
-   "t": "Kulgam hamle ka badla pura! sena ne 2 aatankiyon ko thoka LIVE | Kulgam Attack | Jammu Kas",
+   "id": "tElzTNet0ac",
+   "t": "Today Breaking News | 18 November News | Baba Bageshwar | Ram Katha | Akhilesh | Yogi | Mo",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "z4olRgpyeZI",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma : yogi men ram, hanuman, shiv kise dikhe ? | Baba Bageshwa",
+   "id": "-kAmUnoICQ0",
+   "t": "Aaj Ka Rashifal, 18 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "AdCcRkwc0i8",
-   "t": "Donald Trump On PM Modi LIVE:tranp ke piem modi par bolte hi sare pakistanmen machi khalab",
+   "id": "-ZkWhJw3tOg",
+   "t": "Aaj Ki Taza Khabar LIVE: PM Modi | Rahul Gandhi | Sonia Gandhi Book | UP Election | Congre",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "xtEHpPSo2z8",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 153 | PM Modi | Don",
+   "id": "MbPV1uH2hug",
+   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: PM Modi | QUAD Summit | Rahul Gandhi | MS Dhon",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "4TaEA2uVuko",
-   "t": "Assam Triple Murder Shocker LIVE: Three Members Of Bhuyan Family Found Dead Inside Locked ",
+   "id": "mFAFzbZMGXk",
+   "t": "NDTV Live TV: NVIDIA CEO Jensen Huang | Mumbai Spice Jet | QUAD Summit | Kulgam Encounter",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "D0T4m5XAm6k",
-   "t": "LIVE: After Ram Mandir, Krishna Janmabhoomi New Poll Issue For BJP In UP 2027? | SP vs BJP",
+   "id": "pUXitsbfUwE",
+   "t": "India Today LIVE: J&K Terrorists | PM Modi | Donald Trump | Rahul Gandhi | US Vs Iran War ",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "eyI4qixFMU0",
-   "t": "Saudi Under Attack LIVE: Houthis Unleash Fresh Missile Barrage, Riyadh on Alert | WION",
+   "id": "HGuAiBJ0jl8",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "kp0-nfDbyY0",
-   "t": "Trump News LIVE: FBI Director Kash Patel UNMASKS The Trump Assassination Plot Details | US",
+   "id": "3yH-vkd3IYw",
+   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "k0Znwypm2Mo",
-   "t": "Democrats' Leadership Showdown: Can Jeffries Unite The Party After Midterm Victory | LIVE ",
+   "id": "-EPiu-PHJ-I",
+   "t": "Hegseth's Navy Faces Senate Heat Live | Hung Cao Faces Grilling | Iran War, Navy Firings |",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "KqA6mXvWb7E",
-   "t": "Bahas Bihar KI LIVE:nitish ke nam par pul siyasat phul| CM Samrat | Nitish Kumar| Bihar Br",
+   "id": "Y0mEAGNxW0I",
+   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | MS Dhoni | PM Modi | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
