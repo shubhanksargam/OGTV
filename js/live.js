@@ -8,32 +8,32 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "jb-i2ApyrWE",
-   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 18 November | UP El",
+   "id": "5yFIENOrQ5c",
+   "t": "Bageshwar Baba Kunda Ram Katha LIVE: katha men aae Pakistani Hindu | | Raja Bhaiya | Dhire",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "tElzTNet0ac",
-   "t": "Today Breaking News | 18 November News | Baba Bageshwar | Ram Katha | Akhilesh | Yogi | Mo",
+   "id": "stro0-M955c",
+   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar Ram Katha | Kunda | Raja Bhaiya | Yogi | Akhilesh | Mo",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "-kAmUnoICQ0",
-   "t": "Aaj Ka Rashifal, 18 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "id": "T2HLudnLp2k",
+   "t": "Aaj Ki Badi Khabar LIVE: Sheikh Hasina Bangladesh Return | PM Modi |UP Election 2027 | Rah",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "-ZkWhJw3tOg",
-   "t": "Aaj Ki Taza Khabar LIVE: PM Modi | Rahul Gandhi | Sonia Gandhi Book | UP Election | Congre",
+   "id": "vntNJUTLWro",
+   "t": "America-Iran War LIVE Updates: amerika par 'darti bam' se hamla karega eeran khalipha ke n",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "MbPV1uH2hug",
-   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: PM Modi | QUAD Summit | Rahul Gandhi | MS Dhon",
+   "id": "go_AvnR4x4k",
+   "t": "Today's Breaking News LIVE: Rahul Gandhi | PM Modi Donald Trump Meeting | MS Dhoni Retires",
    "src": "News18 India",
    "lang": "hi"
   },
@@ -50,20 +50,20 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "HGuAiBJ0jl8",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "id": "btNO9OqfAxw",
+   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "3yH-vkd3IYw",
-   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
+   "id": "cDEFbIqN7Z0",
+   "t": "Trump LIVE: President Trump Delivers Major Nuclear Emergency Warning | US On High? | Trump",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "-EPiu-PHJ-I",
-   "t": "Hegseth's Navy Faces Senate Heat Live | Hung Cao Faces Grilling | Iran War, Navy Firings |",
+   "id": "YqZcO3kg500",
+   "t": "Kash Patel Faces Tough Questions | Grilling Erupts In Tense US Hearing | U.S News LIVE- N1",
    "src": "CNN-News18",
    "lang": "en"
   }
