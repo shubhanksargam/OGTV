@@ -2,75 +2,75 @@
 const LIVE = {
  "news": [
   {
-   "id": "6rsd76nDU4U",
-   "t": "Aaj Tak LIVE: Kulgam Encounter | UP Elections | PM Modi | Rahul Gandhi | SP-Congress Allia",
+   "id": "ktw4zEJGQPU",
+   "t": "Kulgam Encounter LIVE Updates: mara gaya aatanki latiph bhat, kulgam men rachi thi aatanki",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "5yFIENOrQ5c",
-   "t": "Bageshwar Baba Kunda Ram Katha LIVE: katha men aae Pakistani Hindu | | Raja Bhaiya | Dhire",
+   "id": "rtfeanMIqGo",
+   "t": "Lashkar Commander Lateef Bhat News LIVE: masjid se nikalkar mara aatanki!, sine men dagi g",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "stro0-M955c",
-   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar Ram Katha | Kunda | Raja Bhaiya | Yogi | Akhilesh | Mo",
+   "id": "PJco4jSSmv0",
+   "t": "Kunda men baba bageshvar ki ramaktha shuru LIVE | Bageshwar Baba Ram Katha | Raja Bhaiya |",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "T2HLudnLp2k",
-   "t": "Aaj Ki Badi Khabar LIVE: Sheikh Hasina Bangladesh Return | PM Modi |UP Election 2027 | Rah",
+   "id": "jnr4ebo9rUQ",
+   "t": "Kahani Kursi Ki LIVE: ded ikonomi tu 'dijastar', yues men rahul ka enti indiya engal? Indi",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "vntNJUTLWro",
-   "t": "America-Iran War LIVE Updates: amerika par 'darti bam' se hamla karega eeran khalipha ke n",
+   "id": "LZ2mWlaCDeo",
+   "t": "Kulgam Attack Terrorists Killed LIVE: pakistan bordar par sena ne kamandar ko thoka! | Mun",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "go_AvnR4x4k",
-   "t": "Today's Breaking News LIVE: Rahul Gandhi | PM Modi Donald Trump Meeting | MS Dhoni Retires",
+   "id": "NTY8VlDNzsM",
+   "t": "Goonj With Arpita Aarya Live: CM Yogi | Akhilesh Yadav | UP Election 2027 | Rahul Gandhi |",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "mFAFzbZMGXk",
-   "t": "NDTV Live TV: NVIDIA CEO Jensen Huang | Mumbai Spice Jet | QUAD Summit | Kulgam Encounter",
+   "id": "J1tPH_PAgtQ",
+   "t": "Prince William, Kate Middleton In India | Prince William In Mumbai | Prince William At Dha",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
    "id": "pUXitsbfUwE",
-   "t": "India Today LIVE: J&K Terrorists | PM Modi | Donald Trump | Rahul Gandhi | US Vs Iran War ",
+   "t": "India Today LIVE: Kulgam Encounter | PM Modi | Donald Trump | Rahul Gandhi | US Vs Iran Wa",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "btNO9OqfAxw",
-   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
+   "id": "HGuAiBJ0jl8",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "cDEFbIqN7Z0",
-   "t": "Trump LIVE: President Trump Delivers Major Nuclear Emergency Warning | US On High? | Trump",
+   "id": "KEJgFIL785s",
+   "t": "Breaking News LIVE: Iran’s Deadly Hypersonic Missiles Aimed at US | Fm Araghchi | US-IRAN ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "YqZcO3kg500",
-   "t": "Kash Patel Faces Tough Questions | Grilling Erupts In Tense US Hearing | U.S News LIVE- N1",
+   "id": "dFldKSdMeLU",
+   "t": "Trump Arrives In China LIVE | APEC Summit 2026 | Meeting Xi Jinping & Putin Next In Shenzh",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "Y0mEAGNxW0I",
+   "id": "gonneDlAU1U",
    "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | MS Dhoni | PM Modi | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
