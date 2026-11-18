@@ -2,8 +2,8 @@
 const LIVE = {
  "news": [
   {
-   "id": "g8K1cU6Yj9U",
-   "t": "Indian Politics: videsh men rahul ka bayan, BJP kahe desh ka 'apman'!| Rahul Gandhi | BJP ",
+   "id": "LncFZQz42_Q",
+   "t": "Black and White with Anjana Om Kashyap: UP Election | Rahul Gandhi | PM Modi | Donald Trum",
    "src": "Aaj Tak",
    "lang": "hi"
   },
@@ -14,70 +14,64 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "DdUQLqmJx84",
-   "t": "Kulgam hamle ka badla pura! sena ne 2 aatankiyon ko thoka LIVE | Kulgam Attack | Jammu Kas",
+   "id": "koYfysM7Qdk",
+   "t": "Bageshwar Baba Ram Katha LIVE : Kunda ki katha men chamatkar? raja bhaiya ke virodhi pares",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "TnlUJ3AUt6k",
-   "t": "Coffee Par Kurukshetra LIVE | Saurav Sharma : Akhilesh ka mishan purvanchal shuru? | Gorak",
+   "id": "zDoJyfXSatA",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma : kaise huaa J&K se lashkar ka saphaya ? Encounter In Kulg",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "CvP0NtLWewc",
-   "t": "Indian Army Killed Kulgam Terrorist LIVE : kulgam hamle ke mastarmaind ka sena ne aise kiy",
+   "id": "O--8BiANFPM",
+   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren LIVE | Kulgam Encounter | UP Ele",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "icab1cCBgqM",
-   "t": "Aar Paar With Rubika Liyaquat Live: CM Yogi | Rahul Gandhi | Akhilesh Yadav | UP Elections",
+   "id": "0jelGDebFJM",
+   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Kulgam Encounter | Latif Bhatt | Pakistan | ",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "m3wcsxayx1E",
-   "t": "LIVE Poora Sach: videsh yatra ki phir vahi kahani, har bar bharat ki badnami! | Rahul Gand",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "nWT8h1UhxPA",
-   "t": "BREAKING LIVE: Samajwadi Party Leader Azam Khan Releases from Dasna Jail on Interim Bail |",
+   "id": "HJdU0taLDco",
+   "t": "Total Chess World Championship 2026 LIVE | Total Chess 2026 | Knockout Semifinals Day 2",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "yNHpMyySgEU",
-   "t": "LIVE:Rahul Gandhi Warns Of Economic Crisis Under Modi | BJP Calls Him 'Anti-India' | BJP v",
+   "id": "GQH3aFC6FME",
+   "t": "LIVE: Rahul Gandhi Attacks Modi Govt In US | Is Attacking Govt Abroad 'Anti-National'? | N",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "9pK_RG_3nwo",
-   "t": "APEC Summit 2026 LIVE: Xi Jinping Hosts Gala Dinner in Shenzhen; World Leaders Arrive | WI",
+   "id": "FGLosIN0VpE",
+   "t": "US Iran War LIVE: Trump's Deadly Warplanes Attack Iranian Missile Sites Again, Middle East",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "eZ5diF3-cGs",
-   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
+   "id": "tKewRnjhJl8",
+   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "65OwBN4F-II",
-   "t": "LIVE | Trump, Putin And Xi Jinping Under One Roof: China Hosts APEC Leaders' Gala Dinner |",
+   "id": "hzz7NEWiSSI",
+   "t": "LIVE: MULLIN GRILLED AFTER US FLIGHT CHAOS! DHS CHIEF FACES CONGRESS OVER SECURITY FAILURE",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "0O0zAHi5zqs",
-   "t": "Aaj Ki Taaja Khabar LIVE: aaj ki bari khabren| Anant Singh | CM Samrat | Bihar News| Cyclo",
+   "id": "f4c3MxyeSik",
+   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | MS Dhoni | PM Modi | ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
