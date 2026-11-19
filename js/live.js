@@ -2,44 +2,44 @@
 const LIVE = {
  "news": [
   {
-   "id": "LncFZQz42_Q",
-   "t": "Black and White with Anjana Om Kashyap: UP Election | Rahul Gandhi | PM Modi | Donald Trum",
+   "id": "Zh06sEJ27C4",
+   "t": "Aaj Tak LIVE TV: APEC Summit | Trump-Putin & Jinping Meeting | PM Modi | Azam Khan | UP El",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "hjVRZT7d3BI",
-   "t": "Sandeep Chaudhary LIVE: Gorakhpur men Akhilesh Yadav ki tal..jati banegi dhal? | UP Electi",
+   "id": "zgvICh0XTjE",
+   "t": "Aaj Ki Taaza Khabar LIVE: 100 khabren | Headlines Today | Hindi News | 19 November | UP El",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "koYfysM7Qdk",
-   "t": "Bageshwar Baba Ram Katha LIVE : Kunda ki katha men chamatkar? raja bhaiya ke virodhi pares",
+   "id": "FbkK3GVGjwQ",
+   "t": "Masjid ke bahar sena ne kulgam hamle ke aantki ko mara LIVE | Lashkar Terrorist Killed | L",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "zDoJyfXSatA",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma : kaise huaa J&K se lashkar ka saphaya ? Encounter In Kulg",
+   "id": "9vXxfXHHUZI",
+   "t": "Aaj Ki Badi Khabar LIVE: Azam Khan | Akhilesh Yadav Gorakhpur Roadshow | U[P Election | CM",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "UKatwdu11SY",
-   "t": "Lashkar Terrorist Killed LIVE : masjid men ghusa aatanki..sena ne kiya dher..phir jo huaa ",
+   "id": "aHGBdb3aARI",
+   "t": "Big Breaking News LIVE : subah ki sabse bari khabren LIVE | Kulgam Encounter | UP Election",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "0jelGDebFJM",
-   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Kulgam Encounter | Latif Bhatt | Pakistan | ",
+   "id": "ZLODomeQW0A",
+   "t": "Today's Breaking News LIVE: Rahul Gandhi | Azam Khan Bail | PM Modi | Donald Trump | UP El",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "cOzVstxb4NQ",
-   "t": "GTA LIVE | Grand Theft Auto: Vice City | GTA 6 Is Here: The Long Wait, Big Launch And Indi",
+   "id": "HJdU0taLDco",
+   "t": "Total Chess World Championship 2026 LIVE | Total Chess 2026 | Knockout Semifinals Day 2",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -50,28 +50,28 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "FGLosIN0VpE",
-   "t": "US Iran War LIVE: Trump's Deadly Warplanes Attack Iranian Missile Sites Again, Middle East",
+   "id": "btNO9OqfAxw",
+   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "tKewRnjhJl8",
-   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
+   "id": "zCDxytYUXBk",
+   "t": "Breaking News LIVE: Iran’s Deadly Hypersonic Missiles Aimed at US | Fm Araghchi | US-IRAN ",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "VOXjb-jAvm0",
-   "t": "US Senate LIVE: Trump Needs To 'Lawyer Up'? Democrats Launch Fresh Probe Plans Targeting P",
+   "id": "nVezHtVWtmU",
+   "t": "Hegseth VS Ossoff | Hegseth Caught In His Own Words?| Hegseth Impeachment Showdown | Iran ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "f4c3MxyeSik",
-   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | MS Dhoni | PM Modi | ",
+   "id": "L7t1Kvk0SzA",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
