@@ -2,56 +2,50 @@
 const LIVE = {
  "news": [
   {
-   "id": "x6YjWoc4VJI",
-   "t": "Halla Bol With Anjana Om Kashyap LIVE: 'gali se nahin barhta desh', rahul ko PM ka sandesh",
+   "id": "MpgxPbafk28",
+   "t": "Black and White with Anjana Om Kashyap: UP Politics | Akhilesh Yadav | Rahul Gandhi | PM M",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "3_3Px14WvdU",
-   "t": "Aaj Ki Taja Khabar LIVE:19 logon ki maut ne hila diya pura desh!, charon or macha hahakar!",
+   "id": "5FBgACNvtC4",
+   "t": "Sandeep Chaudhary LIVE: tushtikran Vs santushtikran..karna hai dhruvikran? | UP Election 2",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "GRAJ3DlUANU",
-   "t": "Baba bageshvar ki ramaktha kunda se sidhaLIVE | Bageshwar Baba Ram Katha | Raja Bhaiya | P",
+   "id": "wb1zKCQUH0k",
+   "t": "Azam Khan News: jel se bahar kiska khel bigarenge aajam? chaunkane vala khulasa | UP Polit",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "0g6SEOppRHw",
-   "t": "Coffee Par Kurukshetra Live: bharat ko duniya kare 'salam', phir rahul kyon kare 'badnam'?",
+   "id": "eCKneAgzsX4",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma : yogi ki akhilesh ko kya naee chunauti ? UP Elections 202",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "whup1FR3vBA",
-   "t": "Gold-Silver Price Crash LIVE : pahli bar sone-chandi par aisi giravat nahin dekhi hogi! | ",
+   "id": "Ex-zzipzbyE",
+   "t": "Gold Price Crash Big News LIVE : sone ke damon men bhari giravat! LIVE | 24 Carat Gold | B",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "Enbrkrb09Lw",
-   "t": "Goonj With Arpita Aarya Live: Rahul Gandhi Chicago University Statement | PM Modi | BJP | ",
+   "id": "KyHlX3qx3j0",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 154 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "ORZv7UK9CUo",
-   "t": "LIVE Khabar Duniya Ki: vapas lautenge sare Rohingya | Bangladesh | APEC Summit | Trump | P",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "g1sH3zDagKk",
-   "t": "Russia-China-US Trilateral Meeting LIVE | Trump, Xi Jinping & Putin Talks | APEC Summit 20",
+   "id": "zWQiNUlGMRg",
+   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "5PY_51kcNUQ",
-   "t": "Live: Tamil Nadu MLA VS Babu Passes Away | MK Stalin | DMK | TVK | CM Vijay | Kolathur | P",
+   "id": "ML64zcFy5fE",
+   "t": "Live: Trump-Xi-Putin Trilateral Meet | US-China-Russia Issue Joint Statement | Trump | Put",
    "src": "India Today",
    "lang": "en"
   },
@@ -62,22 +56,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "Pg9QAndN52U",
-   "t": "Trump News LIVE: FBI Director Kash Patel UNMASKS The Trump Assassination Plot Details | US",
+   "id": "cSCqHwn0sUc",
+   "t": "Donald Trump LIVE: Trump's Stunning Announcement | Trump Latest News LIVE | US News | Whit",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "Q1StZyYmMM4",
-   "t": "ICJ VERDICT LIVE: World Court Judgment On Myanmar | Rohingya Genocide Case | Gambia v Myan",
+   "id": "GpkTM4HsK5o",
+   "t": "US House LIVE: Hakeem Jeffries Wins Democratic Speaker Nomination | Congress Convenes | N1",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "yTubcOiBDHM",
-   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh | Nishant Kumar | CM Samrat | Cyclone Ak",
+   "id": "JkAae3xKXwI",
+   "t": "Cyclone Akvan Updates LIVE : agle 24 ghante men chakravati tuphan ‘akvan’ machane vala hai",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
