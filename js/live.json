@@ -1,77 +1,89 @@
 {
  "news": [
   {
-   "id": "Zh06sEJ27C4",
-   "t": "Aaj Tak LIVE TV: APEC Summit | Trump-Putin & Jinping Meeting | PM Modi | Azam Khan | UP El",
+   "id": "X6-PmncaCHA",
+   "t": "CM Yogi Speech LIVE: chunav se pahle gorakhpur ki janta ko yogi ka tohpha | UP Elections |",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "ZOZfEhO9V4M",
-   "t": "Aaj Ki Taja Khabar LIVE: bari khabren phataphat | Headlines Today | 19 November News | Bre",
+   "id": "MQlvbubQhtU",
+   "t": "SP-Congress Clash on Seat Sharing LVIE: yupi chunav men akele larenge Rahul Gandhi aur Akh",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "ok6jNp0CT_A",
-   "t": "Today Breaking News | 19 November News | Baba Bageshwar | Ram Katha | Akhilesh | Yogi | Ku",
+   "id": "QGIomhEemuY",
+   "t": "Bageshwar Baba Ram Katha LIVE : Kunda ki katha men chamatkar? raja bhaiya ke virodhi pares",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "XuXlAeX0Q9U",
-   "t": "Aaj Ka Rashifal, 19 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "id": "53wXH74qxpc",
+   "t": "Kahani Kursi Ki LIVE | Saurav Sharma: jel se bahar aajam, muslim vot ka naya kailkuleshan!",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "SZz4w_l2nBM",
-   "t": "Today Big Breaking News LIVE : abhi ki 100 sabse bari khabren | Kulgam | Trump-Putin-Jinpi",
+   "id": "WB5eGd2EEpg",
+   "t": "CM Fadnavis Bulldozer Action On Dawood LIVE: 'daood ke ghar' men ghuse 'bhau' ke buldojar,",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "ZLODomeQW0A",
-   "t": "Today's Breaking News LIVE: Rahul Gandhi | Azam Khan Bail | PM Modi | Donald Trump | UP El",
+   "id": "tFYpTkRB798",
+   "t": "Kulgam Encounter LIVE Updates : lashkar ka top kamandar Latif Bhat Kashmir men mara gaya |",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "rndhcfbfvm0",
-   "t": "NDTV LIVE: PM Modi | GTA 6 | Jensen Huang | APEC Summit | Rahul Gandhi | Azam Khan Release",
+   "id": "-2Le7ZJqPb8",
+   "t": "LIVE NextGen Bharat : draivar ki thakan pahchanegi smart sit, AI se helthakeyar tak yavaon",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "N0gnWeLJjZo",
+   "t": "Trump, Xi Jinping And Putin In 3-Way Meeting In China | WATCH LIVE | NDTV",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "YA9QbHpLfDY",
-   "t": "India Today LIVE: APEC Summit | Donald Trump | Rahul Gandhi | Kulgam Encounter | PM Modi |",
+   "id": "o-hpwR8EPI4",
+   "t": "APEC Summit 2026 LIVE: Donald Trump-Xi Jinping-Vladimir Putin Mega Trilateral In China | I",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "5vemostDNtg",
-   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
+   "id": "Hxa3HmJJ_y8",
+   "t": "US-Iran War LIVE: US Sends 40,000 Heavy Bombs To Israel, Massive Joint Strike On Iran Soon",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "yBlUmzd1svQ",
-   "t": "Donald Trump Speech LIVE | Trump Makes Very Big Announcement | Trump Latest News LIVE | US",
+   "id": "P_28G0olzj8",
+   "t": "Trump-Xi-Putin Trilateral Meeting LIVE: US, China and Russia Leaders Meet at APEC Summit i",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "nVezHtVWtmU",
-   "t": "Hegseth VS Ossoff | Hegseth Caught In His Own Words?| Hegseth Impeachment Showdown | Iran ",
+   "id": "Q1StZyYmMM4",
+   "t": "ICJ VERDICT LIVE: World Court Judgment On Myanmar | Rohingya Genocide Case | Gambia v Myan",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "EnR_fHXygz4",
-   "t": "Azam Khan Breaking News LIVE : aaj phir jel jaenge aajam khan ? | Azam Khan News | Rampur ",
+   "id": "Zn9Y9j0TEWQ",
+   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | MS Dhoni | PM Modi | ",
    "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "HA4P5pbbX1c",
+   "t": "CM Samrat ki sikyoriti ne Nishant Kumar ko dhakka dene par kya kya bole Neeraj Kumar ?",
+   "src": "ABP Bihar",
    "lang": "hi"
   }
  ]
