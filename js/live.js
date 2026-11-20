@@ -2,82 +2,82 @@
 const LIVE = {
  "news": [
   {
-   "id": "CfxI3taQaxY",
-   "t": "Black and White with Anjana Om Kashyap LIVE: Sonia Gandhi | Belonging A Journey of Love | ",
+   "id": "QJvfWLArlrA",
+   "t": "Rajasthan Panchayat Election Result LIVE: rajasthan panchayat chunav men bijepi ne hari ma",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "9GD1-Nb4LFs",
-   "t": "Sandeep Chaudhary LIVE: ram ke nam par..rajniti lagi kam par! | UP Election 2027 | Akhiles",
+   "id": "eZ7g1JfBnzU",
+   "t": "Rajasthan Panchayat Election Results 2026 Hindi News LIVE: harte hi BJP ka bara ailan! | C",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "XRZ6gabS9f4",
-   "t": "Ijrayal men bara ulatpher? netanyahu par aa gaee bari khabar! | Iran | America | Trump | B",
+   "id": "HI0IeNAqrVU",
+   "t": "Raja bhaiya ne kiya bara khulasa! LIVE | Dhirendra Shashtri |Bageshwar Dham| Kunda |Brijes",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "6_XPlub3NJY",
-   "t": "Aaj Ki Baat with Rajat Sharma LIVE: chiniyon ne anti India video kyon banaya ? |China vide",
+   "id": "UP0fhKQZKlM",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma: yogi ne Youth ko kya samjhaya ? UP Election 2027 | India ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "lmfjyeZfG_Q",
-   "t": "Today Big Breaking News LIVE : abhi ki sabse bari khabren LIVE | Sonia Gandhi Book | Delhi",
+   "id": "a6T3EMbX6EU",
+   "t": "India Biggest Enemy Killed LIVE : lo..mara gaya bharat ka sabse bara dushman! sare aatanki",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "dprGSSVbc5g",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 146 | PM Modi | Rah",
+   "id": "Ql8h2sKjfGM",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 155 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "cHextG1OL-E",
-   "t": "NVIDIA News LIVE | Spy Scandal, Billion-Dollar Fallout: Jensen Huang's Biggest Crisis Yet",
+   "id": "xDOTgj83Wr0",
+   "t": "Inside USS George Washington: NDTV On Board America's Warship",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "kRw1IH64mes",
-   "t": "Rajdeep Sardesai LIVE: Sonia Gandhi's Memoir | What Are Big Takeaways? | BJP vs Congress |",
+   "id": "Z9vTlC4Z09I",
+   "t": "Rajdeep Sardesai LIVE: Sam Pitroda Exclusive | Decoding Rahul Gandhi's Diaspora Outreach|B",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "QcyWBwDllRE",
-   "t": "Saudi Under Attack LIVE : Houthis Claim Major Strikes on Saudi Oil Facilities & Riyadh Air",
+   "id": "9dHKiYy39yA",
+   "t": "Saudi Under Attack LIVE: Houthis Strike Aramco Tower After Yemen Attack Kills Dozens | WIO",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "yZa7G-feSVQ",
-   "t": "Live: Trump To America, 'Lockdown Now' – Immediate Order Sends Shockwaves Across Nation | ",
+   "id": "VgQkbllgd3I",
+   "t": "Breaking News LIVE: Trump DROPS BOMBSHELL, IMMEDIATE Lockdown Declared Across America!",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "NpS9m0oG7iQ",
-   "t": "US House LIVE: Lawmakers May Vote on Massie's Impeachment Resolution Against Pete Hegseth ",
+   "id": "rAgik5wVwLE",
+   "t": "US LIVE: 'Just Like The President!' Thomas Massie Slams Trump In Fiery Epstein Files Speec",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "UWeNJKZS3Ys",
-   "t": "Bihar News LIVE : aaj ki bari khabren | Anant Singh Daughter Wedding | JDU BJP Alliance | ",
+   "id": "e2TOEN4LlRg",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "VbEKsijY5bw",
-   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding', dekhie shadi ki bhavy ta",
+   "id": "YBOI5K1gHlI",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
