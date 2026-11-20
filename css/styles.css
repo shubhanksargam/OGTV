@@ -818,6 +818,7 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .screen.radio #yt{inset:auto;right:clamp(16px,4%,56px);top:max(16px,calc(50% - 120px));width:200px;height:200px;z-index:4;
   box-shadow:0 0 0 1px rgba(242,160,61,.6),0 0 0 6px #0c0a10,0 18px 40px rgba(0,0,0,.7)}
 .screen.radio:is(.strip-on,.banner-on) #yt{top:16px}
+.screen.radio:has(.static:not([hidden])) #yt{z-index:0} /* while a channel tunes in, the static's glitch covers the window too, as it covers the picture outside Radio (by request) */
 .screen.radio .bug{display:none} /* the kicker names the channel */
 .rd-kicker{font:400 clamp(.6rem,1.05vw,.74rem)/1 "Unbounded",var(--body);letter-spacing:.42em;text-transform:uppercase;color:var(--marigold)}
 .rd-kicker::after{content:"";display:block;width:2.4em;height:1px;margin-top:1.3em;background:currentColor;opacity:.55}
