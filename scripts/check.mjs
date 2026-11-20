@@ -21,11 +21,11 @@ for (const f of readdirSync(new URL("js/", ROOT)).filter(f => f.endsWith(".js"))
 let S;
 try {
   S = new Function(["catalog", "feeds", "live", "festivals", "channels", "scheduler"].map(f => read(`js/${f}.js`)).join("\n")
-    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug};")();
+    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong};")();
 } catch (e) { fail("the site's scripts fail to load together: " + e.message); }
 
 if (S) {
-  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug} = S;
+  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong} = S;
 
   // 3. Every video is playable and displays properly
   const bad = (what, list) => list.length && fail(`${list.length} video(s) ${what}: ${list.slice(0, 5).map(v => v.id || JSON.stringify(v)).join(", ")}`);
@@ -35,6 +35,7 @@ if (S) {
   bad("with an unknown category", CATALOG.filter(v => !CAT_LABEL[v.cat] && !String(v.cat).startsWith("fest-")));
   bad("with an unknown language", CATALOG.filter(v => !LANG_LABEL[v.lang]));
   bad("with no length", CATALOG.filter(v => !(v.min > 0)));
+  bad("with an audio-only track that is not a valid YouTube ID or length (scripts/find-audio.mjs)", CATALOG.filter(v => v.a !== undefined && (!/^[A-Za-z0-9_-]{11}$/.test(v.a) || !(v.am > 0))));
   for (const [group, list] of Object.entries(LIVE)) bad(`live in "${group}" without a valid ID`, list.filter(x => !/^[A-Za-z0-9_-]{11}$/.test(x.id)));
   if (JSON.stringify(JSON.parse(read("js/live.json"))) !== JSON.stringify(LIVE)) fail("js/live.json and js/live.js disagree (run node scripts/fetch-live.mjs)");
 
@@ -65,6 +66,8 @@ if (S) {
   for (const c of CHANNELS) for (let t = start; t < start + 2 * DAY; t += 30 * MIN) {
     const s = slotAt(c, t);
     if (!s || !s.v || !(s.start <= t && t < s.end)) { fail(`${c.name}: no programme at ${new Date(t).toISOString()}`); break; }
+    // a covered song never shows its picture: it plays as its audio-only track (heard, js/scheduler.js)
+    if (!s.live && !s.v.heard && coveredSong(c, s.v) && s.v.a !== s.v.id) { fail(`${c.name}: plays the covered song "${s.v.t}" (${s.v.id}) with its picture`); break; }
   }
 
   // 7. Festivals channel: the calendar needs next year's dates before it runs out

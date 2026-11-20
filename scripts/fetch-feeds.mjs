@@ -19,7 +19,7 @@ import {homeOf, coverOf, SOUTH_LABEL} from "./home.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds, blockChannels = [], blockVideos = [], noSouthIn = [], noBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = [], blockVideos = [], noSouthIn = [], noBhojpuriIn = [], strictNoBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // Reels never air: a Short (its /shorts/ address answers instead of redirecting) or a portrait clip. Only videos of
 // 3 minutes or less can be either; each is checked once and remembered in scripts/reels.json.
@@ -37,7 +37,11 @@ async function isReel(id) {
 }
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
-const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh/i;
+const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh|aa?mrapali/i;
+// Global Hits plays no Bhojpuri at all, by request (its categories are in strictNoBhojpuriIn): not even Chhath geet, which
+// Purvaiya keeps (Sharda Sinha). Its songs are judged by their title, and new ones by their YouTube tags and description
+// too, as a Bhojpuri upload often names only its singer ("Daura Leke Sanghe Jata Bhatar Ho", tagged "chhath geet")
+const STRICT_BHOJPURI = new Set(strictNoBhojpuriIn), BIHAR_FOLK = /chhath|छठ|bhatar|भतार|maithili|मैथिली|magahi|maghi|मगही|angika|अंगिका/i;
 const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|\b(telugu|tamil|malayalam|kannada)\b/i,
   SOUTH_AUTHOR = new RegExp(SOUTH_LABEL.source + "|excel movies", "i"); // the India chart's sorting (home.mjs) leaves Excel Movies out: its chart songs are Hindi (Mirzapur)
 const KEY = process.env.YT_API_KEY;
@@ -116,9 +120,12 @@ async function detailsFromPage(id) {
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   const mf = (p.microformat || {}).playerMicroformatRenderer || {};
   return {sec: +v.lengthSeconds || 0, title: v.title || "", author: v.author || "", pub: mf.publishDate?.slice(0, 10),
+    tags: (v.keywords || []).join(", "), desc: v.shortDescription || "",
     ok: ps.status === "OK" && ps.playableInEmbed === true && !v.isLiveContent && !v.isUpcoming && mf.isFamilySafe !== false};
 }
 
+// YouTube's region rules for a video: playable in India unless India is blocked, or left off a list of the only countries allowed
+const inIndia = rr => !rr || (rr.allowed ? rr.allowed.includes("IN") : !(rr.blocked || []).includes("IN"));
 async function detailsFromApi(ids) {
   const out = {};
   for (let i = 0; i < ids.length; i += 50) {
@@ -127,7 +134,9 @@ async function detailsFromApi(ids) {
       const d = (it.contentDetails.duration || "").match(/P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/) || [];
       const sec = (+d[1] || 0) * 86400 + (+d[2] || 0) * 3600 + (+d[3] || 0) * 60 + (+d[4] || 0);
       out[it.id] = {sec, title: it.snippet.title, author: it.snippet.channelTitle, pub: it.snippet.publishedAt?.slice(0, 10),
-        ok: it.status.embeddable && it.status.privacyStatus === "public" && it.snippet.liveBroadcastContent === "none" && !it.contentDetails.contentRating?.ytRating};
+        tags: (it.snippet.tags || []).join(", "), desc: it.snippet.description || "",
+        ok: it.status.embeddable && it.status.privacyStatus === "public" && it.snippet.liveBroadcastContent === "none" && !it.contentDetails.contentRating?.ytRating
+          && inIndia(it.contentDetails.regionRestriction)}; // a video YouTube won't show in India would only be refused
     }
   }
   return out;
@@ -173,6 +182,10 @@ async function fetchFeed(f, old) {
       if (!d || !d.ok || BLOCKED.has((d.author || "").toLowerCase())) continue;
       if (NO_SOUTH.has(f.cat) && !f.route && (SOUTH_TITLE.test(d.title) || SOUTH_AUTHOR.test(d.author || ""))) continue; // a routed source sorts its South songs later
       if (NO_BHOJPURI.has(f.cat) && BHOJPURI.test(d.title + " " + (d.author || ""))) continue;
+      if (STRICT_BHOJPURI.has(f.cat)) { // the tags and description: from the API or the watch page, else read now
+        const more = d.tags === undefined ? await detailsFromPage(e.id).catch(() => null) : d;
+        if (BIHAR_FOLK.test(d.title) || more && (BHOJPURI.test(more.tags + " " + more.desc) || BIHAR_FOLK.test(more.tags))) continue;
+      }
       if (f.authors && !f.authors.includes(d.author)) continue; // fan playlists: only official uploaders
       const min = Math.ceil(d.sec / 60);
       if (min <= 3 && await isReel(e.id)) continue;
@@ -195,7 +208,7 @@ async function fetchFeed(f, old) {
 }
 
 // Sources with "route" (YouTube's India chart): each song is sorted once by scripts/home.mjs and remembered in
-// scripts/homes.json ("desi", "desi cover" for a picture Desi Pop covers, "south te", "foreign"). HOME_RULES goes up
+// scripts/homes.json ("desi", "desi cover" for a song Desi Pop plays as audio only, "south te", "foreign"). HOME_RULES goes up
 // whenever home.mjs changes, so every song is sorted again.
 const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 2;
 const homes = await readFile(HOMES, "utf8").then(JSON.parse).catch(() => ({}));
@@ -274,8 +287,27 @@ await Promise.all(Array.from({length: 6}, async () => {
 }));
 // Final check: every video, however it got here (fresh, kept from a blocked run, kept for keepDays), passes its source's current filters
 const bySource = new Map(feeds.map(f => [keyOf(f), f]));
-const BLOCKED_IDS = new Set(blockVideos);
-const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t))) return false;
+// Videos viewers' browsers were refused by YouTube (removed, embedding turned off, not allowed): js/app.js reports each
+// as a "refused-<id>" event to GoatCounter. Reported twice or more in the last week, a video is left out for everyone for
+// 30 days (scripts/refused.json), then tried again. js/feeds.js carries the list (REFUSED), so the hand-picked songs in
+// js/catalog.js are left out too. Needs GOATCOUNTER_CODE and GOATCOUNTER_TOKEN (as scripts/traffic-watch.mjs).
+const REFUSED_FILE = new URL("scripts/refused.json", ROOT), REFUSED_DAYS = 30, refusedToday = new Date().toISOString().slice(0, 10);
+const refused = await readFile(REFUSED_FILE, "utf8").then(JSON.parse).catch(() => ({}));
+if (process.env.GOATCOUNTER_CODE && process.env.GOATCOUNTER_TOKEN) {
+  try {
+    const hour = t => new Date(t).toISOString().slice(0, 13) + ":00:00Z", now = Date.now();
+    const r = await fetch(`https://${process.env.GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?limit=200&filter=refused-&start=${hour(now - 7 * 864e5)}&end=${hour(now)}`,
+      {headers: {Authorization: "Bearer " + process.env.GOATCOUNTER_TOKEN, "Content-Type": "application/json"}});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    let n = 0;
+    for (const h of (await r.json()).hits || []) { const m = String(h.path || "").match(/refused-([A-Za-z0-9_-]{11})$/); if (m && (h.count || 0) >= 2) { refused[m[1]] = refusedToday; n++ } }
+    console.log(`refusal reports: ${n} video(s) refused twice or more in the last week`);
+  } catch (e) { console.log("refusal reports not read: " + e.message) }
+}
+for (const [id, d] of Object.entries(refused)) if ((Date.parse(refusedToday) - Date.parse(d)) / 864e5 > REFUSED_DAYS) delete refused[id];
+await writeFile(REFUSED_FILE, "{\n" + Object.keys(refused).sort().map(id => JSON.stringify(id) + ": " + JSON.stringify(refused[id])).join(",\n") + "\n}\n");
+const BLOCKED_IDS = new Set([...blockVideos, ...Object.keys(refused)]);
+const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t)) || (STRICT_BHOJPURI.has(v.cat) && BIHAR_FOLK.test(v.t))) return false;
   if (v.cat !== "trailers" && /\b(official )?(trailer|teaser)\b/i.test(v.t)) return false; // trailers play only on Trailers
   const f = bySource.get(v.feed); if (!f) return true;
   if (v.min < (f.minMin ?? 3) || v.min > (f.maxMin ?? 60)) return false; // kept videos meet today's length rules too
@@ -296,10 +328,17 @@ const seen = new Set(), items = ordered.filter(passes).filter(v => {
   .map(v => ({...v, t: roman(v.t).replace(/[<>]/g, "").trim()})) // titles in Latin script only, never markup
   .filter(v => v.t); // a title with nothing left in Latin script would show blank
 
+// A covered song's audio-only track, on each of its entries: a (its ID) and am (its length in minutes), from
+// scripts/audio.json, which scripts/find-audio.mjs keeps (it runs next, and adds the tracks of newly covered songs)
+const tracks = await readFile(new URL("scripts/audio.json", ROOT), "utf8").then(JSON.parse).catch(() => ({}));
+const withTrack = v => tracks[v.id]?.a ? {...v, a: tracks[v.id].a, am: Math.ceil(tracks[v.id].sec / 60)} : v;
 const body = "/* Generated by scripts/fetch-feeds.mjs from scripts/feeds.json. Do not edit by hand. */\n"
-  + "const FEED = [\n" + items.map(({feed, ...v}) => JSON.stringify(v)).join(",\n") + "\n];\n"
+  + "const FEED = [\n" + items.map(({feed, a: _a, am: _am, ...v}) => JSON.stringify(withTrack(v))).join(",\n") + "\n];\n"
   // a hand-picked js/catalog.js entry stands in for the feed's copy in its own category only (Select shares songs with Drive)
-  + "(have => CATALOG.push(...FEED.filter(f => !have.has(f.id + \"|\" + f.cat))))(new Set(CATALOG.map(c => c.id + \"|\" + c.cat)));\n";
+  + "(have => CATALOG.push(...FEED.filter(f => !have.has(f.id + \"|\" + f.cat))))(new Set(CATALOG.map(c => c.id + \"|\" + c.cat)));\n"
+  // videos viewers were refused (scripts/refused.json): js/app.js never schedules them; a string, as the hourly feed swap
+  // in js/app.js reads FEED from the first "[" to the last "]"
+  + "const REFUSED = " + JSON.stringify(Object.keys(refused).sort().join(" ")) + ";\n";
 await writeFile(OUT, body);
 await writeFile(REELS_FILE, JSON.stringify(reelSeen) + "\n");
 await writeFile(STATE, "{\n" + items.map(v => JSON.stringify(v.id + "|" + v.cat) + ": " + JSON.stringify(v.feed)).join(",\n") + "\n}\n");

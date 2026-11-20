@@ -11,6 +11,16 @@ if(TV_APP) document.documentElement.classList.add("tv-app");
 // opened (ogtv.introDone)
 const NATIVE_INTRO=/OGTV-NativeIntro\//.test(navigator.userAgent)||document.documentElement.classList.contains("native-intro");
 if(NATIVE_INTRO) document.documentElement.classList.add("native-intro");
+// Videos YouTube refuses to play (removed, embedding turned off, or not allowed here) are never scheduled or shown again,
+// so the song the guide, the record and the panel show is the one that plays (by request): those viewers' browsers were
+// refused (REFUSED in js/feeds.js, from the nightly fetch) and those this browser was refused (kept for 14 days)
+const REFUSED_KEY="ogtv-refused", REFUSED_DAYS=14;
+const refusedHere=()=>{try{return JSON.parse(localStorage.getItem(REFUSED_KEY)||"{}")||{}}catch(e){return {}}};
+{const keep={}; for(const [id,at] of Object.entries(refusedHere())) if(Date.now()-at<REFUSED_DAYS*DAY){keep[id]=at; BAD.add(id)}
+  try{localStorage.setItem(REFUSED_KEY,JSON.stringify(keep))}catch(e){}
+  if(typeof REFUSED==="string") REFUSED.split(" ").forEach(id=>id&&BAD.add(id));
+  cache.clear()}
+function rememberRefused(id){const m=refusedHere(); m[id]=Date.now(); try{localStorage.setItem(REFUSED_KEY,JSON.stringify(m))}catch(e){}}
 let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
 // A channel from an address: its name (?ch=desi-pop, or a /tv/<channel>/ page), a renamed channel's old name, or a number
 const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex(c=>/^\d+$/.test(v)?c.n===+v:chSlug(c)===v||(c.oldSlugs||[]).includes(v))};
@@ -148,10 +158,11 @@ let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
-function tune(i){const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
+function tune(i){tuneFlip=false; const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
   showAddress();
-  playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();}
+  playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();
+  if(typeof dialTo==="function") dialTo(cur)} // the channel record under the TV turns to it (js/dial.js)
 let digits="", digitTimer=0;
 function tuneNumber(n){const i=CHANNELS.findIndex(c=>c.n===n); if(i>=0){tune(i); if(retro) osdChannel(cur)}}
 addEventListener("keydown",e=>{
@@ -172,6 +183,7 @@ addEventListener("keydown",e=>{
   else if((e.key===" "||e.key==="k"||e.key==="K")&&!(e.target.closest&&e.target.closest("button,a"))){e.preventDefault(); togglePause()}
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
+  else if(e.key==="a"||e.key==="A") setRadio(!radio)
   else if((e.key==="c"||e.key==="C")&&!isFull()) $("guide").scrollIntoView({behavior:smooth(),block:"start"}); // the channels are in the guide
   else if(e.key==="h"||e.key==="H"||e.key==="?") openHelp();
   else if(e.key==="Escape"&&$("room").classList.contains("pseudo-fs")) toggleFullscreen();
@@ -196,15 +208,19 @@ function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)re
 // panel full screen already shows (minimized plain has none otherwise). Full screen plain gets it from the real
 // banner on every tune() already, so this element only needs to cover minimized plain. Kept current on every call
 // so a channel switch mid-static still shows the channel you're tuning to, not the one you left.
+// tuneFlip: YouTube refused what this tune-in was going to play, so the static names no song (just "Tuning in") until one
+// actually plays, rather than flicking through the ones tried
+let tuneFlip=false;
 function updateStaticInfo(){const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now), nx=s.live?null:slotAt(ch,s.end);
-  if(retro) $("staticInfo").textContent=onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
+  if(retro) $("staticInfo").textContent=tuneFlip?"TUNING IN":onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
   else if(!isFull()){const el=$("staticInfoPlain"), h=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
-    <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
-    <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`;
+    <span class="bn-title">${tuneFlip?"Tuning in…":(s.live?LIVEDOT:"")+esc(onAir(s))}</span>
+    <span class="bn-meta">${tuneFlip?"":(s.live?"Live now":fmt(s.start)+" – "+fmt(s.end))+(nx?" · Next: "+esc(nx.v.t):"")}</span></div>`;
     if(el._h!==h){el._h=h; el.innerHTML=h}}} // rewritten only when it changes
 function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
   const wait=Math.max(0,1200-(Date.now()-staticSince));
-  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop()},wait)}
+  setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop();
+    if(panelDue) waitSteady()},wait)} // the panel under the TV and the record, once the picture has settled
 
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, playingId=null, playingEnd=0, ended=false, muted=true, skips=0, bufTimer=0;
@@ -348,7 +364,10 @@ function skip(code){
   if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube. Trying again every minute.");
     skips=12; retryTimer=setTimeout(replay,60e3); return}
   const wasLive=!!playingId&&Object.values(LIVE).some(l=>l.some(x=>x.id===playingId));
-  if(playingId) markBad(playingId); playingKey=null; tick(); renderGuide();
+  if(playingId){markBad(playingId); // refused for good: remembered here, and reported so the nightly fetch leaves it out for everyone
+    if(GONE.includes(code)){rememberRefused(playingId); track("refused-"+playingId,"Refused by YouTube ("+code+")")}}
+  if(panelDue) tuneFlip=true; // still tuning in: the static stops naming songs until one plays
+  playingKey=null; tick(); renderGuide();
   if(wasLive) refreshLive(); // a broadcast ended or failed: the next live channel plays now, and the list is re-read for the channel's new stream
 }
 addEventListener("online",()=>{retries=0; if(MODE==="yt") replay()}); // also while a new player is still loading (player null)
@@ -692,6 +711,7 @@ document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 let retro=!TV_APP; try{localStorage.removeItem("ogtv-retro"); const s=sessionStorage.getItem("ogtv-retro"); retro=TV_APP?s==="1":s!=="0"}catch(e){} // every visit and channel page opens in retro, the TV app in the plain look; a change lasts for this tab (or app session) only
 function setRetro(on){retro=on; if(!on) staticSound.stop(); $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd(); if(staticOn) updateStaticInfo(); // turning retro on mid-tune-in: fill it in, not a blank green box
+  if(on){if(radio) setFx(FX_RADIO); else if(fxLevel===FX_RADIO) setFx(4)} // the knob shows Radio exactly when Radio is on
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
 function osd(){if(!retro)return; const d=new Date(tvNow()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
@@ -773,17 +793,19 @@ $("keyFs").addEventListener("click",toggleFullscreen);
 $("home").addEventListener("click",()=>{if(!roomFull()) toggleFullscreen()}); // Home is full screen in the current look (retro by default)
 /* Retro's mode knob, where Exit retro was. Each setting peels off one more effect: Full (all of it), Steady (no tracking
    band sweeping down), Tinted (the tape colour and contrast but no lines or grain), Clean (no VCR effects at all), Quiet
-   (no static hiss on channel changes), Normal (retro off;
+   (no static hiss on channel changes), Radio (Quiet, with the radio screen: see Radio below), Normal (retro off;
    in full screen that swaps to the plain full-screen look). Every visit and reload starts at Tinted. */
-const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Normal"], FX_DEG=[-75,-45,-15,15,45,75], FX_OFF=5;
+const FX_NAMES=["Full","Steady","Tinted","Clean","Quiet","Radio","Normal"], FX_DEG=[-90,-60,-30,0,30,60,90], FX_OFF=6, FX_RADIO=5;
+let radio=false; // Radio mode (below), declared before the knob reads it
 const FX_START=TV_APP?3:2; // Tinted on the website, Clean in the TV app (no effects on the picture, which a TV redraws slowly)
 let fxLevel=FX_START;
 function showFx(n){$("knobMode").title="Mode: "+FX_NAMES[n]; $("knobMode").style.setProperty("--rot",FX_DEG[n]+"deg")}
 function setFx(n,osdToo){n=Math.max(0,Math.min(FX_OFF,n)); if(osdToo) tvOsd(`<b>MODE</b> ${FX_NAMES[n].toUpperCase()}`);
-  if(n===FX_OFF){fxLevel=FX_START; showFx(FX_START); setRetro(false); return} // back at the start setting next time
+  if(n===FX_OFF){fxLevel=FX_START; showFx(FX_START); if(radio) applyRadio(false); setRetro(false); return} // back at the start setting next time; past Radio, so Radio ends
   fxLevel=n;
   const sc=$("screen"); sc.classList.toggle("fx-steady",n>=1); sc.classList.toggle("fx-nolines",n>=2); sc.classList.toggle("fx-clean",n>=3);
-  if(n>=4) staticSound.stop(); showFx(n)}
+  if(n>=4) staticSound.stop(); showFx(n);
+  if(retro&&(n===FX_RADIO)!==radio) applyRadio(n===FX_RADIO)} // the knob at Radio is Radio on
 let fxPreview=0;
 turnable($("knobMode"),{
   onTurn:d=>{fxPreview=Math.max(0,Math.min(FX_OFF,fxLevel+Math.round(d/30))); $("knobMode").style.setProperty("--rot",FX_DEG[fxPreview]+"deg"); tvOsd(`<b>MODE</b> ${FX_NAMES[fxPreview].toUpperCase()}`)},
@@ -793,8 +815,28 @@ $("knobMode").addEventListener("wheel",e=>{e.preventDefault(); setFx(fxLevel+(e.
 $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)) return; e.preventDefault(); e.stopPropagation();
   setFx(fxLevel+(k==="ArrowRight"||k==="ArrowUp"?1:-1),true)});
 setFx(fxLevel);
+/* ---------- Radio (by request) ----------
+   The sound of whatever is on, with the TV's screen as a radio's face in the interlude's style: the channel, the song or
+   programme, who made it, its time and what's next, and a moving level meter. YouTube's player keeps playing in a
+   200 x 200 window on it, the smallest YouTube allows, with nothing on the screen ever over it: YouTube's rules don't
+   allow hiding the picture or covering the player (the user chose this over hiding it, 21 Nov). On the retro TV, Radio
+   is a setting of the Mode knob, between Quiet and Normal. Remembered for the next visit. */
+function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now); if(!s) return; const nx=s.live?null:slotAt(ch,s.end);
+  const by=s.live?"":ytChannel(s), el=$("radioScreen");
+  const h=`<span class="rd-kicker">Radio · ${ch.n} ${esc(ch.name)}</span><h2 class="rd-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</h2>`
+    +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
+    +`<span class="rd-play"><span class="rd-eq"><i></i><i></i><i></i><i></i><i></i></span><i class="rd-bar"><i id="rdBar"></i></i></span>`
+    +(nx?`<p class="rd-next">Next at ${fmt(nx.start)} · ${esc(onAir(nx))}</p>`:"");
+  if(el._h!==h){el._h=h; el.innerHTML=h} // rewritten only when it changes
+  const b=$("rdBar"); if(b) b.style.width=s.live?"100%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
+function applyRadio(on){radio=on; $("screen").classList.toggle("radio",on); ["radio","radioFs"].forEach(id=>$(id).setAttribute("aria-pressed",on));
+  try{localStorage.setItem("ogtv-radio",on?"1":"0")}catch(e){} if(on){renderRadio(); track("radio-on","Radio on")}}
+function setRadio(on){if(retro) setFx(on?FX_RADIO:4,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to Quiet
+$("radio").addEventListener("click",()=>setRadio(!radio));
+$("radioFs").addEventListener("click",()=>{setRadio(!radio); wakeUI(false)});
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setRetro(retro); vfd();
+{let on=false; try{on=localStorage.getItem("ogtv-radio")==="1"}catch(e){} if(on) setRadio(true)} // Radio, as it was left
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
 // visitor does something). Exit full screen leaves it.
@@ -855,11 +897,22 @@ function showCard(msg){
   }
 }
 
-// A channel can keep some songs' picture covered (Desi Pop, by request: revealing, item-song or sexual visuals, or
-// marked 18+): the song plays on behind OGTV's own card. Flagged by the nightly fetch (cover: 1) or the channel's rule.
-const covered=(ch,s)=>!s.live&&(s.v.cover===1||!!ch.cover&&((ch.cover.ids||[]).includes(s.v.id)||!!ch.cover.match&&rx(ch.cover.match).test(s.v.t)));
-function showCover(ch,s){const on=covered(ch,s); $("coverCard").hidden=!on; if(!on)return;
-  const by=ytChannel(s); $("coverTitle").textContent=onAir(s); $("coverBy").textContent=/^YouTube Charts/.test(by)?ch.name:by}
+// Desi Pop's covered songs play as their audio-only tracks: the scheduler swaps them in (heard, js/scheduler.js)
+// The panel under the TV (what's on) and the channel record appear only once the picture is steady (by request): they go
+// while the static's glitch covers a change of channel or programme, and come back when the programme has played
+// unbroken for 1.2 s after the static clears (waitSteady). So a video YouTube starts and then gives up on (the next one
+// is tried) never brings them back early, only for them to go again. If no picture comes within 15 s, they come back anyway.
+const STEADY=1200;
+let panelDue=false, panelTimer=0, steadyTimer=0;
+function hidePanel(){panelDue=true; clearTimeout(steadyTimer); $("nowPanel").classList.add("tuning"); clearTimeout(panelTimer); panelTimer=setTimeout(revealPanel,15e3);
+  if(typeof dialBusy==="function") dialBusy(true)} // the channel record below: a spinning disc meanwhile (js/dial.js)
+function revealPanel(){panelDue=false; tuneFlip=false; clearTimeout(panelTimer); clearTimeout(steadyTimer); $("nowPanel").classList.remove("tuning"); if(typeof dialBusy==="function") dialBusy(false)}
+function waitSteady(){clearTimeout(steadyTimer); let since=0;
+  const look=()=>{if(!panelDue||staticOn) return; // the static is back: when it clears again, this starts over
+    let on=false; try{on=player.getPlayerState()===YT.PlayerState.PLAYING}catch(e){}
+    since=on?since||Date.now():0;
+    if(since&&Date.now()-since>=STEADY) revealPanel(); else steadyTimer=setTimeout(look,200)};
+  look()}
 function tick(){
   const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
   const key=slotKey(ch,s);
@@ -873,8 +926,7 @@ function tick(){
     if(playingKey&&nextFeed){swapFeed(); return tick()}
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
-    showCover(ch,s); // before its picture can come up
-    if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
+    if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic(); hidePanel()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
       // A hidden page (another tab or app in front) keeps its player for the next programme: the browser lets a player
       // that is already playing carry on with sound, where a new one can be held back, silent, until the page is seen.
       // Only where there's hover: YouTube's touch chrome after loadVideoById (see recreatePlayer) is a no-hover thing.
@@ -889,12 +941,13 @@ function tick(){
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
     $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
-    renderNowCard();
+    renderNowCard(); if(typeof dialRefresh==="function") dialRefresh(); // the record shows what is really on, after a skip too
   }
   $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:`${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
   if(MODE==="yt"&&ended){const c=$("count");if(c){const r=Math.ceil((s.end-now)/1000);c.textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")}}
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=ytLink(s.v.id,Math.floor((now-s.start)/1000))}
+  if(radio) renderRadio(); // the radio's face keeps up: its progress each second, the programme when it changes
 }
 
 // About section numbers come from the data, so they stay right as channels and creators change
@@ -959,7 +1012,7 @@ syncClock(); setInterval(syncClock,HOUR);
 const stripOn=()=>$("screen").classList.contains("strip-on");
 const press=key=>document.body.dispatchEvent(new KeyboardEvent("keydown",{key,bubbles:true,cancelable:true}));
 function step(d){tune(cur+d); if(retro) osdChannel(cur)}
-const MENU_FX=[3,4,0,1,2,FX_OFF]; // Menu from Normal: Clean, Quiet, Full, Steady, Tinted, then Normal again
+const MENU_FX=[3,4,FX_RADIO,0,1,2,FX_OFF]; // Menu from Normal: Clean, Quiet, Radio, Full, Steady, Tinted, then Normal again
 function nowInfo(){if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)}}
 const channelList=()=>isFull()?wakeUI(true):nowInfo(); // the retro set has no channel list
 window.ogtv={

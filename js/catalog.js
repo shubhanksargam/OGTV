@@ -435,5 +435,5 @@ const CAT_LABEL={select:"Select",magadh:"Bihar & Jharkhand news",firstsports:"Fi
   khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",
   cricket:"Cricket",football:"Football",live:"Live",khabar:"Hindi news",news:"English news",bihar:"Bihar & Jharkhand news",punjabi:"Punjabi",
   hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems",classics:"Cricket classics",raag:"Indian classical",niche:"Niche",fiction:"Fiction",retro:"Classic films",premium:"Classics",masters:"Indian masters"};
-const catLabel=c=>Array.isArray(c)?c.map(catLabel).join(" & "):CAT_LABEL[c]||(c.startsWith("fest-")?"Festival songs":c);
+const catLabel=c=>Array.isArray(c)?[...new Set(c.map(catLabel))].join(" & "):CAT_LABEL[c]||(c.startsWith("fest-")?"Festival songs":c);
 const LANG_LABEL={hi:"Hindi",en:"English",te:"Telugu",ta:"Tamil",ml:"Malayalam",kn:"Kannada",intl:"Worldwide",multi:"Indian languages"};

@@ -5,3 +5,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 !android/app/src/main/res/raw/*.mp4
+
+# The sign-in Worker: local secrets and local database
+worker/.dev.vars
+worker/.wrangler/

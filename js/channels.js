@@ -263,8 +263,9 @@ const CHANNELS = [
   {key:"select",n:29,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify songs (playlists Big Dawgs, No Idea, After Hours), each matched to an official upload; 12 h a day of them (share 0.5), mixed in with the rest, by request
     {from:0,to:24,cat:"select",mix:[{tag:"spotify",share:0.5},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Favourites"}]},
   {key:"bollywood",n:30,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
-   // Songs whose picture stays covered, by request (revealing, item-song or sexual visuals, or marked 18+): the song plays
-   // on behind OGTV's own card. Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
+   // Songs whose picture is never shown, by request (revealing, item-song or sexual visuals, or marked 18+): each plays as
+   // its official audio-only track, with the album's cover art, or not at all until it has one (heard in js/scheduler.js;
+   // scripts/find-audio.mjs finds the tracks). Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
    // titles naming such a film or performer, and songs named one by one (ZiD's "Saanson Ko", which started it)
    cover:{match:String.raw`\b(zid|murder( [23])?|jism( 2)?|hate story|ragini mms|the dirty picture|khamoshiyan|wajah tum ho|mastizaade|grand masti|kyaa super kool|gandii baat|julie 2|ek paheli leela|one night stand|raaz (3|reboot)|sunny leone|mallika sherawat|poonam pandey|nora fatehi|rakhi sawant|claudia ciesla|item (song|number)|hot (songs?|scenes?|videos?)|bikini|bed ?scenes?|18 ?\+|uncensored|unrated|nude|naked|topless)\b`,
      ids:["fzDEaX1OY98","4F2jDMgioqk","0bAVd9jJE2Q","kPmAJPUVY8I"]}, // Saanson Ko (video, lyrical), Aashiq Banaya Aapne, Balma

@@ -44,7 +44,7 @@ function southLang({title, author, kw, desc, lang}) { // the title or uploader f
   return best;
 }
 
-// A video Desi Pop plays with its picture covered (the song plays on; OGTV shows its own card), by request: revealing,
+// A video whose picture Desi Pop never shows (it plays the song's audio-only track instead, scripts/find-audio.mjs), by request: revealing,
 // item-song or sexual visuals, or marked 18+. Read from the title and the uploader's own tags ("Bollywood Hot Scenes"
 // on ZiD's "Saanson Ko"); a description only counts for an explicit marking, as descriptions carry lyrics ("bada hot
 // hai weather"). Not violence or drinking, by request.

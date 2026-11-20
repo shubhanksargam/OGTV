@@ -23,6 +23,10 @@ jobs:
       - run: node scripts/fetch-feeds.mjs
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          GOATCOUNTER_CODE: ${{ secrets.GOATCOUNTER_CODE }}    # viewers' "refused-<id>" reports: such videos are left out (scripts/refused.json)
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+      - name: Audio-only tracks for the songs Desi Pop never shows the picture of
+        run: node scripts/find-audio.mjs   # before the descriptions, which follow the schedule
       - name: YouTube channels and descriptions for the programme guide (the soonest on air first)
         run: node scripts/fetch-descriptions.mjs
         env:

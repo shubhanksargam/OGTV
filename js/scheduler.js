@@ -49,6 +49,17 @@ function pick(part){
   if(part._lessAI||[].concat(part.cat).some(c=>String(c).startsWith("fest-"))){const isAI=v=>AI_RE.test(v.t)&&seeded(v.id)()<0.67, rest=pool.filter(v=>!isAI(v)); if(rest.length>=10) pool=rest}
   return pool.length?pool:CATALOG;
 }
+// Covered songs (Desi Pop, by request): a song with revealing, item-song or sexual visuals, or marked 18+, never shows
+// its picture. It is flagged by the nightly fetch (cover: 1, on any channel) or by the channel's own rule (ch.cover: titles
+// or IDs). YouTube's rules don't allow hiding its player's picture, so such a song plays as its official audio-only track
+// instead, which shows only the album's cover art (v.a and v.am: the track's ID and length, found by scripts/find-audio.mjs).
+// A covered song with no track is left out until it has one.
+const coveredSong=(ch,v)=>v.cover===1||!!ch.cover&&((ch.cover.ids||[]).includes(v.id)||!!ch.cover.match&&rx(ch.cover.match).test(v.t));
+const HEARD=new WeakMap(); // one stand-in per song, so a day's lists keep the same objects
+function heard(ch,list){
+  return list.flatMap(v=>{if(v.live||!coveredSong(ch,v)) return [v];
+    if(!v.a||BAD.has(v.a)) return [];
+    let h=HEARD.get(v); if(!h) HEARD.set(v,h={...v,id:v.a,min:v.am||v.min,heard:v.id}); return [h]})}
 /* Festivals: the row covering this day, if any */
 function festivalOn(dayStart){const d=new Date(dayStart+IST).toISOString().slice(0,10);
   return (typeof FESTIVALS==="undefined"?[]:FESTIVALS).find(x=>x.from<=d&&d<=x.to)||null}
@@ -124,14 +135,15 @@ function buildDay(ch,dayStart){
   // share one run through it a day, in that day's shuffled order, so its songs come round in turn and none repeats early
   const boostRuns=new Map();
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
-    const pool=pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p), rnd=seeded(k+"|"+pi);
+    let pool=heard(ch,pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p)); const rnd=seeded(k+"|"+pi);
+    if(!pool.length) pool=heard(ch,CATALOG.filter(v=>!BAD.has(v.id))); // every song it had was covered with no track (never in practice)
     const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
     const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
     let order=fresh(), i=0, n=0;
     let run=null;
     if(p.boost){const b=p.boost, cats=[].concat(p.cat), re=rx(b.src), bk=b.id||JSON.stringify([b.tag,b.src,cats]);
       run=boostRuns.get(bk);
-      if(!run){const list=CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
+      if(!run){const list=heard(ch,CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag)))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
         boostRuns.set(bk,run={list:shuffle(list,seeded(k+"|boost|"+bk)),at:0})}
       if(!run.list.length) run=null}
     // p.mix [{tag, src or match, w}]: several sets played together (Select). Each takes its turn by weight (w, else the square
