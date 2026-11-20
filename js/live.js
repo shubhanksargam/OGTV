@@ -2,14 +2,14 @@
 const LIVE = {
  "news": [
   {
-   "id": "MpgxPbafk28",
-   "t": "Black and White with Anjana Om Kashyap: UP Politics | Akhilesh Yadav | Rahul Gandhi | PM M",
+   "id": "E7VYYIZRZnY",
+   "t": "Superfast News LIVE: bari khabren dekhie phataphat andaj men | UP Elections | Rahul Gandhi",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "y48_8K9cBh4",
-   "t": "Bageshwar Baba Kunda Ram Katha LIVE: baba bageshvar ki katha ke bich ye kya huaa? achanak ",
+   "id": "d1PT2tNwBUw",
+   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 20 November ",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -20,38 +20,44 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "pv5xt_VytYM",
-   "t": "Aaj Ki Taza Khabar LIVE: Akvan | Rahul | Pakistan | Trump-Putin-Jinping Meet | Bangladesh ",
+   "id": "ANaJImzNDOw",
+   "t": "Aaj Ka Rashifal, 20 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "src": "India TV",
+   "lang": "hi"
+  },
+  {
+   "id": "k404DmKLdZk",
+   "t": "Today 100 Big Breaking News LIVE: aaj ki bari khabren Akvan Cyclone | Trump-Xi-Putin | PM ",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "zko8hLSfgfY",
-   "t": "Today's Breaking News LIVE: Rahul Gandhi | Azam Khan Bail | PM Modi | UP Elections | Donal",
+   "id": "fZcXsH67oBE",
+   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: UP Elections 2027 | PM Modi | CM Yogi | Azam K",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "uePC3zWwUaA",
-   "t": "Anthropic IPO LIVE | $1.5 Trillion Valuation, Record-Breaking Wall Street Debut | Nasdaq |",
+   "id": "vWDZzfNycAI",
+   "t": "NDTV Live TV: Anthropic IPO | Trump Xi Putin Meeting | PM Modi | GTA 6 Release | Rahul Gan",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "ML64zcFy5fE",
-   "t": "Live: Trump-Xi-Putin Trilateral Meet | US-China-Russia Issue Joint Statement | Trump | Put",
+   "id": "vyCEIBuIyMQ",
+   "t": "India Today LIVE: Cyclone Akvan's Landfall | Rahul Gandhi | Gorakhpur Tragedy | PM Modi | ",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "9dHKiYy39yA",
-   "t": "Saudi Under Attack LIVE: Houthis Strike Aramco Tower After Yemen Attack Kills Dozens | WIO",
+   "id": "klgpig576uM",
+   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "cSCqHwn0sUc",
-   "t": "Donald Trump LIVE: Trump's Stunning Announcement | Trump Latest News LIVE | US News | Whit",
+   "id": "D5Ccp8II8cg",
+   "t": "TRUMP IRAN ANNOUNCEMENT LIVE | President Trump Makes Major Statement From The White House ",
    "src": "Times Now",
    "lang": "en"
   },
@@ -64,8 +70,8 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "emHZfozKB5E",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "id": "E5QOhSqo0wg",
+   "t": "Rajasthan Panchayat Election Result Live: rajasthan panchayat chunav rijalt men utalpher! ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
