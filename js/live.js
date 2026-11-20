@@ -2,88 +2,88 @@
 const LIVE = {
  "news": [
   {
-   "id": "XAMa_1aBZwE",
-   "t": "Dangal Live With Sahil Joshi | Rahul Gandhi | PM Modi | Nitin Nabin | UP Election 2027 | A",
+   "id": "ET9hGOIMkb4",
+   "t": "Black and White Live With Rajeev Dhoundiyal | Rahul Gandhi | Goldy Brar | PM Modi | Mohamm",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "DaKEiZT0A4s",
-   "t": "Rajasthan Panchayat Election Result LIVE Updates: buri tarah hari bijepi | Congress Victor",
+   "id": "KrzmeVJ6lz8",
+   "t": "Sandeep Chaudhary LIVE: BJP par chup, SP se saval..Owaisi ki gajab chal! | UP Election 202",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "lfGvkxenHU0",
-   "t": "Rajasthan Panchayat Election Result LIVE: rajasthan panchayat chunav men bara ulatpher! | ",
+   "id": "HI0IeNAqrVU",
+   "t": "Raja bhaiya ne kiya bara khulasa! LIVE | Dhirendra Shashtri |Bageshwar Dham| Kunda |Brijes",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "jzW-zXihIZ0",
-   "t": "CM Yogi Mother Death News LIVE - CM yogi ki mata savitri devi ka nidhan | PM Modi | UP | A",
+   "id": "UP0fhKQZKlM",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma: yogi ne Youth ko kya samjhaya ? UP Election 2027 | India ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "vTyzJ57iBqo",
-   "t": "Gold Price Crash LIVE : lo gir gae dam.. sona kharidne valon ke lie khushkhabri",
+   "id": "a6T3EMbX6EU",
+   "t": "India Biggest Enemy Killed LIVE : lo..mara gaya bharat ka sabse bara dushman! sare aatanki",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "esMTVtLeWvs",
-   "t": "Goonj With Arpita Aarya Live: Rahul Gandhi Statement | PMModi | Trump | XiJinping | Putin ",
+   "id": "Ql8h2sKjfGM",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 155 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "HHDRb63AeZQ",
-   "t": "LIVE: 57th International Film Festival of India | Opening Ceremony | Red Carpet | IFFI 202",
+   "id": "zQTbRc4598Y",
+   "t": "LIVE Do Took: Congress ka propegenda ban gaya bharat virodhiyon ka ejenda! | Ashok Shrivas",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "8smCvlXIPlw",
-   "t": "PAKISTAN MINISTER IN DELHI | \"Double Standards\": Row Over Pak Minister Attending SCO Meet ",
+   "id": "eiXneesEK0E",
+   "t": "Total Chess FINAL World Championship 2026 LIVE | Total Chess 2026 | Knockout FINAL",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "Vk5psC9_3GE",
-   "t": "LIVE:Rahul Gandhi Calls India A 'Side Player In Geopolitics Under Modi|BJP Calls Him Pakis",
+   "id": "Z9vTlC4Z09I",
+   "t": "Rajdeep Sardesai LIVE: Sam Pitroda Exclusive | Decoding Rahul Gandhi's Diaspora Outreach|B",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
+   "id": "9dHKiYy39yA",
+   "t": "Saudi Under Attack LIVE: Houthis Strike Aramco Tower After Yemen Attack Kills Dozens | WIO",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "1BWcA_v0RFg",
-   "t": "US NEWS LIVE: Trump Suddenly Escorted Out by Secret Service! Press Conference Takes Shocki",
+   "id": "VgQkbllgd3I",
+   "t": "Breaking News LIVE: Trump DROPS BOMBSHELL, IMMEDIATE Lockdown Declared Across America!",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "_55xC9rA8ZY",
-   "t": "US-IRAN WAR LIVE | Trump's Big Iran Announcement: Fresh Strikes Delayed Until 2027? | US-I",
+   "id": "c0bGQv8oTew",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "C8kM9sULyf0",
-   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh | CM Samrat |Cyclone Akvan |Rajasthan Pa",
+   "id": "Qk9XPq4x8vU",
+   "t": "Rajasthan Panchayat Result Live: rajasthan panchayat chunav rijalt men kangres ka jalva! |",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "ORNdioPz6eo",
-   "t": "Nitish Setu: 'nitish setu' ke nam par siyasat ! LIVE | Nitish Kumar | Tejashwi Yadav | Sam",
+   "id": "YBOI5K1gHlI",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
