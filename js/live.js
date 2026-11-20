@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "vrB31m2xjLg",
-   "t": "DNA LIVE: sona-chandi..ab 'pital' ke bhav bikenge? | kya bangladesh men ek aur 'takhtaplat",
+   "id": "a6T3EMbX6EU",
+   "t": "India Biggest Enemy Killed LIVE : lo..mara gaya bharat ka sabse bara dushman! sare aatanki",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -62,8 +62,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "GZDSnCISI18",
-   "t": "Trump's Veto Bombshell LIVE: 'Democrats Won't Get Anything Passed!' | Trump's Fiery Briefi",
+   "id": "rAgik5wVwLE",
+   "t": "US LIVE: 'Just Like The President!' Thomas Massie Slams Trump In Fiery Epstein Files Speec",
    "src": "CNN-News18",
    "lang": "en"
   }
