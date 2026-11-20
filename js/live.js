@@ -2,14 +2,14 @@
 const LIVE = {
  "news": [
   {
-   "id": "ET9hGOIMkb4",
-   "t": "Black and White Live With Rajeev Dhoundiyal | Rahul Gandhi | Goldy Brar | PM Modi | Mohamm",
+   "id": "QJvfWLArlrA",
+   "t": "Rajasthan Panchayat Election Result LIVE: rajasthan panchayat chunav men bijepi ne hari ma",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "KrzmeVJ6lz8",
-   "t": "Sandeep Chaudhary LIVE: BJP par chup, SP se saval..Owaisi ki gajab chal! | UP Election 202",
+   "id": "eZ7g1JfBnzU",
+   "t": "Rajasthan Panchayat Election Results 2026 Hindi News LIVE: harte hi BJP ka bara ailan! | C",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -26,8 +26,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "a6T3EMbX6EU",
-   "t": "India Biggest Enemy Killed LIVE : lo..mara gaya bharat ka sabse bara dushman! sare aatanki",
+   "id": "vrB31m2xjLg",
+   "t": "DNA LIVE: sona-chandi..ab 'pital' ke bhav bikenge? | kya bangladesh men ek aur 'takhtaplat",
    "src": "Zee News",
    "lang": "hi"
   },
@@ -38,14 +38,8 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "zQTbRc4598Y",
-   "t": "LIVE Do Took: Congress ka propegenda ban gaya bharat virodhiyon ka ejenda! | Ashok Shrivas",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "eiXneesEK0E",
-   "t": "Total Chess FINAL World Championship 2026 LIVE | Total Chess 2026 | Knockout FINAL",
+   "id": "xDOTgj83Wr0",
+   "t": "Inside USS George Washington: NDTV On Board America's Warship",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -68,16 +62,16 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "c0bGQv8oTew",
-   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "id": "GZDSnCISI18",
+   "t": "Trump's Veto Bombshell LIVE: 'Democrats Won't Get Anything Passed!' | Trump's Fiery Briefi",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "Qk9XPq4x8vU",
-   "t": "Rajasthan Panchayat Result Live: rajasthan panchayat chunav rijalt men kangres ka jalva! |",
+   "id": "e2TOEN4LlRg",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
