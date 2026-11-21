@@ -218,4 +218,15 @@
       <video:description>Shanivar ekadshi vishesh chalisa evan aarti sangrah, now on Bhakti, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/_GJMxf-eHwI</video:player_loc><video:duration>3000</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
+  <url><loc>https://ogtv.co.in/for/indian-tv/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/indian-radio/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/indian-news/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/daily-feed/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/indian-music/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/songs-by-mood/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/indian-sports/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/hindi-movies/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/bhajans/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/kids/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ogtv.co.in/for/learning/</loc><lastmod>2026-11-21</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>

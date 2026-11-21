@@ -190,7 +190,7 @@ $("glist").addEventListener("click",cardClick);
 $("nowPanel").addEventListener("click",cardClick);
 // The channel list at the foot of the page links each channel's own page (for search engines, and to open in a new tab);
 // a plain click there tunes in place like the guide's Watch, without loading the page again and its intro (by request)
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('.directory a[href^="/"],.uses a[href^="/"]');
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('.directory a[href^="/"],.uses a[href^="/"],.for-intro a[href^="/"]');
   if(!a||e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey) return;
   const i=chFind(a.getAttribute("href").split("/")[1]); if(i<0) return; // an unknown channel: let the link load
   e.preventDefault(); watchFromGuide(i)});
@@ -918,6 +918,7 @@ $("radioFs").addEventListener("click",()=>{setRadio(!radio); wakeUI(false)});
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setRetro(retro); vfd();
 try{localStorage.removeItem("ogtv-radio")}catch(e){} // Radio starts off on every visit, phones as computers (by request); this was once remembered
+if(document.querySelector('meta[name="ogtv-mode"][content="radio"]')) setRadio(true); // except the radio page (/for/indian-radio/), which opens as a radio
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
 // visitor does something). Exit full screen leaves it.

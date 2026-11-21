@@ -914,3 +914,16 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .uses .uses-ch{margin-top:8px;font-size:.86rem}
 .uses .uses-ch a{color:var(--marigold);text-decoration:none;font-weight:700}
 @media (hover:hover){.uses .uses-ch a:hover{text-decoration:underline}}
+/* A need page's section (/for/…, scripts/for-pages.mjs): the answer, its channels and its questions */
+.for-intro{padding:20px 2px 0;max-width:80ch}
+.for-intro h2{margin:0 0 12px;font-size:1.15rem;color:var(--ink)}
+.for-intro h3{margin:18px 0 8px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.for-intro p{margin:0 0 10px;color:var(--muted);line-height:1.6}
+.for-ch{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.for-ch a{color:var(--marigold);font-weight:700;text-decoration:none}
+.for-ch span{color:var(--muted)}
+@media (hover:hover){.for-ch a:hover,.uses h3 a:hover{text-decoration:underline}}
+.for-intro details{border-top:1px solid var(--line);padding:10px 0}
+.for-intro summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.for-intro details p{margin:8px 0 0}
+.uses h3 a{color:inherit;text-decoration:none}
