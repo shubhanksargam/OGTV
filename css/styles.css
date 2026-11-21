@@ -32,6 +32,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .logo-mark{width:1.05em;height:.84em;flex:none;color:var(--marigold)}
 .brand h1{font-size:2rem;margin:0;font-weight:700}
 .tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+@media (max-width:560px){.tools{flex-wrap:nowrap;gap:8px}.tools .retro-btn:not(.help-btn){padding-inline:12px}} /* phones: Home, Retro, Radio and Help on one row (by request) */
+@media (max-width:350px){.tools{gap:5px}.tools .retro-btn:not(.help-btn){padding-inline:9px}.tools .home-btn svg{display:none}} /* the smallest phones: tighter still */
 .clock{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:700}
 .clock small{font-weight:500;color:var(--muted);font-size:.8rem;letter-spacing:.08em;margin-left:6px}
 

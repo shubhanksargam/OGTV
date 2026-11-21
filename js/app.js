@@ -840,7 +840,7 @@ setFx(fxLevel);
    programme, who made it, its time and what's next, and a moving level meter. YouTube's player keeps playing in a
    200 x 200 window on it, the smallest YouTube allows, with nothing on the screen ever over it: YouTube's rules don't
    allow hiding the picture or covering the player (the user chose this over hiding it, 21 Nov). On the retro TV, Radio
-   is a setting of the Mode knob, between Quiet and Normal. Remembered for the next visit. */
+   is a setting of the Mode knob, between Quiet and Normal. Every visit starts with it off (by request). */
 function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now); if(!s) return; const nx=s.live?null:slotAt(ch,s.end);
   const by=s.live?"":ytChannel(s), el=$("radioScreen");
   const h=`<span class="rd-kicker">Radio · ${ch.n} ${esc(ch.name)}</span><h2 class="rd-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</h2>`
@@ -850,13 +850,13 @@ function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=tvNow(), s
   if(el._h!==h){el._h=h; el.innerHTML=h} // rewritten only when it changes
   const b=$("rdBar"); if(b) b.style.width=s.live?"100%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
 function applyRadio(on){radio=on; $("screen").classList.toggle("radio",on); ["radio","radioFs"].forEach(id=>$(id).setAttribute("aria-pressed",on));
-  try{localStorage.setItem("ogtv-radio",on?"1":"0")}catch(e){} if(on){renderRadio(); track("radio-on","Radio on")}}
+  if(on){renderRadio(); track("radio-on","Radio on")}}
 function setRadio(on){if(retro) setFx(on?FX_RADIO:4,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to Quiet
 $("radio").addEventListener("click",()=>setRadio(!radio));
 $("radioFs").addEventListener("click",()=>{setRadio(!radio); wakeUI(false)});
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setRetro(retro); vfd();
-{let on=false; try{on=localStorage.getItem("ogtv-radio")==="1"}catch(e){} if(on) setRadio(true)} // Radio, as it was left
+try{localStorage.removeItem("ogtv-radio")}catch(e){} // Radio starts off on every visit, phones as computers (by request); this was once remembered
 // The site opens straight into full screen (the plain look, or the TV set if retro is on for this tab): it fills
 // the window at once, and the first tap or key makes it true full screen (browsers only allow that after the
 // visitor does something). Exit full screen leaves it.
