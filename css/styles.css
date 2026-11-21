@@ -982,3 +982,8 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .start-consent.nudge{animation:consent-nudge .45s ease}
 @keyframes consent-nudge{20%,60%{translate:calc(-50% - 7px) 0}40%,80%{translate:calc(-50% + 7px) 0}}
 .start.ask.consent-wait{cursor:default}
+/* The header logo keeps its real width (Unbounded's) before the font arrives: the narrower stand-in font let the phone's
+   buttons share the logo's row until the font loaded, then they dropped a row and the page jumped (CLS) */
+.top .logo-word{display:inline-block;min-width:2.56em}
+/* While the TV fills the window, the page beneath it isn't drawn (no one sees it, and its filling in moved it: CLS) */
+.room-full .wrap > :not(.main), .room-full #main-tv > :not(#room){display:none}

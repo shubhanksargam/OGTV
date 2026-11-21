@@ -148,7 +148,8 @@ window.dialRefresh=()=>{if(busy) return; items.forEach((it,i)=>{if(it.id) art(i)
 function nextChange(){clearTimeout(changeT); const now=tvNow(); let soon=now+60e3;
   for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&s.end>now&&s.end<soon) soon=s.end}
   changeT=setTimeout(()=>{dialRefresh(); nextChange()},soon-now+100)}
-nextChange();
+// every channel's next programme change: worked out once the page is idle (it builds all 44 channels' days), not at start-up
+(window.requestIdleCallback?f=>requestIdleCallback(f,{timeout:6000}):f=>setTimeout(f,2500))(()=>nextChange());
 setInterval(()=>{if(busy||document.hidden) return; const i=at(pos), s=onNow(i), now=chNow(i), b=info.querySelector(".di-bar i");
   if(b&&s&&!s.live) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
 })();

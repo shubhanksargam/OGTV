@@ -780,7 +780,8 @@ if(/iPhone|iPod/.test(navigator.userAgent)&&!(navigator.standalone||matchMedia("
     tip.innerHTML="For true full screen, tap <b>Share</b> then <b>Add to Home Screen</b>. Swipe to change channel.";
     tip.addEventListener("click",()=>tip.remove()); document.body.appendChild(tip); setTimeout(()=>tip.remove(),9000);
     try{sessionStorage.setItem("ogtv-ios-tip","1")}catch(e){}},6500)}
-function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomFull()?"Exit full screen":"Full screen";
+function onFullscreenChange(){const sc=$("screen"); document.documentElement.classList.toggle("room-full",roomFull()); // the page beneath the full-window TV isn't drawn (css: .room-full)
+  $("keyFs").textContent=roomFull()?"Exit full screen":"Full screen";
   sc.classList.toggle("pseudo-fs",roomFull()&&!retro); // plain look: the bare screen fills the room
   if(!roomFull()) try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}
   if(isFull()){browse=cur; showBanner(); wakeUI(false); sc.classList.remove("ui-idle")}
@@ -938,7 +939,7 @@ if(document.querySelector('meta[name="ogtv-mode"][content="radio"]')) setRadio(t
 // visitor does something). Exit full screen leaves it.
 function autoFull(){
   if(!TV_APP&&matchMedia("(pointer:coarse) and (hover:none)").matches) return; // phones and tablets open in the normal view; Maximize is a tap away
-  if(roomFull()) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange();
+  if(document.fullscreenElement||document.webkitFullscreenElement) return; const room=$("room"); room.classList.add("pseudo-fs"); onFullscreenChange(); // the page may have opened so already (index.html's boot line: no jump), the rest follows here
   if(TV_APP) return; // the app is full screen already
   const up=e=>{removeEventListener("click",up,true); removeEventListener("keydown",up,true);
     if(!room.classList.contains("pseudo-fs")||(e.target.closest&&e.target.closest("#keyFs,#knobMode,#fs,#home,#helpFs,#keyHelp"))||e.key==="Escape") return;

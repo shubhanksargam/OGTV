@@ -2,6 +2,7 @@
 // directory on the home page, the home page's search tags, sitemap.xml and robots.txt.
 // Run after changing channels or sources: node scripts/build-pages.mjs
 import {readFile, writeFile, mkdir, rm, readdir} from "node:fs/promises";
+import {createHash} from "node:crypto";
 import needsOf from "./for-pages.mjs";
 import ASKS from "./channel-asks.mjs";
 
@@ -179,8 +180,12 @@ function faqHtml() {
 
 // What a page may load: our own files, the YouTube player, GoatCounter and Google Fonts. Inline scripts are not
 // allowed, so a title or name that ever carried markup could not run. (GitHub Pages sends no headers, so this is a meta tag.)
+// index.html's boot line (the TV fills the window from the first paint on computers): the security policy allows it by its hash
+const BOOT_SRC = ((await read("index.html")).match(/<script id="boot">([\s\S]*?)<\/script>/) || [])[1];
+if (!BOOT_SRC) throw new Error("index.html: no boot line");
+const BOOT_HASH = createHash("sha256").update(BOOT_SRC, "utf8").digest("base64");
 const CSP = ["default-src 'self'",
-  "script-src 'self' https://www.youtube.com https://s.ytimg.com https://gc.zgo.at",
+  `script-src 'self' 'sha256-${BOOT_HASH}' https://www.youtube.com https://s.ytimg.com https://gc.zgo.at`, // the one inline line allowed: index.html's boot line, by its hash
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
   "connect-src 'self' https://*.goatcounter.com",
   "img-src 'self' data: https://i.ytimg.com https://*.goatcounter.com",
