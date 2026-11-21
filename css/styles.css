@@ -927,3 +927,10 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .for-intro summary{cursor:pointer;font-weight:700;color:var(--ink)}
 .for-intro details p{margin:8px 0 0}
 .uses h3 a{color:inherit;text-decoration:none}
+/* A channel page: what it's good for, and its questions (scripts/channel-asks.mjs) */
+.seo-intro .good-for{margin-top:10px}
+.seo-intro .good-for b{color:var(--ink)}
+.ch-faq{margin-top:12px;max-width:75ch}
+.ch-faq details{border-top:1px solid var(--line);padding:8px 0}
+.ch-faq summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.ch-faq details p{margin:6px 0 0}
