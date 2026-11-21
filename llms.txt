@@ -28,7 +28,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - Hindi news and analysis; Hindi news online, all day: [Khabar](https://ogtv.co.in/khabar/), channel 2.
 - Bihar and Jharkhand news; Bihar news roundups and analysis: [Magadh Times](https://ogtv.co.in/magadh-times/), channel 3.
 - Vantage with Palki Sharma; World news from an Indian point of view: WION, Firstpost and India Global Review; The last two days of world affairs, with Mint and Bloomberg: [Newsroom](https://ogtv.co.in/newsroom/), channel 4.
-- Space and India explainers; General knowledge videos: [Gyaan](https://ogtv.co.in/gyaan/), channel 5.
+- Indian history: Lallantop's Tarikh and HISTORY TV18; World history documentaries; Space and India explainers; General knowledge videos; The PMO's and the Indian Army's videos: [Gyaan](https://ogtv.co.in/gyaan/), channel 5.
 - Science videos and experiments: [Discover](https://ogtv.co.in/discover/), channel 6.
 - Science and maths explainers: [Curious](https://ogtv.co.in/curious/), channel 7.
 - Maps, charts and data stories about India; Khan Sir's GS explainers; India's infrastructure: highways, bridges, metros and mega projects; Business case studies about India: [India in Data](https://ogtv.co.in/india-in-data/), channel 8.
@@ -42,7 +42,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - Cricket World Cup classics and great finishes; Old cricket matches: [Cricket Classics](https://ogtv.co.in/cricket-classics/), channel 16.
 - Football highlights: Premier League, LaLiga, Champions League and ISL: [Football](https://ogtv.co.in/football/), channel 17.
 - F1, tennis and NBA highlights; World sport: [International Sports](https://ogtv.co.in/international-sports/), channel 18.
-- Home workouts, yoga and fitness training; Army and sports fitness training: [Sehat](https://ogtv.co.in/sehat/), channel 19.
+- Home workouts, yoga and fitness training; Army and sports fitness training; FitTuber's health and diet tips: [Sehat](https://ogtv.co.in/sehat/), channel 19.
 - Indian recipes and cooking videos: [Rasoi](https://ogtv.co.in/rasoi/), channel 20.
 - Travel videos from India and the world: [Safar](https://ogtv.co.in/safar/), channel 21.
 - Stories and rhymes for children; Science for kids: [Bachche](https://ogtv.co.in/bachche/), channel 22.
@@ -78,7 +78,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - **A daily feed without scrolling:** The day's new videos come to you, with no feed to scroll and nothing to search: this week's trending songs on Desi Pop, today's cricket highlights, this week's football, the last two days of world news on Newsroom, The Daily Brief and the markets on Paisa, and new gadgets on Tech. New videos arrive every night, and NEW marks uploads from the last 30 days. Channels: [Select](https://ogtv.co.in/select/), [Desi Pop](https://ogtv.co.in/desi-pop/), [Cricket](https://ogtv.co.in/cricket/), [Football](https://ogtv.co.in/football/), [Newsroom](https://ogtv.co.in/newsroom/), [Paisa](https://ogtv.co.in/paisa/), [Tech](https://ogtv.co.in/tech/).
 - **News, live and in Hindi:** Live news around the clock on Just News, Hindi news and analysis on Khabar, Bihar and Jharkhand on Magadh Times, and world affairs on Newsroom: Palki Sharma's Vantage, WION, Firstpost, Mint and Bloomberg. Live broadcasts play first whenever they are on. Channels: [Just News](https://ogtv.co.in/just-news/), [Khabar](https://ogtv.co.in/khabar/), [Magadh Times](https://ogtv.co.in/magadh-times/), [Newsroom](https://ogtv.co.in/newsroom/).
 - **Sports and highlights:** Today's highlights from every major cricket match, India and the IPL first; World Cup classics and great finishes; this week's football from the Premier League, LaLiga, the Champions League and the ISL; the Olympics and Indian sport on Khel; and F1, tennis and the NBA on International Sports. Channels: [Cricket](https://ogtv.co.in/cricket/), [Cricket Classics](https://ogtv.co.in/cricket-classics/), [Football](https://ogtv.co.in/football/), [Khel](https://ogtv.co.in/khel/), [International Sports](https://ogtv.co.in/international-sports/).
-- **Learning that plays on its own:** Explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat. Channels: [Gyaan](https://ogtv.co.in/gyaan/), [Discover](https://ogtv.co.in/discover/), [Curious](https://ogtv.co.in/curious/), [India in Data](https://ogtv.co.in/india-in-data/), [Classroom](https://ogtv.co.in/classroom/), [Paisa](https://ogtv.co.in/paisa/), [Baatcheet](https://ogtv.co.in/baatcheet/), [Niche](https://ogtv.co.in/niche/).
+- **Learning that plays on its own:** History, from Lallantop's Tarikh to world history documentaries, explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat. Channels: [Gyaan](https://ogtv.co.in/gyaan/), [Discover](https://ogtv.co.in/discover/), [Curious](https://ogtv.co.in/curious/), [India in Data](https://ogtv.co.in/india-in-data/), [Classroom](https://ogtv.co.in/classroom/), [Paisa](https://ogtv.co.in/paisa/), [Baatcheet](https://ogtv.co.in/baatcheet/), [Niche](https://ogtv.co.in/niche/).
 - **Films and family TV:** Classic Hindi films, great films from India and the world, critically acclaimed South Indian films in Hindi, Doordarshan classics, Taarak Mehta and mushaira, stand-up comedy and web series. Channels: [Retro Movies](https://ogtv.co.in/retro-movies/), [Classics](https://ogtv.co.in/classics/), [South Gems](https://ogtv.co.in/south-gems/), [Aangan](https://ogtv.co.in/aangan/), [Comedy](https://ogtv.co.in/comedy/), [Fiction](https://ogtv.co.in/fiction/).
 - **Bhajans and festivals:** Bhakti plays devotional songs all day, with the coming festival's bhajans, and Vibe plays the festival's party songs: Diwali, Holi, garba, Lohri, Eid, Christmas and New Year. Channels: [Select](https://ogtv.co.in/select/), [Bhakti](https://ogtv.co.in/bhakti/), [Vibe](https://ogtv.co.in/vibe/).
 - **Kids, cooking, fitness and travel:** Cartoons and learning for children on Bachche, recipes on Rasoi, workouts and yoga on Sehat, and journeys across India and the world on Safar. Channels: [Bachche](https://ogtv.co.in/bachche/), [Rasoi](https://ogtv.co.in/rasoi/), [Sehat](https://ogtv.co.in/sehat/), [Safar](https://ogtv.co.in/safar/).
@@ -115,7 +115,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 
 ### Knowledge
 
-- [5 · Gyaan](https://ogtv.co.in/gyaan/): Gyaan on OGTV: space, India & explainers, free and always on. Videos from Mohak Mangal, StudyIQ IAS, Think School and ISRO.
+- [5 · Gyaan](https://ogtv.co.in/gyaan/): Gyaan on OGTV: history, space & explainers: Tarikh, HISTORY TV18, ISRO, Timeline, free and always on. Videos from Tarikh and Mohak Mangal.
 - [6 · Discover](https://ogtv.co.in/discover/): Discover on OGTV: science, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
 - [7 · Curious](https://ogtv.co.in/curious/): Curious on OGTV: science & maths explainers, free and always on. Videos from Numberphile, minutephysics, CGP Grey and Steve Mould.
 - [8 · India in Data](https://ogtv.co.in/india-in-data/): India in Data on OGTV: maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School, free and always on. Videos from Khan Sir.
@@ -135,7 +135,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 
 ### Lifestyle
 
-- [19 · Sehat](https://ogtv.co.in/sehat/): Sehat on OGTV: sports fitness, army & Soviet-style training, yoga, free and always on. Videos from Overtime Athletes, Yoga With Tim and Improved Health.
+- [19 · Sehat](https://ogtv.co.in/sehat/): Sehat on OGTV: sports fitness, army & Soviet-style training, yoga & FitTuber, free and always on. Videos from Fit Tuber and Fit Tuber Hindi.
 - [20 · Rasoi](https://ogtv.co.in/rasoi/): Rasoi on OGTV: cooking, free and always on. Videos from Kabita's Kitchen, Nisha Madhulika, Sanjeev Kapoor Khazana and Hebbars Kitchen Hindi.
 - [21 · Safar](https://ogtv.co.in/safar/): Safar on OGTV: travel, India & the world, free and always on. Videos from Beautiful Destinations, Visa2explore, Travelling Mantra and Desi Couple On The Go.
 - [22 · Bachche](https://ogtv.co.in/bachche/): Bachche on OGTV: kids, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.

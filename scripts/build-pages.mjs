@@ -98,7 +98,7 @@ const USES = [
   ["sports", "Sports and highlights", ["cricket", "classics", "football", "khel", "worldsport"],
     "Today's highlights from every major cricket match, India and the IPL first; World Cup classics and great finishes; this week's football from the Premier League, LaLiga, the Champions League and the ISL; the Olympics and Indian sport on Khel; and F1, tennis and the NBA on International Sports."],
   ["learn", "Learning that plays on its own", ["gyaan", "vigyan", "curious", "data", "classroom", "paisa", "baatcheet", "niche"],
-    "Explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat."],
+    "History, from Lallantop's Tarikh to world history documentaries, explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat."],
   ["films", "Films and family TV", ["retro", "premium", "southgems", "aangan", "hasya", "fiction"],
     "Classic Hindi films, great films from India and the world, critically acclaimed South Indian films in Hindi, Doordarshan classics, Taarak Mehta and mushaira, stand-up comedy and web series."],
   ["devotion", "Bhajans and festivals", ["select", "bhakti", "festival"],

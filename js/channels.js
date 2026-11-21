@@ -3,6 +3,9 @@
 // group: the heading a channel sits under in the channel list
 // India in Data's day outside its two hours of the latest: Khan Sir and Life on Wheels a fixed share each, so they play
 // every day (by request), the other six creators the rest; their latest and most popular videos alike
+// Gyaan's mixed hours: history a fixed share (Tarikh, HISTORY TV18, world history), the PMO and the Army a little, explainers the rest
+const GYAAN_MIX=[{src:"^Tarikh$",share:0.15},{src:"^HISTORY TV18$",share:0.12},{src:"^(Timeline|World History Encyclopedia|Epimetheus)$",share:0.15},
+  {src:"^(PMO India|Indian Army)$",share:0.1},{src:"^(ISRO|Documentary|Explainer|Mohak Mangal|StudyIQ IAS)$"}];
 const DATA_MIX=[{src:"^Khan Sir$",share:0.15},{src:"^Life On Wheels$",share:0.15},{src:"^(India in Pixels|Nitish Rajput|Infra Talks|Breakdown|Think School|Aevy TV)$"}];
 const CHANNELS = [
   // ---- News ----
@@ -70,7 +73,19 @@ const CHANNELS = [
   {key:"news",n:4,group:"News",name:"Newsroom",en:"Vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days",live:"newsroom",parts:[
     {from:0,to:24,cat:["news","paisa"],days:2,strictDays:true,mix:[{src:"Palki|Vantage",share:0.45},{src:"IGR|India Global Review"},{src:"Firstpost|Blueprint|First Cut|Mind the Gap|Honest Truth"},{src:"^WION"},{src:"^Mint"},{src:"^Bloomberg"},{src:"Zerodha"}],label:"The last two days: Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha"}]},
   // ---- Knowledge ----
-  {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
+  // Gyaan (approved list, 21 Nov 2026): history a focus (by request), beside space and explainers; every creator's latest
+  // and most popular videos; Tarikh's newest every evening, newest first
+  {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"History, space & explainers: Tarikh, HISTORY TV18, ISRO, Timeline",parts:[
+    {from:0,to:6,  cat:"gyaan",label:"World history, after dark",mix:[{src:"^Timeline$",share:0.5},{src:"^(World History Encyclopedia|Epimetheus)$"}]},
+    {from:6,to:7,  cat:"gyaan",src:"^(ISRO|Documentary|Explainer)$",alt:"gyaan",label:"Space: ISRO"},
+    {from:7,to:8,  cat:"gyaan",src:"^(PMO India|Indian Army)$",alt:"gyaan",label:"From the PMO and the Indian Army"},
+    {from:8,to:13, cat:"gyaan",label:"Explainers & history",mix:GYAAN_MIX},
+    {from:13,to:14,cat:"gyaan",src:"^Tarikh$",alt:"gyaan",label:"Tarikh: Indian history"},
+    {from:14,to:18,cat:"gyaan",label:"Explainers & history",mix:GYAAN_MIX},
+    {from:18,to:19,cat:"gyaan",src:"^HISTORY TV18$",alt:"gyaan",label:"HISTORY TV18"},
+    {from:19,to:20,cat:"gyaan",label:"Explainers & history",mix:GYAAN_MIX},
+    {from:20,to:21,cat:"gyaan",src:"^Tarikh$",newest:true,alt:"gyaan",label:"Tarikh: the latest"},
+    {from:21,to:24,cat:"gyaan",label:"World history",mix:[{src:"^Timeline$",share:0.5},{src:"^(World History Encyclopedia|Epimetheus)$"}]}]},
   {key:"vigyan",n:6,group:"Knowledge",name:"Discover",oldSlugs:["vigyan"],en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
   {key:"curious",n:7,group:"Knowledge",name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,preferMin:15,cat:"curious",label:"Explainers"}]},
   // India in Data (approved list, 21 Nov 2026): every creator's latest and most popular videos; Khan Sir's and Life on
@@ -168,17 +183,18 @@ const CHANNELS = [
     {from:22,to:23,cat:"world",tag:"fixtures",alt:"world",label:"International fixtures: NBA, NHL, rugby & basketball"},
     {from:23,to:24,cat:"world",tag:"tennis",alt:"world",label:"Late-night tennis"}]},
   // ---- Lifestyle ----
-  {key:"sehat",prime:20,n:19,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga",parts:[
+  {key:"sehat",prime:20,n:19,group:"Lifestyle",name:"Sehat",en:"Sports fitness, army & Soviet-style training, yoga & FitTuber",parts:[
     {from:0,to:5,  cat:"sehat",tag:"yoga",maxMin:25,label:"Late-night stretch"},
     {from:5,to:7,preferMin:15,  cat:"sehat",tag:"yoga",label:"Morning yoga"},
     {from:7,to:9,  cat:"sehat",tag:"army",alt:"sehat",label:"Army training: morning PT"},
-    {from:9,to:12, cat:"sehat",tag:"sports",label:"Sports fitness: train like an athlete"},
+    {from:9,to:11, cat:"sehat",tag:"sports",label:"Sports fitness: train like an athlete"},
+    {from:11,to:12,cat:"sehat",src:"^Fit Tuber",newest:true,alt:"sehat",label:"FitTuber: health & diet, the latest"}, // its newest every day (by request)
     {from:12,to:13,cat:"sehat",tag:"workout",maxMin:30,label:"Quick workouts"},
     {from:13,to:14,cat:"sehat",tag:"walk",label:"Walk & move"},
     {from:14,to:18,cat:"sehat",tag:"sports",label:"Sports fitness: speed, strength & mobility"},
     {from:18,to:19,cat:"sehat",tag:"army",alt:"sehat",label:"Army training: evening drills"},
     {from:19,to:20,preferMin:15,cat:"sehat",tag:"workout",label:"Evening workouts"},
-    {from:20,to:21,cat:"sehat",tag:"learn",label:"Fitness explained"},
+    {from:20,to:21,cat:"sehat",label:"Fitness explained",mix:[{src:"^Fit Tuber",share:0.5},{tag:"learn"}]}, // FitTuber half of it (by request)
     {from:21,to:22,cat:"sehat",tag:"soviet",alt:"sehat",label:"Soviet-style training: kettlebells & weightlifting"},
     {from:22,to:24,preferMin:15,cat:"sehat",tag:"yoga",maxMin:30,label:"Wind-down yoga"}]},
   {key:"rasoi",n:20,group:"Lifestyle",name:"Rasoi",en:"Cooking",parts:[{from:0,to:24,cat:"rasoi",label:"Recipes, all day"}]},
