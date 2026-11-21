@@ -8,108 +8,114 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "3uYzsGet1yI",
-   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 21 November ",
+   "id": "T6-4EmaKMtA",
+   "t": "Bangladesh Lockdown News LIVE: humayun kabir ka phunk dala ghar, chal jagah-jagah bam!, ba",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "K0IDl9Qr0Hc",
-   "t": "Baba bageshvar ki ramaktha kunda se sidhaLIVE | Bageshwar Baba Ram Katha | Raja Bhaiya | P",
+   "id": "6K8bhWV9yW4",
+   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar | Ram Katha | CM Yogi Mother Death | Anant Singh | Cyc",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "Dl9n6DWixIY",
-   "t": "Aaj Ki Badi Khabar: PM Modi Today News | SCO Summit Updates | CM Yogi Mother Last Rites | ",
+   "id": "AIAfblYuQZU",
+   "t": "CM Yogi Mother Death News LIVE - CM yogi ki man savitri devi ka antim sanskar | PM Modi | ",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "dAuHTLnHjk8",
-   "t": "Today 100 Big Breaking News LIVE: aaj ki bari khabren Akvan Cyclone | Pakistan | PM Modi |",
+   "id": "BZbWJDPKXX4",
+   "t": "Muslims Attack On Couple In Mumbai LIVE: munbaee men premi jore ko 'jihadi gaing' ne gherk",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "qwf-S_-oCxA",
-   "t": "Today's Breaking News LIVE: Rahul Gandhi | PM Modi | Donald Trump | UP Elections 2027 | Cy",
+   "id": "HNCdf32LrPE",
+   "t": "CM Yogi LIVE : panchtatv men vilin hueen CM yogi ki man | Savitri Devi Funeral | Haridwar",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "oXKfkwq6yGU",
-   "t": "Money mantr LIVE : sailri aati hai, bachti kyon nahin | Monthly Budget | Income Management",
+   "id": "KJQ-uJgFIgo",
+   "t": "Mid Day Prime LIVE : PM Modi IIT Kharagpur ke 75ven Platinum Jubilee samaroh men hue shami",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "KkdjNmdkzcQ",
-   "t": "NDTV LIVE: US- Iran War | Trump | PM Modi | Gurpatwant Pannun | Mohammed Siraj | Cyclone A",
+   "id": "5fWerwmZ5os",
+   "t": "CM YOGI MOTHER'S FUNERAL LIVE: Yogi Adityanath Bids Final Farewell To Mother In Haridwar |",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
    "id": "U5icHjUN1rk",
-   "t": "India Today LIVE: Trump's AI War | US-Iran War | Rahul Gandhi | Modi | CM Vijay | Nvidia |",
+   "t": "India Today LIVE: Trump AI Tax | SCO Summit | CM Vijay | Pak Minister In India | PM Modi I",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "XqQe9VKRoV8",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "id": "klgpig576uM",
+   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "kj87_Fxb62c",
-   "t": "Trump LIVE: President Trump Delivers Major Nuclear Emergency Warning | US On High? | Trump",
+   "id": "j7xuKHJEv98",
+   "t": "TRUMP IRAN ANNOUNCEMENT LIVE | US-IRAN War Is Over | Trump Speech Live | US News Live | Tr",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "pHfmToKHFW8",
-   "t": "Kash Patel REPRIMANDED for Skipping House Hearing | Bennie Thompson SLAMS Trump's FBI Chie",
+   "id": "o0HyRoIuJ88",
+   "t": "LIVE: Democrats' 100-Day Agenda: $30 Billion Iran War Savings, But $4.1 Trillion Added To ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "13ozXdDnkuo",
-   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | PM Modi Bihar Visit | CM Samra",
+   "id": "-vOfhiuKP-s",
+   "t": "PM Modi Bihar Visit Live : patna pahunche piem modi sidhe LIVE | Nitish Setu Inauguration ",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "YBOI5K1gHlI",
-   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
+   "id": "xwqFBlv_pwU",
+   "t": "PM Modi Visit Bihar : PM modi ka bara ailan | LIVE | Nitish Kumar | Samrat Choudhary",
    "src": "Zee Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "jbfFoNvkw24",
+   "t": "Vaishali PM Modi : Nitish Setu ka pradhanmantri ka kiya udghatan... lahra diya gamchha",
+   "src": "ABP Bihar",
    "lang": "hi"
   }
  ],
  "newsroom": [
   {
-   "id": "tOrBcGOvVZg",
-   "t": "LIVE: SpaceX Launches Classified Mission for US Space Force from California | India Global",
+   "id": "nFjwwScVQmc",
+   "t": "The Palki Sharma Show LIVE: Houthis Strike Saudi Arabia | Anthropic’s Billion-Dollar IPO |",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "Wtgis-Dgw3Y",
-   "t": "Iran Flexes Secret Arsenal, Taunts Trump; Putin's Drone Storm Batters Kyiv |BIG HEADLINES ",
+   "id": "EblZNvq2gwo",
+   "t": "'The Target Is Locked!': Houthis Threaten Saudi Airspace, Signal Fresh Strikes Now | Houth",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "rl8lnL9DMJ0",
-   "t": "PM Modi LIVE: PM Modi Attends Platinum Jubilee Celebrations of IIT Kharagpur In West Benga",
+   "id": "klgpig576uM",
+   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "yd1ShNDPYjg",
-   "t": "LIVE : 'SHE WON AMERICA'S HEART!' US Senate Pays Tribute To Fiona The Hippo",
+   "id": "vQ1c-a_Gzy4",
+   "t": "Nigel Farage LIVE: Farage's Brussels Bombshell! Reform UK Leader Challenges Burnham Over E",
    "src": "Mint",
    "lang": "en"
   },
