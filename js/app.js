@@ -254,9 +254,15 @@ let noiseAt=0;
 function drawNoise(ts){
   if(staticOn) staticRAF=requestAnimationFrame(drawNoise);
   if(stillNoise&&ts&&ts-noiseAt<120) return; noiseAt=ts||0;
-  const d=nimg.data; for(let i=0;i<d.length;i+=4){const v=50+Math.random()*200|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
-  nctx.putImageData(nimg,0,0);
+  if(NOISE.length<12) NOISE.push(noiseFrame()); // one more frame each time, the first time static shows
+  nctx.putImageData(NOISE[noiseI++%NOISE.length],0,0);
 }
+// The static's snow: twelve frames made once, with a fast generator writing a whole pixel at a time, then shown in turn
+// (a phone drew 90,000 random numbers on every frame while a channel tuned in, the busiest seconds of start-up)
+const NOISE=[]; let noiseI=0, noiseSeed=0x9e3779b9;
+function noiseFrame(){const img=nctx.createImageData(nimg.width,nimg.height), px=new Uint32Array(img.data.buffer); let x=noiseSeed;
+  for(let i=0;i<px.length;i++){x^=x<<13; x^=x>>>17; x^=x<<5; const v=50+(x>>>0)%200; px[i]=(0xff000000|v<<16|v<<8|v)>>>0} // grey 50-249, opaque
+  noiseSeed=x; return img}
 function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)return; staticOn=true; $("static").hidden=false; staticSound.start();
   const id=$("ident"); id.style.animation="none"; void id.offsetWidth; id.style.animation=""; drawNoise()}
 // The channel panel, over the static while tuning in: retro's own green VFD readout, or in the plain look the same

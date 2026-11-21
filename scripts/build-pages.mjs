@@ -206,8 +206,8 @@ const CSP = ["default-src 'self'",
   "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
   "connect-src 'self' https://*.goatcounter.com",
   "img-src 'self' data: https://i.ytimg.com https://*.goatcounter.com",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'", // the site's own fonts (fonts/, css/styles.css)
   "media-src 'self' blob:",
   "base-uri 'self'", "form-action 'none'", "object-src 'none'"].join("; ");
 
@@ -375,8 +375,6 @@ for (const name of LEGAL) {
 ${meta[3] ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${SITE}/${name}/">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#14111c">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Mukta:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="${stampOf("css/styles.css")}">
 </head>
 <body class="legal-page">

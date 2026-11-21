@@ -30,7 +30,8 @@ const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
   b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
   b.innerHTML=`<span class="dk-disc"><img alt="" decoding="async" draggable="false"><i class="dk-gloss"></i><i class="dk-hole"></i></span>`
     +`<span class="dk-n">${c.n}</span><span class="dk-name">${esc(c.name)}</span>`;
-  ring.appendChild(b); return {b, img:b.querySelector("img"), id:"", vis:true}});
+  b.style.visibility="hidden"; // hidden until placed (render): a disc first seen where it belongs, never moved into place
+  ring.appendChild(b); return {b, img:b.querySelector("img"), id:"", vis:false}});
 
 // Sizes: the discs' circle is wide enough that neighbours don't overlap; the record's rim is the panel's foot
 function measure(){W=dial.clientWidth; H=dial.clientHeight; if(!W) return false;
@@ -69,7 +70,8 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
 // The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
 function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending||it.id===s.v.id) return; // pending: its videos are on their way (js/data.js)
   it.id=s.v.id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(s.v.id)}/mqdefault.jpg`}
-function render(){const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
+function render(){if(!W) return; // not measured yet (or out of sight): the observer places it all when it is laid out
+  const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   for(let i=0;i<N;i++){const it=items[i], d=wrapD(i-pos), a=d*STEP, ad=Math.abs(d), x=r*Math.sin(a);
     const vis=ad<5.5&&Math.abs(x)<W/2+D;
     if(vis!==it.vis){it.b.style.visibility=vis?"":"hidden"; it.vis=vis}
@@ -139,8 +141,14 @@ dial.addEventListener("keydown",e=>{ // with the record in focus, ← → turn i
   if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault(); e.stopPropagation(); poke(); turnTo(Math.round(target)+(e.key==="ArrowRight"?1:-1))}
   else if((e.key==="Enter"||e.key===" ")&&e.target===dial){e.preventDefault(); e.stopPropagation(); watch(at(target))}});
 
-if(measure()){items[cur].b.classList.add("cur"); render()}
-new ResizeObserver(()=>{if(measure()) render()}).observe(dial);
+// Measured and painted when the page lays the record out (the observer's first call, right after layout and before the
+// first paint), not while this script runs: reading its size here made the browser lay out the whole page early, and the
+// observer then painted the record a second time at the same size. After that, only a real change of size repaints it.
+// Placing the discs fills in what's on at the centre, which can change the record's height: then it is measured and
+// placed again at once, still before that paint, so nothing on it ever moves once seen
+items[cur].b.classList.add("cur");
+new ResizeObserver(()=>{if(W&&dial.clientWidth===W&&dial.clientHeight===H) return;
+  for(let k=0;k<3&&measure();k++){render(); if(dial.clientWidth===W&&dial.clientHeight===H) break}}).observe(dial);
 // Real time, as the programme guide: the covers and the centre change the moment a programme ends on any channel (the
 // soonest end of all, looked up again after each change; tick() calls this too, so a skipped programme doesn't linger),
 // and the centre's progress bar moves every second. Nothing changes while a channel tunes in.
