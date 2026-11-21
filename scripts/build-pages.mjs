@@ -323,6 +323,38 @@ for (const n of NEEDS) {
   await mkdir(new URL(`for/${n.slug}/`, ROOT), {recursive: true});
   await writeFile(new URL(`for/${n.slug}/index.html`, ROOT), page);
 }
+// The site's own pages besides the TV (scripts/pages/<name>.html -> <name>/index.html): the Terms of Use and the Privacy
+// Policy (21 Nov 2026, for OGTV as it is, with no accounts; the signin branch has its own). The same security policy,
+// fonts and cache stamps as the TV pages. A page's first line: <!-- title: … | description: … | noindex --> ("noindex" optional)
+const stampOf = f => (home.match(new RegExp(f.replace(/\./g, "\\.") + "\\?v=[^\"]+")) || [f])[0];
+const LEGAL = ["terms", "privacy"];
+for (const name of LEGAL) {
+  const src = await read(`scripts/pages/${name}.html`), meta = src.match(/^<!--\s*title:\s*(.*?)\s*\|\s*description:\s*(.*?)\s*(\|\s*noindex\s*)?-->/);
+  if (!meta) throw new Error(`scripts/pages/${name}.html: first line must be <!-- title: … | description: … -->`);
+  await mkdir(new URL(`${name}/`, ROOT), {recursive: true});
+  await writeFile(new URL(`${name}/index.html`, ROOT), `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="${CSP}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<base href="/">
+<title>${esc(meta[1])}</title>
+<meta name="description" content="${esc(meta[2])}">
+${meta[3] ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${SITE}/${name}/">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14111c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Mukta:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="${stampOf("css/styles.css")}">
+</head>
+<body class="legal-page">
+${src.slice(meta[0].length).trim()}
+</body>
+</html>
+`);
+}
 await writeFile(new URL("sitemap.xml", ROOT), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
@@ -332,6 +364,7 @@ ${CHANNELS.map(c => { const v = featured(c); return `  <url><loc>${SITE}/${slug(
       <video:player_loc>https://www.youtube.com/embed/${v.id}</video:player_loc><video:duration>${Math.round(v.min * 60)}</video:duration><video:publication_date>${isoDate(v)}</video:publication_date></video:video>` : ""}
   </url>`; }).join("\n")}
 ${NEEDS.map(n => `  <url><loc>${n.url}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`).join("\n")}
+${LEGAL.map(n => `  <url><loc>${SITE}/${n}/</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>`).join("\n")}
 </urlset>
 `);
 // /llms.txt: what OGTV is, what it's for, the questions and every channel, in plain Markdown for AI tools
