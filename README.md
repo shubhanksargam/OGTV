@@ -2,7 +2,7 @@
 
 **Watch OGTV: [https://ogtv.co.in](https://ogtv.co.in)**
 
-Free, with no sign-up. It works in any browser on phones, laptops and smart TVs. Each channel also has its own page, such as [ogtv.co.in/tv/cricket](https://ogtv.co.in/tv/cricket/). The old address, ogtv.thebharat.si, now redirects here.
+Free, with no sign-up. It works in any browser on phones, laptops and smart TVs. Each channel also has its own page, such as [ogtv.co.in/cricket](https://ogtv.co.in/cricket/). The old address, ogtv.thebharat.si, now redirects here.
 
 A 24×7 TV-style website for Indian viewers: 40 channels of Hindi and English YouTube, two of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
 
@@ -57,7 +57,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 **Magadh Times** — Bihar & Jharkhand news, channel 3. Category `magadh`, refreshed by the hourly news run (`refresh-news.yml`): Doordarshan's regional bulletins from Patna and Ranchi (`bulletin`), News18 Bihar Jharkhand's day's roundups (`roundup`), ETV Bharat's ground reports (`reports`), the region's channels' latest, filtered to Bihar and Jharkhand stories (`updates`), analysis from Prabhat Khabar, The Lallantop, BBC News Hindi, Khabargaon and Newslaundry (`analysis`), and their Bihar & Jharkhand series (`deep`). A part's `days` keeps it to videos posted in the last so many days (the day's roundup; the weekend's week in review).
 
-**Addresses** — every channel has one address, `/tv/<channel>/`, the page the channel list links to; tuning writes it into the address bar (other parameters such as `app=tv` stay), and an old `?ch=<channel>` link still tunes and is tidied the same way.
+**Addresses** — every channel has one address, `/<channel>/` (such as `/cricket/`), the page the channel list links to; the old `/tv/<channel>/` addresses forward there; tuning writes it into the address bar (other parameters such as `app=tv` stay), and an old `?ch=<channel>` link still tunes and is tidied the same way.
 
 **Select** — a hand-picked channel: only the songs in category `select` (Dhurandhar, Saiyaara and Diljit's film songs in `js/catalog.js`; Diljit, Karan Aujla and Mirzapur from `scripts/feeds.json`). Its `mix` plays each set in turn, a set's share being the square root of its size, so a big set doesn't drown a small one. To add songs, give them `cat:"select"` and a tag, and add the tag to the `mix`.
 
@@ -78,7 +78,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 ## Watching
 
 - The first tap ("Press to start") lets the browser play with sound.
-- `?ch=desi-pop` in the address opens Desi Pop: the address always names the channel you're watching (the same name as its `/tv/desi-pop/` page), so a copied link keeps working when channels are reordered. Numbers (`?ch=29`) and renamed channels' old names still work. `←`/`→` change channel and `↑`/`↓` set the volume (in retro mode both show the set’s green readout, as its knobs do); type two digits on the keyboard for channels 10 and up. Channels are numbered 1–40 in the order the guide lists them (`scripts/check.mjs` insists on it).
+- `?ch=desi-pop` in the address opens Desi Pop: the address always names the channel you're watching (the same name as its `/desi-pop/` page), so a copied link keeps working when channels are reordered. Numbers (`?ch=29`) and renamed channels' old names still work. `←`/`→` change channel and `↑`/`↓` set the volume (in retro mode both show the set’s green readout, as its knobs do); type two digits on the keyboard for channels 10 and up. Channels are numbered 1–40 in the order the guide lists them (`scripts/check.mjs` insists on it).
 - Subtitles are off, always: YouTube's captions are cleared as each video starts (the CC button is gone for now).
 - A click or tap on the picture pauses or plays, in the page and in full screen. Paused, the picture dims under a flat dark wash.
 - **Help** (beside **Retro mode** in the header; in full screen beside the on-screen Retro mode button and as a key on the retro TV set; or `H`) explains every part of the site.

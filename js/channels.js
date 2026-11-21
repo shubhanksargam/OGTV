@@ -59,30 +59,13 @@ const CHANNELS = [
     {from:21,to:22,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"9 pm: The latest bulletins"},
     {from:22,to:23,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"10 pm: Aaj ki badi khabren, the day's roundup"},
     {from:23,to:24,cat:"magadh",tag:"deep",preferMin:10,alt:"magadh",label:"11 pm: Deep dives on Bihar & Jharkhand"}]},
-  {key:"news",n:4,group:"News",name:"Newsroom",en:"Vantage with Palki Sharma, Firstpost, IGR & world news",parts:[  // a fixed daily line-up; each show plays its newest episode first
-    {from:0,to:0.5,cat:"paisa",tag:"dailybrief",newest:true,fixed:true,alt:"paisa",label:"12 am: The Daily Brief by Markets by Zerodha"},
-    {from:0.5,to:1,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"Midnight repeat: Vantage with Palki Sharma"},
-    {from:1,to:2,cat:"news",tag:"palki",src:"Flashback",newest:true,alt:"news",label:"1 am: Flashback with Palki Sharma"},
-    {from:2,to:6,  cat:"news",srcSkip:"Vantage|Palki|Firstpost|Blueprint|First Cut|Mind the Gap|Honest Truth|IGR",preferMin:15,label:"World reports & explainers"},
-    {from:6,to:7,cat:"news",tag:"fpshows",src:"Firstpost America",newest:true,alt:"news",label:"6 am: Firstpost America"},
-    {from:7,to:8,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"7 am: Vantage with Palki Sharma (repeat)"},
-    {from:8,to:9,cat:"news",tag:"igr",src:"Daily News Feed",newest:true,alt:"news",label:"8 am: IGR Daily News Feed"},
-    {from:9,to:11, cat:"news",srcSkip:"Vantage|Palki|Firstpost|Blueprint|First Cut|Mind the Gap|Honest Truth|IGR",preferMin:15,label:"Reports & explainers"},
-    {from:11,to:12,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"11 am: Vantage with Palki Sharma"},
-    {from:12,to:12.5,cat:"paisa",tag:"dailybrief",newest:true,fixed:true,alt:"paisa",label:"12 pm: The Daily Brief by Markets by Zerodha"},
-    {from:12.5,to:13,cat:"news",tag:"fpshows",src:"Firstpost Africa",newest:true,alt:"news",label:"12:30 pm: Firstpost Africa"},
-    {from:13,to:14,cat:"news",tag:"palki",src:"Flashback",newest:true,alt:"news",label:"1 pm: Flashback with Palki Sharma"},
-    {from:14,to:15,cat:"news",tag:"igr",src:"India Global Review",newest:true,alt:"news",label:"2 pm: IGR, India Global Review"},
-    {from:15,to:16,cat:"news",srcSkip:"Vantage|Palki|Firstpost|Blueprint|First Cut|Mind the Gap|Honest Truth|IGR",preferMin:15,label:"Afternoon reports"},
-    {from:16,to:17,cat:"news",tag:"fpshows",src:"Blueprint|Mind the Gap",newest:true,alt:"news",label:"4 pm: The Blueprint & Mind the Gap"},
-    {from:17,to:18,cat:"news",tag:"fpshows",src:"First Cut",newest:true,alt:"news",label:"5 pm: First Cut"},
-    {from:18,to:19,cat:"news",tag:"igr",src:"IGR: Live",newest:true,alt:"news",label:"6 pm: IGR Live with Palki Sharma"},
-    {from:19,to:20,cat:"news",tag:"fpshows",src:"Firstpost America",newest:true,alt:"news",label:"7 pm: Firstpost America"},
-    {from:20,to:21,cat:"news",tag:"palki",src:"Vantage Podcast",newest:true,alt:"news",label:"8 pm: Vantage Podcast"},
-    {from:21,to:22,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"Prime time, 9 pm: Vantage with Palki Sharma"},
-    {from:22,to:23,cat:"news",tag:"igr",src:"IGR: Live|Daily News Feed",newest:true,alt:"news",label:"10 pm: IGR at night"},
-    {from:23,to:23.5,cat:"news",tag:"fpshows",src:"Honest Truth",newest:true,alt:"news",label:"11 pm: The Honest Truth"},
-    {from:23.5,to:24,cat:"news",tag:"vantagenew",newest:true,alt:"news",label:"11:30 pm: Vantage with Palki Sharma"}]},
+  // Newsroom (by request, 21 Nov): nothing older than two days, ever (days:2 with strictDays: not even to fill); Palki Sharma
+  // the most (Vantage, IGR Live with Palki Sharma, Flashback, the Vantage Podcast: 45% of the day, share 0.45), then IGR,
+  // Firstpost's shows, WION, Mint, Bloomberg and Zerodha (the Daily Brief, Markets by Zerodha) in turn; others in the category don't play.
+  // And whenever one of IGR, Firstpost, WION, Mint, Bloomberg or Zerodha is live, that plays (live: "newsroom", scripts/live.json;
+  // only broadcasts started in the last 8 hours, so WION's 24x7 stream never takes it over)
+  {key:"news",n:4,group:"News",name:"Newsroom",en:"Vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days",live:"newsroom",parts:[
+    {from:0,to:24,cat:["news","paisa"],days:2,strictDays:true,mix:[{src:"Palki|Vantage",share:0.45},{src:"IGR|India Global Review"},{src:"Firstpost|Blueprint|First Cut|Mind the Gap|Honest Truth"},{src:"^WION"},{src:"^Mint"},{src:"^Bloomberg"},{src:"Zerodha"}],label:"The last two days: Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha"}]},
   // ---- Knowledge ----
   {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
   {key:"vigyan",n:6,group:"Knowledge",name:"Discover",oldSlugs:["vigyan"],en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
@@ -256,13 +239,15 @@ const CHANNELS = [
     {from:14,to:18,cat:"masters",alt:"premium",label:"Indian masters: Ray & art cinema"},
     {from:18,to:22,cat:"premium",srcSkip:"Mosfilm",label:"Prime-time blockbuster"},
     {from:22,to:24,cat:"premium",src:"Mosfilm",label:"World cinema classics"}]},
+  // South Gems (by request, 21 Nov): critically acclaimed South Indian films only, dubbed in Hindi (js/catalog.js, "southgems")
+  {key:"southgems",n:29,group:"Entertainment",name:"South Gems",en:"Critically acclaimed South Indian films, in Hindi",parts:[{from:0,to:24,cat:"southgems",label:"Acclaimed South films, in Hindi"}]},
   // ---- Music ----
   // Hand-picked, by request: only these songs (category "select": js/catalog.js and scripts/feeds.json), shuffled together.
   // mix: each set takes its turn, its songs in their own shuffled run, so none repeats before the rest of its set has played;
   // a set's share of the day is the square root of its size, so Aujla's sixty-odd videos don't drown Saiyaara's ten
-  {key:"select",n:29,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify songs (playlists Big Dawgs, No Idea, After Hours), each matched to an official upload; 12 h a day of them (share 0.5), mixed in with the rest, by request
+  {key:"select",n:30,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify songs (playlists Big Dawgs, No Idea, After Hours), each matched to an official upload; 12 h a day of them (share 0.5), mixed in with the rest, by request
     {from:0,to:24,cat:"select",mix:[{tag:"spotify",share:0.5},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Favourites"}]},
-  {key:"bollywood",n:30,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
+  {key:"bollywood",n:31,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
    // Songs whose picture is never shown, by request (revealing, item-song or sexual visuals, or marked 18+): each plays as
    // its official audio-only track, with the album's cover art, or not at all until it has one (heard in js/scheduler.js;
    // scripts/find-audio.mjs finds the tracks). Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
@@ -285,19 +270,21 @@ const CHANNELS = [
     {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
     {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:16},label:"Prime time: trending now, India's top songs this week"},
     {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"}]},
-  {key:"drive",n:31,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
+  {key:"drive",n:32,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
   // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
   // skip: festivals whose songs are all worship, passed over for the next one; exclude: titles, excludeSrc: sources never played
-  {key:"festival",n:32,group:"Music",name:"Vibe",oldSlugs:["festivals"],en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
+  {key:"festival",n:33,group:"Music",name:"Vibe",oldSlugs:["festivals"],en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
     skip:"^fest-(ram|chhath|shivratri|janmashtami|gurpurab)$",
     exclude:String.raw`bhajan|aarti|aarati|\barti\b|chalisa|stuti|vandana|vandna|mantra|stotra|stotr|ashtak|shatakam|shlok|\bpuja\b|pooja|pujan|bhakti|kirtan|shabad|gurbani|qawwal|qavval|kavvali|\bnaat\b|vrat katha|amritwani|maiya|\bmata\b|\bdevi\b|bhagwan|bhagvan|lakshmi|laxmi|ganesh|ganpati|ganapati|bappa|\bshiv\b|shiva|shankar|shambh|bhole|bhola|mahadev|mahakal|\bram\b|shri ram|siya ram|krishna|krishn\b|kanha|govind|gopal|shyam|radhe|hanuman|bajrang|durga|\bambe\b|jagdamba|mardini|aigiri|jhanki|chhath|carol|hymn|holy night|silent night|stille nacht|manger|allah|khwaja|khvaja|maula`,
     excludeSrc:"bhakti|bhajan|shabad|kirtan|qawwal|choir|sounds of isha|sanskrit channel|tilak|mayapur|barsana|lathmar|vrat katha|mardini",
     min:12, // festivals left with fewer songs than this are passed over too
     ahead:14, party:["fest-diwali","fest-newyear","fest-holi","fest-lohri"]},parts:[]}, // a festival's songs from two weeks before it; party songs in between
-  {key:"hits2010",n:33,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:34,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
-  {key:"deccan",n:35,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day
+  {key:"hits2010",n:34,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:35,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"hits90",n:36,group:"Music",name:"90s Hits",en:"Bollywood 1990-1999",parts:[{from:0,to:24,cat:"hits90",label:"90s hits", // audio-only uploads first (by request): most of the airtime,
+    mix:[{tag:"audio",share:0.6,once:true},{notTag:"audio"}]}]}, // as long as none comes round twice a day. By request, 21 Nov: official 90s playlists, long uploads too
+  {key:"deccan",n:37,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day
     {from:0,to:2,   cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Midnight melodies: Ilaiyaraaja, back to back"},
     {from:2,to:3,   cat:"deccan",tag:"keeravani",alt:"deccan",label:"M. M. Keeravaani, back to back"},
     {from:3,to:5,   cat:"deccan",tag:"anirudh",alt:"deccan",label:"Anirudh, back to back"},
@@ -318,8 +305,8 @@ const CHANNELS = [
     {from:21,to:22, cat:"deccan",tag:"rahman",alt:"deccan",label:"Prime time: A. R. Rahman, back to back"},
     {from:22,to:23, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Late night: Anirudh, back to back"},
     {from:23,to:24, cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Late night: Ilaiyaraaja, back to back"}]},
-  {key:"anthems",n:36,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"english",n:37,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
+  {key:"anthems",n:38,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
+  {key:"english",n:39,group:"Music",name:"Global Hits",en:"The world's top hits, every language",oldSlugs:["english-songs"],parts:[  // any language, by request
     {from:0,to:3,  cat:"global",tag:"alltime",alt:"global",label:"Billion-view classics"},
     {from:3,to:6,  cat:"global",tag:"worldcharts",alt:"global",label:"World tour: Seoul, Tokyo & Johannesburg charts"},
     {from:6,to:9,  cat:"global",tag:"chart",alt:"global",label:"Morning chart: this week's global top 100"},
@@ -327,7 +314,7 @@ const CHANNELS = [
     {from:12,to:15,cat:"global",tag:"chart",alt:"global",label:"Daily global chart"},
     {from:15,to:18,cat:"global",tag:"alltime",alt:"global",label:"All-time most viewed"},
     {from:18,to:24,cat:"global",tag:"chart",alt:"global",label:"Prime time: the global top 100, US & UK charts"}]},
-  {key:"gym",n:38,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
+  {key:"gym",n:40,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
     {from:4,to:6,  cat:"gym",tag:"rock",alt:"gym",label:"Early riser: rock"},
     {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Morning set: Punjabi gym bangers"},
@@ -337,7 +324,7 @@ const CHANNELS = [
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
     {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
-  {key:"punjabi",n:39,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
+  {key:"punjabi",n:41,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
     {from:0,to:2,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
     {from:2,to:4,  cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
     {from:4,to:6,  cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
@@ -350,7 +337,7 @@ const CHANNELS = [
     {from:18,to:20,cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Prime time: Diljit Dosanjh, back to back"},
     {from:20,to:22,cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Prime time: Karan Aujla, back to back"},
     {from:22,to:24,cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Late night bangers"}]},
-  {key:"raag",n:40,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
+  {key:"raag",n:42,group:"Music",name:"Raag",en:"Sitar, santoor, classical voices & Coke Studio",parts:[
     {from:0,to:5,  cat:"raag",tag:"inst",label:"Late-night sitar & santoor"},
     {from:5,to:9,  cat:"raag",tag:"vocal",label:"Morning ragas: khayal, thumri & bhajan"},
     {from:9,to:13, cat:"raag",tag:"inst",label:"Sitar & santoor"},
@@ -358,20 +345,24 @@ const CHANNELS = [
     {from:17,to:20,cat:"raag",tag:"vocal",label:"Evening thumri & khayal"},
     {from:20,to:23,cat:"raag",tag:"coke",label:"Coke Studio prime time"},
     {from:23,to:24,cat:"raag",tag:"inst",label:"Night ragas"}]},
-  {key:"geet",n:41,group:"Music",name:"Sadabahar",en:"Evergreen songs",parts:[  // Kishore Kumar and Mukesh back to back, by request
-    {from:0,to:2,  cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
-    {from:2,to:4,  cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
-    {from:4,to:6,  cat:"geet",label:"Evergreen"},
-    {from:6,to:8,  cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
-    {from:8,to:10, cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
-    {from:10,to:12,cat:"geet",label:"Evergreen"},
-    {from:12,to:14,cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
-    {from:14,to:16,cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
-    {from:16,to:18,cat:"geet",label:"Evergreen"},
-    {from:18,to:20,cat:"geet",tag:"kishore",alt:"geet",label:"Prime time: Kishore Kumar, back to back"},
-    {from:20,to:22,cat:"geet",tag:"mukesh",alt:"geet",label:"Prime time: Mukesh, back to back"},
-    {from:22,to:24,cat:"geet",label:"Late-night evergreen"}]},
-  {key:"bhakti",n:42,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
+  // Sadabahar (by request, 21 Nov): the hits of the 60s, 70s and 80s mostly, Kishore Kumar, Lata Mangeshkar, Mohammed Rafi
+  // and Mukesh the top singers (Kishore and Lata about 5.5 h a day each, Rafi and Mukesh about 3.5 h), very few songs from
+  // before the 60s (the sources skip a title naming a 1930s-50s year; scripts/feeds.json). Each singer has hours of their own,
+  // the decades theirs, and prime time and the night play two or four of them in turn (mix).
+  {key:"geet",n:43,group:"Music",name:"Sadabahar",en:"Evergreen hits of the 60s, 70s & 80s: Kishore, Lata, Rafi & Mukesh",parts:[
+    {from:0,to:2,   cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
+    {from:2,to:4,   cat:"geet",tag:"lata",alt:"geet",label:"Lata Mangeshkar, back to back"},
+    {from:4,to:6,   cat:"geet",tag:"rafi",alt:"geet",label:"Mohammed Rafi, back to back"},
+    {from:6,to:8,   cat:"geet",tag:"mukesh",alt:"geet",label:"Mukesh, back to back"},
+    {from:8,to:10,  cat:"geet",tag:"60s",alt:"geet",label:"Hits of the 60s"},
+    {from:10,to:12, cat:"geet",tag:"70s",alt:"geet",label:"Hits of the 70s"},
+    {from:12,to:14, cat:"geet",tag:"kishore",alt:"geet",label:"Kishore Kumar, back to back"},
+    {from:14,to:16, cat:"geet",tag:"lata",alt:"geet",label:"Lata Mangeshkar, back to back"},
+    {from:16,to:18, cat:"geet",tag:"80s",alt:"geet",label:"Hits of the 80s"},
+    {from:18,to:20, cat:"geet",mix:[{tag:"kishore"},{tag:"rafi"}],alt:"geet",label:"Prime time: Kishore & Rafi"},
+    {from:20,to:22, cat:"geet",mix:[{tag:"lata"},{tag:"mukesh"}],alt:"geet",label:"Prime time: Lata & Mukesh"},
+    {from:22,to:24, cat:"geet",mix:[{tag:"kishore"},{tag:"lata"},{tag:"rafi"},{tag:"mukesh"}],alt:"geet",label:"Late night: Kishore, Lata, Rafi & Mukesh"}]},
+  {key:"bhakti",n:44,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
     {from:0,to:4,  cat:"bhakti",label:"Devotional"},
     {from:4,to:5,  cat:"bhakti",tag:"mrityunjay",label:"4 am, Brahma muhurat: Mahamrityunjay Mantra · Anuradha Paudwal"}, // by request
     {from:5,to:6,  cat:"bhakti",festivalNext:true,label:"Devotional"},
@@ -383,6 +374,6 @@ const CHANNELS = [
     {from:17,to:21,cat:"bhakti",festivalNext:true,label:"Evening devotional"},
     {from:21,to:24,cat:"bhakti",label:"Devotional"}]},
 ];
-// A channel's name in addresses, for its /tv/<name>/ page and ?ch=<name> links ("Desi Pop" -> desi-pop). Unlike its
+// A channel's name in addresses, for its /<name>/ page and ?ch=<name> links ("Desi Pop" -> desi-pop). Unlike its
 // number it stays the same when channels are reordered, so shared links keep pointing at the same channel.
 const chSlug=c=>c.name.toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");

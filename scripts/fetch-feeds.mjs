@@ -56,8 +56,8 @@ async function get(url, tries = 3) {
   }
 }
 
-async function rss(channelId) {
-  const xml = await get("https://www.youtube.com/feeds/videos.xml?channel_id=" + channelId);
+async function rss(channelId, playlist) { // a channel's latest 15 uploads, or a playlist's, with their dates
+  const xml = await get("https://www.youtube.com/feeds/videos.xml?" + (playlist ? "playlist_id=" + playlist : "channel_id=" + channelId));
   return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map(m => m[1])
     .filter(e => !e.includes("/shorts/")) // the feed links Shorts as /shorts/ID
     .map(e => ({id: e.match(/<yt:videoId>([^<]+)/)[1], pub: (e.match(/<published>([^<]+)/) || [])[1]?.slice(0, 10)}));
@@ -171,8 +171,9 @@ async function fetchFeed(f, old) {
     const entries = f.playlist ? await playlist(f.playlist, f.take ?? 50) : await uploads(f.id, f.list === "popular");
     const match = f.match && new RegExp(f.match, "i"), skip = f.skip && new RegExp(f.skip, "i");
     const info = KEY ? await detailsFromApi(entries.map(e => e.id)) : {};
-    if (f.maxDays && !KEY && f.id) { // the uploads page has no dates; the RSS feed has them for the latest 15
-      const pubs = new Map((await rss(f.id).catch(() => [])).map(x => [x.id, x.pub]));
+    if (!KEY) { // the uploads page and playlists have no dates; the RSS feed has them for the latest 15 (Newsroom keeps only
+      // the last two days, so its videos need dates even when this runs without the API, as on a computer)
+      const pubs = new Map((await rss(f.id, f.playlist).catch(() => [])).map(x => [x.id, x.pub]));
       for (const e of entries) e.pub ||= pubs.get(e.id);
     }
     const items = []; let unread = 0;
@@ -192,7 +193,10 @@ async function fetchFeed(f, old) {
       if (min < (f.minMin ?? 3) || min > (f.maxMin ?? 60)) continue; // drops Shorts and very long uploads
       if ((match && !match.test(d.title)) || (skip && skip.test(d.title))) continue;
       if (f.maxDays && !((e.pub || d.pub || "") >= sinceDays(f.maxDays))) continue;
-      items.push({id: e.id, t: f.retitle ? `${f.retitle} · ${items.length + 1}` : cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(f.tag && {tag: f.tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
+      // f.tagAudio: an audio-only upload ("Audio Jukebox", "(Audio)" in its full title, which the cleaned one may drop) is
+      // tagged audio, for a channel to prefer (90s Hits, by request)
+      const tag = f.tag || (f.tagAudio && /\baudio\b/i.test(d.title) ? "audio" : "");
+      items.push({id: e.id, t: f.retitle ? `${f.retitle} · ${items.length + 1}` : cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(tag && {tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
     // A few unread: keep their previous entries rather than silently dropping them.

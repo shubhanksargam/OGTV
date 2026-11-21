@@ -10,13 +10,17 @@ const {groups} = JSON.parse(await readFile(new URL("scripts/live.json", ROOT), "
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
 
-async function liveNow(channelId) {
+// maxHours (a list entry's, e.g. Newsroom's): only a broadcast that started within that many hours counts, a live show,
+// not a channel's 24x7 stream
+const recent = (start, maxHours) => !maxHours || !!start && Date.now() - Date.parse(start) <= maxHours * 3600e3;
+async function liveNow(channelId, maxHours) {
   const r = await fetch("https://www.youtube.com/channel/" + channelId + "/live", {headers: HEADERS});
   const html = await r.text();
   const m = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});(?:var |<\/script>)/s);
   if (!m) return null; // no player on the page: not live
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   if (!v.isLive || ps.status !== "OK" || ps.playableInEmbed !== true) return null;
+  if (!recent(p.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp, maxHours)) return null;
   return {id: v.videoId, t: roman(v.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
 }
 
@@ -28,23 +32,23 @@ async function liveNow(channelId) {
 const KEY = process.env.YT_API_KEY;
 const api = async path => { const r = await fetch("https://www.googleapis.com/youtube/v3/" + path + "&key=" + KEY);
   if (!r.ok) throw Object.assign(new Error("API " + r.status), {status: r.status}); return r.json(); };
-async function liveViaApi(channelId) {
+async function liveViaApi(channelId, maxHours) {
   const pl = await api(`playlistItems?part=contentDetails&maxResults=20&playlistId=UULV${channelId.slice(2)}`).catch(e => e.status === 404 ? {items: []} : Promise.reject(e));
   const ids = (pl.items || []).map(it => it.contentDetails.videoId);
   if (!ids.length) return null;
   const vs = (await api(`videos?part=snippet,status,liveStreamingDetails&id=${ids.join(",")}`)).items || [];
-  const live = vs.filter(v => v.snippet.liveBroadcastContent === "live" && v.snippet.channelId === channelId && v.status.embeddable && v.status.privacyStatus === "public")
+  const live = vs.filter(v => v.snippet.liveBroadcastContent === "live" && v.snippet.channelId === channelId && v.status.embeddable && v.status.privacyStatus === "public" && recent(v.liveStreamingDetails?.actualStartTime, maxHours))
     .sort((a, b) => (+b.liveStreamingDetails?.concurrentViewers || 0) - (+a.liveStreamingDetails?.concurrentViewers || 0));
   if (!live.length) return null;
   return {id: live[0].id, t: roman(live[0].snippet.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
 }
-const find = id => KEY ? liveViaApi(id).catch(e => (console.log(`API: ${e.message}; reading the page instead`), liveNow(id))) : liveNow(id);
+const find = (id, maxHours) => KEY ? liveViaApi(id, maxHours).catch(e => (console.log(`API: ${e.message}; reading the page instead`), liveNow(id, maxHours))) : liveNow(id, maxHours);
 
 const LIVE = {}, report = [];
 for (const [group, list] of Object.entries(groups)) {
   LIVE[group] = [];
   for (const s of list) {
-    const hit = await find(s.id).catch(e => (report.push(`error ${s.src}: ${e.message}`), null));
+    const hit = await find(s.id, s.maxHours).catch(e => (report.push(`error ${s.src}: ${e.message}`), null));
     if (hit) LIVE[group].push({...hit, src: s.src, lang: s.lang});
     await new Promise(r => setTimeout(r, 300));
   }

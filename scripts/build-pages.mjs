@@ -1,7 +1,7 @@
-// Builds the pages search engines read: a landing page per channel (tv/<slug>/), the "All channels"
+// Builds the pages search engines read: a landing page per channel (<slug>/, at the top of the site), the "All channels"
 // directory on the home page, the home page's search tags, sitemap.xml and robots.txt.
 // Run after changing channels or sources: node scripts/build-pages.mjs
-import {readFile, writeFile, mkdir, rm} from "node:fs/promises";
+import {readFile, writeFile, mkdir, rm, readdir} from "node:fs/promises";
 
 const ROOT = new URL("..", import.meta.url);
 const SITE = "https://ogtv.co.in";
@@ -68,6 +68,58 @@ const FAQ = [
   ["Is there an OGTV app for phone or TV?", "Yes. Open ogtv.co.in and choose Install app (or Add to Home screen) in your browser. It then opens full screen like an app on Android, iPhone, laptops and smart TVs."],
   ["Which channels does OGTV have?", `${[...new Set(CHANNELS.map(c => c.group || "OGTV"))].join(", ")}: ${CHANNELS.map(c => c.name).join(", ")}.`], // from the channel list, so renames follow
 ];
+// What people can use OGTV for (by request, 21 Nov 2026): written once here, it goes into the help (every page), a visible
+// section on the home page with links to the channels, the questions above (FAQPage, which search engines and AI
+// assistants read) and /llms.txt (a plain summary for AI tools). Channels by key, so a rename follows.
+const USES = [
+  ["tv", "A TV that's always on", ["aangan", "premium", "retro", "southgems", "hasya", "fiction"],
+    `Free live-style TV in Hindi and English: ${CHANNELS.length} channels that are always playing, like cable TV, with no sign-up and no subscription. Open it and something is already on. Flip channels with a swipe, the arrow keys or the retro TV's Channel knob, or go full screen. It works on phones, laptops and a smart TV's browser.`],
+  ["radio", "A radio", ["geet", "hits90", "bollywood", "raag", "bhakti", "livenews"],
+    "Radio mode (the Radio button, or A) plays the sound of any channel while the screen shows what's on and what's next; the picture stays in a small window, as YouTube asks. Use it in the kitchen, in the car over Bluetooth, or while you work. On Android, the Brave browser keeps it playing with the phone's screen off, and the headphone or lock-screen buttons change channel."],
+  ["ipod", "An iPod for Indian music", ["geet", "hits90", "hits2000", "hits2010", "bollywood", "punjabi", "deccan", "english", "anthems", "select"],
+    "A music player with nothing to set up: every music channel is a non-stop playlist by era, artist or style, so you choose a channel instead of choosing songs. Bollywood by decade from the 60s to the 2010s, this week's trending songs, Punjabi, South Indian, the world's top hits, classical and devotional music. The next and previous buttons on headphones change channel."],
+  ["mood", "Songs for your mood", ["drive", "gym", "festival", "raag", "geet", "hits90", "bhakti", "deccan", "anthems"],
+    "Pick the channel for how you feel: Drive for a road trip, Gym for a workout, Vibe for a party or a festival, Raag for calm and focus, Sadabahar for old-time nostalgia, 90s Hits for romance, Bhakti for prayer and mornings, Deccan Chargers for South Indian energy and Anthems for singing along."],
+  ["feed", "A daily feed without scrolling", ["bollywood", "cricket", "football", "news", "paisa", "tech"],
+    "The day's new videos come to you, with no feed to scroll and nothing to search: this week's trending songs on Desi Pop, today's cricket highlights, this week's football, the last two days of world news on Newsroom, The Daily Brief and the markets on Paisa, and new gadgets on Tech. New videos arrive every night, and NEW marks uploads from the last 30 days."],
+  ["news", "News, live and in Hindi", ["livenews", "khabar", "magadh", "news"],
+    "Live news around the clock on Just News, Hindi news and analysis on Khabar, Bihar and Jharkhand on Magadh Times, and world affairs on Newsroom: Palki Sharma's Vantage, WION, Firstpost, Mint and Bloomberg. Live broadcasts play first whenever they are on."],
+  ["sports", "Sports and highlights", ["cricket", "classics", "football", "khel", "worldsport"],
+    "Today's highlights from every major cricket match, India and the IPL first; World Cup classics and great finishes; this week's football from the Premier League, LaLiga, the Champions League and the ISL; the Olympics and Indian sport on Khel; and F1, tennis and the NBA on International Sports."],
+  ["learn", "Learning that plays on its own", ["gyaan", "vigyan", "curious", "data", "classroom", "paisa", "baatcheet", "niche"],
+    "Explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat."],
+  ["films", "Films and family TV", ["retro", "premium", "southgems", "aangan", "hasya", "fiction"],
+    "Classic Hindi films, great films from India and the world, critically acclaimed South Indian films in Hindi, Doordarshan classics, Taarak Mehta and mushaira, stand-up comedy and web series."],
+  ["devotion", "Bhajans and festivals", ["bhakti", "festival"],
+    "Bhakti plays devotional songs all day, with the coming festival's bhajans, and Vibe plays the festival's party songs: Diwali, Holi, garba, Lohri, Eid, Christmas and New Year."],
+  ["home", "Kids, cooking, fitness and travel", ["bachche", "rasoi", "sehat", "safar"],
+    "Cartoons and learning for children on Bachche, recipes on Rasoi, workouts and yoga on Sehat, and journeys across India and the world on Safar."],
+  ["background", "In the background while you work or study", ["raag", "anthems", "geet"],
+    "Leave a channel on: Raag's sitar, santoor and classical voices, or any music channel in Radio mode, plays for hours with nothing to choose."],
+  ["together", "Watching together, and catching up", ["cricket", "premium"],
+    "Every channel runs to a schedule, so everyone tuned in sees the same moment: watch the highlights or a film with family in another city, and share a channel with its link. Joined part-way through? From start plays the programme from its first minute, then the channel is live again."],
+].map(([id, title, keys, text]) => ({id, title, text, chans: keys.map(k => { const c = CHANNELS.find(x => x.key === k); if (!c) throw new Error("USES: no channel " + k); return c })}));
+const chanNames = cs => list(cs.map(c => c.name));
+FAQ.push(
+  ["Can I use OGTV as a radio?", `Yes. Radio mode (the Radio button, or the A key) plays the sound of any channel, with the screen showing what's playing and what's next, and the picture in a small window. Music channels such as ${chanNames(USES.find(u => u.id === "radio").chans.slice(0, 4))} make a free radio for Hindi songs. On Android, the Brave browser keeps it playing with the phone's screen off.`],
+  ["Can OGTV be my music player, like an iPod?", `Yes. Each music channel is a non-stop playlist, so you choose a channel instead of songs: ${chanNames(USES.find(u => u.id === "ipod").chans)}. Headphone and lock-screen buttons change channel.`],
+  ["Which OGTV channel plays songs for my mood?", "Drive for a road trip, Gym for a workout, Vibe for a party or a festival, Raag for calm and focus, Sadabahar for old-time nostalgia, 90s Hits for romance, Bhakti for prayer and Anthems for singing along."],
+  ["Where can I watch today's cricket highlights for free?", "On OGTV's Cricket channel: highlights from every major match of the day, India and the IPL first, from the official broadcasters' YouTube uploads. Cricket Classics plays World Cup classics and great finishes."],
+  ["Can I watch live news on OGTV?", "Yes. Just News plays live news around the clock, Khabar has Hindi news and analysis, Magadh Times covers Bihar and Jharkhand, and Newsroom has world affairs from Palki Sharma's Vantage, WION, Firstpost, Mint and Bloomberg."],
+  ["Can I watch a programme from the beginning?", "Yes. From start (or the B key) plays the programme on now from its first minute; when it ends, the channel is live again. Press it again to go back live sooner."],
+);
+// in the help (every page): one line a use, the channels by name
+function usesHelp() {
+  return '<!-- uses:start (generated by scripts/build-pages.mjs) -->\n  <section id="h-uses"><h3>What you can use OGTV for</h3>\n    <ul>\n'
+    + USES.map(u => `      <li><b>${esc(u.title)}:</b> ${esc(u.text)} <i>Channels: ${esc(chanNames(u.chans))}.</i></li>\n`).join("")
+    + '    </ul></section>\n  <!-- uses:end -->';
+}
+// on the home page, for people and for search engines and AI tools: each use with links to its channels
+function usesPage() {
+  return '<!-- uses-page:start (generated by scripts/build-pages.mjs) -->\n  <section class="uses" aria-labelledby="uses-h">\n    <h2 id="uses-h">What you can use OGTV for</h2>\n    <div class="uses-grid">\n'
+    + USES.map(u => `      <article><h3>${esc(u.title)}</h3><p>${esc(u.text)}</p><p class="uses-ch">${u.chans.map(c => `<a href="/${slug(c)}/">${esc(c.name)}</a>`).join(" · ")}</p></article>\n`).join("")
+    + '    </div>\n  </section>\n  <!-- uses-page:end -->\n  ';
+}
 function faqHtml() {
   return '<!-- faq:start (generated by scripts/build-pages.mjs) -->\n  <section class="faq" aria-labelledby="faq-h">\n    <h2 id="faq-h">Questions</h2>\n'
     + FAQ.map(([q, a]) => `    <details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>\n`).join("")
@@ -127,7 +179,7 @@ function directory() { // plain links grouped like the channel list
     // a long group (Music) spreads across the row in short columns instead of one long list (css: .directory .wide)
     html += `      <section${CHANNELS.filter(c => (c.group || "OGTV") === g).length > 9 ? ' class="wide"' : ""}><h3>${esc(g)}</h3><ul>\n`;
     for (const c of CHANNELS.filter(c => (c.group || "OGTV") === g))
-      html += `        <li><a href="/tv/${slug(c)}/">${c.n} · ${esc(c.name)}</a> <span>${esc(c.en)}</span></li>\n`;
+      html += `        <li><a href="/${slug(c)}/">${c.n} · ${esc(c.name)}</a> <span>${esc(c.en)}</span></li>\n`;
     html += "      </ul></section>\n";
   }
   return html + "    </div>\n  </nav>\n  <!-- channels:end -->";
@@ -140,6 +192,8 @@ const replaceBetween = (s, a, b, value) => {
 };
 
 let home = await read("index.html");
+home = home.replace(/\s*<!-- uses-page:start[\s\S]*?<!-- uses-page:end -->\s*/g, "\n  "); // the home page's uses section: like the questions, only on the home page
+home = replaceBetween(home, "<!-- uses:start", "<!-- uses:end -->", usesHelp()); // the help's, on every page
 home = home.replace(/\s*<!-- faq:start[\s\S]*?<!-- faq:end -->\s*/g, "\n  "); // every old copy goes, whatever the line endings; channel pages never carry the questions
 home = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->", seoBlock({...HOME, url: SITE + "/"}));
 home = replaceBetween(home, "<!-- channels:start", "<!-- channels:end -->", directory());
@@ -147,46 +201,79 @@ home = home.replace(/<kbd>1<\/kbd>–<kbd>\d+<\/kbd>/, `<kbd>1</kbd>–<kbd>${CH
 home = home.replace(/<span id="aboutChannels">\d+<\/span>/, `<span id="aboutChannels">${CHANNELS.length}</span>`);
 const FEEDS = JSON.parse(await read("scripts/feeds.json")).feeds; // creators, channels and playlists, rounded down to the ten
 home = home.replace(/<span id="aboutCreators">[^<]*<\/span>/, `<span id="aboutCreators">${Math.floor(new Set(FEEDS.map(f => f.id || f.playlist)).size / 10) * 10}+</span>`); // the real count in the page itself (search snippets read it)
-await writeFile(new URL("index.html", ROOT), home.replace('<footer class="about"', faqHtml() + '<footer class="about"'));
+await writeFile(new URL("index.html", ROOT), home.replace('<footer class="about"', usesPage() + faqHtml() + '<footer class="about"'));
 
+// Each channel's page sits at the top of the site, ogtv.co.in/<channel>/ (by request, 21 Nov 2026: no /tv/ before the
+// name). The folders this script made last time go first (each holds only an index.html it marked as its own), so a
+// renamed or retired channel leaves nothing behind; a channel's name may never be one of the site's own folders.
+const MARK = '<meta name="generator" content="ogtv-build-pages">';
+const mine = async d => { try { const f = await readdir(new URL(d + "/", ROOT)); return f.length === 1 && f[0] === "index.html" && (await read(d + "/index.html")).includes(MARK) } catch { return false } };
+const TOP = (await readdir(ROOT, {withFileTypes: true})).filter(e => e.isDirectory()).map(e => e.name);
+for (const d of TOP) if (await mine(d)) await rm(new URL(d + "/", ROOT), {recursive: true, force: true});
 await rm(new URL("tv/", ROOT), {recursive: true, force: true});
+const OWN = new Set((await readdir(ROOT, {withFileTypes: true})).map(e => e.name.toLowerCase())); // css, js, img, scripts, robots.txt…
+for (const n of CHANNELS.flatMap(c => [slug(c), ...(c.oldSlugs || [])])) if (OWN.has(n) || n === "tv") throw new Error(`a channel's address "/${n}/" is one of the site's own folders or files: rename the channel`);
+const forward = async (dir, name, to, canonical) => { // an old address forwards to the new one (search engines take the canonical)
+  await mkdir(new URL(dir + "/", ROOT), {recursive: true});
+  await writeFile(new URL(dir + "/index.html", ROOT), `<!doctype html><meta charset="utf-8">${MARK}<title>${esc(name)} | OGTV</title>
+<link rel="canonical" href="${canonical}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${to}">
+<script>location.replace("${to}"+location.search+location.hash)</script><p>${esc(name)} has moved to <a href="${to}">${SITE.replace("https://", "")}${to}</a>.</p>
+`);
+};
 // Each channel's title and few lines, as its page has them, for the page to show when the channel changes in place
 // (aboutChannel in js/app.js): {slug: {title, h, p}}
 const ABOUT = {};
 for (const c of CHANNELS) {
-  const url = `${SITE}/tv/${slug(c)}/`, description = describe(c), s = c.live ? LIVE[c.live].map(x => x.src) : sources(c);
+  const url = `${SITE}/${slug(c)}/`, description = describe(c), s = c.live ? LIVE[c.live].map(x => x.src) : sources(c);
   const title = `${c.name}: ${c.en} | OGTV free Indian TV`, more = rest(s, description), text = description + (more.length ? ` Also on this channel: ${list(more)}.` : "");
   ABOUT[slug(c)] = {title, h: `${c.name} on OGTV`, p: text};
   let page = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->",
     seoBlock({title, description, url, ch: slug(c), video: featured(c), chan: c})); // by name, not number: a cached page still opens its own channel after a renumbering
   // a short visible intro, unique to the page
   page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(text)}</p></section>\n\n  <!-- channels:start`);
-  await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});
-  await writeFile(new URL(`tv/${slug(c)}/index.html`, ROOT), page);
-  for (const old of c.oldSlugs || []) { // a renamed channel's old address forwards to the new one
-    await mkdir(new URL(`tv/${old}/`, ROOT), {recursive: true});
-    await writeFile(new URL(`tv/${old}/index.html`, ROOT), `<!doctype html><meta charset="utf-8"><title>${esc(c.name)} | OGTV</title>
-<link rel="canonical" href="${url}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/tv/${slug(c)}/">
-<script>location.replace("/tv/${slug(c)}/"+location.search)</script><p>${esc(c.name)} has moved to <a href="/tv/${slug(c)}/">/tv/${slug(c)}/</a>.</p>
-`);
-  }
+  await mkdir(new URL(`${slug(c)}/`, ROOT), {recursive: true});
+  await writeFile(new URL(`${slug(c)}/index.html`, ROOT), page.replace("<!-- seo:end -->", MARK + "\n<!-- seo:end -->"));
+  // the old /tv/<channel>/ address (shared links, search results), and a renamed channel's old names, forward here
+  await forward(`tv/${slug(c)}`, c.name, `/${slug(c)}/`, url);
+  for (const old of c.oldSlugs || []) { await forward(`tv/${old}`, c.name, `/${slug(c)}/`, url); await forward(old, c.name, `/${slug(c)}/`, url) }
 }
 
 await writeFile(new URL("js/about.json", ROOT), JSON.stringify(ABOUT) + "\n");
 
-for (const gone of ["trailers"]) { // channels taken off air: their old pages forward to the home page
-  await mkdir(new URL(`tv/${gone}/`, ROOT), {recursive: true});
-  await writeFile(new URL(`tv/${gone}/index.html`, ROOT), `<!doctype html><meta charset="utf-8"><title>OGTV</title><link rel="canonical" href="${SITE}/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/"><script>location.replace("/")</script>\n`);
-}
+for (const gone of ["trailers"]) await forward(`tv/${gone}`, "OGTV", "/", SITE + "/"); // channels taken off air: their old pages forward to the home page
 await writeFile(new URL("sitemap.xml", ROOT), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-${CHANNELS.map(c => { const v = featured(c); return `  <url><loc>${SITE}/tv/${slug(c)}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.8</priority>${v ? `
+${CHANNELS.map(c => { const v = featured(c); return `  <url><loc>${SITE}/${slug(c)}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.8</priority>${v ? `
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/${v.id}/hqdefault.jpg</video:thumbnail_loc><video:title>${xml(v.t)}</video:title>
       <video:description>${xml(`${v.t}, now on ${c.name}, a free always-on channel on OGTV.`)}</video:description>
       <video:player_loc>https://www.youtube.com/embed/${v.id}</video:player_loc><video:duration>${Math.round(v.min * 60)}</video:duration><video:publication_date>${isoDate(v)}</video:publication_date></video:video>` : ""}
   </url>`; }).join("\n")}
 </urlset>
 `);
+// /llms.txt: what OGTV is, what it's for, the questions and every channel, in plain Markdown for AI tools
+const groups = [...new Set(CHANNELS.map(c => c.group || "OGTV"))];
+await writeFile(new URL("llms.txt", ROOT), `# OGTV
+
+> ${FAQ[0][1]} Free, with no sign-up: ${SITE}/
+
+OGTV turns official YouTube uploads into ${CHANNELS.length} always-on channels that run to a schedule, so everyone tuned in sees the same moment, like cable TV. It works in any browser on phones, laptops and smart TVs, and installs as an app. Each channel has its own page, listed below.
+
+## What you can use OGTV for
+
+${USES.map(u => `- **${u.title}:** ${u.text} Channels: ${u.chans.map(c => `[${c.name}](${SITE}/${slug(c)}/)`).join(", ")}.`).join("\n")}
+
+## Questions
+
+${FAQ.map(([q, a]) => `- **${q}** ${a}`).join("\n")}
+
+## Channels
+
+${groups.map(g => `### ${g}\n\n` + CHANNELS.filter(c => (c.group || "OGTV") === g).map(c => `- [${c.n} · ${c.name}](${SITE}/${slug(c)}/): ${describe(c)}`).join("\n")).join("\n\n")}
+
+## Optional
+
+- [Sitemap](${SITE}/sitemap.xml)
+`);
 await writeFile(new URL("robots.txt", ROOT), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
-console.log(`home + ${CHANNELS.length} channel pages, sitemap.xml, robots.txt written`);
+console.log(`home + ${CHANNELS.length} channel pages, sitemap.xml, robots.txt, llms.txt written`);

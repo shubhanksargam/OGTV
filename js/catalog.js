@@ -383,7 +383,7 @@ const CATALOG = [
   {id:"TO-_3tck2tg",t:"Bones · Imagine Dragons",cat:"select",tag:"spotify",lang:"en",min:3,src:"ImagineDragonsVEVO",pub:"2022-04-06"}, // No Idea 62
   {id:"m7Bc3pLyij0",t:"Happier · Marshmello, Bastille",cat:"select",tag:"spotify",lang:"en",min:4,src:"Marshmello",pub:"2018-09-24"}, // No Idea 64
   {id:"e-fA-gBCkj0",t:"Locked out of Heaven · Bruno Mars",cat:"select",tag:"spotify",lang:"en",min:4,src:"Bruno Mars",pub:"2012-10-15"}, // No Idea 65
-  {id:"fHI8X4OXluQ",t:"Blinding Lights · The Weeknd",cat:"select",tag:"spotify",lang:"en",min:4,src:"TheWeekndVEVO",pub:"2019-11-28"}, // No Idea 66
+  {id:"4NRXx6U8ABQ",t:"Blinding Lights · The Weeknd",cat:"select",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2020-01-21"}, // No Idea 66; the music video, not the audio (by request, 21 Nov)
   {id:"TUVcZfQe-Kw",t:"Levitating · Dua Lipa, DaBaby",cat:"select",tag:"spotify",lang:"en",min:4,src:"Dua Lipa",pub:"2020-10-02"}, // No Idea 67
   {id:"EObr0jeNL2Q",t:"There's Nothing Holdin' Me Back · Shawn Mendes",cat:"select",tag:"spotify",lang:"en",min:4,src:"Shawn Mendes - Topic",pub:"2018-07-24"}, // No Idea 68
   {id:"UtF6Jej8yb4",t:"The Nights · Avicii",cat:"select",tag:"spotify",lang:"en",min:4,src:"AviciiOfficialVEVO",pub:"2014-12-15"}, // No Idea 69
@@ -424,14 +424,39 @@ const CATALOG = [
   {id:"V1Pl8CzNzCw",t:"lovely · Billie Eilish, Khalid",cat:"select",tag:"spotify",lang:"en",min:4,src:"BillieEilishVEVO",pub:"2018-04-26"}, // After Hours 9
   {id:"ydPYNo8o-lI",t:"Thunder / Young Dumb & Broke - Medley · Imagine Dragons, Khalid",cat:"select",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2017-12-19"}, // After Hours 10
   {id:"LfyIt1BOW2E",t:"do Whatever you like · Hallman",cat:"select",tag:"spotify",lang:"en",min:4,src:"Hallman - Topic",pub:"2022-07-07"}, // After Hours 11
-  {id:"u6lihZAcy4s",t:"Save Your Tears · The Weeknd",cat:"select",tag:"spotify",lang:"en",min:4,src:"TheWeekndVEVO",pub:"2020-03-19"}, // After Hours 12
+  {id:"XXYlFuWEuKI",t:"Save Your Tears · The Weeknd",cat:"select",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-01-05"}, // After Hours 12; the music video, not the audio (by request, 21 Nov)
+  {id:"wp43OdtAAkM",t:"Running Up That Hill (A Deal with God) · Kate Bush",cat:"select",tag:"spotify",lang:"en",min:5,src:"KateBushMusic",pub:"2011-01-15"}, // Max's song in Stranger Things (by request, 21 Nov)
   {id:"-gj4_qp4a28",t:"Ready · Kodaline",cat:"select",tag:"spotify",lang:"en",min:5,src:"KodalineVEVO",pub:"2015-06-03"}, // After Hours 13
   {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"select",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-01-30"}, // After Hours 14
   {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21"}, // After Hours 15
   {id:"v7HAVTyvLqI",t:"STAR WALKIN' (League of Legends Worlds Anthem) · Lil Nas X",cat:"select",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2022-09-29"}, // After Hours 16
   {id:"SC4xMk98Pdc",t:"Congratulations · Post Malone, Quavo",cat:"select",tag:"spotify",lang:"en",min:4,src:"PostMaloneVEVO",pub:"2017-01-23"}, // After Hours 62
+  // South Gems (by request, 21 Nov): critically acclaimed South Indian films only, each a full Hindi-dubbed upload by its
+  // rights holder (Goldmines, B4U Movies, Zee Movies, Aditya Movies, Wamindia, DRJ Records), checked to play on other sites
+  {id:"mW0G9W4ZE1c",t:"Drishyam (Malayalam, 2013)",cat:"southgems",lang:"hi",min:153,src:"B4U Movies",pub:"2020-02-11"},
+  {id:"sO6tgqytDC4",t:"Take Off (Malayalam, 2017)",cat:"southgems",lang:"hi",min:127,src:"Wamindia Movies",pub:"2023-04-15"},
+  {id:"8iW9qeJaE4I",t:"Kaithi (Tamil, 2019)",cat:"southgems",lang:"hi",min:131,src:"Goldmines",pub:"2026-02-02"},
+  {id:"7_-fTlskezg",t:"Vikram Vedha (Tamil, 2017)",cat:"southgems",lang:"hi",min:131,src:"Goldmines",pub:"2022-10-28"},
+  {id:"7ykeq72RXK8",t:"Asuran (Tamil, 2019)",cat:"southgems",lang:"hi",min:126,src:"Goldmines",pub:"2024-05-02"},
+  {id:"63F9Pv4k4wk",t:"96 (Tamil, 2018)",cat:"southgems",lang:"hi",min:129,src:"Goldmines",pub:"2019-12-12"},
+  {id:"ukvzNybqBNE",t:"Thani Oruvan (Tamil, 2015) · in Hindi as Double Attack 2",cat:"southgems",lang:"hi",min:139,src:"Goldmines Cineplex",pub:"2018-08-08"},
+  {id:"CyvlLum5ORw",t:"Aruvi (Tamil, 2016)",cat:"southgems",lang:"hi",min:118,src:"Goldmines Dishoom",pub:"2021-02-22"},
+  {id:"go5Du3C9Tb4",t:"Anbe Sivam (Tamil, 2003)",cat:"southgems",lang:"hi",min:119,src:"B4U Movies",pub:"2023-04-17"},
+  {id:"6tjVudXp2Ps",t:"Eega (Telugu, 2012) · in Hindi as Makkhi",cat:"southgems",lang:"hi",min:115,src:"Zee Movies Hindi",pub:"2025-11-08"},
+  {id:"qky1I3a2e0Q",t:"Jersey (Telugu, 2019)",cat:"southgems",lang:"hi",min:126,src:"Goldmines",pub:"2019-10-13"},
+  {id:"C12WRs6LiQs",t:"Mahanati (Telugu, 2018)",cat:"southgems",lang:"hi",min:170,src:"Goldmines",pub:"2021-10-14"},
+  {id:"GVIkN8bv6FQ",t:"Agent Sai Srinivasa Athreya (Telugu, 2019)",cat:"southgems",lang:"hi",min:134,src:"Goldmines",pub:"2021-01-23"},
+  {id:"F50EmsabWLc",t:"Goodachari (Telugu, 2018) · in Hindi as Intelligent Khiladi",cat:"southgems",lang:"hi",min:146,src:"Aditya Movies",pub:"2019-01-27"},
+  {id:"js4HJnv4Zu4",t:"Magadheera (Telugu, 2009)",cat:"southgems",lang:"hi",min:136,src:"Goldmines",pub:"2018-08-02"},
+  {id:"LuYpqQqKW7s",t:"U Turn (Telugu, 2018)",cat:"southgems",lang:"hi",min:122,src:"Goldmines",pub:"2019-09-15"},
+  {id:"Be4WF4p-lGk",t:"Ulidavaru Kandanthe (Kannada, 2014) · in Hindi as Balwaan Badshah",cat:"southgems",lang:"hi",min:130,src:"Zee Movies Hindi",pub:"2026-03-16"},
+  {id:"xE_yyR0Zjsg",t:"Theeran Adhigaaram Ondru (Tamil, 2017) · in Hindi as Theeran",cat:"southgems",lang:"hi",min:141,src:"Goldmines",pub:"2018-12-30"},
+  {id:"S3BqKKsSivc",t:"Maanagaram (Tamil, 2017) · in Hindi as Dadagiri 2",cat:"southgems",lang:"hi",min:125,src:"Goldmines",pub:"2019-01-28"},
+  {id:"1M3sXuuYEWc",t:"Kaakha Kaakha (Tamil, 2003) · in Hindi as Zakhmi Police",cat:"southgems",lang:"hi",min:122,src:"B4U Movies",pub:"2022-07-08"},
+  {id:"5j1T2dwO9tg",t:"Mufti (Kannada, 2017)",cat:"southgems",lang:"hi",min:142,src:"DRJ Records Movies",pub:"2022-02-18"},
+  {id:"Xojf144alBo",t:"Uppena (Telugu, 2021)",cat:"southgems",lang:"hi",min:117,src:"Goldmines",pub:"2026-08-27"},
 ];
-const CAT_LABEL={select:"Select",magadh:"Bihar & Jharkhand news",firstsports:"First Sports",desipop:"Desi pop",modern:"Modern classics",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
+const CAT_LABEL={southgems:"Acclaimed South films, in Hindi",hits90:"90s hits",select:"Select",magadh:"Bihar & Jharkhand news",firstsports:"First Sports",desipop:"Desi pop",modern:"Modern classics",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
   khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",
   cricket:"Cricket",football:"Football",live:"Live",khabar:"Hindi news",news:"English news",bihar:"Bihar & Jharkhand news",punjabi:"Punjabi",
   hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems",classics:"Cricket classics",raag:"Indian classical",niche:"Niche",fiction:"Fiction",retro:"Classic films",premium:"Classics",masters:"Indian masters"};

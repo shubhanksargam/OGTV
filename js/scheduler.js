@@ -27,11 +27,12 @@ function inCats(cats){
 function pick(part){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
   const exT=rx(part.exclude), exS=rx(part.excludeSrc); // part.exclude / excludeSrc: titles and sources never played, not even as a fallback (Vibe's devotional songs)
-  const ok=v=>!BAD.has(v.id)&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src)))&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src)); // part.lang: only that language, never a fallback to others
+  const fresh=v=>!part.days||!!v.pub&&tvNow()-Date.parse(v.pub)<=part.days*DAY; // part.days: posted in the last so many days (Magadh Times' roundups), else the rest
+  const ok=v=>!BAD.has(v.id)&&(!part.strictDays||fresh(v))&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src)))&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src)); // part.lang: only that language, never a fallback to others
+  // part.strictDays: only the last part.days days, ever -- no older video, not even to fill (Newsroom, by request)
   const inCat=inCats(part.cat); // cat may list several categories
   const re=rx(part.match); // part.match: title must match, e.g. snack recipes
   const srcRe=rx(part.src), skipRe=rx(part.srcSkip), srcOk=v=>(!srcRe||srcRe.test(v.src))&&(!skipRe||!skipRe.test(v.src)); // part.src / srcSkip: which creators
-  const fresh=v=>!part.days||!!v.pub&&tvNow()-Date.parse(v.pub)<=part.days*DAY; // part.days: posted in the last so many days (Magadh Times' roundups), else the rest
   let pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin)&&fresh(v));
   if(!pool.length&&part.days) pool=inCat.filter(v=>ok(v)&&srcOk(v)&&(!part.tag||v.tag===part.tag)&&(!re||re.test(v.t))&&(!part.maxMin||v.min<=part.maxMin));
   if(!pool.length&&part.strict&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // part.strict: the match is a must (Bhakti's festival bhajans) -- none left, its own category, never the unmatched rest
@@ -146,12 +147,15 @@ function buildDay(ch,dayStart){
       if(!run){const list=heard(ch,CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag)))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
         boostRuns.set(bk,run={list:shuffle(list,seeded(k+"|boost|"+bk)),at:0})}
       if(!run.list.length) run=null}
-    // p.mix [{tag, src or match, w}]: several sets played together (Select). Each takes its turn by weight (w, else the square
+    // p.mix [{tag or notTag, src or match, w}]: several sets played together (Select). Each takes its turn by weight (w, else the square
     // root of its size), spread evenly through the day; within a set the songs come in a shuffled run, none twice before the
     // rest have played. Songs in no set don't play; if no set has any, the part plays its pool as usual
     let mixNext=null;
-    if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), l=pool.filter(v=>(!m.tag||v.tag===m.tag)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
-        return {l,w:m.w||Math.sqrt(l.length),share:m.share,len:l.reduce((a,v)=>a+v.min,0)/(l.length||1),r:seeded(k+"|"+pi+"|mix"+j),o:[],at:0,c:0}}).filter(s=>s.l.length);
+    if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), l=pool.filter(v=>(!m.tag||v.tag===m.tag)&&(!m.notTag||v.tag!==m.notTag)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
+        // m.once: its share is never so big that one of its songs comes round twice in the part's hours (a small set
+        // preferred: 90s Hits' audio uploads)
+        const sh=m.once&&m.share?Math.min(m.share,l.reduce((a,v)=>a+v.min,0)/((p.to-p.from)*60)):m.share;
+        return {l,w:m.w||Math.sqrt(l.length),share:sh,len:l.reduce((a,v)=>a+v.min,0)/(l.length||1),r:seeded(k+"|"+pi+"|mix"+j),o:[],at:0,c:0}}).filter(s=>s.l.length);
       // m.share: that set's part of the airtime (Select's Spotify songs, 0.5 = 12 h a day, by request); the turn weight is
       // worked out from the songs' lengths, and the other sets share the rest as before
       const fixed=sets.filter(s=>s.share>0&&s.share<1), rest=sets.filter(s=>!fixed.includes(s)), R=rest.reduce((a,s)=>a+s.w*s.len,0), S=fixed.reduce((a,s)=>a+s.share,0);
@@ -184,7 +188,10 @@ function liveStream(ch,t){
   const h=t==null?null:new Date(t+IST).getUTCHours(), want=ch.liveAt&&h!=null&&ch.liveAt.find(([a,b])=>h>=a&&h<b);
   return (want&&on.find(x=>x.src===want[2]))||on[0]||null;
 }
-function liveSlot(ch,L,t){const a=Math.floor(t/HOUR)*HOUR; // shown in the guide as hour-long blocks
+// The hour of India's clock a moment is in (IST is UTC+5:30, so a UTC hour runs from half past to half past): live
+// blocks follow it, as a channel's live hours (liveNow) do, so the guide shows live exactly when the channel is live
+const istHour=t=>Math.floor((t+IST)/HOUR)*HOUR-IST;
+function liveSlot(ch,L,t){const a=istHour(t); // shown in the guide as hour-long blocks
   return {start:a,end:a+HOUR,live:true,part:LIVE_PART,ch,v:{id:L.id,t:L.t,src:L.src,lang:L.lang,cat:"live",min:60}}}
 
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
@@ -195,7 +202,7 @@ function slotAt(ch,t){const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return live
 function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=CATALOG.filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
   return {start:a,end:a+HOUR,v,part:{label:ch.en||ch.name,cat:v.cat,from:0,to:24},ch}}
 function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
-  if(L&&!ch.liveHours){for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
+  if(L&&!ch.liveHours){for(let t=istHour(a);t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
   let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
-  if(L) for(let t=Math.floor(a/HOUR)*HOUR;t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,liveStream(ch,t)||L,t));
+  if(L) for(let t=istHour(a);t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,liveStream(ch,t)||L,t));
   return out.sort((x,y)=>x.start-y.start)}

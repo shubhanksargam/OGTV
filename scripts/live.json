@@ -94,6 +94,39 @@
     "src": "First Bihar Jharkhand",
     "lang": "hi"
    }
+  ],
+  "newsroom": [
+   {
+    "id": "UC83iGbaOhZR8AWNYYNzSNjg",
+    "src": "IGR",
+    "lang": "en"
+   },
+   {
+    "id": "UCz8QaiQxApLq8sLNcszYyJw",
+    "src": "Firstpost",
+    "lang": "en"
+   },
+   {
+    "id": "UC_gUM8rL-Lrg6O3adPW9K1g",
+    "src": "WION",
+    "lang": "en"
+   },
+   {
+    "id": "UCUI9vm69ZbAqRK3q3vKLWCQ",
+    "src": "Mint",
+    "lang": "en"
+   },
+   {
+    "id": "UCIALMKvObZNtJ6AmdCLP7Lg",
+    "src": "Bloomberg",
+    "lang": "en"
+   },
+   {
+    "id": "UCXbKJML9pVclFHLFzpvBgWw",
+    "src": "Markets by Zerodha",
+    "lang": "en"
+   }
   ]
- }
+ },
+ "_newsroom": "Newsroom (by request): a live stream from these plays whenever one is live, earlier preferred (no time limit, by request)"
 }

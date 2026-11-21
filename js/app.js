@@ -21,18 +21,35 @@ const refusedHere=()=>{try{return JSON.parse(localStorage.getItem(REFUSED_KEY)||
   if(typeof REFUSED==="string") REFUSED.split(" ").forEach(id=>id&&BAD.add(id));
   cache.clear()}
 function rememberRefused(id){const m=refusedHere(); m[id]=Date.now(); try{localStorage.setItem(REFUSED_KEY,JSON.stringify(m))}catch(e){}}
-let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics")); // every visit opens on Cricket Classics
-// A channel from an address: its name (?ch=desi-pop, or a /tv/<channel>/ page), a renamed channel's old name, or a number
+let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics"));
+// From start (by request, 21 Nov 2026): the programme on now plays again from its first second to its last, and then the
+// channel is live again. Meanwhile the channel stays on that programme and runs `shift` behind the clock (the player's own
+// position sets it, so a pause holds it where it was); everything that shows the channel shows that programme and moment
+let startOver=null; // {ch, s, shift, at, leftAt}
+// Flipping to other channels keeps it for 2 minutes (by request): the channel runs on behind the clock meanwhile, and
+// coming back within them carries on with it; after that, or once its programme would have ended, the channel is live
+const SO_AWAY=2*MIN;
+function soFor(i){const so=startOver; if(!so||so.ch!==i) return null; if(so.leftAt==null) return i===cur?so:null;
+  return i!==cur&&Date.now()-so.leftAt<=SO_AWAY&&tvNow()-so.shift<so.s.end?so:null} // a channel's From start, if it has one
+const soOn=()=>!!soFor(cur);
+const chNow=(i=cur)=>{const so=soFor(i); return so?tvNow()-so.shift:tvNow()}; // a channel's own moment
+function onNow(i=cur){const so=soFor(i); return so?so.s:slotAt(CHANNELS[i],tvNow())} // what a channel is showing
+function upNext(i=cur){const so=soFor(i), s=onNow(i); if(!s||s.live) return null; // after it: the next programme, or in From start what is live then
+  return so?slotAt(CHANNELS[i],s.end+so.shift):slotAt(CHANNELS[i],s.end)}
+const nextWord=()=>soOn()?"Then live":"Next";
+const RESTART_ICON="<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3.5 4.5v5h5\"/><path d=\"M4.6 14.5a8 8 0 1 0 1.9-8.3L3.5 9.5\"/><path d=\"M10.6 9.6v4.8l3.8-2.4z\"/></svg>", LIVE_ICON="<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"1.6\"/><path d=\"M8.8 8.8a4.5 4.5 0 0 0 0 6.4M15.2 8.8a4.5 4.5 0 0 1 0 6.4M6 6a8.5 8.5 0 0 0 0 12M18 6a8.5 8.5 0 0 1 0 12\"/></svg>";
+let startShown=""; // which look the From start buttons have (redrawn only when it changes) // every visit opens on Cricket Classics
+// A channel from an address: its name (?ch=desi-pop, or a /<channel>/ page), a renamed channel's old name, or a number
 const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex(c=>/^\d+$/.test(v)?c.n===+v:chSlug(c)===v||(c.oldSlugs||[]).includes(v))};
 {const m=document.querySelector('meta[name="ogtv-ch"]'), i=chFind(new URLSearchParams(location.search).get("ch")||(m&&m.content)); if(i>=0)cur=i}
-// The address names the channel the way the channel list's links do, /tv/<channel>/ (by request: one address per channel),
+// The address names the channel the way the channel list's links do, /<channel>/ (by request: one address per channel, no /tv/),
 // so a copied link opens that channel's own page and survives renumbering. Other parameters (app=tv, debug) stay.
 // An old ?ch= link still tunes, and its address is tidied the same way
 function showAddress(){try{const q=new URLSearchParams(location.search); q.delete("ch"); const s=q.toString();
-  history.replaceState(null,"","/tv/"+chSlug(CHANNELS[cur])+"/"+(s?"?"+s:"")+location.hash)}catch(e){}}
+  history.replaceState(null,"","/"+chSlug(CHANNELS[cur])+"/"+(s?"?"+s:"")+location.hash)}catch(e){}}
 if(new URLSearchParams(location.search).has("ch")) showAddress();
 // The channel's own few lines at the foot of the page, and the tab's title, follow the channel as it changes in place
-// (a /tv/<channel>/ page is built with its own channel's): js/about.json, written by scripts/build-pages.mjs, read once
+// (a /<channel>/ page is built with its own channel's): js/about.json, written by scripts/build-pages.mjs, read once
 let ABOUT=null;
 function aboutChannel(){const k=chSlug(CHANNELS[cur]);
   (ABOUT||(ABOUT=fetch("js/about.json?v="+loadedStamp("js/app.js")+"-"+loadedStamp("js/feeds.js")).then(r=>r.ok?r.json():{}).catch(()=>({}))))
@@ -125,7 +142,7 @@ function redraw(el,html){const f=document.activeElement, keep={};
 // The panel under the TV is one card: what's on (tick() fills its title, times and why; here its YouTube channel and
 // description) beside the channel it's on, as in the guide, with what's next (tick() too) and the rest of its day
 const gOpenNow=new Set(); // the day opens here apart from the guide's
-function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=day[0]; if(!s) return;
+function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=soOn()?startOver.s:day[0]; if(!s) return;
   const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live) wantDesc(id);
   redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
   redraw($("nowYt"),s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
@@ -139,10 +156,17 @@ function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0
     +`<ol class="lprogs"><li class="lat${on?" lon":""}"><time>${s.live?"Live":fmt(s.start)}</time><div><b>${badge(s)}${esc(s.live?onAir(s):s.v.t)}</b>`
     +(s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>`)+`<small>${meta}</small>`
     +(on&&!s.live?`<i class="lbar"><i style="width:${((now-s.start)/(s.end-s.start)*100).toFixed(1)}%"></i></i>`:"")
+    +(on&&!s.live&&MODE!=="fallback"?guideStart(c,i,s):"")
     +(s.live?"":descDiv(s.v))+`</div></li>`
     +(nx?`<li class="lnx"><time>${fmt(nx.start)}</time><div>${badge(nx)}${esc(onAir(nx))}${nx.live?"":` <span>· ${esc(nx.v.src)}</span>`}</div></li>`:"")+`</ol>`
     +(more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":(gAt?fmt(gAt)+" onwards":"Rest of today")+" · "+more}</button>`:"")
     +(open&&more?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:"")+`</article>`}
+// From start in the guide (by request): the programme on now on that channel, from its beginning; for the channel
+// already playing from its start, the way back live
+function guideStart(c,i,s){const back=i===cur&&soOn(), ic=(back?LIVE_ICON:RESTART_ICON).replace('width="20" height="20"','width="15" height="15"');
+  return `<button class="lstart" data-i="${i}" aria-pressed="${back}" aria-label="${back?"Back to live on "+esc(c.name):esc(c.name)+": "+esc(s.v.t)+", from the start"}">${ic}${back?"Go live":"From start"}</button>`}
+function startFromGuide(i){if(i===cur&&soOn()){goLive(); return} if(i!==cur) tune(i); fromStart();
+  const r=$("screen").getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight-80) $("main-tv").scrollIntoView({behavior:smooth(),block:"start"})}
 function dayList(day,now){let h="", head="";
   for(const s of day){const label=s.live?"Live":s.part.label; if(label!==head){head=label; h+=`<li class="lpart">${esc(label)}</li>`}
     h+=`<li${now>=s.start&&now<s.end?' class="lon"':""}><time>${fmt(s.start)}</time><span>${badge(s)}${esc(onAir(s))}${s.live?"":`<em>${esc(s.v.src)}</em>`}</span><small>${s.live?"":Math.round((s.end-s.start)/MIN)+" min"}</small></li>`}
@@ -153,7 +177,8 @@ function markGuide(){document.querySelectorAll("#guide [data-ch]").forEach(r=>{c
   const w=r.querySelector(".lwatch"); if(w) w.textContent=on?"Watching":"Watch"})}
 // Tuning from the guide: if the TV has scrolled out of sight (a phone, far down the list), it comes back into view
 function watchFromGuide(i){if(i!==cur) tune(i); const r=$("screen").getBoundingClientRect(); if(r.bottom<80||r.top>innerHeight-80) $("main-tv").scrollIntoView({behavior:smooth(),block:"start"})}
-function cardClick(e){const root=e.currentTarget, w=e.target.closest(".lwatch,.lhead"), m=e.target.closest(".lmore"), d=e.target.closest(".ldmore");
+function cardClick(e){const root=e.currentTarget, fsb=e.target.closest(".lstart"); if(fsb) return startFromGuide(+fsb.dataset.i);
+  const w=e.target.closest(".lwatch,.lhead"), m=e.target.closest(".lmore"), d=e.target.closest(".ldmore");
   if(w) return watchFromGuide(+w.dataset.i);
   if(d){const id=d.dataset.d; gDescOpen.has(id)?gDescOpen.delete(id):gDescOpen.add(id); fillDesc(id); const n=root.querySelector(`.ldmore[data-d="${id}"]`); if(n) n.focus({preventScroll:true}); return}
   if(!m) return;
@@ -165,9 +190,9 @@ $("glist").addEventListener("click",cardClick);
 $("nowPanel").addEventListener("click",cardClick);
 // The channel list at the foot of the page links each channel's own page (for search engines, and to open in a new tab);
 // a plain click there tunes in place like the guide's Watch, without loading the page again and its intro (by request)
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('.directory a[href^="/tv/"]');
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('.directory a[href^="/"],.uses a[href^="/"]');
   if(!a||e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey) return;
-  const i=chFind(a.getAttribute("href").split("/")[2]); if(i<0) return; // an unknown channel: let the link load
+  const i=chFind(a.getAttribute("href").split("/")[1]); if(i<0) return; // an unknown channel: let the link load
   e.preventDefault(); watchFromGuide(i)});
 $("gtimes").addEventListener("click",e=>{const b=e.target.closest(".gt"); if(!b) return; gAt=+b.dataset.t; markTimes(); renderList(tvNow())});
 // Each minute: what's on now moves on, and an hour that has come round drops off the buttons
@@ -178,7 +203,10 @@ let watchTimer=0;
 function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
   watchTimer=setTimeout(()=>track("ch-"+String(c.n).padStart(2,"0")+"-"+c.key,c.n+" · "+c.name),10e3)}
 let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
-function tune(i){tuneFlip=false; const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
+function tune(i){tuneFlip=false; const to=(i+CHANNELS.length)%CHANNELS.length;
+  if(startOver&&to!==cur){if(startOver.ch===cur&&soOn()) startOver.leftAt=Date.now(); // leaving its From start: kept 2 minutes
+    else if(startOver.ch===to){if(soFor(to)){delete startOver.leftAt; startOver.at=Date.now()} else startOver=null}} // back in time: it carries on
+  if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
   showAddress(); aboutChannel();
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();
@@ -204,6 +232,7 @@ addEventListener("keydown",e=>{
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="a"||e.key==="A") setRadio(!radio)
+  else if(e.key==="b"||e.key==="B") toggleStart()
   else if((e.key==="c"||e.key==="C")&&!isFull()){setGuideOpen(true); $("guide").scrollIntoView({behavior:smooth(),block:"start"})} // the channels are in the guide
   else if(e.key==="h"||e.key==="H"||e.key==="?") openHelp();
   else if(e.key==="Escape"&&$("room").classList.contains("pseudo-fs")) toggleFullscreen();
@@ -231,17 +260,23 @@ function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)re
 // tuneFlip: YouTube refused what this tune-in was going to play, so the static names no song (just "Tuning in") until one
 // actually plays, rather than flicking through the ones tried
 let tuneFlip=false;
-function updateStaticInfo(){const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now), nx=s.live?null:slotAt(ch,s.end);
+function updateStaticInfo(){const ch=CHANNELS[cur], s=onNow(), nx=upNext();
   if(retro) $("staticInfo").textContent=tuneFlip?"TUNING IN":onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
   else if(!isFull()){const el=$("staticInfoPlain"), h=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
     <span class="bn-title">${tuneFlip?"Tuning in…":(s.live?LIVEDOT:"")+esc(onAir(s))}</span>
-    <span class="bn-meta">${tuneFlip?"":(s.live?"Live now":fmt(s.start)+" – "+fmt(s.end))+(nx?" · Next: "+esc(nx.v.t):"")}</span></div>`;
+    <span class="bn-meta">${tuneFlip?"":(s.live?"Live now":fmt(s.start)+" – "+fmt(s.end))+(nx?" · "+nextWord()+": "+esc(nx.v.t):"")}</span></div>`;
     if(el._h!==h){el._h=h; el.innerHTML=h}}} // rewritten only when it changes
 function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
   const wait=Math.max(0,1200-(Date.now()-staticSince));
   setTimeout(()=>{if(!staticOn||Date.now()-staticSince<1200)return; staticOn=false; cancelAnimationFrame(staticRAF); $("static").hidden=true; staticSound.stop();
     if(panelDue) waitSteady()},wait)} // the panel under the TV and the record, once the picture has settled
 
+// The sound button on the picture is an icon (by request): a speaker with waves while the sound is on (press to mute), crossed
+// out while it is off (press for sound); its words stay as its name for screen readers and its tooltip
+const SPEAKER='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 9.6h2.6l3.6-3v10.8l-3.6-3H4.8z"/>';
+function soundBtn(off){const b=$("sound"), say=off?"Turn sound on":"Mute";
+  b.innerHTML=SPEAKER+(off?'<path d="M15.6 10.1l3.8 3.8M19.4 10.1l-3.8 3.8"/></svg>':'<path d="M14.8 9.3a3.8 3.8 0 0 1 0 5.4"/><path d="M17.4 6.9a7.2 7.2 0 0 1 0 10.2"/></svg>');
+  b.setAttribute("aria-label",say); b.title=say+" (M)"}
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, playingId=null, playingEnd=0, ended=false, muted=true, skips=0, bufTimer=0;
 const slotKey=(ch,s)=>s.live?ch.key+s.v.id:ch.key+s.start+s.v.id; // a live stream keeps playing across hour blocks
@@ -261,7 +296,7 @@ const playerEvents={
       stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
     else if(e.data===S.UNSTARTED||e.data===S.CUED) stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},12e3) // ready but never started (YouTube sometimes ignores the play): try the programme again -- unless the browser blocked autoplay and the picture is waiting for the viewer's tap
     else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended&&!staticOn) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth); never while static is covering a tune-in, so the two overlays can't clash
-    else if(e.data===S.ENDED){if(!atRealEnd()) return; if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
+    else if(e.data===S.ENDED){if(!atRealEnd()) return; if(soOn()){goLive(); return} if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
   onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()};
 window.onYouTubeIframeAPIReady=()=>{
   // Also runs if the API arrives after the timeout: the player takes over from the link-out card
@@ -271,7 +306,7 @@ window.onYouTubeIframeAPIReady=()=>{
               else {player.setVolume(vol);muted?player.mute():player.unMute()}
               player.playVideo();if(!muted)checkSound();$("sound").hidden=false;
               playingKey=firstKey;tick(); // reloads only if the programme changed while loading
-              $("modeNote").innerHTML="Playing live from YouTube. Every viewer is on the same moment of the same programme."}}});
+              $("modeNote").textContent=""}}}); // no line under the TV while it plays (by request)
 };
 // A fresh YT.Player, used for every channel/programme switch instead of loadVideoById: on a browser that reports no
 // hover, YouTube answers loadVideoById on an existing player by showing its own touch-style chrome (a title bar, a
@@ -288,11 +323,11 @@ let pendingPlayer=null;
 // controls showing after a switch on touch screens, which a new player avoids.
 let keepPlayer=false;
 const HOVER=matchMedia("(hover: hover)").matches; // a mouse or trackpad: loadVideoById shows no touch chrome
-function recreatePlayer(s){
+function recreatePlayer(s,at=chNow()){
   for(const p of [player,pendingPlayer]) if(p) try{p.destroy()}catch(e){}
   player=null;
   const fresh=document.createElement("div"); fresh.id="yt"; $("yt").replaceWith(fresh);
-  const p=pendingPlayer=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
+  const p=pendingPlayer=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.max(0,Math.floor((at-s.start)/1000))})},
     events:{...playerEvents, onReady:()=>{if(p!==pendingPlayer)return; player=p; pendingPlayer=null;
       player.setVolume(vol); muted?player.mute():player.unMute(); player.playVideo(); if(!muted)checkSound(); $("sound").hidden=false}}});
   clearTimeout(stallTimer); stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},15e3); // never even ready (the embed didn't load): try again; its first state change takes over
@@ -379,7 +414,7 @@ function skip(code){
   if(!navigator.onLine){showStatic(); return} // the "online" listener below takes over
   track("play-error-"+(code||"ended"),"Video failed to play"+(code?" ("+code+")":""));
   if(code&&!GONE.includes(code)&&retries<RETRY.length){showStatic(); retryTimer=setTimeout(replay,RETRY[retries++]); return}
-  retries=0;
+  retries=0; if(soOn()){startOver=null; startBtns()} // refused for good: the channel as it is now
   // Many failures in a row: something bigger is wrong (a blocker, the network). Say so, and keep trying every minute
   if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube. Trying again every minute.");
     skips=12; retryTimer=setTimeout(replay,60e3); return}
@@ -396,7 +431,7 @@ function fallback(){
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
 }
 function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;if(muted&&needTap){tapHint();return}muted=!muted;muted?player.mute():player.unMute();
-  $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(muted){interlude.stop(); staticSound.stop()}}
+  soundBtn(muted); knobs(); if(muted){interlude.stop(); staticSound.stop()}}
 /* Opening ident plays through by itself: OGTV forms, the bloom sounds as the iris opens, then the channel plays and
    its sound fades in. Browsers allow sound only once the visitor has done something (or has used the site before):
    a tap, click or key at any point in the ident lets it in, without skipping; with none the ident is silent and
@@ -557,7 +592,7 @@ const staticSound=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),800)}
   return {start,stop};
 })();
-function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; $("sound").textContent=muted?"Turn sound on":"Mute"; knobs(); if(MODE!=="yt"||!player)return;
+function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; soundBtn(muted); knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(tries=0,asks=0,p=player){ // refused (muted again or paused by the browser): carry on muted, picture first
   setTimeout(()=>{if(MODE!=="yt"||!player||muted||p!==player)return; // a newer player has its own check
@@ -576,7 +611,7 @@ function checkSound(tries=0,asks=0,p=player){ // refused (muted again or paused 
     // A new player can still report the mute it was made with for a moment after unMute(): playing but "muted" is asked
     // again (a browser that refuses pauses the video, or YouTube reports it) before it counts as a refusal
     if(player.isMuted()&&st===YT.PlayerState.PLAYING&&asks<3){player.unMute(); checkSound(tries,asks+1,p); return}
-    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs()
+    if(player.isMuted()||st===YT.PlayerState.PAUSED||st===YT.PlayerState.UNSTARTED){muted=true; keepPlayer=true; player.mute(); player.playVideo(); soundBtn(true); knobs()
       if(st===YT.PlayerState.PAUSED&&!TV_APP) tapMode(true)} // paused on unmuting: this browser wants a tap on the picture
     else if(needTap) tapMode(false)},900)}
 /* Some browsers let a video make sound only after a tap on the video itself: the built-in browsers of apps such as X,
@@ -586,7 +621,7 @@ function checkSound(tries=0,asks=0,p=player){ // refused (muted again or paused 
    for a few seconds, and the sound is turned on within them; after that it is allowed for every programme. */
 function soundRefused(){dbg("sound refused: waiting for a tap on the picture"); if(TV_APP||MODE!=="yt"||!player)return;
   if(document.hidden){soundOnReturn=true; return} // not judged while the page can't be seen (see checkSound)
-  muted=true; keepPlayer=true; player.mute(); player.playVideo(); $("sound").textContent="Turn sound on"; knobs(); tapMode(true); if(started) tapHint()}
+  muted=true; keepPlayer=true; player.mute(); player.playVideo(); soundBtn(true); knobs(); tapMode(true); if(started) tapHint()}
 // Back in view after a sound check was put off: the sound is asked for again, and judged now
 let soundOnReturn=false;
 document.addEventListener("visibilitychange",()=>{if(document.hidden||!soundOnReturn)return; soundOnReturn=false;
@@ -635,6 +670,17 @@ function wakeUI(strip){
   clearTimeout(uiTimer);
   uiTimer=setTimeout(()=>{sc.classList.remove("strip-on"); if(isFull()) sc.classList.add("fs-idle"); browse=cur},sc.classList.contains("strip-on")?7000:3000);
 }
+// The small TV's Mute and Full screen buttons fade away when the mouse rests on the picture or leaves it, and after a tap,
+// as they do in full screen (by request); a move or a tap on the picture, or the keyboard's focus, brings them back. On a
+// phone the tap that brings them back does only that (as in full screen), it doesn't also pause
+let smallTimer=0, idleTap=false;
+function wakeSmall(wait=3000){const sc=$("screen"); clearTimeout(smallTimer); if(isFull()) return; sc.classList.remove("ui-idle");
+  smallTimer=setTimeout(()=>{if(!isFull()) sc.classList.add("ui-idle")},wait)}
+$("screen").addEventListener("pointerdown",e=>{idleTap=e.pointerType!=="mouse"&&$("screen").classList.contains("ui-idle"); wakeSmall()},{passive:true});
+$("screen").addEventListener("pointermove",e=>{if(e.pointerType==="mouse") wakeSmall()},{passive:true});
+$("screen").addEventListener("mouseleave",()=>wakeSmall(800));
+$("screen").addEventListener("focusin",()=>wakeSmall());
+wakeSmall();
 // The strip is an endless loop: three copies of the channel row side by side. The focused card is always
 // the copy nearest the middle of the view, so moving past the last channel carries on into the next copy's channel 1 in
 // the same direction (and left of 1 into the last). Once the strip is still, the view jumps by one copy to keep
@@ -646,7 +692,7 @@ const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view
   return a?st.scrollLeft+st.clientWidth/2-(a.getBoundingClientRect().left-st.getBoundingClientRect().left+st.scrollLeft):0};
 function renderStrip(smooth=true){
   const now=tvNow(), strip=$("strip"), mid=stripMid(), w=copyWidth();
-  const row=copy=>CHANNELS.map((c,i)=>{const s=slotAt(c,now), pct=s.live?100:Math.round((now-s.start)/(s.end-s.start)*100);
+  const row=copy=>CHANNELS.map((c,i)=>{const s=onNow(i), t=chNow(i), pct=s.live?100:Math.round((t-s.start)/(s.end-s.start)*100);
     const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${esc(c.group)}</span>`:"";
     return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
@@ -665,10 +711,10 @@ function settleStrip(){ // keep the middle of the view inside the middle copy, w
 }
 function showBanner(){
   if(!isFull())return;
-  const c=CHANNELS[cur], now=tvNow(), s=slotAt(c,now), nx=s.live?null:slotAt(c,s.end);
+  const c=CHANNELS[cur], s=onNow(), nx=upNext();
   $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
-    <span class="bn-meta">${s.live?"Live now":fmt(s.start)+" – "+fmt(s.end)}${nx?" · Next: "+esc(nx.v.t):""}</span></div>`;
+    <span class="bn-meta">${s.live?"Live now":(soOn()?"From the start · ":"")+fmt(s.start)+" – "+fmt(s.end)}${nx?" · "+nextWord()+": "+esc(nx.v.t):""}</span></div>`;
   const sc=$("screen"); sc.classList.add("banner-on"); clearTimeout(bannerTimer);
   bannerTimer=setTimeout(()=>sc.classList.remove("banner-on"),4500);
 }
@@ -723,15 +769,15 @@ if(/iPhone|iPod/.test(navigator.userAgent)&&!(navigator.standalone||matchMedia("
 function onFullscreenChange(){const sc=$("screen"); $("keyFs").textContent=roomFull()?"Exit full screen":"Full screen";
   sc.classList.toggle("pseudo-fs",roomFull()&&!retro); // plain look: the bare screen fills the room
   if(!roomFull()) try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}
-  if(isFull()){browse=cur; showBanner(); wakeUI(false)}
-  else {clearTimeout(uiTimer); clearTimeout(bannerTimer); sc.classList.remove("strip-on","banner-on","fs-idle","digits-on")}} // back to normal view: controls stay put
+  if(isFull()){browse=cur; showBanner(); wakeUI(false); sc.classList.remove("ui-idle")}
+  else {clearTimeout(uiTimer); clearTimeout(bannerTimer); sc.classList.remove("strip-on","banner-on","fs-idle","digits-on"); wakeSmall()}} // back to normal view: its buttons show, then fade
 document.addEventListener("fullscreenchange",onFullscreenChange);
 document.addEventListener("webkitfullscreenchange",onFullscreenChange);
 /* Retro camcorder look, remembered per browser */
 let retro=!TV_APP; try{localStorage.removeItem("ogtv-retro"); const s=sessionStorage.getItem("ogtv-retro"); retro=TV_APP?s==="1":s!=="0"}catch(e){} // every visit and channel page opens in retro, the TV app in the plain look; a change lasts for this tab (or app session) only
 function setRetro(on){retro=on; if(!on) staticSound.stop(); $("main-tv").classList.toggle("retro-on",on); $("screen").classList.toggle("retro",on); $("set").classList.toggle("on",on); knobs(); $("retro").setAttribute("aria-pressed",on); $("retroFs").setAttribute("aria-pressed",on);
   try{sessionStorage.setItem("ogtv-retro",on?"1":"0")}catch(e){} osd(); if(staticOn) updateStaticInfo(); // turning retro on mid-tune-in: fill it in, not a blank green box
-  if(on){if(radio) setFx(FX_RADIO); else if(fxLevel===FX_RADIO) setFx(4)} // the knob shows Radio exactly when Radio is on
+  if(on){if(radio) setFx(FX_RADIO); else if(fxLevel===FX_RADIO) setFx(FX_START)} // the knob shows Radio exactly when Radio is on
   if(roomFull()) onFullscreenChange()} // already full screen: stay full screen, in the other look
 function osd(){if(!retro)return; const d=new Date(tvNow()+IST), p=n=>String(n).padStart(2,"0");
   $("osdTime").textContent=`${MONTHS[d.getUTCMonth()].toUpperCase()} ${p(d.getUTCDate())} ${d.getUTCFullYear()}
@@ -739,7 +785,7 @@ ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`}
 // The TV set's knobs turn like real ones: drag round, scroll, or arrow keys when focused. Channel steps
 // through the dial and tunes where you let go (a plain click is the next channel); volume sets the level
 // 0–100 as you turn (a plain click is sound on or off). A green on-screen readout shows where you are.
-const TAG_NAMES={bulletin:"DD bulletins",roundup:"the day's roundup",reports:"ground reports",updates:"latest updates",analysis:"analysis",deep:"deep dives",coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
+const TAG_NAMES={kishore:"Kishore Kumar",mukesh:"Mukesh",lata:"Lata Mangeshkar",rafi:"Mohammed Rafi","60s":"the 60s","70s":"the 70s","80s":"the 80s",bulletin:"DD bulletins",roundup:"the day's roundup",reports:"ground reports",updates:"latest updates",analysis:"analysis",deep:"deep dives",coke:"Coke Studio",inst:"instrumental",vocal:"vocal",dd:"Doordarshan",mytho:"mythology",auto:"cars & bikes",explain:"explainers",
   india:"India",world:"world",deep:"deep dives",learn:"learning",review:"reviews",scenic:"scenic",walk:"walks",sports:"sports fitness",army:"army training",soviet:"Soviet-style training",kahani:"kahaniyan",kavi:"kavi sammelan",mushaira:"mushaira",sitcom:"family sitcoms",olympic:"the Games",kbc:"KBC",dailybrief:"The Daily Brief",zmarkets:"Markets by Zerodha",firstsports:"First Sports",latest:"latest highlights",talent:"Hustle & I-Popstar",vantagenew:"Vantage, latest",vantage:"Vantage",palki:"Palki Sharma",fpshows:"Firstpost shows",igr:"IGR",trending:"trending",voices:"voices",stars:"stars",indie:"indie",chart:"charts",worldcharts:"world charts",alltime:"all-time hits",telugu:"Telugu",tamil:"Tamil",malayalam:"Malayalam",kannada:"Kannada",classic:"classics",ashtak:"Hanuman Ashtak",mrityunjay:"Mahamrityunjay Mantra",chalisa:"Hanuman Chalisa",punjabi:"Punjabi",dhh:"desi hip-hop",rap:"rap",rock:"rock",phonk:"phonk",tourism:"tourism",heritage:"heritage",food:"food",folk:"folk",prime:"India's big moments",f1:"F1 & MotoGP",tennis:"tennis",fixtures:"international fixtures",more:"golf, cycling & swimming",workout:"workouts",yoga:"yoga",news:"news"}; // how a part's tag reads in "On air because"
 let vol=70; try{const v=+localStorage.getItem("ogtv-vol"); if(v>0&&v<=100) vol=v}catch(e){}
 const CH_STEP=360*5/CHANNELS.length, VOL_DEG=2.7, VOL_MIN=-135; // all the channels take five turns of the knob; volume sweeps -135° (silent) to +135° (full)
@@ -837,22 +883,37 @@ $("knobMode").addEventListener("keydown",e=>{const k=e.key; if(!/^Arrow/.test(k)
 setFx(fxLevel);
 /* ---------- Radio (by request) ----------
    The sound of whatever is on, with the TV's screen as a radio's face in the interlude's style: the channel, the song or
-   programme, who made it, its time and what's next, and a moving level meter. YouTube's player keeps playing in a
+   programme, who made it, its time and what's next, and a turning record. YouTube's player keeps playing in a
    200 x 200 window on it, the smallest YouTube allows, with nothing on the screen ever over it: YouTube's rules don't
    allow hiding the picture or covering the player (the user chose this over hiding it, 21 Nov). On the retro TV, Radio
    is a setting of the Mode knob, between Quiet and Normal. Every visit starts with it off (by request). */
-function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=tvNow(), s=slotAt(ch,now); if(!s) return; const nx=s.live?null:slotAt(ch,s.end);
+function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=chNow(), s=onNow(); if(!s) return; const nx=upNext();
   const by=s.live?"":ytChannel(s), el=$("radioScreen");
   const h=`<span class="rd-kicker">Radio · ${ch.n} ${esc(ch.name)}</span><h2 class="rd-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</h2>`
     +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
-    +`<span class="rd-play"><span class="rd-eq"><i></i><i></i><i></i><i></i><i></i></span><i class="rd-bar"><i id="rdBar"></i></i></span>`
-    +(nx?`<p class="rd-next">Next at ${fmt(nx.start)} · ${esc(onAir(nx))}</p>`:"");
+    +`<span class="rd-play"><span class="vinyl rd-disc" aria-hidden="true"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><i class="rd-bar"><i id="rdBar"></i></i></span>`
+    +(nx?`<p class="rd-next">${soOn()?"Then live":"Next at "+fmt(nx.start)} · ${esc(onAir(nx))}</p>`:"");
   if(el._h!==h){el._h=h; el.innerHTML=h} // rewritten only when it changes
   const b=$("rdBar"); if(b) b.style.width=s.live?"100%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
 function applyRadio(on){radio=on; $("screen").classList.toggle("radio",on); ["radio","radioFs"].forEach(id=>$(id).setAttribute("aria-pressed",on));
   if(on){renderRadio(); track("radio-on","Radio on")}}
-function setRadio(on){if(retro) setFx(on?FX_RADIO:4,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to Quiet
+function setRadio(on){if(retro) setFx(on?FX_RADIO:FX_START,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to where it starts, Tinted (by request)
 $("radio").addEventListener("click",()=>setRadio(!radio));
+// From start, and back live (see startOver at the top)
+function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||s.live) return; // a live broadcast is never seeked
+  if(!started) return;
+  startOver={ch:cur, s, shift:tvNow()-s.start, at:Date.now()}; pausedAt=0; track("from-start","From start: "+CHANNELS[cur].name);
+  playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>FROM START</b>"); if(guideBuilt) renderGuide()}
+function goLive(){if(!soOn()) return; startOver=null; playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>LIVE</b>"); if(guideBuilt) renderGuide()}
+const toggleStart=()=>soOn()?goLive():fromStart();
+function startBtns(){const on=soOn(), s=on?null:slotAt(CHANNELS[cur],tvNow()), can=on||MODE==="yt"&&!!s&&!s.live, k=on+"|"+can; if(k===startShown) return; startShown=k;
+  for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on); b.disabled=!can;
+    b.innerHTML=(on?LIVE_ICON:RESTART_ICON).replace(/width="20" height="20"/,`width="${w}" height="${w}"`);
+    b.setAttribute("aria-label",on?"Back to live":"From start"); b.title=on?"Back to live (B)":"From start: this programme from its beginning (B)"}
+  const kb=$("keyStart"); kb.setAttribute("aria-pressed",on); kb.disabled=!can; kb.textContent=on?"Go live":"From start"}
+$("startBtn").addEventListener("click",toggleStart);
+$("startFs").addEventListener("click",()=>{toggleStart(); wakeUI(false)});
+$("keyStart").addEventListener("click",toggleStart);
 $("radioFs").addEventListener("click",()=>{setRadio(!radio); wakeUI(false)});
 $("keyMute").addEventListener("click",()=>{if(!started) start(); if(MODE==="yt"&&player){toggleSound(); osdVolume()}});
 setRetro(retro); vfd();
@@ -879,14 +940,16 @@ autoFull();
 // takes touches, so YouTube's double-tap skip (±10 s) is gone. No double tap does anything: a quick second tap is
 // ignored, and the tap that turns the sound on doesn't also pause.
 let lastTap=0, fullAskedAt=0;
-$("tapCatch").addEventListener("click",()=>{const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800) return; lastTap=now; togglePause()});
+$("tapCatch").addEventListener("click",()=>{if(idleTap){idleTap=false; return} const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800) return; lastTap=now; togglePause()});
 // Full screen in the plain look: a click pauses or plays too, except the click that made it true full screen or turned
 // the sound on, and except while the channel strip is open (that click just closes it, so browsing doesn't pause)
 $("fsCatch").addEventListener("click",()=>{if($("screen").classList.contains("strip-on")){closeStrip(); return}
-  const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800||now-fullAskedAt<600) return; lastTap=now; togglePause()});
+  const now=Date.now(); if(now-lastTap<400||now-soundTapAt<800||now-fullAskedAt<600) return; lastTap=now;
+  if(matchMedia("(hover:none) and (pointer:coarse)").matches){wakeUI(true); return} // a phone or tablet has no mouse to bring up the channel strip: a tap does (by request), with the buttons, Pause among them
+  togglePause()});
 // Maximized: Pause/Play sits with the full-screen buttons, and in retro mode a tap on the tube pauses or plays (not the
 // click that turned on true full screen). The button follows the channel, however it was paused or played.
-const PAUSE_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>', PLAY_ICON='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M8 5.2v13.6L19 12z"/></svg>';
+const PAUSE_ICON='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.2 6.2v11.6M14.8 6.2v11.6"/></svg>', PLAY_ICON='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 6.4v11.2L18 12z"/></svg>'; // ultra minimal, as all the icons (by request)
 function playIcon(on){const b=$("pauseFs"); b.innerHTML=on?PAUSE_ICON:PLAY_ICON; b.setAttribute("aria-label",on?"Pause":"Play"); b.title=on?"Pause (K)":"Play (K)"}
 {const p0=remote.playing,p1=remote.paused; remote.playing=()=>{p0(); playIcon(true)}; remote.paused=()=>{p1(); playIcon(false)}}
 $("pauseFs").addEventListener("click",()=>{togglePause(); wakeUI(false)});
@@ -934,12 +997,17 @@ function waitSteady(){clearTimeout(steadyTimer); let since=0;
     if(since&&Date.now()-since>=STEADY) revealPanel(); else steadyTimer=setTimeout(look,200)};
   look()}
 function tick(){
-  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
-  const key=slotKey(ch,s);
+  if(startOver&&startOver.ch!==cur&&!soFor(startOver.ch)){startOver=null; if(typeof dialRefresh==="function") dialRefresh()} // away too long, or its programme is over: that channel is live again
+  const so=soOn()?startOver:null;
+  if(so&&MODE==="yt"&&player&&playingKey==="so|"+slotKey(CHANNELS[cur],so.s)&&Date.now()-so.at>2500) try{ // the player's own position sets the channel's moment
+    const st=player.getPlayerState(); if(player.getVideoData().video_id===so.s.v.id&&(st===YT.PlayerState.PLAYING||st===YT.PlayerState.PAUSED)) so.shift=tvNow()-(so.s.start+player.getCurrentTime()*1e3)}catch(e){}
+  if(so&&tvNow()-so.shift>so.s.end+90e3){goLive(); return} // a backstop: its end never came
+  const real=tvNow(), now=chNow(), ch=CHANNELS[cur], s=so?so.s:slotAt(ch,now), nx=so?upNext():slotAt(ch,s.end);
+  const key=(so?"so|":"")+slotKey(ch,s);
   if(ended&&!handing&&MODE==="yt"&&player){try{if(player.getPlayerState()===YT.PlayerState.PLAYING&&!atRealEnd()){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true; if(!muted) player.unMute()}}catch(e){}}
   let finishing=false; // the programme before is still on its last seconds (it started late): let it end first
   if(key!==playingKey&&playingKey&&!ended&&MODE==="yt"&&player&&now-playingEnd<30e3){try{finishing=player.getPlayerState()===YT.PlayerState.PLAYING&&player.getVideoData().video_id===playingId&&player.getDuration()-player.getCurrentTime()<=30}catch(e){}}
-  $("clock").innerHTML=fmt(now)+"<small>IST</small>"; osd();
+  $("clock").innerHTML=fmt(real)+"<small>IST</small>"; osd(); // the real time, also while a programme plays from its start
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey&&!finishing){
     if(playingKey&&reloadNow()){resumeMark(); location.reload(); return}
@@ -950,8 +1018,8 @@ function tick(){
       // A hidden page (another tab or app in front) keeps its player for the next programme: the browser lets a player
       // that is already playing carry on with sound, where a new one can be held back, silent, until the page is seen.
       // Only where there's hover: YouTube's touch chrome after loadVideoById (see recreatePlayer) is a no-hover thing.
-      if((keepPlayer||document.hidden&&HOVER)&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.floor((now-s.start)/1000)}); if(muted)player.mute(); else player.unMute()}
-      else recreatePlayer(s)}
+      if((keepPlayer||document.hidden&&HOVER)&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.max(0,Math.floor((now-s.start)/1000))}); if(muted)player.mute(); else player.unMute()}
+      else recreatePlayer(s,now)}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);
     const hh=h=>String(Math.floor(h)%24).padStart(2,"0")+":"+String(Math.round(h%1*60)).padStart(2,"0"); // 6.5 → 06:30
@@ -960,14 +1028,16 @@ function tick(){
       +(s.live?"":`<span class="chip">${esc(catLabel(s.part.cat))}${s.part.tag?" · "+esc(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
-    $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
+    if(!so) $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
     renderNowCard(); if(typeof dialRefresh==="function") dialRefresh(); // the record shows what is really on, after a skip too
   }
-  $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:`${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
+  if(so){const h=`Then live: ${esc(onAir(nx))}`; if($("next")._h!==h) $("next").innerHTML=$("next")._h=h} else $("next")._h="";
+  $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:`${so?"From the start · ":""}${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
   if(MODE==="yt"&&ended){const c=$("count");if(c){const r=Math.ceil((s.end-now)/1000);c.textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")}}
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=ytLink(s.v.id,Math.floor((now-s.start)/1000))}
   if(radio) renderRadio(); // the radio's face keeps up: its progress each second, the programme when it changes
+  startBtns();
 }
 
 // About section numbers come from the data, so they stay right as channels and creators change

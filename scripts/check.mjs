@@ -58,7 +58,7 @@ if (S) {
   const nums = CHANNELS.map(c => c.n);
   if (new Set(nums).size !== nums.length) fail("two channels share a number");
   if (nums.some((n, i) => n !== i + 1)) fail("channel numbers should run 1, 2, 3… in the order js/channels.js lists them");
-  const names = CHANNELS.flatMap(c => [chSlug(c), ...(c.oldSlugs || [])]); // ?ch=<name> links and /tv/<name>/ pages
+  const names = CHANNELS.flatMap(c => [chSlug(c), ...(c.oldSlugs || [])]); // ?ch=<name> links and /<name>/ pages
   if (new Set(names).size !== names.length) fail("two channels share an address name (or an old one): " + names.filter((n, i) => names.indexOf(n) !== i).join(", "));
 
   // 6. The schedule: every channel has a programme at every half hour for the next two days

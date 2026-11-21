@@ -2,84 +2,122 @@
 const LIVE = {
  "news": [
   {
-   "id": "QJvfWLArlrA",
-   "t": "Rajasthan Panchayat Election Result LIVE: rajasthan panchayat chunav men bijepi ne hari ma",
+   "id": "A3GW7OR4NGI",
+   "t": "CM Yogi Mother Passes Away LIVE Updates: man ki antim vidaee par siem yogi ka chhalka dard",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "eZ7g1JfBnzU",
-   "t": "Rajasthan Panchayat Election Results 2026 Hindi News LIVE: harte hi BJP ka bara ailan! | C",
+   "id": "vEiSpbfAmDA",
+   "t": "CM Yogi Adityanath Mother Passes Away News LIVE: siem yogi ki man ka antim sanskar | Harid",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "HI0IeNAqrVU",
-   "t": "Raja bhaiya ne kiya bara khulasa! LIVE | Dhirendra Shashtri |Bageshwar Dham| Kunda |Brijes",
+   "id": "tMhx9NIy2kY",
+   "t": "CM Yogi Adityanath Mother Funeral | CM Yogi's mother passes away | Yogi Mother Funeral",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "UP0fhKQZKlM",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma: yogi ne Youth ko kya samjhaya ? UP Election 2027 | India ",
+   "id": "3D-kdd-VTvA",
+   "t": "CM Yogi Mother Last Rites LIVE: antim saphar par siem yogi ki man | Haridwar | Latest News",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "a6T3EMbX6EU",
-   "t": "India Biggest Enemy Killed LIVE : lo..mara gaya bharat ka sabse bara dushman! sare aatanki",
+   "id": "BZbWJDPKXX4",
+   "t": "Muslims Attack On Couple In Mumbai LIVE: munbaee men premi jore ko 'jihadi gaing' ne gherk",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "Ql8h2sKjfGM",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 155 | PM Modi | Rah",
+   "id": "HNCdf32LrPE",
+   "t": "CM Yogi LIVE : panchtatv men vilin hueen CM yogi ki man | Savitri Devi Funeral | Haridwar",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "xDOTgj83Wr0",
-   "t": "Inside USS George Washington: NDTV On Board America's Warship",
+   "id": "qD6GkaU2lD0",
+   "t": "DD News LIVE Stream | News Update | Latest News | Top News | 24x7 News Channel",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "i6HoIZx__0k",
+   "t": "Amritpal Singh Arrives In Delhi LIVE | Punjab MP Back For Grandmother's Last Rites | Waris",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "Z9vTlC4Z09I",
-   "t": "Rajdeep Sardesai LIVE: Sam Pitroda Exclusive | Decoding Rahul Gandhi's Diaspora Outreach|B",
+   "id": "lPd3uoaR-gA",
+   "t": "LIVE: PM Narendra Modi Attends IIT Kharagpur Platinum Jubilee Celebrations | IIT Kharagpur",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "9dHKiYy39yA",
-   "t": "Saudi Under Attack LIVE: Houthis Strike Aramco Tower After Yemen Attack Kills Dozens | WIO",
+   "id": "rl8lnL9DMJ0",
+   "t": "PM Modi LIVE: PM Modi Attends Platinum Jubilee Celebrations of IIT Kharagpur In West Benga",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "VgQkbllgd3I",
-   "t": "Breaking News LIVE: Trump DROPS BOMBSHELL, IMMEDIATE Lockdown Declared Across America!",
+   "id": "Tp1mcqWmWDE",
+   "t": "LIVE: Trump UNLEASHES on Ilhan Omar! 'She Could Go to Jail' in Shocking Oval Office Remark",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "rAgik5wVwLE",
-   "t": "US LIVE: 'Just Like The President!' Thomas Massie Slams Trump In Fiery Epstein Files Speec",
+   "id": "l4FadTfXzxY",
+   "t": "Kash Patel's House Hearing No-Show | Republicans Also Slam Trump's FBI Chief | LIVE U.S Ne",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "e2TOEN4LlRg",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "id": "FrJ05kEdG8c",
+   "t": "PM Modi in Bihar Live: 'nitish setu' ka udghatan | PM Modi Bihar Visit | Nitish Setu | Pat",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "YBOI5K1gHlI",
-   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
+   "id": "zTYwevEcoac",
+   "t": "PM Modi Visit Bihar : PM modi ki bihar ko bari saugat! LIVE",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
+  }
+ ],
+ "newsroom": [
+  {
+   "id": "tOrBcGOvVZg",
+   "t": "LIVE: SpaceX Launches Classified Mission for US Space Force from California | India Global",
+   "src": "IGR",
+   "lang": "en"
+  },
+  {
+   "id": "Wtgis-Dgw3Y",
+   "t": "Iran Flexes Secret Arsenal, Taunts Trump; Putin's Drone Storm Batters Kyiv |BIG HEADLINES ",
+   "src": "Firstpost",
+   "lang": "en"
+  },
+  {
+   "id": "rl8lnL9DMJ0",
+   "t": "PM Modi LIVE: PM Modi Attends Platinum Jubilee Celebrations of IIT Kharagpur In West Benga",
+   "src": "WION",
+   "lang": "en"
+  },
+  {
+   "id": "yd1ShNDPYjg",
+   "t": "LIVE : 'SHE WON AMERICA'S HEART!' US Senate Pays Tribute To Fiona The Hippo",
+   "src": "Mint",
+   "lang": "en"
+  },
+  {
+   "id": "QB5BNdBFujE",
+   "t": "Bloomberg Business News Live",
+   "src": "Bloomberg",
+   "lang": "en"
   }
  ]
 };

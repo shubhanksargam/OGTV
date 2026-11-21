@@ -1,212 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.co.in/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://ogtv.co.in/tv/just-news/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/i5PRPnbLkIo/hqdefault.jpg</video:thumbnail_loc><video:title>Tehran To Target US Bases In Europe? Trump&apos;s Threat Sparks Escalation Fear</video:title>
-      <video:description>Tehran To Target US Bases In Europe? Trump&apos;s Threat Sparks Escalation Fear, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/i5PRPnbLkIo</video:player_loc><video:duration>3480</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
+  <url><loc>https://ogtv.co.in/just-news/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/1n95RUznfIU/hqdefault.jpg</video:thumbnail_loc><video:title>Lahori Zeera Love: Why are Indians Favouring Jeera Drinks Over Coca-Cola, Pepsi?</video:title>
+      <video:description>Lahori Zeera Love: Why are Indians Favouring Jeera Drinks Over Coca-Cola, Pepsi?, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/1n95RUznfIU</video:player_loc><video:duration>3480</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/khabar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/khabar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/IovGiwZMqwg/hqdefault.jpg</video:thumbnail_loc><video:title>Amerika men muslim aabadi 3 guna jyada hogi, Pew ki Research men kya samne aaya?</video:title>
       <video:description>Amerika men muslim aabadi 3 guna jyada hogi, Pew ki Research men kya samne aaya?, now on Khabar, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/IovGiwZMqwg</video:player_loc><video:duration>1080</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/magadh-times/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/magadh-times/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/aEb-a8oDs_Y/hqdefault.jpg</video:thumbnail_loc><video:title>Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…</video:title>
       <video:description>Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…, now on Magadh Times, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/aEb-a8oDs_Y</video:player_loc><video:duration>1620</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/newsroom/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/WWvtTzMp7yQ/hqdefault.jpg</video:thumbnail_loc><video:title>Is GTA VI the last hope of a dying industry?</video:title>
-      <video:description>Is GTA VI the last hope of a dying industry?, now on Newsroom, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/WWvtTzMp7yQ</video:player_loc><video:duration>1560</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
+  <url><loc>https://ogtv.co.in/newsroom/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/1n95RUznfIU/hqdefault.jpg</video:thumbnail_loc><video:title>Lahori Zeera Love: Why are Indians Favouring Jeera Drinks Over Coca-Cola, Pepsi?</video:title>
+      <video:description>Lahori Zeera Love: Why are Indians Favouring Jeera Drinks Over Coca-Cola, Pepsi?, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/1n95RUznfIU</video:player_loc><video:duration>3480</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/gyaan/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/gyaan/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/e70Sf4K_7C4/hqdefault.jpg</video:thumbnail_loc><video:title>BJP&apos;s South India Strategy</video:title>
       <video:description>BJP&apos;s South India Strategy, now on Gyaan, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/e70Sf4K_7C4</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/discover/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/discover/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/bOmxHFlshOI/hqdefault.jpg</video:thumbnail_loc><video:title>Following The Trail Of Bigfoot!</video:title>
       <video:description>Following The Trail Of Bigfoot!, now on Discover, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/bOmxHFlshOI</video:player_loc><video:duration>3480</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/curious/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/curious/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uXuQF_PPg5U/hqdefault.jpg</video:thumbnail_loc><video:title>Most people don’t understand randomness.</video:title>
       <video:description>Most people don’t understand randomness., now on Curious, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/uXuQF_PPg5U</video:player_loc><video:duration>2340</video:duration><video:publication_date>2026-11-18T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/india-in-data/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/india-in-data/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/3hFQyEpOrxQ/hqdefault.jpg</video:thumbnail_loc><video:title>The Move That Cleaned Up China’s Air</video:title>
       <video:description>The Move That Cleaned Up China’s Air, now on India in Data, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/3hFQyEpOrxQ</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-18T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/classroom/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/classroom/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/3O72uVrkUSg/hqdefault.jpg</video:thumbnail_loc><video:title>The Hindu newspaper Analysis · 19 Nov 2026</video:title>
       <video:description>The Hindu newspaper Analysis · 19 Nov 2026, now on Classroom, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/3O72uVrkUSg</video:player_loc><video:duration>4680</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/tech/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/tech/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/4p5iI_a1HTs/hqdefault.jpg</video:thumbnail_loc><video:title>The gaming business after GTA VI</video:title>
       <video:description>The gaming business after GTA VI, now on Tech, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/4p5iI_a1HTs</video:player_loc><video:duration>2640</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/paisa/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/paisa/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/WWvtTzMp7yQ/hqdefault.jpg</video:thumbnail_loc><video:title>Is GTA VI the last hope of a dying industry?</video:title>
       <video:description>Is GTA VI the last hope of a dying industry?, now on Paisa, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/WWvtTzMp7yQ</video:player_loc><video:duration>1560</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/baatcheet/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/baatcheet/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/8ETRd0mgWAI/hqdefault.jpg</video:thumbnail_loc><video:title>How Your Brain Can Make You Successful or Dangerous</video:title>
       <video:description>How Your Brain Can Make You Successful or Dangerous, now on Baatcheet, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/8ETRd0mgWAI</video:player_loc><video:duration>7020</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/niche/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/niche/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/9cPPdwBrsZ4/hqdefault.jpg</video:thumbnail_loc><video:title>Bharat ke janjatiy khel</video:title>
       <video:description>Bharat ke janjatiy khel, now on Niche, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/9cPPdwBrsZ4</video:player_loc><video:duration>1020</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/cricket/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/cricket/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/2ohgudYxw2w/hqdefault.jpg</video:thumbnail_loc><video:title>Sunil Gavaskar Talks About New Zealand’s DRS Decision|Extraaa Innings|India Tour of New…</video:title>
       <video:description>Sunil Gavaskar Talks About New Zealand’s DRS Decision|Extraaa Innings|India Tour of New…, now on Cricket, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/2ohgudYxw2w</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/khel/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/khel/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/UNb9bTE9854/hqdefault.jpg</video:thumbnail_loc><video:title>The most weird blitz game of Magnus Carlsen ever!</video:title>
       <video:description>The most weird blitz game of Magnus Carlsen ever!, now on Khel, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/UNb9bTE9854</video:player_loc><video:duration>600</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/cricket-classics/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/cricket-classics/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/2ohgudYxw2w/hqdefault.jpg</video:thumbnail_loc><video:title>Sunil Gavaskar Talks About New Zealand’s DRS Decision|Extraaa Innings|India Tour of New…</video:title>
       <video:description>Sunil Gavaskar Talks About New Zealand’s DRS Decision|Extraaa Innings|India Tour of New…, now on Cricket Classics, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/2ohgudYxw2w</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/football/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/football/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/mPPCvHDZ-OU/hqdefault.jpg</video:thumbnail_loc><video:title>Do Players Know The Meaning Of These Words?</video:title>
       <video:description>Do Players Know The Meaning Of These Words?, now on Football, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/mPPCvHDZ-OU</video:player_loc><video:duration>1080</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/international-sports/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/international-sports/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/UNb9bTE9854/hqdefault.jpg</video:thumbnail_loc><video:title>The most weird blitz game of Magnus Carlsen ever!</video:title>
       <video:description>The most weird blitz game of Magnus Carlsen ever!, now on International Sports, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/UNb9bTE9854</video:player_loc><video:duration>600</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/sehat/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/sehat/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Yi91c0PNqvA/hqdefault.jpg</video:thumbnail_loc><video:title>The ONE Squat Cue That Changes Everything</video:title>
       <video:description>The ONE Squat Cue That Changes Everything, now on Sehat, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/Yi91c0PNqvA</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/rasoi/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/rasoi/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/hEYrLmld6Zo/hqdefault.jpg</video:thumbnail_loc><video:title>Ganv ke banaee sarson vali arbi ke patto ki sabzi</video:title>
       <video:description>Ganv ke banaee sarson vali arbi ke patto ki sabzi, now on Rasoi, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/hEYrLmld6Zo</video:player_loc><video:duration>540</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/safar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/safar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/pZ1UvGzMYwE/hqdefault.jpg</video:thumbnail_loc><video:title>ENTRY In MONGOLIA with @NomadShubham After 7 Years</video:title>
       <video:description>ENTRY In MONGOLIA with @NomadShubham After 7 Years, now on Safar, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/pZ1UvGzMYwE</video:player_loc><video:duration>1140</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/bachche/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/bachche/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/bOmxHFlshOI/hqdefault.jpg</video:thumbnail_loc><video:title>Following The Trail Of Bigfoot!</video:title>
       <video:description>Following The Trail Of Bigfoot!, now on Bachche, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/bOmxHFlshOI</video:player_loc><video:duration>3480</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/aangan/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/7OAnVClhDys/hqdefault.jpg</video:thumbnail_loc><video:title>Devauthni ekadshi, tulsi vivah evan khatu shyam janmotsav vishesh bhajan</video:title>
-      <video:description>Devauthni ekadshi, tulsi vivah evan khatu shyam janmotsav vishesh bhajan, now on Aangan, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/7OAnVClhDys</video:player_loc><video:duration>4140</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
+  <url><loc>https://ogtv.co.in/aangan/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/HX5SRtOcKA4/hqdefault.jpg</video:thumbnail_loc><video:title>Aao Na, Gale Laga Lo Na</video:title>
+      <video:description>Aao Na, Gale Laga Lo Na, now on Aangan, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/HX5SRtOcKA4</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/comedy/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/comedy/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/tKvmcpAB1U4/hqdefault.jpg</video:thumbnail_loc><video:title>Trump Calls Putin &quot;My Friend&quot; in China, Elon Musk Says He&apos;s &quot;Not MAGA&quot; After Midterms:…</video:title>
       <video:description>Trump Calls Putin &quot;My Friend&quot; in China, Elon Musk Says He&apos;s &quot;Not MAGA&quot; After Midterms:…, now on Comedy, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/tKvmcpAB1U4</video:player_loc><video:duration>840</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/purvaiya/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/purvaiya/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/EzQlVW9Csnk/hqdefault.jpg</video:thumbnail_loc><video:title>Lalu Yadav Gopalganj Visit: gopalganj pahuncha lalu parivar, rohini ne nitish ko diya khula ophar</video:title>
       <video:description>Lalu Yadav Gopalganj Visit: gopalganj pahuncha lalu parivar, rohini ne nitish ko diya khula ophar, now on Purvaiya, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/EzQlVW9Csnk</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/fiction/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/fiction/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ECVIDpA7r7Y/hqdefault.jpg</video:thumbnail_loc><video:title>Broke Bachelors Ka Gaming Mission</video:title>
       <video:description>Broke Bachelors Ka Gaming Mission, now on Fiction, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/ECVIDpA7r7Y</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/retro-movies/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/retro-movies/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/ghD_DMjHtLI/hqdefault.jpg</video:thumbnail_loc><video:title>Samraat (1982) Hindi Movie</video:title>
       <video:description>Samraat (1982) Hindi Movie, now on Retro Movies, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/ghD_DMjHtLI</video:player_loc><video:duration>8640</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/classics/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/classics/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Qa5qrLzmzxo/hqdefault.jpg</video:thumbnail_loc><video:title>Jab ek aurat ne rajniti men utarkar bare-bare netaon ko hila diya! 💥👑 - Satta Full Movie 4K -</video:title>
       <video:description>Jab ek aurat ne rajniti men utarkar bare-bare netaon ko hila diya! 💥👑 - Satta Full Movie 4K -, now on Classics, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/Qa5qrLzmzxo</video:player_loc><video:duration>8940</video:duration><video:publication_date>2026-10-13T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/select/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/south-gems/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  </url>
+  <url><loc>https://ogtv.co.in/select/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/P9acqIy76Uw/hqdefault.jpg</video:thumbnail_loc><video:title>REAL BADMAN Karan Aujla</video:title>
       <video:description>REAL BADMAN Karan Aujla, now on Select, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/P9acqIy76Uw</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-12T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/desi-pop/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/desi-pop/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/R2qkBeglFO0/hqdefault.jpg</video:thumbnail_loc><video:title>Thodi Der - 8K Video</video:title>
       <video:description>Thodi Der - 8K Video, now on Desi Pop, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/R2qkBeglFO0</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-18T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/drive/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/drive/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/b6TaalRVi54/hqdefault.jpg</video:thumbnail_loc><video:title>Desmond Cheese - Midnight Haze</video:title>
       <video:description>Desmond Cheese - Midnight Haze, now on Drive, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/b6TaalRVi54</video:player_loc><video:duration>120</video:duration><video:publication_date>2026-10-30T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/vibe/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/vibe/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/JEShigOqYbc/hqdefault.jpg</video:thumbnail_loc><video:title>Sweetheart - 8K Video</video:title>
       <video:description>Sweetheart - 8K Video, now on Vibe, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/JEShigOqYbc</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-10-28T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/2010s-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/2010s-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/r8xqL2gbmvQ/hqdefault.jpg</video:thumbnail_loc><video:title>Besharmi Ki Height</video:title>
       <video:description>Besharmi Ki Height, now on 2010s Hits, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/r8xqL2gbmvQ</video:player_loc><video:duration>180</video:duration><video:publication_date>2021-08-26T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/2000s-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/2000s-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/UL-kQw3Fdac/hqdefault.jpg</video:thumbnail_loc><video:title>Akhiyan</video:title>
       <video:description>Akhiyan, now on 2000s Hits, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/UL-kQw3Fdac</video:player_loc><video:duration>180</video:duration><video:publication_date>2024-06-10T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/deccan-chargers/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/90s-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/BPn5BYls89Y/hqdefault.jpg</video:thumbnail_loc><video:title>Yeh Jo Teri Payalon Ki Chan Chan Hai - 8K</video:title>
+      <video:description>Yeh Jo Teri Payalon Ki Chan Chan Hai - 8K, now on 90s Hits, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/BPn5BYls89Y</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>
+  </url>
+  <url><loc>https://ogtv.co.in/deccan-chargers/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/gXOZJcYZC-E/hqdefault.jpg</video:thumbnail_loc><video:title>Cheen Dapak Dum Dum Video Song</video:title>
       <video:description>Cheen Dapak Dum Dum Video Song, now on Deccan Chargers, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/gXOZJcYZC-E</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-11-04T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/anthems/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/anthems/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/LHDrqgaGwzA/hqdefault.jpg</video:thumbnail_loc><video:title>OneRepublic - Let&apos;s Hurt Tonight (The Lost Video)</video:title>
       <video:description>OneRepublic - Let&apos;s Hurt Tonight (The Lost Video), now on Anthems, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/LHDrqgaGwzA</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-02T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/global-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/global-hits/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/M8fO5lQpfrc/hqdefault.jpg</video:thumbnail_loc><video:title>LISA - Leave With Me (Featured in Always Lalisa) (Official Music Video)</video:title>
       <video:description>LISA - Leave With Me (Featured in Always Lalisa) (Official Music Video), now on Global Hits, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/M8fO5lQpfrc</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-18T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/gym/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/gym/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/y2VdsXQPEVI/hqdefault.jpg</video:thumbnail_loc><video:title>Love Ghost - Filthy Hands (official music video)</video:title>
       <video:description>Love Ghost - Filthy Hands (official music video), now on Gym, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/y2VdsXQPEVI</video:player_loc><video:duration>180</video:duration><video:publication_date>2026-11-11T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/punjabi/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/punjabi/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/HQVBZfvsksE/hqdefault.jpg</video:thumbnail_loc><video:title>Hanju | Gippy Grewal | New Punjabi Songs 2026 | Latest Punjabi Songs 2026 | Speed Records</video:title>
       <video:description>Hanju | Gippy Grewal | New Punjabi Songs 2026 | Latest Punjabi Songs 2026 | Speed Records, now on Punjabi, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/HQVBZfvsksE</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/raag/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/raag/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/-eQEFtrOpNw/hqdefault.jpg</video:thumbnail_loc><video:title>Rama Rama - Rishab Rikhiram Sharma (Official Music Video)</video:title>
       <video:description>Rama Rama - Rishab Rikhiram Sharma (Official Music Video), now on Raag, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/-eQEFtrOpNw</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-11-03T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/sadabahar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/_GsA8dPze9Y/hqdefault.jpg</video:thumbnail_loc><video:title>Tu Maike Mat Jaiyo</video:title>
-      <video:description>Tu Maike Mat Jaiyo, now on Sadabahar, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/_GsA8dPze9Y</video:player_loc><video:duration>360</video:duration><video:publication_date>2026-11-19T00:00:00.000Z</video:publication_date></video:video>
+  <url><loc>https://ogtv.co.in/sadabahar/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/HX5SRtOcKA4/hqdefault.jpg</video:thumbnail_loc><video:title>Aao Na, Gale Laga Lo Na</video:title>
+      <video:description>Aao Na, Gale Laga Lo Na, now on Sadabahar, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/HX5SRtOcKA4</video:player_loc><video:duration>240</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
-  <url><loc>https://ogtv.co.in/tv/bhakti/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
+  <url><loc>https://ogtv.co.in/bhakti/</loc><lastmod>2026-11-21</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/7OAnVClhDys/hqdefault.jpg</video:thumbnail_loc><video:title>Devauthni ekadshi, tulsi vivah evan khatu shyam janmotsav vishesh bhajan</video:title>
       <video:description>Devauthni ekadshi, tulsi vivah evan khatu shyam janmotsav vishesh bhajan, now on Bhakti, a free always-on channel on OGTV.</video:description>
       <video:player_loc>https://www.youtube.com/embed/7OAnVClhDys</video:player_loc><video:duration>4140</video:duration><video:publication_date>2026-11-20T00:00:00.000Z</video:publication_date></video:video>

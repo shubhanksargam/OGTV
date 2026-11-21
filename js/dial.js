@@ -1,5 +1,5 @@
 /* ---------- The channel record (by request) ----------
-   Below the panel under the TV (what's on now) is a record, of which only the bottom segment shows: black vinyl with its grooves and
+   Above the panel under the TV (what's on now) is a record, of which only the bottom segment shows: black vinyl with its grooves and
    a gold rim, and every channel round its rim, all 360 degrees of it, each a small disc with the cover of what's on it
    now. The channel you're on sits at the bottom centre; its neighbours rise away along the rim on either side, smaller
    the further they are. Turning the record (drag or swipe across it, a trackpad's sideways scroll, or ← → once it has
@@ -24,7 +24,7 @@ dial.querySelector(".dial-record").replaceWith(cv);
 const tc=document.createElement("canvas"); tc.className="dial-record dial-tint"; tc.setAttribute("aria-hidden","true"); cv.after(tc);
 const TINT={News:"229,72,58",Knowledge:"63,184,168",Sports:"70,180,90",Lifestyle:"242,160,61",Entertainment:"79,124,240",Music:"163,92,240"};
 let geo=null, tintAt=null;
-dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><i class="dial-spin"></i><span>Tuning in</span></div>`);
+dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><span class="vinyl dial-spin"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><span>Tuning in</span></div>`);
 
 const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
   b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
@@ -67,7 +67,7 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
   const fade=g.createRadialGradient(cx,cy,Math.max(0,-cy-10),cx,cy,R); fade.addColorStop(0,"rgba(0,0,0,.25)"); fade.addColorStop(1,"rgba(0,0,0,1)");
   g.globalCompositeOperation="destination-in"; g.fillStyle=fade; g.fillRect(0,0,W,H); g.restore()}
 // The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
-function art(i){const s=slotAt(CHANNELS[i],tvNow()), it=items[i]; if(!s||it.id===s.v.id) return;
+function art(i){const s=onNow(i), it=items[i]; if(!s||it.id===s.v.id) return;
   it.id=s.v.id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(s.v.id)}/mqdefault.jpg`}
 function render(){const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   for(let i=0;i<N;i++){const it=items[i], d=wrapD(i-pos), a=d*STEP, ad=Math.abs(d), x=r*Math.sin(a);
@@ -84,10 +84,10 @@ function render(){const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   if(mid!==shown) showInfo(mid);
   drawTint()}
 // What's on the channel at the centre, as the full-screen strip shows it
-const infoKey=i=>{const s=slotAt(CHANNELS[i],tvNow()); return i+"|"+(s?s.v.id+s.start:"")+"|"+(i===cur)};
-function showInfo(i){shown=i; info._k=infoKey(i); const c=CHANNELS[i], now=tvNow(), s=slotAt(c,now); if(!s) return;
+const infoKey=i=>{const s=onNow(i); return i+"|"+(s?s.v.id+s.start:"")+"|"+(i===cur)+"|"+!!soFor(i)};
+function showInfo(i){shown=i; info._k=infoKey(i); const c=CHANNELS[i], now=chNow(i), s=onNow(i); if(!s) return;
   const pct=s.live?100:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
-  info.innerHTML=`<span class="di-k">${c.n} · ${esc(c.group||"")}${i===cur?" · <b>Watching</b>":""}</span>`
+  info.innerHTML=`<span class="di-k">${c.n} · ${esc(c.group||"")}${i===cur?(soOn()?" · <b>From the start</b>":" · <b>Watching</b>"):soFor(i)?" · From the start":""}</span>`
     +`<span class="di-name">${esc(c.name)}</span><span class="di-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>`
     +`<span class="di-meta"><span>${s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
     +(i===cur?"":`<button class="dial-watch" type="button" data-i="${i}">Watch</button>`)+`</span>`}
@@ -149,6 +149,6 @@ function nextChange(){clearTimeout(changeT); const now=tvNow(); let soon=now+60e
   for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&s.end>now&&s.end<soon) soon=s.end}
   changeT=setTimeout(()=>{dialRefresh(); nextChange()},soon-now+100)}
 nextChange();
-setInterval(()=>{if(busy||document.hidden) return; const s=slotAt(CHANNELS[at(pos)],tvNow()), b=info.querySelector(".di-bar i");
-  if(b&&s&&!s.live) b.style.width=Math.max(0,Math.min(100,(tvNow()-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
+setInterval(()=>{if(busy||document.hidden) return; const i=at(pos), s=onNow(i), now=chNow(i), b=info.querySelector(".di-bar i");
+  if(b&&s&&!s.live) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
 })();
