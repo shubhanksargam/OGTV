@@ -31,7 +31,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - Space and India explainers; General knowledge videos: [Gyaan](https://ogtv.co.in/gyaan/), channel 5.
 - Science videos and experiments: [Discover](https://ogtv.co.in/discover/), channel 6.
 - Science and maths explainers: [Curious](https://ogtv.co.in/curious/), channel 7.
-- Maps, charts and data stories about India: [India in Data](https://ogtv.co.in/india-in-data/), channel 8.
+- Maps, charts and data stories about India; Khan Sir's GS explainers; India's infrastructure: highways, bridges, metros and mega projects; Business case studies about India: [India in Data](https://ogtv.co.in/india-in-data/), channel 8.
 - UPSC lectures and current affairs; NPTEL, MIT and Stanford lectures; AI and data engineering lectures, including data engineering in Hindi: [Classroom](https://ogtv.co.in/classroom/), channel 9.
 - Gadget reviews and tech explainers; Car and bike reviews: [Tech](https://ogtv.co.in/tech/), channel 10.
 - The Daily Brief and Markets by Zerodha; Stock market and investing basics: [Paisa](https://ogtv.co.in/paisa/), channel 11.
@@ -118,7 +118,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - [5 · Gyaan](https://ogtv.co.in/gyaan/): Gyaan on OGTV: space, India & explainers, free and always on. Videos from Mohak Mangal, StudyIQ IAS, Think School and ISRO.
 - [6 · Discover](https://ogtv.co.in/discover/): Discover on OGTV: science, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
 - [7 · Curious](https://ogtv.co.in/curious/): Curious on OGTV: science & maths explainers, free and always on. Videos from Numberphile, minutephysics, CGP Grey and Steve Mould.
-- [8 · India in Data](https://ogtv.co.in/india-in-data/): India in Data on OGTV: maps, charts & stories, free and always on. Videos from India in Pixels, Abhi and Niyu and Nitish Rajput.
+- [8 · India in Data](https://ogtv.co.in/india-in-data/): India in Data on OGTV: maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School, free and always on. Videos from Khan Sir.
 - [9 · Classroom](https://ogtv.co.in/classroom/): Classroom on OGTV: data & AI engineering, UPSC & lectures, free and always on. Videos from NPTEL IIT Kharagpur, MIT OpenCourseWare, Stanford Online and NPTEL.
 - [10 · Tech](https://ogtv.co.in/tech/): Tech on OGTV: gadgets, explainers, cars & bikes, free and always on. Videos from Tech Burner, Beebom, C4ETech and Marques Brownlee.
 - [11 · Paisa](https://ogtv.co.in/paisa/): Paisa on OGTV: money: The Daily Brief, Markets by Zerodha & investing, free and always on. Videos from Ankur Warikoo, Zero1 by Zerodha and CA Rachana Ranade.

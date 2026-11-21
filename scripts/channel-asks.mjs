@@ -11,7 +11,7 @@ export default {
   gyaan: {verb: "watch", asks: ["space and India explainers", "general knowledge videos"]},
   vigyan: {verb: "watch", asks: ["science videos and experiments"]},
   curious: {verb: "watch", asks: ["science and maths explainers"]},
-  data: {verb: "watch", asks: ["maps, charts and data stories about India"]},
+  data: {verb: "watch", asks: ["maps, charts and data stories about India", "Khan Sir's GS explainers", "India's infrastructure: highways, bridges, metros and mega projects", "business case studies about India"]},
   classroom: {verb: "watch", asks: ["UPSC lectures and current affairs", "NPTEL, MIT and Stanford lectures", "AI and data engineering lectures, including data engineering in Hindi"]},
   tech: {verb: "watch", asks: ["gadget reviews and tech explainers", "car and bike reviews"]},
   paisa: {verb: "watch", asks: ["The Daily Brief and Markets by Zerodha", "stock market and investing basics"]},

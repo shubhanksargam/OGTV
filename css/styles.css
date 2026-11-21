@@ -934,3 +934,15 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .ch-faq details{border-top:1px solid var(--line);padding:8px 0}
 .ch-faq summary{cursor:pointer;font-weight:700;color:var(--ink)}
 .ch-faq details p{margin:6px 0 0}
+/* The retro set's keys in full screen: Mute and Help side by side, then From start and Exit full screen, a row each
+   (in the page's order From start sat between Mute and Help, leaving each alone on a half row) */
+.room:is(:fullscreen,.pseudo-fs) .key#keyMute{order:1}
+.room:is(:fullscreen,.pseudo-fs) .key#keyHelp{order:2}
+.room:is(:fullscreen,.pseudo-fs) .key#keyStart{order:3}
+.room:is(:fullscreen,.pseudo-fs) .key#keyFs{order:4}
+/* a phone, on its side or upright (the set then lies on its side): a short panel, so a little less space between things */
+@media (max-height:500px),(orientation:portrait) and (max-width:500px){
+  .room:is(:fullscreen,.pseudo-fs) .set.on .set-panel{gap:6px;padding-top:8px;padding-bottom:8px}
+  .room:is(:fullscreen,.pseudo-fs) .key{min-height:22px}
+  .room:is(:fullscreen,.pseudo-fs) .keys{gap:5px}
+}

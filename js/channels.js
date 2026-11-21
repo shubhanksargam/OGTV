@@ -1,6 +1,9 @@
 /* ---------- Channels and their rules. A rule = hours (IST) + what to select ---------- */
 // live: a group in js/live.js. While one of its streams is on air the channel shows it; otherwise its parts play.
 // group: the heading a channel sits under in the channel list
+// India in Data's day outside its two hours of the latest: Khan Sir and Life on Wheels a fixed share each, so they play
+// every day (by request), the other six creators the rest; their latest and most popular videos alike
+const DATA_MIX=[{src:"^Khan Sir$",share:0.15},{src:"^Life On Wheels$",share:0.15},{src:"^(India in Pixels|Nitish Rajput|Infra Talks|Breakdown|Think School|Aevy TV)$"}];
 const CHANNELS = [
   // ---- News ----
   {key:"livenews",n:1,group:"News",name:"Just News",oldSlugs:["live-news"],en:"24x7 news",live:"news",
@@ -70,7 +73,14 @@ const CHANNELS = [
   {key:"gyaan",n:5,group:"Knowledge",name:"Gyaan",en:"Space, India & explainers",parts:[{from:0,to:24,preferMin:15,cat:"gyaan",label:"Explainers, all day"}]},
   {key:"vigyan",n:6,group:"Knowledge",name:"Discover",oldSlugs:["vigyan"],en:"Science",parts:[{from:0,to:24,preferMin:20,cat:"vigyan",label:"Experiments & explainers"}]},
   {key:"curious",n:7,group:"Knowledge",name:"Curious",en:"Science & maths explainers",parts:[{from:0,to:24,preferMin:15,cat:"curious",label:"Explainers"}]},
-  {key:"data",n:8,group:"Knowledge",name:"India in Data",en:"Maps, charts & stories",parts:[{from:0,to:24,preferMin:15,cat:"data",label:"Data stories"}]},
+  // India in Data (approved list, 21 Nov 2026): every creator's latest and most popular videos; Khan Sir's and Life on
+  // Wheels' newest every day in an hour of their own, newest first (by request), and a fixed share of the rest of the day
+  {key:"data",n:8,group:"Knowledge",name:"India in Data",en:"Maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School",parts:[
+    {from:0,to:7,  cat:"data",preferMin:8,label:"Data stories",mix:DATA_MIX},
+    {from:7,to:8,  cat:"data",src:"^Khan Sir$",tag:"latest",newest:true,alt:"data",label:"Khan Sir: the latest"},
+    {from:8,to:19, cat:"data",preferMin:8,label:"Data stories",mix:DATA_MIX},
+    {from:19,to:20,cat:"data",src:"^Life On Wheels$",tag:"latest",newest:true,alt:"data",label:"Life on Wheels: the latest"},
+    {from:20,to:24,cat:"data",preferMin:8,label:"Data stories",mix:DATA_MIX}]},
   {key:"classroom",n:9,group:"Knowledge",name:"Classroom",en:"Data & AI engineering, UPSC & lectures",parts:[  // niche courses back to back, by request
     {from:0,to:2,  cat:"classroom",src:"NPTEL|MIT|Stanford",preferMin:25,alt:"classroom",label:"Lectures: NPTEL, MIT & Stanford"},
     {from:2,to:4,  cat:"classroom",src:"Karpathy",inOrder:true,alt:"classroom",label:"AI engineering: Karpathy's Zero to Hero, back to back"},
