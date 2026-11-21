@@ -2,14 +2,14 @@
 const LIVE = {
  "news": [
   {
-   "id": "hjch1YuKK1w",
-   "t": "Aaj Tak LIVE : Bangladesh Violence News | UP Chunav 2027 | PM Modi | CM Yogi | Hindi News",
+   "id": "kgYxOvY9N5s",
+   "t": "PM Modi LIVE Speech: bihar ko piem modi ki saugat, nitish setu ka kiya udghatan | Vaishali",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "T6-4EmaKMtA",
-   "t": "Bangladesh Lockdown News LIVE: humayun kabir ka phunk dala ghar, chal jagah-jagah bam!, ba",
+   "id": "j7k_Z6DOzVk",
+   "t": "Rajasthan Panchayat Election Result LIVE Updates: bijepi ka bara ailan! | Congress Victory",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -20,32 +20,32 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "AIAfblYuQZU",
-   "t": "CM Yogi Mother Death News LIVE - CM yogi ki man savitri devi ka antim sanskar | PM Modi | ",
+   "id": "qLxDJqRQW8U",
+   "t": "'Nitish Setu' Innauguration LIVE Updates: PM Modi ne kiya nitish setu ka udghatan",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "BZbWJDPKXX4",
-   "t": "Muslims Attack On Couple In Mumbai LIVE: munbaee men premi jore ko 'jihadi gaing' ne gherk",
+   "id": "Pg3bdhd1nGo",
+   "t": "World Breaking News LIVE: lo..dub gaee aadhi duniya sabse bare muslim desh men bhishan mau",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "HNCdf32LrPE",
-   "t": "CM Yogi LIVE : panchtatv men vilin hueen CM yogi ki man | Savitri Devi Funeral | Haridwar",
+   "id": "sKFBr45_BrM",
+   "t": "Goonj With Arpita Aarya Live: UP Election | Akhilesh | CM Yogi | Krishna Janmabhoomi | Mat",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "KJQ-uJgFIgo",
-   "t": "Mid Day Prime LIVE : PM Modi IIT Kharagpur ke 75ven Platinum Jubilee samaroh men hue shami",
+   "id": "CVf6jsCJGbw",
+   "t": "LIVE Rashtra Manch: videsh ki dharti... desh par hamla! | Rahul Gandhi | BJP | Congress | ",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "5fWerwmZ5os",
-   "t": "CM YOGI MOTHER'S FUNERAL LIVE: Yogi Adityanath Bids Final Farewell To Mother In Haridwar |",
+   "id": "bcDohWVkTqg",
+   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -68,22 +68,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "o0HyRoIuJ88",
-   "t": "LIVE: Democrats' 100-Day Agenda: $30 Billion Iran War Savings, But $4.1 Trillion Added To ",
+   "id": "i5kyWu57FP0",
+   "t": "Hakeem Jeffries Nominated As House Speaker Set To Become First Black Speaker In US History",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "-vOfhiuKP-s",
-   "t": "PM Modi Bihar Visit Live : patna pahunche piem modi sidhe LIVE | Nitish Setu Inauguration ",
+   "id": "yS5piUjda8g",
+   "t": "PM Modi in Bihar Live : bihar ki janta par saugaton ki barish | PM Modi Bihar Visit | Niti",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "xwqFBlv_pwU",
-   "t": "PM Modi Visit Bihar : PM modi ka bara ailan | LIVE | Nitish Kumar | Samrat Choudhary",
+   "id": "T1b7hgoLajo",
+   "t": "PM Modi Visit Bihar : PM modi ne di bihar ko kaee saugat... 'sushasan ka mishan' LIVE | Ni",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   },
@@ -96,8 +96,8 @@ const LIVE = {
  ],
  "newsroom": [
   {
-   "id": "nFjwwScVQmc",
-   "t": "The Palki Sharma Show LIVE: Houthis Strike Saudi Arabia | Anthropic’s Billion-Dollar IPO |",
+   "id": "MKBRbG0Er2U",
+   "t": "Donald Trump LIVE: Trump Warns Tech Giants Against Building Data Centers Outside US | IGR",
    "src": "IGR",
    "lang": "en"
   },
@@ -114,8 +114,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "vQ1c-a_Gzy4",
-   "t": "Nigel Farage LIVE: Farage's Brussels Bombshell! Reform UK Leader Challenges Burnham Over E",
+   "id": "cXImkkW82UM",
+   "t": "LIVE | Stay Or Flee Kyiv? Ukrainians Face Brutal Winter As Russian Strikes Trigger Blackou",
    "src": "Mint",
    "lang": "en"
   },
