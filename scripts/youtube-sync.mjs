@@ -42,19 +42,24 @@ async function api(method, path, body) {
 }
 async function all(path) { let out = [], page = ""; do { const j = await api("GET", path + (page ? "&pageToken=" + page : "")); out = out.concat(j.items || []); page = j.nextPageToken } while (page); return out }
 const mine = await all("playlists?part=snippet,status&mine=true&maxResults=50");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+// A playlist YouTube has only just made isn't found for a few seconds (404 playlistNotFound): wait and try again
+async function patient(fn, tries = 4) { for (let k = 1; ; k++) { try { return await fn() } catch (e) { if (e.reason !== "playlistNotFound" || k >= tries) throw e; await wait(4000 * k) } } }
 for (const p of plan) {
   if (writes >= BUDGET) break;
-  let pl = mine.find(x => x.snippet.title.startsWith(`OGTV ${p.c.n} · ${p.c.name}`) || x.snippet.title.startsWith(`OGTV · ${p.c.name}`));
-  if (!pl) { pl = await api("POST", "playlists?part=snippet,status", {snippet: {title: p.title, description: p.description, defaultLanguage: "en"}, status: {privacyStatus: "public"}}); writes++; console.log("created", p.title) }
-  else if (pl.snippet.title !== p.title || pl.snippet.description !== p.description) { await api("PUT", "playlists?part=snippet", {id: pl.id, snippet: {title: p.title, description: p.description, defaultLanguage: "en"}}); writes++ }
-  const items = await all(`playlistItems?part=snippet&playlistId=${pl.id}&maxResults=50`);
-  const have = new Set(items.map(i => i.snippet.resourceId.videoId)), want = new Set(p.videos.map(v => v.id));
-  let added = 0, removed = 0;
-  for (const v of p.videos) { if (writes >= BUDGET) break; if (have.has(v.id)) continue; // this week's first, so a playlist is never empty
-    try { await api("POST", "playlistItems?part=snippet", {snippet: {playlistId: pl.id, resourceId: {kind: "youtube#video", videoId: v.id}}}); added++ }
-    catch (e) { if (e.status === 403 && e.reason === "quotaExceeded") { writes = BUDGET; break } console.log("  skipped", v.id, e.message) } writes++ }
-  for (const i of items) { if (writes >= BUDGET) break; if (want.has(i.snippet.resourceId.videoId)) continue;
-    try { await api("DELETE", "playlistItems?id=" + i.id); removed++ } catch (e) { if (e.status === 403 && e.reason === "quotaExceeded") { writes = BUDGET; break } } writes++ }
-  console.log(`${p.c.name}: +${added} −${removed}`);
+  try { // one playlist's trouble never stops the others
+    let pl = mine.find(x => x.snippet.title.startsWith(`OGTV ${p.c.n} · ${p.c.name}`) || x.snippet.title.startsWith(`OGTV · ${p.c.name}`)), fresh = false;
+    if (!pl) { pl = await api("POST", "playlists?part=snippet,status", {snippet: {title: p.title, description: p.description, defaultLanguage: "en"}, status: {privacyStatus: "public"}}); writes++; fresh = true; console.log("created", p.title); await wait(5000) }
+    else if (pl.snippet.title !== p.title || pl.snippet.description !== p.description) { await api("PUT", "playlists?part=snippet", {id: pl.id, snippet: {title: p.title, description: p.description, defaultLanguage: "en"}}); writes++ }
+    const items = fresh ? [] : await patient(() => all(`playlistItems?part=snippet&playlistId=${pl.id}&maxResults=50`)); // just made: nothing in it yet
+    const have = new Set(items.map(i => i.snippet.resourceId.videoId)), want = new Set(p.videos.map(v => v.id));
+    let added = 0, removed = 0;
+    for (const v of p.videos) { if (writes >= BUDGET) break; if (have.has(v.id)) continue; // this week's first, so a playlist is never empty
+      try { await patient(() => api("POST", "playlistItems?part=snippet", {snippet: {playlistId: pl.id, resourceId: {kind: "youtube#video", videoId: v.id}}})); added++ }
+      catch (e) { if (e.status === 403 && e.reason === "quotaExceeded") { writes = BUDGET; break } console.log("  skipped", v.id, e.message) } writes++ }
+    for (const i of items) { if (writes >= BUDGET) break; if (want.has(i.snippet.resourceId.videoId)) continue;
+      try { await api("DELETE", "playlistItems?id=" + i.id); removed++ } catch (e) { if (e.status === 403 && e.reason === "quotaExceeded") { writes = BUDGET; break } } writes++ }
+    console.log(`${p.c.name}: +${added} −${removed}`);
+  } catch (e) { console.log(`${p.c.name}: not this time (${e.message}); tomorrow's run tries again`) }
 }
 console.log(`done: ${writes} writes (${writes * 50} of 10,000 units)${writes >= BUDGET ? "; the rest tomorrow" : ""}`);
