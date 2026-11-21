@@ -132,7 +132,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - [14 · Cricket](https://ogtv.co.in/cricket/): Cricket on OGTV: today's highlights from every major match, India & IPL first, free and always on. Videos from First Sports with Rupha Ramani (Firstpost).
 - [15 · Khel](https://ogtv.co.in/khel/): Khel on OGTV: Olympics, Asian Games & Indian sport, free and always on. Videos from ChessBase India and First Sports with Rupha Ramani (Firstpost).
 - [16 · Cricket Classics](https://ogtv.co.in/cricket-classics/): Cricket Classics on OGTV: world Cups & great finishes, free and always on. Videos from .
-- [17 · Football](https://ogtv.co.in/football/): Football on OGTV: this week's matches: Premier League, LaLiga, UCL, ISL & more, free and always on. Videos from UEFA, Indian Super League and Premier League.
+- [17 · Football](https://ogtv.co.in/football/): Football on OGTV: this week's matches: Premier League, LaLiga, UCL, ISL & more, free and always on. Videos from UEFA, Premier League and Indian Super League.
 - [18 · International Sports](https://ogtv.co.in/international-sports/): International Sports on OGTV: Olympics, F1, tennis, NBA & world sport, free and always on. Videos from ChessBase India, ATP Tour, WTA and FIBA Basketball.
 
 ### Lifestyle
