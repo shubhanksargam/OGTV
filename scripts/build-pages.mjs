@@ -268,6 +268,10 @@ const replaceBetween = (s, a, b, value) => {
 };
 
 let home = await read("index.html");
+// The scripts fetched from the start (<link rel="preload"> in the head) must name each script exactly as its <script> tag
+// does, stamp and all, or the browser downloads it twice: the refresh jobs restamp the tags, this keeps the links in step
+home = home.replace(/<link rel="preload" href="(js\/[\w-]+\.js)\?v=[^"]*" as="script"/g, (m, f) => {
+  const tag = home.match(new RegExp(`<script src="${f.replace(/\./g, "\\.")}(\\?v=[^"]*)"`)); return tag ? `<link rel="preload" href="${f}${tag[1]}" as="script"` : m });
 home = home.replace(/\s*<!-- uses-page:start[\s\S]*?<!-- uses-page:end -->\s*/g, "\n  "); // the home page's uses section: like the questions, only on the home page
 home = replaceBetween(home, "<!-- uses:start", "<!-- uses:end -->", usesHelp()); // the help's, on every page
 home = home.replace(/\s*<!-- faq:start[\s\S]*?<!-- faq:end -->\s*/g, "\n  "); // every old copy goes, whatever the line endings; channel pages never carry the questions
