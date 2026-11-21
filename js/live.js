@@ -44,9 +44,9 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "5hIkzkGMAKI",
-   "t": "PM Modi LIVE | PM Modi Lucknow | PM Modi Today | PM Modi On Gold Prices | NDTV LIVE",
-   "since": "2026-11-21T17:44:45Z",
+   "id": "bcDohWVkTqg",
+   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
+   "since": "2026-11-21T11:55:20Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -81,9 +81,9 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "s4v60ORxf-0",
-   "t": "Nitish Setu Inauguration Live : PM modi ne 'nitish setu' ka kiya uddhatan | PM Modi Bihar ",
-   "since": "2026-11-21T18:01:56Z",
+   "id": "P8SdQ6mXdnY",
+   "t": "PM Modi Bihar Visit Live: PM Modi LIVE | Nitish Setu Inauguration | Patna | Nitish Kumar |",
+   "since": "2026-11-21T15:42:43Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -125,9 +125,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "c2IXZxbMc2k",
-   "t": "Nigel Farage LIVE: Farage's Brussels Bombshell! Reform UK Leader Challenges Burnham Over E",
-   "since": "2026-11-21T17:06:14Z",
+   "id": "tDpEukxzoTQ",
+   "t": "Donald Trump LIVE | Trump ERUPTS Over Iran, Issues Blunt Warning as He Addresses China and",
+   "since": "2026-11-21T18:11:10Z",
    "src": "Mint",
    "lang": "en"
   },
