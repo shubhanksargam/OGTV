@@ -1,6 +1,6 @@
 # OGTV, in full
 
-> OGTV is a free TV-style app for India: 44 always-on channels built from official YouTube uploads, from live news, cricket and the Olympics to Bollywood, bhajans, KBC, Taarak Mehta and documentaries, in Hindi and English. Open it and something is already playing. https://ogtv.co.in/ · A shorter version: https://ogtv.co.in/llms.txt
+> OGTV is a free TV-style app for India: 44 always-on channels built from official YouTube uploads, from live news, cricket and the Olympics to Bollywood, bhajans, KBC, Taarak Mehta and documentaries, in Hindi and English. Open it and something is already playing. https://ogtv.co.in/ · A shorter version: https://ogtv.co.in/llms.txt · On YouTube: https://www.youtube.com/@ogtvindia
 
 Every channel below opens playing at its own address. Times are India Standard Time, for Saturday, 21 November.
 
