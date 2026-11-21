@@ -101,6 +101,9 @@ function wantDesc(id){if(DESC.has(id)) return; DESC.set(id,"");
 const ytChannel=s=>{const d=DESC.get(s.v.id); return d&&d.a||s.v.src}; // until the file arrives, the source's own name
 // The day the video went up on YouTube, at the top of its description (by request); pub is "YYYY-MM-DD" when known
 const postedOn=pub=>{const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(pub||""); return m?`Posted ${+m[3]} ${MONTHS[m[2]-1]} ${m[1]}`:""};
+// A live broadcast shows when it went on air instead (by request; js/live.js since, from scripts/fetch-live.mjs), in India time
+const liveSince=v=>{const t=Date.parse(v&&v.since||""); if(!t) return ""; const d=new Date(t+IST);
+  return `<div class="ldesc"><p class="ldpost">Live since ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}, ${fmt(t)}</p></div>`};
 function descHtml(id,pub){const d=DESC.get(id), open=gDescOpen.has(id), p=postedOn(pub||d&&d.p), when=p?`<p class="ldpost">${p}</p>`:""; // the song list's date, else the one in the description file
   if(!d||!d.d) return when;
   return when+`<p class="ldtext${open?" open":""}">${esc(d.d)}</p>`+(d.d.length>110||d.d.includes("\n")?`<button class="ldmore" data-d="${id}" aria-expanded="${open}">${open?"Less":"More"}</button>`:"")}
@@ -149,7 +152,7 @@ const gOpenNow=new Set(); // the day opens here apart from the guide's
 function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=soOn()?startOver.s:day[0]; if(!s) return;
   const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live&&!s.pending) wantDesc(id);
   redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
-  redraw($("nowYt"),s.live||s.pending?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
+  redraw($("nowYt"),s.pending?"":s.live?liveSince(s.v):`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
   redraw($("nowDay"),more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":"Rest of today · "+more}</button>`+(open?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:""):"")}
 function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
   const head=`<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
@@ -163,7 +166,7 @@ function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0
     +(s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>`)+`<small>${meta}</small>`
     +(on&&!s.live?`<i class="lbar"><i style="width:${((now-s.start)/(s.end-s.start)*100).toFixed(1)}%"></i></i>`:"")
     +(on&&!s.live&&MODE!=="fallback"?guideStart(c,i,s):"")
-    +(s.live?"":descDiv(s.v))+`</div></li>`
+    +(s.live?liveSince(s.v):descDiv(s.v))+`</div></li>`
     +(nx?`<li class="lnx"><time>${fmt(nx.start)}</time><div>${badge(nx)}${esc(onAir(nx))}${nx.live?"":` <span>· ${esc(nx.v.src)}</span>`}</div></li>`:"")+`</ol>`
     +(more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":(gAt?fmt(gAt)+" onwards":"Rest of today")+" · "+more}</button>`:"")
     +(open&&more?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:"")+`</article>`}

@@ -12,6 +12,9 @@ const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT
 
 // maxHours (a list entry's, e.g. Newsroom's): only a broadcast that started within that many hours counts, a live show,
 // not a channel's 24x7 stream
+// since: when the broadcast went on air (UTC), which the page shows as "Live since …" (the same for a broadcast all along,
+// so the file still changes only when what's live changes)
+const since = start => { const t = Date.parse(start || ""); return t ? {since: new Date(t).toISOString().slice(0, 19) + "Z"} : {} };
 const recent = (start, maxHours) => !maxHours || !!start && Date.now() - Date.parse(start) <= maxHours * 3600e3;
 async function liveNow(channelId, maxHours) {
   const r = await fetch("https://www.youtube.com/channel/" + channelId + "/live", {headers: HEADERS});
@@ -20,8 +23,13 @@ async function liveNow(channelId, maxHours) {
   if (!m) return null; // no player on the page: not live
   const p = JSON.parse(m[1]), v = p.videoDetails || {}, ps = p.playabilityStatus || {};
   if (!v.isLive || ps.status !== "OK" || ps.playableInEmbed !== true) return null;
-  if (!recent(p.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp, maxHours)) return null;
-  return {id: v.videoId, t: roman(v.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
+  let start = p.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp;
+  if (!start) { // the /live page can come without its details: the broadcast's own page has when it began
+    const w = await fetch("https://www.youtube.com/watch?v=" + v.videoId, {headers: HEADERS}).then(r => r.text()).catch(() => "");
+    start = (w.match(/"liveBroadcastDetails":\{[^}]*"startTimestamp":"([^"]+)"/) || [])[1];
+  }
+  if (!recent(start, maxHours)) return null;
+  return {id: v.videoId, t: roman(v.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90), ...since(start)};
 }
 
 // With a YouTube Data API key (GitHub's runners): YouTube shows datacenter machines a /live page without the broadcast,
@@ -40,7 +48,7 @@ async function liveViaApi(channelId, maxHours) {
   const live = vs.filter(v => v.snippet.liveBroadcastContent === "live" && v.snippet.channelId === channelId && v.status.embeddable && v.status.privacyStatus === "public" && recent(v.liveStreamingDetails?.actualStartTime, maxHours))
     .sort((a, b) => (+b.liveStreamingDetails?.concurrentViewers || 0) - (+a.liveStreamingDetails?.concurrentViewers || 0));
   if (!live.length) return null;
-  return {id: live[0].id, t: roman(live[0].snippet.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90)};
+  return {id: live[0].id, t: roman(live[0].snippet.title).replace(/[<>]/g, "").replace(/#\S+/g, "").replace(/\s+/g, " ").trim().slice(0, 90), ...since(live[0].liveStreamingDetails?.actualStartTime)};
 }
 const find = (id, maxHours) => KEY ? liveViaApi(id, maxHours).catch(e => (console.log(`API: ${e.message}; reading the page instead`), liveNow(id, maxHours))) : liveNow(id, maxHours);
 

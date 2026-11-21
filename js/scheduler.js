@@ -216,7 +216,7 @@ function liveStream(ch,t){
 // blocks follow it, as a channel's live hours (liveNow) do, so the guide shows live exactly when the channel is live
 const istHour=t=>Math.floor((t+IST)/HOUR)*HOUR-IST;
 function liveSlot(ch,L,t){const a=istHour(t); // shown in the guide as hour-long blocks
-  return {start:a,end:a+HOUR,live:true,part:LIVE_PART,ch,v:{id:L.id,t:L.t,src:L.src,lang:L.lang,cat:"live",min:60}}}
+  return {start:a,end:a+HOUR,live:true,part:LIVE_PART,ch,v:{id:L.id,t:L.t,src:L.src,lang:L.lang,cat:"live",min:60,since:L.since}}} // since: when it went on air
 
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
