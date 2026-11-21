@@ -47,3 +47,5 @@ jobs:
           git add -A && git commit -qm "Refresh feeds"
           git pull -q --rebase && git push -q
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+      - name: Tell search engines the pages changed (IndexNow, which Bing reads; ChatGPT search and Copilot answer from Bing)
+        run: sleep 120 && node scripts/indexnow.mjs || true   # after the deploy; never fails the run

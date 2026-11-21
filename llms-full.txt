@@ -1,0 +1,779 @@
+# OGTV, in full
+
+> OGTV is a free TV-style app for India: 44 always-on channels built from official YouTube uploads, from live news, cricket and the Olympics to Bollywood, bhajans, KBC, Taarak Mehta and documentaries, in Hindi and English. Open it and something is already playing. https://ogtv.co.in/ · A shorter version: https://ogtv.co.in/llms.txt
+
+Every channel below opens playing at its own address. Times are India Standard Time, for Saturday, 21 November.
+
+## Pages for each need
+
+- [Free TV for India, online](https://ogtv.co.in/for/indian-tv/): OGTV is free TV for India: 44 always-on channels in Hindi and English, from live news and cricket to Bollywood, bhajans and family shows. No sign-up.
+- [Radio for India, free and non-stop](https://ogtv.co.in/for/indian-radio/): OGTV's Radio mode is free radio for India: Bollywood, old Hindi songs, Punjabi, bhajans and live news, non-stop, and on Android with the screen off in Brave.
+- [News for India, live and in one place](https://ogtv.co.in/for/indian-news/): Free news for India on OGTV: live news 24x7, Hindi news and analysis, Bihar and Jharkhand news, and world affairs from WION, Firstpost and Palki Sharma.
+- [A daily feed for India, with nothing to scroll](https://ogtv.co.in/for/daily-feed/): OGTV is a daily feed for India that plays itself: today's news, cricket highlights, trending songs, markets and tech, new every day, with no feed to scroll.
+- [Music for India, non-stop and free](https://ogtv.co.in/for/indian-music/): Free Indian music, non-stop: Bollywood from the 60s to today, 90s hits, Punjabi, South Indian, classical, bhajans and global hits, as always-on channels.
+- [Songs for your mood](https://ogtv.co.in/for/songs-by-mood/): Pick a channel for your mood on OGTV: Select for favourites, Drive for road trips, Gym for workouts, Vibe for parties, Raag for calm, Sadabahar for nostalgia.
+- [Sports for India: today's highlights, always on](https://ogtv.co.in/for/indian-sports/): Free sports channels for India: today's cricket highlights (India and the IPL first), football from the Premier League to the ISL, the Olympics, F1 and tennis.
+- [Hindi movies, free and always on](https://ogtv.co.in/for/hindi-movies/): Free full Hindi movies on OGTV: classic Hindi films, great films from India and the world, and acclaimed South Indian films in Hindi, always on.
+- [Bhajans, all day](https://ogtv.co.in/for/bhajans/): Free bhajans non-stop on OGTV's Bhakti channel: the Mahamrityunjay Mantra at dawn, Hanuman Chalisa, devotional songs and the coming festival's bhajans.
+- [Kids' TV, free and always on](https://ogtv.co.in/for/kids/): Bachche on OGTV is a free, always-on children's channel for India: stories, rhymes and early science, with bedtime science and explainers for older kids.
+- [Learning that plays on its own](https://ogtv.co.in/for/learning/): Free learning channels for India: space, science and maths explainers, India in maps and data, UPSC and AI and data engineering lectures, money and podcasts.
+
+## 1 · Just News (News)
+
+https://ogtv.co.in/just-news/ · Just News on OGTV: 24x7 news, free and always on. Live streams from Aaj Tak, ABP News, NDTV India and India TV.
+
+Good for: Live news, 24x7; Live news streams from Indian news channels; News to keep on in the background.
+
+Live streams, around the clock.
+
+## 2 · Khabar (News)
+
+https://ogtv.co.in/khabar/ · Khabar on OGTV: Hindi news & analysis, free and always on. Videos from BBC News Hindi, Khabargaon, The Lallantop and Newslaundry Hindi.
+
+Good for: Hindi news and analysis; Hindi news online, all day.
+
+Today:
+- 00:00–06:00 Raat ki khabrein: reports & explainers: TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang; Joe biden ke kahne par netanyahu ne hamla tal diya tha? naee kitab men kya raz khule? Rajdoot…; Nuclear weapons par tranp, putin aur jinping ki dil hogi? Quad kyon phuss ho gaya? Rajdoo…
+- 06:00–07:00 6 am: BBC News Hindi: Shenzhen men Xi, Trump aur Putin ki miting ke kya hain mayne aur kyon is par thi bharat ki na…; Bangladesh men hinsa, BNP ke do netaon ki maut, Sheikh Hasina ki parti par kya aarop lage…; BBC Earth Video: sukhe ka mausam aur magarmachchh ka aisa jal
+- 07:00–08:00 7 am: The Lallantop: GTA kaise bana itna bara geming brand?GTA 6 Last Mission; Khalistani Gurpatwant Singh Pannun ki hatya ke mamle men Nikhil Gupta ko 235 mahine jel…; Josh ke dushman Sharad Kapoor ki madad ko aae Shah Rukh Khan, phon par kya bat huee?
+- 08:00–09:00 8 am: Khabargaon: GTA 6 Game ke khauphnak Scenes par baval! Dhruv Rathee ne kyon di Warning?; Rafale par sarkar vs FlightGlobal! aakhir sach kya hai?; TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang
+- 09:00–10:00 9 am: Newslaundry Hindi: Diwali milan ki bela aur patrakaron ke Gift men iPhone Duo; Yamuna ka sach dikhane ke lie aapka sath jaruri; Pradushan ka khilariyon ki trening aur sehat par kitna asar?
+- 10:00–12:00 Reports & explainers: Delhi Building Collapse: makan dhaha, 2 ki maut; 70-80 kiraye ke kamron ka chaunkane vala sach!; Kanpniyon ka munapha barha, naukriyan aur sailri nahin, PM Modi ne saval puchha, Rahul ne gher liy…; GTA 6: 13 hajar karor ka gem! aakhir itna krej kyon? GTA 6 Launch
+- 12:00–13:00 Noon: BBC News Hindi: Shenzhen men Xi, Trump aur Putin ki miting ke kya hain mayne aur kyon is par thi bharat ki na…; Bangladesh men hinsa, BNP ke do netaon ki maut, Sheikh Hasina ki parti par kya aarop lage…; BBC Earth Video: sukhe ka mausam aur magarmachchh ka aisa jal
+- 13:00–14:00 1 pm: The Lallantop: GTA kaise bana itna bara geming brand?GTA 6 Last Mission; Khalistani Gurpatwant Singh Pannun ki hatya ke mamle men Nikhil Gupta ko 235 mahine jel…; Josh ke dushman Sharad Kapoor ki madad ko aae Shah Rukh Khan, phon par kya bat huee?
+- 14:00–16:00 Afternoon explainers: Robert Pattinson: The Most Unexpected James Bond? Batman; Hitler ke dar se bana Atomic Bomb, Japan par kyon giraya America ne?; Delhi Building Collapse: makan dhaha, 2 ki maut; 70-80 kiraye ke kamron ka chaunkane vala sach!
+- 16:00–17:00 4 pm: Khabargaon: GTA 6 Game ke khauphnak Scenes par baval! Dhruv Rathee ne kyon di Warning?; Rafale par sarkar vs FlightGlobal! aakhir sach kya hai?; TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang
+- 17:00–18:00 5 pm: Newslaundry Hindi: Diwali milan ki bela aur patrakaron ke Gift men iPhone Duo; Yamuna ka sach dikhane ke lie aapka sath jaruri; Pradushan ka khilariyon ki trening aur sehat par kitna asar?
+- 18:00–19:00 6 pm: BBC News Hindi: Shenzhen men Xi, Trump aur Putin ki miting ke kya hain mayne aur kyon is par thi bharat ki na…; Bangladesh men hinsa, BNP ke do netaon ki maut, Sheikh Hasina ki parti par kya aarop lage…; BBC Earth Video: sukhe ka mausam aur magarmachchh ka aisa jal
+- 19:00–20:00 7 pm: Khabargaon: GTA 6 Game ke khauphnak Scenes par baval! Dhruv Rathee ne kyon di Warning?; Rafale par sarkar vs FlightGlobal! aakhir sach kya hai?; TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang
+- 20:00–21:00 8 pm: The Lallantop: GTA kaise bana itna bara geming brand?GTA 6 Last Mission; Khalistani Gurpatwant Singh Pannun ki hatya ke mamle men Nikhil Gupta ko 235 mahine jel…; Josh ke dushman Sharad Kapoor ki madad ko aae Shah Rukh Khan, phon par kya bat huee?
+- 21:00–22:00 Prime time, 9 pm: The Lallantop: GTA kaise bana itna bara geming brand?GTA 6 Last Mission; Khalistani Gurpatwant Singh Pannun ki hatya ke mamle men Nikhil Gupta ko 235 mahine jel…; Josh ke dushman Sharad Kapoor ki madad ko aae Shah Rukh Khan, phon par kya bat huee?
+- 22:00–23:00 10 pm: BBC News Hindi: Shenzhen men Xi, Trump aur Putin ki miting ke kya hain mayne aur kyon is par thi bharat ki na…; Bangladesh men hinsa, BNP ke do netaon ki maut, Sheikh Hasina ki parti par kya aarop lage…; BBC Earth Video: sukhe ka mausam aur magarmachchh ka aisa jal
+- 23:00–00:00 11 pm: Khabargaon & Newslaundry: GTA 6 Game ke khauphnak Scenes par baval! Dhruv Rathee ne kyon di Warning?; Rafale par sarkar vs FlightGlobal! aakhir sach kya hai?; TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang
+
+Playing this week: TVS Family Feud: pita vs beti ki 1.75 lakh karor ki virasat ki jang (Khabargaon); Joe biden ke kahne par netanyahu ne hamla tal diya tha? naee kitab men kya raz khule? Rajdoot… (Khabargaon); Nuclear weapons par tranp, putin aur jinping ki dil hogi? Quad kyon phuss ho gaya? Rajdoo… (Khabargaon); Amerika men muslim aabadi 3 guna jyada hogi, Pew ki Research men kya samne aaya? (Khabargaon); GTA 6: 13 hajar karor ka gem! aakhir itna krej kyon? GTA 6 Launch (Khabargaon); Hair Fall Solution: bal jhar rahe hain? Dermatologist Ankur Sarin ne bataee vajah aur ilaj I Fi… (BBC News Hindi); Delhi Building Collapse: makan dhaha, 2 ki maut; 70-80 kiraye ke kamron ka chaunkane vala sach! (Khabargaon); Iran ne Oil tankers aur Bahrain men US military radar system par kiya hamla, Qatar ne de da… (BBC News Hindi); Kanpniyon ka munapha barha, naukriyan aur sailri nahin, PM Modi ne saval puchha, Rahul ne gher liy… (The Lallantop); Tamacha! Rohingya Genocide par ICJ ka aitihasik phaisla, Myanmar ko doshi bataya, Israel ki bar… (The Lallantop); Ek taraf haeeraij, dusri taraf andhera... Noida ke is ilake ki kahani (Khabargaon); BBC Earth Video: sukhe ka mausam aur magarmachchh ka aisa jal (BBC News Hindi); Seaweed talashne vali in mahilaon ki nazar se dekhie kitna badal gaya samandar (BBC Hindi) (BBC News Hindi); Rajasthan: bina imarat kaise chal rahe ye sarkari skul? (BBC Hindi) (BBC News Hindi); GTA kaise bana itna bara geming brand?GTA 6 Last Mission (The Lallantop); Khalistani Gurpatwant Singh Pannun ki hatya ke mamle men Nikhil Gupta ko 235 mahine jel… (The Lallantop); Jab man ko niharte rahe Yogi, nidhan ke bad Video Viral (The Lallantop); Anthropic IPO ne Nasdaq listing men racha itihas, Elon Musk ki SpaceX ka rikord tuta| Du… (The Lallantop); GTA 6 Game ke khauphnak Scenes par baval! Dhruv Rathee ne kyon di Warning? (Khabargaon); Rafale par sarkar vs FlightGlobal! aakhir sach kya hai? (Khabargaon); Ek galti se bana tha ye Pool, ab aaya karoron ka IPO! Blue Lagoon IPO Explained (Khabargaon); Diwali milan ki bela aur patrakaron ke Gift men iPhone Duo (Newslaundry Hindi); Pradushan ka khilariyon ki trening aur sehat par kitna asar? (Newslaundry Hindi); Delhi ke pradushan men kam band, kamaee band; majduron ka saval- kab khatm hoga muaavje ka intjar? (Newslaundry Hindi).
+
+## 3 · Magadh Times (News)
+
+https://ogtv.co.in/magadh-times/ · Magadh Times on OGTV: bihar & Jharkhand news: bulletins, the day's & week's roundups, deep analysis, free and always on. Videos from News18 Bihar Jharkhand.
+
+Good for: Bihar and Jharkhand news; Bihar news roundups and analysis.
+
+Today:
+- 00:00–06:00 Raat: deep dives, Bihar's chief ministers, ground reports & elections: Tejashwi Yadav Mokama Rally men Anant Singh par kya bole, bahas chhir gaee? Dularchand Yadav; Bihar Election 2025 Result men Anant Singh, Reetlal Yadav jaise bahubliyon ka kya huaa?; Maithili Thakur Alinagar ko sitangar banaengi, virodhi Vinod Mishra kya banaenge? Bihar El…
+- 06:00–07:00 6 am: Subah ki khabar, the latest from Bihar & Jharkhand: PM Narendra Modi Inaugurated Nitish Setu: nitish setu par PM modi ne lahraya gamchha; CM On Nitish Setu :''karpuri thakur ke nam par vishvavidyalay sthapit karegi bihar sarkar''; Vijay Kumar Chaudhary On Nitish Setu : '’nitish setu' nam rakhne ka khule dil se svagat’’
+- 07:00–07:30 7 am: DD News Bihar bulletin: Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh…; Aaj Ki Taaja Khabar: aaj ki bari khabren
+- 07:30–08:00 7:30 am: Jharkhand DD News, Pradeshik Samachar: Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh…; Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…
+- 08:00–09:00 8 am: Analysis, what's moving Bihar & Jharkhand: Mining & Mineral Conclave: khanij sanpda se vikas tak...jharkhand ke bhavishy par prabhat khabar ke ma…; Ranchi: patrakaron ke sath anyay par BJP neta ka hallabol,pulis ko sunaee khari-khoti |Jharka…; Jharkhand Foundation Day par jayram mahto ki do tuk, bole sabhi aandolankariyon ko mile samman
+- 09:00–11:00 Latest updates, newest first: PM Narendra Modi Inaugurated Nitish Setu: nitish setu par PM modi ne lahraya gamchha; CM On Nitish Setu :''karpuri thakur ke nam par vishvavidyalay sthapit karegi bihar sarkar''; Vijay Kumar Chaudhary On Nitish Setu : '’nitish setu' nam rakhne ka khule dil se svagat’’
+- 11:00–12:00 11 am: Ground reports, ETV Bharat Bihar & Jharkhand: Waste To Energy Plant: patna ke ramchak bairiya men ek vishal vest-tu-enarji plant ho raha…; PM Modi Bihar Visit: endie sarkar ke ek sal pure hone par piem denge 3 lakh karor ki yojna…; Gumla News: banjar jamin par lahalhae chay ke bagan, ab bare paryatan kendr ke rup men viksit ha…
+- 12:00–13:00 Noon: Aaj ki badi khabren, the big stories so far: Aaj Ki Taaja Khabar: aaj ki bari khabren; Top News: phataphat dekhen aaj ki bari khabar · 21 Nov 2026; Jharkhand News : jharkhand ki bari khabren · 21 Nov 2026
+- 13:00–14:00 1 pm: DD bulletins from Patna & Ranchi: Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh…; Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…; Char baje aprahn pradeshik samachar 20 navanbar 2026
+- 14:00–16:00 Afternoon updates, newest first: PM Narendra Modi Inaugurated Nitish Setu: nitish setu par PM modi ne lahraya gamchha; CM On Nitish Setu :''karpuri thakur ke nam par vishvavidyalay sthapit karegi bihar sarkar''; Vijay Kumar Chaudhary On Nitish Setu : '’nitish setu' nam rakhne ka khule dil se svagat’’
+- 16:00–17:00 4 pm: Ground reports: Waste To Energy Plant: patna ke ramchak bairiya men ek vishal vest-tu-enarji plant ho raha…; PM Modi Bihar Visit: endie sarkar ke ek sal pure hone par piem denge 3 lakh karor ki yojna…; Gumla News: banjar jamin par lahalhae chay ke bagan, ab bare paryatan kendr ke rup men viksit ha…
+- 17:00–18:00 5 pm: Evening bulletins, DD News Bihar & Jharkhand DD News: Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh…; Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…; Char baje aprahn pradeshik samachar 20 navanbar 2026
+- 18:00–19:00 6 pm: Latest updates: PM Narendra Modi Inaugurated Nitish Setu: nitish setu par PM modi ne lahraya gamchha; CM On Nitish Setu :''karpuri thakur ke nam par vishvavidyalay sthapit karegi bihar sarkar''; Vijay Kumar Chaudhary On Nitish Setu : '’nitish setu' nam rakhne ka khule dil se svagat’’
+- 19:00–20:00 Weekend, 7 pm: Hafte ki khabar, the week's big stories: Aaj Ki Taaja Khabar:Anant Singh Daughter Wedding; Jharkhand News : jharkhand ki bari khabren · 20 Nov 2026; Aaj Ki Taaja Khabar: aaj ki bari khabren · 18 Nov 2026
+- 20:00–21:00 Weekend, 8 pm: the week's analysis: Mining & Mineral Conclave: khanij sanpda se vikas tak...jharkhand ke bhavishy par prabhat khabar ke ma…; Ranchi: patrakaron ke sath anyay par BJP neta ka hallabol,pulis ko sunaee khari-khoti |Jharka…; Jharkhand Foundation Day par jayram mahto ki do tuk, bole sabhi aandolankariyon ko mile samman
+- 21:00–22:00 9 pm: The latest bulletins: Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh…; Sham 7 baje pradeshik samachar 20 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. dd news…; Char baje aprahn pradeshik samachar 20 navanbar 2026
+- 22:00–23:00 10 pm: Aaj ki badi khabren, the day's roundup: Aaj Ki Taaja Khabar: aaj ki bari khabren; Top News: phataphat dekhen aaj ki bari khabar · 21 Nov 2026; Jharkhand News : jharkhand ki bari khabren · 21 Nov 2026
+- 23:00–00:00 11 pm: Deep dives on Bihar & Jharkhand: Tej Pratap ki rah par Rohini Acharya, Sanjay Yadav ki vajah se lalu parivar men do phar? Bihar; 23 sal se intzar, zamin milkar bhi til-til kar mar raha Bihar Landless Farmer; Employment, Tourism par Bihar Government ke IAS Officers ne kam ki bat bata di| LT Bihar…
+
+Playing this week: Tejashwi Yadav Mokama Rally men Anant Singh par kya bole, bahas chhir gaee? Dularchand Yadav (Khabargaon: Ground Report Bihar); ‘mariyam hembram se mariyam bibi?’ Barhait se Hemant Soren ke samne khare Gamaliel Hembrom… (The Lallantop: Jharkhand elections 2024); Chinti ki chatni, mahue ka achar, dhuska..thali dekhkar hi jharkhand aane ka man ho jaega. Jharkhand… (The Lallantop: Jharkhand elections 2024); Bihar men janta ka mud saph, bata diya abki bar hogi kiski jit? Ground Report (Khabargaon: Ground Report Bihar); Vijay Kumar Chaudhary On Nitish Setu : '’nitish setu' nam rakhne ka khule dil se svagat’’ (Zee Bihar Jharkhand); Dophar 1 baje pradeshik samachar 21 navanbar 2026 dekhie jharkhand ki bari khabren ek najar men. DD Jh… (Jharkhand DD News); Jharkhand Foundation Day par jayram mahto ki do tuk, bole sabhi aandolankariyon ko mile samman (Prabhat Khabar); PM Modi Visit Bihar : patna eyarport par dikhegi khas tasvir!nitish kumar karenge PM ka svagat (Zee Bihar Jharkhand); Jharkhand News: vikas ke davon ki khuli pol! buniyadi suvidhaon ke lie sangharsh kar raha birah… (ETV Bharat Jharkhand); Success Story: kad chhota, hausla bara.. 2 phit hait, samaj ke lie misal bani mina aur umesh ki ja… (ETV Bharat Bihar); Char baje aprahn pradeshik samachar 20 navanbar 2026 (Jharkhand DD News); 23 sal se intzar, zamin milkar bhi til-til kar mar raha Bihar Landless Farmer (The Lallantop: Hum Bihar ke Log); Bihar chunav se pahle berojgari bana bara mudda, yuvaon ne Vote nahin dene ka diya Ultimatum! (Khabargaon: Ground Report Bihar); Eent bhatthe pahuncha lallantop, kam karne valon ki zindgi dekh hairan, aise banti hai eenta. Lateha… (The Lallantop: Jharkhand elections 2024); Mano sanp sungh gaya..Jamtara Cyber Crime par log kya bole. Sita Soren vs Irfan Ansari. J… (The Lallantop: Jharkhand elections 2024); Surajbhan Singh Interview men Dularchand Yadav mardar, Anant Singh aur Mokama par kya bataya? (Khabargaon: Ground Report Bihar); Desh ke pahle dalit mukhyamantri ki kahani |Mukhyamantri E 9| Bhola Paswan Shastri (The Lallantop: Mukhyamantri, Bihar); Bihar men nakal ko dhvast karne vala iklauta mukhyamantri (The Lallantop: Mukhyamantri, Bihar); Jogi aur javani philm banvane vala bihar ka mukhyamantri| Mukhyamantri E 7 (The Lallantop: Mukhyamantri, Bihar); BPSC Protest: Bihar ke SDM besik inglish tak nahin likh pa rahe, chhatr ne aayog ko gher liya! (Khabargaon: Ground Report Bihar); 24 chunav hare neta se kya khatra? Lalu Yadav ka phon ka kissa| Assembly Election| Hum B… (The Lallantop: Hum Bihar ke Log); JSSC CGL ki bat aaee, larka tamatma gaya. Modi, Hemant Soren ke nam par samarthak bhire. Palamu… (The Lallantop: Jharkhand elections 2024); Kya hai Dhokra Art, Sohrai Painting? Jharkhand Tribal Arts dekh dil khush ho jaega. Santha… (The Lallantop: Jharkhand elections 2024); 'Thala for a reason' parosiyon ne sunae MS Dhoni Residence ke kuchh mazedar kisse. Ranch… (The Lallantop: Jharkhand elections 2024).
+
+## 4 · Newsroom (News)
+
+https://ogtv.co.in/newsroom/ · Newsroom on OGTV: vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days, free and always on.
+
+Good for: Vantage with Palki Sharma; World news from an Indian point of view: WION, Firstpost and India Global Review; The last two days of world affairs, with Mint and Bloomberg.
+
+Live streams, around the clock.
+
+## 5 · Gyaan (Knowledge)
+
+https://ogtv.co.in/gyaan/ · Gyaan on OGTV: history, space & explainers: Tarikh, HISTORY TV18, ISRO, Timeline, free and always on. Videos from Tarikh and Mohak Mangal.
+
+Good for: Indian history: Lallantop's Tarikh and HISTORY TV18; World history documentaries; Space and India explainers; General knowledge videos; The PMO's and the Indian Army's videos.
+
+Today:
+- 00:00–06:00 World history, after dark: The history of Georgia (the Country) Explained; The history of Romania explained in 10 minutes; Could Hitler's 'Wonder Weapons' Have Won The War For Germany?
+- 06:00–07:00 Space: ISRO: The full story of Chandrayaan-2; India's Human Space Flight Program by Shri Hanamantray Baluragi
+- 07:00–08:00 From the PMO and the Indian Army: PM Modi travels by metro to attend the centenary celebrations of Shri Ram College of Co…; Indian Army Para Commandos are elite fighters & force multiplier.; What happened when India's WorldSkills Competition 2026 winners met PM Modi
+- 08:00–13:00 Explainers & history: 500 Million Indians Out of Poverty? The World Bank Report Explained; ‘maut ka intzar nahin kar sakta…’ kahkar jan de di| India First IVF Case ke bad aisa kya huaa…; PM Narendra Modi replies to the debate on the Motion of thanks on the President's Addre…
+- 13:00–14:00 Tarikh: Indian history: Jaun Elia ko kisne tabah kiya? sher sune, ab sunie Story of Jaun Elia Sher; Bargad ke per se Dalal Street tak, India ke Stock Market ka pahla ‘Big Bull’ kaun tha ?; Nepoliyan, akbar mahan to Rajendra Chola kyon nahin? Cambodia, Thailand tak parakram|Tarikh
+- 14:00–18:00 Explainers & history: How the NEET 2026 Paper Was Actually Leaked; Jhopriyon ki rakh, ghaylon ki karah...Bihar ki Caste Armies ka vo khaufnak daur|Massacres In B…; OPERATION SINDOOR
+- 18:00–19:00 HISTORY TV18: This professor uses plastic waste to build better roads! S04E07 Story 4; This man could teach monkeys how to climb S2E04 Story 2; Special Operations India: 'Myanmar' English Episode
+- 19:00–20:00 Explainers & history: BJP's South India Strategy; Adolf Hitler ne jab 400 logon ka katl karaya, dahla degi yah kahani; address on assuming the appointment of the 31st Chief of the Army Staff
+- 20:00–21:00 Tarikh: the latest: Kya huaa jab Mughals ka samna Mathura ke Jats se huaa? kahani vir Gokula Jat ki| Tarikh; Mahatma Buddha ne pahla updesh dene ke lie Sarnath ko hi kyon chuna?Origin of Buddhism|Va…; Jab Guru Gorakhnath ke gusse se kanpa Nepal,Gorakhnath Math ki puri kahani|Gorakhpur| CM…
+- 21:00–00:00 World history: All China's dynasties explained in 7 minutes (5,000 years of Chinese history); Mesopotamia and the Fertile Crescent - A Short History; The Discovery Of The Earliest Human Ancestor
+
+Playing this week: The history of Georgia (the Country) Explained (Epimetheus); The Minoans: A Civilization of Bronze Age Crete (World History Encyclopedia); North East Frontier Railway: Tracks Of Transformation (HISTORY TV18); Kiranti Spirit - Third Battalion of Eleven Gorkha Rifles (Indian Army); All China's dynasties explained in 7 minutes (5,000 years of Chinese history) (Epimetheus); This man could teach monkeys how to climb S2E04 Story 2 (HISTORY TV18); The First Black Archaeologist: A Life of John Wesley Gilbert (World History Encyclopedia); Ancient Egyptian Religion: How were the Ancient Egyptian Gods and Goddesses Worshipped? (World History Encyclopedia); "The Warriors Spirit" (Indian Army); PM Modi holds a meeting with Russian President Vladimir Putin (PMO India); Shri Narendra Damodardas Modi takes oath as the 14th Prime Minister of India (PMO India); Multiple US Banks hit by nationwide outages (StudyIQ IAS); The History of Cyprus Explained in 10 minutes (Epimetheus); Next Level Bombay Chutney Grill Sandwich with Vicky Ratnani | (HISTORY TV18); N Word bolne par hatya kar di, saza bhi nahin huee, ye kaise bana abyusiv vard?Nibba Nibbi His… (Tarikh); Tamil Nadu men aary banam dravir aur hindi ke virodh se DMK ki rajniti kaise shuru huee? |Tarikh (Tarikh); Launch of SSLV-D1/EOS-02 Mission (ISRO); The Indian Temple That Broke Science (Solved?) (Mohak Mangal); Freshly made pizza at the push of a button? S04E08 Story 4 (HISTORY TV18); 9/11 Attack ki is Photo ko America ne duniya se kyon chhipa diya tha? Terrorist Attack| L… (Tarikh); Bhartiy vyapari ka basaya Cambodia kaise bana Thiland ka dushman? Preah Vihear Temple|Tarikh (Tarikh); THE MOTHER OF EMPERORS ROME TRIED TO FORGET (World History Encyclopedia); Forged in India's Apocalypse, History of the Rajputs (Summarized) (Epimetheus); Queen Elizabeth ke samne padne vala Earl of Oxford - kyon mila tha desh nikala? Shakespeare (Tarikh).
+
+## 6 · Discover (Knowledge)
+
+https://ogtv.co.in/discover/ · Discover on OGTV: science, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
+
+Good for: Science videos and experiments.
+
+Today:
+- 00:00–00:00 Experiments & explainers: These Rescue Dogs Were Waiting For Someone Like Tia; Alligator Encounters That Demanded Serious Courage; Turtleman Faces The Fastest Creatures In Kentucky
+
+Playing this week: These Rescue Dogs Were Waiting For Someone Like Tia (Animal Planet India); Strange Aquatic Encounters Lead Jeremy Wade Into Uncharted Waters (Animal Planet India); We Can Smell These Myths 👃 Mythbusters (Discovery); Beastly Cryptid Countdown (Discovery); What Do The Cameras Capture In The Dark? (Discovery Channel India); The Final Moments Of The Most Terrifying Investigations!|Ghost AdventureS12| Discovery… (Discovery Channel India); Navigating the Hammerhead Highway (Full Episode) (Nat Geo Animals); North Korea – Control, Silence, Survival – – Infinity Stream (Infinity Stream); Britain men Roman samrajy ki khoj (National Geographic India); Did These Lost Creatures Trick Every Single Expert? (Animal Planet India); Los enjilis men aavas sankat, karoron ke gharon se kuchh hi dur beghar log (DW Documentary Hindi); Inside CIA's Interrogation Program to Find 9/11 Planners (Full Episode) (National Geographic); Monsters of the Wild: Wonderfully Weird (Full Episode) (Nat Geo Animals); Kya kim jong un ki beti ban sakti hain uttar koriya ki agli shasak? (2/2) (DW Documentary Hindi); Maldives – The Ocean’s Jewel – – Infinity Stream (Infinity Stream); Josh Gates Takes On History's Biggest Mysteries! (Discovery Channel India); Forrest Galante Takes On Some Impossible Wildlife Searches (Animal Planet India); The Journey Behind Every Custom Chopper (discovery+ India); Rudolf shtainar ki duniya: shiksha, adhyatm aur nasl par bahas (DW Documentary Hindi); Lion Survival in African Wilderness (Full Episode) (Nat Geo Animals); Gaua Island par Hazen ka Extreme Plan (National Geographic India); Yemen – The Hidden Jewel of Arabia – – Infinity Stream (Infinity Stream); Khun,tare,chattanen aur aapdaen janie unke kaee prakar! (Binocs Ki Duniya); Strange Animal Relationships (Full Episode) (Nat Geo Animals).
+
+## 7 · Curious (Knowledge)
+
+https://ogtv.co.in/curious/ · Curious on OGTV: science & maths explainers, free and always on. Videos from Numberphile, minutephysics, CGP Grey and Steve Mould.
+
+Good for: Science and maths explainers.
+
+Today:
+- 00:00–00:00 Explainers: Do Chairs Exist?; GERMANY IS OVER; The Unlikely Rise of the Indian Space Program
+
+Playing this week: Do Chairs Exist? (Vsauce); Why does every mammal get 1 billion heartbeats in their life? (Veritasium); You've Never Seen a Real Photo (Steve Mould); Why Runways Have to Be Repainted (CGP Grey); How Many Holes Does a Human Have? (Vsauce); The Insane Engineering of the F-14 Tomcat (Real Engineering); What "Follow Your Dreams" Misses (3Blue1Brown); Everyone Was Wrong About Maximum Siphon Height (Steve Mould); Is spider web really stronger than steel? (Veritasium); Why chaotic hoses dance (Steve Mould); Amplifying Invisible Motion (Steve Mould); The Mountain Climbing Theorem - Numberphile (Numberphile); The Future of Veritasium (Veritasium); How are holograms possible? (3Blue1Brown); The last IMO problem AI could not solve (3Blue1Brown); The Insane Engineering of Europa Clipper (Real Engineering); This Material Sorts Itself (Steve Mould); The Immortal Kangaroo Sequence - Numberphile (Numberphile); Relativity is so much weirder than we thought... (Veritasium); There's never been a better time to go into math (3Blue1Brown); This Is What a Godlike Civilization Would Look Like (Kurzgesagt); We've Been Using The Wrong Science In Court For 50 years (Veritasium); Why Laplace transforms are so useful (3Blue1Brown); Selfie Waves (Vsauce).
+
+## 8 · India in Data (Knowledge)
+
+https://ogtv.co.in/india-in-data/ · India in Data on OGTV: maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School, free and always on. Videos from Khan Sir.
+
+Good for: Maps, charts and data stories about India; Khan Sir's GS explainers; India's infrastructure: highways, bridges, metros and mega projects; Business case studies about India.
+
+Today:
+- 00:00–07:00 Data stories: The Genius Marketing Strategy of Marlboro Cigarettes; Bhandara 14.8km By Pass Project Update || Wainganga River Bridge Project || Almost Comp…; The Ghazi Attack
+- 07:00–08:00 Khan Sir: the latest: Eeran ke pas parmanu bam aa gaya to kya hoga?; Kya BRICS milkar gira dega Dollar ki badshahat ?; Aakhir tren ki patri lohe ki nahin, stil ki kyon banti hai
+- 08:00–19:00 Data stories: Brainrot is Ruining You; Raipur Vizag Expressway Package-01 Update; 🇮🇳 Uttar Pradesh's $100 Billion Masterplan to Build a $1 Trillion Economy
+- 19:00–20:00 Life on Wheels: the latest: ₹4,988 karor ka Nitish Setu! 19.76 KM Ganga Bridge ka pura End-to-End Tour; Raipur–Dhanbad Economic Corridor; Jabalpur Outer Ring Road Update 2026
+- 20:00–00:00 Data stories: Jacqueline-Sukesh Scandal; Maruti Ciaz SmartPlay Infotainment System; 🇮🇳 This ₹20,000 Cr. Airport Will Change MUMBAI Forever !
+
+Playing this week: The Genius Marketing Strategy of Marlboro Cigarettes (Think School); Four Stroke Engine (Khan Sir); Bharat ke ₹32,000 karor dubenge? (Khan Sir); Punjab Khalistan Movement Explained (Nitish Rajput); Reality of India's R&AW (Nitish Rajput); Raipur–Dhanbad Economic Corridor (Life On Wheels); CDS Vipin Rawat (Khan Sir); $15 Trillion Money-Making Machine (Think School); 🇮🇳 Which State Became First Fully Developed STATE of INDIA ? DEVELOPMENT Race in INDI… (Infra Talks); why is Manike Mage Hithe so catchy? (India in Pixels); China’s Manufacturing Monopoly is BREAKING! (Breakdown); We went to Germany to see if it is really Dying (Aevy TV); The Problem With Harvard Admissions (Aevy TV); Why Indians Can’t Afford a House Anymore (Aevy TV); Bemetara Bypass Progress Update (Life On Wheels); The Tricks Brands Use to Deceive You, Explained (Aevy TV); How CONGRESS Won SOUTH by Using MODI's Fame AGAINST HIM (Aevy TV); 1971 India Pakistan War (Khan Sir); BIMARU State Becomes New IT Hub of India ! Overtaking South India? (Infra Talks); Why Is Iran at War? (Nitish Rajput); INDIA HAS A NEW UPI!! CBDC EXPLAINED - COMPLETE 0 TO 1 BREAKDOWN! (Breakdown); I Found a Shocking Report on What AI Did to Indian IT (Breakdown); India's Solar Boom Looks Great Until You Read the Numbers (Breakdown); Raipur-Visakhapatnam Expressway OD-05 Project Update || Koraput, Odisha || HG Infra || 4K (Life On Wheels).
+
+## 9 · Classroom (Knowledge)
+
+https://ogtv.co.in/classroom/ · Classroom on OGTV: data & AI engineering, UPSC & lectures, free and always on. Videos from NPTEL IIT Kharagpur, MIT OpenCourseWare, Stanford Online and NPTEL.
+
+Good for: UPSC lectures and current affairs; NPTEL, MIT and Stanford lectures; AI and data engineering lectures, including data engineering in Hindi.
+
+Today:
+- 00:00–02:00 Lectures: NPTEL, MIT & Stanford: Lecture 19 on Topic 13: Optical Properties; Lecture 12 on Topic 9: Glass Strengthening
+- 02:00–04:00 AI engineering: Karpathy's Zero to Hero, back to back: Let's build the GPT Tokenizer
+- 04:00–06:00 Data engineering in Hindi: Manish Kumar, Spark & Azure: Manage Files and Folder in Databricks using DBUtils; Databricks Job: End‑to‑End Demo with Loops, Parameters, Failure Handling & Alerts; Mastering Databricks Auto-loader for Near Real Time/Batch Data Processing
+- 06:00–07:00 UPSC current affairs: The Hindu analysis: The Hindu newspaper Analysis · 19 Nov 2026
+- 07:00–08:00 UPSC explainers: To The Point & Dr Vikas Divyakirti: 1971 India-Pak War to Operation Sindoor
+- 08:00–10:00 Data engineering: Darshil Parmar's projects, back to back: COVID 19 - Build End to End Data Engineering Project · 9 Dec 2021; COVID 19 - Build End to End Data Engineering Project · 16 Dec 2021; Zomato AI Data Analytics
+- 10:00–12:00 Data engineering: Zach Wilson's bootcamp, back to back: Data Modeling - Cumulative Dimensions, Struct and Array - Day 1 Lab - DataExpert.io Fre…; Data Modeling - Slowly Changing Dimensions and Idempotency - Day 2 Lecture - DataExpert…; Data Modeling - Building Slowly Changing Dimensions (SCDs) - Day 2 Lab- DataExpert.io F…
+- 12:00–13:00 UPSC current affairs: The Hindu newspaper Analysis · 19 Nov 2026
+- 13:00–15:00 AI in Hindi: CampusX's 100 days of deep learning: Types of Neural Networks; What is a Perceptron? Perceptron Vs Neuron; Perceptron Trick
+- 15:00–17:00 Data engineering in Hindi, back to back: Manage Files and Folder in Databricks using DBUtils; Databricks Job: End‑to‑End Demo with Loops, Parameters, Failure Handling & Alerts; Mastering Databricks Auto-loader for Near Real Time/Batch Data Processing
+- 17:00–19:00 Data engineering: Darshil Parmar, back to back: COVID 19 - Build End to End Data Engineering Project · 9 Dec 2021; COVID 19 - Build End to End Data Engineering Project · 16 Dec 2021; Zomato AI Data Analytics
+- 19:00–20:00 UPSC explainers: Dr Vikas Divyakirti's Concept Talk: Muslim Personal Law, Minority & Tribal laws and Uniform Civil Code: Part 2 I by Dr. Vik…
+- 20:00–22:00 AI engineering: Krish Naik on generative AI, RAG & agents: Mastering LLM Chatbots And RAG Evaluation Crash Course; Detailed Prerequisites To Start Learning Agentic AI With Free Videos And Materials; What is Agentic AI? Important For GEN AI In 2025
+- 22:00–00:00 Data Engineering Zoomcamp, back to back: DE Zoomcamp 2.2.8 - Orchestrate dbt Models with BigQuery in Kestra; Data Engineering Zoomcamp 2025 - Launch stream; Data Engineering Zoomcamp 2025 pre-course Q&A
+
+Playing this week: Lecture 19 on Topic 13: Optical Properties (MIT OpenCourseWare); Debugging Code in Databricks (DataBeli: PySpark & Databricks (Hindi)); COVID 19 - Build End to End Data Engineering Project · 16 Dec 2021 (Darshil Parmar: data engineering on the cloud); Perceptron Trick (CampusX: 100 days of deep learning (Hindi)); DE Zoomcamp 2.2.8 - Orchestrate dbt Models with BigQuery in Kestra (DataTalksClub: Data Engineering Zoomcamp); Job Run Cost Calculation in Databricks with SQL (DataBeli: PySpark & Databricks (Hindi)); Perceptron Loss Function (CampusX: 100 days of deep learning (Hindi)); Integrity, Honesty & Probity : Concept Talk by Dr. Vikas Divyakirti (Drishti IAS: Concept Talk, Dr Vikas Divyakirti); Data Ingestion From APIs to Warehouses and Data Lakes - Violetta Mishechkina (DataTalksClub: Data Engineering Zoomcamp); Netflix Data Analysis (Darshil Parmar: end-to-end data engineering projects); Ozone Layer Recovery (Drishti IAS: To The Point); DE Zoomcamp 2.2.3 - ETL Pipelines with Postgres in Kestra (DataTalksClub: Data Engineering Zoomcamp); Building makemore Part 2: MLP (Andrej Karpathy: Neural Networks, Zero to Hero); High Performance Spark in 1 hour - DataFrame, Dataset, UDFs, Caching - Week 3 Day 2 - D… (DataExpert (Zach Wilson): data engineering bootcamp); Lecture -16 : Isoparametric elements (NPTEL IIT Kharagpur); Twitter Data Pipeline using Airflow for Beginners (Darshil Parmar: end-to-end data engineering projects); PVTGs in India (Drishti IAS: To The Point); What is cloud computing? - Best video to begin with (Darshil Parmar: data engineering on the cloud); Build Data Pipeline Using Python Infrastructure As Code (IaC) (Darshil Parmar: data engineering on the cloud); How to Improve the Performance of a Neural Network (CampusX: 100 days of deep learning (Hindi)); Building makemore Part 5: Building a WaveNet (Andrej Karpathy: Neural Networks, Zero to Hero); Building Data Pipeline and Loading Data Into Redshift Using COPY Command (Darshil Parmar: data engineering on the cloud); Data Scaling in Neural Network (CampusX: 100 days of deep learning (Hindi)); End To End RAG Agent With DeepSeek-R1 And Ollama (Krish Naik: agentic AI).
+
+## 10 · Tech (Knowledge)
+
+https://ogtv.co.in/tech/ · Tech on OGTV: gadgets, explainers, cars & bikes, free and always on. Videos from Tech Burner, Beebom, C4ETech and Marques Brownlee.
+
+Good for: Gadget reviews and tech explainers; Car and bike reviews.
+
+Today:
+- 00:00–00:08 Machines & motors: New 2026 BMW i5 Drive Impressions
+- 00:08–04:00 Hi-tech explained: Why New York Just Built a 1930s Skyscraper; The £102BN Plan To Finish The World's Most Expensive Railway; The Rise and Fall of the Soviet Union's Workhorse Computer
+- 04:00–07:10 Late-night deep dives: Meta’s Legal Troubles Are Worse than You Think; I Played GTA VI at 60 FPS; The Man Who Refused to be a Trillionaire
+- 07:10–10:43 Morning tech news: iPhone Duo challenges microdramas; CP PLUS CarKam CP-F89B: 4K Dashcam With Rear Camera, GPS & Emergency Recording; CP PLUS EZ-S35T 3MP 4G PT Solar-Powered Camera: Remote Security Made Easy. No Wi-Fi. No…
+- 10:43–14:16 New gadgets: Oppo Find X9 Ultra Camera Review & Comparison Beyond the Hype; The Truth About the Bezelless Concept Phone; How Tech Companies Lie to You.
+- 14:16–16:38 How tech works: The World's Biggest Airport is About to Land; Is TSMC Coming to Texas?; High Bandwidth Flash Is Coming
+- 16:38–19:00 Cars & bikes: How We Won the Red Bull Soapbox Derby; BGauss C12 MaxR: Can One Scooter Belong To Three Different Worlds?; Lucid Responded To My Critical Review
+- 19:00–21:34 Prime-time gadgets: I Finally Found My Camera Phone.; Inside ₹15,000 Crore Ambani Tech !; The Dark Side of China’s Perfect Cars
+- 21:34–00:00 Machines & motors: New BMW M2 - More Powerful?; I Secretly Restored My Dad’s Car; Toyota's Hybrids on a Record Run From Sea to Snow!
+
+Playing this week: New 2026 BMW i5 Drive Impressions (Gagan Choudhary); AI Band Gets Caught Then Hires Real Humans (ColdFusion); This Diwali, Celebrate the Family That Feels Like Home (Gadgets 360); Oppo Find X9 Ultra Camera Review & Comparison Beyond the Hype (Geekyranjit); Unboxing the XGIMI Titan Noir MAX... (Unbox Therapy); Surprising Hyundai Launches in 2027 (MotorOctane); Jeep's New Hurricane 4 Engine Is Insane! (Engineering Explained); Why Everyone Stopped Buying GoPro (ColdFusion); How I wasted $52,000 in my Dream Smart Home (Mrwhosetheboss); Samsung Z Fold 8 Observations after few days of use (Geekyranjit); New McLaren F1: ‘90s Supercar Icon Reborn! (Top Gear); Every major economy is trying to ditch Visa & MasterCard (TechAltar); Brother DCP-T730DW Printer Review (Gadgets 360); iPhone 18 Pro Review: All About that Chip (Marques Brownlee); Dolby Atmos Explained Ft. Mahindra XUV 3XO, Thar Roxx & XEV 9e (PowerDrift); My F-You To Sam Altman (Linus Tech Tips); World's First Valorant Laptop ! (Tech Burner); Ford's $200 Million Nightmare (Fordlandia) (Donut); China is Now Mass-Producing Nuclear Reactors (The B1M); I tested phones that shouldn’t EXIST (Mrwhosetheboss); BRAVE Ark Tablet - Loaded & Premium Yet Affordable (Geekyranjit); Nothing Phone (4b) – The Budget Nothing We Wanted? (C4ETech); OLED iPad Mini is The Most Apple Product They've Ever Appled (Marques Brownlee); We bought the most Extreme Gaming Tech! (Mrwhosetheboss).
+
+## 11 · Paisa (Knowledge)
+
+https://ogtv.co.in/paisa/ · Paisa on OGTV: money: The Daily Brief, Markets by Zerodha & investing, free and always on. Videos from Ankur Warikoo, Zero1 by Zerodha and CA Rachana Ranade.
+
+Good for: The Daily Brief and Markets by Zerodha; Stock market and investing basics.
+
+Today:
+- 00:00–00:30 12 am: The Daily Brief: Is GTA VI the last hope of a dying industry?; The world only invents new energy when it's scared
+- 00:30–04:00 Prime time: The Daily Brief, back to back: Future of critical minerals; Why areca nut (supari) smuggling is such a big business; Why SEBI Fined Suzlon
+- 04:00–05:00 The Daily Brief: past episodes: The fiber optics powering India’s AI play; The next phase of India’s fuel-blending policy; India’s EV story needs more than subsidies
+- 05:00–06:00 Money & investing: Which Car Can You Afford on ₹50,000, ₹1 Lakh or ₹2 Lakh a Month?; I wish I knew this in my 20s and 30s; What do quarterly results of Private Banks tell us?
+- 06:00–08:36 Morning markets: Markets by Zerodha: IDBI Bank’s ₹53,000 crore deal - Can Fairfax pull it off?; Viceroy Research's huge allegations against Vedanta Ltd.; The new rules of paying for electricity
+- 08:36–11:38 The Daily Brief: past episodes: Reliance is still an oil business; Why SEBI Fined Suzlon; India's broadband mission
+- 11:38–12:00 Markets by Zerodha: Why Are Hotel Companies Expanding So Fast?; Why 5G still feels like 4G in India
+- 12:00–12:30 12 pm: The Daily Brief: Is GTA VI the last hope of a dying industry?; The world only invents new energy when it's scared
+- 12:30–13:48 Markets by Zerodha: Why TCS shares are Falling despite Profit Growth; Why Jindal’s are bidding for Thyssenkrupp Steel?; India Ka Next Big Tech Battle?
+- 13:48–15:32 Money & investing: I DOUBLED Indian Salaries Until It Got RIDICULOUS; Textile industry decoded; Are Index Funds Breaking the Stock Market?
+- 15:32–18:08 The Daily Brief: past episodes: Amazon goes for the quick commerce pie; India’s food inflation gets worrying; Fixing India’s drug regulation
+- 18:08–19:00 Markets by Zerodha: Everything You Need to Know India’s Compressed Biogas Sector; Yes Bank's Big Comeback?; Inside Tata Motors' €3.8 billion Iveco deal
+- 19:00–00:00 Prime time: The Daily Brief, back to back: The Indian states solar is forgetting; SEBI finds fraud in the Zee empire; India's data centres need more water
+
+Playing this week: Is GTA VI the last hope of a dying industry? (Markets by Zerodha: The Daily Brief); Why can't India copy this cancer drug? |Meghalaya doesn’t want uranium mining (Markets by Zerodha: The Daily Brief); Abid Hassan (@BeSensibull) on why we’re on the brink of an economic crisis (Markets by Zerodha: most watched); Why 5G still feels like 4G in India (Markets by Zerodha Hindi: The Daily Brief); My Complete Stock Selection Process Explained (Pranjal Kamra); Yes Bank's Big Comeback? (Markets by Zerodha: most watched); What does it mean to close a mine? (Markets by Zerodha: The Daily Brief); SEBI finds fraud in a data center in Goa (Markets by Zerodha: The Daily Brief); Why Vedanta split its business into 5 companies (Markets by Zerodha Hindi: The Daily Brief); The costs of hosting a FIFA World Cup (Markets by Zerodha: The Daily Brief); $133B in NRI deposits: good or bad for banks? (Markets by Zerodha: The Daily Brief); What’s driving Fertiliser Prices Out of Control? (Markets by Zerodha Hindi: The Daily Brief); What explains India’s net FDI uptick? (Markets by Zerodha: The Daily Brief); Weekly Tidbits: 3rd Oct (Markets by Zerodha); Coal India’s largest subsidiary goes public (Markets by Zerodha: The Daily Brief); India might change how it sells its airports (Markets by Zerodha: The Daily Brief); Why Bengaluru's Metro takes forever? (Markets by Zerodha: The Daily Brief); What’s driving India’s FMCG growth now? (Markets by Zerodha Hindi: The Daily Brief); Can You Spend ₹1,000 Without Paying a Billionaire? (Ankur Warikoo); Breaking down the Zepto IPO (Markets by Zerodha: The Daily Brief); Exide aur Amara Raja ka Tough Time shuru? (Markets by Zerodha Hindi: The Daily Brief); Why NSDL and CDSL posted such different Q2 results (Markets by Zerodha Hindi: The Daily Brief); Is Paytm back on track? (Markets by Zerodha Hindi: The Daily Brief); Polycab, Adani, UltraTech: Cable Industry showdown begins (Markets by Zerodha Hindi: The Daily Brief).
+
+## 12 · Baatcheet (Knowledge)
+
+https://ogtv.co.in/baatcheet/ · Baatcheet on OGTV: podcasts, free and always on. Videos from Raj Shamani, Prakhar Gupta, Dostcast and Shubhankar Mishra.
+
+Good for: Indian podcasts: Raj Shamani, BeerBiceps and Nikhil Kamath.
+
+Today:
+- 00:00–00:00 Long conversations: Why India Stopped Worshipping Its Greatest God (Indra’s Real Story); Childhood insecurities, love at first sight and Ranabaali; YOU CHOOSE NOW - Content Creation Masterclass 2026
+
+Playing this week: Why India Stopped Worshipping Its Greatest God (Indra’s Real Story) (Dostcast); YOU CHOOSE NOW - Content Creation Masterclass 2026 (BeerBiceps); Body Language Expert Reveals The Hidden Signs of Attraction (Prakhar Gupta); Brian Armstrong: Bitcoin, Banks & The New Rules Of Money (Nikhil Kamath); How India is TRAPPING China with Its STRATEGY? Geopolitics Explained (Prakhar Gupta); Top VC: One Trait That Separates Billionaire Founders From The Rest (Raj Shamani); Why People Ignore You: The Communication Mistakes You Need To Fix (Raj Shamani); How to Read People, Build Trust & Choose Better Friends (Raj Shamani); How To Pick Top Universities: Fees, Salaries & Jobs (Raj Shamani); TOP Harvard Scientist: These 5 Habits Are Aging You Faster (Raj Shamani); Ep 444: Suman Kumar is Perennially Pregnant With Stories (The Seen and the Unseen); The Donald Trump Interview (Dostcast); Ep 453: Srikrishna Ayyangar Examines Populism (The Seen and the Unseen); Sarthak Goswami EXPOSES the CJP, DESTROYS Journalism, and Fake Narrative (Dostcast); Boring Business Masterclass: ₹1000 Cr Opportunity (Raj Shamani); Kaal Bhairav Made This Documentary (BeerBiceps); Rashmika & Vijay (Shubhankar Mishra); Ep 435: A Primer on China (The Seen and the Unseen); Magnus Carlsen on Retirement, Gukesh, Elon Musk, AI, & India’s Future In World Champion… (Prakhar Gupta); Can technology actually reverse ageing? Ishaan Khanna on CRISPR and the future of ageing (Prakhar Gupta); Are Entrepreneurs Born or Made? (Nikhil Kamath); Australia Cricket Vlog - BeerBiceps (BeerBiceps); Abundance vs Scarcity: We Built 20 Brands With 30 Strangers In 90 Days (Nikhil Kamath); Howard Marks: AI, Debt vs Equity & The Next 40 Years Of Investing (Nikhil Kamath).
+
+## 13 · Niche (Knowledge)
+
+https://ogtv.co.in/niche/ · Niche on OGTV: rare, offbeat & curious, free and always on. Videos from Primitive Technology, Tom Scott, Half as Interesting and Wendover Productions.
+
+Good for: Rare, offbeat and curious videos.
+
+Today:
+- 00:00–04:00 From the archives: Melodious Magic of Bansuri with Jagdish Verman; Going On; MIFF HIGHLIGHTS 2022
+- 04:00–08:47 Offbeat world: Ved vyas ke pote (Ved Vyas Ke Pote) ved vyas ke vanshjon ka royalti vivad · 20 Nov 2026; The Sinking No One Could Explain; If I get this wrong, 50,000 people will hear it.
+- 08:47–12:30 Rare India: She Draws Outside Strangers’ Doors at 5:30 AM — Here’s Why; Melodious Magic of Bansuri with Jagdish Verman; Communal Harmony - I
+- 12:30–19:00 Curious finds: DAY 05 - 17th Mumbai International Film Festival 2022; Primitive Technology: Geopolymer Cement (Ash and Clay); Primitive Technology: Floating Pulley Blower Smelt
+- 19:00–00:00 From the archives: Ved vyas ke pote (Ved Vyas Ke Pote) ved vyas ke vanshjon ka royalti vivad · 6 Nov 2026; DAY 04 - 17th Mumbai International Film Festival 2022; DAY 03 - 17th Mumbai International Film Festival 2022
+
+Playing this week: Melodious Magic of Bansuri with Jagdish Verman (Prasar Bharati Archives); Bharat ke janjatiy khel (Prasar Bharati Archives); Chay bagan se kuchh patr (Chai Bagan Se Kuch Patra) (Prasar Bharati Archives); The Tube Map nearly looked very different (Map Men); What’s Really Cooking in IIT Bombay’s Hostel Mess? (The Better India); Aadarsh | aadarsh | Territorial Army Life | The Story of India's Citizen Soldiers | Ep. 13 (Prasar Bharati Archives); Where is America? (Map Men); These Are HAI’s Worst Mistakes of the Year (Half as Interesting); Ved vyas ke pote (Ved Vyas Ke Pote) ved vyas ke vanshjon ka royalti vivad · 6 Nov 2026 (Prasar Bharati Archives); Progress in Priceless (The Better India); What will the world look like in 250 million years? (Map Men); FLAG AND FREEDOM (Films Division); When I blow this whistle, a swimming pool appears. (Tom Scott); Internet Vs Ocean: the essential wires we never think about (Map Men); How Planes Fly Without Air Traffic Control (Half as Interesting); Why Almost Every Airline Has Sued This One Website (Half as Interesting); Why is North up? (Map Men); Nothing About the VVA-14 Makes Sense (Mustard); How Tonga Made $100 Million Renting Space in Outer Space (Half as Interesting); How Self Storage Consumed America (Wendover Productions); English counties explained (Map Men); Primitive Technology: Water Bellows smelt (Primitive Technology); Turns out building dry stone walls is difficult (Tom Scott); The longitude problem: history's deadliest riddle (Map Men).
+
+## 14 · Cricket (Sports)
+
+https://ogtv.co.in/cricket/ · Cricket on OGTV: today's highlights from every major match, India & IPL first, free and always on. Videos from First Sports with Rupha Ramani (Firstpost).
+
+Good for: Today's cricket highlights; India and IPL highlights.
+
+Today:
+- 00:00–02:52 Prime time: India & IPL, latest match highlights: David Miller Goes BIG! 💥 Incredible Sixes; Day 02 Highlights; Day 04 Highlights
+- 02:52–04:00 Around the world: today's matches: Full Match Highlights · 17 Sep 2026; 3rd T20I Highlights; Full Match Highlights · 16 Sep 2026
+- 04:00–05:00 Repeat: India & IPL, latest highlights: Nicholls' 113* Rescue The Kiwis |1st Test Day 1| English |Highlights |India Tour of New…; Day 03 Highlights; Day 02 Highlights
+- 05:00–06:55 Overnight: every major match, latest highlights: Day 02 Highlights; Day 01 Highlights; Nicholls' 113* Rescue The Kiwis |1st Test Day 1| English |Highlights |India Tour of New…
+- 06:55–08:47 Morning repeat: India & IPL: Day 05 Highlights; 3rd T20I Highlights; Full Match Highlights · 16 Sep 2026
+- 08:47–12:30 World cricket & leagues: the latest highlights: Day 03 Highlights; Day 02 Highlights; David Miller Goes BIG! 💥 Incredible Sixes
+- 12:30–14:21 Recent series highlights: David Miller Goes BIG! 💥 Incredible Sixes; Day 02 Highlights; Day 01 Highlights
+- 14:21–16:12 Afternoon repeat: India & IPL: Full Match Highlights · 17 Sep 2026; Day 05 Highlights; Day 02 Highlights
+- 16:12–19:00 World cricket today: Nicholls' 113* Rescue The Kiwis |1st Test Day 1| English |Highlights |India Tour of New…; Day 01 Highlights; 2nd T20I Highlights
+- 19:00–23:00 Prime time: India & IPL, latest match highlights: Day 02 Highlights; Nicholls' 113* Rescue The Kiwis |1st Test Day 1| English |Highlights |India Tour of New…; 2nd T20I Highlights
+- 23:00–23:30 11 pm: First Sports with Rupha Ramani, the day in cricket: The Madness Around GTA VI: Hamilton's Plans, McGregor's Day Off; Chasing the IPL Dream, PSL Owners Are Paying the Price; From Lewis Hamilton to Conor McGregor: Sport's GTA VI Obsession
+- 23:30–00:00 Prime time: India & IPL, latest match highlights: Day 05 Highlights; Full Match Highlights · 17 Sep 2026
+
+Playing this week: David Miller Goes BIG! 💥 Incredible Sixes (SA20: latest); Day 02 Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2026); Day 04 Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2026); Day 01 Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2026); Full Match Highlights · 16 Sep 2026 (Afghanistan Cricket Board: Afghanistan v India T20Is 2026); 2nd T20I Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2024); Full Match Highlights · 14 Sep 2026 (Afghanistan Cricket Board: Afghanistan v India T20Is 2026); Day 03 Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2026); Full Match Highlights · 17 Sep 2026 (Afghanistan Cricket Board: Afghanistan v India T20Is 2026); 3rd T20I Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2024); Nicholls' 113* Rescue The Kiwis |1st Test Day 1| English |Highlights |India Tour of New… (Sony Sports Network: latest); Day 05 Highlights (Sri Lanka Cricket: India tour of Sri Lanka 2026); The Madness Around GTA VI: Hamilton's Plans, McGregor's Day Off (First Sports with Rupha Ramani (Firstpost)); Chasing the IPL Dream, PSL Owners Are Paying the Price (First Sports with Rupha Ramani (Firstpost)); From Lewis Hamilton to Conor McGregor: Sport's GTA VI Obsession (First Sports with Rupha Ramani (Firstpost)).
+
+## 15 · Khel (Sports)
+
+https://ogtv.co.in/khel/ · Khel on OGTV: Olympics, Asian Games & Indian sport, free and always on. Videos from ChessBase India and First Sports with Rupha Ramani (Firstpost).
+
+Good for: Olympics and Asian Games videos; Indian sport.
+
+Today:
+- 00:00–02:52 Gukesh, Pragg & Neeraj: Nakamura cannot believe that he couldn't win this against Praggnanandhaa! Tata Steel In…; The very first game between Vishy Anand and Praggnanandhaa; Stars Ride: Olympic Javelin Thrower Curtis Thompson - Wanda Diamond League
+- 02:52–04:00 India's big moments: Pirates Run Circles Around U Mumba in Kolkata; Match Highlights: Bengal Warriorz vs Tamil Thalaivas; Top 5 tackles of Sunil Kumar (Jaipur Pink Panthers) in Season 9
+- 04:00–06:00 Olympic moments: Powerlifting; This young gymnast teaching her dad gymnastics will make your day! ❤️; Men's and Women's 4x400m Relay Finals
+- 06:00–08:47 Morning repeat: the latest in Indian sport: Chess World Reacts Strongly to Magnus Carlsen's Forfeit Against Bibisara; Rankireddy/Shetty vs Azriyn/Tan; Magnus skips the Classical, comes back and wins the Armageddon
+- 08:47–12:30 Olympics, Asian Games & Commonwealth Games: Dimes and Dunks on Day 6; Men's 10,000m Final; Underway at the Sir Chris Hoy Velodrome!
+- 12:30–15:17 Kabaddi, hockey, badminton & chess: When top Chess Grandmasters couldn't hold back tears; Nuno Pinto on Coaching F1 Drivers, Working with Fernando Alonso & Scouting Future Stars; India A vs Nepal · 21 Nov 2026
+- 15:17–19:00 India at the Games: Table Toppers Puneri Paltan Make Light Work of Gujarat Giants; Patna Pirates Secure Victory, Strengthening Their Position in Top 6; The very first game between Vishy Anand and Praggnanandhaa
+- 19:00–21:15 Prime time: the latest in Indian sport: Jaiswal's Sparkling 85 · 20 Nov 2026 · 20 Nov 2026 · 20 Nov 2026 · 20 Nov 2026; Wang Zhi Yi vs Putri Kusuma Wardani; Nicholls' 113* Rescue The Kiwis |1st Test Day 1| Kannada |Highlights |India Tour of New…
+- 21:15–22:22 Pro Kabaddi: the latest: Siddharth Desai's 6 point raid: How it happened; 11 years old and already rated 2351; Ajinkya Pawar's Super 10 Helps Thalaivas Win Against Patna Pirates
+- 22:22–23:00 Hockey & badminton: the latest: Man/Tee vs Rankireddy/Shetty; Loh Kean Yew vs Lakshya Sen · 20 Nov 2026; India vs Malaysia · 19 Nov 2026
+- 23:00–23:30 11 pm: First Sports with Rupha Ramani: The Madness Around GTA VI: Hamilton's Plans, McGregor's Day Off; Chasing the IPL Dream, PSL Owners Are Paying the Price; From Lewis Hamilton to Conor McGregor: Sport's GTA VI Obsession
+- 23:30–00:00 Gukesh, Pragg & Neeraj: What did Magnus Carlsen tell Pragg after the game?; The simple life of D. Gukesh
+
+Playing this week: Nakamura cannot believe that he couldn't win this against Praggnanandhaa! Tata Steel In… (ChessBase India: big games); Spain vs India (M) (FIH Pro League: India); Magnus skips the Classical, comes back and wins the Armageddon (ChessBase India: latest); Josh Kerr On Miracle Miles, World Records, Commonwealth Golds And Handling Pressure (Commonwealth Games); Nuno Pinto on Coaching F1 Drivers, Working with Fernando Alonso & Scouting Future Stars (FanCode); Patna Pirates Secure Victory, Strengthening Their Position in Top 6 (Star Sports: PKL 10 highlights); Wang Zhi Yi vs Putri Kusuma Wardani (BWF TV: latest); Chasing the IPL Dream, PSL Owners Are Paying the Price (First Sports with Rupha Ramani (Firstpost)); Athletics - Women's 100m - T42 Final - London 2012 Paralympic Games (Paralympic Games); World Record (World Athletics); India’s Top 3 Raider at Commonwealth Kabaddi Championship 2026 (Pro Kabaddi); Tamil Thalaivas' Storming Performance down U Mumba (Star Sports: PKL 10 highlights); Pawan's Telugu Titans Down Pardeep’s UP Yoddhas (Star Sports: PKL 10 highlights); Loh Kean Yew vs Kenta Nishimoto (BWF TV: latest); Match Highlights: Gujarat Giants vs Jaipur Pink Panthers (Pro Kabaddi: Season 11 highlights); Match Highlights: Jaipur Pink Panthers vs Patna Pirates (Pro Kabaddi: Season 11 highlights); Second chance for a Spanish swimmer after leaving the pool in tears (Olympics); Match Highlights: U Mumba vs Dabang Delhi K.C. (Pro Kabaddi: Season 11 highlights); Wang Zhi Yi vs Tomoka Miyazaki (BWF TV: latest); This is PEAK Vaishali (ChessBase India); Shubham & Maninder Inspire Bengal Warriors' Win Vs Tamil Thalaivas (Star Sports: PKL 10 highlights); IM Sagar Shah visits India's strongest GM tournament (ChessBase India); Match Highlights: UP Yoddhas vs Bengal Warriorz (Pro Kabaddi: Season 11 highlights); Is Magnus Carlsen working with Nodirbek Abdusattorov? (ChessBase India).
+
+## 16 · Cricket Classics (Sports)
+
+https://ogtv.co.in/cricket-classics/ · Cricket Classics on OGTV: world Cups & great finishes, free and always on. Videos from .
+
+Good for: Cricket World Cup classics and great finishes; Old cricket matches.
+
+Today:
+- 00:00–00:00 From the archive: Cricket World Cup Upsets: Kenya v West Indies; Jos Buttler and Alex Hales smash record partnership; Lendl Simmons and Andre Russell power West Indies into the Final
+
+Playing this week: Cricket World Cup Upsets: Kenya v West Indies (ICC: World Cup upsets); Lendl Simmons and Andre Russell power West Indies into the Final (ICC: Best of the T20 World Cup); Final Over Thrillers: Afghanistan v West Indies (ICC: Final over thrillers); Chaminda Vaas with one of the best first overs in Cricket World Cup history (ICC: Best of the Cricket World Cup); Martin Guptill hits the highest ICC Men's Cricket World Cup score (ICC: Best of the Cricket World Cup); Final Over Thrillers: Australia v West Indies (ICC: Final over thrillers); Every Rachin Ravindra six at Cricket World Cup 2023 (ICC: Best of World Cup 2023); An MS Dhoni masterclass against Zimbabwe (ICC: Best of the Cricket World Cup); Rizwan, Babar re-write history with an iconic partnership (ICC: Best of the T20 World Cup); Every Shubman Gill six at Cricket World Cup 2023 (ICC: Best of World Cup 2023); Final Over Thrillers: India v Bangladesh, T20WC 2016 (ICC: Best of the T20 World Cup); Lasith Malinga takes four wickets in four balls (ICC: Best of the Cricket World Cup); Stephen Fleming's century crushes Bangladesh (ICC: Best of the Cricket World Cup); Best wicket-keeping from Cricket World Cup 2023 (ICC: Best of World Cup 2023); Imran Tahir’s match-winning spell against Sri Lanka (ICC: Best of the Cricket World Cup); Final Over Thrillers: England v West Indies (ICC: Final over thrillers); Ian Bishop and Daren Ganga revisit Windies' maiden World Cup triumph (ICC: Best of the Cricket World Cup); Every Quinton de Kock six at Cricket World Cup 2023 (ICC: Best of World Cup 2023); Every Umar Gul wicket (ICC: Best of the T20 World Cup); Gautam Gambhir’s gritty 97 sets the stage for India’s World Cup triumph (ICC: Best of the Cricket World Cup); Final Over Thrillers: England v New Zealand (ICC: Final over thrillers); Unbelievable athleticism (ICC: Best of the T20 World Cup); Extra Cover (ICC: Best of World Cup 2023); Rilee Rossouw sizzles with quick-fire ton (ICC: Best of the T20 World Cup).
+
+## 17 · Football (Sports)
+
+https://ogtv.co.in/football/ · Football on OGTV: this week's matches: Premier League, LaLiga, UCL, ISL & more, free and always on. Videos from UEFA, Indian Super League and Premier League.
+
+Good for: Football highlights: Premier League, LaLiga, Champions League and ISL.
+
+Today:
+- 00:00–04:00 Prime time: this week's match highlights: Bengaluru FC vs Mumbai City FC · 21 Nov 2026; Fiji v Morocco; Mozambique v Denmark
+- 04:00–05:00 Repeat: the latest match highlights: EVERY Women's Champions League Goal From Matchday 5; Undercover at (ft. CK Vineeth). 🎥; 10-Minute Match
+- 05:00–06:55 Football through the night: Paris vs Barcelona!; REFCAM Atlético de Madrid vs FC Barcelona; EVERY Champions League Goal From Matchday 3
+- 06:55–08:47 Morning repeat: the latest matches: Fiji v Morocco; Egypt v Greece; Spain v China PR
+- 08:47–12:30 ISL, LaLiga, Bundesliga & FIFA: EVERY Women's Champions League Goal From Matchday 4!; Harry Kane & Alexia Putellas WIN The Ballon D'Or 2026 🏆; GOLES inolvidables de LARGA DISTANCIA 🚀
+- 12:30–14:21 Afternoon repeat: the latest matches: BEST Nations League Goals From Matchday 5 & 6! 😱; Côte d'Ivoire v Uzbekistan; Colombia's Epic Opener Against Uzbekistan
+- 14:21–19:00 Football, all afternoon: BEST Champions League Saves of the Season So Far; EVERY Women's Champions League Goal From Matchday 5; Europa League Goals of the Season So Far! 😱
+- 19:00–00:00 Prime time: this week's match highlights: Cuba v Tajikistan; East Bengal FC Were on FIRE! 🔥 Every Goal So Far; Côte d'Ivoire v Uzbekistan
+
+Playing this week: Bengaluru FC vs Mumbai City FC · 21 Nov 2026 (Sony Sports Network: latest); Mozambique v Denmark (FIFA: latest); Tom Bischof Showing Why He is the Future of Bayern and Germany 🔮✨ (Bundesliga: latest); Argentina v Australia (FIFA: latest); Ordenamos los 10 GOLES de LAMINE YAMAL en LALIGA EA SPORTS 2026/27 (LaLiga: latest); New Caledonia v Ecuador (FIFA: latest); Bengaluru FC Go TOP! 🔝 (Indian Super League: latest); TODOS LOS GOLES vistos desde la REFCAM (LaLiga: latest); Senegal v Croatia (FIFA: latest); Qatar v Panama (FIFA: latest); France v Haiti (FIFA: latest); Spain v China PR (FIFA: latest); BEST Nations League Goals From Matchday 5 & 6! 😱 (UEFA: latest); REFCAM Atlético de Madrid vs FC Barcelona (LaLiga); The BEST Goals From Matchweek 4 (UCL, UEL, UECL) (UEFA); EVERY Women's Champions League Goal From Matchday 4! (UEFA); Love and VAR (Indian Super League); ALL HIGHLIGHTS (Bundesliga); Oli McBurnie RATES Hull City's Best Premier League Goals (Premier League); Un día con un FUTBOLISTA PROFESIONAL: JAVI HERNÁNDEZ (LaLiga); Peak Firmino, Salah, Mane 😮‍💨 (Premier League); The BEST Goals From Matchweek 3 (UCL, UEL, UECL) (UEFA); Stamford Bridge Had NO IDEA What Was Coming... (Premier League); EVERY Kylian Mbappé Champions League Goal! (UEFA).
+
+## 18 · International Sports (Sports)
+
+https://ogtv.co.in/international-sports/ · International Sports on OGTV: Olympics, F1, tennis, NBA & world sport, free and always on. Videos from ChessBase India, ATP Tour, WTA and FIBA Basketball.
+
+Good for: F1, tennis and NBA highlights; World sport.
+
+Today:
+- 00:00–00:24 Race night: the latest from F1 & MotoGP: Alex Marquez sets the pace in the last 5 minutes of MotoGP Practice; What We Learned on Friday; Ai Ogura: "I'm Not Ice Like Everybody Thinks" 🥶
+- 00:24–02:12 International fixtures: NBA, NHL, rugby & basketball: AJ Dybantsa SHINED in his first NBA Preseason! ⭐️; Cole Caufield's 15 Overtime Winners; Netherlands 🇳🇱 v Slovakia 🇸🇰
+- 02:12–04:00 Late-night tennis: Jasmine Paolini vs. Anhelina Kalinina; Iva Jovic vs. Jasmine Paolini; Paula Badosa vs. Carol Young Suh Lee
+- 04:00–05:20 Olympic classics: Malaysia's Pocket Rocket Azizulhasni Awang Signs Off With A Gold Medal! 🇲🇾🥇; Raja Randhir Singh: The Heart and Soul of Asian Sports; Powerlifting
+- 05:20–07:00 Golf, cycling & swimming: PGA Tour Highlights · 1 Nov 2026; How Hubert Kos Builds His Backstroke; PGA Tour Highlights · 31 Oct 2026
+- 07:00–10:00 Tennis: ATP, WTA & the Grand Slams: Day 1 in Ningbo featuring Eala, Fernandez, Cirstea, and more; Coco Gauff vs. Jessica Pegula; Alex de Minaur vs Karen Khachanov Highlights
+- 10:00–13:00 Repeat: this week in world sport: Final Moments THRILLER; Wild vs. Flames; Sabres vs. Capitals
+- 13:00–16:00 F1 & MotoGP: Daniel Ricciardo Reacts To Iconic & Hilarious Career Moments; Drivers Look Ahead To Race Weekend · 23 Oct 2026; Qualifying Highlights · 10 Oct 2026
+- 16:00–19:00 Olympics & world athletics: Men's javelin F41; Powerlifting; Swimming · 15 Sep 2016
+- 19:00–22:36 Prime time: this week in world sport: Qualifying Highlights · 21 Nov 2026; MAGIC AT NETS; Anthony Davis TAKES OVER with 36 PTS & 11 REB
+- 22:36–00:00 Race night: the latest from F1 & MotoGP: A Closer Look At All The Upgrades In Las Vegas; Qualifying Highlights · 21 Nov 2026; Extended Highlights · 18 Nov 2026
+
+Playing this week: Alex Marquez sets the pace in the last 5 minutes of MotoGP Practice (MotoGP: latest); Pierre-Hugues Herbert vs Taylor Fritz Highlights (ATP Tour); Current Short Course World Records set at the Swimming World Cup (World Aquatics); Arthur Fils vs Rafael Jodar Highlights (ATP Tour); The Evolution Of F1 Timekeeping (Formula 1); Men's High Jump Final (Olympics); FP3 Highlights · 21 Nov 2026 (Formula 1: latest); 2026 Season Review with Jessica Pegula (WTA); Alcaraz, Shelton, Zverev and more pay tribute to Gael Monfils (ATP Tour); The Best Game Ever? Andy Murray v Roger Federer (2015, Semi-Final) (Wimbledon); Behind The Tyres: Toprak Razgatlioglu's MotoGP rookie season! 🏍️ (MotoGP); PGA Tour Highlights · 20 Nov 2026 (PGA Tour: latest); Emmanuel Eseme On Winning Gold For Cameroon, His 100m Record And Making History! 🇨🇲 (Commonwealth Games); Talia Gibson vs. Ashlyn Krueger (WTA); ONBOARD: Jorge Martin's heroic P11 to P3 comeback 🦾 (MotoGP); Men's 100m Final (World Athletics); Jordan Spieth highlights that get increasingly more RIDICULOUS! (PGA Tour); Frances Tiafoe vs Flavio Cobolli Highlights (ATP Tour: latest); Jan-Lennard Struff vs Tallon Griekspoor Highlights (ATP Tour); WTA Foundation and UNICEF Rally Tennis Fans for Women’s Health (WTA); Philippines Go UNDEFEATED to Win the Asia Cup! 🇵🇭 (FIBA Basketball); Egor Kornev's stunning swim (World Aquatics); Men's 4x100m Relay Final (World Athletics); Arthur Fery vs Lorenzo Musetti Highlights (ATP Tour).
+
+## 19 · Sehat (Lifestyle)
+
+https://ogtv.co.in/sehat/ · Sehat on OGTV: sports fitness, army & Soviet-style training, yoga & FitTuber, free and always on. Videos from Fit Tuber and Fit Tuber Hindi.
+
+Good for: Home workouts, yoga and fitness training; Army and sports fitness training; FitTuber's health and diet tips.
+
+Today:
+- 00:00–04:00 Wind-down yoga: The Practice That Makes Your Body Feel Clear Again; Full Body Yoga for Teens; Traditional Hatha Surya Namaskar Step by Step for Beginners
+- 04:00–05:40 Late-night stretch: This 8 Minute Workout Hits Every Muscle Without Any Equipment; 8 Minutes to Undo Full Body Stiffness and Feel Human Again; Up Every Hour at Night? Do This Before Bed
+- 05:40–06:55 Morning yoga: 25 Min Morning Yoga Flow; Get Out of Your Head and Feel Better in Your Body; 30 Min Full Body Yoga Flow
+- 06:55–08:47 Army training: morning PT: 15 Minute Full-Body Military Calisthenics Workout; How to prepare for 1600 meter running in just 1 month; How to Count Macros (The Simplest Guide You’ll Ever Watch)
+- 08:47–10:38 Sports fitness: train like an athlete: Stop Treating Shoulder Pain Wrong (Do This Instead); 📈INCREASE Bowling Performance with this Effective 5 Stretch Daily Routine!!!; Run Stronger, Run Faster
+- 10:38–11:34 FitTuber: health & diet, the latest: Burhapa pas bhi nahin aaega – 30 din tak bas ye khao; 5 zabardast Patanjali Products zarur TRY kare in 2026 (NOT SPONSORED); Pet saph karke sare rog mitane ki shakti hai is upay men ! subah ye jarur karen - Clear Stomach
+- 11:34–12:30 Quick workouts: We Found The Culprit; Chest Day + Back To Routine; 0% Sperm Count - DARK TRUTH REALITY
+- 12:30–13:25 Walk & move: Dumbbell Vs Tubing For Seniors; Low impact, beginner, fat burning, home cardio workout. ALL standing!; 5 Exercises for Lower Body Strength
+- 13:25–17:08 Sports fitness: speed, strength & mobility: 🔋How badminton athletes train🏸; The Hard Work behind the Beauty! ✨💦; The Truth About Knee Valgus
+- 17:08–18:04 Army training: evening drills: 10 MIN ABS & CORE WORKOUT; The Rain-Soaked Finish: Tough Ruck Marathon With 45 LB; 15-Minute Military Calisthenics Upper Body Strength Workout
+- 18:04–19:00 Evening workouts: One Year Later, I’m Finally Ready; Chest Day + New Gym; Chest Day + Ganesh Chaturthi
+- 19:00–21:15 Fitness explained: Exercise Scientists Critique Fitness Influencer Workouts; How to Reverse Your Liver Damage? (Early Signs & 3 Best Herbs); Best Home Ab Workout // Just 10 Min // 6 PACK GUARANTEED!
+- 21:15–23:30 Soviet-style training: kettlebells & weightlifting: Kettlebell Weight Chain; The SNATCH: Rules & Mistakes / A.TOROKHTIY; Pavel Tsatsouline: The Secret Weapon of Endurance Athletes, Part 2
+- 23:30–00:00 Wind-down yoga: 20 Min Full Body Yoga; Yoga for Sciatica & Back Pain Relief
+
+Playing this week: The Practice That Makes Your Body Feel Clear Again (Breathe and Flow); Feel Incredible in Your Body Again in Just 7 Minutes (Breathe and Flow); Patellar Tendonitis Knee Pain? Do THIS Instead of Stretching! (Squat University); Dumbbell Vs Tubing For Seniors (SilverSneakers); Maximizing Running Fitness: Cycling and Swimming for Injury Recovery (The Run Experience); Best Home Ab Workout // Just 10 Min // 6 PACK GUARANTEED! (ATHLEAN-X); Mastering the Dumbbell Press (StrongFirst); Give Me 8 Minutes and I Make You Feel Loose, Calm, and Better in Your Body (Breathe and Flow); Cricket Home Workout (12 Mins) (Fitness for Cricket); 20 Min Feel-Good Country Music Workout (Improved Health); I Haven't Tweaked My Back Since Doing This (Squat University); The Hardstyle Pistol Squat - Using counterbalance (StrongFirst); This Practice Will Expose How Strong Your Core Really Is (Breathe and Flow); 10 Cricket BALL STRIKING Exercises (Fitness for Cricket); ARMY Agniveer 1600 Meter Trial Running 5 Min men Complete kaise kare (Berhampur Physical Academy); Manniy mukhyamantri pujy yogi aadityanath ji ki pujya matashri savitri devi ji ki anty… (Swami Ramdev); CUTS - Fat Shredding Full Week Workout (Guru Mann Fitness); 8 Tips To Build Strong and Healthy Feet (Backed by Science) (Squat University); 10 Min Stress Relief Morning Meditation Routine (Follow Along) (Yoga with Amit); Low impact beginners kick boxing workout (Body Project); Pain today strength tomorrow (Berhampur Physical Academy); I did 492 pushups a day for YEARS (here's why I stopped) (Hybrid Calisthenics); 7 Amazing Exercises No One Does (ALL S TIER) (Jeff Nippard); Last Day in Pune (Saket Gokhale).
+
+## 20 · Rasoi (Lifestyle)
+
+https://ogtv.co.in/rasoi/ · Rasoi on OGTV: cooking, free and always on. Videos from Kabita's Kitchen, Nisha Madhulika, Sanjeev Kapoor Khazana and Hebbars Kitchen Hindi.
+
+Good for: Indian recipes and cooking videos.
+
+Today:
+- 00:00–00:00 Recipes, all day: 5 Breakfast Recipes In 10 Minutes; Phrench phraij resipi 🍟 McDonald's jaise Crispy French Fries ke khas tips; Supar Badam Milk kaise banae - trak valo ka sikret badam shek almond milk shake recipe Coo…
+
+Playing this week: 5 Breakfast Recipes In 10 Minutes (Sanjeev Kapoor Khazana); Ukriche modak banane ki Easy resipi - Steam Modak - Ukadiche Rice Flour Modakam Recipe Co… (CookingShooking Hindi); 90 dinon ke lie pyaj ki chatni banaen aur stor karen (Hebbars Kitchen Hindi); Lauki ki barphi-sopht & lachchhedar lauki ki lauj,no phud kalar (Nisha Madhulika); Sopht,spanji va shuddh panir ke asli svad ke liye ghar par banayen 🥛 Homemade Fresh & Pure P… (Nisha Madhulika); Is Diwali banaen 1 nahin 4 pakvan (Chef Ranveer Brar); Bengali Food Special! 5 Delicious Recipes For Durga Puja By Chef@sanjeevkapoorkhazana (Sanjeev Kapoor Khazana); Garlic wala Chatpata aam ka achar kaise banae - Lahsun Mango Pickle / Avakai Aam ka Achar R… (CookingShooking Hindi); Surat wali Hasti Toast Sandwich Recipe - 20 minat saindvich kaise banae CookingShooking Masa… (CookingShooking Hindi); Ganv ke banaee sarson vali arbi ke patto ki sabzi (Kabita's Kitchen); 2-MINUTE Unique ICED COFFEE Recipes AT HOME! 2-minat men ban ne vali kaife jaisi kofi (Your Food Lab); Hi Protein tin dalon vali sabzi (Chef Ranveer Brar); Cafe wali Cold Coffee BEST THICK kold kofi 5 minat EASY Secret Recipe - CookingShooking (CookingShooking Hindi); Divali speshal besan ki barphi aasan tarike se (Kabita's Kitchen); Itna heldi itna testi ki bachche shaunk se khaenge dher sari sabjiyan is nashte ke bahane.Ve… (Masala Kitchen); Melbourne's Amazing Food Markets, Coffee Culture & Great Ocean Road! (Sanjeev Kapoor Khazana); Aloo Paneer Dum Biryani (Chef Ranveer Brar); Thekuaa banane ki vidhi - atta thekua recipe - gur ka khasta thekuaa - Khajuria (CookingShooking Hindi); 20 minat men kukar men Rasgulla - rasgulla Recipe in Cooker Bengali Sponge Rasgulle Cooki… (CookingShooking Hindi); 6 quick, healthy tiffins for kids (Kabita's Kitchen); Lasooni Corn Palak Recipe (Your Food Lab); Churma laddu banane ki aasan vidhi (Nisha Madhulika); Munh men ghul jane vala sopht suji ka halva parphekt map se (Kabita's Kitchen); HEALTHY Green Moong Sprouts Vegetable Cheela (Your Food Lab).
+
+## 21 · Safar (Lifestyle)
+
+https://ogtv.co.in/safar/ · Safar on OGTV: travel, India & the world, free and always on. Videos from Beautiful Destinations, Visa2explore, Travelling Mantra and Desi Couple On The Go.
+
+Good for: Travel videos from India and the world.
+
+Today:
+- 00:00–00:08 Indian road trips: Haridwar Travel Guide
+- 00:08–04:00 The world at night: China Built the World's Highest Ladder (and we climbed it); I Met the Terrifying Animal Gangs of Nigeria; That Time I Went to North Korea as a Tourist (Full Documentary)
+- 04:00–06:00 Long journeys: I Spent A Day With Kim Jong's Actual Bodyguard; Inside Argentina's Most Dangerous Neighborhood ($40 per month rent); We Took Our Food Delivery Man on His First Vacation
+- 06:00–07:10 Scenic mornings: One Year of the Beautiful Destinations Academy; Feel Brasil: A Journey Through Rio's Pequena África; The Long Ride Home: Vietnam's motorcycling heartbeat
+- 07:10–15:27 Travel India: Inside China’s Hidden Muslim City 🇨🇳🕌; First Time In New Zealand; Why Making Makhana Is So Difficult ? 80% duniya ka makhana yahan banta hai!
+- 15:27–19:00 Around the world: Walking into Peru's Roughest Neighborhood; Our journey through Africa is over; This Is The America You Never See (Rural Virginia)
+- 19:00–00:00 Indian road trips: Italy Road Trip; A Kashmiri place NOBODY will tell you about! Bungus valley & Bangus Mela; BUS TRAVEL in TURKEY, Still NOT EASY for Foreigner Tourists (Istanbul to Esksehir)
+
+Playing this week: Haridwar Travel Guide (Visa2explore); Inside Argentina's Most Dangerous Neighborhood ($40 per month rent) (Indigo Traveller); Sustainable living in Germany is EASY (Beautiful Destinations); Welcome to Foz do Iguaçu: Brazil's Natural Wonder (Beautiful Destinations); Ep - 2 Singapore (Visa2explore); TURKEY’s SECRET - and Its Cheaper, Better, UnTouched = SOĞANLI VALLEY (Mountain Trekker); Bangkok, Thailand- Morning till night visit- Things to do in Bangkok, local food, sight… (Visa2explore); 24 Hours in 2 Countries that Hate Each Other (Yes Theory); Hong Kong: A Cinematic Journey (Beautiful Destinations); Nanaksar: Guru Nanak Dev Ji's Forgotten Village in Pakistan (Travelling Mantra); I Went to Court for ₹25,000 Fine in Chile 🇨🇱 (Nomadic Indian); I Entered My 195th Country: Equador (Nomad Shubham); Brazil’s Wild Duality — Lençóis Maranhenses to Fernando de Noronha (Beautiful Destinations); Ep 3 Mandu, Madhya Pradesh (Visa2explore); I was Shocked to see this in Bihar (Nomad Shubham); I Got 20 Tattoos in 1 Day (not clickbait) (Kara and Nate); I Entered Strait of Hormuz - IRAN 🇮🇷(World’s Oil Lifeline) (Travel with AK); EP 1 - Singapore, Merlion, Heritage walk, China town, Maxwell Hawker centre chicken rice (Visa2explore); We Bought a Bus (to drive around the world) (Kara and Nate); Ep 3 Adi Kailash & Om Parvat Road Trip (Visa2explore); We Traveled from Botswana to Zimbabwe (Lost LeBlanc); HOW ARE INDIANS still TREATED IN TURKEY? (Mountain Trekker); My Life in USA 🇺🇸 (Nomad Shubham); Italy to Albania by Overnight Ferry! Full Cruise Tour + Albania Road Trip (Desi Couple On The Go).
+
+## 22 · Bachche (Lifestyle)
+
+https://ogtv.co.in/bachche/ · Bachche on OGTV: kids, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
+
+Good for: Stories and rhymes for children; Science for kids.
+
+Today:
+- 00:00–07:00 Early science: The Spider Bike Finally Comes to Life!; Svachchh khana pakane se kaise jivan bachta hai?; Rice Weevil Infestation & Life Cycle
+- 07:00–21:00 Stories & rhymes: ChuChu TV Police · 20 Jun 2026; Watching a Cat Curl Up to Sleep; The Magic Bottle
+- 21:00–00:00 Bedtime science: Is There Another You? Many-Worlds Theory Explained in Simple Words; Kya aap jante ho apne 5 jaduee indriya?; Rayleigh Scattering Explained in Simple Words for Beginners
+
+Playing this week: The Spider Bike Finally Comes to Life! (discovery+ India); Disney+ Special Look (National Geographic); Rayleigh Scattering Explained in Simple Words for Beginners (Science ABC); Rick Petko Builds His First Chopper from Scratch! (discovery+ India); Gravitational Waves Explained in Simple Words (Science ABC); Moment of Inertia Explained in Simple Words for Beginners (Science ABC); Deadliest Parasite Loa Loa 🪱 What if You Caught an Eye infection Worm? (Peekaboo Kidz); Paudhon ke hairan kar dene vale phaikts (Binocs Ki Duniya); Plate Tectonics Explained in Simple Words for Beginners (Science ABC); Eating Too Much Chocolate? 🍫 What Happens When You Eat Too Much Chocolate? (Peekaboo Kidz); Chirality Explained in Simple Words for Beginners (Science ABC); Can We Create Rain? ⛈️ What is Cloud Seeding and How Does it Work? (Peekaboo Kidz); OCC Takes Its NASA Tribute Chopper to the Next Level! (discovery+ India); Quantum mechanics in simple words (Science ABC); What Are Red Blood Cells? 🩸 (Peekaboo Kidz); ChuChu Adopts A Puppy - Bedtime Stories in 4K for Kids (ChuChu TV Storytime); ChaCha's Time Management - Bedtime Stories in 4K for Kids (ChuChu TV Storytime); The Forest Friends (ChuChu TV Storytime); A Daring Hare - Bedtime Stories in 4K for Kids (ChuChu TV Storytime); Jingo, The Baby Elephant - Bedtime Stories in 4K for Kids (ChuChu TV Storytime); Helping Bestie Find a Quiet Spot (ChuChu TV Storytime); What if Steller's Sea Cow didn't go Extinct? (Peekaboo Kidz); String Theory Explained in Simple Words for Beginners (Science ABC); Deadliest Insects (Peekaboo Kidz).
+
+## 23 · Aangan (Entertainment)
+
+https://ogtv.co.in/aangan/ · Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.
+
+Good for: Family TV: Taarak Mehta, Doordarshan classics and kavi sammelan; Morning aarti and kahaniyan.
+
+Today:
+- 00:00–01:45 Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati: Khidki - khirki - Episode 36 - 16th August, 2016; Khidki - khirki - Episode 108 - 24th November, 2016; Wagle Ki Duniya - Ep 52 - Full Episode - 5th May, 2021
+- 01:45–04:00 Mushaira & ghazal: Shakeel Azmi; Bazm-e-Sukhan : Mushaira at Jashn-e-Rekhta 2015; Rahat Indori Live Shayari Performance
+- 04:00–04:20 Repeat: MTV Hustle & I-Popstar: Best in The Biz: Bassick, Karan Kanchan; Homeopathy; Right Here Right Now- The Hustle Flip
+- 04:20–05:40 Late-night sadabahar: Hum Ko Mohabbat Ho Gai Hai Tumse; Dekha Na Haye Re - Amitabh Bachchan & Aruna Irani - Bombay To Goa; Gore Rang Pe Na
+- 05:40–06:00 Morning aarti: Shri hanuman chalisa Shree Hanuman Chalisa I SHIVAY VYAS I Hanuman Bhajan,Hindi Engish Ly…; Hanuman Chalisa Hari Om Sharan I Shri Hanuman Chalisa Jai Jai Shri Hamunam
+- 06:00–06:55 Subah ki kahani: Khabar se Khabar By Ritvik Shreedhar Joshi; Happy New Year by Om - Season 2; Thodi Si Bewafai by Kanchan Pant
+- 06:55–08:47 Wildlife & nature: From Abandoned to Adored: Dogs Find Their Forever Homes?; The Wildest Gypsy Wedding Celebrations!
+- 08:47–10:38 Doordarshan classics: Bharat Ek Khoj: Bharat Ek Khoj · 10 Jul 2020; Bharat Ek Khoj · 18 Jun 2020
+- 10:38–12:30 Doordarshan classics: Ramanand sagar krit vikram aur betal bhag 18 - shankchur aur jimutvahan ki bahaduri ki katha; Bharat Ek Khoj · 19 Jun 2020; Bharat Ek Khoj · 30 Jun 2020
+- 12:30–13:25 Discovery afternoon: Iraq – The Land of Mesopotamia – – Infinity Stream; Maharashtra – The Land of Legends – – Infinity Stream
+- 13:25–14:21 Music talent: MTV Hustle & I-Popstar: Sundari | Nishant Mukta | I-Popstar Hindi Vol.2 | EP 16 | Alright TV | Netflix; Bandook l Ghaint Jxtt; Nahi Mama: Vijay Dada
+- 14:21–15:17 Dopahar ki kahani: Papa Kehte Hain By Vrishali Jain; December ka Khwaab by Umesh Pant - -Yaadon ka IdiotBox with Neelesh Misra Season 2; Phuppi Ki Love Story by Dolly Ahuja - Season 2
+- 15:17–16:12 Kavi sammelan: Samaj ka asli chehra dikhati sabse tikhi kavitaen; Jati par ye kavitaen... sunkar aansu nahin rok paoge!; Ramashankar Yadav Vidrohi ki sistam ko chunauti deti kavitaen
+- 16:12–17:08 Family comedy: Meditation; Audience Interaction · 4 Aug 2024; Double Apple iFhone
+- 17:08–18:04 Wildlife at dusk: We Filmed The US Military During an ISIS Conflict in Iraq; Colosseum ke niche kya mila?
+- 18:04–19:00 Evening aarti: Shree Hanuman Chalisa · original video; Aarti Keejei Hanuman Lala Ki Gulshan Kumar, Hariharan I Aartiyan; Somvar Special bhajan I Shiv Bhajans I Ganesh Bhajans I shiv ji evan ganesh ji ke bhajan I Mornin…
+- 19:00–21:15 Prime time: Taarak Mehta Ka Ooltah Chashmah: SE 02 EP 578 - aadhi rat ko Bhide kisse kar raha hai Chatting ?; FULL EPISODE 4854 - Jethalal Ne Diya Gokuldham Walo Ko Surprise !; SE 02 EP 573 - kisko Dekhte Hi ur gaee Jethalal Ki nind ?
+- 21:15–23:30 Prime time: Taarak Mehta & family sitcoms: Khidki - khirki - Episode 35 - 15th August, 2016; SE 02 EP 576 - kya dekhkar ur gae Iyer Aur Babita ke hosh ?; Wagle Ki Duniya - Ep 44 - Full Episode - 8th April, 2021
+- 23:30–00:00 Family sitcoms: Wagle Ki Duniya, Shrimaan Shrimati: Wagle Ki Duniya - Ep 91 - Full Episode - 29th June, 2021; Shrimaan Shrimati Phir Se - Ep 63 - Full Episode - 7th June, 2018
+
+Playing this week: Khidki - khirki - Episode 36 - 16th August, 2016 (Sony SAB: Khidki); Ae Sawan Baras Zara (Shemaroo Filmi Gaane); 101 | MC Square | MTV Hustle 2.0 (MTV Hustle 2.0 (T-Series)); Shree Hanuman Chalisa · original video (Bhakti); Bataa De Tu (MTV Hustle Season 4 (Saregama)); Ek Kahani Aisi Bhi by Akbar Quadri - Season 2 (Neelesh Misra: Yaadon Ka Idiot Box); Hausale Ki Uchai By Basannt Raj Singh (Neelesh Misra: inspirational stories); Shrimaan Shrimati Phir Se - Ep 20 - Full Episode - 9th April, 2018 (Sony SAB: Shrimaan Shrimati Phir Se); Kab Tak Bol Gori Aise Sharmayegi (Goldmines: superhit songs of the 60s); Interview with Shyam Benegal (Prasar Bharati Archives: Bharat Ek Khoj); Anjana Verma ki ye kavitaen sochne par majbur kar dengi (Sahitya Tak: poetry on loop); Haseeb Soz (Jashn-e-Rekhta: grand mushaira); Raat Akeli Thi (Tips: 80s hits); How This Baby Monkey Survives in Snow (Full Episode) (Nat Geo Animals); Emotional Men (Rakesh Addlakha); Gadar | Panther | MTV Hustle 2.0 (MTV Hustle 2.0 (T-Series)); Jai Ambe Gauri [Full Song] Nau Deviyon Ki Aartiyan (T-Series Bhakti Sagar: Aarti collection); Ummeedon Ki Ek Dukaan By Rahul Gupta- - Yaadon ka IdiotBox with Neelesh Misra Season 3 (Neelesh Misra: inspirational stories); Nida Fazli at Shaam-e-Sher Mushaira 2014 (Rekhta: mushaira); Meine Kaha Tumse Song (Rajshri: Evergreen old Hindi songs); Balancing Sheets: Uday, Karan Kanchan (MTV Hustle 3.0 (T-Series)); Mangalvar hanuman ji ke bhajan Shree Ram Bhakt Hanuman (Hariharan: Hanuman bhajans); Mujhe Teri Mohabbat Ka Sahara - Lata Mangeshkar - Mohd Rafi - Aap Aye Bahar Ayee [1971] (Saregama: Mohammed Rafi songs); Ek Pyar Ka Naghma Hai - The Hustle Flip (MTV Hustle Season 4 (Saregama)).
+
+## 24 · Comedy (Entertainment)
+
+https://ogtv.co.in/comedy/ · Comedy on OGTV: stand-up, sketches & shows, free and always on. Videos from Jimmy Kimmel Live, Whose Line Is It Anyway? and Late Night with Seth Meyers.
+
+Good for: Stand-up comedy and sketches.
+
+Today:
+- 00:00–00:00 Hindi & English comedy: If you see this thumbnail, you've reached the Creed-trix; 2 past 2 curious- Ep 5 - Bronze Age - History podcast - Biswa Kalyan Rath and Kumar Varun; Whose Line Is It Anyway? · 30 Sep 2026
+
+Playing this week: If you see this thumbnail, you've reached the Creed-trix (The Office); Wanda Sykes: “Drinking Liquor, Playing Nintendo” - Full Special (Comedy Central Stand-Up); Can Mr Bean Defuse the Bomb in His Garden? 💣 (Mr Bean); Over 6,600 Flights Grounded by FAA Due to Malfunctioning Router (Late Night with Seth Meyers); Random Season 2 Episodes to Watch At Lunch (Brooklyn Nine-Nine); One Perfect Moment From Every Office Episode (The Office); Ekaki Chapter 4 : Skyfall (Ashish Chanchlani); Andy Samberg Revealed as New James Bond (Brooklyn Nine-Nine); NUTRITIONIST (Gaurav Kapoor); SE 02 EP 578 - aadhi rat ko Bhide kisse kar raha hai Chatting ? (Taarak Mehta Ka Ooltah Chashmah); "Come On, Who Cares?" – Chelsea Peretti - Full Special (Comedy Central Stand-Up); Daya Ne kyu pilaee Jethalal Ko namak vali chay ! (Taarak Mehta Ka Ooltah Chashmah); Mr Bean Has a VERY Unusual Way of Babysitting! 😂 (Mr Bean); DO NOT LAUGH CHALLENGE FT. CHESS OLYMPIAD (Samay Raina); Trump Makes Saddest Most Embarrassing Plea Yet, Meets Up with Putin and Xi & Press Secr… (Jimmy Kimmel Live); A Stalled Car Delays the Seaside Trip With Teddy (Mr Bean); I BECAME A ZOMATO DELIVERY BOY FOR A DAY (Samay Raina); Fleas Force a 24 Hour Stay at Mrs Wicket's (Mr Bean); Brooklyn 99 but Everyone Needs Therapy (Brooklyn Nine-Nine); Can Mr Bean Get Past These Hotel Guests? 😂 (Mr Bean); Jethalal Ne Popatlal Pe kyu lagya chori ka ilzam ! (Taarak Mehta Ka Ooltah Chashmah); "Butt Naked With A Blazer On" – Tone Bell - Full Special (Comedy Central Stand-Up); Woodland Animals Protect a Tree From a Bully (Mr Bean); No, I wouldn’t say I have a passion for HR (The Office).
+
+## 25 · Purvaiya (Entertainment)
+
+https://ogtv.co.in/purvaiya/ · Purvaiya on OGTV: regional news, legends, travel & vlogs, free and always on. Live streams from News18 Bihar Jharkhand, Zee Bihar Jharkhand and ABP Bihar.
+
+Good for: Bihar and Jharkhand: regional news, legends, travel and vlogs.
+
+Today:
+- 00:00–00:24 Prime-time regional news: Patna ke Bihar Museum pahunche Jyotiraditya Scindia, sangrahalay ki tariph men kahi bari bat!; Anant Singh ki beti ki tilak men pahunche Giriraj Singh, kya kaha dekhie; Nitish Setu Inauguration : nitish setu par siyasat kyon ?
+- 00:24–02:12 Late night: Legends of Bihar, back to back: Chanakya (1991) · 60; Chanakya (1991) · 54; Chandragupta Maurya · 16 Apr 2022
+- 02:12–04:00 Late night: Anand Kumar & HC Verma: Guj 5 Air resistance on a falling body; Anand Kumar in conversation with BBC Hindi; A talk by HC Verma
+- 04:00–04:40 Weekend: Sharda Sinha & Nadiya Ke Paar, back to back: Ho Deenanath New Version I Chhath Pooja Geet I SHARDA SINHA I Chhath Pooja I Chhathi Maiya; Kelva ke pat par New Version, Kelwa Ke Paat Par, Kelva Ke Paat Par I SHARDA SINHA I Chha…; He chhathi maiya aarti
+- 04:40–05:40 Night vlogs: Curly Tales, village life & hidden Bihar and Jharkhand: I Tried the AMAZING Ghugni Street Food in Ghatshila – The Bengali Favorite You MUST EAT!; 🎨 I Found a SECRET Village Where EVERY House is a MASTERPIECE! (Ghatshila); Native Village
+- 05:40–07:00 Legends of Bihar: Dinkar, Chanakya, Chandragupta, Nalanda, Khan Sir & the Bihar Museum: Chanakya (1991) · 39; Chanakya (1991) · 8; Chandragupta Maurya · 18 Mar 2022
+- 07:00–10:00 Bihar & Jharkhand news: Patna men CM Samrat Choudhary ne FTA Outreach Programme men liya hissa, udyogon par di…; Anant Singh beti ka Tilak lekar pahunche shahi andaj men, ek jhalak ke lie tut pare chahne vale; Patna men hajaron Drivers ka pradarshan, bole- 'hak nahin mila to CM aavas se nahin nikalne denge'
+- 10:00–11:00 Ghoomo Bihar: Nalanda, Rajgir, Bodh Gaya, with the songs of Guide: Discover the SECRET huen tsang smarak hol, nalanda; AAJ PHIR JEENE KI TAMANNA HAI ORIGINAL FULL SONG 4K; EXPERIENCE Buddha's ENLIGHTENMENT at Bodh Gaya Temple
+- 11:00–12:00 Building Bihar & Jharkhand: Patna, Giridih, Deoghar & Nalanda: Why India is building so many expressways in Bihar; Why Is India Building 5 New 4 lane Highway Corridor In Bihar; Bihar New Infrastructure Projects Launched On Independence Day
+- 12:00–13:00 Litti chokha & the Bihar plate: PATNA BRUNCH TOUR; Patna Sahib Gurudwara Langar Tour; LOCAL food experience in Village Dhokraha - BEST Dahi Chura + Kele ka Kofta + Garai Machhi
+- 13:00–14:00 Afternoon news: Cyclone Akwan Alert : ratonrat badla mausam jharkhand men ab kya hoga?; Anant Singh Daughter Tilak: anant sinh ne apne beton ke sath charhaya tilak; Nitish Kumar Photo Missing: nitish setu... vigyapan men photo kyon nahin?
+- 14:00–15:00 Festivals: Chhath, Shravani Mela & Sonepur Mela: Fairs of India: Sonepur Mela; Witnessing Chhath Puja in Bihar · I Love My India
+- 15:00–16:00 Niche vlogs: Curly Tales, village life & hidden Bihar and Jharkhand: Aadivasi ganv jangal khubsurat jivan; Thousands of people became homeless due to blast in coal mine; 🌿 TRIBAL Village Life & The TRADITIONAL DRINK That Changed Everything in Ghatshila
+- 16:00–17:00 Bihar's gurus: Anand Kumar & HC Verma: The reality of Super 30 · Anand Kumar; Why is Rainbow Curved?; Teaching Electricity to class 9 students 1/4
+- 17:00–19:00 Weekend: Sharda Sinha & Nadiya Ke Paar, back to back: Jab Tak Pure Na Ho Phere - Bollywood Wedding Song - Nadiya Ke Paar; Jogiji Haan - Sachin, Sandhya Singh - Nadiya Ke Paar - Superhit Bollywood Holi Song; He chhathi maiya aarti
+- 19:00–00:00 Prime-time regional news: Bihar Police draivar pariksha men sabkuchh ho gaya lekin naukri nahin ab mundan hoga, CM samrat…; Nawada ke Aman Raj aur Aditi Paswan ne racha itihas, desh ke pratishthit Film Institutes men…; Jharkhand News : jharkhand ki bari khabren
+
+Playing this week: Patna ke Bihar Museum pahunche Jyotiraditya Scindia, sangrahalay ki tariph men kahi bari bat! (ABP Bihar); Kelva ke pat par New Version, Kelwa Ke Paat Par, Kelva Ke Paat Par I SHARDA SINHA I Chha… (Sharda Sinha); Patna men CM Samrat Choudhary ne FTA Outreach Programme men liya hissa, udyogon par di… (ABP Bihar); Nitish Setu: nitish setu ke nam par siyasi sangram, bihar men macha siyasi bhuchal!| PM Modi… (News18 Bihar Jharkhand); Nitish Kumar ko gali kisne di thi, Tejashwi Yadav bharke, daphan kaun kar raha hai (News4Nation); PATNA BRUNCH TOUR (Delhi Food Walks: Bihar food tour); Thousands of people became homeless due to blast in coal mine (Minhaz Campfire: Jharkhand tribal village life); Chhath puja samapan I chhath puja katha evan aarti I SHARDA SINHA I TULSI KUMAR I SHIVANI CHANANA I C… (Sharda Sinha); Patna ke Paliganj men andhvishvas ne li 2 sal ke masum ki jan? chachi par hatya ka aarop! (ABP Bihar); Chandragupta Maurya · 11 Mar 2022 (Swastik: Chandragupta Maurya, from vision to empire); Chanakya (1991) · 13 (Chanakya (1991)); Delhi To Bhagalpur 3rd and 4th railway Track (All India Bihar); H C Verma Quiz on double cone going up BVN 4/5 (H C Verma); Son Bhandar caves, Maniyar Math & the glass bridge, Rajgir (Travel4Search); MY REAL EXPERIENCE: Pind Daan at Gaya Ji (Chutti Hai: Bihar travel guide); The three river islands of Kahalgaon · Dil Se Bihari E5 (Curly Tales); Deoghar's new airport and ₹16,800 crore of projects (CNN-News18); The Green Mic (Jharkhand Tourism); Displacement current is not an electric current (H C Verma); Beautiful picnic spots in jharkhand (Minhaz Campfire: Jharkhand tribal village life); Bihar Chhath Puja, Day 3 - sandhya arghy I World Famous Thekua (Bihari Cookies) Prasad… (Delhi Food Walks: Bihar food tour); Why are 10 new expressways and highways being built in Jharkhand? (All India Jharkhand); Bhagalpur’s Famous Katarni Chura & Ultimate Street Food Tour, Part 2 l Nashta, Chop, Su… (Delhi Food Walks: Bihar food tour); Chanakya (1991) · 22 (Chanakya (1991)).
+
+## 26 · Fiction (Entertainment)
+
+https://ogtv.co.in/fiction/ · Fiction on OGTV: web series, short films & DD classics, free and always on. Videos from Chanakya (1991), Ramayan (Tilak) and Upanishad Ganga (Chinmaya).
+
+Good for: Web series and short films; Doordarshan classic serials.
+
+Today:
+- 00:00–01:00 Prime-time stories: Dinner Party; Ep 7: Recipe of Mutton Yakhni Pulao; Talking to your brother about his s*x life
+- 01:00–04:00 Late-night shorts: Civil Service; Holding Out; Horror Short Film "The Conduit"
+- 04:00–04:40 Midnight thrillers: Horror Short Film "The Rickety Man"; Love Bytes; 096 | Sci-Fi Short Film | DUST
+- 04:40–06:00 World short films: AN APOLOGY; AN ARTIST'S SOUL; BACKSTAGE
+- 06:00–10:20 Doordarshan mornings: Ramayan, Chanakya, Upanishad Ganga: Ramayan EP 66 - garur ka parakram; Uttar Ramayan EP 34 - lav kush ne haraya bharat sugriv ko; Uttar Ramayan EP 27 - lav kush ki kundlini jagrit
+- 10:20–14:40 Indian web series & shorts: Kiran Rao on Bollywood, Theatre & Social Storytelling; Talking to your brother about his s*x life; FilterCopy · 15 Aug 2026
+- 14:40–19:00 Old but gold: Byomkesh, Fauji, Malgudi Days: Byomkesh Bakshi · 1 Mar 2022; Byomkesh Bakshi: Ep - Pahari Rahasya; Byomkesh Bakshi: Ep - Tasvir Chor
+- 19:00–00:00 Prime-time stories: This Friendship Took A Dangerous Turn; FilterCopy · 9 Oct 2026; FilterCopy · 17 Jul 2026
+
+Playing this week: Dinner Party (Pocket Films); A MATTER OF MINUTES (Omeleto); Ramayan EP 66 - garur ka parakram (Ramayan (Tilak)); Adulting · 26 Apr 2025 (Dice Media); Select Conversations with Tisca Chopra - Ft. Vikramaditya Motwane (Royal Stag Barrel Select Shorts); EP 4 - The Summer I turned Pachchis (Terribly Tiny Tales); FilterCopy · 12 Aug 2026 (FilterCopy); SILICON VALLEY GIRL (Omeleto); Upanishad Ganga · 3 Mar 2025 (Upanishad Ganga (Chinmaya)); Vidushi Episode 3 (Pocket Films); Byomkesh Bakshi: Ep Anjaan Khooni (Byomkesh Bakshi (Doordarshan)); Damaad Ji Ka Shagun Ka Sikka ft. Chandan Roy, Aasif Khan, Durgesh Kumar, Shrikant (TVF); Five Star (ALTER); Chanakya (1991) · 49 (Chanakya (1991)); Banshiwala (Pocket Films); Father vs Son: Ek Ghar, Do Sapne (FilterCopy); DELISTED (Omeleto); Adulting · 29 Apr 2025 (Dice Media); AFK - Away From Keyboard · 4 Jun 2025 (Dice Media); Chanakya (1991) · 14 (Chanakya (1991)); Byomkesh Bakshi: Ep - Bemisaal (Byomkesh Bakshi (Doordarshan)); Chanakya (1991) · 19 (Chanakya (1991)); Byomkesh Bakshi · 10 Feb 2022 (Byomkesh Bakshi part 2 (Doordarshan)); Uttar Ramayan EP 26 - ashvamedh yagy ki shuruaat (Uttar Ramayan (Tilak)).
+
+## 27 · Retro Movies (Entertainment)
+
+https://ogtv.co.in/retro-movies/ · Retro Movies on OGTV: Classic Hindi films, free and always on. Videos from Ultra Movie Parlour, Goldmines Bollywood, Shemaroo Movies and Rajshri.
+
+Good for: Old Hindi movies.
+
+Today:
+- 00:00–04:00 Prime-time classics: Daraar | Full Hindi Movie | Juhi Chawla Birthday Special | Rishi Kapoor, Arbaaz Khan; Mr Natwarlal (1979) - Amitabh Bachchan And Rekha's Superhit Movie
+- 04:00–06:00 Late-night classics: Aadmi Khilona Hai (1993)
+- 06:00–12:30 Morning show: Arpan (1983) Hindi Full Movie Jeetendra & Reena Roy; Hafta Vasuli (1998) Hindi Full Movie Jackie Shroff & Aditya Pancholi & Madhoo; AUGUST 16 1947
+- 12:30–19:00 Matinee: C.I.D. (1990) Hindi Movie; Veergati (1995) Hindi Full Movie Salman Khan, Atul Agnihotri & Divya D.; Lovers (1983) Bollywood Superhit Romantic Movie
+- 19:00–00:00 Prime-time classics: Amir Khan's - 1947 EARTH Hindi Full Movie Nandita Das, Rahul Khanna & Shabana Azmi; Bombay 405 Miles (1980) Hindi Movie; AUGUST 16 1947
+
+Playing this week: Daraar | Full Hindi Movie | Juhi Chawla Birthday Special | Rishi Kapoor, Arbaaz Khan (Goldmines Bollywood); Mr Natwarlal (1979) - Amitabh Bachchan And Rekha's Superhit Movie (Goldmines Bollywood); Aadmi Khilona Hai (1993) (Goldmines Bollywood); Hafta Vasuli (1998) Hindi Full Movie Jackie Shroff & Aditya Pancholi & Madhoo (Ultra Movie Parlour); AUGUST 16 1947 (Shemaroo Movies); Veergati (1995) Hindi Full Movie Salman Khan, Atul Agnihotri & Divya D. (Ultra Movie Parlour); Lovers (1983) Bollywood Superhit Romantic Movie (Goldmines Bollywood); Amir Khan's - 1947 EARTH Hindi Full Movie Nandita Das, Rahul Khanna & Shabana Azmi (Ultra Movie Parlour); Nana Patekar's Movie - Hu Tu Tu (1999) Full Movie Tabu & Suniel Shetty (Ultra Movie Parlour); Aakhir Kyon? (1985) Hindi Full Movie Rajesh Khanna & Smita Patil (Ultra Movie Parlour); Cheetah (1994) Bollywood Superhit Action Movie (Goldmines Bollywood); Aakraman (1975) Hindi Full Movie Sanjeev Kumar & Rakesh Roshan (Ultra Movie Parlour); Bhai Bahen 1969 (Goldmines Bollywood); Jhooth Bole Kauwa Kaate (1998) Hindi Full Movie Anil Kapoor & Juhi Chawla (Ultra Movie Parlour); Itni Si Baat (1981) (Goldmines Bollywood); Khamoshi (1996) 4K Full Movie (Ultra Movie Parlour); Anil Kapoor Ki Superhit Film AMBA (Shemaroo Movies); Gumrah (1963) Hindi Romantic Movie (Goldmines Bollywood); Trishakti (1999) Hindi Full Movie Arshad Warsi & Sharad Kapoor & Milind Gunaji (Ultra Movie Parlour); Samraat (1982) Hindi Movie (Goldmines Bollywood); Dost garibon ka (1989) phul hindi muvi (Goldmines Bollywood); Apna Desh Paraye Log (1989) Hindi Full Movie Sumeet Saigal & Moon Moon Sen| Sadashiv Am… (Ultra Movie Parlour); Lootera (1965) Full Hindi Movie (Goldmines Bollywood); Maahir (1996) Hindi Full Movie Hema Malini & Govinda (Ultra Movie Parlour).
+
+## 28 · Classics (Entertainment)
+
+https://ogtv.co.in/classics/ · Classics on OGTV: great films from India & the world, free and always on. Videos from Mosfilm, Shemaroo 4K Premium and Indian parallel cinema.
+
+Good for: Great films from India and the world.
+
+Today:
+- 00:00–01:00 Prime-time blockbuster: DHAMAAL (2007) COMEDY FULL MOVIE 4K
+- 01:00–04:00 World cinema classics: Decision: Liquidation; Dersu Uzala
+- 04:00–06:00 World cinema after midnight: The Irony of Fate, Part One; Camino a Berlín
+- 06:00–14:40 Bollywood hits: Jeet Full Hindi Superhit Action Movie 4K (1996); Maa Tujhhe Salaam (2002) Full Hindi Movie; Kranti (2002) Full Hindi Movie
+- 14:40–19:00 Indian masters: Ray & art cinema: Dhoop Chhaon; Barsaat (1949) - Hindi Full Movie - Raj Kapoor - Nargis - Premnath
+- 19:00–00:00 Prime-time blockbuster: Yeh Dil (2003) Full Hindi Movie; Ajay {HD} Hindi Full Movie - Sunny Deol - Karisma Kapoor - Superhit Hindi Movie; Ek hasina, do aashik aur karoron ka khel - Dedh Ishqiya Full Movie 4K - Madhuri Dixit, Arsha…
+
+Playing this week: DHAMAAL (2007) COMEDY FULL MOVIE 4K (Shemaroo 4K Premium); The Irony of Fate, Part One (Mosfilm); Maa Tujhhe Salaam (2002) Full Hindi Movie (Goldmines Bollywood); Dhoop Chhaon (Indian parallel cinema); Ajay {HD} Hindi Full Movie - Sunny Deol - Karisma Kapoor - Superhit Hindi Movie (Shemaroo Movies); War and Peace, Part One (Mosfilm); Thagon ka ustad khud ban gaya shikar - Bluffmaster Full Movie 4K - Nana Patekar, Ritesh Desh… (Shemaroo 4K Premium); Kanchivaram {HD} - Prakash Raj - Shreya Reddy - Sree Kumar - Full Hindi Movie - (With E… (Hindi art and parallel films); MANN FULL MOVIE (1999) 4K (Shemaroo 4K Premium); Stalker | FULL MOVIE | Directed by Andrey Tarkovsky (Mosfilm); Raja Hindustani Full Movie - Aamir Khan - Karishma Kapoor - 90's Popular Hindi Movie (Shemaroo Movies); Khilona (Indian parallel cinema); On the Road to Berlin (Mosfilm); Mr Joe B. Carvalho Full Hindi Superhit Comedy Movie 4K (Shemaroo 4K Premium); Deadline: Sirf 24 Ghante {HD} - Irfan Khan - Konkana Sen Sharma - Hindi Film-(With Eng… (Indian art cinema); Dilwale (1994) Full Hindi Movie (Goldmines Bollywood); Moscow does not believe in tears (Mosfilm); Abhijan | অভিযান | Soumitra Chatterjee | Waheeda Rehman | Rabi Ghosh (Satyajit Ray films 2); JAB WE MET FULL MOVIE (2007) 4K (Shemaroo 4K Premium); Rishtey (2002) Hindi Full Movie - Anil Kapoor (Shemaroo Movies); মহানগর | Mahanagar - Full Movie | Madhabi Mukherjee, Anil Chatterjee, Haradhan Bannerjee (Satyajit Ray films 2); Welcome Full Movie Comedy (2007) in 4K (Shemaroo 4K Premium); The Star (Mosfilm); Raju ne kiya kand phas gae baburav aur shyam - Phir Hera Pheri Full Movie {4K} - Akshay Kumar (Shemaroo 4K Premium).
+
+## 29 · South Gems (Entertainment)
+
+https://ogtv.co.in/south-gems/ · South Gems on OGTV: critically acclaimed South Indian films, in Hindi, free and always on. Videos from .
+
+Good for: South Indian movies in Hindi; Hindi-dubbed South films such as Drishyam, Kaithi, Vikram Vedha and 96.
+
+Today:
+- 00:00–00:00 Acclaimed South films, in Hindi: Theeran Adhigaaram Ondru (Tamil, 2017) · in Hindi as Theeran; Take Off (Malayalam, 2017); Vikram Vedha (Tamil, 2017)
+
+Playing this week: Theeran Adhigaaram Ondru (Tamil, 2017) · in Hindi as Theeran (Goldmines); Take Off (Malayalam, 2017) (Wamindia Movies); Vikram Vedha (Tamil, 2017) (Goldmines); Goodachari (Telugu, 2018) · in Hindi as Intelligent Khiladi (Aditya Movies); 96 (Tamil, 2018) (Goldmines); Maanagaram (Tamil, 2017) · in Hindi as Dadagiri 2 (Goldmines); Asuran (Tamil, 2019) (Goldmines); Mahanati (Telugu, 2018) (Goldmines); Ulidavaru Kandanthe (Kannada, 2014) · in Hindi as Balwaan Badshah (Zee Movies Hindi); Drishyam (Malayalam, 2013) (B4U Movies); Mufti (Kannada, 2017) (DRJ Records Movies); Magadheera (Telugu, 2009) (Goldmines); Jersey (Telugu, 2019) (Goldmines); Thani Oruvan (Tamil, 2015) · in Hindi as Double Attack 2 (Goldmines Cineplex); Agent Sai Srinivasa Athreya (Telugu, 2019) (Goldmines); Anbe Sivam (Tamil, 2003) (B4U Movies); Uppena (Telugu, 2021) (Goldmines); Eega (Telugu, 2012) · in Hindi as Makkhi (Zee Movies Hindi); Aruvi (Tamil, 2016) (Goldmines Dishoom); U Turn (Telugu, 2018) (Goldmines); Kaithi (Tamil, 2019) (Goldmines).
+
+## 30 · Select (Music)
+
+https://ogtv.co.in/select/ · Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh, Karan Aujla and Mirzapur.
+
+Good for: Favourite songs: Indian and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh and Karan Aujla.
+
+Today:
+- 00:00–00:00 Favourites: Pani Da Rang · Ayushmann Khurrana, Rochak Kohli; TOP FELLA (MUSIC VIDEO) KARAN AUJLA; Inaaya · Saurabh Trivedi, Suyash
+
+Playing this week: Pani Da Rang · Ayushmann Khurrana, Rochak Kohli (Sony Music India); Musician · Porter Robinson (Porter Robinson); Muskurahat · Mitraz (MITRAZ); Nothing on You · B.o.B, Bruno Mars (B.o.B); JUGNI | OFFICIAL MUSIC VIDEO | DILJIT DOSANJH X DIAMOND PLATNUMZ (Diljit Dosanjh); lovely · Billie Eilish, Khalid (BillieEilishVEVO); Kho Gaye · Taaruk Raina, Mismatched - Cast (Netflix India); Diljit Dosanjh: CLASH (Official) Music Video (Diljit Dosanjh); Barbaad Reprise (Female) · Saiyaara · Shilpa Rao (YRF); Saiyaara Reprise (Female) · Shreya Ghoshal (YRF); Problems - Taska Black Remix · Petit Biscuit, Taska Black (Petit Biscuit); Big Love · Louis The Child, EARTHGANG (LouistheChildVEVO); For A Reason Karan Aujla (Karan Aujla); do Whatever you like · Hallman (Hallman - Topic); In My Mind · Mura Masa (Mura Masa); NOTHING LASTS - KARAN AUJLA, DIVINE (Karan Aujla); Runner · Tennis (Tennis); Pal Behta Jaaye · Vismay Patel (Vismay Patel); It Ain't Legal (Karan Aujla); 48 Rhymes (Music Video) Karan Aujla Manna Music (Karan Aujla); IDK HOW (MUSIC VIDEO) KARAN AUJLA (Karan Aujla); Dheere Se · The Yellow Diary (Sony Music India); 10:35 · Tiësto, Tate McRae (Tiësto); STAR WALKIN' (League of Legends Worlds Anthem) · Lil Nas X (LilNasXVEVO).
+
+## 31 · Desi Pop (Music)
+
+https://ogtv.co.in/desi-pop/ · Desi Pop on OGTV: arijit, Shreya Ghoshal, this week's trending songs & India's OG artists, free and always on. Videos from Coke Studio Pakistan.
+
+Good for: This week's trending Hindi songs; Arijit Singh and Shreya Ghoshal songs.
+
+Today:
+- 00:00–04:00 Prime time: Arijit Singh, back to back: First Class - Full Video; Zindagi - The Sky Is Pink; Ae Watan
+- 04:00–04:40 Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits: KR$NA - Sensitive Ft. Seedhe Maut; Jaane Tu; Full Video: Raanjhan
+- 04:40–05:20 OG voices: Daler Mehndi, Atif Aslam & KK: Shaman Paiyan; Hauli Hauli; Saade Dil Te Chhuriyan Chaliyan
+- 05:20–05:40 Diljit Dosanjh: Naina, Naram Kaalja & the Punjabi hits: DILJIT DOSANJH: Black & White (Official Music Video) MoonChild Era; Diljit Dosanjh: Born To Shine (Official Music Video) G.O.A.T; Naram Kaalja · Amar Singh Chamkila · Diljit, A.R. Rahman
+- 05:40–07:05 OG desi artists: DIVINE, Seedhe Maut, KR$NA, Hanumankind & Karan Aujla: On Top Karan Aujla; Prateek Kuhad - cold/mess; WHO THEY? (Music Video) Karan Aujla
+- 07:05–09:15 Shreya Ghoshal, back to back: Kya Bataoon Reprise by Shreya Ghoshal, Sonu Nigam - Life is Beautiful!; Khamma Ghani - Full Video; Jugraafiya - Full Video
+- 09:15–10:20 Amit Trivedi, back to back: Chitta Ve - Full Video; Chann Pardesi - Full Video; Shaabaashiyaan - Full Video
+- 10:20–12:30 Trending now: India's top songs this week: DUPATTA SARAK RAHA HAI; Vaaroon Forever; ✓ Nach Bindani Dj Pe
+- 12:30–13:35 Coke Studio bests: Chaudhary - Amit Trivedi feat Mame Khan, Coke Studio @ MTV Season 2; Malang · Sahir Ali Bagga and Aima Baig; Udja · OAFF x Savera x Burrah x Jasleen
+- 13:35–14:40 Gangs of Wasseypur & Sneha Khanwalkar: Bihar Ke Lala Song; Kaala Rey Full Video Song Gangs of Wasseypur 2; Aabroo Song
+- 14:40–15:45 Shubh, back to back: Shubh - Cheques (Official Music Video); Shubh - Balenci (Official Music Video); Shubh - Elevated (Official Music Video)
+- 15:45–16:50 Modern classics: Dhurandhar, Ramayana, Saiyaara & the new film hits: Raataan Lambiyan – Official Video; Tu Hain Toh; Dhurandhar The Revenge - AARI AARI (Video)| Ranveer Singh
+- 16:50–17:55 Shreya Ghoshal, back to back: Jo Tum Saath Ho (Lullaby) - Full Video; Mere Ankhon Se Nikle Ansoo; Soona Man Ka Aangan
+- 17:55–19:00 Amit Trivedi, back to back: Chitta Ve - Full Video; Keti Ko - Full Video; Saale Sapne
+- 19:00–23:30 Prime time: trending now, India's top songs this week: Aksar Is Duniya Mein - Suniel Shetty & Mahima Choudhary; DJ Chetas - Bom Diggy (Official Remix); CALIFORNIA LOVE Cheema Y
+- 23:30–00:00 Prime time: Arijit Singh, back to back: Arijit Singh; Dhal Jaun Main by Arijit Singh; Piya Tu Piya - Dongri Ka Raja
+
+Playing this week: First Class - Full Video (Zee Music: best of Arijit Singh); Ki Honda Pyaar - Jabariya Jodi (Zee Music: best of Arijit Singh); Gehra Hua (Modern classics: India's chart, film songs); Hanumankind - Go To Sleep ft. Parimal Shais (Official Music Video) (Hanumankind); Tori Soorat Pe Dil Har Gayee (Zee Music: best of Shreya Ghoshal); Ramayana: Mangal Rang (Song) (YouTube Charts: Top 100 music videos, India); Piya Ghar Aavenge in HD - Kailash on Coke Studio @ MTV S01 (Coke Studio India); Shubh - Together (Official Music Video) (Shubh); Ishq Ki Baarish (Zee Music: best of Shreya Ghoshal); Allah Kare Dil Na Lage (Official Full Video) (YouTube Charts: Top 100 music videos, India); Dil Na Jaaneya - Arijit Singh (Zee Music: best of Arijit Singh); JAWAN: Chaleya (Modern classics: new Bollywood hits); KR$NA - Who You Are Ft. Aitch (KR$NA: originals); Atak Gaya - Badhaai Do (Zee Music: best of Amit Trivedi); Latthay Di Chaadar · Quratulain Balouch & Farhan Saeed (Coke Studio Pakistan); Main Tera Hero (YouTube Charts: Top 100 music videos, India); Ishq Di Baajiyaan · Soorma · Diljit Dosanjh, Taapsee (Sony Music India); Ud-daa Punjab - Full Video (Zee Music: best of Amit Trivedi); Lafda Kar Le - Ganapath (Zee Music: best of Amit Trivedi); I REALLY DO (MUSIC VIDEO) KARAN AUJLA| IKKY (Karan Aujla: official music videos); Saiyaan Ji ► Yo Yo Honey Singh, Neha Kakkar|Nushrratt Bharuccha| Lil G, Hommie D| Mihir… (Modern classics: new Bollywood hits); Seedhe Maut - BURE DIN ft. Mick Jenkins (Prod. Hisab) (Seedhe Maut); Aaj dil Shaayraana - Arijit Singh (Zee Music: best of Arijit Singh); 'Laadki' - Sachin-Jigar, Taniskha S, Kirtidan G, Rekha B - Coke Studio@MTV Season 4 (Coke Studio India).
+
+## 32 · Drive (Music)
+
+https://ogtv.co.in/drive/ · Drive on OGTV: road-trip songs, free and always on. Videos from Road trip songs everyone knows, Classic rock road trip and Top 100 Bollywood travel songs.
+
+Good for: Road-trip songs; A driving playlist.
+
+Today:
+- 00:00–00:00 Road-trip playlist: Khaabon Ke Parinday (Full video song) Zindagi Na Milegi Dobara; Avicii - Hey Brother; Prateek Kuhad - cold/mess
+
+Playing this week: Khaabon Ke Parinday (Full video song) Zindagi Na Milegi Dobara (Top 100 Bollywood travel songs); Main Zindagi Ka Saath Nibhaata - Hum Dono - Mohd Rafi - Dev Anand - HD (Hindi travel songs); The Outfield - All The Love In The World (Classic rock road trip); Guns N' Roses - Patience (Classic rock road trip); TERE NAINA (Road Trip Bollywood); Ritviz - Liggi [Official Music Video] (Top 100 Bollywood travel songs); Rehna Tu (Road Trip Bollywood); Toto - Africa (Official HD Video) (Road trip songs everyone knows); Gehra Hua (Dhurandhar 1 & 2 soundtrack); Liggi (Road Trip Bollywood); Bastille - Pompeii (Official Music Video) (Road trip songs everyone knows); Hai Junoon Song (Top 100 Bollywood travel songs); Roobaroo (Road Trip Bollywood); Ishq Bulaava Full Video - Hasee Toh Phasee|Parineeti, Sidharth|Sanam Puri, Shipra Goyal (Top 100 Bollywood travel songs); The Strumbellas - Spirits (Road trip songs everyone knows); Welcome To The Jungle (Classic rock road trip); Vance Joy - 'Riptide' Official Video (Road trip songs everyone knows); Edward Sharpe & The Magnetic Zeros - Home (Road trip songs everyone knows); 'Pehli Baar' VIDEO Song (Top 100 Bollywood travel songs); BLACK SABBATH - "Paranoid" (Classic rock road trip); Desmond Cheese - Midnight Haze (Classic rock road trip); Mauja Hi Mauja (Long drive: upbeat Hindi car songs); Madari - Clinton Cerejo feat Vishal Dadlani & Sonu Kakkar, Coke Studio @ MTV Season 2 (Top 100 Bollywood travel songs); Toto - Rosanna (Official HD Video) (Classic rock road trip).
+
+## 33 · Vibe (Music)
+
+https://ogtv.co.in/vibe/ · Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.
+
+Good for: Diwali, Holi and garba party songs; Festival songs for Lohri, Eid, Christmas and New Year.
+
+Today:
+- 00:00–00:00 Party songs: Manohari - Full Video; 'PREM RATAN DHAN PAYO' Title Song; Woh Ladki Jo - VIDEO SONG
+
+Playing this week: Manohari - Full Video (Newyear songs); Dilliwali Girlfriend Full Song Yeh Jawaani Hai Deewani (Holi songs 2); Pallo Latke (Diwali songs 3); Laila Main Laila (Newyear songs); Tu Na Jaane (Lohri songs 3); Badshah - Aaj Raat Ka Scene Banale (Newyear songs); Gat Gat - Full Video (Newyear songs); Urvashi Video (Holi songs 2); PAYAL SONG : YO YO HONEY SINGH (Holi songs 2); Kar Gayi Chull (From "Kapoor & Sons (Since 1921)") (Diwali songs 3); Mehbooba (Newyear songs); Wakhra Swag (Lohri songs 3); Aaja Ni Aaja (Lohri songs 3); Aaye Haaye (Holi songs 2); MANIAC : YO YO HONEY SINGH (Holi songs 2); Balam Pichkari (Holi songs 2); Kuley Kuley (Newyear songs); Khadke Glassy - Jabariya Jodi |Sidharth M,Parineeti C| Yo Yo Honey Singh, Ashok M, Jyot… (Newyear songs); Dilbar (From "Satyameva Jayate") (Diwali songs 3); Jaspinder Narula - Dulhe Ka Sehra (Diwali songs 2); Kay Sera Sera - Jhankar Beats - HD VIDEO (Diwali songs 2); "Geeta Zaildar New Song": PATANG (Lohri songs); Dil ko churana, ninden urana (Diwali songs 2); Mannat | Holi Song | Daawat-e-Ishq | Aditya Roy Kapur, Parineeti Chopra | Sonu Nigam, S… (Holi songs).
+
+## 34 · 2010s Hits (Music)
+
+https://ogtv.co.in/2010s-hits/ · 2010s Hits on OGTV: Bollywood 2010-2019, free and always on. Videos from Bollywood 2010-2015 and Bollywood nostalgia 2007-2016.
+
+Good for: Bollywood songs from 2010 to 2019.
+
+Today:
+- 00:00–00:00 2010s hits: I Hate Luv Storys Title Track Full Video - Sonam Kapoor|Imran Khan|Vishal Dadlani|Kumaar; Shukran Allah Full Video - Kurbaan|Kareena Kapoor,Saif Ali Khan|Sonu Nigam,Shreya Ghoshal; Bheegi Si Bhaagi Si - Full Video
+
+Playing this week: I Hate Luv Storys Title Track Full Video - Sonam Kapoor|Imran Khan|Vishal Dadlani|Kumaar (Bollywood nostalgia 2007-2016); Tabaah Ho Gaye - Kalank (Hindi songs 2011-2020); Pee Loon (Bollywood 2010-2015); "Subha Hone Na De Full Song"| Desi Boyz (Bollywood nostalgia 2007-2016); ADHOORE (Bollywood 2010-2015); Saiyaara Rebirth (Bollywood 2010-2015); Samjhawan Unplugged (Bollywood nostalgia 2007-2016); Full Video: Tum Se Hi (Bollywood nostalgia 2007-2016); Love You Zindagi Full Video - Dear Zindagi (Hindi songs 2011-2020); Kabhi Alvida Naa Kehna Full Video - Shahrukh Khan, Rani , Preity , Abhishek (Bollywood nostalgia 2007-2016); Madhubala (Bollywood nostalgia 2007-2016); Abhi Toh Party Shuru Hui Hai (Bollywood 2010-2015); The Disco Song Full Song - SOTY|Alia Bhatt,Sidharth Malhotra,Varun Dhawan|Sunidhi Chauhan (Hindi songs 2011-2020); bahubali movie song, Hindi panchhi bole hai kiyaby kamruzzaman (Hindi songs 2011-2020); Mashallah (Bollywood 2010-2015); Mera Pehla Pehla Pyar 720p HD HQ Official (Hindi songs 2011-2020); KAHIN TO (Bollywood 2010-2015); Pehli Nazar Mein Kaise Jaado Kar Diya (Bollywood nostalgia 2007-2016); Zehnaseeb (Bollywood 2010-2015); Qaafirana (Hindi songs 2011-2020); Khuda Jaane (From "Bachna Ae Haseeno") (Bollywood 2010-2015); Aye Khuda [Full Song] Paathshaala (Bollywood nostalgia 2007-2016); Bheegi Si Bhaagi Si (From "Raajneeti") (Bollywood 2010-2015); Badtameez Dil (Bollywood 2010-2015).
+
+## 35 · 2000s Hits (Music)
+
+https://ogtv.co.in/2000s-hits/ · 2000s Hits on OGTV: Bollywood 2000-2009, free and always on. Videos from Hindi 2000s Hits, All Out 00s Hindi and Bollywood in the 00s.
+
+Good for: Bollywood songs from 2000 to 2009.
+
+Today:
+- 00:00–00:00 2000s hits: Tere Liye; Kabhi Khushi Kabhie Gham -Sad Version Video - Title Track|Shah Rukh Khan|Lata Mangeshkar; Na Tum Jano Na Hum
+
+Playing this week: Tere Liye (Hindi 2000s Hits); Mitwa, A. R. Rahman - Lagaan (Bollywood in the 00s); TUMSE MILKE DIL KA (Hindi 2000s Hits); Mera Rang De Basanti Chola - Video Song (Bollywood in the 00s); You'Re My Love Full Video (All Out 00s Hindi); It's the Time to Disco (Hindi 2000s Hits); Masti Ki Paathshala (Hindi 2000s Hits); Mast Kalandar (Full Song) Heyy Babyy (All Out 00s Hindi); Ajab Si (Hindi 2000s Hits); Heyy Babyy Title Song Feat. Akshay Kumar, Fardeen Khan, Riteish Deshmukh (Bollywood in the 00s); Tera Chehra Jab Nazar Aaye Feat. Rani Mukherjee Video Song Adnan Sami Super Hit Album "… (All Out 00s Hindi); Kya Mujhe Pyar Hai (Remix) [Full Song] Woh Lamhe (All Out 00s Hindi); Kem Chhe (Hindi 2000s Hits); Chand Sitare (Hindi 2000s Hits); TUMHE JO MAINE DEKHA (Hindi 2000s Hits); Pyar Ki Kashti Mein (Hindi 2000s Hits); Tennu Le [Full Song] - Jai Veeru (Bollywood in the 00s); Aur Kya (Hindi 2000s Hits); Say Shava Shava - Full Video (Bollywood in the 00s); Babuji Zara Dheere Chalo - Full Video (Bollywood in the 00s); Twist - Full Video Song (Bollywood in the 00s); Sajna Aa Bhi Jaa song from the movie Waisa Bhi Hota Hai - Part II (Bollywood in the 00s); Chalo Tumko Lekar (Hindi 2000s Hits); OODHNI (Hindi 2000s Hits).
+
+## 36 · 90s Hits (Music)
+
+https://ogtv.co.in/90s-hits/ · 90s Hits on OGTV: Bollywood 1990-1999, free and always on. Videos from Indian songs of 1995 and Kumar Sanu hits.
+
+Good for: 90s Bollywood songs; Kumar Sanu and Alka Yagnik songs, and 90s audio jukeboxes.
+
+Today:
+- 00:00–00:00 90s hits: Dandiye Ke Bahane Aa Jana; Hindi sadabhar gane; Gulshan Gulshan Kali Kali
+
+Playing this week: Dandiye Ke Bahane Aa Jana (Tips: 90s evergreen romantic songs); Pyar Dilon Ka Mela Hai 8K (Tips: 90s evergreen romantic songs); Dil Ki Halat - Janta Ki Adalat (Zee Music Classic: best of Kumar Sanu, 90s); Dil Laga Liya Maine (Tips: 90s evergreen romantic songs); Official: 80's Vs 90's Sad Songs (T-Series Bollywood Classics: 90s jukeboxes); Saat Samundar Paar Main Tere 4K Song (Shemaroo: 1990s superhit romantic songs); Double Dhamaka : 90s Romantic Songs (Shemaroo: 1990s superhit romantic songs); Hindi Sadabahar Gaane (Tips: Bollywood 90s hit songs); Jise Dekh Mera Dil Dhadka - Phool Aur Kaante (Kumar Sanu hits); Akhiyaan Milaoon Kabhi (Shemaroo: 1990s superhit romantic songs); Double Dhamaka : Evergreen Hits 0f 90's (Shemaroo: 1990s superhit romantic songs); Barste Pani Ka - Gaddaar (Indian songs of 1995); Dhiktana 3 - Superhit Blockbuster Song - Salman Khan, Madhuri Dixit - Hum Aapke Hain Koun (Rajshri: Hum Aapke Hain Koun songs); Paayal Meri Jadoo Jagati Hai - 4K Video (Shemaroo: 1990s superhit romantic songs); Aankhon Mein Base Ho (Shemaroo: 1990s superhit romantic songs); Udit Narayan Hits (Tips: 90s evergreen romantic songs); 90's Best Movie Songs (Tips: 90s evergreen romantic songs); Mere Dil Ki Galiyon Mein - Old Moive Songs (Tips: 90s evergreen romantic songs); Kabhi Tu Chalia Lagta Hai (Shemaroo: 1990s superhit romantic songs); Chudiyan Khanak Gayeen Song (YRF: Groovy 90s); Pehla Pehla Pyar Hai - Hum Aapke Hain Koun - Salman Khan, Madhuri Dixit - Best Romantic… (Rajshri: Hum Aapke Hain Koun songs); Dheere Dheere Se Meri Zindagi Mein Aana Full Video Song (T-Series Bollywood Classics: Aashiqui songs); Aisi divangi dekhi nahin (Shemaroo: 1990s superhit romantic songs); Kehdo Na Ke Tumse Pyar Hai (Indian songs of 1995).
+
+## 37 · Deccan Chargers (Music)
+
+https://ogtv.co.in/deccan-chargers/ · Deccan Chargers on OGTV: anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers, free and always on. Videos from Kannada banger songs.
+
+Good for: Telugu, Tamil, Malayalam and Kannada songs; Anirudh and A. R. Rahman songs.
+
+Today:
+- 00:00–01:00 Prime time: A. R. Rahman, back to back: I - Pookkalae Sattru Oyivedungal Video Song · 3 Feb 2015; Sarkar - OMG Ponnu Song Video (Tamil); Kaatru Veliyidai - Tango Kelaayo Video
+- 01:00–02:30 Late night: Anirudh, back to back: Baitikochi Chuste Song; Who Is Aravindh ?; Kaathuvaakula Rendu Kaadhal - Dippam Dappam Video
+- 02:30–04:00 Late night: Ilaiyaraaja, back to back: Adhisaya Nadamidum · Ilaiyaraaja · K.J. Yesudas · K.S. Chithra. Ilaiyaraaja; Unna Nenachen Paattu.; Oorellam Un Paatuthaan (Male) · Ilaiyaraaja · K.J. Yesudas
+- 04:00–04:40 Midnight melodies: Ilaiyaraaja, back to back: Thenmadurai Vaigai Nadhi.S. P. Balasubrahmanyam, P. Susheela, Malaysia Vasudevan; Ilaiyaraaja.( Isai Mani Digital); Appappa Thithikkum" Japanil Kalyanaraman.S. P. Balasubramanyam
+- 04:40–05:00 M. M. Keeravaani, back to back: Sundarakanda Songs; Badrinath Full Song |Badrinath|| Allu Arjun M.M.Keeravani Hits; Major Chandrakanth Songs - Neek Kaavalisindhi - Mohan Babu, Ramya Krishna
+- 05:00–05:40 Anirudh, back to back: Annakiliye - Music Video; Doctor - Chellamma Video; Hoyna Hoyna
+- 05:40–06:00 A. R. Rahman, back to back: Kaatru Veliyidai - Saarattu Vandiyila Video · 28 Apr 2017; Thiruda Thiruda Tamil Movie Songs; Kochadaiiyaan - Idhayam Video
+- 06:00–07:05 Morning melodies: Ilaiyaraaja: Amma Endru : K. J. Yesudas :Ilaiyaraaja; Idhayam Oru Kovil.Idaya Kovil.( S P Balasubrahmanyam )Isai Mani; Pattu Kannam. Kakki Sattai. Ilaiyaraaja
+- 07:05–08:10 Sai Abhyankkar, back to back: Vaada Veera Punch; @SaiAbhyankkar - Pavazha Malli (Music Video); God Mode - Video Song
+- 08:10–10:20 Anirudh, back to back: Don - Private Party Video; Swipe Right Material Music Video; LEO - Naa Ready Song Video
+- 10:20–11:25 A. R. Rahman, back to back: Maryan - Kadal Raasa Naan Full Video; Kaaviyathalaivan - Aye Mr. Minor Video; Sakkarakatti - Taxi Taxi Video
+- 11:25–12:30 Malayalam bangers: Thathaka Theithare Video Song; Nebulakal - Travel Song; Oru Vadakkan Selfie
+- 12:30–13:35 Telugu mass: Undipova Full Video Song; Mr. Perfect; Mastaaru Mastaaru Full Video Song
+- 13:35–14:40 Trending now: the South's songs on India's YouTube chart: MAIMATA | Chandan Shetty | Agastya Raag | Official Music Video; Magale - Music Video; Yeshanagula - Video Song
+- 14:40–15:45 Anirudh, back to back: Pathala Pathala Video; Remo - Tamilselvi Video Song; Thaanaa Serndha Koottam - Naana Thaana Tamil Video
+- 15:45–16:50 M. M. Keeravaani, back to back: Seethaiah Telugu Movie; Sundarakanda Songs; Panchadara Bomma Full Song
+- 16:50–17:55 Anirudh & co: Sai Abhyankkar, Thaman: Velaikkaran - Iraiva Video l Sivakarthikeyan, Nayanthara l Anirudh; Rum - Alladhe Siragiye Official Tamil Song Video; Aravindh - Music Video
+- 17:55–19:00 Sai Abhyankkar, back to back: Singari Video Song; Mozhiye Video Song |Baththa; Oorum Blood
+- 19:00–20:30 Prime time: Tamil kuthu & bangers: Vaaranam Aayiram - Adiyae Kolluthey Video; Madharasapattinam - Pookkal Pookkum Video; Engeyum Kaadhal - Nangaai Video
+- 20:30–23:30 Prime time: Anirudh, back to back: Annakiliye - Music Video; Ori Devuda Song; Kaathuvaakula Rendu Kaadhal - Two Two Two Music Video
+- 23:30–00:00 Prime time: A. R. Rahman, back to back: Chekka Chivantha Vaanam - Sevandhu Pochu Nenju Video; Kochadaiiyaan - Medhuvaagathaan Video; Kuchi Kuchi Rakkamma Video Song
+
+Playing this week: I - Pookkalae Sattru Oyivedungal Video Song · 3 Feb 2015 (Sony Music South: best of A.R. Rahman); KODAKAA KOTESWAR RAO Full Video Song |Agnyaathavaasi || Pawan kalyan,Trivikram Hits (Aditya Music: best of Anirudh, Telugu); Vaa Vaa Pakkam Vaa.Thanga Magan.Ilaiyaraaja.S P Balasubrahmanyam, Vani Jairam.( Isai Ma… (Isai Mani Digital: Ilaiyaraaja songs); Abbaigaru Songs - O Kanne Poovva - Venkatesh - Meena (M.M. Keeravaani Telugu hits); God Mode - Video Song (Think Music: Sai Abhyankkar); Kingdom - Ragile Ragile Full Video Song (Aditya Music: best of Anirudh, Telugu); Yaathonnum Parayathe Video Song (Think Music: Malayalam top hits); Ringa Ringa (Telugu bangers); Orey Oru - Song Making Video (Anirudh Ravichander); @SaiAbhyankkar - Aasa Kooda (Music Video) (Think Music: Sai Abhyankkar); Kingdom - Hridayam Lopala Song (Aditya Music: best of Anirudh, Telugu); Don - Jalabulajangu Video (Sony Music South: best of Anirudh); Ilamanadhu.S.P.Balasubrahmanyam, S. Janaki (Isai Mani Digital: Ilaiyaraaja songs); Karuppa Kooda Va - Live Performance (Think Music: Sai Abhyankkar); Vaathil Melle - Video Song (Think Music: Malayalam top hits); Andama Nee Peremiti Song - Allari Priyudu Movie (M.M. Keeravaani Telugu hits); Irumbile Oru Idhaiyam Video Song (Tamil bangers); I - Ladio Video (A.R. Rahman Tamil hits); Seetharamaiah Gari Manavaralu Songs - Poosindi Poosindi - Meena (M.M. Keeravaani Telugu hits); Original Audio VS Isai Mani Digital Audio (Isai Mani Digital: Ilaiyaraaja songs); Undiporaadhey Full Video Song || Hushaaru Songs || Radhan || Sree Harsha Konuganti (Aditya Music: most viewed Telugu); Maryan - Sonapareeya Video (Sony Music South: best of A.R. Rahman); Kadhal Psycho (Tamil bangers); Veera Sivaji - Soppanasundari Video Song (Tamil kuthu).
+
+## 38 · Anthems (Music)
+
+https://ogtv.co.in/anthems/ · Anthems on OGTV: Coldplay & friends, free and always on. Videos from Coldplay, Imagine Dragons, OneRepublic mix and Coldplay official videos.
+
+Good for: Coldplay and stadium anthems.
+
+Today:
+- 00:00–00:00 Big-chorus pop & rock: Fall Out Boy - Immortals (From "Big Hero 6"); Evanescence - Bring Me To Life (Official HD Music Video) ft. Paul McCoy; Calvin Harris - My Way
+
+Playing this week: Fall Out Boy - Immortals (From "Big Hero 6") (Coldplay, Imagine Dragons, OneRepublic mix); Coldplay - 🌈 (A Film For The Future) (Coldplay); Gotye - Somebody That I Used To Know (feat. Kimbra) [Official Music Video] (Coldplay, Imagine Dragons, OneRepublic mix); Imagine Dragons - Birds (Animated Video) (Coldplay, Imagine Dragons, OneRepublic mix); BLOCK - "Still Life" (Coldplay, Imagine Dragons, OneRepublic mix); 3 Doors Down - Kryptonite (Alternative anthems); Nickelback - Photograph (Alternative anthems); Maroon 5 - Maps (Coldplay, Imagine Dragons, OneRepublic mix); Coldplay - God Put A Smile Upon Your Face (Coldplay official videos); Tom Odell - Another Love (Coldplay, Imagine Dragons, OneRepublic mix); Coldplay - Paradise · 19 Oct 2011 (Coldplay official videos); Green Day - 21 Guns [Official Music Video] (Alternative anthems); Coldplay - JUPiTER (A Film For The Future) (Coldplay); Coldplay - Hurts Like Heaven (Coldplay official videos); Coldplay - Viva La Vida · 4 Aug 2008 (Coldplay official videos); Coldplay - Clocks · 27 May 2011 (Coldplay official videos); OneRepublic - Love Runs Out (Coldplay, Imagine Dragons, OneRepublic mix); Maroon 5 - Love Somebody (Alternative anthems); Incubus - Drive (Alternative anthems); Imagine Dragons - Thunder (Coldplay, Imagine Dragons, OneRepublic mix); Coldplay - Moon Music (A Film For The Future) (Coldplay); OneRepublic - I Ain’t Worried (From “Top Gun: Maverick”) [Official Music Video] (Coldplay, Imagine Dragons, OneRepublic mix); MAGIC! - Rude (Alternative anthems); Ed Sheeran - Castle On The Hill [Official Music Video] (Alternative anthems).
+
+## 39 · Global Hits (Music)
+
+https://ogtv.co.in/global-hits/ · Global Hits on OGTV: the world's top hits, every language, free and always on. Videos from Best music videos of all time and Billion-view songs.
+
+Good for: The world's top hits, in English and every language.
+
+Today:
+- 00:00–04:00 Prime time: the global top 100, US & UK charts: SIMMBA: Tere Bin; Maroon 5 - Girls Like You ft. Cardi B (Official Music Video); EETHA - Ji Ji Re Ji (Video) Shraddha Kapoor
+- 04:00–05:00 Billion-view classics: David Bowie & Mick Jagger - Dancing In The Street; Sinéad O'Connor - Nothing Compares 2 U (Official Music Video); Romeo Santos - Propuesta Indecente
+- 05:00–06:00 World tour: Seoul, Tokyo & Johannesburg charts: 小泉今日子 - 学園天国（Live at 沖縄コンベンションセンター 劇場棟 2026.5.10）; Hearts2Hearts 하츠투하츠 'RUDE!' MV; [PLAVE BIRTHDAY GIFT] 하민 & 밤비 '0+0' (원곡 : 한로로)
+- 06:00–09:15 Morning chart: this week's global top 100: JISOO - ‘ADDICTED’ DANCE PERFORMANCE VIDEO; 80 Lakh | Kala Dighal, Sweta Chauhan | Shiva Choudhary, D Naveen | New Haryanvi Songs H…; Lady Gaga - Poker Face (Official Music Video)
+- 09:15–12:30 K-pop, J-pop & Amapiano: the world's charts: YAO - ありふれた世界の果てに (feat. Awich, CHICO CARLITO, ONE OK ROCK & Paledusk) [Official Music…; [MV] KimNaYoung(김나영) _ A Letter For You(봄 내음보다 너를); [LIVE] 사랑만 해두자 - 경서 X 유영우
+- 12:30–15:45 Daily global chart: KARM6 - İki Yüzlü (Official Music Video); Megan Thee Stallion - Thin Ice - Tina Tuesday Freestyle · 20 Oct 2026; DILRUBA DILNASHEEN - Dilfek - Rito Riba
+- 15:45–19:00 All-time most viewed: Radiohead - Karma Police; MACKLEMORE & RYAN LEWIS - THRIFT SHOP FEAT. WANZ; Prince and the Revolution - Raspberry Beret (Official 4K Music Video)
+- 19:00–00:00 Prime time: the global top 100, US & UK charts: Ella Langley - Choosin' Texas; AURORA - Runaway; Udaarian (Badi lambi hai kahani mere pyaar di) - Satinder Sartaaj
+
+Playing this week: SIMMBA: Tere Bin (YouTube Charts: daily top music videos, global); Shubh - Never Left (Official Music Video) (YouTube Charts: daily top music videos, global); Robert Palmer - Addicted To Love (Official Music Video) (Best music videos of all time); "PINKY UP" (Official EYEKONS Video) (YouTube Charts: daily top music videos, global); Sheesha (Official Music Video) (YouTube Charts: Top 100 music videos, global); Video (YouTube Charts: Top 100, Japan); back number - 히로인 [ヒロイン] 🎵"저 가수 입니다🎤" by 강남 (YouTube Charts: daily top music videos, global); Dire Straits - Money For Nothing (Official Music Video) (Best music videos of all time); XG - DEPENDS (Official Music Video) · 6 Nov 2026 (YouTube Charts: Top 100 music videos, global); Zeddy Will - Bow Bow Bow (YouTube Charts: Top 100, United States); Alan Walker, Hamza Malik, Zain Zohaib & James Arthur - Alfaaz (Alan Walker Relight) (YouTube Charts: daily top music videos, global); 꿈꾸던 어른이 되었나요? Cover by 탑현 (YouTube Charts: Top 100, South Korea); Usimamane, Jacquees - My Baby (Official Music Video) (YouTube Charts: Top 100, South Africa); IVE 아이브 'Looks Can Kill' MV (YouTube Charts: Top 100, South Korea); Björk - It's Oh So Quiet (Best music videos of all time); Finesse2Tymes - Playing With Fire [Official Music Video] (YouTube Charts: Top 100, United States); 初音ミク が オリジナル曲を歌ってくれたよ「1996」 (YouTube Charts: Top 100, Japan); Song Of Hope (Zwi Do Luga) (YouTube Charts: Top 100, South Africa); Sam Smith - I'm Not The Only One (Official Music Video) (Billion-view songs); しわあわせ / Vaundy ： MUSIC VIDEO (YouTube Charts: Top 100, Japan); RIIZE (라이즈) 'Insomnia'｜Record Delivery📦｜Self Recording @SM ENTERTAINMENT｜LIVE｜레코드딜리버리 (YouTube Charts: Top 100, South Korea); ＝LOVE（イコールラブ）/ 21st Single『恋、はじめました。』【MV full】 (YouTube Charts: Top 100, Japan); Kate Bush - Running Up That Hill - Official Music Video (Best music videos of all time); Girls' Generation-HRS 소녀시대-효리수 'Skibidi' Performance Video (YouTube Charts: Top 100, South Korea).
+
+## 40 · Gym (Music)
+
+https://ogtv.co.in/gym/ · Gym on OGTV: Punjabi, desi hip-hop, rap, rock & phonk bangers, free and always on. Videos from Greatest rock workout songs and Hyped Punjabi gym songs.
+
+Good for: Workout music: Punjabi gym songs, desi hip-hop, rap, rock and phonk.
+
+Today:
+- 00:00–04:00 Late set: phonk & rap: URBAN DDPAT; Phonky Halloween; GO! (remixed and speed up)
+- 04:00–05:20 Phonk after dark: INSTINCT; SHADXWBXRN, ARCHEZ, KXNVRA - PRINCE OF DARKNESS; Scary Garry
+- 05:20–06:00 Early riser: rock: The Killers - Mr. Brightside (Official Music Video); The Hospital - The Long Way Down (Official Music Video); My Chemical Romance - Welcome To The Black Parade [Official Music Video]
+- 06:00–09:00 Morning set: Punjabi gym bangers: WAHZIR INC; Buckle Up; Kalla Chann
+- 09:00–12:00 Power hour: rap: Work REMIX; Tay-K - Get It (feat. Wasteey Monroe) (Official Music Video); Who Want Smoke?
+- 12:00–14:00 Desi hip-hop: KODAK | King & @SeedheMaut | MM | Official Music Video; Dino James - Still Here ft. Katya Krishnan (Official Music Video); Family Routine (Official Video)
+- 14:00–17:00 Punjabi heavyweights: Milan: Deep Money Feat Arjun Full Song; Cartel; No Love
+- 17:00–19:00 Heavy set: rock & metal: Welcome To The Jungle; Racewall Mosquitoes - Vagabond [Official Music Video]; Nirvana - Smells Like Teen Spirit (Official Music Video)
+- 19:00–22:36 Prime-time desi hip-hop: Kath; EMIWAY BANTAI - TRIBUTE TO SIDHU MOOSEWALA; Chal Bombay
+- 22:36–00:00 Late set: phonk & rap: BROKEN SPIRIT; INCOMING; END LINE
+
+Playing this week: URBAN DDPAT (Aggressive gym phonk); AVOID ME (Aggressive gym phonk); Live Another Day (Aggressive gym phonk); Hirni (Punjabi gym bangers); Mera Mahi (Punjabi gym workout); Homecoming (Beast mode: rap workout); Dino James - Still Here ft. Katya Krishnan (Official Music Video) (AWAL India: Desi hip-hop workout bangers); 3 PEG (Punjabi gym workout); Headliner (Hyped Punjabi gym songs); EMIWAY BANTAI - TRIBUTE TO SIDHU MOOSEWALA (YouTube Music: Desi Hip Hop Workout); KAALI HOODIE (MUSIC VIDEO) SIDHU MOOSE WALA FT BOHEMIA (YouTube Music: Desi Hip Hop Workout); Lock (Hyped Punjabi gym songs); Hanji Hanji (Punjabi gym bangers); KR$NA - Joota Japani (YouTube Music: Desi Hip Hop Workout); 4PF (Hyped Punjabi gym songs); Tenside - TRAUMA TRUTH TRAGEDY (Official Music Video) (Greatest rock workout songs); Chaar Diwaari x Sanjith Hegde - Banda Kaam Ka (YouTube Music: Desi Hip Hop Workout); Daga Te Pyaar (Punjabi gym workout); Bom Diggy (Punjabi gym workout); Dhanda Nyoliwala - Ha Ha Ha (Official Music Video) (YouTube Music: Desi Hip Hop Workout); Wazir Patar - MTCD ft. Japjeet Sandhu (Hyped Punjabi gym songs); Eric Schenkman - Recipe (Greatest rock workout songs); Hostel (Punjabi gym workout); Shubh - Bandana (Official Music Video) (YouTube Music: Desi Hip Hop Workout).
+
+## 41 · Punjabi (Music)
+
+https://ogtv.co.in/punjabi/ · Punjabi on OGTV: karan Aujla, Diljit, Shubh & Punjabi bangers, free and always on. Videos from Iconic Punjabi Hits and Most viewed Punjabi songs.
+
+Good for: Punjabi songs: Karan Aujla, Diljit Dosanjh and Shubh.
+
+Today:
+- 00:00–01:00 Prime time: Karan Aujla, back to back: TOP FELLA (MUSIC VIDEO) KARAN AUJLA; Karan Aujla Feat. Bohemia ( UNITY - Full Video) Deep Jandu I Rupan Bal I Latest Punjabi…; I REALLY DO (MUSIC VIDEO) KARAN AUJLA| IKKY
+- 01:00–04:00 Late night bangers: Diljit Dosanjh: Tension (Official Music Video) Advisory; Shubh - Still Rollin (Official Music Video); "3 Peg Sharry Mann"
+- 04:00–04:40 Diljit Dosanjh, back to back: Diljit Dosanjh; Kufar I Official Video; Diljit Dosanjh: Welcome To My Hood (Official Music Video)
+- 04:40–05:20 Bangers: With You - AP Dhillon (Official Music Video); Shubh - Buckle Up (Official Music Video); Jodi Teri Meri
+- 05:20–06:00 Shubh, back to back: Shubh - Cheques (Official Music Video) · 21 Jul 2023; Shubh - Buckle Up (Official Music Video); Shubh - Elevated (Official Music Video)
+- 06:00–08:10 Karan Aujla, back to back: Softly, Wavy, Tauba Tauba & the chartbusters: Aaye Haaye Feat. Nora Fatehi; Gangsta - Karan Aujla Ft. YG; LOW FADE (Music Video) KARAN AUJLA
+- 08:10–10:20 Bangers: RESHAM DA RUMAAL; Diamond | Official Music Video | Gurnam Bhullar | Roopi Gill | Songs 2018 | Jass Records; Wakhra Swag
+- 10:20–12:30 Shubh, back to back: Shubh - Baller (Official Music Video); Shubh - OG (Official Music Video); Shubh - Supreme (Official Music Video)
+- 12:30–14:40 Diljit Dosanjh, back to back: Diljit Dosanjh - G.O.A.T. (Official Music Video); Chauffeur: Official Music Video; Diljit Dosanjh
+- 14:40–16:50 Karan Aujla, back to back: Y.D.G; Hukam Karan Aujla I Latest Punjabi Songs 2021 I Rehaan Records; REAL BADMAN Karan Aujla
+- 16:50–19:00 Shubh, back to back: Shubh - Buckle Up (Official Music Video); Shubh - Still Rollin (Official Music Video); Shubh - Dior (Official Music Video)
+- 19:00–22:00 Prime time: Diljit Dosanjh, back to back: Diljit Dosanjh : Dealer (Official Music Video) Virk Andaaz : Da Future; Diljit Dosanjh : Ranjha (Official Music Video) ft. SIA : David Guetta; Hass Hass Diljit X Sia
+- 22:00–00:00 Prime time: Karan Aujla, back to back: Winning Speech (Music Video) Karan Aujla; Chithiyaan; BOYFRIEND(MUSIC VIDEO) KARAN AUJLA| SUNANDA
+
+Playing this week: TOP FELLA (MUSIC VIDEO) KARAN AUJLA (Karan Aujla); FALLIN APART Karan Aujla (Karan Aujla: official music videos); Veervaar (Speed Records: Top Punjabi Hits); 𝐊𝐚𝐥𝐚 𝐂𝐡𝐚𝐬𝐡𝐦𝐚 🕶️ (Most viewed Punjabi songs); Official Video: Nikle Currant Song (Iconic Punjabi Hits); Shubh - Buckle Up (Official Music Video) (Shubh); Shubh - Together (Official Music Video) (Shubh); Oouuu Karan Aujla I Rupan Bal I Yeah Proof (Karan Aujla: official music videos); It's Okay God Karan Aujla I Rupan Bal I Proof I Latest Punjabi Songs 2020 (Karan Aujla: official music videos); Diljit Dosanjh : Dealer (Official Music Video) Virk Andaaz : Da Future (Diljit Dosanjh); Shubh - MVP (Official Music Video) (Shubh); Y.D.G (Karan Aujla: official music videos); Sheesha | Karan Aujla | J Statik | Sagar Deol | New Punjabi Song 2022 (Karan Aujla: official music videos); Champions Anthem Karan Aujla (Karan Aujla: official music videos); Annewahh - Harsh Nussi (Desi Melodies); Paranda | Kaur B | JSL | Latest Song 2016 | Kaur B New Song | Speed Records (Speed Records: Top Punjabi Hits); Patiala Peg (Speed Records: Top Punjabi Hits); Harrdy Sandhu - Backbone (Most viewed Punjabi songs); Daang | Mankirt Aulakh | MixSingh | Deep Kahlon| Sukh Sanghera| Latest Punjabi Song (Speed Records: Top Punjabi Hits); Ve Maahi (Most viewed Punjabi songs); KHAAB | AKHIL | PARMISH VERMA | PUNJABI SONG 2025 | CROWN RECORDS | LATEST PUNJABI 2025 | (Iconic Punjabi Hits); TANG KURTI (T-Series Apna Punjab); Yaari Tod Deni : Surjit Bhullar Ft. Sudesh Kumari (Most viewed Punjabi songs); Snapchat (Speed Records: Top Punjabi Hits).
+
+## 42 · Raag (Music)
+
+https://ogtv.co.in/raag/ · Raag on OGTV: sitar, santoor, classical voices & Coke Studio, free and always on. Videos from Coke Studio Pakistan, Anoushka Shankar and Coke Studio India.
+
+Good for: Indian classical music: sitar, santoor and classical voices; Coke Studio; Calm music to study or work to.
+
+Today:
+- 00:00–01:45 Coke Studio prime time: Hawa Hawa · Gul Panrra & Hassan Jahangir; 'Sawan Mein' - Sachin-Jigar, Divya Kumar & Jasmine Sandlas - Coke Studio@MTV Season 4; Sundari Komola - Ram Sampath, Usri Banerjee & Aditi Singh Sharma - Coke Studio @ MTV Se…
+- 01:45–04:00 Night ragas: Shankara - Rishab Rikhiram Sharma (Official Music Video); Raag Alhaiya Bilawal; Roslyn - Rishab Rikhiram Sharma (Official Music Video)
+- 04:00–05:40 Late-night sitar & santoor: Rama Rama - Rishab Rikhiram Sharma (Official Music Video); Sindhu Bhairavi; Charukeshi
+- 05:40–08:47 Morning ragas: khayal, thumri & bhajan: BHAJAN BY SMT. KAUSHIKI CHAKRABARTY AT BIRLA ACADEMY ON 8TH FEBRUARY, 2014; Kaushiki Chakraborty; Kaushiki Chakraborty - Live at Indoor Stadium
+- 08:47–12:30 Sitar & santoor: Tilak Kamod; Mehram (Dr. Arora); Bijli - Rishab Rikhiram Sharma (Official Visualizer) [Out Now]
+- 12:30–16:12 Coke Studio classics: Khalasi · Aditya Gadhvi x Achint; Chaudhary - Amit Trivedi feat Mame Khan, Coke Studio @ MTV Season 2; Latthay Di Chaadar · Quratulain Balouch & Farhan Saeed
+- 16:12–19:00 Evening thumri & khayal: Hindustani Classical Vocal; Nain ghat ghatatan ek ghari; Raag Maluha Maand
+- 19:00–00:00 Coke Studio prime time: O Yaara · Abdul Hannan x Kaavish; Hivde Ro Haar (Official Music Video) · Mame Khan, Mohammad Faiz, Vaibhav Pani; Dil · Afusic x Zoha Waseem x Ali Soomro
+
+Playing this week: Hawa Hawa · Gul Panrra & Hassan Jahangir (Coke Studio Pakistan); Ae Ajnabee (Official Music Video) - Aditya Rikhari, Ravator, Kutle Khan (Coke Studio India); Anoushka Shankar - India Chapters Tour (Anoushka Shankar); Miraculous RAGHUPATI on ZITAR (Niladri Kumaar); ► RACHNA PAHADI (DEEP CHANDI TAAL) (Full Audio) : PT. SHIV KUMAR SHARMA || T-Series Cla… (T-Series Classical: Pt Shivkumar Sharma); Kaushiki Chakraborty - Live at Indoor Stadium (Kaushiki Chakraborty); BENGALI PRAYER by Kaushiki (Kaushiki Chakraborty); Raag Maluha Maand (Darbar Festival: Hindustani vocal); Amazing Sitar (Darbar Festival: For sitar lovers); Ustad Vilayat Khan (Saregama: Best of Ustad Vilayat Khan); Tu Mane Ya Na Mane,Wadali Brothers,Coke Studio @ MTV,S01,E03 (Coke Studio India); O Yaara · Abdul Hannan x Kaavish (Coke Studio Pakistan); Albela Sajan Ayo Re (Saregama: Kishori Amonkar); Taqdeer · Donn Bhat x Rashmeet Kaur x Prabh Deep x Sakur Khan (Coke Studio India); Wohi Khuda Hai · Atif Aslam (Coke Studio Pakistan); Chanakya - Rishab Rikhiram Sharma (Live from Mumbai) (Rishab Rikhiram Sharma); Anoushka Shankar - New Dawn (Official Audio) (Anoushka Shankar); Hindustani Classical| Raga Jaijaiwanti| Classical Vocal by Madhup Mudgal (Saregama: Best of Indian classical); Raag Bhairavi (Darbar Festival: Niladri Kumar); Zara Zara x Tinka Tinka (Sitar Version) by Rishab Rikhiram Sharma – Live in Nepal (Rishab Rikhiram Sharma); Raga Darbari Kanhada| Indian Classical| Classical Vocal Music by Madhup Mudgal (Saregama: Best of Indian classical); Anoushka Shankar - Amrita (Official Audio) (Anoushka Shankar); ► RACHNA MISHRA KHAMAJ (Full Audio) : PANDIT SHIV KUMAR SHARMA || T-SeriesClassics (T-Series Classical: Pt Shivkumar Sharma); Druta Laya (Saregama: Best of Ustad Vilayat Khan).
+
+## 43 · Sadabahar (Music)
+
+https://ogtv.co.in/sadabahar/ · Sadabahar on OGTV: evergreen hits of the 60s, 70s & 80s: Kishore, Lata, Rafi & Mukesh, free and always on. Videos from Shemaroo Filmi Gaane.
+
+Good for: Old Hindi songs non-stop; Evergreen hits of Kishore Kumar, Lata Mangeshkar, Mohammed Rafi and Mukesh; 60s, 70s and 80s Bollywood songs.
+
+Today:
+- 00:00–01:00 Prime time: Lata & Mukesh: Yeh To Sach Hai Ki Bhagwan Hai; Hum Tum Yug Yug Se - Classic Romantic Song - Lata Mangeshkar & Mukesh - Milan; Teri Duniya Main Dil Lagta Nahin - Bawre Nain Songs - Raj Kapoor - Mukesh - Sad Song
+- 01:00–04:00 Late night: Kishore, Lata, Rafi & Mukesh: Yeh Jeevan Hai Iss Jeevan Ka; Bol Gori Bol Tera Kaun Piya - Classic Hindi Song - Sunil Dutt, Nutan - Milan; Aaj Kal Mein Dhal Gaya
+- 04:00–04:40 Kishore Kumar, back to back: Vada karo nahin chhoroge tum mera sath ❤️; Chahe Raho Door Chahe Raho Paas - Dharmendra - Tanuja - Do Chor - Kishore Lata Duet - R…; Chhoti Chhoti Dikhti Thi HD |Jeetendra, Shabana Azmi| Kishore Kumar, Asha Bhosle
+- 04:40–05:20 Lata Mangeshkar, back to back: Ye Zulf Kaisi Hai Video Song; Maye Ni Maye Full 4K Video Song; Sharm Aati Hai Magar - Padosan - Lata Mangeshkar Hits - R. D. Burman Hit Songs
+- 05:20–06:00 Mohammed Rafi, back to back: Rafi sahab aur lata didi ki aavaz men, zindagi ka anmol path - jinevale muskurake ji; Woh Din Yaad Karo Video Song; Mujhe Kitna Pyaar Hai Tumse - Video Song
+- 06:00–08:10 Mukesh, back to back: Tum Roothi Raho Main Manata Rahun; Humsafar Ab Yeh Safar - Shashi Kapoor - Nanda - Juaari - Lata - Mukesh - Evergreen Hind…; Republic Day Special |Mera Rang De Basanti Chola
+- 08:10–10:20 Hits of the 60s: Nazar Nazar Se Milao HD; O Jogi Hum To Lut Gaye Tere Pyar Mein; Main Laal Laal Muchkun
+- 10:20–12:30 Hits of the 70s: Ankhiyon Ke Jharokhon Se (Sad); Ek Baat Poochhoon; Pyase do badan
+- 12:30–14:40 Kishore Kumar, back to back: Jeevan Pyar Bina Kuch Nahi; Pal Pal Dil Ke Paas; Rampur Ka Wasi Hoon Main
+- 14:40–16:50 Lata Mangeshkar, back to back: Chocolate Lime Juice - Hum Aapke Hain Koun - Best Of Lata Mangeshkar Hit Songs; Classic Dil Deewana Female; Leja Meri Duayen - Best Of Lata Mangeshkar - Naushad Hits - Deedar
+- 16:50–19:00 Hits of the 80s: Na Jaiyo Pardes; Dil tere nam se; Jeena Bhi Kya Koi Jeena
+- 19:00–22:00 Prime time: Kishore & Rafi: Jeevan Pyar Bina Kuch Nahi; 60's Evergreen Retro Song; Tu na mili to ham jogi ban jaenge ❤️
+- 22:00–00:00 Prime time: Lata & Mukesh: Khushi Ki Woh Raat Aa Gayee; Mausam Ka Jaadu; Yeh Mera Deewanapan Hai
+
+Playing this week: Yeh To Sach Hai Ki Bhagwan Hai (Bollywood Classics: Lata Mangeshkar hits); Tum Chale Aaye Ho Chalo Khair Hui (Goldmines: hits of Kishore Kumar); Yadon Mein Woh - Swami 1977 Songs - Shabana Azmi - Girish Karnad - Kishore Kumar - Film… (Kishore Kumar: sad songs); Bol Gori Bol - Sunil Dutt - Nutan - Milan (Mukesh: romantic songs); Abhi Na Jaao Chhod Kar (Goldmines: superhit songs of the 60s); Bye Bye Miss Goodnight (Bollywood Classics: 70s evergreen songs); Woh Shaam Kuch Ajeeb Thi (Kishore Kumar: sad songs); Maa Kabhi Main Bhi (Bollywood Classics: Lata Mangeshkar hits); 60's Evergreen Retro Song (Bollywood Classics: Rafi and Lata duets); Ooi Maa Ooi Maa Yeh Kya Ho Gaya - Lata Mangeshkar Hit Songs - Laxmikant Pyarelal Songs (Bollywood Classics: Lata Mangeshkar hits); Kali se najaron se (Goldmines: hits of Kishore Kumar); Tere Mere Sapne (Goldmines: superhit songs of the 60s); O Meri Jaan Maine Kaha (Shemaroo: best of Rajesh Khanna); Chhukar mere man ko (Goldmines: hits of Kishore Kumar); Mujhko Peena Hai Peene Do - Remix By L3AD (Shemaroo: hits of Mithun Chakraborty); Jhilmil Sitaron Ka Aangan Hoga (Video Song) (Bollywood Classics: Lata Mangeshkar hits); Kaali Kaali Raat Daraye HD (Goldmines: superhit songs of the 60s); Public Hai Sab Janti Hai (Shemaroo: best of Rajesh Khanna); Ek Bata Do Do Bate Char (Tips: 80s hits); Manoj kumar Birth Anniversary Special ❤️ (Goldmines: superhit songs of the 60s); Ek nanbar ki larki HD - kamyab - jitendr, radha - aasha bhosle, kishor kumar - Old Is Gold (Goldmines: hits of Kishore Kumar); Kabhi tera daman na chhorenge ham ❤️ mohammad rafi, aasha bhosle (Goldmines: superhit songs of the 60s); Dil Lagaate Hai Song (Shemaroo: hits of Mithun Chakraborty); Banna Re Bagama Jhula Ghalya (Shemaroo: hits of Mithun Chakraborty).
+
+## 44 · Bhakti (Music)
+
+https://ogtv.co.in/bhakti/ · Bhakti on OGTV: devotional, and the coming festival's bhajans, free and always on. Videos from T-Series Bhakti Sagar.
+
+Good for: Bhajans non-stop; Hanuman Chalisa and morning aarti; The coming festival's bhajans.
+
+Today:
+- 00:00–04:00 Devotional: Hanuman Chalisa · Shankar Mahadevan; Somvar Special bhajan I aarti somnath ji ki I Aarti Somnath Ji Ki Aarti I HEMANT CHAUHAN I S…; Kali ji ki aarti
+- 04:00–05:00 4 am, Brahma muhurat: Mahamrityunjay Mantra · Anuradha Paudwal: Mahamrityunjay Mantra · Anuradha Paudwal
+- 05:00–06:00 Devotional: Jay ganesh deva, ganesh ji ki aarti Jai Ganesh Deva, Ganesh Aarti l HARIHARAN I Best Aarti Sa…; Om jay jagdish hare aarti| Om Jai Jagdish Hare; Mangalmurti gauri lala Mangalmurti Gauri Lala, Hindi English Lyrics, HARIHARAN I Shree Ga…
+- 06:00–06:30 Subah: Sankatmochan Hanuman Ashtak: Mangalvar special: Sankatmochan Hanuman Ashtak; Sankat Mochan Hanuman Ashtak · Hari Om Sharan; Hanuman Ashtak · Hariharan
+- 06:30–07:00 Shree Hanuman Chalisa: Shri hanuman chalisa SHREE HANUMAN CHALISA I BRAJESH BRAJ I Hanuman Bhajan I Full HD Vide…; Shri hanuman chalisa · 13 May 2025; Hanuman Chalisa with Hindi Subtitles Lata Mangeshkar I Shri Hanuman Chalisa
+- 07:00–08:00 Hariharan bhajans: Aarti kijai hanuman lala ki,hanuman Aarti, Aarti Keejai Hanuman Lala Ki,HARIHARAN,Shree Han…; Sankatmochan hanuman ashtak; Mangalvar Special hanuman bhajan ramdut mahavir hanuman Ramdoot Mahavir Hanuman Sweekaro I HARI…
+- 08:00–17:00 Devotional: Somvar Special Non Stop shiv ji ke bhajan I Monday Morning Shiv Ji Bhajans I Best Collection; Somvar Special shivji ke bhajan I Monday Morning Shiv Bhajans I ANURADHA PAUDWAL,HARIHARAN,…; Hey Bhole Shankar Padhaaro I HARIHARAN I GULSHAN KUMAR I Shiv Mahima I Full HD Video
+- 17:00–21:00 Evening devotional: Jai Pretraj Ji I Aarti Jai Pretraj Ji I Shree Mehandipur Balaji Ki Aartiyan I RAKSHA BH…; Hanuman chalisa |🙏New Hanuman Chalisa🙏; Somvar Special shiv aartiyan jay shiv onkara, Jai Shiv Omkara, Sheesh Gang Ardhang Parvati…
+- 21:00–00:00 Devotional: Shri hanuman chalisa SHREE HANUMAN CHALISA I BRAJESH BRAJ I Hanuman Bhajan I Full HD Vide…; Hanuman Chalisa I Hindi English Lyrics I MUKESH KUMAR I Full HD Video Song; Shri hanuman chalisa · 13 May 2025
+
+Playing this week: Hanuman Chalisa · Shankar Mahadevan (Times Music Spiritual); Sampoorna Sunder Kand By Hari Om Sharan (Hariharan: Hanuman bhajans); Sankat Mochan Hanuman Ashtak (Zee Music Devotional); Hriday men hain siyaram Jinke Hriday Mein Hain Siyaram (Hariharan: Hanuman bhajans); Om jay sarasvati mata Om Jai Saraswati Mata I VIPIN SACHDEVA I Basant Panchami Special 2021 (T-Series Bhakti Sagar: Best aarti collection); Mangalvar Special bhajan I Shree Ram Bhakt Hanuman I HARI OM SHARAN I NANDINI SHARAN I Best… (Hariharan: Hanuman bhajans); Somvar Special shiv aartiyan jay shiv onkara, Jai Shiv Omkara, Sheesh Gang Ardhang Parvati… (T-Series Bhakti Sagar: Monday bhajans); Hanuman Chalisa By Parupalli Ranganath (T-Series Bhakti Sagar: Hanuman Chalisa collection); Aarti Keejei Hanuman Lala Ki Gulshan Kumar, Hariharan I Aartiyan (T-Series Bhakti Sagar: Aarti collection); Budhvar Special jay ganesh bolo pyare (Hariharan: Ganesh bhajans); Navratri Special nau deviyon ki aartiyan Nau Deviyon Ki Aartiyan:ANURDHA PAUDWAL,Best Aar… (T-Series Bhakti Sagar: Best aarti collection); Jai Ganesh Jai Ganesh Deva [Full Song] I Aartiyan (T-Series Bhakti Sagar: Aarti collection); Ganesh Vivah 3 By Gulshan Kumar [Full Song] I Shree Ganesh Vivah Bhakti Sagar (Hariharan: Ganesh bhajans); Ganesh vivah Ganesh Vivah 1 By Gulshan Kumar [Full Song] I Shree Ganesh Vivah Bhakti Sagar (Hariharan: Ganesh bhajans); Somvar Special shiv ji ke bhajan I Monday Morning Shiv Bhajans I Bholenath Ke Bhajans I Bes… (T-Series Bhakti Sagar: Monday bhajans); Aarti kijai hanuman lala ki,Aarti Keejei Hanuman Lala Ki, Hanuman Aarti,HARI OM SHARAN,Hanu… (Hariharan: Hanuman bhajans); Somvar shivji ke bhajan I kanvar bhajan Top Kanwar Bhajans Best Collection I Monday Morning Shi… (T-Series Bhakti Sagar: Monday bhajans); Jai Ambe Gauri [Full Song] Nau Deviyon Ki Aartiyan (T-Series Bhakti Sagar: Aarti collection); Hanuman Chalisa · Hariharan (T-Series Bhakti Sagar); Om Jai Jagdish Hare Aarti (T-Series Bhakti Sagar); Somvar Special Non Stop shivji ke bhajan I Monday Morning Shiv Bhajans I ANURADHA PAUDWAL,… (T-Series Bhakti Sagar: Monday bhajans); Shukravar Morning time Devi bhajan Full HD,vaishno devi Vaishno Devi Darshan,Bhor Bhai Din,… (Hariharan: Devi bhajans); Jai Santoshi Mata Aarti By Anuradha Paudwal [Full Video Song] - Aartiyan (T-Series Bhakti Sagar: Aarti collection); Shri hanuman chalisa · 1 Jul 2025 (T-Series Bhakti Sagar: Hanuman Chalisa collection).

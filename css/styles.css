@@ -946,3 +946,11 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
   .room:is(:fullscreen,.pseudo-fs) .key{min-height:22px}
   .room:is(:fullscreen,.pseudo-fs) .keys{gap:5px}
 }
+/* A channel page's day and week, in plain text (scripts/build-pages.mjs): today's lineup, and what it plays this week */
+.ch-extra{margin-top:16px;max-width:75ch}
+.ch-extra h3{margin:0 0 8px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.lineup,.ch-week{margin:0;padding:0;list-style:none;display:grid;gap:5px;color:var(--muted);font-size:.9rem;line-height:1.45}
+.lineup time{color:var(--ink);font-variant-numeric:tabular-nums;margin-right:4px}
+.lineup b{color:var(--ink);font-weight:600}
+.ch-week{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:4px 18px}
+.ch-week span{display:block;font-size:.78rem;opacity:.8}

@@ -170,4 +170,5 @@ Link the channel itself: each opens playing, with nothing to set up.
 
 ## Optional
 
+- [Every channel in full: today's lineup and what it plays this week](https://ogtv.co.in/llms-full.txt)
 - [Sitemap](https://ogtv.co.in/sitemap.xml)

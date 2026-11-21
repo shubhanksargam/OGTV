@@ -58,7 +58,7 @@ function aboutChannel(){const k=chSlug(CHANNELS[cur]);
       if(!sec){const dir=document.querySelector(".directory"); if(!dir) return; // the home page has none: it gets one
         sec=document.createElement("section"); sec.className="seo-intro"; sec.innerHTML="<h2></h2><p></p><p class=\"good-for\"><b>Good for:</b> <span></span></p>"; dir.before(sec)}
       sec.querySelector("h2").textContent=t.h; sec.querySelector("p").textContent=t.p; document.title=t.title;
-      const g=sec.querySelector(".good-for span"); if(g) g.textContent=t.g||""; sec.querySelectorAll(".ch-faq").forEach(e=>e.remove())})} // what it is good for follows; the page's own channel's questions go
+      const g=sec.querySelector(".good-for span"); if(g) g.textContent=t.g||""; sec.querySelectorAll(".ch-faq,.ch-extra").forEach(e=>e.remove())})} // what it is good for follows; the page's own channel's questions go
 // A page that reloaded itself for new code (resumeMark) comes straight back to the channel it was playing, with no
 // intro: the note it left in this tab is read once, and only within a minute
 const RESUME=(()=>{try{const r=JSON.parse(sessionStorage.getItem("ogtv-resume")||"null"); sessionStorage.removeItem("ogtv-resume"); return r&&Date.now()-r.at<60e3?r:null}catch(e){return null}})();
