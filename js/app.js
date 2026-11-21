@@ -31,6 +31,16 @@ const chFind=v=>{v=String(v||"").trim().toLowerCase(); return CHANNELS.findIndex
 function showAddress(){try{const q=new URLSearchParams(location.search); q.delete("ch"); const s=q.toString();
   history.replaceState(null,"","/tv/"+chSlug(CHANNELS[cur])+"/"+(s?"?"+s:"")+location.hash)}catch(e){}}
 if(new URLSearchParams(location.search).has("ch")) showAddress();
+// The channel's own few lines at the foot of the page, and the tab's title, follow the channel as it changes in place
+// (a /tv/<channel>/ page is built with its own channel's): js/about.json, written by scripts/build-pages.mjs, read once
+let ABOUT=null;
+function aboutChannel(){const k=chSlug(CHANNELS[cur]);
+  (ABOUT||(ABOUT=fetch("js/about.json?v="+loadedStamp("js/app.js")+"-"+loadedStamp("js/feeds.js")).then(r=>r.ok?r.json():{}).catch(()=>({}))))
+    .then(a=>{const t=a[k]; if(!t||chSlug(CHANNELS[cur])!==k) return; // a newer change has come since
+      let sec=document.querySelector(".seo-intro");
+      if(!sec){const dir=document.querySelector(".directory"); if(!dir) return; // the home page has none: it gets one
+        sec=document.createElement("section"); sec.className="seo-intro"; sec.innerHTML="<h2></h2><p></p>"; dir.before(sec)}
+      sec.querySelector("h2").textContent=t.h; sec.querySelector("p").textContent=t.p; document.title=t.title})}
 // A page that reloaded itself for new code (resumeMark) comes straight back to the channel it was playing, with no
 // intro: the note it left in this tab is read once, and only within a minute
 const RESUME=(()=>{try{const r=JSON.parse(sessionStorage.getItem("ogtv-resume")||"null"); sessionStorage.removeItem("ogtv-resume"); return r&&Date.now()-r.at<60e3?r:null}catch(e){return null}})();
@@ -79,7 +89,17 @@ function fillDesc(id){const d=DESC.get(id);
   if(d&&d.a) document.querySelectorAll(`.lby[data-a="${id}"]`).forEach(el=>{el.textContent="by "+d.a})}
 
 function renderGuide(){const now=tvNow(); gB=guideEnd(now); if(gAt&&gAt<=now) gAt=0; // a chosen hour that has come round is now
-  $("gday").textContent="Today, "+dayName(now)+" · India Standard Time"; renderTimes(now); renderList(now)}
+  $("gday").textContent="Today, "+dayName(now)+" · India Standard Time";
+  if($("gbody").hidden) return; // minimized: its hours and channels are drawn when it opens
+  renderTimes(now); renderList(now)}
+// Whatever is clicked with the mouse or tapped gives the focus back straight away (by request): otherwise, on a computer,
+// the next key pressed (the arrows to change channel, M, K...) draws the browser's gold focus ring round that button, the
+// record or a knob, and it stays. Keyboard users (Tab, then Enter or Space) keep their focus and its ring; dialogs keep theirs.
+addEventListener("click",e=>{if(e.detail===0) return; const el=document.activeElement;
+  if(el&&el!==document.body&&!el.closest("dialog")&&el.matches("button,a,[tabindex]")) el.blur()});
+// The guide starts minimized on every visit (by request): its heading opens and closes it, and C opens it too
+function setGuideOpen(on){$("gbody").hidden=!on; $("gtoggle").setAttribute("aria-expanded",on); if(on) renderGuide()}
+$("gtoggle").addEventListener("click",()=>setGuideOpen($("gbody").hidden));
 // The hours left today as buttons (Now, then each full hour), with the part of the day each run starts
 const DAYPART={5:"Morning",12:"Afternoon",17:"Evening",21:"Night"};
 function renderTimes(now){const first=Math.floor((now+IST)/HOUR+1)*HOUR-IST, key=first+"|"+gB; if(key===gHours) return; gHours=key;
@@ -160,7 +180,7 @@ function countChannel(){clearTimeout(watchTimer); const c=CHANNELS[cur];
 let lastCh=null; // the channel before this one, for the TV app remote's last-channel key
 function tune(i){tuneFlip=false; const to=(i+CHANNELS.length)%CHANNELS.length; if(TV_APP&&to!==cur) lastCh=cur; cur=to;
   countChannel(); browse=cur; clearDigits(); markGuide();
-  showAddress();
+  showAddress(); aboutChannel();
   playingKey=null; tick(); showBanner(); if($("screen").classList.contains("strip-on")) renderStrip(); knobs(); vfd();
   if(typeof dialTo==="function") dialTo(cur)} // the channel record under the TV turns to it (js/dial.js)
 let digits="", digitTimer=0;
@@ -184,7 +204,7 @@ addEventListener("keydown",e=>{
   else if(e.key==="f"||e.key==="F") toggleFullscreen();
   else if(e.key==="r"||e.key==="R"){setRetro(!retro); if(retro) track("retro-on","Retro mode on")}
   else if(e.key==="a"||e.key==="A") setRadio(!radio)
-  else if((e.key==="c"||e.key==="C")&&!isFull()) $("guide").scrollIntoView({behavior:smooth(),block:"start"}); // the channels are in the guide
+  else if((e.key==="c"||e.key==="C")&&!isFull()){setGuideOpen(true); $("guide").scrollIntoView({behavior:smooth(),block:"start"})} // the channels are in the guide
   else if(e.key==="h"||e.key==="H"||e.key==="?") openHelp();
   else if(e.key==="Escape"&&$("room").classList.contains("pseudo-fs")) toggleFullscreen();
 });

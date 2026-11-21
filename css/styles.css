@@ -135,8 +135,14 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   .set.on .grille{display:none;display:none}
   .knob-wrap{flex-direction:column;gap:4px}.knob{width:40px} /* labels under the knobs, so all three sit in one row */
   .knob-wrap small{font-size:.52rem;letter-spacing:.14em}
-  .room:not(:fullscreen):not(.pseudo-fs) .set.on .knob-wrap{margin-top:10px} /* the knobs sit a little lower on the phone panel */
-  .room:not(:fullscreen):not(.pseudo-fs) .set.on .set-brand{margin-left:12px;margin-top:10px} /* the logo a little in from the edge, level with the knobs */
+  /* the phone panel's middle row: the logo, the three dials and the red light on one centre line (by request). Each
+     knob's name hangs just under it, outside the row's own height, so the row lines up the dials themselves; the row
+     gap leaves room for the names above the keys */
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .set-panel{row-gap:24px}
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .knob-wrap{position:relative}
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .knob-wrap small{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);white-space:nowrap}
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .set-brand{margin:4px 0 0 12px} /* the logo a little in from the edge, its middle on the dials' */
+  .room:not(:fullscreen):not(.pseudo-fs) .set.on .led{margin-right:12px} /* the light as far in from its edge */
   .grille{display:none;min-height:28px;min-width:40px;background:repeating-linear-gradient(90deg,#2b2016 0 3px,transparent 3px 7px),linear-gradient(#a58c62,#8c7450)}
 }
 #yt,#yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -324,13 +330,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .screen.fs-idle .retro-fs{opacity:0!important;pointer-events:none}
 .screen.strip-on .retro-fs{bottom:calc(5vh + 126px);opacity:1!important}
 /* Help beside it, also only in full screen, where the header's Help is out of sight */
-.help-fs{display:none;position:absolute;left:198px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+.help-fs{display:none;position:absolute;left:198px;bottom:14px;z-index:6;width:48px;height:48px;padding:0;place-items:center;border-radius:999px;border:0;cursor:pointer;
   background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4);transition:bottom .3s ease,opacity .4s}
 .help-fs:hover{background:rgba(0,0,0,.8)}
-.screen:fullscreen .help-fs,.screen:-webkit-full-screen .help-fs,.screen.pseudo-fs .help-fs{display:block}
+.screen:fullscreen .help-fs,.screen:-webkit-full-screen .help-fs,.screen.pseudo-fs .help-fs{display:grid}
 .screen.fs-idle .help-fs{opacity:0!important;pointer-events:none}
 .screen.strip-on .help-fs{bottom:calc(5vh + 126px);opacity:1!important}
-.radio-fs{display:none;position:absolute;left:280px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
+.radio-fs{display:none;position:absolute;left:256px;bottom:14px;z-index:6;height:48px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;
   background:rgba(0,0,0,.55);color:#fff;font:700 .9rem/1 var(--body);letter-spacing:.04em;box-shadow:0 6px 20px rgba(0,0,0,.4);transition:bottom .3s ease,opacity .4s}
 .radio-fs:hover{background:rgba(0,0,0,.8)}
 .radio-fs[aria-pressed="true"]{background:var(--marigold);color:var(--marigold-ink)}
@@ -593,6 +599,13 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .guide-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;padding:0 18px 12px}
 .guide-head h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.35rem}
 .gday{color:var(--muted);font-size:.9rem}
+/* The guide's heading opens and closes it; it starts minimized (setGuideOpen in app.js) */
+.gtoggle{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+.gtoggle .gchev{color:var(--marigold);transition:transform .25s ease}
+.gtoggle[aria-expanded="true"] .gchev{transform:rotate(180deg)}
+.guide:has(.gbody[hidden]){padding-bottom:14px}
+.guide:has(.gbody[hidden]) .guide-head{padding-bottom:0}
+@media (prefers-reduced-motion:reduce){.gtoggle .gchev{transition:none}}
 /* Hour buttons: one swipeable row on a touch screen, wrapped onto two lines on a wide screen with a mouse */
 .gtimes{position:relative;display:flex;align-items:center;gap:8px;overflow-x:auto;padding:0 18px 12px;scrollbar-width:none}
 .gtimes::-webkit-scrollbar{display:none}
@@ -661,7 +674,7 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 @media (max-width:719px){.glist{padding:2px 12px 6px}.lrow{padding:12px}}
 
 /* Help: everything about using OGTV, in a dialog over the page (the whole screen on a phone) */
-.help-btn{display:inline-flex;align-items:center;gap:7px}
+.help-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:44px;padding:0 /* just the icon, by request */}
 .help{box-sizing:border-box;width:min(760px,calc(100vw - 24px));max-width:none;max-height:min(88vh,900px);padding:0 24px 24px;border:1px solid var(--line);border-radius:16px;
   background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.6);overscroll-behavior:contain}
 .help::backdrop{background:rgba(8,6,14,.75)}
@@ -814,9 +827,9 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .radio-screen{display:none}
 .screen.radio .radio-screen{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
   gap:clamp(8px,1.6vh,16px);padding:clamp(18px,5%,56px) calc(200px + clamp(36px,8%,110px)) clamp(18px,5%,56px) clamp(20px,6%,72px);
-  background:radial-gradient(120% 90% at 20% 30%,#1c1524 0%,#000 70%);color:#f4f1ec;overflow:hidden}
+  background:#000;color:#f4f1ec;overflow:hidden}
 .screen.radio #yt{inset:auto;right:clamp(16px,4%,56px);top:max(16px,calc(50% - 120px));width:200px;height:200px;z-index:4;
-  box-shadow:0 0 0 1px rgba(242,160,61,.6),0 0 0 6px #0c0a10,0 18px 40px rgba(0,0,0,.7)}
+  box-shadow:0 0 0 6px #000,0 18px 40px rgba(0,0,0,.7)}
 .screen.radio:is(.strip-on,.banner-on) #yt{top:16px}
 .screen.radio:has(.static:not([hidden])) #yt{z-index:0} /* while a channel tunes in, the static's glitch covers the window too, as it covers the picture outside Radio (by request) */
 .screen.radio .bug{display:none} /* the kicker names the channel */

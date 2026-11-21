@@ -150,12 +150,17 @@ home = home.replace(/<span id="aboutCreators">[^<]*<\/span>/, `<span id="aboutCr
 await writeFile(new URL("index.html", ROOT), home.replace('<footer class="about"', faqHtml() + '<footer class="about"'));
 
 await rm(new URL("tv/", ROOT), {recursive: true, force: true});
+// Each channel's title and few lines, as its page has them, for the page to show when the channel changes in place
+// (aboutChannel in js/app.js): {slug: {title, h, p}}
+const ABOUT = {};
 for (const c of CHANNELS) {
   const url = `${SITE}/tv/${slug(c)}/`, description = describe(c), s = c.live ? LIVE[c.live].map(x => x.src) : sources(c);
+  const title = `${c.name}: ${c.en} | OGTV free Indian TV`, more = rest(s, description), text = description + (more.length ? ` Also on this channel: ${list(more)}.` : "");
+  ABOUT[slug(c)] = {title, h: `${c.name} on OGTV`, p: text};
   let page = replaceBetween(home, "<!-- seo:start", "<!-- seo:end -->",
-    seoBlock({title: `${c.name}: ${c.en} | OGTV free Indian TV`, description, url, ch: slug(c), video: featured(c), chan: c})); // by name, not number: a cached page still opens its own channel after a renumbering
+    seoBlock({title, description, url, ch: slug(c), video: featured(c), chan: c})); // by name, not number: a cached page still opens its own channel after a renumbering
   // a short visible intro, unique to the page
-  page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(description)}${rest(s, description).length ? ` Also on this channel: ${esc(list(rest(s, description)))}.` : ""}</p></section>\n\n  <!-- channels:start`);
+  page = page.replace('<!-- channels:start', `<section class="seo-intro"><h2>${esc(c.name)} on OGTV</h2><p>${esc(text)}</p></section>\n\n  <!-- channels:start`);
   await mkdir(new URL(`tv/${slug(c)}/`, ROOT), {recursive: true});
   await writeFile(new URL(`tv/${slug(c)}/index.html`, ROOT), page);
   for (const old of c.oldSlugs || []) { // a renamed channel's old address forwards to the new one
@@ -166,6 +171,8 @@ for (const c of CHANNELS) {
 `);
   }
 }
+
+await writeFile(new URL("js/about.json", ROOT), JSON.stringify(ABOUT) + "\n");
 
 for (const gone of ["trailers"]) { // channels taken off air: their old pages forward to the home page
   await mkdir(new URL(`tv/${gone}/`, ROOT), {recursive: true});
