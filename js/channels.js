@@ -343,12 +343,12 @@ const CHANNELS = [
   {key:"gym",n:40,group:"Music",name:"Gym",en:"Punjabi, desi hip-hop, rap, rock & phonk bangers",parts:[
     {from:0,to:4,  cat:"gym",tag:"phonk",alt:"gym",label:"Phonk after dark"},
     {from:4,to:6,  cat:"gym",tag:"rock",alt:"gym",label:"Early riser: rock"},
-    {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Morning set: Punjabi gym bangers"},
+    {from:6,to:9,  cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",cat:"punjabi",every:5},label:"Morning set: Punjabi gym bangers"},
     {from:9,to:12, cat:"gym",tag:"rap",alt:"gym",label:"Power hour: rap"},
-    {from:12,to:14,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Desi hip-hop"},
-    {from:14,to:17,cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Punjabi heavyweights"},
+    {from:12,to:14,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",cat:"punjabi",every:5},label:"Desi hip-hop"},
+    {from:14,to:17,cat:"gym",tag:"punjabi",alt:"gym",boost:{id:"4DfVxVeqk2o",cat:"punjabi",every:5},label:"Punjabi heavyweights"},
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
-    {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",every:5},label:"Prime-time desi hip-hop"},
+    {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",cat:"punjabi",every:5},label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
   {key:"punjabi",n:41,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
     {from:0,to:2,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},

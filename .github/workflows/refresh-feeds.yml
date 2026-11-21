@@ -31,6 +31,8 @@ jobs:
         run: node scripts/fetch-descriptions.mjs
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: The pages, and the video files the page fetches a category at a time (js/c/, js/feedmap.js)
+        run: git diff --quiet js/feeds.js || node scripts/build-pages.mjs   # only when the videos changed
       - name: Check the new data before it ships
         run: node scripts/check.mjs   # a failure stops here: nothing is committed and the site keeps its last good data
       - name: Commit and redeploy if anything changed
@@ -38,10 +40,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet js/feeds.js && [ -z "$(git status --porcelain desc)" ]; then echo "No new videos or descriptions"; exit 0; fi
-          if ! git diff --quiet js/feeds.js; then
-            sed -i -E "s#js/feeds\.js\?v=[^\"]*#js/feeds.js?v=$(date -u +%Y%m%d)#" index.html
-            node scripts/build-pages.mjs   # channel pages copy the home page, so rebuild them after the stamp
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A && git commit -qm "Refresh feeds"

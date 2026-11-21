@@ -24,7 +24,30 @@ function inCats(cats){
   if(list.length>1) idx.sort((a,b)=>a-b);
   return idx.map(i=>CATALOG[i]);
 }
-function pick(part){
+// The categories a channel's days are made from: its parts' (and their fallbacks'), a boosted song's (boost.cat), and the
+// festivals'. The page loads the videos category by category (js/data.js), and a channel's day is worked out only once
+// all of its categories are in (chReady), so every viewer's day is the same; the fallbacks below stay within these
+// categories for the same reason. scripts/check.mjs proves it for every channel, today and the weeks ahead.
+// Festivals: Vibe weighs every festival (festivalParts), so it takes them all. A festival part (Aangan's evening aarti)
+// plays the festival on that day, and Bhakti's the one on or coming within two weeks: a page works out today and
+// tomorrow, so those take only the festivals from yesterday to 16 days ahead (the set is worked out afresh each day).
+const iso=t=>new Date(t+IST).toISOString().slice(0,10), FEST_LIST=()=>typeof FESTIVALS==="undefined"?[]:FESTIVALS;
+// Its own categories, whatever the day: the fallbacks' pool (chPool), so a day comes out the same whenever it is worked out
+function baseCats(ch){if(ch._base) return ch._base; const s=new Set(), add=x=>[].concat(x==null?[]:x).forEach(c=>typeof c==="string"&&s.add(c));
+  if(ch.festival){FEST_LIST().forEach(f=>s.add(f.cat)); s.add("fest-newyear"); if(typeof ch.festival==="object") add(ch.festival.party)}
+  for(const p of ch.parts||[]) for(const q of [p,p.weekend,p.otherDay]) if(q){add(q.cat); add(q.alt); if(q.boost) add(q.boost.cat)}
+  return ch._base=[...s]}
+// and the festivals its days near t can play
+function chCats(ch,t=tvNow()){const day=istDayStart(t); if(ch._cats&&ch._cats.day===day) return ch._cats.list;
+  const s=new Set(baseCats(ch)), near=f=>f.to>=iso(day-DAY)&&f.from<=iso(day+16*DAY);
+  for(const p of ch.parts||[]){if(p.festival) FEST_LIST().filter(near).forEach(f=>s.add(f.cat));
+    if(p.festivalNext) FEST_LIST().filter(f=>near(f)&&BHAKTI_FEST.test(f.cat)).forEach(f=>s.add(f.cat))}
+  ch._cats={day,list:[...s]}; return ch._cats.list}
+const chReady=ch=>typeof OGTV_DATA==="undefined"||OGTV_DATA.ready(ch); // all its videos are here (in Node, always)
+const chPool=ch=>ch?inCats(baseCats(ch)):CATALOG; // every video of the channel's own categories
+// What a channel shows while its videos are on their way: never a programme it might not play
+const pendingSlot=(ch,t)=>({start:Math.floor(t/MIN)*MIN,end:Math.floor(t/MIN)*MIN+MIN,pending:true,ch,part:{label:"Tuning in",cat:"",from:0,to:24},v:{id:"",t:"Tuning in…",src:"",lang:"",cat:"",min:1}});
+function pick(part,ch){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
   const exT=rx(part.exclude), exS=rx(part.excludeSrc); // part.exclude / excludeSrc: titles and sources never played, not even as a fallback (Vibe's devotional songs)
   const fresh=v=>!part.days||!!v.pub&&tvNow()-Date.parse(v.pub)<=part.days*DAY; // part.days: posted in the last so many days (Magadh Times' roundups), else the rest
@@ -42,13 +65,13 @@ function pick(part){
   if(!pool.length&&typeof part.alt==="string") pool=inCats(part.alt).filter(ok); // e.g. Kids falls back to science
   if(!pool.length&&part.tag) pool=inCat.filter(ok);
   if(part.tag&&pool.length&&pool.length<6&&typeof part.alt==="string") pool=pool.concat(inCats(part.alt).filter(v=>ok(v)&&!pool.includes(v))); // an artist set still filling up: never two songs on loop
-  if(!pool.length) pool=CATALOG.filter(ok); // never leave a channel empty
+  if(!pool.length) pool=chPool(ch).filter(ok); // never leave a channel empty (its own categories: see chCats)
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
   // Festivals and the music channels: AI-made videos get less airtime. About two in three sit out, chosen the
   // same way for every viewer, as long as the pool has plenty of other videos
   if(part._lessAI||[].concat(part.cat).some(c=>String(c).startsWith("fest-"))){const isAI=v=>AI_RE.test(v.t)&&seeded(v.id)()<0.67, rest=pool.filter(v=>!isAI(v)); if(rest.length>=10) pool=rest}
-  return pool.length?pool:CATALOG;
+  return pool.length?pool:chPool(ch).length?chPool(ch):CATALOG;
 }
 // Covered songs (Desi Pop, by request): a song with revealing, item-song or sexual visuals, or marked 18+, never shows
 // its picture. It is flagged by the nightly fetch (cover: 1, on any channel) or by the channel's own rule (ch.cover: titles
@@ -132,19 +155,20 @@ function buildDay(ch,dayStart){
   const odd=Math.round(dayStart/DAY)%2===1; // p.otherDay: every other day takes those settings
   const parts=ch.festival?festivalParts(dayStart,ch.festival):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
-  // p.boost {id, tag or src, every}: that song, or those songs in turn, every so many. Several parts with the same boost
+  // p.boost {id, tag or src, every}: that song, or those songs in turn, every so many (boost.cat: the category a song by
+  // its id is in, when it isn't one of the channel's own, so it comes with the channel: chCats). Several parts with the same boost
   // share one run through it a day, in that day's shuffled order, so its songs come round in turn and none repeats early
   const boostRuns=new Map();
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
-    let pool=heard(ch,pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p)); const rnd=seeded(k+"|"+pi);
-    if(!pool.length) pool=heard(ch,CATALOG.filter(v=>!BAD.has(v.id))); // every song it had was covered with no track (never in practice)
+    let pool=heard(ch,pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p,ch)); const rnd=seeded(k+"|"+pi);
+    if(!pool.length) pool=heard(ch,chPool(ch).filter(v=>!BAD.has(v.id))); // every song it had was covered with no track (never in practice)
     const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
     const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
     let order=fresh(), i=0, n=0;
     let run=null;
     if(p.boost){const b=p.boost, cats=[].concat(p.cat), re=rx(b.src), bk=b.id||JSON.stringify([b.tag,b.src,cats]);
       run=boostRuns.get(bk);
-      if(!run){const list=heard(ch,CATALOG.filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag)))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j);
+      if(!run){const list=heard(ch,chPool(ch).filter(v=>!BAD.has(v.id)&&(b.id?v.id===b.id:cats.includes(v.cat)&&(re?re.test(v.src):v.tag===b.tag)))).filter((v,j,a)=>a.findIndex(x=>x.id===v.id)===j); // a song by its ID: from the channel's categories (boost.cat names another)
         boostRuns.set(bk,run={list:shuffle(list,seeded(k+"|boost|"+bk)),at:0})}
       if(!run.list.length) run=null}
     // p.mix [{tag or notTag, src or match, w}]: several sets played together (Select). Each takes its turn by weight (w, else the square
@@ -196,13 +220,15 @@ function liveSlot(ch,L,t){const a=istHour(t); // shown in the guide as hour-long
 
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
-function slotAt(ch,t){const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t);
+function slotAt(ch,t){const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t); // a live stream needs no list
+  if(!chReady(ch)) return pendingSlot(ch,t); // its videos are still on their way
   return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)||gapSlot(ch,t)}
 // Only if a channel's parts leave an hour uncovered (a slip in channels.js): play something rather than break the page
-function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=CATALOG.filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
+function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=chPool(ch).filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
   return {start:a,end:a+HOUR,v,part:{label:ch.en||ch.name,cat:v.cat,from:0,to:24},ch}}
 function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
   if(L&&!ch.liveHours){for(let t=istHour(a);t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
+  if(!chReady(ch)) return [pendingSlot(ch,a)]; // its videos are still on their way
   let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
   if(L) for(let t=istHour(a);t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,liveStream(ch,t)||L,t));
   return out.sort((x,y)=>x.start-y.start)}

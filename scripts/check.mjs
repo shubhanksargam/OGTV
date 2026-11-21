@@ -2,9 +2,10 @@
 // Runs on every push (.github/workflows/check.yml) and before the nightly and live refreshes commit, so a
 // typo or a bad scrape never reaches viewers' screens. Exit 1 = something is broken; warnings don't fail.
 // Usage: node scripts/check.mjs
-import {readFileSync, readdirSync} from "node:fs";
+import {readFileSync, readdirSync, existsSync} from "node:fs";
 import {spawnSync, execFileSync} from "node:child_process";
 import {fileURLToPath} from "node:url";
+import {splitFeeds} from "./split-feeds.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const read = p => readFileSync(new URL(p, ROOT), "utf8");
@@ -74,6 +75,88 @@ if (S) {
   const last = FESTIVALS.map(f => f.to).sort().at(-1), left = (Date.parse(last) - Date.now()) / DAY;
   if (left < 0) fail(`js/festivals.js ended on ${last}: add the coming festivals`);
   else if (left < 60) warn(`js/festivals.js ends on ${last} (${Math.floor(left)} days): add next year's festivals`);
+}
+
+// 10. The page's video files (js/c/ and js/feedmap.js: js/data.js fetches them a category at a time) are js/feeds.js's,
+// split as scripts/build-pages.mjs splits it, and every page names the current ones
+const feedSrc = read("js/feeds.js"), FEED = JSON.parse(feedSrc.slice(feedSrc.indexOf("["), feedSrc.lastIndexOf("]") + 1));
+let split = null;
+try { split = splitFeeds(FEED, JSON.parse((feedSrc.match(/const REFUSED = ("[^"]*")/) || [, '""'])[1])); } catch (e) { fail(e.message); }
+if (split) {
+  const disk = f => { try { return read(f).replace(/\r\n/g, "\n"); } catch { return null; } };
+  const stale = [...split.files].filter(([f, text]) => disk(f) !== text).map(([f]) => f);
+  if (stale.length) fail(`${stale.length} of the page's video files are out of step with js/feeds.js (run node scripts/build-pages.mjs): ${stale.slice(0, 5).join(", ")}`);
+  const extra = (() => { try { return readdirSync(new URL("js/c/", ROOT)); } catch { return []; } })().filter(f => !split.files.has("js/c/" + f));
+  if (extra.length) fail(`js/c/ has files for categories js/feeds.js no longer has (run node scripts/build-pages.mjs): ${extra.slice(0, 5).join(", ")}`);
+  const pages = ["index.html", ...readdirSync(ROOT, {withFileTypes: true}).filter(e => e.isDirectory()).flatMap(e => [`${e.name}/index.html`,
+    ...(e.name === "for" ? readdirSync(new URL("for/", ROOT)).map(n => `for/${n}/index.html`) : [])])].filter(p => existsSync(new URL(p, ROOT)));
+  for (const p of pages) { const h = read(p); if (!h.includes("js/scheduler.js")) continue; // the TV's pages (not the legal ones, or a forward)
+    if (/js\/feeds\.js\?v=/.test(h)) { fail(`${p} still loads js/feeds.js (run node scripts/build-pages.mjs)`); continue; }
+    const maps = [...h.matchAll(/js\/feedmap\.js\?v=([^"']*)/g)].map(m => m[1]);
+    if (!maps.length || maps.some(s => s !== split.mapStamp)) fail(`${p} names js/feedmap.js with a stamp other than its contents' (${maps.join(", ") || "none"}; run node scripts/build-pages.mjs)`);
+    for (const [, c, s] of h.matchAll(/js\/c\/([\w-]+)\.js\?v=([^"']*)/g)) if (split.stamps.get(c) !== s) fail(`${p} preloads js/c/${c}.js with an old stamp (run node scripts/build-pages.mjs)`);
+  }
+}
+
+// 11. Every channel's day comes out the same from its own categories alone: the page loads the categories one by one and
+// a channel plays as soon as its own are in (chCats and chReady in js/scheduler.js). Checked for today and the days
+// after it (--days=N, else 7), as a page on each of those days works out that day and the next
+if (S && split) {
+  const days = +((process.argv.find(a => a.startsWith("--days=")) || "").slice(7)) || 7;
+  const T = new Function(["catalog", "feeds", "live", "festivals", "channels", "scheduler"].map(f => read(`js/${f}.js`)).join("\n")
+    + ";return {CATALOG, FEED, CHANNELS, BAD, REFUSED, buildDay, chCats, chPool, istDayStart, DAY, HOUR, setCat(list){CATALOG.length=0; for(const v of list) CATALOG.push(v); byCat=null; cache.clear()},"
+    + "watch(f){const o=inCats; inCats=c=>{f(c); return o(c)}}};")();
+  T.REFUSED.split(" ").forEach(id => id && T.BAD.add(id)); // as js/app.js does
+  const full = T.CATALOG.slice(), fromFeed = new Set(T.FEED), hand = new Set(full.filter(v => !fromFeed.has(v)));
+  const sig = slots => slots.map(s => s.start + ":" + s.end + ":" + s.v.id).join(",");
+  const today = T.istDayStart(Date.now()), wrong = [], outside = new Set();
+  let asked = null; T.watch(c => asked && [].concat(c).forEach(x => asked.add(x))); // every category the scheduler looks in
+  for (let d = 0; d < days; d++) {
+    const day = today + d * T.DAY, date = new Date(day + 5.5 * 3600e3).toISOString().slice(0, 10);
+    T.setCat(full); const want = T.CHANNELS.map(c => [sig(T.buildDay(c, day)), sig(T.buildDay(c, day + T.DAY))]);
+    T.CHANNELS.forEach((c, i) => {
+      const cats = new Set(T.chCats(c, day + 12 * T.HOUR)); T.setCat(full.filter(v => hand.has(v) || cats.has(v.cat)));
+      asked = new Set(); const got = [sig(T.buildDay(c, day)), sig(T.buildDay(c, day + T.DAY))];
+      for (const x of asked) if (!cats.has(x)) outside.add(`${c.name} looks in "${x}" (${date})`);
+      asked = null;
+      if (got[0] !== want[i][0] || got[1] !== want[i][1]) wrong.push(`${c.name} (${date})`);
+    });
+  }
+  if (wrong.length) fail(`${wrong.length} channel-day(s) come out differently from the channel's own categories alone (chCats in js/scheduler.js): ${wrong.slice(0, 6).join(", ")}`);
+  if (outside.size) fail(`the scheduler looks in categories a channel doesn't wait for (add them to chCats in js/scheduler.js): ${[...outside].slice(0, 6).join("; ")}`);
+  // and every category a part names, its fallback's too, is one of them, whether or not it is needed today
+  for (const c of T.CHANNELS) { const cats = new Set(T.chCats(c));
+    for (const p of c.parts || []) for (const q of [p, p.weekend, p.otherDay]) if (q) for (const x of [].concat(q.cat, q.alt ?? [], q.boost?.cat ?? []))
+      if (typeof x === "string" && !cats.has(x)) fail(`${c.name}: "${q.label}" names the category "${x}", which the channel doesn't wait for (chCats in js/scheduler.js)`); }
+  // A song boosted by its ID is looked for in the channel's own categories only (and boost.cat's): one that isn't there
+  // would quietly never play
+  T.setCat(full);
+  for (const c of T.CHANNELS) for (const p of c.parts || []) for (const q of [p, p.weekend, p.otherDay]) if (q && q.boost && q.boost.id && !T.chPool(c).some(v => v.id === q.boost.id))
+    fail(`${c.name}: the boosted song ${q.boost.id} ("${q.label}") isn't in the channel's categories: name its category (boost.cat)`);
+}
+
+// 12. js/data.js puts the categories together, in whatever order they arrive, into the very catalogue js/feeds.js makes,
+// and a channel is ready once its own are in (run here without a page: each file's put() is called directly)
+if (S && split) {
+  try {
+    const page = "const document={createElement:()=>({setAttribute(){},remove(){}}),head:{appendChild(){}}}, events=[];"
+      + "const addEventListener=()=>{}, dispatchEvent=e=>events.push(e), setTimeout=f=>{f(); return 0}, clearTimeout=()=>{};"
+      + "class CustomEvent{constructor(type,o){this.type=type; this.detail=o.detail}}\n";
+    const D = new Function(page + read("js/catalog.js") + "\n" + split.files.get("js/feedmap.js") + "\n"
+      + ["live", "festivals", "channels", "scheduler", "data"].map(f => read(`js/${f}.js`)).join("\n") + ";return {CATALOG, CHANNELS, OGTV_DATA, chCats, events};")();
+    if (!D.OGTV_DATA) throw new Error("it did not set up");
+    const put = f => new Function("OGTV_DATA", split.files.get(f))(D.OGTV_DATA);
+    const own = ch => D.chCats(ch).filter(c => split.files.has(`js/c/${c}.js`));
+    const first = D.CHANNELS.find(c => c.key === "classics"), far = D.CHANNELS.find(c => c.key === "punjabi");
+    if (D.OGTV_DATA.ready(first)) throw new Error("Cricket Classics counts as ready before its videos are in");
+    own(first).forEach(c => put(`js/c/${c}.js`));
+    if (!D.OGTV_DATA.ready(first)) throw new Error("Cricket Classics isn't ready once its videos are in");
+    if (D.OGTV_DATA.ready(far)) throw new Error("Punjabi counts as ready before its videos are in");
+    [...split.list].reverse().forEach(([c]) => put(`js/c/${c}.js`)); // the rest, last first
+    if (JSON.stringify(D.CATALOG) !== JSON.stringify(S.CATALOG)) throw new Error("the catalogue it puts together differs from the one js/feeds.js makes");
+    if (!D.OGTV_DATA.loaded() || !D.CHANNELS.every(ch => D.OGTV_DATA.ready(ch))) throw new Error("not every channel is ready once every category is in");
+    if (!D.events.some(e => e.type === "ogtv-data" && e.detail.all)) throw new Error("no ogtv-data event says that all are in");
+  } catch (e) { fail("js/data.js: " + e.message); }
 }
 
 // 8. HTML escaping in the player (titles from YouTube go through esc() into the page)

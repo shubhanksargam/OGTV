@@ -13,7 +13,7 @@ const NATIVE_INTRO=/OGTV-NativeIntro\//.test(navigator.userAgent)||document.docu
 if(NATIVE_INTRO) document.documentElement.classList.add("native-intro");
 // Videos YouTube refuses to play (removed, embedding turned off, or not allowed here) are never scheduled or shown again,
 // so the song the guide, the record and the panel show is the one that plays (by request): those viewers' browsers were
-// refused (REFUSED in js/feeds.js, from the nightly fetch) and those this browser was refused (kept for 14 days)
+// refused (REFUSED in js/feedmap.js, from the nightly fetch) and those this browser was refused (kept for 14 days)
 const REFUSED_KEY="ogtv-refused", REFUSED_DAYS=14;
 const refusedHere=()=>{try{return JSON.parse(localStorage.getItem(REFUSED_KEY)||"{}")||{}}catch(e){return {}}};
 {const keep={}; for(const [id,at] of Object.entries(refusedHere())) if(Date.now()-at<REFUSED_DAYS*DAY){keep[id]=at; BAD.add(id)}
@@ -52,7 +52,7 @@ if(new URLSearchParams(location.search).has("ch")) showAddress();
 // (a /<channel>/ page is built with its own channel's): js/about.json, written by scripts/build-pages.mjs, read once
 let ABOUT=null;
 function aboutChannel(){const k=chSlug(CHANNELS[cur]);
-  (ABOUT||(ABOUT=fetch("js/about.json?v="+loadedStamp("js/app.js")+"-"+loadedStamp("js/feeds.js")).then(r=>r.ok?r.json():{}).catch(()=>({}))))
+  (ABOUT||(ABOUT=fetch("js/about.json?v="+loadedStamp("js/app.js")+"-"+loadedStamp("js/feedmap.js")).then(r=>r.ok?r.json():{}).catch(()=>({}))))
     .then(a=>{const t=a[k]; if(!t||chSlug(CHANNELS[cur])!==k) return; // a newer change has come since
       let sec=document.querySelector(".seo-intro");
       if(!sec){const dir=document.querySelector(".directory"); if(!dir) return; // the home page has none: it gets one
@@ -63,6 +63,9 @@ function aboutChannel(){const k=chSlug(CHANNELS[cur]);
 // intro: the note it left in this tab is read once, and only within a minute
 const RESUME=(()=>{try{const r=JSON.parse(sessionStorage.getItem("ogtv-resume")||"null"); sessionStorage.removeItem("ogtv-resume"); return r&&Date.now()-r.at<60e3?r:null}catch(e){return null}})();
 if(RESUME){const i=chFind(RESUME.ch); if(i>=0) cur=i}
+// The videos come a category at a time (js/data.js): this channel's first, then the rest round the record from it
+const DATA=typeof OGTV_DATA==="undefined"?null:OGTV_DATA; // null: js/catalog.js's videos alone
+if(DATA) DATA.start(cur);
 const isNew=v=>v.pub&&tvNow()-Date.parse(v.pub)<30*DAY; // uploaded in the last 30 days
 const NEW='<i class="new" title="Uploaded in the last 30 days">NEW</i>', LIVEDOT='<i class="livedot">LIVE</i>';
 const badge=s=>s.live?LIVEDOT:isNew(s.v)?NEW:"";
@@ -144,16 +147,18 @@ function redraw(el,html){const f=document.activeElement, keep={};
 // description) beside the channel it's on, as in the guide, with what's next (tick() too) and the rest of its day
 const gOpenNow=new Set(); // the day opens here apart from the guide's
 function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=soOn()?startOver.s:day[0]; if(!s) return;
-  const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live) wantDesc(id);
+  const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live&&!s.pending) wantDesc(id);
   redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
-  redraw($("nowYt"),s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
+  redraw($("nowYt"),s.live||s.pending?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
   redraw($("nowDay"),more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":"Rest of today · "+more}</button>`+(open?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:""):"")}
 function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
+  const head=`<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
+    +`<div class="lhead" data-i="${i}"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div>`
+    +`<button class="lwatch" data-i="${i}" aria-label="Watch ${esc(c.name)} now">${i===cur?"Watching":"Watch"}</button></div>`;
+  if(s.pending) return head+`<ol class="lprogs"><li class="lat"><time></time><div><b>Tuning in…</b></div></li></ol></article>`; // its videos are on their way (js/data.js)
   const on=now>=s.start&&now<s.end, more=day.length>1?unit(c,day.length):"", id=s.v.id; if(!s.live) wantDesc(id);
   const meta=s.live?"Live stream":(on?"On now · until ":"Until ")+fmt(s.end)+" · "+Math.round((s.end-s.start)/MIN)+" min";
-  return `<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
-    +`<div class="lhead" data-i="${i}"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div>`
-    +`<button class="lwatch" data-i="${i}" aria-label="Watch ${esc(c.name)} now">${i===cur?"Watching":"Watch"}</button></div>`
+  return head
     +`<ol class="lprogs"><li class="lat${on?" lon":""}"><time>${s.live?"Live":fmt(s.start)}</time><div><b>${badge(s)}${esc(s.live?onAir(s):s.v.t)}</b>`
     +(s.live?"":`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>`)+`<small>${meta}</small>`
     +(on&&!s.live?`<i class="lbar"><i style="width:${((now-s.start)/(s.end-s.start)*100).toFixed(1)}%"></i></i>`:"")
@@ -261,11 +266,11 @@ function showStatic(){staticSince=Date.now(); updateStaticInfo(); if(staticOn)re
 // tuneFlip: YouTube refused what this tune-in was going to play, so the static names no song (just "Tuning in") until one
 // actually plays, rather than flicking through the ones tried
 let tuneFlip=false;
-function updateStaticInfo(){const ch=CHANNELS[cur], s=onNow(), nx=upNext();
-  if(retro) $("staticInfo").textContent=tuneFlip?"TUNING IN":onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
+function updateStaticInfo(){const ch=CHANNELS[cur], s=onNow(), nx=upNext(), flip=tuneFlip||s.pending; // pending: its videos are on their way
+  if(retro) $("staticInfo").textContent=flip?"TUNING IN":onAir(s).toUpperCase(); // the channel itself already shows on the VFD panel -- no need to repeat it here
   else if(!isFull()){const el=$("staticInfoPlain"), h=`<span class="bn-n">${ch.n}</span><div class="bn-body"><span class="bn-name">${esc(ch.name)}<em>${esc(ch.en)}</em></span>
-    <span class="bn-title">${tuneFlip?"Tuning in…":(s.live?LIVEDOT:"")+esc(onAir(s))}</span>
-    <span class="bn-meta">${tuneFlip?"":(s.live?"Live now":fmt(s.start)+" – "+fmt(s.end))+(nx?" · "+nextWord()+": "+esc(nx.v.t):"")}</span></div>`;
+    <span class="bn-title">${flip?"Tuning in…":(s.live?LIVEDOT:"")+esc(onAir(s))}</span>
+    <span class="bn-meta">${flip?"":(s.live?"Live now":fmt(s.start)+" – "+fmt(s.end))+(nx&&!nx.pending?" · "+nextWord()+": "+esc(nx.v.t):"")}</span></div>`;
     if(el._h!==h){el._h=h; el.innerHTML=h}}} // rewritten only when it changes
 function hideStatic(){ // keep it up at least 1.2s so the logo finishes resolving
   const wait=Math.max(0,1200-(Date.now()-staticSince));
@@ -281,10 +286,11 @@ function soundBtn(off){const b=$("sound"), say=off?"Turn sound on":"Mute";
 /* ---------- Player: YouTube IFrame API when hosted; link-out card when embedding is blocked ---------- */
 let MODE="loading", player=null, playingKey=null, playingId=null, playingEnd=0, ended=false, muted=true, skips=0, bufTimer=0;
 const slotKey=(ch,s)=>s.live?ch.key+s.v.id:ch.key+s.start+s.v.id; // a live stream keeps playing across hour blocks
+let ytApi=false; // YouTube's player API is here
 function loadYT(){
   const s=document.createElement("script"); s.src="https://www.youtube.com/iframe_api";
   s.onerror=()=>fallback(); document.head.appendChild(s);
-  setTimeout(()=>{if(MODE==="loading")fallback()},8000);
+  setTimeout(()=>{if(MODE==="loading"&&!ytApi)fallback()},8000); // the API never came (blocked): the player has its own 8 s, from when it is made
 }
 // Shared by the player's first creation and every later recreation (see recreatePlayer): the ongoing playback events
 // don't depend on how the player came to exist, only onReady differs (the first video has its own sound-permission
@@ -292,16 +298,20 @@ function loadYT(){
 const playerEvents={
   onStateChange:e=>{const S=YT.PlayerState; dbg("video: "+({"-1":"unstarted",0:"ended",1:"playing",2:"paused",3:"buffering",5:"cued"}[e.data]||e.data));
     clearTimeout(bufTimer); clearTimeout(stallTimer);
-    if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
+    if(e.data===S.PLAYING){if(ended&&!handing&&atRealEnd()===false){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true} hidePauseScreen(); rejoin();remote.playing();$("set").classList.remove("idle");hideStatic(); if(subsFor!==playingId){subsFor=playingId; applySubs()} videoUp=true; if(DATA) DATA.go(); openIris(); tvGo(); fadeCard(); keepAwake(true); skips=0; retries=0} // captions once per video, not on every resume
     else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
       stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
     else if(e.data===S.UNSTARTED||e.data===S.CUED) stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},12e3) // ready but never started (YouTube sometimes ignores the play): try the programme again -- unless the browser blocked autoplay and the picture is waiting for the viewer's tap
     else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended&&!staticOn) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth); never while static is covering a tune-in, so the two overlays can't clash
     else if(e.data===S.ENDED){if(!atRealEnd()) return; if(soOn()){goLive(); return} if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
   onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()};
-window.onYouTubeIframeAPIReady=()=>{
-  // Also runs if the API arrives after the timeout: the player takes over from the link-out card
-  const s=slotAt(CHANNELS[cur],tvNow()), firstKey=slotKey(CHANNELS[cur],s);
+// Also runs if the API arrives after the timeout: the player takes over from the link-out card
+window.onYouTubeIframeAPIReady=()=>{ytApi=true; firstPlayer()};
+// The first player is made once the API is here and the channel's videos are in (js/data.js: until then it is tuning in;
+// their arrival, ogtv-data below, calls this again)
+function firstPlayer(){if(!ytApi||player||pendingPlayer) return;
+  const s=slotAt(CHANNELS[cur],tvNow()); if(s.pending) return; const firstKey=slotKey(CHANNELS[cur],s);
+  setTimeout(()=>{if(MODE==="loading")fallback()},8000); // never ready: the link-out card meanwhile
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
     events:{...playerEvents, onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute(); if(TV_APP) player.setVolume(0)} // sound allowed: open it silently, it fades up after the ident
               else {player.setVolume(vol);muted?player.mute():player.unMute()}
@@ -706,7 +716,7 @@ const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view
   return a?st.scrollLeft+st.clientWidth/2-(a.getBoundingClientRect().left-st.getBoundingClientRect().left+st.scrollLeft):0};
 function renderStrip(smooth=true){
   const now=tvNow(), strip=$("strip"), mid=stripMid(), w=copyWidth();
-  const row=copy=>CHANNELS.map((c,i)=>{const s=onNow(i), t=chNow(i), pct=s.live?100:Math.round((t-s.start)/(s.end-s.start)*100);
+  const row=copy=>CHANNELS.map((c,i)=>{const s=onNow(i), t=chNow(i), pct=s.live?100:s.pending?0:Math.round((t-s.start)/(s.end-s.start)*100);
     const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${esc(c.group)}</span>`:"";
     return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
@@ -728,7 +738,7 @@ function showBanner(){
   const c=CHANNELS[cur], s=onNow(), nx=upNext();
   $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
-    <span class="bn-meta">${s.live?"Live now":(soOn()?"From the start · ":"")+fmt(s.start)+" – "+fmt(s.end)}${nx?" · "+nextWord()+": "+esc(nx.v.t):""}</span></div>`;
+    <span class="bn-meta">${s.pending?"":s.live?"Live now":(soOn()?"From the start · ":"")+fmt(s.start)+" – "+fmt(s.end)}${nx&&!nx.pending?" · "+nextWord()+": "+esc(nx.v.t):""}</span></div>`;
   const sc=$("screen"); sc.classList.add("banner-on"); clearTimeout(bannerTimer);
   bannerTimer=setTimeout(()=>sc.classList.remove("banner-on"),4500);
 }
@@ -902,26 +912,26 @@ setFx(fxLevel);
    200 x 200 window on it, the smallest YouTube allows, with nothing on the screen ever over it: YouTube's rules don't
    allow hiding the picture or covering the player (the user chose this over hiding it, 21 Nov). On the retro TV, Radio
    is a setting of the Mode knob, between Quiet and Normal. Every visit starts with it off (by request). */
-function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=chNow(), s=onNow(); if(!s) return; const nx=upNext();
-  const by=s.live?"":ytChannel(s), el=$("radioScreen");
+function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=chNow(), s=onNow(); if(!s) return; const nx=s.pending?null:upNext();
+  const by=s.live||s.pending?"":ytChannel(s), el=$("radioScreen");
   const h=`<span class="rd-kicker">Radio · ${ch.n} ${esc(ch.name)}</span><h2 class="rd-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</h2>`
-    +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
+    +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.pending?"":s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
     +`<span class="rd-play"><span class="vinyl rd-disc" aria-hidden="true"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><i class="rd-bar"><i id="rdBar"></i></i></span>`
     +(nx?`<p class="rd-next">${soOn()?"Then live":"Next at "+fmt(nx.start)} · ${esc(onAir(nx))}</p>`:"");
   if(el._h!==h){el._h=h; el.innerHTML=h} // rewritten only when it changes
-  const b=$("rdBar"); if(b) b.style.width=s.live?"100%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
+  const b=$("rdBar"); if(b) b.style.width=s.live?"100%":s.pending?"0%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
 function applyRadio(on){radio=on; $("screen").classList.toggle("radio",on); ["radio","radioFs"].forEach(id=>$(id).setAttribute("aria-pressed",on));
   if(on){renderRadio(); track("radio-on","Radio on")}}
 function setRadio(on){if(retro) setFx(on?FX_RADIO:FX_START,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to where it starts, Tinted (by request)
 $("radio").addEventListener("click",()=>setRadio(!radio));
 // From start, and back live (see startOver at the top)
-function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||s.live) return; // a live broadcast is never seeked
+function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||s.live||s.pending) return; // a live broadcast is never seeked
   if(!started) return;
   startOver={ch:cur, s, shift:tvNow()-s.start, at:Date.now()}; pausedAt=0; track("from-start","From start: "+CHANNELS[cur].name);
   playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>FROM START</b>"); if(guideBuilt) renderGuide()}
 function goLive(){if(!soOn()) return; startOver=null; playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>LIVE</b>"); if(guideBuilt) renderGuide()}
 const toggleStart=()=>soOn()?goLive():fromStart();
-function startBtns(){const on=soOn(), s=on?null:slotAt(CHANNELS[cur],tvNow()), can=on||MODE==="yt"&&!!s&&!s.live, k=on+"|"+can; if(k===startShown) return; startShown=k;
+function startBtns(){const on=soOn(), s=on?null:slotAt(CHANNELS[cur],tvNow()), can=on||MODE==="yt"&&!!s&&!s.live&&!s.pending, k=on+"|"+can; if(k===startShown) return; startShown=k;
   for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on); b.disabled=!can;
     b.innerHTML=(on?LIVE_ICON:RESTART_ICON).replace(/width="20" height="20"/,`width="${w}" height="${w}"`);
     b.setAttribute("aria-label",on?"Back to live":"From start"); b.title=on?"Back to live (B)":"From start: this programme from its beginning (B)"}
@@ -979,7 +989,7 @@ function handOver(){handing=true; clearTimeout(handTimer); handTimer=setTimeout(
 function fadeCard(){if(!handing)return; handing=false; clearTimeout(handTimer); const c=$("card"); c.classList.add("fading");
   setTimeout(()=>{if(!c.classList.contains("fading"))return; c.hidden=true; c.classList.remove("fading")},850)}
 function showCard(msg){
-  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now), nx=slotAt(ch,s.end);
+  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now); if(s.pending) return; const nx=slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
   handing=false; const card=$("card"); card.hidden=false; card.classList.remove("fading");
   card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
@@ -1018,8 +1028,9 @@ function tick(){
   if(so&&MODE==="yt"&&player&&playingKey==="so|"+slotKey(CHANNELS[cur],so.s)&&Date.now()-so.at>2500) try{ // the player's own position sets the channel's moment
     const st=player.getPlayerState(); if(player.getVideoData().video_id===so.s.v.id&&(st===YT.PlayerState.PLAYING||st===YT.PlayerState.PAUSED)) so.shift=tvNow()-(so.s.start+player.getCurrentTime()*1e3)}catch(e){}
   if(so&&tvNow()-so.shift>so.s.end+90e3){goLive(); return} // a backstop: its end never came
-  const real=tvNow(), now=chNow(), ch=CHANNELS[cur], s=so?so.s:slotAt(ch,now), nx=so?upNext():slotAt(ch,s.end);
-  const key=(so?"so|":"")+slotKey(ch,s);
+  const real=tvNow(), now=chNow(), ch=CHANNELS[cur], s=so?so.s:slotAt(ch,now);
+  if(s.pending){tuningIn(ch,real); return} // its videos are still on their way (js/data.js)
+  const nx=so?upNext():slotAt(ch,s.end), key=(so?"so|":"")+slotKey(ch,s);
   if(ended&&!handing&&MODE==="yt"&&player){try{if(player.getPlayerState()===YT.PlayerState.PLAYING&&!atRealEnd()){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true; if(!muted) player.unMute()}}catch(e){}}
   let finishing=false; // the programme before is still on its last seconds (it started late): let it end first
   if(key!==playingKey&&playingKey&&!ended&&MODE==="yt"&&player&&now-playingEnd<30e3){try{finishing=player.getPlayerState()===YT.PlayerState.PLAYING&&player.getVideoData().video_id===playingId&&player.getDuration()-player.getCurrentTime()<=30}catch(e){}}
@@ -1027,7 +1038,8 @@ function tick(){
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey&&!finishing){
     if(playingKey&&reloadNow()){resumeMark(); location.reload(); return}
-    if(playingKey&&nextFeed){swapFeed(); return tick()}
+    if(playingKey&&DATA&&DATA.staged()){swapFeed(); return tick()}
+    if(/^pending\|/.test(playingKey||"")) tuneFlip=false; // its videos have come: the static names what plays
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic(); hidePanel()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
@@ -1044,7 +1056,7 @@ function tick(){
       +(s.live?"":`<span class="chip">${esc(catLabel(s.part.cat))}${s.part.tag?" · "+esc(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
-    if(!so) $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
+    if(!so) $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:nx.pending?"":`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
     renderNowCard(); if(typeof dialRefresh==="function") dialRefresh(); // the record shows what is really on, after a skip too
   }
   if(so){const h=`Then live: ${esc(onAir(nx))}`; if($("next")._h!==h) $("next").innerHTML=$("next")._h=h} else $("next")._h="";
@@ -1055,14 +1067,30 @@ function tick(){
   if(radio) renderRadio(); // the radio's face keeps up: its progress each second, the programme when it changes
   startBtns();
 }
+// A channel whose videos are still on their way (js/data.js, which fetches its files first): the static and "Tuning in", as
+// at any change of channel, until they come (ogtv-data, below); the channel before is paused under it
+function tuningIn(ch,real){
+  $("clock").innerHTML=fmt(real)+"<small>IST</small>"; osd(); $("chanbug").textContent=ch.n+" · "+ch.name;
+  if(DATA) DATA.need(cur);
+  if(MODE==="yt"&&player) try{if(player.getPlayerState()===YT.PlayerState.PLAYING) player.pauseVideo()}catch(e){}
+  if(started&&MODE!=="fallback"&&!staticOn){showStatic(); hidePanel()}
+  const key="pending|"+ch.key; if(playingKey===key) return;
+  playingKey=key; playingId=null; playingEnd=0; ended=false; gapHushed=false; tuneFlip=true;
+  clearTimeout(stallTimer); clearTimeout(bufTimer); clearTimeout(retryTimer); interlude.stop(); $("card").hidden=true; hidePauseScreen();
+  $("nowTitle").textContent="Tuning in…"; $("why").innerHTML=""; $("next").innerHTML=$("next")._h=""; $("nowTime").textContent=""; $("nowBar").style.width="0%";
+  updateStaticInfo(); renderNowCard(); startBtns(); if(radio) renderRadio()}
 
 // About section numbers come from the data, so they stay right as channels and creators change
 $("aboutChannels").textContent=CHANNELS.length;
-$("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size;
+const countCreators=()=>{$("aboutCreators").textContent=new Set(CATALOG.map(v=>v.src)).size};
+if(DATA) DATA.all.then(countCreators); else countCreators(); // once every list is in (until then the page's own count stands)
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
 tick(); loadYT(); // the guide is built after the intro (guideLater), so the intro has the phone to itself
 setInterval(guarded(tick,"tick"),1000);
+// More channels' videos are in (js/data.js): the channel tuning in plays, and everything showing other channels catches up
+addEventListener("ogtv-data",guarded(()=>{firstPlayer(); tick(); renderNowCard(); startBtns();
+  if(guideBuilt) renderGuide(); if($("screen").classList.contains("strip-on")) renderStrip(false)},"data"));
 // Watch-time milestones while the page is visible: how long people stay
 let watchedSec=0; const MILESTONES={300:"5m",900:"15m",1800:"30m",3600:"60m",7200:"2h"};
 setInterval(()=>{if(!started||document.hidden)return; watchedSec+=15; const m=MILESTONES[watchedSec]; if(m) track("watch-"+m,"Watched "+m)},15e3);
@@ -1076,24 +1104,24 @@ async function refreshLive(){
     for(const k of Object.keys(LIVE)) delete LIVE[k]; Object.assign(LIVE,j); renderGuide()}catch(e){}}
 setInterval(refreshLive,10*MIN);
 // A new version of the site goes in at the next change of programme, so the viewer only sees a normal programme change.
-// New song lists (js/feeds.js: the hourly news, the nightly music) are swapped in place, with no reload: a page that
+// New song lists (js/feedmap.js: the hourly news, the nightly music) are swapped in place, with no reload: a page that
 // reloads itself has had no click yet, and a browser holds its sound back, so a set left playing in a tab came back
 // muted. New code reloads the page: always in the TV app (it always has sound); in a browser only after 30 minutes
 // untouched and when no sound would be lost (muted, or never started).
 const stamp=(html,f)=>(html.match(new RegExp(f.replace(/\./g,"\\.")+"\\?v=([^\"']+)"))||[])[1];
 const loadedStamp=f=>{const el=document.querySelector(`script[src^="${f}?"]`); return el?stamp(el.outerHTML,f):""};
-let newCode=false, nextFeed=null, feedStamp=loadedStamp("js/feeds.js"), lastTouch=Date.now();
+let newCode=false, feedStamp=loadedStamp("js/feedmap.js"), lastTouch=Date.now();
 ["pointerdown","keydown"].forEach(ev=>addEventListener(ev,()=>{lastTouch=Date.now()},true));
-const HANDPICKED=(()=>{const f=new Set(typeof FEED==="undefined"?[]:FEED); return CATALOG.filter(v=>!f.has(v))})(); // js/catalog.js's own
+// The lists of videos (js/feedmap.js, naming each category's file) are compared too: only the categories that changed are
+// fetched (js/data.js, stage), and swapped in at the next change of programme (swapFeed, from tick)
 async function checkVersion(){
-  try{const html=await (await fetch("index.html?t="+Date.now(),{cache:"no-store"})).text(), code=stamp(html,"js/app.js"), feeds=stamp(html,"js/feeds.js");
+  try{const html=await (await fetch("index.html?t="+Date.now(),{cache:"no-store"})).text(), code=stamp(html,"js/app.js"), feeds=stamp(html,"js/feedmap.js");
     newCode=!!code&&code!==loadedStamp("js/app.js");
-    if(feeds&&feeds!==feedStamp){const t=await (await fetch("js/feeds.js?v="+feeds)).text();
-      nextFeed=JSON.parse(t.slice(t.indexOf("["),t.lastIndexOf("]")+1)); feedStamp=feeds}}catch(e){}}
+    if(DATA&&feeds&&feeds!==feedStamp){const t=await (await fetch("js/feedmap.js?v="+feeds)).text(), at=t.indexOf("FEED_MAP");
+      DATA.stage(JSON.parse(t.slice(t.indexOf("{",at),t.lastIndexOf("}")+1))); feedStamp=feeds}}catch(e){}}
 setInterval(checkVersion,HOUR);
-// Today's schedules are rebuilt from the new lists (the same for every viewer); this moment's programme is taken from them
-function swapFeed(){const f=nextFeed, ids=new Set(HANDPICKED.map(v=>v.id+"|"+v.cat)); nextFeed=null; // a hand-picked entry stands in for the feed's copy in its own category only
-  CATALOG.length=0; CATALOG.push(...HANDPICKED,...f.filter(v=>!ids.has(v.id+"|"+v.cat))); byCat=null; cache.clear(); renderGuide()}
+// Today's schedules are worked out again from the new lists (the same for every viewer); this moment's programme is taken from them
+function swapFeed(){if(DATA.apply()){cache.clear(); renderGuide()}}
 const reloadNow=()=>newCode&&(TV_APP||Date.now()-lastTouch>30*MIN&&(muted||!started));
 // The reloaded page comes straight back to this channel, playing (RESUME, near the top): a note in this tab's session
 // storage. A viewer still on the intro gets the intro again.

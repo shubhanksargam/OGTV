@@ -67,7 +67,7 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
   const fade=g.createRadialGradient(cx,cy,Math.max(0,-cy-10),cx,cy,R); fade.addColorStop(0,"rgba(0,0,0,.25)"); fade.addColorStop(1,"rgba(0,0,0,1)");
   g.globalCompositeOperation="destination-in"; g.fillStyle=fade; g.fillRect(0,0,W,H); g.restore()}
 // The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
-function art(i){const s=onNow(i), it=items[i]; if(!s||it.id===s.v.id) return;
+function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending||it.id===s.v.id) return; // pending: its videos are on their way (js/data.js)
   it.id=s.v.id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(s.v.id)}/mqdefault.jpg`}
 function render(){const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   for(let i=0;i<N;i++){const it=items[i], d=wrapD(i-pos), a=d*STEP, ad=Math.abs(d), x=r*Math.sin(a);
@@ -86,10 +86,10 @@ function render(){const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
 // What's on the channel at the centre, as the full-screen strip shows it
 const infoKey=i=>{const s=onNow(i); return i+"|"+(s?s.v.id+s.start:"")+"|"+(i===cur)+"|"+!!soFor(i)};
 function showInfo(i){shown=i; info._k=infoKey(i); const c=CHANNELS[i], now=chNow(i), s=onNow(i); if(!s) return;
-  const pct=s.live?100:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
+  const pct=s.live?100:s.pending?0:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
   info.innerHTML=`<span class="di-k">${c.n} · ${esc(c.group||"")}${i===cur?(soOn()?" · <b>From the start</b>":" · <b>Watching</b>"):soFor(i)?" · From the start":""}</span>`
     +`<span class="di-name">${esc(c.name)}</span><span class="di-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>`
-    +`<span class="di-meta"><span>${s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
+    +`<span class="di-meta"><span>${s.live?"Live":s.pending?"":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
     +(i===cur?"":`<button class="dial-watch" type="button" data-i="${i}">Watch</button>`)+`</span>`}
 
 // Turning: the record glides to its target channel, easing in the last stretch
@@ -113,7 +113,7 @@ window.dialBusy=on=>{if(on===busy) return; busy=on;
   items.forEach((it,i)=>{if(it.id) art(i)}); shown=-1;
   if(pending!==null){const i=pending, base=Math.round(target); pending=null; cancelAnimationFrame(raf); raf=0;
     items.forEach((it,k)=>it.b.classList.toggle("cur",k===cur)); pos=target=base+wrapD(i-base)} // no turn to watch: it was away
-  render(); dial.classList.remove("loading"); nextChange()};
+  render(); dial.classList.remove("loading"); warmThen()};
 
 dial.addEventListener("pointerdown",e=>{if(e.button!==0||e.target.closest(".dial-watch")) return;
   cancelAnimationFrame(raf); raf=0; dragged=false;
@@ -146,10 +146,21 @@ new ResizeObserver(()=>{if(measure()) render()}).observe(dial);
 // and the centre's progress bar moves every second. Nothing changes while a channel tunes in.
 window.dialRefresh=()=>{if(busy) return; items.forEach((it,i)=>{if(it.id) art(i)}); const i=at(pos); if(!drag&&info._k!==infoKey(i)) showInfo(i)};
 function nextChange(){clearTimeout(changeT); const now=tvNow(); let soon=now+60e3;
-  for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&s.end>now&&s.end<soon) soon=s.end}
-  changeT=setTimeout(()=>{dialRefresh(); nextChange()},soon-now+100)}
-// every channel's next programme change: worked out once the page is idle (it builds all 44 channels' days), not at start-up
-(window.requestIdleCallback?f=>requestIdleCallback(f,{timeout:6000}):f=>setTimeout(f,2500))(()=>nextChange());
+  for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&!s.pending&&s.end>now&&s.end<soon) soon=s.end}
+  changeT=setTimeout(()=>{dialRefresh(); warmThen()},soon-now+100)}
+// Every channel's day is worked out a channel or two at a time while the page is idle (each takes a few milliseconds on
+// a phone; all 44 at once held the page up for most of a second), then the covers come round and the next change is
+// looked up: at start-up, as more channels' videos come in (js/data.js), after a tune-in and at each change
+const whenIdle=window.requestIdleCallback?f=>requestIdleCallback(f,{timeout:3000}):f=>setTimeout(()=>{const end=performance.now()+12; f({timeRemaining:()=>Math.max(0,end-performance.now())})},60);
+let warming=false, again=false;
+function warmThen(){if(warming){again=true; return} warming=true; again=false; let i=0; const now=tvNow();
+  const step=dl=>{do slotAt(CHANNELS[i++],now); while(i<N&&dl.timeRemaining()>8);
+    if(i<N) return whenIdle(step);
+    warming=false; if(again) return warmThen();
+    if(!busy){render(); dialRefresh()} nextChange()};
+  whenIdle(step)}
+warmThen();
+addEventListener("ogtv-data",warmThen);
 setInterval(()=>{if(busy||document.hidden) return; const i=at(pos), s=onNow(i), now=chNow(i), b=info.querySelector(".di-bar i");
-  if(b&&s&&!s.live) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
+  if(b&&s&&!s.live&&!s.pending) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
 })();
