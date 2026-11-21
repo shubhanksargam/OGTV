@@ -112,7 +112,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 
 - [1 · Just News](https://ogtv.co.in/just-news/): Just News on OGTV: 24x7 news, free and always on. Live streams from Aaj Tak, ABP News, NDTV India and India TV.
 - [2 · Khabar](https://ogtv.co.in/khabar/): Khabar on OGTV: Hindi news & analysis, free and always on. Videos from BBC News Hindi, Khabargaon, The Lallantop and Newslaundry Hindi.
-- [3 · Magadh Times](https://ogtv.co.in/magadh-times/): Magadh Times on OGTV: bihar & Jharkhand news: bulletins, the day's & week's roundups, deep analysis, free and always on. Videos from News18 Bihar Jharkhand.
+- [3 · Magadh Times](https://ogtv.co.in/magadh-times/): Magadh Times on OGTV: bihar & Jharkhand news: bulletins, the day's roundups, ground reports & analysis, only the last two days, free and always on.
 - [4 · Newsroom](https://ogtv.co.in/newsroom/): Newsroom on OGTV: vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days, free and always on.
 
 ### Knowledge

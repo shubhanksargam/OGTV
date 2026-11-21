@@ -43,28 +43,27 @@ const CHANNELS = [
   // bulletins from Patna and Ranchi (tag bulletin), News18 Bihar Jharkhand's day's roundups (roundup), ETV Bharat's ground
   // reports (reports), the region's channels' latest (updates), analysis of the region's stories from Prabhat Khabar,
   // The Lallantop, BBC News Hindi, Khabargaon and Newslaundry (analysis), and their Bihar & Jharkhand series (deep).
-  // days: posted in the last so many days. Weekends close with the week's roundup
-  {key:"magadh",n:3,group:"News",name:"Magadh Times",en:"Bihar & Jharkhand news: bulletins, the day's & week's roundups, deep analysis",parts:[
-    {from:0,to:6,  cat:"magadh",tag:"deep",preferMin:10,alt:"magadh",label:"Raat: deep dives, Bihar's chief ministers, ground reports & elections"},
-    {from:6,to:7,  cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"6 am: Subah ki khabar, the latest from Bihar & Jharkhand"},
-    {from:7,to:7.5,cat:"magadh",tag:"bulletin",src:"DD News Bihar",newest:true,alt:"magadh",label:"7 am: DD News Bihar bulletin"},
-    {from:7.5,to:8,cat:"magadh",tag:"bulletin",src:"Jharkhand DD News",newest:true,alt:"magadh",label:"7:30 am: Jharkhand DD News, Pradeshik Samachar"},
-    {from:8,to:9,  cat:"magadh",tag:"analysis",newest:true,alt:"magadh",label:"8 am: Analysis, what's moving Bihar & Jharkhand"},
-    {from:9,to:11, cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"Latest updates, newest first"},
-    {from:11,to:12,cat:"magadh",tag:"reports",newest:true,alt:"magadh",label:"11 am: Ground reports, ETV Bharat Bihar & Jharkhand"},
-    {from:12,to:13,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"Noon: Aaj ki badi khabren, the big stories so far"},
-    {from:13,to:14,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"1 pm: DD bulletins from Patna & Ranchi"},
-    {from:14,to:16,cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"Afternoon updates, newest first"},
-    {from:16,to:17,cat:"magadh",tag:"reports",newest:true,alt:"magadh",label:"4 pm: Ground reports"},
-    {from:17,to:18,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"5 pm: Evening bulletins, DD News Bihar & Jharkhand DD News"},
-    {from:18,to:19,cat:"magadh",tag:"updates",newest:true,alt:"magadh",label:"6 pm: Latest updates"},
-    {from:19,to:20,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"Prime time, 7 pm: the day in Bihar & Jharkhand",
-     weekend:{days:7,newest:false,preferMin:15,label:"Weekend, 7 pm: Hafte ki khabar, the week's big stories"}},
-    {from:20,to:21,cat:"magadh",tag:"analysis",newest:true,alt:"magadh",label:"8 pm: Deep analysis",
-     weekend:{days:7,label:"Weekend, 8 pm: the week's analysis"}},
-    {from:21,to:22,cat:"magadh",tag:"bulletin",newest:true,alt:"magadh",label:"9 pm: The latest bulletins"},
-    {from:22,to:23,cat:"magadh",tag:"roundup",days:1,newest:true,alt:"magadh",label:"10 pm: Aaj ki badi khabren, the day's roundup"},
-    {from:23,to:24,cat:"magadh",tag:"deep",preferMin:10,alt:"magadh",label:"11 pm: Deep dives on Bihar & Jharkhand"}]},
+  // days: posted in the last so many days
+  // Nothing older than two days, ever (by request, 22 Nov 2026; as Newsroom): every part days:2 with strictDays, not even
+  // to fill; the archive series (deep) and the weekends' week-long slots went with it. The night replays the last two days.
+  {key:"magadh",n:3,group:"News",name:"Magadh Times",en:"Bihar & Jharkhand news: bulletins, the day's roundups, ground reports & analysis, only the last two days",parts:[
+    {from:0,to:6,  cat:"magadh",days:2,strictDays:true,label:"Raat: the last two days' news again, roundups, ground reports & analysis"},
+    {from:6,to:7,  cat:"magadh",tag:"updates",days:2,strictDays:true,newest:true,alt:"magadh",label:"6 am: Subah ki khabar, the latest from Bihar & Jharkhand"},
+    {from:7,to:7.5,cat:"magadh",tag:"bulletin",src:"DD News Bihar",days:2,strictDays:true,newest:true,alt:"magadh",label:"7 am: DD News Bihar bulletin"},
+    {from:7.5,to:8,cat:"magadh",tag:"bulletin",src:"Jharkhand DD News",days:2,strictDays:true,newest:true,alt:"magadh",label:"7:30 am: Jharkhand DD News, Pradeshik Samachar"},
+    {from:8,to:9,  cat:"magadh",tag:"analysis",days:2,strictDays:true,newest:true,alt:"magadh",label:"8 am: Analysis, what's moving Bihar & Jharkhand"},
+    {from:9,to:11, cat:"magadh",tag:"updates",days:2,strictDays:true,newest:true,alt:"magadh",label:"Latest updates, newest first"},
+    {from:11,to:12,cat:"magadh",tag:"reports",days:2,strictDays:true,newest:true,alt:"magadh",label:"11 am: Ground reports, ETV Bharat Bihar & Jharkhand"},
+    {from:12,to:13,cat:"magadh",tag:"roundup",days:2,strictDays:true,newest:true,alt:"magadh",label:"Noon: Aaj ki badi khabren, the big stories so far"},
+    {from:13,to:14,cat:"magadh",tag:"bulletin",days:2,strictDays:true,newest:true,alt:"magadh",label:"1 pm: DD bulletins from Patna & Ranchi"},
+    {from:14,to:16,cat:"magadh",tag:"updates",days:2,strictDays:true,newest:true,alt:"magadh",label:"Afternoon updates, newest first"},
+    {from:16,to:17,cat:"magadh",tag:"reports",days:2,strictDays:true,newest:true,alt:"magadh",label:"4 pm: Ground reports"},
+    {from:17,to:18,cat:"magadh",tag:"bulletin",days:2,strictDays:true,newest:true,alt:"magadh",label:"5 pm: Evening bulletins, DD News Bihar & Jharkhand DD News"},
+    {from:18,to:19,cat:"magadh",tag:"updates",days:2,strictDays:true,newest:true,alt:"magadh",label:"6 pm: Latest updates"},
+    {from:19,to:20,cat:"magadh",tag:"roundup",days:2,strictDays:true,newest:true,alt:"magadh",label:"Prime time, 7 pm: the day in Bihar & Jharkhand"},
+    {from:20,to:21,cat:"magadh",tag:"analysis",days:2,strictDays:true,newest:true,alt:"magadh",label:"8 pm: Analysis"},
+    {from:21,to:22,cat:"magadh",tag:"bulletin",days:2,strictDays:true,newest:true,alt:"magadh",label:"9 pm: The latest bulletins"},
+    {from:22,to:24,cat:"magadh",tag:"roundup",days:2,strictDays:true,newest:true,alt:"magadh",label:"10 pm: Aaj ki badi khabren, the day's roundup"}]},
   // Newsroom (by request, 21 Nov): nothing older than two days, ever (days:2 with strictDays: not even to fill); Palki Sharma
   // the most (Vantage, IGR Live with Palki Sharma, Flashback, the Vantage Podcast: 45% of the day, share 0.45), then IGR,
   // Firstpost's shows, WION, Mint, Bloomberg and Zerodha (the Daily Brief, Markets by Zerodha) in turn; others in the category don't play.

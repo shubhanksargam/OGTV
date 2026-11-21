@@ -22,11 +22,11 @@ for (const f of readdirSync(new URL("js/", ROOT)).filter(f => f.endsWith(".js"))
 let S;
 try {
   S = new Function(["catalog", "feeds", "live", "festivals", "channels", "scheduler"].map(f => read(`js/${f}.js`)).join("\n")
-    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong};")();
+    + ";return {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, buildDay, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong};")();
 } catch (e) { fail("the site's scripts fail to load together: " + e.message); }
 
 if (S) {
-  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong} = S;
+  const {CATALOG, CHANNELS, FESTIVALS, LIVE, CAT_LABEL, LANG_LABEL, slotAt, buildDay, istDayStart, HOUR, DAY, MIN, chSlug, coveredSong} = S;
 
   // 3. Every video is playable and displays properly
   const bad = (what, list) => list.length && fail(`${list.length} video(s) ${what}: ${list.slice(0, 5).map(v => v.id || JSON.stringify(v)).join(", ")}`);
@@ -70,6 +70,12 @@ if (S) {
     // a covered song never shows its picture: it plays as its audio-only track (heard, js/scheduler.js)
     if (!s.live && !s.v.heard && coveredSong(c, s.v) && s.v.a !== s.v.id) { fail(`${c.name}: plays the covered song "${s.v.t}" (${s.v.id}) with its picture`); break; }
   }
+
+  // 6b. A channel with an age limit (strictDays: Newsroom, Magadh Times) has nothing older today; if it does, its newest
+  // videos are older themselves (the scheduler then plays the newest there is): its fetch is worth a look
+  for (const c of CHANNELS) { const lim = Math.max(0, ...(c.parts || []).filter(p => p.strictDays && p.days).map(p => p.days)); if (!lim) continue;
+    const day = istDayStart(Date.now()), old = buildDay(c, day).filter(s => !s.v.pub || day + DAY - Date.parse(s.v.pub) > lim * DAY);
+    if (old.length) warn(`${c.name}: ${old.length} of today's programmes are older than ${lim} days (nothing newer to play): is its fetch failing?`) }
 
   // 7. Festivals channel: the calendar needs next year's dates before it runs out
   const last = FESTIVALS.map(f => f.to).sort().at(-1), left = (Date.parse(last) - Date.now()) / DAY;

@@ -50,7 +50,10 @@ const pendingSlot=(ch,t)=>({start:Math.floor(t/MIN)*MIN,end:Math.floor(t/MIN)*MI
 function pick(part,ch){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
   const exT=rx(part.exclude), exS=rx(part.excludeSrc); // part.exclude / excludeSrc: titles and sources never played, not even as a fallback (Vibe's devotional songs)
-  const fresh=v=>!part.days||!!v.pub&&tvNow()-Date.parse(v.pub)<=part.days*DAY; // part.days: posted in the last so many days (Magadh Times' roundups), else the rest
+  // part.days: posted in the last so many days (Newsroom, Magadh Times), else the rest. Counted back from the end of the day
+  // being worked out (part._day, from buildDay), so the day is the same whenever and wherever it is worked out, and nothing
+  // in it is older than that at any hour of it
+  const ref=part._day!=null?part._day+DAY:tvNow(), fresh=v=>!part.days||!!v.pub&&ref-Date.parse(v.pub)<=part.days*DAY;
   const ok=v=>!BAD.has(v.id)&&(!part.strictDays||fresh(v))&&(!part.lang||v.lang===part.lang||(exc&&exc.test(v.src)))&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src)); // part.lang: only that language, never a fallback to others
   // part.strictDays: only the last part.days days, ever -- no older video, not even to fill (Newsroom, by request)
   const inCat=inCats(part.cat); // cat may list several categories
@@ -66,6 +69,10 @@ function pick(part,ch){
   if(!pool.length&&part.tag) pool=inCat.filter(ok);
   if(part.tag&&pool.length&&pool.length<6&&typeof part.alt==="string") pool=pool.concat(inCats(part.alt).filter(v=>ok(v)&&!pool.includes(v))); // an artist set still filling up: never two songs on loop
   if(!pool.length) pool=chPool(ch).filter(ok); // never leave a channel empty (its own categories: see chCats)
+  // strictDays and nothing from those days (tomorrow worked out before its news is in, or a fetch that failed): the newest
+  // there is, its last so many days, never the archive
+  if(!pool.length&&part.strictDays&&part.days){const own=chPool(ch).filter(v=>!BAD.has(v.id)&&v.pub).sort((a,b)=>b.pub.localeCompare(a.pub)), top=own.length?Date.parse(own[0].pub):0;
+    pool=own.filter(v=>top-Date.parse(v.pub)<=part.days*DAY)}
   // part.preferMin: play only long mixes when there are enough of them (fewer video loads = fewer YouTube ads)
   if(part.preferMin){const long=pool.filter(v=>v.min>=part.preferMin); if(long.length>=6) pool=long}
   // Festivals and the music channels: AI-made videos get less airtime. About two in three sit out, chosen the
@@ -160,7 +167,7 @@ function buildDay(ch,dayStart){
   // share one run through it a day, in that day's shuffled order, so its songs come round in turn and none repeats early
   const boostRuns=new Map();
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
-    let pool=heard(ch,pick(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{...p,_lessAI:true}:p,ch)); const rnd=seeded(k+"|"+pi);
+    let pool=heard(ch,pick({...p,_day:dayStart,...(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{_lessAI:true}:{})},ch)); const rnd=seeded(k+"|"+pi);
     if(!pool.length) pool=heard(ch,chPool(ch).filter(v=>!BAD.has(v.id))); // every song it had was covered with no track (never in practice)
     const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
     const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
