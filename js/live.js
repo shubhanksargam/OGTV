@@ -8,50 +8,44 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "j7k_Z6DOzVk",
-   "t": "Rajasthan Panchayat Election Result LIVE Updates: bijepi ka bara ailan! | Congress Victory",
+   "id": "ZuHqvoP3qm4",
+   "t": "Big Breaking on Bangladeshi Crisis LIVE: Dhaka men kohram | Sheikh Hasina | India Reaction",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "6K8bhWV9yW4",
-   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar | Ram Katha | CM Yogi Mother Death | Anant Singh | Cyc",
+   "id": "4u1w1mmPVgk",
+   "t": "Panchtatv men vilin hueen siem yogi ki man | CM Yogi Mother Passes Away | Savitri Devi |Yo",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "qLxDJqRQW8U",
-   "t": "'Nitish Setu' Innauguration LIVE Updates: PM Modi ne kiya nitish setu ka udghatan",
+   "id": "Fh6sFNa0goo",
+   "t": "Nishikant Dubey in Aap Ki Adalat LIVE : aap ki adalat men BJP neta nishikant dube LIVE | R",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "Pg3bdhd1nGo",
-   "t": "World Breaking News LIVE: lo..dub gaee aadhi duniya sabse bare muslim desh men bhishan mau",
+   "id": "nNzNb7YtFqQ",
+   "t": "DNA LIVE: desh men ek aur eyarlains band ho jaegi? | chin se lautkar tranp ne bharat ki ta",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "sKFBr45_BrM",
-   "t": "Goonj With Arpita Aarya Live: UP Election | Akhilesh | CM Yogi | Krishna Janmabhoomi | Mat",
+   "id": "mYswoejS85M",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 156 | PM Modi | Rah",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "CVf6jsCJGbw",
-   "t": "LIVE Rashtra Manch: videsh ki dharti... desh par hamla! | Rahul Gandhi | BJP | Congress | ",
-   "src": "DD News",
-   "lang": "hi"
-  },
-  {
-   "id": "bcDohWVkTqg",
-   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
+   "id": "4C13BajzzL0",
+   "t": "Mumbai Woman Dies After 40 Years Alone, Neighbours Publish Newspaper Appeal To Her Daughte",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "U5icHjUN1rk",
-   "t": "India Today LIVE: Trump AI Tax | SCO Summit | CM Vijay | Pak Minister In India | PM Modi I",
+   "id": "fT90CAjPkUw",
+   "t": "LIVE: 'Congress Will Return To Power In 2028' |Ashok Gehlot Excl On Rajasthan Panchayat Po",
    "src": "India Today",
    "lang": "en"
   },
@@ -68,22 +62,22 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "i5kyWu57FP0",
-   "t": "Hakeem Jeffries Nominated As House Speaker Set To Become First Black Speaker In US History",
+   "id": "OdVE8uyh2EY",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "yS5piUjda8g",
-   "t": "PM Modi in Bihar Live : bihar ki janta par saugaton ki barish | PM Modi Bihar Visit | Niti",
+   "id": "k1QaJRGqPdY",
+   "t": "PM Modi Bihar Visit Live : bihar ko 34,470 karor ka tohpha! | Nitish Setu Inauguration | C",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "T1b7hgoLajo",
-   "t": "PM Modi Visit Bihar : PM modi ne di bihar ko kaee saugat... 'sushasan ka mishan' LIVE | Ni",
+   "id": "YBOI5K1gHlI",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   },
@@ -96,14 +90,14 @@ const LIVE = {
  ],
  "newsroom": [
   {
-   "id": "MKBRbG0Er2U",
-   "t": "Donald Trump LIVE: Trump Warns Tech Giants Against Building Data Centers Outside US | IGR",
+   "id": "PDuFomq_7CU",
+   "t": "LIVE: Iran Targets US Bases | Trump, Xi & Putin’s Historic Meeting | The Palki Sharma Show",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "EblZNvq2gwo",
-   "t": "'The Target Is Locked!': Houthis Threaten Saudi Airspace, Signal Fresh Strikes Now | Houth",
+   "id": "u3Lo5XkTZHM",
+   "t": "LIVE:Putin Upgrades 'Unstoppable' Iskander Missiles: Is It Game Over for Ukraine? |Vantage",
    "src": "Firstpost",
    "lang": "en"
   },
@@ -114,8 +108,8 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "cXImkkW82UM",
-   "t": "LIVE | Stay Or Flee Kyiv? Ukrainians Face Brutal Winter As Russian Strikes Trigger Blackou",
+   "id": "UP2qyGY98y4",
+   "t": "LIVE | Russia Cripples Kyiv's Lifelines: 3 Bridges Shut,Grid Hit As Ukraine's Nuclear Outp",
    "src": "Mint",
    "lang": "en"
   },
