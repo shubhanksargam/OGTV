@@ -14,14 +14,14 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "cXSmR1p7udU",
-   "t": "CM yogi ki man ke nidhan par kya bole akhilesh aur aajam? | CM Yogi Mother Passes Away Sav",
+   "id": "K0IDl9Qr0Hc",
+   "t": "Baba bageshvar ki ramaktha kunda se sidhaLIVE | Bageshwar Baba Ram Katha | Raja Bhaiya | P",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "Jyn699orhoA",
-   "t": "Aaj Ka Rashifal, 21 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "id": "Dl9n6DWixIY",
+   "t": "Aaj Ki Badi Khabar: PM Modi Today News | SCO Summit Updates | CM Yogi Mother Last Rites | ",
    "src": "India TV",
    "lang": "hi"
   },
@@ -38,6 +38,12 @@ const LIVE = {
    "lang": "hi"
   },
   {
+   "id": "oXKfkwq6yGU",
+   "t": "Money mantr LIVE : sailri aati hai, bachti kyon nahin | Monthly Budget | Income Management",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
    "id": "KkdjNmdkzcQ",
    "t": "NDTV LIVE: US- Iran War | Trump | PM Modi | Gurpatwant Pannun | Mohammed Siraj | Cyclone A",
    "src": "NDTV 24x7",
@@ -50,28 +56,28 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "H1bwE5zd2go",
-   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
+   "id": "XqQe9VKRoV8",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "jE9IegxfYaI",
-   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
+   "id": "kj87_Fxb62c",
+   "t": "Trump LIVE: President Trump Delivers Major Nuclear Emergency Warning | US On High? | Trump",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "qiQRd6-knrQ",
-   "t": "US House LIVE: Hakeem Jeffries Wins Democratic Speaker Nomination | Congress Convenes | N1",
+   "id": "pHfmToKHFW8",
+   "t": "Kash Patel REPRIMANDED for Skipping House Hearing | Bennie Thompson SLAMS Trump's FBI Chie",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "XOKiEojLhRw",
-   "t": "Anant Singh Daughter Wedding LIVE: anant sinh ke ghar shahi shadi ka jashn shuru | Shivang",
+   "id": "13ozXdDnkuo",
+   "t": "🔴Bihar Jharkhand News LIVE: Anant Singh Daughter Wedding | PM Modi Bihar Visit | CM Samra",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
