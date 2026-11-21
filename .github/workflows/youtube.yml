@@ -1,0 +1,24 @@
+# Keeps the OGTV YouTube channel's playlists current: one per flagship channel, this week's picks (scripts/youtube-sync.mjs).
+# Needs three repository secrets, made once with scripts/youtube-auth.mjs: YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN.
+# Without them it does a dry run and changes nothing.
+name: YouTube playlists
+on:
+  schedule:
+    - cron: "0 1 * * *"   # 06:30 IST, after the nightly refresh
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: node scripts/youtube-sync.mjs
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
