@@ -2,9 +2,9 @@
 const LIVE = {
  "news": [
   {
-   "id": "W559AdQWBtM",
-   "t": "PM Modi LIVE : lakhnaoo se piem modi ka sanbodhan | UP Election 2027 | CM Yogi | BJP | Aaj",
-   "since": "2026-11-21T13:04:43Z",
+   "id": "kgYxOvY9N5s",
+   "t": "PM Modi LIVE Speech: bihar ko piem modi ki saugat, nitish setu ka kiya udghatan | Vaishali",
+   "since": "2026-11-21T09:29:57Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
@@ -44,9 +44,9 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "bcDohWVkTqg",
-   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
-   "since": "2026-11-21T11:55:20Z",
+   "id": "5hIkzkGMAKI",
+   "t": "PM Modi LIVE | PM Modi Lucknow | PM Modi Today | PM Modi On Gold Prices | NDTV LIVE",
+   "since": "2026-11-21T17:44:45Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -81,9 +81,9 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "3ROeR6Lv7q0",
-   "t": "Anant Singh Daughter Wedding LIVE: anant sinh ke ghar shahi shadi ka jashn shuru | Shivang",
-   "since": "2026-11-21T17:59:03Z",
+   "id": "s4v60ORxf-0",
+   "t": "Nitish Setu Inauguration Live : PM modi ne 'nitish setu' ka kiya uddhatan | PM Modi Bihar ",
+   "since": "2026-11-21T18:01:56Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
