@@ -34,6 +34,9 @@ if (S) {
   bad("with no title", CATALOG.filter(v => !String(v.t || "").trim()));
   bad("with < or > in the title or source", CATALOG.filter(v => /[<>]/.test(v.t + v.src)));
   bad("with an unknown category", CATALOG.filter(v => !CAT_LABEL[v.cat] && !String(v.cat).startsWith("fest-")));
+  // Select's songs by foreign artists play on Global Hits too (by request): each English or other foreign-language song in
+  // Select says whose it is, home "foreign" or "desi" (an Indian artist singing in English), so none is left out or let in by chance
+  bad("in Select, in English or another foreign language, with no home (\"foreign\" or \"desi\")", CATALOG.filter(v => v.cat === "select" && (v.lang === "en" || v.lang === "intl") && !["foreign", "desi"].includes(v.home)));
   bad("with an unknown language", CATALOG.filter(v => !LANG_LABEL[v.lang]));
   bad("with no length", CATALOG.filter(v => !(v.min > 0)));
   bad("with an audio-only track that is not a valid YouTube ID or length (scripts/find-audio.mjs)", CATALOG.filter(v => v.a !== undefined && (!/^[A-Za-z0-9_-]{11}$/.test(v.a) || !(v.am > 0))));

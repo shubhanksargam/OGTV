@@ -43,7 +43,7 @@ export default {
   hits90: {verb: "listen to", asks: ["90s Bollywood songs", "Kumar Sanu and Alka Yagnik songs, and 90s audio jukeboxes"]},
   deccan: {verb: "listen to", asks: ["Telugu, Tamil, Malayalam and Kannada songs", "Anirudh and A. R. Rahman songs"]},
   anthems: {verb: "listen to", asks: ["Coldplay and stadium anthems"]},
-  english: {verb: "listen to", asks: ["the world's top hits, in English and every language"]},
+  english: {verb: "listen to", asks: ["the world's top hits, in English and every language", "Ed Sheeran's songs, an hour of them every evening"]},
   gym: {verb: "listen to", asks: ["workout music: Punjabi gym songs, desi hip-hop, rap, rock and phonk"]},
   punjabi: {verb: "listen to", asks: ["Punjabi songs: Karan Aujla, Diljit Dosanjh and Shubh"]},
   raag: {verb: "listen to", asks: ["Indian classical music: sitar, santoor and classical voices", "Coke Studio", "calm music to study or work to"]},

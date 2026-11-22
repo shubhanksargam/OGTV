@@ -35,7 +35,7 @@ const iso=t=>new Date(t+IST).toISOString().slice(0,10), FEST_LIST=()=>typeof FES
 // Its own categories, whatever the day: the fallbacks' pool (chPool), so a day comes out the same whenever it is worked out
 function baseCats(ch){if(ch._base) return ch._base; const s=new Set(), add=x=>[].concat(x==null?[]:x).forEach(c=>typeof c==="string"&&s.add(c));
   if(ch.festival){FEST_LIST().forEach(f=>s.add(f.cat)); s.add("fest-newyear"); if(typeof ch.festival==="object") add(ch.festival.party)}
-  for(const p of ch.parts||[]) for(const q of [p,p.weekend,p.otherDay]) if(q){add(q.cat); add(q.alt); if(q.boost) add(q.boost.cat)}
+  for(const p of ch.parts||[]) for(const q of [p,p.weekend,p.otherDay]) if(q){add(q.cat); add(q.alt); if(q.boost) add(q.boost.cat); (q.mix||[]).forEach(m=>add(m.cat))}
   return ch._base=[...s]}
 // and the festivals its days near t can play
 function chCats(ch,t=tvNow()){const day=istDayStart(t); if(ch._cats&&ch._cats.day===day) return ch._cats.list;
@@ -196,7 +196,10 @@ function buildDay(ch,dayStart){if(ch.menu) return []; // Latest Mix: no day to w
     // root of its size), spread evenly through the day; within a set the songs come in a shuffled run, none twice before the
     // rest have played. Songs in no set don't play; if no set has any, the part plays its pool as usual
     let mixNext=null;
-    if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), l=pool.filter(v=>(!m.tag||v.tag===m.tag)&&(!m.notTag||v.tag!==m.notTag)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
+    // m.cat: a set from another category, not the part's own pool (Global Hits takes Select's songs by foreign artists:
+    // m.home "foreign", js/catalog.js)
+    if(p.mix){const sets=p.mix.map((m,j)=>{const ms=rx(m.src), mt=rx(m.match), from=m.cat?heard(ch,inCats(m.cat).filter(v=>!BAD.has(v.id))):pool,
+        l=from.filter(v=>(!m.tag||v.tag===m.tag)&&(!m.notTag||v.tag!==m.notTag)&&(!m.home||v.home===m.home)&&(!ms||ms.test(v.src))&&(!mt||mt.test(v.t)));
         // m.once: its share is never so big that one of its songs comes round twice in the part's hours (a small set
         // preferred: 90s Hits' audio uploads)
         const sh=m.once&&m.share?Math.min(m.share,l.reduce((a,v)=>a+v.min,0)/((p.to-p.from)*60)):m.share;
