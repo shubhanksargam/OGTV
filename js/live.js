@@ -2,9 +2,9 @@
 const LIVE = {
  "news": [
   {
-   "id": "x26_P_X48ys",
-   "t": "UP Election News LIVE : yupi chunav par aa gaee bari khabar |CM Yogi | BJP | BJP | Samajwa",
-   "since": "2026-11-22T10:44:11Z",
+   "id": "Rbe6Ys51HZ0",
+   "t": "Nepal PM India Visit LIVE : thori der men bharat pahunchne vale hain nepal ke pradhanmantr",
+   "since": "2026-11-22T10:06:19Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
@@ -44,9 +44,16 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "FMnnwFgg6pI",
-   "t": "LIVE: Balen Shah India | Balen Shah India Visit | Nepal PM Balendra Shah Begins 2-Day Indi",
-   "since": "2026-11-22T10:50:31Z",
+   "id": "o9nASpzo5oM",
+   "t": "LIVE Rashtra Manch: Nitish Setu...rajnitik akhara ! | PM Modi | Bihar | DD News",
+   "since": "2026-11-22T11:28:24Z",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "mTxCTuv6FOA",
+   "t": "Gold Price LIVE | PM Modi On Gold | PM Modi Recent Speech | Traders Thank PM Modi For Gold",
+   "since": "2026-11-22T11:27:52Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -58,23 +65,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "VBn0d1SpwyY",
-   "t": "Russia-Ukraine War LIVE: Putin's Revenge After Crimea Bridge Attack, Ukraine Under Fire | ",
-   "since": "2026-11-22T01:53:17Z",
+   "id": "klgpig576uM",
+   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
+   "since": "2026-11-20T01:52:29Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "Lh9i08fcGp4",
-   "t": "Donald Trump Declares Emergency LIVE | Historic White House Announcement Rocks the Nation!",
-   "since": "2026-11-22T10:58:57Z",
+   "id": "FpX8q2Yv2LE",
+   "t": "US NEWS LIVE: Trump Suddenly Escorted Out by Secret Service! Press Conference Takes Shocki",
+   "since": "2026-11-22T11:31:50Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "dMuJznNgz8k",
-   "t": "LIVE: TRUMP HUMILIATES VANCE & RUBIO to Their Faces: Floats Stephen Miller for President! ",
-   "since": "2026-11-22T07:44:39Z",
+   "id": "dkK5e0PwRcQ",
+   "t": "LIVE: US-Israel Weigh New Iran Strikes | Trump Faces Big Decision As Hormuz Crisis Deepens",
+   "since": "2026-11-22T08:08:43Z",
    "src": "CNN-News18",
    "lang": "en"
   }
@@ -111,9 +118,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "VBn0d1SpwyY",
-   "t": "Russia-Ukraine War LIVE: Putin's Revenge After Crimea Bridge Attack, Ukraine Under Fire | ",
-   "since": "2026-11-22T01:53:17Z",
+   "id": "klgpig576uM",
+   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
+   "since": "2026-11-20T01:52:29Z",
    "src": "WION",
    "lang": "en"
   },
