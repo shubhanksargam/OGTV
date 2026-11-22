@@ -2,58 +2,58 @@
 const LIVE = {
  "news": [
   {
-   "id": "gfiyGKlMUeM",
-   "t": "Round Table With Anjana Om Kashyap LIVE : soniya ke yadon ke...kitne panne vivadon ke? | C",
-   "since": "2026-11-22T12:20:33Z",
+   "id": "92hchFYqYYo",
+   "t": "Black & White with Anjana Om Kashyap LIVE |Russia | America | China | Putin | Bangladesh |",
+   "since": "2026-11-22T15:22:46Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "0mI3jQFd-VU",
-   "t": "Big Breaking on Congress New Alliance LIVE: kangres ka khela! | Rajasthan Panchayat Electi",
-   "since": "2026-11-22T11:40:36Z",
+   "id": "ese9LpRRxn0",
+   "t": "Sandeep Chaudhary LIVE: Yogi ki tisri pari ya Akhilesh ka PDA bhari? | SP vs BJP |Seedha S",
+   "since": "2026-11-22T13:28:10Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "k1YI0T6FzOw",
-   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar | Ram Katha | CM Yogi Mother Death | Anant Singh | Cyc",
-   "since": "2026-11-22T08:49:15Z",
+   "id": "jxu9Vfyp1sQ",
+   "t": "Sone ke nae damon par hosh urane vali khabarLIVE | Big Breaking | Gold New Price | Modi | ",
+   "since": "2026-11-22T16:13:41Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "x0iPg6Nb2Zs",
-   "t": "PM Modi On Gold Price Live : sone ki kimat men banpar giravat ke bich bari khabar |",
-   "since": "2026-11-22T10:07:07Z",
+   "id": "6hDKLvxBM8E",
+   "t": "SP-Congress Seat Sharing News Live : yupi men rahul ko kitni siten denge akhilesh?",
+   "since": "2026-11-22T08:14:58Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "B_VwCPLmuVk",
-   "t": "Today Big Breaking News LIVE:abhi ki sabse bari khabren LIVE |SCO | PM Modi | UP Election ",
-   "since": "2026-11-22T12:26:38Z",
+   "id": "xMgTZyxO-Ac",
+   "t": "Iran Massive Attack on US Base LIVE : eeran ka amerika bes par bhishan hamla! sena men mac",
+   "since": "2026-11-22T15:57:44Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "B8PkFM6jv3U",
-   "t": "Goonj With Arpita Aarya Live: Rahul Gandhi | Congress | GDP | SIR | Rahul Gandhi Statement",
-   "since": "2026-11-22T11:14:58Z",
+   "id": "umDAaRWpDMU",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 157 | PM Modi | Tri",
+   "since": "2026-11-22T15:16:07Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "mTxCTuv6FOA",
-   "t": "Gold Price LIVE | PM Modi On Gold | PM Modi Recent Speech | Traders Thank PM Modi For Gold",
-   "since": "2026-11-22T11:27:52Z",
+   "id": "auRsXu2MJkI",
+   "t": "PM Modi LIVE | PM Modi Lucknow | PM Modi Today | PM Modi On Gold Prices | NDTV LIVE",
+   "since": "2026-11-22T18:34:13Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "3XwyjUWpvTA",
-   "t": "LIVE: Row Over Rahul Gandhi’s US Remarks On India | Attack On Modi Government Or India? Wa",
-   "since": "2026-11-22T10:46:56Z",
+   "id": "fLGQwrusPVI",
+   "t": "Rahul Gandhi's US Remarks On India Spark Row | Attack On Modi Government Or India? Watch N",
+   "since": "2026-11-22T18:30:05Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -65,25 +65,25 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "gyFam669OmQ",
-   "t": "US News LIVE | WORLD WAR 3? Trump Threatens Iran as Global Tensions Rise | LIVE | TRUMP LI",
-   "since": "2026-11-22T12:39:24Z",
+   "id": "0voOGvpOXMM",
+   "t": "LIVE: Marco Rubio's Chilling Nuclear Warning | America Braces For Major Emergency | US New",
+   "since": "2026-11-22T17:10:35Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "uKJH_34TWLQ",
-   "t": "LIVE: BOOKER GRILLS BLANCHE | Epstein Survivors, Maxwell Meeting & Prison Transfer Under F",
-   "since": "2026-11-22T12:26:32Z",
+   "id": "zBVZ6NE_PLk",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "since": "2026-11-22T16:02:01Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "5X0pwmp2zXk",
-   "t": "PM Modi Bihar Visit Live : bihar ko 34,470 karor ka tohpha! | Nitish Setu Inauguration | C",
-   "since": "2026-11-22T12:42:34Z",
+   "id": "fuClWUOqvvI",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "since": "2026-11-22T12:44:44Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -92,6 +92,13 @@ const LIVE = {
    "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
    "since": "2026-11-20T13:12:34Z",
    "src": "Zee Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "Z2IvqykyA5w",
+   "t": "Patna: bihar ke uchch shiksha vibhag men banpar bahali ki taiyari, 13,208 padon ko vitt vi",
+   "since": "2026-11-22T17:07:47Z",
+   "src": "Kashish News",
    "lang": "hi"
   }
  ],
@@ -118,9 +125,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "0pP3wrsJQcM",
-   "t": "LIVE: SpaceX NROL-136 Mission: Falcon 9 to Launch Classified US Spy Satellites for Nationa",
-   "since": "2026-11-22T12:27:37Z",
+   "id": "kgQyQOJMUmg",
+   "t": "LIVE | Nigel Farage Holds Emergency Briefing On The UK-EU Summit In Brussels | Reform UK |",
+   "since": "2026-11-22T17:26:41Z",
    "src": "Mint",
    "lang": "en"
   },
