@@ -25,7 +25,7 @@ const refusedHere=()=>{try{return JSON.parse(localStorage.getItem(REFUSED_KEY)||
   if(typeof REFUSED==="string") REFUSED.split(" ").forEach(id=>id&&BAD.add(id));
   cache.clear()}
 function rememberRefused(id){const m=refusedHere(); m[id]=Date.now(); try{localStorage.setItem(REFUSED_KEY,JSON.stringify(m))}catch(e){}}
-let cur=Math.max(0,CHANNELS.findIndex(c=>c.key==="classics"));
+let cur=Math.max(0,CHANNELS.findIndex(c=>c.menu)); // OGTV opens on Latest Mix (by request, 22 Nov 2026; it was Cricket Classics)
 // From start (by request, 21 Nov 2026): the programme on now plays again from its first second to its last, and then the
 // channel is live again. Meanwhile the channel stays on that programme and runs `shift` behind the clock (the player's own
 // position sets it, so a pause holds it where it was); everything that shows the channel shows that programme and moment
@@ -1197,7 +1197,8 @@ function latestKey(e){if(!CHANNELS[cur].menu||e.key!=="Enter"||inMix()) return f
 // comes, it tunes in
 function mixWake(){if(started&&mixReady&&CHANNELS[cur].menu&&!mixQuiet) showMix()}
 function menuIn(ch,real){const list=latestItems();
-  if(list.length){const i=list.findIndex(v=>v.id===lastPick); playMix(list[i<0?0:(i+1)%list.length].id,true); mixQuiet=false; mixWake(); return}
+  // a fresh start opens on Sports (by request): its top video, Indian cricket first; then down the trending list
+  if(list.length){const i=list.findIndex(v=>v.id===lastPick); playMix((i<0?list.find(v=>v.g==="Sports")||list[0]:list[(i+1)%list.length]).id,true); mixQuiet=false; mixWake(); return}
   tuningIn(ch,real); if(!LATEST) loadLatest()}
 setTimeout(()=>{if(!LATEST) loadLatest()},CHANNELS[cur].menu?0:9000); // its first video's cover is the record's disc for it
 setInterval(()=>{if(CHANNELS[cur].menu&&!document.hidden) loadLatest()},10*MIN);
