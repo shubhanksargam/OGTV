@@ -92,7 +92,7 @@ function showInfo(i){shown=i; info._k=infoKey(i); const c=CHANNELS[i], now=chNow
   const pct=s.live?100:s.pending||s.menu?0:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
   info.innerHTML=`<span class="di-k">${c.n} · ${esc(c.group||"")}${i===cur?(soOn()?" · <b>From the start</b>":" · <b>Watching</b>"):soFor(i)?" · From the start":""}</span>`
     +`<span class="di-name">${esc(c.name)}</span><span class="di-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>`
-    +`<span class="di-meta"><span>${s.live?"Live":s.menu?(LATEST?LATEST.items.length+" to pick from":""):s.pending?"":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
+    +`<span class="di-meta"><span>${s.live?"Live":s.menu?(LATEST?LATEST.items.length+" trending":""):s.pending?"":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
     +(i===cur?"":`<button class="dial-watch" type="button" data-i="${i}">Watch</button>`)+`</span>`}
 
 // Turning: the record glides to its target channel, easing in the last stretch

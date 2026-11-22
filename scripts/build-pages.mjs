@@ -21,7 +21,7 @@ const slug = chSlug; // js/channels.js: the same name the app puts in ?ch= links
 
 // The creators a channel actually plays, most videos first: the words people search for
 // The videos a channel can play: Vibe (festival) takes every festival's songs but the ones it passes over or never plays
-// Latest Mix (menu) plays what viewers pick from js/latest.json (scripts/fetch-latest.mjs, hourly): its page shows that list
+// Latest Mix (menu) plays js/latest.json in order, or what viewers pick from it (scripts/fetch-latest.mjs, hourly): its page shows that list
 const LATEST_ITEMS = await read("js/latest.json").then(t => JSON.parse(t).items || []).catch(() => []);
 function playable(c) {
   if (c.menu) return LATEST_ITEMS;
@@ -95,9 +95,10 @@ const list = a => a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a.at(-1) 
 const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 // Channels whose sources don't tell their story get their own line
 const WRITTEN = {
+  dsd: "Digital System Design on OGTV: IIT Madras's course from its BS in Electronic Systems, all 62 lectures in order on a loop that goes on and on, from what a digital system is and Verilog to FPGAs, memory, CPUs and SoCs. Free, with no sign-up.",
   aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
   festival: "Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.",
-  latest: "Latest Mix on OGTV: the last two days' trending videos from every OGTV channel, ranked by how fast they are being watched and updated every hour. Pick one and it plays, free, with no sign-up.",
+  latest: "Latest Mix on OGTV: the last two days' trending videos from every OGTV channel, ranked by how fast they are being watched and updated every hour. They play one after another, and any of them can be picked on the screen, free, with no sign-up.",
   select: "Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, the F1 film's songs, Diljit Dosanjh, Karan Aujla and Mirzapur.",
 };
 // What people ask for that a channel answers (scripts/channel-asks.mjs), and its questions: on its page (with FAQPage)
@@ -151,7 +152,7 @@ const USES = [
     "Live news around the clock on Just News, Hindi news and analysis on Khabar, Bihar and Jharkhand on Magadh Times, and world affairs on Newsroom: Palki Sharma's Vantage, WION, Firstpost, Mint and Bloomberg. Live broadcasts play first whenever they are on."],
   ["sports", "Sports and highlights", ["cricket", "classics", "football", "khel", "worldsport"],
     "Today's highlights from every major cricket match, India and the IPL first; World Cup classics and great finishes; this week's football from the Premier League, LaLiga, the Champions League and the ISL; the Olympics and Indian sport on Khel; and F1, tennis and the NBA on International Sports."],
-  ["learn", "Learning that plays on its own", ["gyaan", "vigyan", "curious", "data", "classroom", "paisa", "baatcheet", "niche"],
+  ["learn", "Learning that plays on its own", ["gyaan", "vigyan", "curious", "data", "classroom", "dsd", "paisa", "baatcheet", "niche"],
     "History, from Lallantop's Tarikh to world history documentaries, explainers on space, science and maths, India told in maps and charts, lectures for UPSC and for data and AI engineering, money and investing, long-form podcasts and the rare and offbeat."],
   ["films", "Films and family TV", ["retro", "premium", "southgems", "aangan", "hasya", "fiction"],
     "Classic Hindi films, great films from India and the world, critically acclaimed South Indian films in Hindi, Doordarshan classics, Taarak Mehta and mushaira, stand-up comedy and web series."],
@@ -457,6 +458,6 @@ ${CHANNELS.map(c => { const lu = lineup(c), wk = weekPicks(c);
 ${SITE}/${slug(c)}/ · ${describe(c)}
 
 Good for: ${asksOf(c).asks.map(cap).join("; ")}.
-${lu.length ? `\nToday:\n${lu.map(b => `- ${hm(b.from)}–${hm(b.to)} ${b.label}: ${b.titles.join("; ")}`).join("\n")}\n` : c.live ? "\nLive streams, around the clock.\n" : c.menu && LATEST_ITEMS.length ? `\nNo schedule: pick from what is trending, the last two days (updated every hour). Now: ${LATEST_ITEMS.slice(0, 12).map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}${wk.length ? `\nPlaying this week: ${wk.map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}`; }).join("\n")}`);
+${lu.length ? `\nToday:\n${lu.map(b => `- ${hm(b.from)}–${hm(b.to)} ${b.label}: ${b.titles.join("; ")}`).join("\n")}\n` : c.live ? "\nLive streams, around the clock.\n" : c.menu && LATEST_ITEMS.length ? `\nNo schedule: what is trending, the last two days (updated every hour), plays one after another; any can be picked. Now: ${LATEST_ITEMS.slice(0, 12).map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}${wk.length ? `\nPlaying this week: ${wk.map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}`; }).join("\n")}`);
 await writeFile(new URL("robots.txt", ROOT), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 console.log(`home + ${CHANNELS.length} channel pages, sitemap.xml, robots.txt, llms.txt written`);

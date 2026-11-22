@@ -322,9 +322,14 @@ const filmKey = v => v.t.toLowerCase().replace(/\(.*?\)|\[.*?\]|\{.*?\}/g, "").s
 // A song routed onto another channel comes last, so that channel's own copy (with its creator and tag) is the one kept
 const routed = v => { const f = bySource.get(v.feed); return !!f?.route && v.cat !== f.cat };
 const flat = results.flat(), ordered = [...flat.filter(v => !routed(v)), ...flat.filter(routed)];
+// Three or more videos of a category with the same title (a daily bulletin) are told apart by their date, added once: a
+// video kept from an earlier run comes with the date that run gave it, so every date is taken off first (it was added
+// again on each run before, piling up "· 20 Nov 2026 · 20 Nov 2026 · ...")
+const DATED = /( · \d{1,2} [A-Z][a-z]{2} \d{4})+$/;
+for (const v of ordered) v.t = v.t.replace(DATED, "");
 const sameTitle = {}; for (const v of ordered) { const k = v.cat + "|" + v.t.toLowerCase(); sameTitle[k] = (sameTitle[k] || 0) + 1 }
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-for (const v of ordered) if (sameTitle[v.cat + "|" + v.t.toLowerCase()] >= 3 && v.pub && !/ · \d+$/.test(v.t)) v.t += ` · ${+v.pub.slice(8, 10)} ${MONTHS[+v.pub.slice(5, 7) - 1]} ${v.pub.slice(0, 4)}`;
+for (const v of ordered) if (sameTitle[v.cat + "|" + v.t.toLowerCase()] >= 3 && v.pub) v.t += ` · ${+v.pub.slice(8, 10)} ${MONTHS[+v.pub.slice(5, 7) - 1]} ${v.pub.slice(0, 4)}`;
 const seen = new Set(), items = ordered.filter(passes).filter(v => {
   const k = ["premium", "retro", "masters"].includes(v.cat) && filmKey(v).length > 3 ? "film:" + v.cat + filmKey(v) : v.id + v.cat; // a song may be on two channels
   return !seen.has(k) && seen.add(k);

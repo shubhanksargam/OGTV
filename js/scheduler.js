@@ -48,7 +48,7 @@ const chPool=ch=>ch?inCats(baseCats(ch)):CATALOG; // every video of the channel'
 // What a channel shows while its videos are on their way: never a programme it might not play
 // Latest Mix (ch.menu) has no schedule: the viewer picks what plays (js/app.js). Asked what is on, it answers with a
 // "menu" slot, an hour long, which plays nothing
-const menuSlot=(ch,a,b=istHour(a)+HOUR)=>({start:a,end:b,menu:true,ch,part:{label:"Pick a video",cat:"",from:0,to:24},v:{id:"",t:"Latest Mix: pick a video",src:"",lang:"",cat:"",min:1}});
+const menuSlot=(ch,a,b=istHour(a)+HOUR)=>({start:a,end:b,menu:true,ch,part:{label:"Trending now",cat:"",from:0,to:24},v:{id:"",t:"Latest Mix: trending now",src:"",lang:"",cat:"",min:1}});
 const pendingSlot=(ch,t)=>({start:Math.floor(t/MIN)*MIN,end:Math.floor(t/MIN)*MIN+MIN,pending:true,ch,part:{label:"Tuning in",cat:"",from:0,to:24},v:{id:"",t:"Tuning in…",src:"",lang:"",cat:"",min:1}});
 function pick(part,ch){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
@@ -171,6 +171,17 @@ function buildDay(ch,dayStart){if(ch.menu) return []; // Latest Mix: no day to w
   const boostRuns=new Map();
   layout(parts,warp).forEach(({p,spans,flex})=>{const pi=parts.indexOf(p);
     let pool=heard(ch,pick({...p,_day:dayStart,...(ch.festival||ch.group==="Music"||ch.key==="bhakti"?{_lessAI:true}:{})},ch)); const rnd=seeded(k+"|"+pi);
+    // p.loop ("2026-11-23T06:00", IST): one programme on and on, by request (Digital System Design): its videos in their order,
+    // end to end from that moment, across midnight, the first again after the last. Where it is at any moment is worked out
+    // from that moment, so each day picks up exactly where the day before left off: the video on at midnight belongs to the
+    // day it began (its slot runs over, so it plays on without a break; slotAt and slotsBetween look there) and the next one
+    // opens the day. For a whole day's part (0 to 24)
+    if(p.loop){const L=pool.filter(v=>v.min>0), T=L.reduce((a,v)=>a+v.min*MIN,0); if(L.length){
+      const from=dayStart+p.from*HOUR, to=dayStart+p.to*HOUR; let x=((from-Date.parse(p.loop+(p.loop.length===10?"T00:00":"")+":00+05:30"))%T+T)%T, j=0;
+      while(x>=L[j].min*MIN){x-=L[j].min*MIN; j++} // L[j] is on as the day starts, x into it
+      let t=from-x; if(x>0){t+=L[j].min*MIN; j=(j+1)%L.length} // begun the day before: that day's
+      while(t<to){const v=L[j]; slots.push({start:t,end:t+v.min*MIN,v,part:p,ch}); t+=v.min*MIN; j=(j+1)%L.length}
+      return}}
     if(!pool.length) pool=heard(ch,chPool(ch).filter(v=>!BAD.has(v.id))); // every song it had was covered with no track (never in practice)
     const perDay=Math.max(1,Math.round((p.to-p.from)*60/(pool.reduce((t,v)=>t+v.min,0)/pool.length||30))), at=Math.round(dayStart/DAY)*perDay%pool.length;
     const fresh=()=>p.newest?newestFirst(pool):p.inOrder?pool.slice(at).concat(pool.slice(0,at)):shuffle(pool,rnd); // p.inOrder: lesson after lesson, carrying on each day
@@ -232,13 +243,16 @@ function liveSlot(ch,L,t){const a=istHour(t); // shown in the guide as hour-long
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
 function slotAt(ch,t){if(ch.menu) return menuSlot(ch,istHour(t)); const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t); // a live stream needs no list
   if(!chReady(ch)) return pendingSlot(ch,t); // its videos are still on their way
-  return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)||gapSlot(ch,t)}
+  const at=s=>t>=s.start&&t<s.end; // a loop's video on at midnight is the day before's (p.loop)
+  return buildDay(ch,istDayStart(t)).find(at)||loops(ch)&&buildDay(ch,istDayStart(t)-DAY).find(at)||gapSlot(ch,t)}
+const loops=ch=>!!ch.parts&&ch.parts.some(p=>p.loop);
 // Only if a channel's parts leave an hour uncovered (a slip in channels.js): play something rather than break the page
 function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=chPool(ch).filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
   return {start:a,end:a+HOUR,v,part:{label:ch.en||ch.name,cat:v.cat,from:0,to:24},ch}}
 function slotsBetween(ch,a,b){if(ch.menu) return [menuSlot(ch,a,b)]; const out=[], L=liveStream(ch);
   if(L&&!ch.liveHours){for(let t=istHour(a);t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
   if(!chReady(ch)) return [pendingSlot(ch,a)]; // its videos are still on their way
-  let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
+  let d=istDayStart(a)-(loops(ch)?DAY:0);while(d<b){ // a loop: the day before's last video may run into these hours
+    for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}
   if(L) for(let t=istHour(a);t<b;t+=HOUR) if(liveNow(ch,t)) out.push(liveSlot(ch,liveStream(ch,t)||L,t));
   return out.sort((x,y)=>x.start-y.start)}

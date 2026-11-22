@@ -1,9 +1,9 @@
-// Builds js/latest.json for Latest Mix (channel 45, by request, 22 Nov 2026): the last two days' trending uploads of every
+// Builds js/latest.json for Latest Mix (channel 46, by request, 22 Nov 2026): the last two days' trending uploads of every
 // YouTube channel OGTV draws on (the sources in scripts/feeds.json with a channel "id"; playlists are curated older
 // videos and are left out), ranked by views per hour since posting, like a home page of what is taking off now.
 // Each video meets the rules its channel's sources set (match/skip, length, the category's Bhojpuri and South rules,
 // no trailers), plays in an embed, is public, not live, not age-restricted and not blocked in India; blocked uploaders
-// and refused videos never appear, nor Shorts. The grid has a section for each group (g: News, Knowledge, Sports,
+// and refused videos never appear, nor Shorts. The carousel has a section for each group (g: News, Knowledge, Sports,
 // Lifestyle, Entertainment, Music), each with as many videos as the others (by request): the top 16 of each, or as many
 // as the smallest group has; at most 3 from a channel, up to 6 in a group short of videos.
 // Each channel's RSS feed (no API quota) lists its latest 15 uploads with their views; a feed that fails falls back to

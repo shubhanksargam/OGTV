@@ -523,6 +523,7 @@
     {"id": "UCgp23vdLNaUitOkCxxVnRrg", "src": "NPTEL IIT Kharagpur", "cat": "classroom", "lang": "en", "minMin": 10, "maxMin": 100},
     {"id": "UCEBb1b_L6zDS3xTUrIALZOw", "src": "MIT OpenCourseWare", "cat": "classroom", "lang": "en", "minMin": 10, "maxMin": 100},
     {"id": "UCBa5G_ESCn8Yd4vw5U-gIcg", "src": "Stanford Online", "cat": "classroom", "lang": "en", "minMin": 10, "maxMin": 100},
+    {"playlist": "PLUQpHm_JtukLuPA_xJiEZWreKTD9jwgJl", "src": "IIT Madras: Digital System Design", "cat": "dsd", "lang": "en", "take": 200, "minMin": 3, "maxMin": 120, "skip": "#shorts|trailer|teaser", "keepDays": 3650},
     {"id": "UCsXVk37bltHxD1rDPwtNM8Q", "src": "Kurzgesagt", "cat": "curious", "lang": "en", "minMin": 2, "maxMin": 60},
     {"id": "UCYO_jab_esuFRV4b17AJtAw", "src": "3Blue1Brown", "cat": "curious", "lang": "en", "minMin": 2, "maxMin": 60},
     {"id": "UCHnyfMqiRRG1u-2MsSQLbXA", "src": "Veritasium", "cat": "curious", "lang": "en", "minMin": 2, "maxMin": 60},
