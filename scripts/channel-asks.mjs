@@ -16,7 +16,7 @@ export default {
   classroom: {verb: "watch", asks: ["UPSC lectures and current affairs", "NPTEL, MIT and Stanford lectures", "AI and data engineering lectures, including data engineering in Hindi"]},
   tech: {verb: "watch", asks: ["gadget reviews and tech explainers", "car and bike reviews"]},
   paisa: {verb: "watch", asks: ["The Daily Brief and Markets by Zerodha", "stock market and investing basics"]},
-  baatcheet: {verb: "watch", asks: ["Indian podcasts: Raj Shamani, BeerBiceps and Nikhil Kamath"]},
+  baatcheet: {verb: "watch", asks: ["The Slow Interview with Neelesh Misra", "The Lallantop's Guest in the Newsroom (GITN) long interviews", "Indian podcasts: Raj Shamani, BeerBiceps and Nikhil Kamath"]},
   niche: {verb: "watch", asks: ["rare, offbeat and curious videos"]},
   cricket: {verb: "watch", asks: ["today's cricket highlights", "India and IPL highlights"]},
   khel: {verb: "watch", asks: ["Olympics and Asian Games videos", "Indian sport"]},

@@ -38,7 +38,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - IIT Madras's Digital System Design lectures; Verilog, FPGA and digital design lectures, in order; How a CPU and an SoC are designed, lecture by lecture: [Digital System Design](https://ogtv.co.in/digital-system-design/), channel 10.
 - Gadget reviews and tech explainers; Car and bike reviews: [Tech](https://ogtv.co.in/tech/), channel 11.
 - The Daily Brief and Markets by Zerodha; Stock market and investing basics: [Paisa](https://ogtv.co.in/paisa/), channel 12.
-- Indian podcasts: Raj Shamani, BeerBiceps and Nikhil Kamath: [Baatcheet](https://ogtv.co.in/baatcheet/), channel 13.
+- The Slow Interview with Neelesh Misra; The Lallantop's Guest in the Newsroom (GITN) long interviews; Indian podcasts: Raj Shamani, BeerBiceps and Nikhil Kamath: [Baatcheet](https://ogtv.co.in/baatcheet/), channel 13.
 - Rare, offbeat and curious videos: [Niche](https://ogtv.co.in/niche/), channel 14.
 - Today's cricket highlights; India and IPL highlights: [Cricket](https://ogtv.co.in/cricket/), channel 15.
 - Olympics and Asian Games videos; Indian sport: [Khel](https://ogtv.co.in/khel/), channel 16.
@@ -127,7 +127,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - [10 · Digital System Design](https://ogtv.co.in/digital-system-design/): Digital System Design on OGTV: IIT Madras's course from its BS in Electronic Systems, all 62 lectures in order on a loop that goes on and on, from what a digital system is and Verilog to FPGAs, memory, CPUs and SoCs. Free, with no sign-up.
 - [11 · Tech](https://ogtv.co.in/tech/): Tech on OGTV: gadgets, explainers, cars & bikes, free and always on. Videos from Tech Burner, Beebom, C4ETech and Marques Brownlee.
 - [12 · Paisa](https://ogtv.co.in/paisa/): Paisa on OGTV: money: The Daily Brief, Markets by Zerodha & investing, free and always on. Videos from Ankur Warikoo, Zero1 by Zerodha and CA Rachana Ranade.
-- [13 · Baatcheet](https://ogtv.co.in/baatcheet/): Baatcheet on OGTV: podcasts, free and always on. Videos from Raj Shamani, Prakhar Gupta, Dostcast and Shubhankar Mishra.
+- [13 · Baatcheet](https://ogtv.co.in/baatcheet/): Baatcheet on OGTV: podcasts & long interviews: Raj Shamani, Neelesh Misra's Slow Interview, Lallantop's GITN, free and always on. Videos from Raj Shamani.
 - [14 · Niche](https://ogtv.co.in/niche/): Niche on OGTV: rare, offbeat & curious, free and always on. Videos from Primitive Technology, Tom Scott, Half as Interesting and Wendover Productions.
 
 ### Sports

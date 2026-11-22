@@ -136,7 +136,8 @@ const CHANNELS = [
     {from:17,to:20,cat:"paisa",tag:"dailybrief",alt:"paisa",label:"The Daily Brief: past episodes"},
     {from:20,to:21,cat:"paisa",tag:"zmarkets",alt:"paisa",label:"Markets by Zerodha"},
     {from:21,to:24,cat:"paisa",tag:"dailybrief",alt:"paisa",label:"Prime time: The Daily Brief, back to back"}]},
-  {key:"baatcheet",n:13,group:"Knowledge",name:"Baatcheet",en:"Podcasts",parts:[{from:0,to:24,preferMin:30,cat:"baatcheet",label:"Long conversations"}]},
+  {key:"baatcheet",n:13,group:"Knowledge",name:"Baatcheet",en:"Podcasts & long interviews: Raj Shamani, Neelesh Misra's Slow Interview, Lallantop's GITN",parts:[ // Neelesh Misra's Slow Interview and the Lallantop's GITN added by request (22 Nov 2026), with shares of their own, so their long archives sit alongside the podcasts rather than crowd them out
+    {from:0,to:24,preferMin:30,cat:"baatcheet",mix:[{src:"^(?!The Lallantop|Neelesh Misra)"},{src:"^The Lallantop",share:0.2},{src:"^Neelesh Misra",share:0.15}],label:"Long conversations"}]},
   {key:"niche",prime:20,n:14,group:"Knowledge",name:"Niche",en:"Rare, offbeat & curious",parts:[
     {from:0,to:9,  cat:"niche",label:"Offbeat world"},
     {from:9,to:13, cat:"niche",src:"Prasar Bharati|Films Division|Better India",label:"Rare India"},
