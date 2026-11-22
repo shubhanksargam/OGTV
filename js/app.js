@@ -1,4 +1,8 @@
 /* ---------- UI ---------- */
+// js/analytics.js refused (a privacy blocker takes files of that name): everything carries on without it. Play called
+// track() halfway through and stopped there, the intro left up for good
+if(typeof track!=="function") window.track=()=>{};
+if(typeof reportError!=="function") window.reportError=()=>{};
 const $=id=>document.getElementById(id);
 // Titles, creator names and labels come from YouTube and fan playlists: escape them wherever they go into HTML
 const ESC={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}, esc=t=>String(t??"").replace(/[&<>"']/g,c=>ESC[c]);
