@@ -2,58 +2,58 @@
 const LIVE = {
  "news": [
   {
-   "id": "kgYxOvY9N5s",
-   "t": "PM Modi LIVE Speech: bihar ko piem modi ki saugat, nitish setu ka kiya udghatan | Vaishali",
-   "since": "2026-11-21T09:29:57Z",
+   "id": "aV1XWM57-Dw",
+   "t": "Aaj Tak LIVE : UP Election 2027 | CM Yogi | PM Modi | BJP Vs Congress | Rahul Gandhi | Pol",
+   "since": "2026-11-22T01:17:43Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "XiGjWBUcQqM",
-   "t": "Rajasthan Panchayat Election Results Hindi News LIVE: jitkar bhi hari kangres! | Congress ",
-   "since": "2026-11-21T14:40:16Z",
+   "id": "n8uquWfsof0",
+   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 22 November ",
+   "since": "2026-11-22T00:53:14Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "4u1w1mmPVgk",
-   "t": "Panchtatv men vilin hueen siem yogi ki man | CM Yogi Mother Passes Away | Savitri Devi |Yo",
-   "since": "2026-11-21T16:18:33Z",
+   "id": "DCNDqiaNaZ8",
+   "t": "Aaj Ki Taaza Khabar | CM Yogi Mother Death | Baba Bageshwar | CM Yogi | PM Modi | Akhilesh",
+   "since": "2026-11-22T00:44:05Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "Fh6sFNa0goo",
-   "t": "Nishikant Dubey in Aap Ki Adalat LIVE : aap ki adalat men BJP neta nishikant dube LIVE | R",
-   "since": "2026-11-21T16:28:06Z",
+   "id": "GA2vXJ0SIjw",
+   "t": "Aaj Ka Rashifal, 22 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
+   "since": "2026-11-22T01:52:20Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "nNzNb7YtFqQ",
-   "t": "DNA LIVE: desh men ek aur eyarlains band ho jaegi? | chin se lautkar tranp ne bharat ki ta",
-   "since": "2026-11-21T15:20:02Z",
+   "id": "8HabqOEhb0U",
+   "t": "Aaj Ki Taza Khabar LIVE: UP Election | BJP | Congress| CM Yogi | PM Modi | Rahul Gandhi | ",
+   "since": "2026-11-22T00:30:46Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "mYswoejS85M",
-   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 156 | PM Modi | Rah",
-   "since": "2026-11-21T15:17:12Z",
+   "id": "8EHiLYO4NxI",
+   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: PM Modi in Bihar | UPElections2027 | CMYogi | ",
+   "since": "2026-11-21T23:22:23Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "bcDohWVkTqg",
-   "t": "Ramayana Film | The 'Agenda' Behind Ramayana: Mahabharat's Krishna With Nitish Bharadwaj |",
-   "since": "2026-11-21T11:55:20Z",
+   "id": "7ZmPUqmZi5Q",
+   "t": "NDTV Live: US-Iran War | PM Modi | Yuzvendra Chahal | India VS Newzealand | Delhi Pollutio",
+   "since": "2026-11-22T01:34:01Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "fT90CAjPkUw",
-   "t": "LIVE: 'Congress Will Return To Power In 2028' |Ashok Gehlot Excl On Rajasthan Panchayat Po",
-   "since": "2026-11-21T16:57:48Z",
+   "id": "V6VHDTWBDCM",
+   "t": "India Today LIVE: US-Iran War | Trump News | Yuzi Joins BJP | UP Election 2027 | PM Modi |",
+   "since": "2026-11-22T01:45:13Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -65,25 +65,25 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "j7xuKHJEv98",
-   "t": "TRUMP IRAN ANNOUNCEMENT LIVE | US-IRAN War Is Over | Trump Speech Live | US News Live | Tr",
-   "since": "2026-11-21T08:03:57Z",
+   "id": "uqleIgdp6l8",
+   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
+   "since": "2026-11-22T03:02:20Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "sQ8-FiPLfF0",
-   "t": "TRUMP LOSES HIS COOL | 'YOU'RE REALLY A RUDE PERSON!' | Trump Snaps at Reporter in Fiery E",
-   "since": "2026-11-21T18:57:16Z",
+   "id": "rD1uKNXuvbg",
+   "t": "LIVE: Cory Booker vs Blanche | Ghislaine Maxwell Meeting, Epstein Survivors & Prison Trans",
+   "since": "2026-11-22T01:56:20Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "P8SdQ6mXdnY",
+   "id": "qCqLU_vyjFQ",
    "t": "PM Modi Bihar Visit Live: PM Modi LIVE | Nitish Setu Inauguration | Patna | Nitish Kumar |",
-   "since": "2026-11-21T15:42:43Z",
+   "since": "2026-11-22T01:50:51Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -111,23 +111,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "u3Lo5XkTZHM",
-   "t": "LIVE:Putin Upgrades 'Unstoppable' Iskander Missiles: Is It Game Over for Ukraine? |Vantage",
-   "since": "2026-11-21T16:30:13Z",
+   "id": "H6PXCtRbB9o",
+   "t": "US Iran War LIVE| Gulf On Edge: Iran Claims US Radar Strikes; Oil Tankers Hit Near Strait ",
+   "since": "2026-11-22T02:30:58Z",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
-   "since": "2026-11-20T01:52:29Z",
+   "id": "VBn0d1SpwyY",
+   "t": "Russia-Ukraine War LIVE: Putin's Revenge After Crimea Bridge Attack, Ukraine Under Fire | ",
+   "since": "2026-11-22T01:53:17Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "tDpEukxzoTQ",
+   "id": "MemL0SyCRWA",
    "t": "Donald Trump LIVE | Trump ERUPTS Over Iran, Issues Blunt Warning as He Addresses China and",
-   "since": "2026-11-21T18:11:10Z",
+   "since": "2026-11-22T01:36:08Z",
    "src": "Mint",
    "lang": "en"
   },

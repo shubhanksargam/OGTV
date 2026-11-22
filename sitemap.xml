@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url><loc>https://ogtv.co.in/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://ogtv.co.in/just-news/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/osx63ZEV8jI/hqdefault.jpg</video:thumbnail_loc><video:title>Bengaluru Mass Murder Case: How a Cab Driver Killed 7 Family Members in 16 Days</video:title>
-      <video:description>Bengaluru Mass Murder Case: How a Cab Driver Killed 7 Family Members in 16 Days, now on Just News, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/osx63ZEV8jI</video:player_loc><video:duration>1920</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uucH07Iez_g/hqdefault.jpg</video:thumbnail_loc><video:title>Houthi Siege Disrupts Fuel Supplies to Taiz</video:title>
+      <video:description>Houthi Siege Disrupts Fuel Supplies to Taiz, now on Just News, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/uucH07Iez_g</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/khabar/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/osx63ZEV8jI/hqdefault.jpg</video:thumbnail_loc><video:title>Bengaluru Mass Murder Case: How a Cab Driver Killed 7 Family Members in 16 Days</video:title>
@@ -12,14 +12,14 @@
       <video:player_loc>https://www.youtube.com/embed/osx63ZEV8jI</video:player_loc><video:duration>1920</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/magadh-times/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/tlnbOmUTNYQ/hqdefault.jpg</video:thumbnail_loc><video:title>Top News: phataphat dekhen aaj ki bari khabar</video:title>
-      <video:description>Top News: phataphat dekhen aaj ki bari khabar, now on Magadh Times, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/tlnbOmUTNYQ</video:player_loc><video:duration>960</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/Rf7UuNA7Yqk/hqdefault.jpg</video:thumbnail_loc><video:title>Aaj Ki Taaja Khabar: aaj ki bari khabren · 22 Nov 2026</video:title>
+      <video:description>Aaj Ki Taaja Khabar: aaj ki bari khabren · 22 Nov 2026, now on Magadh Times, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Rf7UuNA7Yqk</video:player_loc><video:duration>1380</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/newsroom/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/IsPMTMvjL-Y/hqdefault.jpg</video:thumbnail_loc><video:title>Weekly Tidbits: 21st Nov</video:title>
-      <video:description>Weekly Tidbits: 21st Nov, now on Newsroom, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/IsPMTMvjL-Y</video:player_loc><video:duration>840</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/uucH07Iez_g/hqdefault.jpg</video:thumbnail_loc><video:title>Houthi Siege Disrupts Fuel Supplies to Taiz</video:title>
+      <video:description>Houthi Siege Disrupts Fuel Supplies to Taiz, now on Newsroom, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/uucH07Iez_g</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/gyaan/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/iSvaIQzsQqs/hqdefault.jpg</video:thumbnail_loc><video:title>₹10000 fine for crossing toll plaza without insurance</video:title>
@@ -72,9 +72,9 @@
       <video:player_loc>https://www.youtube.com/embed/AeD0kvmZ0lQ</video:player_loc><video:duration>2160</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/khel/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/qb_EpkLQyI0/hqdefault.jpg</video:thumbnail_loc><video:title>India vs Korea · 21 Nov 2026</video:title>
-      <video:description>India vs Korea · 21 Nov 2026, now on Khel, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/qb_EpkLQyI0</video:player_loc><video:duration>780</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/no_EX_kqVf0/hqdefault.jpg</video:thumbnail_loc><video:title>Anish Giri - &quot;Sindarov will prevail after a very tense match!&quot;</video:title>
+      <video:description>Anish Giri - &quot;Sindarov will prevail after a very tense match!&quot;, now on Khel, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/no_EX_kqVf0</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/cricket-classics/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/S9ujLluST7U/hqdefault.jpg</video:thumbnail_loc><video:title>Vivek Razdan Talks About Sachin Tendulkar&apos;s Injury |Extraaa Innings</video:title>
@@ -82,14 +82,14 @@
       <video:player_loc>https://www.youtube.com/embed/S9ujLluST7U</video:player_loc><video:duration>420</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/football/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/byPvzk7r_J8/hqdefault.jpg</video:thumbnail_loc><video:title>Maguire&apos;s Late Heroics!</video:title>
-      <video:description>Maguire&apos;s Late Heroics!, now on Football, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/byPvzk7r_J8</video:player_loc><video:duration>600</video:duration><video:publication_date>2026-11-21T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/xJxF1wY2Mf8/hqdefault.jpg</video:thumbnail_loc><video:title>Colombia v Congo DR</video:title>
+      <video:description>Colombia v Congo DR, now on Football, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/xJxF1wY2Mf8</video:player_loc><video:duration>660</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/international-sports/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/XLr0BY3I50U/hqdefault.jpg</video:thumbnail_loc><video:title>TIC TAC TOE ❌ 🅾️</video:title>
-      <video:description>TIC TAC TOE ❌ 🅾️, now on International Sports, a free always-on channel on OGTV.</video:description>
-      <video:player_loc>https://www.youtube.com/embed/XLr0BY3I50U</video:player_loc><video:duration>300</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/no_EX_kqVf0/hqdefault.jpg</video:thumbnail_loc><video:title>Anish Giri - &quot;Sindarov will prevail after a very tense match!&quot;</video:title>
+      <video:description>Anish Giri - &quot;Sindarov will prevail after a very tense match!&quot;, now on International Sports, a free always-on channel on OGTV.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/no_EX_kqVf0</video:player_loc><video:duration>1260</video:duration><video:publication_date>2026-11-22T00:00:00.000Z</video:publication_date></video:video>
   </url>
   <url><loc>https://ogtv.co.in/sehat/</loc><lastmod>2026-11-22</lastmod><changefreq>daily</changefreq><priority>0.8</priority>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/vPvMSfZRnfU/hqdefault.jpg</video:thumbnail_loc><video:title>20 Minute Full-Body Military Calisthenics Workout (No Equipment</video:title>
