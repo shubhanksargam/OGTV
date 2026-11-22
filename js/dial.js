@@ -27,7 +27,7 @@ let geo=null, tintAt=null;
 dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><span class="vinyl dial-spin"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><span>Tuning in</span></div>`);
 
 const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
-  b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
+  b.type="button"; b.className="dk"+(c.name.length>13?" long":""); b.dataset.i=i; // long: its name needs room on a phone (css) b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
   b.innerHTML=`<span class="dk-disc"><img alt="" decoding="async" draggable="false"><i class="dk-gloss"></i><i class="dk-hole"></i></span>`
     +`<span class="dk-n">${c.n}</span><span class="dk-name">${esc(c.name)}</span>`;
   b.style.visibility="hidden"; // hidden until placed (render): a disc first seen where it belongs, never moved into place

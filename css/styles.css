@@ -572,8 +572,13 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .dk-hole{position:absolute;left:50%;top:50%;width:18%;height:18%;transform:translate(-50%,-50%);border-radius:50%;
   background:radial-gradient(circle,#0b090e 0 38%,#e9d6ae 42% 58%,#8a6a3c 63%);box-shadow:0 1px 3px rgba(0,0,0,.7)}
 .dk-n{font:700 .78rem/1 "Unbounded",var(--body);letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
-.dk-name{font-weight:700;font-size:.85rem;line-height:1.1;white-space:nowrap;opacity:0;transition:opacity .2s}
+.dk-name{font-weight:700;font-size:.8rem;line-height:1.1;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em;opacity:0;transition:opacity .2s} /* in capitals, by request, as the card above */
 .dk.near .dk-name{opacity:1}
+/* a phone's discs are close (69 px apart): every name keeps to its own slot, on two lines if need be; a long name in the
+   centre takes two lines across and its neighbours' names step aside (their numbers stay); a long name beside it isn't shown */
+@media (max-width:600px){.dk-name{white-space:normal;width:66px;text-align:center} /* each name in its own slot, on two lines if it needs them */
+  .dk.long .dk-name{width:8em}
+  .dial:has(.dk.mid.long) .dk.near:not(.mid) .dk-name,.dk.near.long:not(.mid) .dk-name{opacity:0}}
 .dk.mid .dk-n{color:var(--marigold)}
 .dk.cur .dk-disc{box-shadow:0 0 0 3px var(--marigold),0 0 28px rgba(242,160,61,.55),0 12px 22px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.35)}
 .dk.cur .dk-n::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sindoor);margin-right:5px;vertical-align:1px}
