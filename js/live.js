@@ -2,51 +2,51 @@
 const LIVE = {
  "news": [
   {
-   "id": "aV1XWM57-Dw",
-   "t": "Aaj Tak LIVE : UP Election 2027 | CM Yogi | PM Modi | BJP Vs Congress | Rahul Gandhi | Pol",
-   "since": "2026-11-22T01:17:43Z",
+   "id": "x26_P_X48ys",
+   "t": "UP Election News LIVE : yupi chunav par aa gaee bari khabar |CM Yogi | BJP | BJP | Samajwa",
+   "since": "2026-11-22T10:44:11Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "NHMVLkFD9jE",
-   "t": "Aaj Ki Taja Khabar LIVE: 7 baje ki 100 khabren | Headline | 100 News | Gujarat-Rajasthan A",
-   "since": "2026-11-22T01:48:24Z",
+   "id": "KB9Dn0UVh9c",
+   "t": "Rajasthan Panchayat Election Result LIVE Updates: bijepi ka bara ailan! | Congress Victory",
+   "since": "2026-11-22T11:02:45Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "DCNDqiaNaZ8",
-   "t": "Aaj Ki Taaza Khabar | CM Yogi Mother Death | Baba Bageshwar | CM Yogi | PM Modi | Akhilesh",
-   "since": "2026-11-22T00:44:05Z",
+   "id": "k1YI0T6FzOw",
+   "t": "Aaj Ki Taaza Khabar| Baba Bageshwar | Ram Katha | CM Yogi Mother Death | Anant Singh | Cyc",
+   "since": "2026-11-22T08:49:15Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "HbuQxlcTSV4",
-   "t": "Aaj ki Badi Khabrein LIVE: Gold-Silver prices fall | Musadik Malik | UP Elections | Latest",
-   "since": "2026-11-22T01:04:53Z",
+   "id": "x0iPg6Nb2Zs",
+   "t": "PM Modi On Gold Price Live : sone ki kimat men banpar giravat ke bich bari khabar |",
+   "since": "2026-11-22T10:07:07Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "0O3W3K4_Hz0",
-   "t": "Today 100 Big Breaking News LIVE: aaj ki bari khabren | Gold-Silver prices | Musadik Malik",
-   "since": "2026-11-22T01:27:16Z",
+   "id": "hQkXepjVMSA",
+   "t": "Trump Big Claim On India LIVE: bharat par palat gae tranp? ailan se chin-pakistan men khal",
+   "since": "2026-11-22T06:59:43Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "8EHiLYO4NxI",
-   "t": "Aaj Ki Badi Khabar With Sushant Sinha LIVE: PM Modi in Bihar | UPElections2027 | CMYogi | ",
-   "since": "2026-11-21T23:22:23Z",
+   "id": "B8PkFM6jv3U",
+   "t": "Goonj With Arpita Aarya Live: Rahul Gandhi | Congress | GDP | SIR | Rahul Gandhi Statement",
+   "since": "2026-11-22T11:14:58Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "7ZmPUqmZi5Q",
-   "t": "NDTV Live: US-Iran War | PM Modi | Yuzvendra Chahal | India VS Newzealand | Delhi Pollutio",
-   "since": "2026-11-22T01:34:01Z",
+   "id": "FMnnwFgg6pI",
+   "t": "LIVE: Balen Shah India | Balen Shah India Visit | Nepal PM Balendra Shah Begins 2-Day Indi",
+   "since": "2026-11-22T10:50:31Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -58,32 +58,32 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
-   "since": "2026-11-20T01:52:29Z",
+   "id": "VBn0d1SpwyY",
+   "t": "Russia-Ukraine War LIVE: Putin's Revenge After Crimea Bridge Attack, Ukraine Under Fire | ",
+   "since": "2026-11-22T01:53:17Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "uqleIgdp6l8",
-   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran | Declares EMERGENCY From Whitehouse;| Russia",
-   "since": "2026-11-22T03:02:20Z",
+   "id": "Lh9i08fcGp4",
+   "t": "Donald Trump Declares Emergency LIVE | Historic White House Announcement Rocks the Nation!",
+   "since": "2026-11-22T10:58:57Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "OB5Va7x0yjs",
-   "t": "VANCE VS RUBIO LIVE: 2028 Presidency Race Heats Up as Polls Flip After U.S. Midterms | N18",
-   "since": "2026-11-22T04:20:02Z",
+   "id": "dMuJznNgz8k",
+   "t": "LIVE: TRUMP HUMILIATES VANCE & RUBIO to Their Faces: Floats Stephen Miller for President! ",
+   "since": "2026-11-22T07:44:39Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "qCqLU_vyjFQ",
+   "id": "U-yvPUQiuDQ",
    "t": "PM Modi Bihar Visit Live: PM Modi LIVE | Nitish Setu Inauguration | Patna | Nitish Kumar |",
-   "since": "2026-11-22T01:50:51Z",
+   "since": "2026-11-22T10:43:29Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -92,13 +92,6 @@ const LIVE = {
    "t": "Anant Singh Daughter Wedding : anant sinh ke ghar 'royal veding' LIVE",
    "since": "2026-11-20T13:12:34Z",
    "src": "Zee Bihar Jharkhand",
-   "lang": "hi"
-  },
-  {
-   "id": "jbfFoNvkw24",
-   "t": "Vaishali PM Modi : Nitish Setu ka pradhanmantri ka kiya udghatan... lahra diya gamchha",
-   "since": "2026-11-21T09:02:43Z",
-   "src": "ABP Bihar",
    "lang": "hi"
   }
  ],
@@ -111,23 +104,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "acrSDt9Wovs",
-   "t": "SAUDI HOUTHI UPDATES LIVE|Saudi Capital Targeted Again:Three Houthi Missiles Intercepted O",
-   "since": "2026-11-22T03:30:25Z",
+   "id": "u3Lo5XkTZHM",
+   "t": "LIVE:Putin Upgrades 'Unstoppable' Iskander Missiles: Is It Game Over for Ukraine? |Vantage",
+   "since": "2026-11-21T16:30:13Z",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
-   "since": "2026-11-20T01:52:29Z",
+   "id": "VBn0d1SpwyY",
+   "t": "Russia-Ukraine War LIVE: Putin's Revenge After Crimea Bridge Attack, Ukraine Under Fire | ",
+   "since": "2026-11-22T01:53:17Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "3DZq9I-mC_E",
-   "t": "Mark Carney LIVE | Canada PM Makes Big Announcement At Ottawa Press Gallery Dinner | Trump",
-   "since": "2026-11-22T03:45:42Z",
+   "id": "91r_0lFQpew",
+   "t": "LIVE: Did Kushner's Middle East Deals Shape US Policy? Schiff Revives $2 Billion Money Que",
+   "since": "2026-11-22T11:14:24Z",
    "src": "Mint",
    "lang": "en"
   },
