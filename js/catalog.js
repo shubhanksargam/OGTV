@@ -426,6 +426,23 @@ const CATALOG = [
   {id:"LfyIt1BOW2E",t:"do Whatever you like · Hallman",cat:"select",tag:"spotify",lang:"en",min:4,src:"Hallman - Topic",pub:"2022-07-07"}, // After Hours 11
   {id:"XXYlFuWEuKI",t:"Save Your Tears · The Weeknd",cat:"select",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-01-05"}, // After Hours 12; the music video, not the audio (by request, 21 Nov)
   {id:"wp43OdtAAkM",t:"Running Up That Hill (A Deal with God) · Kate Bush",cat:"select",tag:"spotify",lang:"en",min:5,src:"KateBushMusic",pub:"2011-01-15"}, // Max's song in Stranger Things (by request, 21 Nov)
+  // F1 The Album (the 2025 film's songs, by request, 22 Nov 2026): Select's f1 set. Official uploads on the artists' own channels
+  {id:"WWEs82u37Mw",t:"Lose My Mind · Don Toliver, Doja Cat",cat:"select",tag:"f1",lang:"en",min:4,src:"Don Toliver"},
+  {id:"KFapxdAvi74",t:"No Room for a Saint · Dom Dolla, Nathan Nicholson",cat:"select",tag:"f1",lang:"en",min:4,src:"Dom Dolla"},
+  {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"select",tag:"f1",lang:"en",min:4,src:"Ed Sheeran"},
+  {id:"dpvQqmX6SUI",t:"Just Keep Watching · Tate McRae",cat:"select",tag:"f1",lang:"en",min:3,src:"Tate McRae"},
+  {id:"ia2Ph61bYzc",t:"Messy · ROSÉ",cat:"select",tag:"f1",lang:"en",min:4,src:"ROSÉ"},
+  {id:"h35Nhha7qQI",t:"Don't Let Me Drown · Burna Boy",cat:"select",tag:"f1",lang:"en",min:4,src:"Burna Boy"},
+  {id:"qW4Tc1vVLIc",t:"Underdog · Roddy Ricch",cat:"select",tag:"f1",lang:"en",min:3,src:"Roddy Ricch"},
+  {id:"0DDTgoeieik",t:"Grandma Calls the Boy Bad News · RAYE",cat:"select",tag:"f1",lang:"en",min:4,src:"RAYE"},
+  {id:"p13Cn0mONP8",t:"Bad As I Used To Be · Chris Stapleton",cat:"select",tag:"f1",lang:"en",min:5,src:"Chris Stapleton"},
+  {id:"mfnyDjleNRY",t:"OMG! · Tiësto, Sexyy Red",cat:"select",tag:"f1",lang:"en",min:3,src:"Tiësto"},
+  {id:"CksB-6MRP54",t:"All At Once · Madison Beer",cat:"select",tag:"f1",lang:"en",min:3,src:"Madison Beer"},
+  {id:"63AIpRUren0",t:"D.A.N.C.E · Peggy Gou",cat:"select",tag:"f1",lang:"en",min:4,src:"Peggy Gou"},
+  {id:"iC-hlli6ShE",t:"Double C · PAWSA",cat:"select",tag:"f1",lang:"en",min:4,src:"PAWSA"},
+  {id:"C0y3t4LynjI",t:"Attention · Mr Eazi",cat:"select",tag:"f1",lang:"en",min:3,src:"Mr Eazi"},
+  {id:"6mFUg-WbY6s",t:"Give Me Love · Darkoo",cat:"select",tag:"f1",lang:"en",min:3,src:"Darkoo"},
+  {id:"xvx1Sk8tNqA",t:"Gasoline · Obongjayar",cat:"select",tag:"f1",lang:"en",min:4,src:"Obongjayar"},
   {id:"-gj4_qp4a28",t:"Ready · Kodaline",cat:"select",tag:"spotify",lang:"en",min:5,src:"KodalineVEVO",pub:"2015-06-03"}, // After Hours 13
   {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"select",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-01-30"}, // After Hours 14
   {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21"}, // After Hours 15

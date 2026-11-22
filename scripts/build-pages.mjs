@@ -98,7 +98,7 @@ const WRITTEN = {
   aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
   festival: "Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.",
   latest: "Latest Mix on OGTV: the last two days' trending videos from every OGTV channel, ranked by how fast they are being watched and updated every hour. Pick one and it plays, free, with no sign-up.",
-  select: "Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh, Karan Aujla and Mirzapur.",
+  select: "Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, the F1 film's songs, Diljit Dosanjh, Karan Aujla and Mirzapur.",
 };
 // What people ask for that a channel answers (scripts/channel-asks.mjs), and its questions: on its page (with FAQPage)
 // and in /llms.txt, each answer naming the channel and its link

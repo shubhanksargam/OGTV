@@ -155,7 +155,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 
 ### Music
 
-- [30 · Select](https://ogtv.co.in/select/): Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh, Karan Aujla and Mirzapur.
+- [30 · Select](https://ogtv.co.in/select/): Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, the F1 film's songs, Diljit Dosanjh, Karan Aujla and Mirzapur.
 - [31 · Desi Pop](https://ogtv.co.in/desi-pop/): Desi Pop on OGTV: arijit, Shreya Ghoshal, this week's trending songs & India's OG artists, free and always on. Videos from Coke Studio Pakistan.
 - [32 · Drive](https://ogtv.co.in/drive/): Drive on OGTV: road-trip songs, free and always on. Videos from Road trip songs everyone knows, Classic rock road trip and Top 100 Bollywood travel songs.
 - [33 · Vibe](https://ogtv.co.in/vibe/): Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.

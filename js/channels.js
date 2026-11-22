@@ -271,7 +271,7 @@ const CHANNELS = [
   // mix: each set takes its turn, its songs in their own shuffled run, so none repeats before the rest of its set has played;
   // a set's share of the day is the square root of its size, so Aujla's sixty-odd videos don't drown Saiyaara's ten
   {key:"select",n:30,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify songs (playlists Big Dawgs, No Idea, After Hours), each matched to an official upload; 12 h a day of them (share 0.5), mixed in with the rest, by request
-    {from:0,to:24,cat:"select",mix:[{tag:"spotify",share:0.5},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"}],label:"Favourites"}]},
+    {from:0,to:24,cat:"select",mix:[{tag:"spotify",share:0.5},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"},{tag:"f1"}],label:"Favourites"}]},
   {key:"bollywood",n:31,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
    // Songs whose picture is never shown, by request (revealing, item-song or sexual visuals, or marked 18+): each plays as
    // its official audio-only track, with the album's cover art, or not at all until it has one (heard in js/scheduler.js;
