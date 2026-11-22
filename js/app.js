@@ -1116,7 +1116,7 @@ const countCreators=()=>{$("aboutCreators").textContent=new Set(CATALOG.map(v=>v
 if(DATA) DATA.all.then(countCreators); else countCreators(); // once every list is in (until then the page's own count stands)
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
-/* ---------- Latest Mix (channel 47, by request, 22 Nov 2026) ----------
+/* ---------- Latest Mix (channel 1 and OGTV's first, by request, 22 Nov 2026) ----------
    Always playing (by request): tuning in plays the top trending video of the last two days on OGTV's YouTube channels
    (js/latest.json, from scripts/fetch-latest.mjs every hour: by views per hour, the same number from each category),
    from its start, then the next and so on down the list (after the last, the first again); one that won't play is

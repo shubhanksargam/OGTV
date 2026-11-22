@@ -28,7 +28,7 @@ jobs:
       - run: node scripts/fetch-live.mjs
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
-      - name: Latest Mix (channel 45), the last two days' trending uploads of every channel
+      - name: Latest Mix (channel 1), the last two days' trending uploads of every channel
         run: node scripts/fetch-latest.mjs || echo "Latest Mix not refreshed this time"   # never stops the news
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}

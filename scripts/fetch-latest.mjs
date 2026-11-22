@@ -1,4 +1,4 @@
-// Builds js/latest.json for Latest Mix (channel 47, by request, 22 Nov 2026): the last two days' trending uploads of every
+// Builds js/latest.json for Latest Mix (channel 1, by request, 22 Nov 2026): the last two days' trending uploads of every
 // YouTube channel OGTV draws on (the sources in scripts/feeds.json with a channel "id"; playlists are curated older
 // videos and are left out), ranked by views per hour since posting, like a home page of what is taking off now.
 // Each video meets the rules its channel's sources set (match/skip, length, the category's Bhojpuri and South rules,
