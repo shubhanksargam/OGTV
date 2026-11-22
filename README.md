@@ -4,7 +4,7 @@
 
 Free, with no sign-up. It works in any browser on phones, laptops and smart TVs. Each channel also has its own page, such as [ogtv.co.in/cricket](https://ogtv.co.in/cricket/). The old address, ogtv.thebharat.si, now redirects here.
 
-A 24×7 TV-style website for Indian viewers: 40 channels of Hindi and English YouTube, two of them live. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
+A 24×7 TV-style website for Indian viewers: 47 channels of Hindi and English YouTube, three of them with live streams (Just News, Newsroom, and Purvaiya for some hours). It opens on Latest Mix, the last two days' trending videos, starting with Sports. All text on the site is in Latin script; Devanagari titles from YouTube are written in Roman letters (`scripts/roman.mjs`). YouTube videos are scheduled into channels by time-of-day rules, so every viewer sees the same programme at the same moment, like real TV.
 
 ## Run it
 
@@ -32,6 +32,8 @@ YouTube embeds don't play from a double-clicked file, so serve the folder:
 | `js/live.js`, `js/live.json` | Generated: which channels in `scripts/live.json` are live right now (open pages re-read the JSON every 10 minutes) |
 | `js/festivals.js` | Festival calendar for the Vibe channel (add next year's dates before Oct 2027) |
 | `scripts/fetch-live.mjs` | Rebuilds `js/live.js` (`node scripts/fetch-live.mjs`) |
+| `js/latest.json`, `scripts/fetch-latest.mjs` | Generated hourly by the news run: Latest Mix's list, the last two days' trending uploads of every channel's YouTube sources, the same number from each category plus spares |
+| `scripts/feed-rules.mjs` | The Bhojpuri and South Indian title rules shared by `fetch-feeds.mjs` and `fetch-latest.mjs` |
 | `js/channels.js` | Channels and their rules (time blocks in IST and what each block plays) |
 | `js/scheduler.js` | Builds each day's schedule deterministically from the rules |
 | `js/app.js` | Player, programme guide (which is also the channel list), help, remote keys |
@@ -48,9 +50,9 @@ Scripts load in that order as plain `<script>` tags. No build step.
 {id:"VIDEO_ID", t:"Title", cat:"rasoi", lang:"te", min:12, src:"Channel name", tag:"snack"}
 ```
 
-`cat` must be a key of `CAT_LABEL` (`bhakti, rasoi, sehat, geet, gyaan, hasya, khel, vigyan, tech, paisa, safar, bachche, baatcheet`). `lang` is `hi` or `en`. `tag` is optional.
+`cat` must be a key of `CAT_LABEL` in `js/catalog.js` (53 categories; `scripts/check.mjs` fails a video with an unknown one). `lang` is `hi` or `en` (`intl` for other languages on Global Hits and Sargam). `tag` is optional. An English or other foreign-language song in `select` also says whose it is, `home:"foreign"` or `home:"desi"`: the foreign ones play on Global Hits too.
 
-**A creator feed** — add a line to `scripts/feeds.json` with the YouTube channel ID (`"id"`, starts with `UC`) or a playlist ID (`"playlist"`, plus `"take"` for how many), category and language, then run `node scripts/fetch-feeds.mjs`. `"match"`/`"skip"` filter by title, e.g. only trailers. Only uploads that allow embedding, aren't live, are family-safe and fit `minMin`–`maxMin` (default 3–60 minutes) are kept, so Shorts drop out.
+**A creator feed** — add a line to `scripts/feeds.json` with the YouTube channel ID (`"id"`, starts with `UC`) or a playlist ID (`"playlist"`, plus `"take"` for how many), category and language, then run `node scripts/fetch-feeds.mjs`. `"match"`/`"skip"` filter by title, e.g. only trailers. A fan-made playlist takes `"authors"`, the official channels whose uploads it may keep; `"suffix"` is added to every title (an album's bare track names: `" (Interstellar) · Hans Zimmer"`) and `"strip"` takes a leading credit off. Only uploads that allow embedding, aren't live, are family-safe and fit `minMin`–`maxMin` (default 3–60 minutes) are kept, so Shorts drop out.
 
 **YouTube's India chart** — its sources have `"route"`: each song is sorted once by `scripts/home.mjs` (remembered in `scripts/homes.json`). Songs in Telugu, Tamil, Kannada or Malayalam go to Deccan Chargers' trending hour, songs with only foreign artists on them go to Global Hits, and everything else stays on Desi Pop (any desi artist on a song keeps it there). Desi Pop also covers the picture of songs with revealing, item-song or sexual visuals, or marked 18+: the song plays on behind OGTV's own card. Those songs are flagged by their tags (`cover: 1`) or by the channel's `cover` rule in `js/channels.js`.
 
@@ -64,6 +66,14 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 **Select** — a hand-picked channel: only the songs in category `select` (Dhurandhar, Saiyaara and Diljit's film songs in `js/catalog.js`; Diljit, Karan Aujla and Mirzapur from `scripts/feeds.json`). Its `mix` plays each set in turn, a set's share being the square root of its size, so a big set doesn't drown a small one. To add songs, give them `cat:"select"` and a tag, and add the tag to the `mix`.
 
+**Latest Mix** — channel 47 and the channel OGTV opens on (`menu:true`: no schedule). It plays the last two days' trending uploads (views per hour) one after another, from `js/latest.json`, which `scripts/fetch-latest.mjs` rebuilds every hour in the news run: the RSS feeds of every YouTube channel in `scripts/feeds.json`, details from the Data API. Each category (News, Knowledge, Sports, Lifestyle, Entertainment, Music) has the same number (`n`), plus up to six `spare` videos, so when a browser is refused one the page plays a spare and the categories stay equal. In Sports, Indian cricket ranks first; Formula 1 and LaLiga are left out (their embeds don't play in India); the same video in several languages counts once. A fresh start plays the top Sports video. Over the picture, a carousel of the mix (words only, by category) comes up on tuning in, a mouse move or a tap, and fades; Enter (OK) opens it, the arrows move (↑/↓ a category), Enter plays, Esc (Back) closes, and B or **The mix** pins it up or puts it away.
+
+**Digital System Design** — channel 10, IIT Madras's course playlist on one loop that goes on and on: a part with `loop:"2026-11-23T06:00"` plays its videos in order end to end from that moment, across midnight (the video on at midnight belongs to the day it began), the first again after the last.
+
+**Sargam** — channel 46, background scores without vocals: Hans Zimmer, Batman, Spider-Man, Marvel and series themes, lofi, sitar, santoor and Indian flute, and calm music (soothing, zen, Buddhist, cortisol reset, rain), all from the labels', composers' and music channels' own uploads. Pieces with singing are left out. Its day follows a mood, block by block, each set with a `share` of its block (a two-hour mix would otherwise drown a four-minute score), and rain has 2–5 am to itself.
+
+**Global Hits** — the world's charts and billion-view songs, Select's songs by foreign artists a quarter of the time (a `mix` set with `cat:"select", home:"foreign"`), and an hour of Ed Sheeran at 9 pm (`fixed:true`, so prime time's stretch leaves it at 9 by the clock).
+
 **Nightly refresh** — `.github/workflows/refresh-feeds.yml` reruns the feed script at 03:00 IST, then the description script, and commits `js/feeds.js` and `desc/` when there is anything new. Run it by hand from the repo's Actions tab → Refresh feeds → Run workflow. For more reliable lookups, add a YouTube Data API key as a repository secret named `YT_API_KEY`. Descriptions in particular need it: without a key they come from watch pages, which YouTube stops serving (HTTP 429) after a couple of hundred in a few minutes, so the ~15,000 videos would fill in over weeks; with a key, one run does them all.
 
 **A rule** — each channel in `js/channels.js` has `parts`. Each part is a block of hours in IST:
@@ -76,12 +86,16 @@ Scripts load in that order as plain `<script>` tags. No build step.
 - `tag` (optional) narrows to tagged videos
 - `maxMin` (optional) skips videos longer than this
 - `alt` (optional) a category to use when `cat` has no videos
+- `mix` (optional) plays several sets together, each `{tag}` (or `src`, `match`) taking its turn; `share` gives a set that part of the airtime; a set with `cat` (and `home`) comes from another category
+- `fixed:true` keeps a block at its clock hours (music channels' prime time is otherwise stretched over 9 pm to 3 am)
+- `inOrder` plays a block's videos in order, carrying on each day; `loop` plays them end to end, on and on, across midnight
+- `days` (with `strictDays`) keeps a block to videos posted in the last so many days
 - Blocks for one channel should cover 0–24 without gaps
 
 ## Watching
 
 - The first tap ("Press to start") lets the browser play with sound.
-- `?ch=desi-pop` in the address opens Desi Pop: the address always names the channel you're watching (the same name as its `/desi-pop/` page), so a copied link keeps working when channels are reordered. Numbers (`?ch=29`) and renamed channels' old names still work. `←`/`→` change channel and `↑`/`↓` set the volume (in retro mode both show the set’s green readout, as its knobs do); type two digits on the keyboard for channels 10 and up. Channels are numbered 1–40 in the order the guide lists them (`scripts/check.mjs` insists on it).
+- `?ch=desi-pop` in the address opens Desi Pop: the address always names the channel you're watching (the same name as its `/desi-pop/` page), so a copied link keeps working when channels are reordered. Numbers (`?ch=29`) and renamed channels' old names still work. `←`/`→` change channel and `↑`/`↓` set the volume (in retro mode both show the set’s green readout, as its knobs do); type two digits on the keyboard for channels 10 and up. Channels are numbered 1–47 in the order the guide lists them (`scripts/check.mjs` insists on it). The home page opens on Latest Mix (47); a channel's own page opens on that channel.
 - Subtitles are off, always: YouTube's captions are cleared as each video starts (the CC button is gone for now).
 - A click or tap on the picture pauses or plays, in the page and in full screen. Paused, the picture dims under a flat dark wash.
 - **Help** (beside **Retro mode** in the header; in full screen beside the on-screen Retro mode button and as a key on the retro TV set; or `H`) explains every part of the site.
@@ -103,7 +117,7 @@ Scripts load in that order as plain `<script>` tags. No build step.
 
 ## Traffic monitoring
 
-- `js/analytics.js` sends visits and events to GoatCounter once `GC_CODE` is set (no cookies). Events: `start`, `ch-NN-key` (10 s on a channel), `watch-5m/15m/30m/60m/2h`, `live-none-<group>`, `play-error-<code>`, `blocked`, `retro-on`, `fullscreen`.
+- `js/analytics.js` sends visits and events to GoatCounter once `GC_CODE` is set (no cookies). Events: `start`, `ch-NN-key` (10 s on a channel), `watch-5m/15m/30m/60m/2h`, `live-none-<group>`, `play-error-<code>`, `refused-<id>`, `blocked`, `retro-on`, `radio-on`, `fullscreen`, `from-start`, `latest-pick` (a video picked in Latest Mix). If a browser blocks `js/analytics.js`, the site carries on without it.
 - Dashboard: `https://<code>.goatcounter.com`.
 - `.github/workflows/traffic-watch.yml` runs `scripts/traffic-watch.mjs` daily at 06:00 IST: a report on the run page, and a `traffic-alert` issue (GitHub emails you) when yesterday's visitors fell below half the 7-day average. Needs secrets `GOATCOUNTER_CODE` and `GOATCOUNTER_TOKEN`.
 

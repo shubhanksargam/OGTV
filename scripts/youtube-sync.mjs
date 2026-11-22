@@ -48,7 +48,10 @@ async function patient(fn, tries = 4) { for (let k = 1; ; k++) { try { return aw
 for (const p of plan) {
   if (writes >= BUDGET) break;
   try { // one playlist's trouble never stops the others
-    let pl = mine.find(x => x.snippet.title.startsWith(`OGTV ${p.c.n} · ${p.c.name}`) || x.snippet.title.startsWith(`OGTV · ${p.c.name}`)), fresh = false;
+    // found by the channel's name, whatever number the title had: channels get renumbered (22 Nov 2026: a new channel
+    // 10 and 46), and matching the number too made a second playlist instead of retitling the first
+    const own = new RegExp(`^OGTV (\\d+ )?· ${p.c.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(:|$)`);
+    let pl = mine.find(x => own.test(x.snippet.title)), fresh = false;
     if (!pl) { pl = await api("POST", "playlists?part=snippet,status", {snippet: {title: p.title, description: p.description, defaultLanguage: "en"}, status: {privacyStatus: "public"}}); writes++; fresh = true; console.log("created", p.title); await wait(5000) }
     else if (pl.snippet.title !== p.title || pl.snippet.description !== p.description) { await api("PUT", "playlists?part=snippet", {id: pl.id, snippet: {title: p.title, description: p.description, defaultLanguage: "en"}}); writes++ }
     const items = fresh ? [] : await patient(() => all(`playlistItems?part=snippet&playlistId=${pl.id}&maxResults=50`)); // just made: nothing in it yet
