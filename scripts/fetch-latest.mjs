@@ -127,8 +127,26 @@ for (const e of fresh.values()) {
 for (const v of prev.items || []) if (failed.includes(v.y) && now - Date.parse(v.pub) <= WINDOW && !picked.some(x => x.id === v.id)) picked.push(v);
 
 // 4. Trending: views per hour since posting; at most PER_CHANNEL from a channel, the top PER_GROUP of each group
-const vph = v => v.views / Math.max(1, (now - Date.parse(v.pub)) / 3600e3);
+const views = v => v.views / Math.max(1, (now - Date.parse(v.pub)) / 3600e3);
+// Sports: Indian cricket first (by request), then other cricket, then the rest, by weighted views per hour. Formula 1
+// and LaLiga are left out: their embeds don't play in India (refused or stalled in viewers' browsers and in ours, 22 Nov)
+const NO_EMBED_IN_INDIA = /^(formula 1|laliga)/i;
+const CRICKET = /cricket|\bipl\b|\bt20i?\b|\bodi\b|test match|\bwpl\b|ranji|duleep|vijay hazare|mushtaq ali|wicket|century|innings|bowling|batting/i;
+const INDIA = /\bindia|\bind\b|\bbcci\b|\bipl\b|\bwpl\b|ranji|duleep|vijay hazare|mushtaq ali|team india|kohli|virat|rohit|gill|bumrah|jadeja|pant|suryakumar|hardik|dhoni|shami|siraj|jaiswal|kl rahul|shreyas|ashwin|kuldeep|arshdeep|rinku|samson|abhishek sharma|tilak|smriti|harmanpreet|jemimah/i;
+const INDIAN_CRICKET_SRC = /^(ipl|sony sports|star sports|fancode|bcci|jiostar|jiohotstar)/i;
+const weightOf = v => { if (v.g !== "Sports") return 1; const s = v.t + " " + v.src, cricket = v.cat === "cricket" || CRICKET.test(s);
+  return cricket && (INDIA.test(s) || INDIAN_CRICKET_SRC.test(v.src)) ? 5 : cricket ? 1.5 : 1 };
+for (let i = picked.length - 1; i >= 0; i--) if (NO_EMBED_IN_INDIA.test(picked[i].src || "")) picked.splice(i, 1);
+// The same video in several languages (Sony Sports' highlights: "| Hindi |", "| English |", "| Kannada |"): OGTV plays
+// Hindi and English, and one of them is enough (the one with more views per hour, kept below). A language only when it
+// labels the title ("| Tamil |", "(Tamil)"), never a place ("Tamil Nadu")
+const LANG_LABEL = l => new RegExp(`(^|[|(\\[])\\s*(${l})\\s*(?=$|[|)\\]])`, "gi"), OTHER_LANG = LANG_LABEL("kannada|tamil|telugu|malayalam|bengali|marathi|gujarati|odia|bangla"), ANY_LANG = LANG_LABEL("hindi|english|kannada|tamil|telugu|malayalam|bengali|marathi|gujarati|odia|bangla");
+for (let i = picked.length - 1; i >= 0; i--) if (new RegExp(OTHER_LANG.source, "i").test(picked[i].t)) picked.splice(i, 1);
+const sameVideo = v => v.y + "|" + v.t.replace(ANY_LANG, "$1").toLowerCase().replace(/[^a-z0-9]/g, "");
+for (const v of picked) if (!v.g) v.g = groupOf.get(v.cat) || "Entertainment";
+const vph = v => views(v) * weightOf(v);
 picked.sort((a, b) => vph(b) - vph(a) || a.id.localeCompare(b.id));
+{ const seen = new Set(); for (let i = 0; i < picked.length; i++) { const k = sameVideo(picked[i]); if (seen.has(k)) picked.splice(i--, 1); else seen.add(k) } }
 const byGroup = new Map();
 for (const v of picked) { if (!v.g) v.g = groupOf.get(v.cat) || "Entertainment"; if (!byGroup.has(v.g)) byGroup.set(v.g, []); byGroup.get(v.g).push(v) } // in trending order
 const upTo = (list, cap) => { const per = new Map(), out = []; for (const v of list) { const n = per.get(v.y) || 0; if (n < cap) { per.set(v.y, n + 1); out.push(v) } } return out };

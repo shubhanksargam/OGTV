@@ -95,7 +95,7 @@ const list = a => a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a.at(-1) 
 const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 // Channels whose sources don't tell their story get their own line
 const WRITTEN = {
-  sargam: "Sargam on OGTV: background scores without vocals, free and always on. Hans Zimmer, the Batman, Spider-Man and Marvel themes, Game of Thrones and other series' themes, lofi, santoor and flute, and rain, zen and calming music for the night.",
+  sargam: "Sargam on OGTV: background scores without vocals, free and always on. Hans Zimmer, the Batman, Spider-Man and Marvel themes, Game of Thrones and other series' themes, lofi, sitar, santoor and flute, and rain, zen and calming music for the night.",
   dsd: "Digital System Design on OGTV: IIT Madras's course from its BS in Electronic Systems, all 62 lectures in order on a loop that goes on and on, from what a digital system is and Verilog to FPGAs, memory, CPUs and SoCs. Free, with no sign-up.",
   aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
   festival: "Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.",

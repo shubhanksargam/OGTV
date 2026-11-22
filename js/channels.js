@@ -413,13 +413,13 @@ const CHANNELS = [
   // Sargam (by request, 22 Nov 2026): background scores without vocals. The day follows a mood: rain, zen and calm through
   // the night, santoor and flute in the morning and late afternoon, lofi and Hans Zimmer to focus by, the epic scores
   // (Hans Zimmer, Batman, Spider-Man, Marvel) in the evening, then the series' themes, and a calm hour before midnight
-  {key:"sargam",n:46,group:"Music",name:"Sargam",en:"Background scores, no vocals: Hans Zimmer, themes, lofi, santoor, Indian flute, rain & zen",parts:[
+  {key:"sargam",n:46,group:"Music",name:"Sargam",en:"Background scores, no vocals: Hans Zimmer, themes, lofi, sitar, santoor, Indian flute, rain & zen",parts:[
     {from:0,to:2,  cat:"sargam",mix:[{tag:"bansuri",share:0.35},{tag:"calm"}],label:"Night: zen, Buddhist calm & Indian flute"},
     {from:2,to:5,  cat:"sargam",tag:"rain",alt:"sargam",label:"Rain for deep sleep"}, // rain recordings run for hours: a stretch of their own, not turns in a mix
-    {from:5,to:8,  cat:"sargam",mix:[{tag:"santoor",share:0.35},{tag:"flute",share:0.35},{tag:"bansuri"}],label:"Morning: santoor & Indian flute"},
+    {from:5,to:8,  cat:"sargam",mix:[{tag:"sitar",share:0.25},{tag:"santoor",share:0.25},{tag:"flute",share:0.25},{tag:"bansuri"}],label:"Morning: sitar, santoor & Indian flute"},
     {from:8,to:12, cat:"sargam",mix:[{tag:"zimmer",share:0.35},{tag:"lofitop",share:0.25},{tag:"lofi"}],label:"Focus: lofi & Hans Zimmer"},
     {from:12,to:16,cat:"sargam",mix:[{tag:"lofi",share:0.3},{tag:"lofitop",share:0.15},{tag:"bansuri",share:0.25},{tag:"calm"}],label:"Lofi, calm & Indian flute"},
-    {from:16,to:19,cat:"sargam",mix:[{tag:"santoor",share:0.3},{tag:"flute",share:0.25},{tag:"bansuri",share:0.2},{tag:"calm"}],label:"Santoor, Indian flute & soothing music"},
+    {from:16,to:19,cat:"sargam",mix:[{tag:"sitar",share:0.25},{tag:"santoor",share:0.25},{tag:"flute",share:0.15},{tag:"bansuri",share:0.15},{tag:"calm"}],label:"Sitar, santoor, Indian flute & soothing music"},
     {from:19,to:22,cat:"sargam",mix:[{tag:"zimmer"},{tag:"batman"},{tag:"spiderman"},{tag:"marvel"}],label:"Epic scores: Hans Zimmer, Batman, Spider-Man & Marvel"},
     {from:22,to:23,cat:"sargam",mix:[{tag:"series"},{tag:"marvel"}],label:"Themes: Game of Thrones, Stranger Things & more"},
     {from:23,to:24,cat:"sargam",mix:[{tag:"bansuri",share:0.3},{tag:"rain",share:0.2},{tag:"calm"}],label:"Cortisol reset: calm & Indian flute before sleep"}]},
