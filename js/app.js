@@ -1130,13 +1130,20 @@ async function loadLatest(){if(latestLoading) return; latestLoading=true;
   finally{latestLoading=false}}
 function latestNote(t){const n=$("latestNote"); if(n.textContent!==t) n.textContent=t}
 const latestItems=()=>LATEST?LATEST.items.filter(v=>!BAD.has(v.id)):[]; // less what this browser was refused
-// The grid; not redrawn while the keyboard is in it (an hourly list arriving would take the focus away)
+// The grid, by group (by request): chips to show one group, or All with a section for each, in the channels' order;
+// not redrawn while the keyboard is in it (an hourly list arriving would take the focus away)
+let lxGroup="all";
+const LX_GROUPS=()=>[...new Set(CHANNELS.filter(c=>!c.menu).map(c=>c.group))];
 function renderLatest(force){const grid=$("latestGrid"); if(!grid||(!force&&grid.contains(document.activeElement))) return;
-  const list=latestItems();
-  grid.innerHTML=list.length?list.map(v=>`<button class="lx" type="button" role="listitem" data-id="${v.id}" aria-label="${esc(v.t)}, ${esc(v.src)}, ${LX_FMT.views(v.views)} views, ${LX_FMT.ago(v.pub)}">`
+  const list=latestItems(), groups=LX_GROUPS().filter(g=>list.some(v=>v.g===g)); if(!groups.includes(lxGroup)) lxGroup="all";
+  const card=v=>`<button class="lx" type="button" role="listitem" data-id="${v.id}" aria-label="${esc(v.t)}, ${esc(v.src)}, ${LX_FMT.views(v.views)} views, ${LX_FMT.ago(v.pub)}">`
     +`<span class="lx-th"><img src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg" alt="" loading="lazy" decoding="async" draggable="false">${v.sec?`<i class="lx-len">${LX_FMT.dur(v.sec)}</i>`:""}</span>`
-    +`<span class="lx-t">${esc(v.t)}</span><span class="lx-by">${esc(v.src)} · ${LX_FMT.views(v.views)} views · ${LX_FMT.ago(v.pub)}</span></button>`).join("")
-    :`<p class="lx-empty">${LATEST?"Nothing to show right now.":"Loading the latest…"}</p>`}
+    +`<span class="lx-t">${esc(v.t)}</span><span class="lx-by">${esc(v.src)} · ${LX_FMT.views(v.views)} views · ${LX_FMT.ago(v.pub)}</span></button>`;
+  const cards=l=>`<div class="lx-cards" role="list">${l.map(card).join("")}</div>`;
+  if(!list.length){grid.innerHTML=`<p class="lx-empty">${LATEST?"Nothing to show right now.":"Loading the latest…"}</p>`; return}
+  if(!groups.length){grid.innerHTML=cards(list); return} // a list from before the groups
+  grid.innerHTML=`<div class="lx-chips" role="group" aria-label="Show">`+["all",...groups].map(g=>`<button class="lx-chip" type="button" data-g="${esc(g)}" aria-pressed="${g===lxGroup}">${g==="all"?"All":esc(g)}</button>`).join("")+"</div>"
+    +(lxGroup==="all"?groups.map(g=>`<section class="lx-sec" aria-label="${esc(g)}"><h3>${esc(g)}</h3>${cards(list.filter(v=>v.g===g))}</section>`).join(""):cards(list.filter(v=>v.g===lxGroup)))}
 // Shown exactly when Latest Mix is on with nothing picked (tick)
 function latestShown(on){const el=$("latest"); if(el.hidden===!on) return; el.hidden=!on; if(on){renderLatest(); if(!LATEST||Date.now()-LATEST.got>10*MIN) loadLatest()}
   else if(el.contains(document.activeElement)) document.activeElement.blur()}
@@ -1149,16 +1156,23 @@ function pickVideo(id){const v=latestItems().find(x=>x.id===id), i=CHANNELS.find
 function backToList(note){if(!lxPick) return; lxPick=null; playingKey=null; latestNote(note||""); tick(); startBtns();
   const b=$("latestGrid").querySelector(`.lx[data-id="${lastPick}"]`); if(b) b.scrollIntoView({block:"nearest"})}
 // Moving in the grid by its rows and columns (arrows, or the TV remote's)
-const inGrid=()=>$("latest").contains(document.activeElement)&&document.activeElement.classList.contains("lx");
-function gridMove(dir){const cards=[...$("latestGrid").querySelectorAll(".lx")]; if(!cards.length) return;
-  const at=cards.indexOf(document.activeElement); if(at<0){cards[0].focus({preventScroll:true}); cards[0].scrollIntoView({block:"nearest"}); return}
-  const cols=Math.max(1,cards.filter(c=>c.offsetTop===cards[0].offsetTop).length);
-  const to=Math.max(0,Math.min(cards.length-1,at+({left:-1,right:1,up:-cols,down:cols}[dir]||0)));
-  cards[to].focus({preventScroll:true}); cards[to].scrollIntoView({block:"nearest"})}
-$("latestGrid").addEventListener("click",e=>{const b=e.target.closest(".lx"); if(b) pickVideo(b.dataset.id)});
+const inGrid=()=>$("latest").contains(document.activeElement)&&document.activeElement.matches(".lx,.lx-chip");
+// left and right: the next chip, or the next video; up and down: the nearest one in the row above or below, on screen
+function gridMove(dir){const all=[...$("latestGrid").querySelectorAll(".lx-chip,.lx")]; if(!all.length) return;
+  const a=document.activeElement, go=x=>{if(x){x.focus({preventScroll:true}); x.scrollIntoView({block:"nearest"})}};
+  if(all.indexOf(a)<0) return go($("latestGrid").querySelector(".lx")||all[0]);
+  if(dir==="left"||dir==="right"){const same=all.filter(x=>x.classList.contains("lx-chip")===a.classList.contains("lx-chip")); return go(same[same.indexOf(a)+(dir==="right"?1:-1)])}
+  const r=a.getBoundingClientRect(), cx=r.left+r.width/2, down=dir==="down";
+  const rows=all.map(x=>[x,x.getBoundingClientRect()]).filter(([,b])=>down?b.top>r.top+4:b.top<r.top-4); if(!rows.length) return;
+  const edge=down?Math.min(...rows.map(([,b])=>b.top)):Math.max(...rows.map(([,b])=>b.top));
+  go(rows.filter(([,b])=>Math.abs(b.top-edge)<4).sort((p,q)=>Math.abs(p[1].left+p[1].width/2-cx)-Math.abs(q[1].left+q[1].width/2-cx))[0][0])}
+$("latestGrid").addEventListener("click",e=>{const c=e.target.closest(".lx-chip");
+  if(c){lxGroup=c.dataset.g; renderLatest(true); $("latest").scrollTop=0; if(e.detail===0){const n=$("latestGrid").querySelector(`.lx-chip[data-g="${CSS.escape(lxGroup)}"]`); if(n) n.focus({preventScroll:true})} return} // a chip: that group, or All
+  const b=e.target.closest(".lx"); if(b) pickVideo(b.dataset.id)});
 $("latest").addEventListener("keydown",e=>{const d={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"}[e.key];
   if(d){e.preventDefault(); e.stopPropagation(); gridMove(d)}
-  else if(e.key==="Escape"){e.preventDefault(); e.stopPropagation(); document.activeElement.blur()}});
+  else if(e.key==="Escape"&&inGrid()){e.preventDefault(); e.stopPropagation(); document.activeElement.blur()}
+  else if((e.key==="Enter"||e.key===" ")&&inGrid()){e.preventDefault(); e.stopPropagation(); document.activeElement.click()}}); // a video plays, a chip shows its group
 // Enter (OK) steps into the grid when nothing else has the focus
 function latestKey(e){if($("latest").hidden||e.key!=="Enter"||inGrid()) return false;
   const a=document.activeElement; if(a&&a!==document.body&&a.matches("button,a,input,[tabindex]")) return false;

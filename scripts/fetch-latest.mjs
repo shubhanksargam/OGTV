@@ -3,17 +3,20 @@
 // videos and are left out), ranked by views per hour since posting, like a home page of what is taking off now.
 // Each video meets the rules its channel's sources set (match/skip, length, the category's Bhojpuri and South rules,
 // no trailers), plays in an embed, is public, not live, not age-restricted and not blocked in India; blocked uploaders
-// and refused videos never appear, nor Shorts. At most 3 a channel, 120 in all.
+// and refused videos never appear, nor Shorts. The grid has a section for each group (g: News, Knowledge, Sports,
+// Lifestyle, Entertainment, Music), each with as many videos as the others (by request): the top 16 of each, or as many
+// as the smallest group has; at most 3 from a channel, up to 6 in a group short of videos.
 // Each channel's RSS feed (no API quota) lists its latest 15 uploads with their views; a feed that fails falls back to
 // the uploads list through the Data API (YT_API_KEY, at most API_BUDGET calls a run), else last run's videos stay.
 // Details come from the Data API (1 unit for 50 videos), else (no key, as on a computer) from each watch page.
 // Runs hourly (.github/workflows/refresh-news.yml). Usage: node scripts/fetch-latest.mjs
 import {readFile, writeFile} from "node:fs/promises";
+import {readFileSync} from "node:fs";
 import {roman} from "./roman.mjs";
 import {BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR} from "./feed-rules.mjs";
 
 const ROOT = new URL("..", import.meta.url), OUT = new URL("js/latest.json", ROOT);
-const KEY = process.env.YT_API_KEY, API_BUDGET = 150, WINDOW = 2 * 86400e3, PER_CHANNEL = 3, TOTAL = 120;
+const KEY = process.env.YT_API_KEY, API_BUDGET = 150, WINDOW = 2 * 86400e3, PER_CHANNEL = 3, PER_GROUP = 16;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -23,6 +26,16 @@ const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())), NO_VIDEO = new
 const NO_SOUTH = new Set(noSouthIn), NO_BHOJPURI = new Set(noBhojpuriIn), STRICT_BHOJPURI = new Set(strictNoBhojpuriIn);
 const prev = await readFile(OUT, "utf8").then(JSON.parse).catch(() => ({items: []}));
 const now = Date.now();
+// A category's group: that of the channel playing it the most hours (js/channels.js); a fallback (alt) counts a little.
+// Newsroom plays Paisa's videos too, but Paisa plays them all day, so they are Knowledge
+const {CHANNELS} = new Function(readFileSync(new URL("js/channels.js", ROOT), "utf8") + ";return {CHANNELS}")();
+const weight = new Map(), groupOf = new Map();
+const add = (cat, g, w) => { if (typeof cat !== "string") return; const m = weight.get(cat) || new Map(); m.set(g, (m.get(g) || 0) + w); weight.set(cat, m) };
+for (const c of CHANNELS) { if (c.menu) continue;
+  if (c.festival) { for (const f of feeds) if (String(f.cat).startsWith("fest-")) add(f.cat, c.group, 24); continue }
+  for (const p of c.parts || []) { const cats = [].concat(p.cat), h = p.to - p.from; cats.forEach(x => add(x, c.group, h / cats.length)); [].concat(p.alt || []).forEach(x => add(x, c.group, 0.1)) } }
+for (const [cat, m] of weight) groupOf.set(cat, [...m].sort((a, b) => b[1] - a[1])[0][0]);
+const GROUPS = [...new Set(CHANNELS.filter(c => !c.menu).map(c => c.group))];
 
 // The channels, each with the sources (and so the rules) it appears under
 const channels = new Map();
@@ -76,7 +89,7 @@ if (KEY) {
   }
 } else { // a computer without the key: the watch pages of the likeliest 250 (by the feed's own views per hour)
   const vph = e => e.views / Math.max(1, (now - Date.parse(e.pub)) / 3600e3);
-  const top = [...fresh.values()].sort((a, b) => vph(b) - vph(a)).slice(0, 250);
+  const top = [...fresh.values()].sort((a, b) => vph(b) - vph(a)).slice(0, +process.env.LATEST_PAGES || 250);
   for (let i = 0; i < top.length; i += 4) await Promise.all(top.slice(i, i + 4).map(async e => {
     try {
       const html = await get("https://www.youtube.com/watch?v=" + e.id), m = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});(?:var |<\/script>)/s);
@@ -108,18 +121,23 @@ const picked = [];
 for (const e of fresh.values()) {
   const d = info.get(e.id), f = takenBy(e, d); if (!f) continue;
   const t = clean(d.title); if (!t) continue;
-  picked.push({id: e.id, t, src: d.author || f.src.replace(/:.*$/, ""), cat: f.cat, lang: f.lang, min: Math.ceil(d.sec / 60), sec: d.sec, pub: new Date(Date.parse(d.pub || e.pub)).toISOString().slice(0, 19) + "Z", views: d.views, y: e.ch});
+  picked.push({id: e.id, t, src: d.author || f.src.replace(/:.*$/, ""), g: groupOf.get(f.cat) || "Entertainment", cat: f.cat, lang: f.lang, min: Math.ceil(d.sec / 60), sec: d.sec, pub: new Date(Date.parse(d.pub || e.pub)).toISOString().slice(0, 19) + "Z", views: d.views, y: e.ch});
 }
 // a channel whose feed failed keeps last run's videos (still within the two days)
 for (const v of prev.items || []) if (failed.includes(v.y) && now - Date.parse(v.pub) <= WINDOW && !picked.some(x => x.id === v.id)) picked.push(v);
 
-// 4. Trending: views per hour since posting; at most PER_CHANNEL from a channel
+// 4. Trending: views per hour since posting; at most PER_CHANNEL from a channel, the top PER_GROUP of each group
 const vph = v => v.views / Math.max(1, (now - Date.parse(v.pub)) / 3600e3);
 picked.sort((a, b) => vph(b) - vph(a) || a.id.localeCompare(b.id));
-const per = new Map(), items = [];
-for (const v of picked) { const n = per.get(v.y) || 0; if (n >= PER_CHANNEL) continue; per.set(v.y, n + 1); items.push(v); if (items.length >= TOTAL) break }
+const byGroup = new Map();
+for (const v of picked) { if (!v.g) v.g = groupOf.get(v.cat) || "Entertainment"; if (!byGroup.has(v.g)) byGroup.set(v.g, []); byGroup.get(v.g).push(v) } // in trending order
+const upTo = (list, cap) => { const per = new Map(), out = []; for (const v of list) { const n = per.get(v.y) || 0; if (n < cap) { per.set(v.y, n + 1); out.push(v) } } return out };
+const avail = new Map([...byGroup].map(([g, list]) => { const t = upTo(list, PER_CHANNEL); return [g, t.length >= PER_GROUP ? t : upTo(list, 6)] }));
+const N = Math.min(PER_GROUP, ...[...avail.values()].map(l => l.length)), inGroup = new Map([...avail.keys()].map(g => [g, N]));
+const items = [...avail.values()].flatMap(l => l.slice(0, N)).sort((x, y) => vph(y) - vph(x) || x.id.localeCompare(y.id));
 
+// too few (YouTube refusing this machine, feeds down): the last list stays rather than an empty one
+if (items.length < 20) { console.log(`Only ${items.length} videos fit: js/latest.json left as it was`); process.exit(1) }
 await writeFile(OUT, JSON.stringify({at: new Date(now).toISOString().slice(0, 19) + "Z", items}, null, 0).replace(/\},\{/g, "},\n{") + "\n");
-console.log(`${channels.size} channels: ${fresh.size} uploads in the last two days, ${picked.length} fit, ${items.length} written to js/latest.json`
+console.log(`${channels.size} channels: ${fresh.size} uploads in the last two days, ${picked.length} fit, ${items.length} written to js/latest.json (${GROUPS.map(g => g + " " + (inGroup.get(g) || 0)).join(", ")})`
   + `${failed.length ? `; ${failed.length} feeds unread (kept last run's)` : ""}; API calls for failed feeds: ${API_BUDGET - budget}`);
-if (items.length < 20) { console.log("Too few videos: something is wrong with the feeds"); process.exitCode = 1 }

@@ -1009,7 +1009,15 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .lx-head b{color:var(--ink);font-family:var(--display);font-size:1rem;font-weight:700}
 .lx-note{flex-basis:100%;color:var(--marigold)}
 .lx-note:empty{display:none}
-.lx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px 12px;padding:0 14px 72px}
+.lx-grid{padding:0 14px 72px}
+.lx-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px 12px}
+.lx-chips{position:sticky;top:0;z-index:1;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:2px 14px 12px;background:#0d0b12}
+.lx-chips::-webkit-scrollbar{display:none}
+.lx-chip{flex:none;padding:5px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);color:var(--ink);font:inherit;font-size:.8rem;font-weight:600;cursor:pointer;outline:none}
+.lx-chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--room)}
+.lx-chip:focus-visible{box-shadow:0 0 0 2px var(--marigold)}
+.lx-sec h3{margin:20px 2px 10px;font-family:var(--display);font-size:1rem;font-weight:700;color:var(--ink)}
+.lx-sec:first-of-type h3{margin-top:4px}
 .lx{display:flex;flex-direction:column;gap:5px;padding:0;border:0;background:none;color:var(--ink);text-align:left;font:inherit;cursor:pointer;border-radius:10px;outline:none}
 .lx-th{position:relative;display:block;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--panel)}
 .lx-th img{display:block;width:100%;height:100%;object-fit:cover}
@@ -1019,7 +1027,7 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .lx:hover .lx-th,.lx:focus-visible .lx-th{box-shadow:0 0 0 2px var(--marigold)}
 .lx:focus-visible .lx-t{color:var(--marigold)}
 .lx-empty{color:var(--muted);margin:24px 2px}
-@container (min-width:640px){.lx-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px 16px}.lx-t{font-size:.95rem}.lx-by{font-size:.8rem}.lx-head{font-size:.88rem}.lx-head b{font-size:1.15rem}}
-@container (min-width:1100px){.lx-head{padding:28px 32px 0}.lx-grid{padding:0 32px 90px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+@container (min-width:640px){.lx-cards{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px 16px}.lx-sec h3{font-size:1.15rem}.lx-t{font-size:.95rem}.lx-by{font-size:.8rem}.lx-head{font-size:.88rem}.lx-head b{font-size:1.15rem}}
+@container (min-width:1100px){.lx-head{padding:28px 32px 0}.lx-grid{padding:0 32px 90px}.lx-chips{margin:0 -32px;padding:2px 32px 14px}.lx-cards{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
 /* a phone's TV (the retro set's screen is under 300 px): two small columns */
-@container (max-width:460px){.lx-head{padding:8px 9px 0;margin-bottom:7px;gap:2px 8px;font-size:.68rem}.lx-head b{font-size:.84rem}.lx-grid{grid-template-columns:1fr 1fr;gap:9px 8px;padding:0 9px 58px}.lx{gap:3px}.lx-th,.lx{border-radius:7px}.lx-t{font-size:.72rem}.lx-by{font-size:.62rem}.lx-len{right:4px;bottom:4px;font-size:.6rem}}
+@container (max-width:460px){.lx-head{padding:8px 9px 0;margin-bottom:7px;gap:2px 8px;font-size:.68rem}.lx-head b{font-size:.84rem}.lx-grid{padding:0 9px 58px}.lx-cards{grid-template-columns:1fr 1fr;gap:9px 8px}.lx-chips{margin:0 -9px;padding:0 9px 8px;gap:6px}.lx-chip{padding:3px 9px;font-size:.66rem}.lx-sec h3{margin:12px 2px 6px;font-size:.78rem}.lx{gap:3px}.lx-th,.lx{border-radius:7px}.lx-t{font-size:.72rem}.lx-by{font-size:.62rem}.lx-len{right:4px;bottom:4px;font-size:.6rem}}
