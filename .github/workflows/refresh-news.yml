@@ -28,9 +28,13 @@ jobs:
       - run: node scripts/fetch-live.mjs
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: Latest Mix (channel 45), the last two days' trending uploads of every channel
+        run: node scripts/fetch-latest.mjs || echo "Latest Mix not refreshed this time"   # never stops the news
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
       - name: The pages, and the video files the page fetches a category at a time (js/c/, js/feedmap.js)
         run: |
-          if git diff --quiet js/feeds.js && git diff --quiet js/live.js; then echo "No new episodes or streams"; exit 0; fi
+          if git diff --quiet js/feeds.js && git diff --quiet js/live.js && git diff --quiet js/latest.json; then echo "No new episodes or streams"; exit 0; fi
           git diff --quiet js/live.js || sed -i -E "s#js/live\.js\?v=[^\"]*#js/live.js?v=$(date -u +%Y%m%d%H%M)#" index.html
           node scripts/build-pages.mjs   # js/feedmap.js is stamped by its contents here
       - name: Check the new data before it ships
@@ -39,7 +43,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet js/feeds.js && git diff --quiet js/live.js; then echo "No new episodes or streams"; exit 0; fi
+          if git diff --quiet js/feeds.js && git diff --quiet js/live.js && git diff --quiet js/latest.json; then echo "No new episodes or streams"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A && git commit -qm "Refresh news shows, sports highlights and live streams"

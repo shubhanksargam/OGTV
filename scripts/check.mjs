@@ -50,7 +50,7 @@ if (S) {
   // 5. Each channel's parts make sense. (The scheduler closes the hours between regular parts itself and lays
   // fixed-time shows over them, so whole-day coverage is checked by the schedule test below, not here.)
   for (const c of CHANNELS) {
-    if (c.festival) continue;
+    if (c.festival || c.menu) continue; // Vibe's parts are made each day; Latest Mix has none
     for (const p of c.parts) if (!(p.from >= 0 && p.from < p.to && p.to <= 24)) fail(`${c.name}: part "${p.label}" has hours ${p.from}–${p.to}`);
     if (!c.parts.some(p => !p.fixed)) fail(`${c.name}: has only fixed-time shows`);
     const fixed = c.parts.filter(p => p.fixed).sort((a, b) => a.from - b.from);
@@ -163,6 +163,17 @@ if (S && split) {
     if (!D.OGTV_DATA.loaded() || !D.CHANNELS.every(ch => D.OGTV_DATA.ready(ch))) throw new Error("not every channel is ready once every category is in");
     if (!D.events.some(e => e.type === "ogtv-data" && e.detail.all)) throw new Error("no ogtv-data event says that all are in");
   } catch (e) { fail("js/data.js: " + e.message); }
+}
+
+// 13. Latest Mix's list (js/latest.json, from scripts/fetch-latest.mjs every hour): valid, plain text, recent
+if (existsSync(new URL("js/latest.json", ROOT))) {
+  try {
+    const L = JSON.parse(read("js/latest.json")), items = L.items || [];
+    const bad = items.filter(v => !/^[A-Za-z0-9_-]{11}$/.test(v.id) || !String(v.t || "").trim() || /[<>]/.test(v.t + v.src) || isNaN(Date.parse(v.pub)) || !(v.views >= 0));
+    if (bad.length) fail(`js/latest.json: ${bad.length} broken video(s): ${bad.slice(0, 5).map(v => v.id).join(", ")}`);
+    if (items.length < 20) warn(`js/latest.json has only ${items.length} videos`);
+    const age = (Date.now() - Date.parse(L.at)) / 3600e3; if (!(age < 6)) warn(`js/latest.json is ${Math.round(age)} hours old (scripts/fetch-latest.mjs runs hourly)`);
+  } catch (e) { fail("js/latest.json does not parse: " + e.message); }
 }
 
 // 8. HTML escaping in the player (titles from YouTube go through esc() into the page)

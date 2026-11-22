@@ -22,7 +22,7 @@ dial.querySelector(".dial-record").replaceWith(cv);
 // Each segment of channels has its own shade of vinyl (by request), on a second canvas over the grooves that turns with
 // the record: News red, Knowledge teal, Sports green, Lifestyle amber, Entertainment blue, Music violet
 const tc=document.createElement("canvas"); tc.className="dial-record dial-tint"; tc.setAttribute("aria-hidden","true"); cv.after(tc);
-const TINT={News:"229,72,58",Knowledge:"63,184,168",Sports:"70,180,90",Lifestyle:"242,160,61",Entertainment:"79,124,240",Music:"163,92,240"};
+const TINT={Latest:"214,174,96",News:"229,72,58",Knowledge:"63,184,168",Sports:"70,180,90",Lifestyle:"242,160,61",Entertainment:"79,124,240",Music:"163,92,240"};
 let geo=null, tintAt=null;
 dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><span class="vinyl dial-spin"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><span>Tuning in</span></div>`);
 
@@ -68,8 +68,9 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
   const fade=g.createRadialGradient(cx,cy,Math.max(0,-cy-10),cx,cy,R); fade.addColorStop(0,"rgba(0,0,0,.25)"); fade.addColorStop(1,"rgba(0,0,0,1)");
   g.globalCompositeOperation="destination-in"; g.fillStyle=fade; g.fillRect(0,0,W,H); g.restore()}
 // The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
-function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending||it.id===s.v.id) return; // pending: its videos are on their way (js/data.js)
-  it.id=s.v.id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(s.v.id)}/mqdefault.jpg`}
+function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending) return; // pending: its videos are on their way (js/data.js)
+  const id=s.menu?(LATEST&&LATEST.items[0]?LATEST.items[0].id:""):s.v.id; if(!id||it.id===id) return; // Latest Mix: its list's first video
+  it.id=id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`}
 function render(){if(!W) return; // not measured yet (or out of sight): the observer places it all when it is laid out
   const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   for(let i=0;i<N;i++){const it=items[i], d=wrapD(i-pos), a=d*STEP, ad=Math.abs(d), x=r*Math.sin(a);
@@ -88,10 +89,10 @@ function render(){if(!W) return; // not measured yet (or out of sight): the obse
 // What's on the channel at the centre, as the full-screen strip shows it
 const infoKey=i=>{const s=onNow(i); return i+"|"+(s?s.v.id+s.start:"")+"|"+(i===cur)+"|"+!!soFor(i)};
 function showInfo(i){shown=i; info._k=infoKey(i); const c=CHANNELS[i], now=chNow(i), s=onNow(i); if(!s) return;
-  const pct=s.live?100:s.pending?0:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
+  const pct=s.live?100:s.pending||s.menu?0:Math.max(0,Math.min(100,Math.round((now-s.start)/(s.end-s.start)*100)));
   info.innerHTML=`<span class="di-k">${c.n} · ${esc(c.group||"")}${i===cur?(soOn()?" · <b>From the start</b>":" · <b>Watching</b>"):soFor(i)?" · From the start":""}</span>`
     +`<span class="di-name">${esc(c.name)}</span><span class="di-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>`
-    +`<span class="di-meta"><span>${s.live?"Live":s.pending?"":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
+    +`<span class="di-meta"><span>${s.live?"Live":s.menu?(LATEST?LATEST.items.length+" to pick from":""):s.pending?"":fmt(s.start)+" – "+fmt(s.end)}</span><i class="di-bar"><i style="width:${pct}%"></i></i>`
     +(i===cur?"":`<button class="dial-watch" type="button" data-i="${i}">Watch</button>`)+`</span>`}
 
 // Turning: the record glides to its target channel, easing in the last stretch
@@ -152,9 +153,9 @@ new ResizeObserver(()=>{if(W&&dial.clientWidth===W&&dial.clientHeight===H) retur
 // Real time, as the programme guide: the covers and the centre change the moment a programme ends on any channel (the
 // soonest end of all, looked up again after each change; tick() calls this too, so a skipped programme doesn't linger),
 // and the centre's progress bar moves every second. Nothing changes while a channel tunes in.
-window.dialRefresh=()=>{if(busy) return; items.forEach((it,i)=>{if(it.id) art(i)}); const i=at(pos); if(!drag&&info._k!==infoKey(i)) showInfo(i)};
+window.dialRefresh=()=>{if(busy) return; items.forEach((it,i)=>{if(it.id||CHANNELS[i].menu) art(i)}); const i=at(pos); if(!drag&&info._k!==infoKey(i)) showInfo(i)};
 function nextChange(){clearTimeout(changeT); const now=tvNow(); let soon=now+60e3;
-  for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&!s.pending&&s.end>now&&s.end<soon) soon=s.end}
+  for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&!s.pending&&!s.menu&&s.end>now&&s.end<soon) soon=s.end}
   changeT=setTimeout(()=>{dialRefresh(); warmThen()},soon-now+100)}
 // Every channel's day is worked out a channel or two at a time while the page is idle (each takes a few milliseconds on
 // a phone; all 44 at once held the page up for most of a second), then the covers come round and the next change is
@@ -170,5 +171,5 @@ function warmThen(){if(warming){again=true; return} warming=true; again=false; l
 warmThen();
 addEventListener("ogtv-data",warmThen);
 setInterval(()=>{if(busy||document.hidden) return; const i=at(pos), s=onNow(i), now=chNow(i), b=info.querySelector(".di-bar i");
-  if(b&&s&&!s.live&&!s.pending) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
+  if(b&&s&&!s.live&&!s.pending&&!s.menu) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
 })();

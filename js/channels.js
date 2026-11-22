@@ -398,6 +398,11 @@ const CHANNELS = [
     {from:11,to:17,cat:"bhakti",label:"Devotional"},
     {from:17,to:21,cat:"bhakti",festivalNext:true,label:"Evening devotional"},
     {from:21,to:24,cat:"bhakti",label:"Devotional"}]},
+  // ---- Latest ----
+  // Latest Mix (by request, 22 Nov 2026): no schedule (menu). The TV shows a grid of the last two days' trending uploads of
+  // every YouTube channel OGTV draws on (js/latest.json, from scripts/fetch-latest.mjs every hour, ranked by views per
+  // hour); the viewer picks one, it plays, and then the grid is back (js/app.js, Latest Mix)
+  {key:"latest",n:45,group:"Latest",name:"Latest Mix",en:"Trending now: the last two days' top videos from every OGTV channel, pick one to play",menu:true},
 ];
 // A channel's name in addresses, for its /<name>/ page and ?ch=<name> links ("Desi Pop" -> desi-pop). Unlike its
 // number it stays the same when channels are reordered, so shared links keep pointing at the same channel.

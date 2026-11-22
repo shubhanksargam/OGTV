@@ -46,6 +46,9 @@ function chCats(ch,t=tvNow()){const day=istDayStart(t); if(ch._cats&&ch._cats.da
 const chReady=ch=>typeof OGTV_DATA==="undefined"||OGTV_DATA.ready(ch); // all its videos are here (in Node, always)
 const chPool=ch=>ch?inCats(baseCats(ch)):CATALOG; // every video of the channel's own categories
 // What a channel shows while its videos are on their way: never a programme it might not play
+// Latest Mix (ch.menu) has no schedule: the viewer picks what plays (js/app.js). Asked what is on, it answers with a
+// "menu" slot, an hour long, which plays nothing
+const menuSlot=(ch,a,b=istHour(a)+HOUR)=>({start:a,end:b,menu:true,ch,part:{label:"Pick a video",cat:"",from:0,to:24},v:{id:"",t:"Latest Mix: pick a video",src:"",lang:"",cat:"",min:1}});
 const pendingSlot=(ch,t)=>({start:Math.floor(t/MIN)*MIN,end:Math.floor(t/MIN)*MIN+MIN,pending:true,ch,part:{label:"Tuning in",cat:"",from:0,to:24},v:{id:"",t:"Tuning in…",src:"",lang:"",cat:"",min:1}});
 function pick(part,ch){
   const exc=rx(part.langExcept); // named creators allowed whatever their language
@@ -153,7 +156,7 @@ function layout(parts,warp){
           ...parts.filter(p=>p.fixed).map(p=>({p,spans:[[p.from,p.to]]}))]}
 // part.newest: the latest episode first, then the one before (a daily show), instead of a shuffle
 const newestFirst=pool=>pool.map((v,i)=>[v,i]).sort((a,b)=>(b[0].pub||"").localeCompare(a[0].pub||"")||a[1]-b[1]).map(x=>x[0]);
-function buildDay(ch,dayStart){
+function buildDay(ch,dayStart){if(ch.menu) return []; // Latest Mix: no day to work out
   const k=ch.key+"|"+dayStart; if(cache.has(k)) return cache.get(k);
   // a set left on for weeks keeps only yesterday onwards
   if(cache.size>CHANNELS.length*4){const keep=istDayStart(tvNow())-DAY; for(const key of cache.keys()) if(+key.split("|")[1]<keep) cache.delete(key)}
@@ -227,13 +230,13 @@ function liveSlot(ch,L,t){const a=istHour(t); // shown in the guide as hour-long
 
 // ch.liveHours ([[from,to],…] in IST hours): live only then; the rest of the day plays the channel's parts
 const liveNow=(ch,t)=>!ch.liveHours||ch.liveHours.some(([a,b])=>{const h=new Date(t+IST).getUTCHours(); return h>=a&&h<b});
-function slotAt(ch,t){const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t); // a live stream needs no list
+function slotAt(ch,t){if(ch.menu) return menuSlot(ch,istHour(t)); const L=liveStream(ch,t); if(L&&liveNow(ch,t)) return liveSlot(ch,L,t); // a live stream needs no list
   if(!chReady(ch)) return pendingSlot(ch,t); // its videos are still on their way
   return buildDay(ch,istDayStart(t)).find(s=>t>=s.start&&t<s.end)||gapSlot(ch,t)}
 // Only if a channel's parts leave an hour uncovered (a slip in channels.js): play something rather than break the page
 function gapSlot(ch,t){const a=Math.floor(t/HOUR)*HOUR, pool=chPool(ch).filter(v=>!BAD.has(v.id)), v=pool[seeded(ch.key+a)()*pool.length|0]||CATALOG[0];
   return {start:a,end:a+HOUR,v,part:{label:ch.en||ch.name,cat:v.cat,from:0,to:24},ch}}
-function slotsBetween(ch,a,b){const out=[], L=liveStream(ch);
+function slotsBetween(ch,a,b){if(ch.menu) return [menuSlot(ch,a,b)]; const out=[], L=liveStream(ch);
   if(L&&!ch.liveHours){for(let t=istHour(a);t<b;t+=HOUR) out.push(liveSlot(ch,liveStream(ch,t)||L,t)); return out}
   if(!chReady(ch)) return [pendingSlot(ch,a)]; // its videos are still on their way
   let d=istDayStart(a);while(d<b){for(const s of buildDay(ch,d)) if(s.end>a&&s.start<b&&!(L&&liveNow(ch,s.start))) out.push(s); d+=DAY}

@@ -33,10 +33,15 @@ function soFor(i){const so=startOver; if(!so||so.ch!==i) return null; if(so.left
   return i!==cur&&Date.now()-so.leftAt<=SO_AWAY&&tvNow()-so.shift<so.s.end?so:null} // a channel's From start, if it has one
 const soOn=()=>!!soFor(cur);
 const chNow=(i=cur)=>{const so=soFor(i); return so?tvNow()-so.shift:tvNow()}; // a channel's own moment
-function onNow(i=cur){const so=soFor(i); return so?so.s:slotAt(CHANNELS[i],tvNow())} // what a channel is showing
-function upNext(i=cur){const so=soFor(i), s=onNow(i); if(!s||s.live) return null; // after it: the next programme, or in From start what is live then
+function onNow(i=cur){if(pickOn(i)) return pickSlot(); const so=soFor(i); return so?so.s:slotAt(CHANNELS[i],tvNow())} // what a channel is showing
+function upNext(i=cur){const so=soFor(i), s=onNow(i); if(!s||s.live||s.menu||s.picked) return null; // a pick is followed by the list // after it: the next programme, or in From start what is live then
   return so?slotAt(CHANNELS[i],s.end+so.shift):slotAt(CHANNELS[i],s.end)}
 const nextWord=()=>soOn()?"Then live":"Next";
+// Latest Mix (see its section below): the list (js/latest.json) and the video picked from it, if one is playing
+let LATEST=null, lxPick=null, pickN=0, lastPick=""; // pick: {ch, v, start, n}
+const pickOn=(i=cur)=>!!lxPick&&lxPick.ch===i;
+const pickSlot=()=>({start:lxPick.start,end:lxPick.start+Math.max(60,lxPick.v.sec||lxPick.v.min*60)*1e3,picked:true,ch:CHANNELS[lxPick.ch],part:{label:"Latest Mix",cat:lxPick.v.cat,from:0,to:24},v:lxPick.v});
+const LIST_ICON="<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"13\" y=\"4\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"4\" y=\"13\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"13\" y=\"13\" width=\"7\" height=\"7\" rx=\"1.5\"/></svg>";
 const RESTART_ICON="<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3.5 4.5v5h5\"/><path d=\"M4.6 14.5a8 8 0 1 0 1.9-8.3L3.5 9.5\"/><path d=\"M10.6 9.6v4.8l3.8-2.4z\"/></svg>", LIVE_ICON="<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"1.6\"/><path d=\"M8.8 8.8a4.5 4.5 0 0 0 0 6.4M15.2 8.8a4.5 4.5 0 0 1 0 6.4M6 6a8.5 8.5 0 0 0 0 12M18 6a8.5 8.5 0 0 1 0 12\"/></svg>";
 let startShown=""; // which look the From start buttons have (redrawn only when it changes) // every visit opens on Cricket Classics
 // A channel from an address: its name (?ch=desi-pop, or a /<channel>/ page), a renamed channel's old name, or a number
@@ -149,15 +154,16 @@ function redraw(el,html){const f=document.activeElement, keep={};
 // The panel under the TV is one card: what's on (tick() fills its title, times and why; here its YouTube channel and
 // description) beside the channel it's on, as in the guide, with what's next (tick() too) and the rest of its day
 const gOpenNow=new Set(); // the day opens here apart from the guide's
-function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=soOn()?startOver.s:day[0]; if(!s) return;
-  const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live&&!s.pending) wantDesc(id);
+function renderNowCard(){const c=CHANNELS[cur], now=tvNow(), day=guideSlots(c,now,gB||guideEnd(now)), s=pickOn()?pickSlot():soOn()?startOver.s:day[0]; if(!s) return;
+  const id=s.v.id, open=gOpenNow.has(c.key), more=day.length>1?unit(c,day.length):""; if(!s.live&&!s.pending&&!s.menu) wantDesc(id);
   redraw($("nowCh"),`<div class="nowch"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div></div>`);
-  redraw($("nowYt"),s.pending?"":s.live?liveSince(s.v):`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
+  redraw($("nowYt"),s.pending||s.menu?"":s.live?liveSince(s.v):`<span class="lby" data-a="${id}">by ${esc(ytChannel(s))}</span>${descDiv(s.v)}`);
   redraw($("nowDay"),more?`<button class="lmore" data-k="${c.key}" aria-expanded="${open}">${open?"Hide":"Rest of today · "+more}</button>`+(open?`<ol class="lday" data-k="${c.key}">${dayList(day,now)}</ol>`:""):"")}
 function listRow(c,i,t,now){const day=guideSlots(c,t,gB||guideEnd(now)), s=day[0], nx=day[1], open=gOpen.has(c.key); if(!s) return "";
   const head=`<article class="lrow${i===cur?" gcur":""}" data-ch="${i}"${i===cur?' aria-current="true"':""}>`
     +`<div class="lhead" data-i="${i}"><span class="lnum">${c.n}</span><div class="lnm"><h6 class="lname">${esc(c.name)}</h6><span class="len">${esc(c.en)}</span></div>`
     +`<button class="lwatch" data-i="${i}" aria-label="Watch ${esc(c.name)} now">${i===cur?"Watching":"Watch"}</button></div>`;
+  if(s.menu){const n=LATEST?latestItems().length:0; return head+`<ol class="lprogs"><li class="lat"><time></time><div><b>Pick from ${n?n+" ":""}trending videos</b><small>The last two days, from OGTV's channels</small></div></li></ol></article>`} // Latest Mix: a list to pick from
   if(s.pending) return head+`<ol class="lprogs"><li class="lat"><time></time><div><b>Tuning in…</b></div></li></ol></article>`; // its videos are on their way (js/data.js)
   const on=now>=s.start&&now<s.end, more=day.length>1?unit(c,day.length):"", id=s.v.id; if(!s.live) wantDesc(id);
   const meta=s.live?"Live stream":(on?"On now · until ":"Until ")+fmt(s.end)+" · "+Math.round((s.end-s.start)/MIN)+" min";
@@ -226,6 +232,7 @@ addEventListener("keydown",e=>{
   if(e.target.closest&&e.target.closest("input,select,textarea"))return;
   if($("help").open)return; // while Help is open, keys are for it (Esc closes it)
   if(!started)return; // the ident plays through (a key during it only lets the sound in)
+  if(latestKey(e)) return; // Latest Mix's grid: Enter steps into it
   if(isFull()&&fsKey(e)) return;
   // Like the TV remote: left/right change channel, up/down set the volume; in retro each shows the set's own readout,
   // exactly as turning the Channel or Volume knob does (setVol shows the volume itself)
@@ -311,15 +318,15 @@ const playerEvents={
     else if(e.data===S.BUFFERING){if(started&&!handing&&Date.now()-resumedAt>6e3&&!(TV_APP&&Date.now()-startedAt<8e3)) bufTimer=setTimeout(showStatic,800); // TV app: no static (with its own OGTV) for a stall just after the intro // no static while a resume catches up // a brief stall shows no static; the ident covers loading
       stallTimer=setTimeout(()=>skip("stall"),25e3)} // stuck loading (a weak or dropped connection): try again
     else if(e.data===S.UNSTARTED||e.data===S.CUED) stallTimer=setTimeout(()=>{if(!needTap) skip("stall")},12e3) // ready but never started (YouTube sometimes ignores the play): try the programme again -- unless the browser blocked autoplay and the picture is waiting for the viewer's tap
-    else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended&&!staticOn) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth); never while static is covering a tune-in, so the two overlays can't clash
-    else if(e.data===S.ENDED){if(!atRealEnd()) return; if(soOn()){goLive(); return} if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
+    else if(e.data===S.PAUSED){keepAwake(false); pausedAt=Date.now(); remote.paused(); $("set").classList.add("idle"); if(!ended&&!staticOn&&!onNow().menu) showPauseScreen()} // a backstop for pauses that don't go through pauseNow() (media keys, Bluetooth); never while static is covering a tune-in, so the two overlays can't clash
+    else if(e.data===S.ENDED){if(!atRealEnd()) return; if(pickOn()){backToList(); return} if(soOn()){goLive(); return} if(slotAt(CHANNELS[cur],tvNow()).live) skip(); else if(tvNow()>=playingEnd-1000){playingKey=null; tick()} else {ended=true;hideStatic();showCard();keepAwake(false);try{player.mute()}catch(e){}}}},
   onError:e=>skip(e.data), onAutoplayBlocked:()=>soundRefused()};
 // Also runs if the API arrives after the timeout: the player takes over from the link-out card
 window.onYouTubeIframeAPIReady=()=>{ytApi=true; firstPlayer()};
 // The first player is made once the API is here and the channel's videos are in (js/data.js: until then it is tuning in;
 // their arrival, ogtv-data below, calls this again)
 function firstPlayer(){if(!ytApi||player||pendingPlayer) return;
-  const s=slotAt(CHANNELS[cur],tvNow()); if(s.pending) return; const firstKey=slotKey(CHANNELS[cur],s);
+  const s=onNow(); if(s.pending||s.menu) return; const firstKey=pickOn()?"pick|"+lxPick.n:slotKey(CHANNELS[cur],s);
   setTimeout(()=>{if(MODE==="loading")fallback()},8000); // never ready: the link-out card meanwhile
   player=new YT.Player("yt",{videoId:s.v.id,playerVars:{autoplay:1,mute:1,controls:0,rel:0,playsinline:1,disablekb:1,iv_load_policy:3,...(s.live?{}:{start:Math.floor((tvNow()-s.start)/1000)})},
     events:{...playerEvents, onReady:()=>{MODE="yt"; if(muted&&primed&&!started){player.setVolume(0);player.unMute(); if(TV_APP) player.setVolume(0)} // sound allowed: open it silently, it fades up after the ident
@@ -435,6 +442,8 @@ function skip(code){
   track("play-error-"+(code||"ended"),"Video failed to play"+(code?" ("+code+")":""));
   if(code&&!GONE.includes(code)&&retries<RETRY.length){showStatic(); retryTimer=setTimeout(replay,RETRY[retries++]); return}
   retries=0; if(soOn()){startOver=null; startBtns()} // refused for good: the channel as it is now
+  if(pickOn()){if(playingId){markBad(playingId); if(GONE.includes(code)){rememberRefused(playingId); track("refused-"+playingId,"Refused by YouTube ("+code+")")}}
+    backToList("That video won't play here. Pick another."); renderLatest(true); return} // a pick that won't play: back to the list, without it
   // Many failures in a row: something bigger is wrong (a blocker, the network). Say so, and keep trying every minute
   if(++skips>15){track("blocked","Videos not playing at all");ended=true;hideStatic();showCard("Videos aren't playing here"+(code?" (YouTube error "+code+")":"")+". An ad blocker or privacy setting may be stopping YouTube. Trying again every minute.");
     skips=12; retryTimer=setTimeout(replay,60e3); return}
@@ -725,7 +734,7 @@ const stripMid=()=>{const st=$("strip"), a=stripCard(0,0); // middle of the view
   return a?st.scrollLeft+st.clientWidth/2-(a.getBoundingClientRect().left-st.getBoundingClientRect().left+st.scrollLeft):0};
 function renderStrip(smooth=true){
   const now=tvNow(), strip=$("strip"), mid=stripMid(), w=copyWidth();
-  const row=copy=>CHANNELS.map((c,i)=>{const s=onNow(i), t=chNow(i), pct=s.live?100:s.pending?0:Math.round((t-s.start)/(s.end-s.start)*100);
+  const row=copy=>CHANNELS.map((c,i)=>{const s=onNow(i), t=chNow(i), pct=s.live?100:s.pending||s.menu?0:Math.round((t-s.start)/(s.end-s.start)*100);
     const head=c.group&&c.group!==(CHANNELS[i-1]||{}).group?`<span class="sc-group" aria-hidden="true">${esc(c.group)}</span>`:"";
     return `${head}<button class="sc${i===cur?" on":""}${i===browse?" focus":""}" role="listitem" data-copy="${copy}" data-i="${i}" aria-label="${c.n} ${esc(c.name)}: ${esc(onAir(s))}"${copy!==1?' tabindex="-1" aria-hidden="true"':""}>
       <span class="sc-n">${c.n}</span><span class="sc-name">${esc(c.name)}</span><span class="sc-now">${s.live?LIVEDOT:""}${esc(s.v.t)}</span>
@@ -747,7 +756,7 @@ function showBanner(){
   const c=CHANNELS[cur], s=onNow(), nx=upNext();
   $("banner").innerHTML=`<span class="bn-n">${c.n}</span><div class="bn-body"><span class="bn-name">${esc(c.name)}<em>${esc(c.en)}</em></span>
     <span class="bn-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</span>
-    <span class="bn-meta">${s.pending?"":s.live?"Live now":(soOn()?"From the start · ":"")+fmt(s.start)+" – "+fmt(s.end)}${nx&&!nx.pending?" · "+nextWord()+": "+esc(nx.v.t):""}</span></div>`;
+    <span class="bn-meta">${s.pending||s.menu?"":s.live?"Live now":(soOn()?"From the start · ":"")+fmt(s.start)+" – "+fmt(s.end)}${nx&&!nx.pending?" · "+nextWord()+": "+esc(nx.v.t):""}</span></div>`;
   const sc=$("screen"); sc.classList.add("banner-on"); clearTimeout(bannerTimer);
   bannerTimer=setTimeout(()=>sc.classList.remove("banner-on"),4500);
 }
@@ -922,29 +931,29 @@ setFx(fxLevel);
    allow hiding the picture or covering the player (the user chose this over hiding it, 21 Nov). On the retro TV, Radio
    is a setting of the Mode knob, between Quiet and Normal. Every visit starts with it off (by request). */
 function renderRadio(){if(!radio) return; const ch=CHANNELS[cur], now=chNow(), s=onNow(); if(!s) return; const nx=s.pending?null:upNext();
-  const by=s.live||s.pending?"":ytChannel(s), el=$("radioScreen");
+  const by=s.live||s.pending||s.menu?"":ytChannel(s), el=$("radioScreen");
   const h=`<span class="rd-kicker">Radio · ${ch.n} ${esc(ch.name)}</span><h2 class="rd-title">${s.live?LIVEDOT:""}${esc(onAir(s))}</h2>`
-    +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.pending?"":s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
+    +`<p class="rd-by">${esc(/^YouTube Charts/.test(by)?ch.en:by)}${by?" · ":""}${s.pending||s.menu?"":s.live?"Live":fmt(s.start)+" – "+fmt(s.end)}</p>`
     +`<span class="rd-play"><span class="vinyl rd-disc" aria-hidden="true"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><i class="rd-bar"><i id="rdBar"></i></i></span>`
     +(nx?`<p class="rd-next">${soOn()?"Then live":"Next at "+fmt(nx.start)} · ${esc(onAir(nx))}</p>`:"");
   if(el._h!==h){el._h=h; el.innerHTML=h} // rewritten only when it changes
-  const b=$("rdBar"); if(b) b.style.width=s.live?"100%":s.pending?"0%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
+  const b=$("rdBar"); if(b) b.style.width=s.live?"100%":s.pending||s.menu?"0%":Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"}
 function applyRadio(on){radio=on; $("screen").classList.toggle("radio",on); ["radio","radioFs"].forEach(id=>$(id).setAttribute("aria-pressed",on));
   if(on){renderRadio(); track("radio-on","Radio on")}}
 function setRadio(on){if(retro) setFx(on?FX_RADIO:FX_START,true); else applyRadio(on)} // on the retro TV the Mode knob turns: to Radio, or back to where it starts, Tinted (by request)
 $("radio").addEventListener("click",()=>setRadio(!radio));
 // From start, and back live (see startOver at the top)
-function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||s.live||s.pending) return; // a live broadcast is never seeked
+function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||s.live||s.pending||s.menu) return; // a live broadcast is never seeked
   if(!started) return;
   startOver={ch:cur, s, shift:tvNow()-s.start, at:Date.now()}; pausedAt=0; track("from-start","From start: "+CHANNELS[cur].name);
   playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>FROM START</b>"); if(guideBuilt) renderGuide()}
 function goLive(){if(!soOn()) return; startOver=null; playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>LIVE</b>"); if(guideBuilt) renderGuide()}
-const toggleStart=()=>soOn()?goLive():fromStart();
-function startBtns(){const on=soOn(), s=on?null:slotAt(CHANNELS[cur],tvNow()), can=on||MODE==="yt"&&!!s&&!s.live&&!s.pending, k=on+"|"+can; if(k===startShown) return; startShown=k;
-  for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on); b.disabled=!can;
-    b.innerHTML=(on?LIVE_ICON:RESTART_ICON).replace(/width="20" height="20"/,`width="${w}" height="${w}"`);
-    b.setAttribute("aria-label",on?"Back to live":"From start"); b.title=on?"Back to live (B)":"From start: this programme from its beginning (B)"}
-  const kb=$("keyStart"); kb.setAttribute("aria-pressed",on); kb.disabled=!can; kb.textContent=on?"Go live":"From start"}
+const toggleStart=()=>pickOn()?backToList():soOn()?goLive():fromStart(); // on Latest Mix, a pick's way back to the list
+function startBtns(){const pk=pickOn(), on=soOn(), s=on||pk?null:slotAt(CHANNELS[cur],tvNow()), can=pk||on||MODE==="yt"&&!!s&&!s.live&&!s.pending&&!s.menu, k=pk+"|"+on+"|"+can; if(k===startShown) return; startShown=k;
+  for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on||pk); b.disabled=!can;
+    b.innerHTML=(pk?LIST_ICON:on?LIVE_ICON:RESTART_ICON).replace(/width="20" height="20"/,`width="${w}" height="${w}"`);
+    b.setAttribute("aria-label",pk?"Back to the list":on?"Back to live":"From start"); b.title=pk?"Back to the list (B)":on?"Back to live (B)":"From start: this programme from its beginning (B)"}
+  const kb=$("keyStart"); kb.setAttribute("aria-pressed",on||pk); kb.disabled=!can; kb.textContent=pk?"The list":on?"Go live":"From start"}
 $("startBtn").addEventListener("click",toggleStart);
 $("startFs").addEventListener("click",()=>{toggleStart(); wakeUI(false)});
 $("keyStart").addEventListener("click",toggleStart);
@@ -998,7 +1007,7 @@ function handOver(){handing=true; clearTimeout(handTimer); handTimer=setTimeout(
 function fadeCard(){if(!handing)return; handing=false; clearTimeout(handTimer); const c=$("card"); c.classList.add("fading");
   setTimeout(()=>{if(!c.classList.contains("fading"))return; c.hidden=true; c.classList.remove("fading")},850)}
 function showCard(msg){
-  const now=tvNow(), ch=CHANNELS[cur], s=slotAt(ch,now); if(s.pending) return; const nx=slotAt(ch,s.end);
+  const now=tvNow(), ch=CHANNELS[cur], s=pickOn()?pickSlot():slotAt(ch,now); if(s.pending||s.menu) return; const nx=s.picked?s:slotAt(ch,s.end);
   const off=Math.floor((now-s.start)/1000);
   handing=false; const card=$("card"); card.hidden=false; card.classList.remove("fading");
   card.classList.toggle("interlude",MODE==="yt"&&!msg); // fades up with the jingle's bloom
@@ -1037,16 +1046,22 @@ function tick(){
   if(so&&MODE==="yt"&&player&&playingKey==="so|"+slotKey(CHANNELS[cur],so.s)&&Date.now()-so.at>2500) try{ // the player's own position sets the channel's moment
     const st=player.getPlayerState(); if(player.getVideoData().video_id===so.s.v.id&&(st===YT.PlayerState.PLAYING||st===YT.PlayerState.PAUSED)) so.shift=tvNow()-(so.s.start+player.getCurrentTime()*1e3)}catch(e){}
   if(so&&tvNow()-so.shift>so.s.end+90e3){goLive(); return} // a backstop: its end never came
-  const real=tvNow(), now=chNow(), ch=CHANNELS[cur], s=so?so.s:slotAt(ch,now);
+  const pk=pickOn();
+  if(pk&&MODE==="yt"&&player&&playingKey==="pick|"+lxPick.n) try{ // the player's own position is the pick's moment, through pauses too
+    const st=player.getPlayerState(); if(player.getVideoData().video_id===lxPick.v.id&&(st===YT.PlayerState.PLAYING||st===YT.PlayerState.PAUSED)) lxPick.start=tvNow()-player.getCurrentTime()*1e3}catch(e){}
+  if(pk&&tvNow()>pickSlot().end+90e3){backToList(); return} // a backstop: its end never came
+  const real=tvNow(), now=chNow(), ch=CHANNELS[cur], s=pk?pickSlot():so?so.s:slotAt(ch,now);
+  latestShown(!!s.menu); // Latest Mix's grid, when nothing is picked
   if(s.pending){tuningIn(ch,real); return} // its videos are still on their way (js/data.js)
-  const nx=so?upNext():slotAt(ch,s.end), key=(so?"so|":"")+slotKey(ch,s);
+  if(s.menu){menuIn(ch,real); return} // Latest Mix: the list to pick from
+  const nx=pk?null:so?upNext():slotAt(ch,s.end), key=pk?"pick|"+lxPick.n:(so?"so|":"")+slotKey(ch,s);
   if(ended&&!handing&&MODE==="yt"&&player){try{if(player.getPlayerState()===YT.PlayerState.PLAYING&&!atRealEnd()){ended=false; gapHushed=false; interlude.stop(); $("card").hidden=true; if(!muted) player.unMute()}}catch(e){}}
   let finishing=false; // the programme before is still on its last seconds (it started late): let it end first
   if(key!==playingKey&&playingKey&&!ended&&MODE==="yt"&&player&&now-playingEnd<30e3){try{finishing=player.getPlayerState()===YT.PlayerState.PLAYING&&player.getVideoData().video_id===playingId&&player.getDuration()-player.getCurrentTime()<=30}catch(e){}}
   $("clock").innerHTML=fmt(real)+"<small>IST</small>"; osd(); // the real time, also while a programme plays from its start
   $("chanbug").textContent=ch.n+" · "+ch.name;
   if(key!==playingKey&&!finishing){
-    if(playingKey&&reloadNow()){resumeMark(); location.reload(); return}
+    if(playingKey&&reloadNow()&&!pk){resumeMark(); location.reload(); return} // never in place of a video just picked
     if(playingKey&&DATA&&DATA.staged()){swapFeed(); return tick()}
     if(/^pending\|/.test(playingKey||"")) tuneFlip=false; // its videos have come: the static names what plays
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
@@ -1065,11 +1080,11 @@ function tick(){
       +(s.live?"":`<span class="chip">${esc(catLabel(s.part.cat))}${s.part.tag?" · "+esc(TAG_NAMES[s.part.tag]||s.part.tag):""}${s.part.maxMin?" · under "+s.part.maxMin+" min":""}</span>`)
       +(ch.live&&!s.live&&liveNow(ch,now)?`<span class="chip">Nothing live right now</span>`:"");
     if(ch.live&&!s.live&&liveNow(ch,now)&&started) track("live-none-"+ch.live,ch.name+": nothing live");
-    if(!so) $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:nx.pending?"":`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
+    if(!so) $("next").innerHTML=s.live?`Live from <b>${esc(s.v.src)}</b>`:s.picked?"Then back to the list":nx.pending?"":`Next at <b>${fmt(nx.start)}</b>: ${esc(onAir(nx))}`;
     renderNowCard(); if(typeof dialRefresh==="function") dialRefresh(); // the record shows what is really on, after a skip too
   }
   if(so){const h=`Then live: ${esc(onAir(nx))}`; if($("next")._h!==h) $("next").innerHTML=$("next")._h=h} else $("next")._h="";
-  $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:`${so?"From the start · ":""}${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
+  $("nowTime").textContent=s.live?`LIVE · ${langName(s.v)}`:s.picked?`Latest Mix · ${LX_FMT.dur(s.v.sec)} · ${langName(s.v)}`:`${so?"From the start · ":""}${fmt(s.start)} – ${fmt(s.end)} · ${langName(s.v)}`;
   $("nowBar").style.width=s.live?"100%":((now-s.start)/(s.end-s.start)*100).toFixed(1)+"%";
   if(MODE==="yt"&&ended){const c=$("count");if(c){const r=Math.ceil((s.end-now)/1000);c.textContent=Math.floor(r/60)+":"+String(r%60).padStart(2,"0")}}
   if(MODE==="fallback"){const w=$("watch");if(w)w.href=ytLink(s.v.id,Math.floor((now-s.start)/1000))}
@@ -1095,6 +1110,75 @@ const countCreators=()=>{$("aboutCreators").textContent=new Set(CATALOG.map(v=>v
 if(DATA) DATA.all.then(countCreators); else countCreators(); // once every list is in (until then the page's own count stands)
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
+/* ---------- Latest Mix (channel 45, by request, 22 Nov 2026) ----------
+   No schedule: the TV shows a grid of the last two days' trending uploads of OGTV's YouTube channels (js/latest.json,
+   written every hour by scripts/fetch-latest.mjs, ranked by views per hour). A video picked plays once, from its start,
+   and then the grid is back (by request). Tap or click a video; with a keyboard or the TV remote, Enter (OK) steps into
+   the grid, the arrows move, Enter (OK) plays, Esc (Back) steps out: outside it left and right change channel as on every
+   channel. While a pick plays, the From start button is "Back to the list" (B). */
+const LX_FMT={views:n=>n>=1e7?Math.round(n/1e6)+"M":n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,"")+"M":n>=1e4?Math.round(n/1e3)+"K":n>=1e3?(n/1e3).toFixed(1).replace(/\.0$/,"")+"K":String(n||0),
+  ago:t=>{const h=(tvNow()-Date.parse(t))/HOUR; if(h<1) return Math.max(1,Math.round(h*60))+" min ago"; if(h<24){const n=Math.round(h); return n+(n===1?" hour":" hours")+" ago"} const d=Math.round(h/24); return d===1?"yesterday":d+" days ago"},
+  dur:s=>{s=Math.round(s||0); const h=s/3600|0, m=(s%3600)/60|0, x=s%60; return (h?h+":"+String(m).padStart(2,"0"):m)+":"+String(x).padStart(2,"0")}};
+let latestLoading=false;
+async function loadLatest(){if(latestLoading) return; latestLoading=true;
+  try{const r=await fetch("js/latest.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error("HTTP "+r.status);
+    const j=await r.json(); if(!j||!Array.isArray(j.items)) throw new Error("no list");
+    LATEST={at:j.at, got:Date.now(), items:j.items.filter(v=>v&&/^[\w-]{11}$/.test(v.id)&&v.t)}; latestNote("");
+    renderLatest(); if(typeof dialRefresh==="function") dialRefresh(); if(guideBuilt) renderGuide();
+    if(CHANNELS[cur].menu&&!pickOn()){playingKey=null; tick()}} // the panel counts the new list
+  catch(e){latestNote("The list didn't load. Trying again in a minute."); setTimeout(loadLatest,60e3)}
+  finally{latestLoading=false}}
+function latestNote(t){const n=$("latestNote"); if(n.textContent!==t) n.textContent=t}
+const latestItems=()=>LATEST?LATEST.items.filter(v=>!BAD.has(v.id)):[]; // less what this browser was refused
+// The grid; not redrawn while the keyboard is in it (an hourly list arriving would take the focus away)
+function renderLatest(force){const grid=$("latestGrid"); if(!grid||(!force&&grid.contains(document.activeElement))) return;
+  const list=latestItems();
+  grid.innerHTML=list.length?list.map(v=>`<button class="lx" type="button" role="listitem" data-id="${v.id}" aria-label="${esc(v.t)}, ${esc(v.src)}, ${LX_FMT.views(v.views)} views, ${LX_FMT.ago(v.pub)}">`
+    +`<span class="lx-th"><img src="https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg" alt="" loading="lazy" decoding="async" draggable="false">${v.sec?`<i class="lx-len">${LX_FMT.dur(v.sec)}</i>`:""}</span>`
+    +`<span class="lx-t">${esc(v.t)}</span><span class="lx-by">${esc(v.src)} · ${LX_FMT.views(v.views)} views · ${LX_FMT.ago(v.pub)}</span></button>`).join("")
+    :`<p class="lx-empty">${LATEST?"Nothing to show right now.":"Loading the latest…"}</p>`}
+// Shown exactly when Latest Mix is on with nothing picked (tick)
+function latestShown(on){const el=$("latest"); if(el.hidden===!on) return; el.hidden=!on; if(on){renderLatest(); if(!LATEST||Date.now()-LATEST.got>10*MIN) loadLatest()}
+  else if(el.contains(document.activeElement)) document.activeElement.blur()}
+function pickVideo(id){const v=latestItems().find(x=>x.id===id), i=CHANNELS.findIndex(c=>c.menu); if(!v||i<0) return;
+  if(!started) start(true);
+  if(cur!==i) tune(i);
+  if($("latest").contains(document.activeElement)) document.activeElement.blur();
+  lxPick={ch:i, v:{...v}, start:tvNow(), n:++pickN}; lastPick=id; playingEnd=0; track("latest-pick","Latest Mix: a video picked");
+  playingKey=null; tick(); if(!player&&!pendingPlayer) firstPlayer(); startBtns()}
+function backToList(note){if(!lxPick) return; lxPick=null; playingKey=null; latestNote(note||""); tick(); startBtns();
+  const b=$("latestGrid").querySelector(`.lx[data-id="${lastPick}"]`); if(b) b.scrollIntoView({block:"nearest"})}
+// Moving in the grid by its rows and columns (arrows, or the TV remote's)
+const inGrid=()=>$("latest").contains(document.activeElement)&&document.activeElement.classList.contains("lx");
+function gridMove(dir){const cards=[...$("latestGrid").querySelectorAll(".lx")]; if(!cards.length) return;
+  const at=cards.indexOf(document.activeElement); if(at<0){cards[0].focus({preventScroll:true}); cards[0].scrollIntoView({block:"nearest"}); return}
+  const cols=Math.max(1,cards.filter(c=>c.offsetTop===cards[0].offsetTop).length);
+  const to=Math.max(0,Math.min(cards.length-1,at+({left:-1,right:1,up:-cols,down:cols}[dir]||0)));
+  cards[to].focus({preventScroll:true}); cards[to].scrollIntoView({block:"nearest"})}
+$("latestGrid").addEventListener("click",e=>{const b=e.target.closest(".lx"); if(b) pickVideo(b.dataset.id)});
+$("latest").addEventListener("keydown",e=>{const d={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"}[e.key];
+  if(d){e.preventDefault(); e.stopPropagation(); gridMove(d)}
+  else if(e.key==="Escape"){e.preventDefault(); e.stopPropagation(); document.activeElement.blur()}});
+// Enter (OK) steps into the grid when nothing else has the focus
+function latestKey(e){if($("latest").hidden||e.key!=="Enter"||inGrid()) return false;
+  const a=document.activeElement; if(a&&a!==document.body&&a.matches("button,a,input,[tabindex]")) return false;
+  e.preventDefault(); gridMove("down"); return true}
+// Latest Mix with nothing picked: the grid; the channel before is paused under it
+function menuIn(ch,real){
+  $("clock").innerHTML=fmt(real)+"<small>IST</small>"; osd(); $("chanbug").textContent=ch.n+" · "+ch.name;
+  if(MODE==="yt"&&player) try{const st=player.getPlayerState(); if(st===YT.PlayerState.PLAYING||st===YT.PlayerState.BUFFERING) player.pauseVideo()}catch(e){}
+  const key="menu|"+ch.key+"|"+(LATEST?LATEST.at:""); if(playingKey===key) return;
+  playingKey=key; playingId=null; playingEnd=0; ended=false; gapHushed=false; tuneFlip=false;
+  clearTimeout(stallTimer); clearTimeout(bufTimer); clearTimeout(retryTimer); interlude.stop(); $("card").hidden=true; hidePauseScreen();
+  if(staticOn) hideStatic(); revealPanel();
+  const n=latestItems().length;
+  $("nowTitle").textContent="Latest Mix: pick a video"; $("why").innerHTML=`<span>On air because</span><span class="chip">Trending on OGTV's channels, the last two days</span>`;
+  $("next").innerHTML=$("next")._h=n?`<b>${n}</b> videos to pick from, ranked by views per hour`:""; $("nowTime").textContent=LATEST?"Updated "+LX_FMT.ago(LATEST.at):""; $("nowBar").style.width="0%";
+  remote.meta("Latest Mix: pick a video",ch.n+" · "+ch.name);
+  updateStaticInfo(); renderNowCard(); startBtns(); if(radio) renderRadio(); if(typeof dialRefresh==="function") dialRefresh()}
+setTimeout(()=>{if(!LATEST) loadLatest()},CHANNELS[cur].menu?0:9000); // its first video's cover is the record's disc for it
+setInterval(()=>{if(CHANNELS[cur].menu&&!document.hidden) loadLatest()},10*MIN);
+
 tick(); loadYT(); // the guide is built after the intro (guideLater), so the intro has the phone to itself
 setInterval(guarded(tick,"tick"),1000);
 // More channels' videos are in (js/data.js): the channel tuning in plays, and everything showing other channels catches up
@@ -1160,9 +1244,11 @@ function nowInfo(){if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)}
 const channelList=()=>isFull()?wakeUI(true):nowInfo(); // the retro set has no channel list
 window.ogtv={
   remote(k){
-    if(k==="back"){if(stripOn()){closeStrip(); return true} return false}
+    if(k==="back"){if(stripOn()){closeStrip(); return true} if(inGrid()){document.activeElement.blur(); return true} if(pickOn()){backToList(); return true} return false}
     if(!started) return true; // the ident plays through
     if(/^[0-9]$/.test(k)){press(k); return true}
+    if(inGrid()&&["left","right","up","down","ok"].includes(k)){if(k==="ok") document.activeElement.click(); else gridMove(k); return true} // in Latest Mix's grid
+    if(k==="ok"&&!$("latest").hidden){gridMove("down"); return true} // OK steps into it
     if(stripOn()&&(k==="left"||k==="right"||k==="ok")){press({left:"ArrowLeft",right:"ArrowRight",ok:"Enter"}[k]); if(k==="ok") closeStrip(); return true} // browsing the channel list; OK tunes and closes it
     switch(k){
       case "right": case "chup": case "ff": case "up": step(1); break;

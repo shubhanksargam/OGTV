@@ -47,5 +47,6 @@ export default {
   punjabi: {verb: "listen to", asks: ["Punjabi songs: Karan Aujla, Diljit Dosanjh and Shubh"]},
   raag: {verb: "listen to", asks: ["Indian classical music: sitar, santoor and classical voices", "Coke Studio", "calm music to study or work to"]},
   geet: {verb: "listen to", asks: ["old Hindi songs non-stop", "evergreen hits of Kishore Kumar, Lata Mangeshkar, Mohammed Rafi and Mukesh", "60s, 70s and 80s Bollywood songs"]},
+  latest: {verb: "watch", asks: ["what's trending on YouTube in India today", "the latest videos from Indian YouTube channels, the last two days", "a home page of trending videos, news, cricket, comedy and tech, to pick from"]},
   bhakti: {verb: "listen to", asks: ["bhajans non-stop", "Hanuman Chalisa and morning aarti", "the coming festival's bhajans"]},
 };

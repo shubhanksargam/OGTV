@@ -21,7 +21,10 @@ const slug = chSlug; // js/channels.js: the same name the app puts in ?ch= links
 
 // The creators a channel actually plays, most videos first: the words people search for
 // The videos a channel can play: Vibe (festival) takes every festival's songs but the ones it passes over or never plays
+// Latest Mix (menu) plays what viewers pick from js/latest.json (scripts/fetch-latest.mjs, hourly): its page shows that list
+const LATEST_ITEMS = await read("js/latest.json").then(t => JSON.parse(t).items || []).catch(() => []);
 function playable(c) {
+  if (c.menu) return LATEST_ITEMS;
   const f = typeof c.festival === "object" ? c.festival : {}, rx = s => s && new RegExp(s, "i");
   const skip = rx(f.skip), exT = rx(f.exclude), exS = rx(f.excludeSrc);
   const cats = new Set(c.festival ? FEED.filter(v => v.cat.startsWith("fest-") && !(skip && skip.test(v.cat))).map(v => v.cat)
@@ -67,6 +70,8 @@ function weekPicks(c, n = 24) { // what the channel plays over the next seven da
   const step = Math.max(1, all.length / n); return Array.from({length: Math.min(n, all.length)}, (_, i) => all[Math.floor(i * step)]);
 }
 function scheduleHtml(c) {
+  if (c.menu) return LATEST_ITEMS.length ? `<div class="ch-extra"><h3>Trending now on ${esc(c.name)} (the last two days, updated every hour)</h3><ul class="ch-week">`
+    + LATEST_ITEMS.slice(0, 24).map(v => `<li>${esc(v.t)} <span>${esc(v.src)}</span></li>`).join("") + "</ul></div>" : "";
   const lu = lineup(c), wk = weekPicks(c); let h = "";
   if (lu.length) h += `<div class="ch-extra"><h3>Today on ${esc(c.name)}, ${esc(dayLabel)} (India time)</h3><ul class="lineup">`
     + lu.map(b => `<li><time>${hm(b.from)}–${hm(b.to)}</time> <b>${esc(b.label)}</b>: ${esc(b.titles.join("; "))}</li>`).join("") + "</ul></div>";
@@ -92,6 +97,7 @@ const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 const WRITTEN = {
   aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
   festival: "Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.",
+  latest: "Latest Mix on OGTV: the last two days' trending videos from every OGTV channel, ranked by how fast they are being watched and updated every hour. Pick one and it plays, free, with no sign-up.",
   select: "Select on OGTV: favourites, free and always on. Indie, Bollywood and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh, Karan Aujla and Mirzapur.",
 };
 // What people ask for that a channel answers (scripts/channel-asks.mjs), and its questions: on its page (with FAQPage)
@@ -451,6 +457,6 @@ ${CHANNELS.map(c => { const lu = lineup(c), wk = weekPicks(c);
 ${SITE}/${slug(c)}/ · ${describe(c)}
 
 Good for: ${asksOf(c).asks.map(cap).join("; ")}.
-${lu.length ? `\nToday:\n${lu.map(b => `- ${hm(b.from)}–${hm(b.to)} ${b.label}: ${b.titles.join("; ")}`).join("\n")}\n` : c.live ? "\nLive streams, around the clock.\n" : ""}${wk.length ? `\nPlaying this week: ${wk.map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}`; }).join("\n")}`);
+${lu.length ? `\nToday:\n${lu.map(b => `- ${hm(b.from)}–${hm(b.to)} ${b.label}: ${b.titles.join("; ")}`).join("\n")}\n` : c.live ? "\nLive streams, around the clock.\n" : c.menu && LATEST_ITEMS.length ? `\nNo schedule: pick from what is trending, the last two days (updated every hour). Now: ${LATEST_ITEMS.slice(0, 12).map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}${wk.length ? `\nPlaying this week: ${wk.map(v => `${v.t} (${v.src})`).join("; ")}.\n` : ""}`; }).join("\n")}`);
 await writeFile(new URL("robots.txt", ROOT), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 console.log(`home + ${CHANNELS.length} channel pages, sitemap.xml, robots.txt, llms.txt written`);

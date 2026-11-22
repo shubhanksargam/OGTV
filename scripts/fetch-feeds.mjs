@@ -16,6 +16,7 @@
 import {readFile, writeFile} from "node:fs/promises";
 import {roman} from "./roman.mjs";
 import {homeOf, coverOf, SOUTH_LABEL} from "./home.mjs";
+import {BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR} from "./feed-rules.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
@@ -37,13 +38,12 @@ async function isReel(id) {
 }
 // South Indian songs belong on Deccan Chargers: the music categories in noSouthIn skip them (by script, language or label)
 // Purvaiya plays no modern Bhojpuri (nor Santhali or Khortha) (its categories are in noBhojpuriIn); classics such as Sharda Sinha and Nadiya Ke Paar stay
-const NO_BHOJPURI = new Set(noBhojpuriIn), BHOJPURI = /[ঀ-৿]|bhojpuri|भोजपुरी|santh?ali|संथाली|सन्थाली|khortha|खोरठा|खोरथा|nagpuri|नागपुरी|pawan singh|khesari|nirahua|dinesh lal|shilpi raj|neelkamal|pramod premi|ritesh pandey|arvind akela|kallu|samar singh|antra singh|ankush raja|gunjan singh|akshara singh|aa?mrapali/i;
+const NO_BHOJPURI = new Set(noBhojpuriIn); // BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR: scripts/feed-rules.mjs
 // Global Hits plays no Bhojpuri at all, by request (its categories are in strictNoBhojpuriIn): not even Chhath geet, which
 // Purvaiya keeps (Sharda Sinha). Its songs are judged by their title, and new ones by their YouTube tags and description
 // too, as a Bhojpuri upload often names only its singer ("Daura Leke Sanghe Jata Bhatar Ho", tagged "chhath geet")
-const STRICT_BHOJPURI = new Set(strictNoBhojpuriIn), BIHAR_FOLK = /chhath|छठ|bhatar|भतार|maithili|मैथिली|magahi|maghi|मगही|angika|अंगिका/i;
-const NO_SOUTH = new Set(noSouthIn), SOUTH_TITLE = /[஀-ൿ]|\b(telugu|tamil|malayalam|kannada)\b/i,
-  SOUTH_AUTHOR = new RegExp(SOUTH_LABEL.source + "|excel movies", "i"); // the India chart's sorting (home.mjs) leaves Excel Movies out: its chart songs are Hindi (Mirzapur)
+const STRICT_BHOJPURI = new Set(strictNoBhojpuriIn);
+const NO_SOUTH = new Set(noSouthIn);
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
