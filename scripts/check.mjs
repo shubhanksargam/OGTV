@@ -174,7 +174,10 @@ if (existsSync(new URL("js/latest.json", ROOT))) {
     const L = JSON.parse(read("js/latest.json")), items = L.items || [];
     const bad = items.filter(v => !/^[A-Za-z0-9_-]{11}$/.test(v.id) || !String(v.t || "").trim() || /[<>]/.test(v.t + v.src) || isNaN(Date.parse(v.pub)) || !(v.views >= 0));
     if (bad.length) fail(`js/latest.json: ${bad.length} broken video(s): ${bad.slice(0, 5).map(v => v.id).join(", ")}`);
-    if (items.length < 20) warn(`js/latest.json has only ${items.length} videos`);
+    if (items.filter(v => !v.spare).length < 20) warn(`js/latest.json has only ${items.length} videos`);
+    // every category the same number (by request), its spares (up to 6) besides
+    const per = {}; for (const v of items.filter(v => !v.spare)) per[v.g] = (per[v.g] || 0) + 1;
+    if (new Set(Object.values(per)).size > 1) fail(`js/latest.json: categories of different sizes: ${JSON.stringify(per)}`);
     const age = (Date.now() - Date.parse(L.at)) / 3600e3; if (!(age < 6)) warn(`js/latest.json is ${Math.round(age)} hours old (scripts/fetch-latest.mjs runs hourly)`);
   } catch (e) { fail("js/latest.json does not parse: " + e.message); }
 }

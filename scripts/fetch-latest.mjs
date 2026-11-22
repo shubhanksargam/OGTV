@@ -1,4 +1,4 @@
-// Builds js/latest.json for Latest Mix (channel 46, by request, 22 Nov 2026): the last two days' trending uploads of every
+// Builds js/latest.json for Latest Mix (channel 47, by request, 22 Nov 2026): the last two days' trending uploads of every
 // YouTube channel OGTV draws on (the sources in scripts/feeds.json with a channel "id"; playlists are curated older
 // videos and are left out), ranked by views per hour since posting, like a home page of what is taking off now.
 // Each video meets the rules its channel's sources set (match/skip, length, the category's Bhojpuri and South rules,
@@ -16,7 +16,7 @@ import {roman} from "./roman.mjs";
 import {BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR} from "./feed-rules.mjs";
 
 const ROOT = new URL("..", import.meta.url), OUT = new URL("js/latest.json", ROOT);
-const KEY = process.env.YT_API_KEY, API_BUDGET = 150, WINDOW = 2 * 86400e3, PER_CHANNEL = 3, PER_GROUP = 16;
+const KEY = process.env.YT_API_KEY, API_BUDGET = 150, WINDOW = 2 * 86400e3, PER_CHANNEL = 3, PER_GROUP = 16, SPARES = 6;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -134,10 +134,12 @@ for (const v of picked) { if (!v.g) v.g = groupOf.get(v.cat) || "Entertainment";
 const upTo = (list, cap) => { const per = new Map(), out = []; for (const v of list) { const n = per.get(v.y) || 0; if (n < cap) { per.set(v.y, n + 1); out.push(v) } } return out };
 const avail = new Map([...byGroup].map(([g, list]) => { const t = upTo(list, PER_CHANNEL); return [g, t.length >= PER_GROUP ? t : upTo(list, 6)] }));
 const N = Math.min(PER_GROUP, ...[...avail.values()].map(l => l.length)), inGroup = new Map([...avail.keys()].map(g => [g, N]));
-const items = [...avail.values()].flatMap(l => l.slice(0, N)).sort((x, y) => vph(y) - vph(x) || x.id.localeCompare(y.id));
+// and up to SPARES more of each group, marked spare: a browser that can't play one of the N plays the next instead, so
+// every group keeps the same number (js/app.js, latestItems)
+const items = [...avail.values()].flatMap(l => [...l.slice(0, N), ...l.slice(N, N + SPARES).map(v => ({...v, spare: 1}))]).sort((x, y) => vph(y) - vph(x) || x.id.localeCompare(y.id));
 
 // too few (YouTube refusing this machine, feeds down): the last list stays rather than an empty one
-if (items.length < 20) { console.log(`Only ${items.length} videos fit: js/latest.json left as it was`); process.exit(1) }
-await writeFile(OUT, JSON.stringify({at: new Date(now).toISOString().slice(0, 19) + "Z", items}, null, 0).replace(/\},\{/g, "},\n{") + "\n");
+if (items.filter(v => !v.spare).length < 20) { console.log(`Only ${items.length} videos fit: js/latest.json left as it was`); process.exit(1) }
+await writeFile(OUT, JSON.stringify({at: new Date(now).toISOString().slice(0, 19) + "Z", n: N, items}, null, 0).replace(/\},\{/g, "},\n{") + "\n");
 console.log(`${channels.size} channels: ${fresh.size} uploads in the last two days, ${picked.length} fit, ${items.length} written to js/latest.json (${GROUPS.map(g => g + " " + (inGroup.get(g) || 0)).join(", ")})`
   + `${failed.length ? `; ${failed.length} feeds unread (kept last run's)` : ""}; API calls for failed feeds: ${API_BUDGET - budget}`);

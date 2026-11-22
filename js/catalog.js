@@ -478,6 +478,45 @@ const CATALOG = [
   {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
   {id:"2Vv-BfVoq4g",t:"Perfect · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
   {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
+  // Sargam (by request, 22 Nov 2026): background scores without vocals, official uploads (labels' and composers' own); the
+  // albums, lofi, santoor, flute and calm come from scripts/feeds.json
+  {id:"JPxoOlC8ZSU",t:"Flight (Man of Steel) · Hans Zimmer",cat:"sargam",tag:"zimmer",lang:"intl",min:5,src:"WaterTower Music"},
+  {id:"-4vKTf8f7qk",t:"He's a Pirate (Pirates of the Caribbean) · Klaus Badelt, Hans Zimmer",cat:"sargam",tag:"zimmer",lang:"intl",min:2,src:"Klaus Badelt"},
+  {id:"5fS_XkPLRzo",t:"Interstellar Suite: Day One · Hans Zimmer",cat:"sargam",tag:"zimmer",lang:"intl",min:4,src:"Hans Zimmer"},
+  {id:"KjShkVqz2a4",t:"Why So Serious? (The Dark Knight) · Hans Zimmer, James Newton Howard",cat:"sargam",tag:"batman",lang:"intl",min:10,src:"RHINO"},
+  {id:"BdnkbXA_piI",t:"Molossus (Batman Begins) · Hans Zimmer, James Newton Howard",cat:"sargam",tag:"batman",lang:"intl",min:5,src:"WaterTower Music"},
+  {id:"zFzm8uWxEYI",t:"Barbastella (Batman Begins) · Hans Zimmer, James Newton Howard",cat:"sargam",tag:"batman",lang:"intl",min:5,src:"WaterTower Music"},
+  {id:"_Cq9OSZcEC4",t:"A Dark Knight (The Dark Knight) · Hans Zimmer",cat:"sargam",tag:"batman",lang:"intl",min:17,src:"Hans Zimmer"},
+  {id:"Cwcinb2OxUo",t:"The Batman · Michael Giacchino",cat:"sargam",tag:"batman",lang:"intl",min:7,src:"WaterTower Music"},
+  {id:"YoaU3kRFvLg",t:"The Batman Theme (Batman, 1989) · Danny Elfman",cat:"sargam",tag:"batman",lang:"intl",min:3,src:"Danny Elfman"},
+  {id:"x-qgkHhCA6Y",t:"Spider-Man 2 Main Title · Danny Elfman",cat:"sargam",tag:"spiderman",lang:"intl",min:4,src:"SonySoundtracksVEVO"},
+  {id:"PDmE1thmRFI",t:"Arachnoverture (Spider-Man: No Way Home) · Michael Giacchino",cat:"sargam",tag:"spiderman",lang:"intl",min:11,src:"SonySoundtracksVEVO"},
+  {id:"nFAwdQuf8cc",t:"Exit Through the Lobby (Spider-Man: No Way Home) · Michael Giacchino",cat:"sargam",tag:"spiderman",lang:"intl",min:5,src:"SonySoundtracksVEVO"},
+  {id:"qcjMSc2_tpE",t:"Peter Parker Picked a Perilously Precarious Profession (No Way Home) · Michael Giacchino",cat:"sargam",tag:"spiderman",lang:"intl",min:2,src:"Michael Giacchino"},
+  {id:"GL8ZmqyNiZM",t:"The Prowler (Into the Spider-Verse) · Daniel Pemberton",cat:"sargam",tag:"spiderman",lang:"intl",min:3,src:"SonySoundtracksVEVO"},
+  {id:"86QODzEDtoE",t:"Spider-Man Loves You (Into the Spider-Verse) · Daniel Pemberton",cat:"sargam",tag:"spiderman",lang:"intl",min:2,src:"SonySoundtracksVEVO"},
+  {id:"XNCQZ0wxphY",t:"The Avengers · Alan Silvestri",cat:"sargam",tag:"marvel",lang:"intl",min:3,src:"MarvelMusicVEVO"},
+  {id:"F_mhWxOjxp4",t:"Portals (Avengers: Endgame) · Alan Silvestri",cat:"sargam",tag:"marvel",lang:"intl",min:4,src:"MarvelMusicVEVO"},
+  {id:"AaaknR1C0Kk",t:"Captain America · Alan Silvestri",cat:"sargam",tag:"marvel",lang:"intl",min:2,src:"Alan Silvestri"},
+  {id:"183tEhupiSQ",t:"TVA (Loki) · Natalie Holt",cat:"sargam",tag:"marvel",lang:"intl",min:3,src:"MarvelMusicVEVO"},
+  {id:"yV_76cm2BWU",t:"Loki Green Theme · Natalie Holt",cat:"sargam",tag:"marvel",lang:"intl",min:3,src:"Natalie Holt"},
+  {id:"0KOZ3VbPB0k",t:"Purpose Is Glorious (Loki) · Natalie Holt",cat:"sargam",tag:"marvel",lang:"intl",min:4,src:"MarvelMusicVEVO"},
+  {id:"vOKFvnTu7c8",t:"Strange Days Ahead (Doctor Strange) · Michael Giacchino",cat:"sargam",tag:"marvel",lang:"intl",min:7,src:"DisneyMusicVEVO"},
+  {id:"zrod2imUhGw",t:"The Master of the Mystic End Credits (Doctor Strange) · Michael Giacchino",cat:"sargam",tag:"marvel",lang:"intl",min:4,src:"Michael Giacchino"},
+  {id:"Pz9oulSuGqA",t:"Black Tears (Guardians of the Galaxy) · Tyler Bates",cat:"sargam",tag:"marvel",lang:"intl",min:3,src:"Tyler Bates"},
+  {id:"eCemS3f-LDU",t:"Game of Thrones Main Title · Ramin Djawadi",cat:"sargam",tag:"series",lang:"intl",min:2,src:"WaterTower Music"},
+  {id:"4Ax_XbFLAuM",t:"House of the Dragon Main Title · Ramin Djawadi",cat:"sargam",tag:"series",lang:"intl",min:2,src:"WaterTower Music"},
+  {id:"rYelEUVQ50g",t:"Westworld Main Title · Ramin Djawadi",cat:"sargam",tag:"series",lang:"intl",min:2,src:"WaterTower Music"},
+  {id:"2obv0DHuhu4",t:"Stranger Things · Kyle Dixon, Michael Stein",cat:"sargam",tag:"series",lang:"intl",min:2,src:"Kyle Dixon & Michael Stein"},
+  {id:"pCfpTK0IB-w",t:"Stranger Things (Extended) · Kyle Dixon, Michael Stein",cat:"sargam",tag:"series",lang:"intl",min:6,src:"Kyle Dixon & Michael Stein"},
+  {id:"Ha2OcL_0gtM",t:"Kids (Stranger Things) · Kyle Dixon, Michael Stein",cat:"sargam",tag:"series",lang:"intl",min:3,src:"Kyle Dixon & Michael Stein"},
+  {id:"Pt1pOY3_W64",t:"The Last of Us (Main Theme) · Gustavo Santaolalla",cat:"sargam",tag:"series",lang:"intl",min:4,src:"SonySoundtracksVEVO"},
+  {id:"ilfYnhXD-bE",t:"Breaking Bad Main Title (Extended) · Dave Porter",cat:"sargam",tag:"series",lang:"intl",min:2,src:"Dave Porter"},
+  {id:"EIEqXWHPf88",t:"The Crown Main Title · Hans Zimmer",cat:"sargam",tag:"series",lang:"intl",min:2,src:"Hans Zimmer"},
+  {id:"X2v42OSqi44",t:"Raquel y Sergio Juntos (Money Heist)",cat:"sargam",tag:"series",lang:"intl",min:5,src:"Netflix Music"},
+  {id:"igOn1d9kcew",t:"The Mandalorian and Grogu · Ludwig Göransson",cat:"sargam",tag:"series",lang:"intl",min:4,src:"Star Wars"},
+  {id:"YAe7QuTvGRc",t:"Best of Rahul Sharma: santoor · Rahul Sharma",cat:"sargam",tag:"santoor",lang:"hi",min:104,src:"Sony Music India Classical"},
+  {id:"Qf8ETxbQ8kQ",t:"Cortisol Reset (777 Hz), handpan · Malte Marten",cat:"sargam",tag:"calm",lang:"intl",min:122,src:"Malte Marten"},
   {id:"-gj4_qp4a28",t:"Ready · Kodaline",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"KodalineVEVO",pub:"2015-06-03"}, // After Hours 13
   {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-01-30"}, // After Hours 14
   {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21"}, // After Hours 15
@@ -511,6 +550,6 @@ const CATALOG = [
 const CAT_LABEL={southgems:"Acclaimed South films, in Hindi",hits90:"90s hits",select:"Select",magadh:"Bihar & Jharkhand news",firstsports:"First Sports",desipop:"Desi pop",modern:"Modern classics",global:"Global hits",deccan:"South Indian music",gym:"Gym music",biharlife:"Bihar & Jharkhand",world:"World sport",aangan:"Family TV",bhakti:"Devotional",rasoi:"Cooking",sehat:"Yoga & health",geet:"Evergreen songs",gyaan:"Space & India",hasya:"Comedy",
   khel:"Sports",vigyan:"Science",tech:"Tech",paisa:"Money",safar:"Travel",bachche:"Kids",baatcheet:"Podcasts",
   cricket:"Cricket",football:"Football",live:"Live",khabar:"Hindi news",news:"English news",bihar:"Bihar & Jharkhand news",punjabi:"Punjabi",
-  hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",dsd:"Digital System Design",edsheeran:"Ed Sheeran",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems",classics:"Cricket classics",raag:"Indian classical",niche:"Niche",fiction:"Fiction",retro:"Classic films",premium:"Classics",masters:"Indian masters"};
+  hits2000:"2000s hits",hits2010:"2010s hits",bollywood:"Bollywood hits",english:"English songs",trailers:"Trailers",data:"India in data",classroom:"Lectures",dsd:"Digital System Design",sargam:"Background scores",edsheeran:"Ed Sheeran",curious:"Explainers",drive:"Road trip",anthems:"Pop & rock anthems",classics:"Cricket classics",raag:"Indian classical",niche:"Niche",fiction:"Fiction",retro:"Classic films",premium:"Classics",masters:"Indian masters"};
 const catLabel=c=>Array.isArray(c)?[...new Set(c.map(catLabel))].join(" & "):CAT_LABEL[c]||(c.startsWith("fest-")?"Festival songs":c);
 const LANG_LABEL={hi:"Hindi",en:"English",te:"Telugu",ta:"Tamil",ml:"Malayalam",kn:"Kannada",intl:"Worldwide",multi:"Indian languages"};

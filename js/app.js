@@ -1116,7 +1116,7 @@ const countCreators=()=>{$("aboutCreators").textContent=new Set(CATALOG.map(v=>v
 if(DATA) DATA.all.then(countCreators); else countCreators(); // once every list is in (until then the page's own count stands)
 // The clock and the guide run for days on a TV: an error in one tick is reported and the next tick carries on
 const guarded=(f,name)=>()=>{try{f()}catch(e){reportError(name,e&&e.message)}};
-/* ---------- Latest Mix (channel 46, by request, 22 Nov 2026) ----------
+/* ---------- Latest Mix (channel 47, by request, 22 Nov 2026) ----------
    Always playing (by request): tuning in plays the top trending video of the last two days on OGTV's YouTube channels
    (js/latest.json, from scripts/fetch-latest.mjs every hour: by views per hour, the same number from each category),
    from its start, then the next and so on down the list (after the last, the first again); one that won't play is
@@ -1131,12 +1131,18 @@ let latestLoading=false;
 async function loadLatest(){if(latestLoading) return; latestLoading=true;
   try{const r=await fetch("js/latest.json?t="+Date.now(),{cache:"no-store"}); if(!r.ok) throw new Error("HTTP "+r.status);
     const j=await r.json(); if(!j||!Array.isArray(j.items)) throw new Error("no list");
-    LATEST={at:j.at, got:Date.now(), items:j.items.filter(v=>v&&/^[\w-]{11}$/.test(v.id)&&v.t)};
+    LATEST={at:j.at, got:Date.now(), n:j.n, items:j.items.filter(v=>v&&/^[\w-]{11}$/.test(v.id)&&v.t)};
     renderMix(); if(typeof dialRefresh==="function") dialRefresh(); if(guideBuilt) renderGuide();
     if(CHANNELS[cur].menu&&!pickOn()){playingKey=null; tick()}} // Latest Mix was waiting for it: it plays now
   catch(e){setTimeout(loadLatest,60e3)} // tried again in a minute
   finally{latestLoading=false}}
-const latestItems=()=>LATEST?LATEST.items.filter(v=>!BAD.has(v.id)):[]; // in trending order, less what this browser was refused
+// The mix, in trending order: in each category its first videos this browser can play (a spare fills in for one it was
+// refused), the same number from each (by request): the list's n, or fewer if a category hasn't that many playable. A
+// category with none playable at all is left out, rather than empty the rest
+function latestItems(){if(!LATEST) return [];
+  const ok=LATEST.items.filter(v=>!BAD.has(v.id)), by=new Map(); for(const v of ok){if(!by.has(v.g)) by.set(v.g,[]); by.get(v.g).push(v)}
+  const n=Math.min(LATEST.n||Infinity,...[...by.values()].map(l=>l.length)), keep=new Set([...by.values()].flatMap(l=>l.slice(0,n)));
+  return ok.filter(v=>keep.has(v))}
 const LX_GROUPS=()=>[...new Set(CHANNELS.filter(c=>!c.menu).map(c=>c.group))];
 // What plays: a video of the mix, from its start (auto: the next one by itself)
 function playMix(id,auto){const v=latestItems().find(x=>x.id===id), i=CHANNELS.findIndex(c=>c.menu); if(!v||i<0) return;

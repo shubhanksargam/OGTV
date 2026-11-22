@@ -142,12 +142,16 @@ async function detailsFromApi(ids) {
   return out;
 }
 
-// "Main title | #tags | Channel" -> "Main title"
+// "Main title | #tags | Channel" -> "Main title". Sources: "strip" takes a leading credit off (a regex), "suffix" is added
+// to every title (an album's bare track names: " (Interstellar) · Hans Zimmer")
 function cleanTitle(t) {
   t = t.replace(/#\S+/g, "").replace(/[\[(](?:hindi|english|full video|official video|4k|hd)[\])]/gi, "").replace(/\s+/g, " ").trim();
   // "Coke Studio | Season 14 | Pasoori | Ali Sethi x Shae Gill" → "Pasoori · Ali Sethi x Shae Gill": the show's name isn't the title
   const segs = t.split(/\s*[|｜]\s*/).filter(Boolean), song = segs.filter(x => !/^(coke studio\b.*|season \d+)$/i.test(x));
   const first = t.split(/\s[|｜]\s/)[0].trim();
+  // "Inception Official Soundtrack | Half Remembered Dream - Hans Zimmer | WaterTower" → "Half Remembered Dream (Inception) · Hans Zimmer"
+  const ost = segs.length >= 2 && segs[0].match(/^(.+?)\s+(?:official\s+)?soundtrack$/i), piece = ost && segs[1].match(/^(.+?)\s+[-–]\s+([^-–]+)$/);
+  if (piece) return `${piece[1]} (${ost[1]}) · ${piece[2]}`.slice(0, 90);
   if (song.length && segs.some(x => /^coke studio/i.test(x)) && song.length < segs.length) t = song.slice(0, 2).join(" · ");
   else if (first.length >= 8) t = first;
   return t.length > 90 ? t.slice(0, 87).trimEnd() + "…" : t;
@@ -196,7 +200,7 @@ async function fetchFeed(f, old) {
       // f.tagAudio: an audio-only upload ("Audio Jukebox", "(Audio)" in its full title, which the cleaned one may drop) is
       // tagged audio, for a channel to prefer (90s Hits, by request)
       const tag = f.tag || (f.tagAudio && /\baudio\b/i.test(d.title) ? "audio" : "");
-      items.push({id: e.id, t: f.retitle ? `${f.retitle} · ${items.length + 1}` : cleanTitle(d.title), cat: f.cat, lang: f.lang, ...(tag && {tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
+      items.push({id: e.id, t: f.retitle ? `${f.retitle} · ${items.length + 1}` : cleanTitle(f.strip ? d.title.replace(new RegExp(f.strip, "i"), "") : d.title) + (f.suffix || ""), cat: f.cat, lang: f.lang, ...(tag && {tag}), min, src: f.src, pub: e.pub || d.pub, feed: keyOf(f)});
     }
     // Rate-limited (HTTP 429): half or more unread means this run tells us little, so keep last run's list.
     // A few unread: keep their previous entries rather than silently dropping them.

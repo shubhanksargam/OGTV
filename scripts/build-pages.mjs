@@ -22,7 +22,7 @@ const slug = chSlug; // js/channels.js: the same name the app puts in ?ch= links
 // The creators a channel actually plays, most videos first: the words people search for
 // The videos a channel can play: Vibe (festival) takes every festival's songs but the ones it passes over or never plays
 // Latest Mix (menu) plays js/latest.json in order, or what viewers pick from it (scripts/fetch-latest.mjs, hourly): its page shows that list
-const LATEST_ITEMS = await read("js/latest.json").then(t => JSON.parse(t).items || []).catch(() => []);
+const LATEST_ITEMS = await read("js/latest.json").then(t => (JSON.parse(t).items || []).filter(v => !v.spare)).catch(() => []); // the spares stand by for the page
 function playable(c) {
   if (c.menu) return LATEST_ITEMS;
   const f = typeof c.festival === "object" ? c.festival : {}, rx = s => s && new RegExp(s, "i");
@@ -95,6 +95,7 @@ const list = a => a.length > 1 ? a.slice(0, -1).join(", ") + " and " + a.at(-1) 
 const LIVE = JSON.parse(await read("scripts/live.json")).groups;
 // Channels whose sources don't tell their story get their own line
 const WRITTEN = {
+  sargam: "Sargam on OGTV: background scores without vocals, free and always on. Hans Zimmer, the Batman, Spider-Man and Marvel themes, Game of Thrones and other series' themes, lofi, santoor and flute, and rain, zen and calming music for the night.",
   dsd: "Digital System Design on OGTV: IIT Madras's course from its BS in Electronic Systems, all 62 lectures in order on a loop that goes on and on, from what a digital system is and Verilog to FPGAs, memory, CPUs and SoCs. Free, with no sign-up.",
   aangan: "Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.",
   festival: "Vibe on OGTV: festival party songs, free and always on. Diwali and Holi hits, garba, Lohri boliyan, Eid, Christmas and New Year songs, and dhol-tasha.",
