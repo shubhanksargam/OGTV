@@ -36,7 +36,7 @@ export default {
   premium: {verb: "watch", asks: ["great films from India and the world"]},
   southgems: {verb: "watch", asks: ["South Indian movies in Hindi", "Hindi-dubbed South films such as Drishyam, Kaithi, Vikram Vedha and 96"]},
   select: {verb: "listen to", asks: ["favourite songs: Indian and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh and Karan Aujla"]},
-  bollywood: {verb: "listen to", asks: ["this week's trending Hindi songs", "Arijit Singh and Shreya Ghoshal songs"]},
+  bollywood: {verb: "listen to", asks: ["the songs trending on Instagram Reels and YouTube Shorts in India", "this week's trending Hindi songs", "Arijit Singh and Shreya Ghoshal songs"]},
   drive: {verb: "listen to", asks: ["road-trip songs", "a driving playlist"]},
   festival: {verb: "listen to", asks: ["Diwali, Holi and garba party songs", "festival songs for Lohri, Eid, Christmas and New Year"]},
   hits2010: {verb: "listen to", asks: ["Bollywood songs from 2010 to 2019"]},

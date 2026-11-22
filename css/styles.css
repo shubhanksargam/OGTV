@@ -782,8 +782,6 @@ kbd{font-family:var(--body);border:1px solid var(--line);border-radius:4px;paddi
 .about .credit{border-top:1px solid var(--line);padding-top:16px;font-size:.82rem;letter-spacing:.04em;color:var(--muted);opacity:.85;
   display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:none} /* the whole width: the icon at the far right */
 /* OGTV on YouTube: an icon on the right (by request), thin line like the others, gold on hover */
-.about .yt-link{display:inline-grid;place-items:center;width:40px;height:40px;margin-right:-9px;border-radius:999px;color:var(--ink)} /* the icon itself flush with the edge */
-@media (hover:hover){.about .yt-link:hover{color:var(--marigold)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* Retro full screen: the whole set as big as the display allows, always in its landscape shape (side panel,

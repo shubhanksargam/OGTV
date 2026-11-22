@@ -283,7 +283,7 @@ const CHANNELS = [
   // a set's share of the day is the square root of its size, so Aujla's sixty-odd videos don't drown Saiyaara's ten
   {key:"select",n:32,group:"Music",name:"Select",en:"Favourites",parts:[ // spotify: the user's Spotify songs (playlists Big Dawgs, No Idea, After Hours), each matched to an official upload; 12 h a day of them (share 0.5), mixed in with the rest, by request
     {from:0,to:24,cat:"select",mix:[{tag:"spotify",share:0.5},{tag:"dhurandhar"},{tag:"saiyaara"},{tag:"diljit"},{tag:"aujla"},{tag:"mirzapur"},{tag:"f1"}],label:"Favourites"}]},
-  {key:"bollywood",n:33,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs & India's OG artists",oldSlugs:["bollywood-now"],
+  {key:"bollywood",n:33,group:"Music",name:"Desi Pop",en:"Arijit, Shreya Ghoshal, this week's trending songs, trending on Reels & India's OG artists",oldSlugs:["bollywood-now"],
    // Songs whose picture is never shown, by request (revealing, item-song or sexual visuals, or marked 18+): each plays as
    // its official audio-only track, with the album's cover art, or not at all until it has one (heard in js/scheduler.js;
    // scripts/find-audio.mjs finds the tracks). Besides the chart songs the nightly fetch flags from their tags (cover: 1, scripts/home.mjs):
@@ -305,7 +305,11 @@ const CHANNELS = [
     {from:16,to:17,cat:"desipop",src:"Shreya",alt:"desipop",label:"Shreya Ghoshal, back to back"},
     {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
     {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:16},label:"Prime time: trending now, India's top songs this week"},
-    {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"}]},
+    {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"},
+    // trending on Reels (by request, 22 Nov 2026): 4 hours a day, 11 am-1 pm and 7-9 pm by the clock (fixed: prime time's
+    // stretch leaves them there); YouTube's official charts of the songs India makes Shorts with, weekly and daily (feeds.json)
+    {from:11,to:13,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Trending on Reels: the songs India is making Reels and Shorts with"},
+    {from:19,to:21,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Evening: trending on Reels"}]},
   {key:"drive",n:34,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
   // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
