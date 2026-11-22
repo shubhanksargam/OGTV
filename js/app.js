@@ -722,7 +722,7 @@ function wakeUI(strip){mixWake();
 let smallTimer=0, idleTap=false;
 function wakeSmall(wait=3000){const sc=$("screen"); clearTimeout(smallTimer); mixWake(); if(isFull()) return; sc.classList.remove("ui-idle");
   smallTimer=setTimeout(()=>{if(!isFull()) sc.classList.add("ui-idle")},wait)}
-$("screen").addEventListener("pointerdown",e=>{if(e.target.closest("#lxStrip")) return; idleTap=e.pointerType!=="mouse"&&($("screen").classList.contains("ui-idle")||CHANNELS[cur].menu&&!mixOpen()); wakeSmall()},{passive:true});
+$("screen").addEventListener("pointerdown",e=>{if(e.target.closest("#lxStrip")) return; if(e.pointerType!=="mouse"&&!e.target.closest("button")) mixQuiet=false; idleTap=e.pointerType!=="mouse"&&($("screen").classList.contains("ui-idle")||CHANNELS[cur].menu&&!mixOpen()); wakeSmall()},{passive:true});
 $("screen").addEventListener("pointermove",e=>{if(e.pointerType==="mouse") wakeSmall()},{passive:true});
 $("screen").addEventListener("mouseleave",()=>wakeSmall(800));
 $("screen").addEventListener("focusin",()=>wakeSmall());
@@ -954,8 +954,8 @@ function fromStart(){const s=slotAt(CHANNELS[cur],tvNow()); if(MODE!=="yt"||!s||
   playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>FROM START</b>"); if(guideBuilt) renderGuide()}
 function goLive(){if(!soOn()) return; startOver=null; playingKey=null; tick(); showBanner(); if(retro) tvOsd("<b>LIVE</b>"); if(guideBuilt) renderGuide()}
 const toggleStart=()=>CHANNELS[cur].menu?toggleMix():soOn()?goLive():fromStart(); // on Latest Mix, the carousel of the mix
-function startBtns(){const pk=pickOn(), on=soOn(), s=on||pk?null:slotAt(CHANNELS[cur],tvNow()), can=pk||on||MODE==="yt"&&!!s&&!s.live&&!s.pending&&!s.menu, k=pk+"|"+on+"|"+can+"|"+(pk&&mixOpen()); if(k===startShown) return; startShown=k;
-  for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on||pk&&mixOpen()); b.disabled=!can;
+function startBtns(){const pk=pickOn(), on=soOn(), s=on||pk?null:slotAt(CHANNELS[cur],tvNow()), can=pk||on||MODE==="yt"&&!!s&&!s.live&&!s.pending&&!s.menu, k=pk+"|"+on+"|"+can+"|"+(pk&&mixPinned); if(k===startShown) return; startShown=k;
+  for(const [id,w] of [["startBtn",20],["startFs",22]]){const b=$(id); b.setAttribute("aria-pressed",on||pk&&mixPinned); b.disabled=!can;
     b.innerHTML=(pk?LIST_ICON:on?LIVE_ICON:RESTART_ICON).replace(/width="20" height="20"/,`width="${w}" height="${w}"`);
     b.setAttribute("aria-label",pk?"The mix":on?"Back to live":"From start"); b.title=pk?"The mix: the videos to pick from (B)":on?"Back to live (B)":"From start: this programme from its beginning (B)"}
   const kb=$("keyStart"); kb.setAttribute("aria-pressed",on||pk); kb.disabled=!can; kb.textContent=pk?"The mix":on?"Go live":"From start"}
@@ -1146,7 +1146,8 @@ function playMix(id,auto){const v=latestItems().find(x=>x.id===id), i=CHANNELS.f
 const mixNext=()=>{const l=latestItems(); if(!l.length) return null; return l[(l.findIndex(v=>v.id===lastPick)+1)%l.length]};
 function nextInMix(){const v=mixNext(); if(v) playMix(v.id,true); else {lxPick=null; playingKey=null; tick()}}
 // The carousel
-let mixTimer=0;
+let mixTimer=0, mixPinned=false; // pinned by "The mix" (B): up, without fading, until pressed again or Esc / Back
+let mixQuiet=false; // put away by hand: no wake brings it back until the mouse leaves the picture, a tap on it or a tune-in
 const mixOpen=()=>$("screen").classList.contains("lxs-on");
 const inMix=()=>$("lxStrip").contains(document.activeElement)&&document.activeElement.classList.contains("lxs-c");
 function renderMix(force){const el=$("lxStrip"); if(!el||(!force&&inMix())) return; // not while the keyboard is in it, unless asked
@@ -1163,10 +1164,12 @@ function mixTo(b,focus){if(!b) return; if(focus) b.focus({preventScroll:true}); 
 // Up for a while (6 s, or as long as the keyboard or the pointer is in it); on Latest Mix only
 function showMix(ms=6000){if(!CHANNELS[cur].menu) return; const sc=$("screen"), was=mixOpen(); sc.classList.add("lxs-on");
   if(!was){renderMix(true); mixTo($("lxStrip").querySelector(".lxs-c.on"))} startBtns();
-  clearTimeout(mixTimer); mixTimer=setTimeout(function idle(){if(inMix()||$("lxStrip").matches(":hover")){mixTimer=setTimeout(idle,2000); return} hideMix()},ms)}
-function hideMix(){clearTimeout(mixTimer); if(inMix()) document.activeElement.blur(); $("screen").classList.remove("lxs-on"); startBtns()}
-function openMix(){showMix(); mixTo($("lxStrip").querySelector(".lxs-c.on")||mixCards()[0],true)}
-const toggleMix=()=>mixOpen()?hideMix():openMix();
+  clearTimeout(mixTimer); mixTimer=setTimeout(function idle(){if(mixPinned||inMix()||$("lxStrip").matches(":hover")){mixTimer=setTimeout(idle,2000); return} hideMix()},ms)}
+function hideMix(byHand){clearTimeout(mixTimer); mixPinned=false; if(byHand) mixQuiet=true; if(inMix()) document.activeElement.blur(); $("screen").classList.remove("lxs-on"); startBtns()}
+function openMix(){mixQuiet=false; showMix(); mixTo($("lxStrip").querySelector(".lxs-c.on")||mixCards()[0],true)}
+// The button's press wakes the carousel before its click arrives (a tap's pointerdown, the mouse over the picture), so
+// the click goes by the pin, not by whether it is up: one up by itself is pinned, a pinned one put away
+const toggleMix=()=>{if(mixPinned) return hideMix(true); mixQuiet=false; mixPinned=true; openMix(); startBtns()};
 // ← → the next one; ↑ ↓ the first of the category before or after
 function mixMove(dir){const cards=mixCards(), at=cards.indexOf(document.activeElement); if(!cards.length) return; showMix();
   if(at<0) return mixTo(cards[0],true);
@@ -1176,18 +1179,19 @@ function mixMove(dir){const cards=mixCards(), at=cards.indexOf(document.activeEl
 $("lxStrip").addEventListener("click",e=>{const b=e.target.closest(".lxs-c"); if(!b) return; showMix(3000); if(b.dataset.id!==(pickOn()?lxPick.v.id:"")) playMix(b.dataset.id)});
 $("lxStrip").addEventListener("keydown",e=>{const d={ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down"}[e.key];
   if(d){e.preventDefault(); e.stopPropagation(); mixMove(d)}
-  else if(e.key==="Escape"){e.preventDefault(); e.stopPropagation(); hideMix()}
+  else if(e.key==="Escape"){e.preventDefault(); e.stopPropagation(); hideMix(true)}
   else if((e.key==="Enter"||e.key===" ")&&inMix()){e.preventDefault(); e.stopPropagation(); document.activeElement.click()}});
 $("lxStrip").addEventListener("pointermove",()=>showMix(),{passive:true});
+$("screen").addEventListener("mouseleave",()=>{mixQuiet=false}); // after wakeSmall's own mouseleave, so leaving doesn't bring it up
 // Enter (OK) opens it, at the one playing, when nothing else has the focus
 function latestKey(e){if(!CHANNELS[cur].menu||e.key!=="Enter"||inMix()) return false;
   const a=document.activeElement; if(a&&a!==document.body&&a.matches("button,a,input,[tabindex]")) return false;
   e.preventDefault(); openMix(); return true}
 // Latest Mix with nothing playing yet: the top video straight away (or the one after the last played); until the list
 // comes, it tunes in
-function mixWake(){if(started&&mixReady&&CHANNELS[cur].menu) showMix()}
+function mixWake(){if(started&&mixReady&&CHANNELS[cur].menu&&!mixQuiet) showMix()}
 function menuIn(ch,real){const list=latestItems();
-  if(list.length){const i=list.findIndex(v=>v.id===lastPick); playMix(list[i<0?0:(i+1)%list.length].id,true); mixWake(); return}
+  if(list.length){const i=list.findIndex(v=>v.id===lastPick); playMix(list[i<0?0:(i+1)%list.length].id,true); mixQuiet=false; mixWake(); return}
   tuningIn(ch,real); if(!LATEST) loadLatest()}
 setTimeout(()=>{if(!LATEST) loadLatest()},CHANNELS[cur].menu?0:9000); // its first video's cover is the record's disc for it
 setInterval(()=>{if(CHANNELS[cur].menu&&!document.hidden) loadLatest()},10*MIN);
@@ -1258,7 +1262,7 @@ function nowInfo(){if(retro) osdChannel(cur); else {showBanner(); wakeUI(false)}
 const channelList=()=>isFull()?wakeUI(true):nowInfo(); // the retro set has no channel list
 window.ogtv={
   remote(k){
-    if(k==="back"){if(stripOn()){closeStrip(); return true} if(mixOpen()){hideMix(); return true} return false}
+    if(k==="back"){if(stripOn()){closeStrip(); return true} if(mixOpen()){hideMix(true); return true} return false}
     if(!started) return true; // the ident plays through
     if(/^[0-9]$/.test(k)){press(k); return true}
     if(inMix()&&["left","right","up","down","ok"].includes(k)){if(k==="ok") document.activeElement.click(); else mixMove(k); return true} // in Latest Mix's carousel
