@@ -49,7 +49,8 @@ function southLang({title, author, kw, desc, lang}) { // the title or uploader f
 // language. Read from the title, the uploader, the tags and the description's opening (further down, descriptions list a
 // label's other channels: "T-Series Haryanvi"), the title's script, the language YouTube hears, and a few regional
 // labels and singers (by report: "Payal Ki Khanak" says "Hindi New Song" and is Braj; Sanjay Sultanpuriya's "Badnaam UP")
-const REGIONAL = [["hr", /haryan?a?vi|haryani/i], ["bho", /bhojpuri/i], ["awa", /awadhi/i], ["bra", /\bbraj\b|\brasiya/i],
+const REGIONAL = [["hr", /haryan?a?vi|haryani/i], ["bho", /bhojpuri|\bchhath/i], // Chhath songs: Bhojpuri by tradition
+  ["awa", /awadhi/i], ["bra", /\bbraj\b|\brasiya/i],
   ["raj", /rajasthani|marwa[rd]i|mewati|shekhawati/i], ["bn", /bengali|\bbangla\b|[\u0980-\u09FF]/i], ["mr", /marathi/i], ["gu", /gujarati|[\u0A80-\u0AFF]/i],
   ["or", /\bodia\b|oriya|sambalpuri|[\u0B00-\u0B7F]/i], ["as", /assamese|\bbihu\b/i], ["ne", /nepali/i], ["mai", /maithili/i], ["mag", /magahi/i],
   ["gbm", /garhwali/i], ["kfy", /kumaoni/i], ["him", /himachali|pahari/i], ["hne", /chhattisgarhi/i], ["sd", /sindhi/i], ["ks", /kashmiri/i],

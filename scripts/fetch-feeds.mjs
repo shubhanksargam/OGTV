@@ -13,6 +13,7 @@
 //   South Indian and foreign songs to those categories instead, null leaves them out; desi songs stay in "cat".
 //   "regional": null also leaves out desi songs in a language other than Hindi, Punjabi or Urdu (Desi Pop's Reels).
 //   "devotional": {cat, tag, lang} sends desi devotional songs there (Bhakti); one in a regional language is left out.
+// "noLangs" (a routed source): desi songs in these regional languages are left out (Desi Pop: Bhojpuri and its neighbours).
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
@@ -225,7 +226,7 @@ async function fetchFeed(f, old) {
 // other than Hindi, Punjabi or Urdu, which a route's "regional" decides, "desi bhakti" for a devotional one, which its
 // "devotional" decides, "south te", "foreign"). HOME_RULES goes up
 // whenever home.mjs changes, so every song is sorted again.
-const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 5;
+const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 6;
 const homes = await readFile(HOMES, "utf8").then(JSON.parse).catch(() => ({}));
 if (homes.rules !== HOME_RULES) Object.assign(homes, {rules: HOME_RULES, videos: {}});
 // What sorting needs. The watch page has it all, with the language YouTube hears (its auto-captions); the API stands in
@@ -274,7 +275,7 @@ async function routeAll(items, f, kept) {
     // left out (Bhakti keeps to Hindi); a regional song the route doesn't mention stays
     const key = home !== "desi" ? home : devotional && f.route.devotional ? (sub ? "out" : "devotional") : sub ? "regional" : "desi";
     const to = key === "desi" ? undefined : key === "out" ? null : f.route[key];
-    if (to === null) return [];
+    if (to === null || home === "desi" && sub && (f.noLangs || []).includes(sub)) return []; // left out
     const {tag: _, cover: __, ...song} = v, tag = to ? to.tag : f.tag;
     return [{...song, cat: to?.cat || f.cat, lang: !to ? f.lang : sub && sub !== "multi" ? sub : to.lang || f.lang, ...(tag && {tag}), ...(cover && {cover: 1})}];
   });
