@@ -366,12 +366,12 @@ const CHANNELS = [
     {from:17,to:19,cat:"gym",tag:"rock",alt:"gym",label:"Heavy set: rock & metal"},
     {from:19,to:21,cat:"gym",tag:"dhh",alt:"gym",boost:{id:"4DfVxVeqk2o",cat:"punjabi",every:5},label:"Prime-time desi hip-hop"},
     {from:21,to:24,cat:"gym",tag:"phonk",alt:"gym",label:"Late set: phonk & rap"}]},
-  {key:"punjabi",n:43,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request
+  {key:"punjabi",n:43,group:"Music",name:"Punjabi",en:"Karan Aujla, Diljit, Shubh, Sidhu Moose Wala & Punjabi bangers",parts:[  // Karan Aujla, Diljit and Shubh back to back, 6 h each a day, and 52 Bars a lot, by request; Sidhu Moose Wala 2 h (23 Nov 2026, by request), and in the bangers
     {from:0,to:2,  cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
     {from:2,to:4,  cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
     {from:4,to:6,  cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
     {from:6,to:8,  cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Karan Aujla, back to back: Softly, Wavy, Tauba Tauba & the chartbusters"},
-    {from:8,to:10, cat:"punjabi",srcSkip:"Aujla",boost:{id:"4DfVxVeqk2o",every:5},label:"Bangers"},
+    {from:8,to:10, cat:"punjabi",tag:"sidhu",alt:"punjabi",label:"Sidhu Moose Wala, back to back: So High, 295, Legend & the classics"},
     {from:10,to:12,cat:"punjabi",tag:"shubh",alt:"punjabi",label:"Shubh, back to back"},
     {from:12,to:14,cat:"punjabi",tag:"diljit",alt:"punjabi",label:"Diljit Dosanjh, back to back"},
     {from:14,to:16,cat:"punjabi",tag:"aujla",alt:"punjabi",label:"Karan Aujla, back to back"},
