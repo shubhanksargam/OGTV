@@ -11,11 +11,12 @@
 // "list": "popular" reads the channel's most popular uploads instead of its latest (used for Blockbusters).
 // "route": sorts each song by scripts/home.mjs (YouTube's India chart): {"south": {cat, tag, lang}, "foreign": {...}} sends
 //   South Indian and foreign songs to those categories instead, null leaves them out; desi songs stay in "cat".
+//   "regional": null also leaves out desi songs in a language other than Hindi, Punjabi or Urdu (Desi Pop's Reels).
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
 import {roman} from "./roman.mjs";
-import {homeOf, coverOf, SOUTH_LABEL} from "./home.mjs";
+import {homeOf, coverOf, desiLangOf, SOUTH_LABEL} from "./home.mjs";
 import {BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR} from "./feed-rules.mjs";
 
 const ROOT = new URL("..", import.meta.url);
@@ -216,9 +217,10 @@ async function fetchFeed(f, old) {
 }
 
 // Sources with "route" (YouTube's India chart): each song is sorted once by scripts/home.mjs and remembered in
-// scripts/homes.json ("desi", "desi cover" for a song Desi Pop plays as audio only, "south te", "foreign"). HOME_RULES goes up
+// scripts/homes.json ("desi", "desi cover" for a song Desi Pop plays as audio only, "desi hr" for one in a regional language
+// other than Hindi, Punjabi or Urdu, which a route's "regional" decides, "south te", "foreign"). HOME_RULES goes up
 // whenever home.mjs changes, so every song is sorted again.
-const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 2;
+const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 3;
 const homes = await readFile(HOMES, "utf8").then(JSON.parse).catch(() => ({}));
 if (homes.rules !== HOME_RULES) Object.assign(homes, {rules: HOME_RULES, videos: {}});
 // What sorting needs. The watch page has it all, with the language YouTube hears (its auto-captions); the API stands in
@@ -249,8 +251,8 @@ function homeFor(id) {
     const d = await songInfo(id).catch(() => null); if (!d) return null;
     const country = d.ch ? await countryOf(d.ch) : ""; if (country === null) return null;
     if (!KEY) await sleep(300);
-    const home = homeOf({...d, country});
-    return (homes.videos[id] = home + (home === "desi" && coverOf(d) ? " cover" : ""));
+    const home = homeOf({...d, country}), lang = home === "desi" ? desiLangOf(d) : "";
+    return (homes.videos[id] = home + (lang ? " " + lang : "") + (home === "desi" && coverOf(d) ? " cover" : ""));
   })());
   return sorting.get(id);
 }
@@ -262,10 +264,11 @@ async function routeAll(items, f, kept) {
   if (unsorted * 2 > items.length && kept.length) { console.log(`  could not sort ${unsorted} of ${items.length} from ${f.src}; kept last run's`); return kept }
   return items.flatMap((v, i) => {
     if (!found[i]) return [];
-    const [home, more] = found[i].split(" "), to = home === "desi" ? undefined : f.route[home]; // more: a South language, or "cover"
+    const [home, ...more] = found[i].split(" "), cover = more.includes("cover"), sub = more.find(m => m !== "cover"); // sub: a South language, or a desi song's regional one
+    const key = home === "desi" && sub ? "regional" : home, to = key === "desi" ? undefined : f.route[key]; // a regional song the route doesn't mention stays
     if (to === null) return [];
     const {tag: _, cover: __, ...song} = v, tag = to ? to.tag : f.tag;
-    return [{...song, cat: to?.cat || f.cat, lang: !to ? f.lang : more && more !== "multi" ? more : to.lang || f.lang, ...(tag && {tag}), ...(more === "cover" && {cover: 1})}];
+    return [{...song, cat: to?.cat || f.cat, lang: !to ? f.lang : sub && sub !== "multi" ? sub : to.lang || f.lang, ...(tag && {tag}), ...(cover && {cover: 1})}];
   });
 }
 

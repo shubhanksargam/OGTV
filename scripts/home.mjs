@@ -15,7 +15,7 @@ export const SOUTH_LABEL = /telugu|tamil|malayalam|kannada|aditya music|lahari|t
 const SOUTH_SAID = /[஀-ൿ]|\b(telugu|tamil|tamizh|kannad|malayal|tollywood|kollywood|sandalwood|mollywood|telangana|kuthu|madras ?gaa?na|chennai ?gaa?na|g\.? ?v\.? ?prakash|ilaiyaraaja|ilayaraja|yuvan|harris jayaraj|santhosh narayanan|sid sriram|thaman|devi sri prasad|sai abhyankkar|hiphop tamizha|sushin shyam|jakes bejoy|hesham abdul|rajinikanth|thalapathy|thalaivar|vijay sethupathi|mohanlal|mammootty|allu arjun|ram charan|jr\.? ?ntr|mahesh babu|chiranjeevi|pawan kalyan|sivakarthikeyan|kamal haasan|suriya)/i;
 const SOUTH_HEARD = /^(te|ta|kn|ml)\b/;
 // Desi languages and scripts other than the South's (Devanagari, Bengali, Gurmukhi, Gujarati, Odia)
-const DESI_SAID = /[ऀ-୿]|\b(hindi|bollywood|punjabi|pollywood|haryanvi|bhojpuri|rajasthani|marathi|gujarati|bengali|urdu|magahi|maghi|maithili|garhwali|kumaoni|himachali|pahari|odia|assamese|bhajan|qawwal|ghazal|sufi)|\bdesi\b/i;
+const DESI_SAID = /[ऀ-୿]|\b(hindi|bollywood|punjabi|pollywood|haryanvi|bhojpuri|rajasthani|marathi|gujarati|bengali|urdu|magahi|maghi|maithili|garhwali|kumaoni|himachali|pahari|odia|assamese|bhajan|qawwal|ghazal|sufi|naat|hamd\b|manqabat)|\bdesi\b/i;
 const DESI_HEARD = /^(hi|pa|ur|bn|mr|gu|or|as|ne|sd|bho|mai|raj)\b/;
 // For uploaders outside South Asia (Karan Aujla's channel is in Canada, Daddy Yankee's in the US): a desi artist shows
 // as a desi language, label or name anywhere on the video, the names being ones common only in South Asia
@@ -44,6 +44,29 @@ function southLang({title, author, kw, desc, lang}) { // the title or uploader f
   return best;
 }
 
+// A desi song's language, for sources that keep to Hindi and Punjabi (Desi Pop's Reels, by request, 23 Nov 2026): "" for
+// Hindi, Punjabi or Urdu (one spoken language with Hindi), or when nothing says otherwise; else a code for the regional
+// language. Read from the title, the uploader, the tags and the description's opening (further down, descriptions list a
+// label's other channels: "T-Series Haryanvi"), the title's script, the language YouTube hears, and a few regional
+// labels and singers (by report: "Payal Ki Khanak" says "Hindi New Song" and is Braj; Sanjay Sultanpuriya's "Badnaam UP")
+const REGIONAL = [["hr", /haryan?a?vi|haryani/i], ["bho", /bhojpuri/i], ["awa", /awadhi/i], ["bra", /\bbraj\b|\brasiya/i],
+  ["raj", /rajasthani|marwa[rd]i|mewati|shekhawati/i], ["bn", /bengali|\bbangla\b|[\u0980-\u09FF]/i], ["mr", /marathi/i], ["gu", /gujarati|[\u0A80-\u0AFF]/i],
+  ["or", /\bodia\b|oriya|sambalpuri|[\u0B00-\u0B7F]/i], ["as", /assamese|\bbihu\b/i], ["ne", /nepali/i], ["mai", /maithili/i], ["mag", /magahi/i],
+  ["gbm", /garhwali/i], ["kfy", /kumaoni/i], ["him", /himachali|pahari/i], ["hne", /chhattisgarhi/i], ["sd", /sindhi/i], ["ks", /kashmiri/i],
+  ["doi", /dogri/i], ["kok", /konkani/i], ["ps", /pashto/i]];
+const REGIONAL_HEARD = {bn: "bn", mr: "mr", gu: "gu", or: "or", as: "as", ne: "ne", sd: "sd"};
+const REGIONAL_WHO = [["hr", /sonotek|mor haryanvi|vr bros|masoom sharma|sapna choudhary|raju punjabi|diler kharkiya|amanraj gill|pranjal dahiya|renuka panwar|ruchika jangid|khasa aala chahar|gulzaar chhaniwala|ndee kundu|surender romio|ajay hooda|sumit goswami|narender bhagana|vishvajeet choudhary|addi kalyan|rohtakiya/i],
+  ["bho", /pawan singh|khesari|nirahua|shilpi raj|neelkamal singh|pramod premi|ritesh pandey|arvind akela|samar singh|antra singh/i],
+  ["awa", /sultanpuriya/i], ["bra", /hathrasi|bhaigiri music/i], ["raj", /veena music|bansh?idhar|rathore cassettes/i],
+  ["gu", /studio saraswati|jhankar music|raghav digital|ekta sound/i], ["bn", /\bsvf\b|eskay movies|sagarika/i]];
+export function desiLangOf({title = "", author = "", kw = [], desc = "", lang = ""}) {
+  const text = [title, author, kw.join(", "), desc.slice(0, 200)].join("\n");
+  for (const [code, re] of REGIONAL) if (re.test(text)) return code;
+  const heard = REGIONAL_HEARD[String(lang).split("-")[0]]; if (heard) return heard;
+  for (const [code, re] of REGIONAL_WHO) if (re.test(text)) return code;
+  return "";
+}
+
 // A video whose picture Desi Pop never shows (it plays the song's audio-only track instead, scripts/find-audio.mjs), by request: revealing,
 // item-song or sexual visuals, or marked 18+. Read from the title and the uploader's own tags ("Bollywood Hot Scenes"
 // on ZiD's "Saanson Ko"); a description only counts for an explicit marking, as descriptions carry lyrics ("bada hot
@@ -57,5 +80,6 @@ export function homeOf({title = "", author = "", kw = [], desc = "", lang = "", 
   if (SOUTH_TITLE.test(title) || SOUTH_LABEL.test(author)
       || (!desiSaid && (SOUTH_HEARD.test(lang) || (!DESI_HEARD.test(lang) && SOUTH_SAID.test(text + "\n" + author))))) return "south " + southLang(d);
   if (SOUTH_ASIA.test(country)) return "desi";
-  return desiSaid || DESI_HEARD.test(lang) || DESI_LABEL.test(text + "\n" + author) || /\bindia\b/i.test(author) || DESI_NAME.test(text + "\n" + author) ? "desi" : "foreign";
+  return desiSaid || DESI_HEARD.test(lang) || DESI_LABEL.test(text + "\n" + author) || /\bindia\b/i.test(author) || DESI_NAME.test(text + "\n" + author)
+    || !!desiLangOf(d) ? "desi" : "foreign"; // a regional desi language or singer ("Sanjay Sultanpuriya") is desi too
 }
