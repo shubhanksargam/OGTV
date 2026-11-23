@@ -34,6 +34,9 @@ for (const ch of S.CHANNELS.filter(c => c.audio)) {
   const f = typeof ch.festival === "object" ? ch.festival : null, rxi = s => s ? new RegExp(s, "i") : null, skip = rxi(f?.skip), exT = rxi(f?.exclude), exS = rxi(f?.excludeSrc);
   const cats = new Set([...catsOf(ch), ...(ch.festival ? [...S.FESTIVALS.map(x => x.cat).filter(c => !(skip && skip.test(c))), ...(f?.party || []), "fest-newyear"] : [])]);
   for (const v of S.CATALOG) if (!v.live && cats.has(v.cat) && !(exT && exT.test(v.t)) && !(exS && exS.test(v.src || "")) && !covered.has(v.id)) covered.set(v.id, v);
+  // and what it mixes in from another category (Global Hits: Select's songs by foreign artists, home "foreign")
+  for (const m of (ch.parts || []).flatMap(p => p.mix || []).filter(m => m.cat))
+    for (const v of S.CATALOG) if (!v.live && [].concat(m.cat).includes(v.cat) && (!m.home || v.home === m.home) && !covered.has(v.id)) covered.set(v.id, v);
 }
 
 async function get(url) {

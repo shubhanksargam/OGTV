@@ -13,6 +13,7 @@
 //   South Indian and foreign songs to those categories instead, null leaves them out; desi songs stay in "cat".
 //   "regional": null also leaves out desi songs in a language other than Hindi, Punjabi or Urdu (Desi Pop's Reels).
 //   "devotional": {cat, tag, lang} sends desi devotional songs there (Bhakti); one in a regional language is left out.
+//   "desi": null leaves out every desi song (Global Hits' charts, by request: no desi song there).
 // "noLangs" (a routed source): desi songs in these regional languages are left out (Desi Pop: Bhojpuri and its neighbours).
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
@@ -272,6 +273,7 @@ async function routeAll(items, f, kept) {
   if (unsorted * 2 > items.length && kept.length) { console.log(`  could not sort ${unsorted} of ${items.length} from ${f.src}; kept last run's`); return kept }
   return items.flatMap((v, i) => {
     if (!found[i]) return [];
+    if (found[i].startsWith("desi") && f.route.desi === null) return []; // a source that takes no desi song (Global Hits)
     const [home, ...more] = found[i].split(" "), cover = more.includes("cover"), devotional = more.includes("bhakti"), sub = more.find(m => m !== "cover" && m !== "bhakti"); // sub: a South language, or a desi song's regional one
     // a devotional desi song goes where the route's "devotional" says (Bhakti), unless it is in a regional language: then it is
     // left out (Bhakti keeps to Hindi); a regional song the route doesn't mention stays

@@ -351,11 +351,12 @@ const CHANNELS = [
     {from:22,to:23, cat:"deccan",tag:"anirudh",alt:"deccan",label:"Late night: Anirudh, back to back"},
     {from:23,to:24, cat:"deccan",src:"Ilaiyaraaja",alt:"deccan",label:"Late night: Ilaiyaraaja, back to back"}]},
   {key:"anthems",n:40,group:"Music",name:"Anthems",en:"Coldplay & friends",parts:[{from:0,to:24,cat:"anthems",label:"Big-chorus pop & rock"}]},
-  {key:"english",n:41,group:"Music",name:"Global Hits",en:"The world's top hits, every language, and an hour of Ed Sheeran",oldSlugs:["english-songs"],parts:[  // any language, by request. Select's songs by foreign artists mixed into the chart and all-time hours, a quarter of the time, and Ed Sheeran's hour, by request (22 Nov 2026)
+  {key:"english",n:41,group:"Music",name:"Global Hits",en:"The world's top international hits, and an hour of Ed Sheeran",oldSlugs:["english-songs"],audio:true,parts:[ // no desi song (its charts' sources leave them out) and only audio uploads (by request, 24 Nov 2026)
+     // any language, by request. Select's songs by foreign artists mixed into the chart and all-time hours, a quarter of the time, and Ed Sheeran's hour, by request (22 Nov 2026)
     {from:0,to:3,  cat:"global",tag:"alltime",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Billion-view classics & Select's favourites"},
-    {from:3,to:6,  cat:"global",tag:"worldcharts",alt:"global",label:"World tour: Seoul, Tokyo & Johannesburg charts"},
+    {from:3,to:6,  cat:"global",tag:"alltime",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Night: billion-view classics & Select's favourites"}, // was the world tour (Korea, Japan, South Africa charts), replaced by request, 24 Nov 2026
     {from:6,to:9,  cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Morning chart: this week's global top 100 & Select's favourites"},
-    {from:9,to:12, cat:"global",tag:"worldcharts",alt:"global",label:"K-pop, J-pop & Amapiano: the world's charts"},
+    {from:9,to:12, cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Global top 100, US & UK charts & Select's favourites"},
     {from:12,to:15,cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Daily global chart & Select's favourites"},
     {from:15,to:18,cat:"global",tag:"alltime",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"All-time most viewed & Select's favourites"},
     {from:18,to:24,cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Prime time: the global top 100, US & UK charts & Select's favourites"},
