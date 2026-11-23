@@ -28,13 +28,14 @@ dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><
 
 const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
   b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
-  b.innerHTML=`<span class="dk-disc"><span class="dk-cover"></span><i class="dk-gloss"></i></span>`
+  b.innerHTML=`<span class="dk-disc"><span class="dk-cover"></span><i class="dk-gloss"></i><i class="dk-hole"></i></span>`
     +`<span class="dk-n">${c.n}</span>`; // no name under it (by request, 23 Nov 2026): its cover carries it
   b.style.visibility="hidden"; // hidden until placed (render): a disc first seen where it belongs, never moved into place
   ring.appendChild(b); return {b, cover:b.querySelector(".dk-cover"), vis:false}});
-// Each disc's cover (by request, 23 Nov 2026): the channel's name in a script, black on ivory, as large as fits the label,
-// on one line or broken between its words onto two or three (a circle: the more lines, the narrower). Measured once, when
-// the script has loaded; until then the labels are plain.
+// Each disc's cover (by request, 23 Nov 2026): the channel's name in a script, white on black, as large as fits the label,
+// on one line or broken between its words onto two or three (a circle: the more lines, the narrower); the spindle hole
+// sits over it in the middle, cropping the letters it covers (by request). Measured once, when the script has loaded;
+// until then the labels are plain.
 function letter(){const g=document.createElement("canvas").getContext("2d"); if(!g) return;
   g.font="100px "+getComputedStyle(items[0].cover).fontFamily; const em=t=>g.measureText(t).width/100;
   items.forEach((it,i)=>{const w=CHANNELS[i].name.split(" "), ways=[[w.join(" ")]]; let best=null;

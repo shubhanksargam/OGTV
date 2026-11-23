@@ -574,6 +574,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:radial-gradient(circle at 32% 22%,#3b3b40,#1b1b1e 34%,#0b0b0c 66%,#030303)}
 .dk-cover::before,.dk-cover::after{content:"";position:absolute;border-radius:50%}
 .dk-cover::before{inset:3px;border:1px solid rgba(255,255,255,.6)}
+.dk-disc .dk-hole{width:14%;height:14%} /* the spindle hole in the middle of the cover, over the name: its letters cropped (by request) */
 .dk-cover::after{inset:6px;border:1px solid rgba(255,255,255,.18)}
 .dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none; /* a lacquer's gloss: a soft light at the top, a sheen across */
   background:radial-gradient(110% 60% at 32% 0%,rgba(255,255,255,.15),transparent 58%),
