@@ -548,6 +548,10 @@ const CATALOG = [
   {id:"BosvyiLwlDI",t:"Chaand · Pehla Pyaar Doosri Baar · Faheem Abdullah",cat:"select",tag:"soul",lang:"hi",min:3,src:"T-Series",pub:"2026-11-04"},
   {id:"9S5_E65AbTQ",t:"Hoor · Faheem Abdullah, Arslan Nizami · Coke Studio Bharat",cat:"select",tag:"soul",lang:"hi",min:7,src:"Coke Studio India",pub:"2026-06-30"},
   {id:"JBUvJ7mdg3U",t:"Darbadar · Faheem Abdullah, Moosa Saleem",cat:"select",tag:"soul",lang:"hi",min:3,src:"Universal Music India",pub:"2026-11-22"},
+  // Chalre Chalre Waal (by request, 23 Nov 2026): Tu Sanwal Phul Kasturi, Sufi Irfan's song, trending on Instagram; his own
+  // official video, and the female version he put out with ISAR Music
+  {id:"hfAwT2ZqrE0",t:"Chalre Chalre Waal (Tu Sanwal Phul Kasturi) · Sufi Irfan",cat:"select",tag:"soul",lang:"hi",min:5,src:"Sufi Irfan",pub:"2026-10-30"},
+  {id:"Q4ryZfcMg3A",t:"Chalre Chalre Waal (Female Version) · Sufi Irfan",cat:"select",tag:"soul",lang:"hi",min:5,src:"ISAR Music",pub:"2026-10-04"},
   {id:"8367ETnagHo",t:"Tera Woh Pyar · Momina Mustehsan, Asim Azhar · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:8,src:"Coke Studio Pakistan",pub:"2016-09-16"},
   // South Gems (by request, 21 Nov): critically acclaimed South Indian films only, each a full Hindi-dubbed upload by its
   // rights holder (Goldmines, B4U Movies, Zee Movies, Aditya Movies, Wamindia, DRJ Records), checked to play on other sites

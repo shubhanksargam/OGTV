@@ -30,7 +30,7 @@ export default {
   bachche: {verb: "watch", asks: ["stories and rhymes for children", "science for kids"]},
   aangan: {verb: "watch", asks: ["family TV: Taarak Mehta, Doordarshan classics and kavi sammelan", "morning aarti and kahaniyan"]},
   hasya: {verb: "watch", asks: ["stand-up comedy and sketches"]},
-  bihar: {verb: "watch", asks: ["Bihar and Jharkhand: regional news, legends, travel and vlogs"]},
+  bihar: {verb: "watch", asks: ["Bihar and Jharkhand: regional news, legends, travel and vlogs", "Bihar and Jharkhand entertainment: Chhath and festivals, Sharda Sinha, food and village vlogs"]},
   fiction: {verb: "watch", asks: ["web series and short films", "Doordarshan classic serials"]},
   retro: {verb: "watch", asks: ["old Hindi movies"]},
   premium: {verb: "watch", asks: ["great films from India and the world"]},
