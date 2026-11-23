@@ -353,8 +353,11 @@ let pendingPlayer=null;
 // same player instead (loadVideoById), so that one tap keeps the sound on every channel -- at the cost of YouTube's own
 // controls showing after a switch on touch screens, which a new player avoids.
 let keepPlayer=false;
+// A programme that changed while the page was hidden went on in the old player (see tick): on a touch screen it is renewed
+// once the page is seen again (renewDue). A stall in a hidden page is tried again when the page is seen (replayOnReturn).
+let renewDue=false, replayOnReturn=false;
 const HOVER=matchMedia("(hover: hover)").matches; // a mouse or trackpad: loadVideoById shows no touch chrome
-function recreatePlayer(s,at=chNow()){
+function recreatePlayer(s,at=chNow()){renewDue=false;
   for(const p of [player,pendingPlayer]) if(p) try{p.destroy()}catch(e){}
   player=null;
   const fresh=document.createElement("div"); fresh.id="yt"; $("yt").replaceWith(fresh);
@@ -445,6 +448,7 @@ function skip(code){
   if(!navigator.onLine){showStatic(); return} // the "online" listener below takes over
   track("play-error-"+(code||"ended"),"Video failed to play"+(code?" ("+code+")":""));
   if(code&&!GONE.includes(code)&&retries<RETRY.length){showStatic(); retryTimer=setTimeout(replay,RETRY[retries++]); return}
+  if(code==="stall"&&document.hidden){retries=0; replayOnReturn=true; return} // the page can't be seen: no song is dropped for it
   retries=0; if(soOn()){startOver=null; startBtns()} // refused for good: the channel as it is now
   if(pickOn()){if(playingId){markBad(playingId); if(GONE.includes(code)){rememberRefused(playingId); track("refused-"+playingId,"Refused by YouTube ("+code+")")}}
     nextInMix(); return} // one in Latest Mix that won't play: the next, and this one is left out
@@ -459,6 +463,13 @@ function skip(code){
   if(wasLive) refreshLive(); // a broadcast ended or failed: the next live channel plays now, and the list is re-read for the channel's new stream
 }
 addEventListener("online",()=>{retries=0; if(MODE==="yt") replay()}); // also while a new player is still loading (player null)
+// Back in view: a programme that stalled while hidden is tried again; one that changed while hidden on a touch screen gets a
+// new player, covered by the static as at any change, unless under two minutes of it are left (the next brings a new one)
+document.addEventListener("visibilitychange",()=>{if(document.hidden||MODE!=="yt") return;
+  if(replayOnReturn){replayOnReturn=false; renewDue=false; replay(); return}
+  if(!renewDue) return; renewDue=false; if(!player||keepPlayer||ended||pausedAt) return;
+  let left=Infinity; try{if(!onNow().live){const d=player.getDuration(), t=player.getCurrentTime(); if(d>0) left=(d-t)*1e3}}catch(e){} // a live stream's duration means nothing
+  if(left>120e3){playingKey=null; tick()}});
 function fallback(){
   MODE="fallback"; hideStatic(); playingKey=null; tick(); videoUp=true; openIris();
   $("modeNote").innerHTML="<strong>Preview mode.</strong> This viewer blocks embedded YouTube, so the screen shows what is on air with a link that opens YouTube at the exact live moment. Host this same file on your own site and the screen plays the video itself.";
@@ -620,7 +631,7 @@ const interlude=(()=>{
    volume, and plays only where the browser allows sound. */
 const staticSound=(()=>{
   let ac=null, out=null;
-  function start(){stop(); if(!AC||muted||!started||!retro||fxLevel>=4)return; // only the retro TV hisses, and not in its Quiet mode
+  function start(){stop(); if(!AC||muted||!started||!retro||fxLevel>=4||document.hidden)return; // only the retro TV hisses, and not in its Quiet mode, nor unseen
     try{const a=ac=new AC(); a.resume().then(()=>{if(a!==ac)return; if(a.state!=="running"){a.close(); ac=null; return}
       const sr=a.sampleRate, t=a.currentTime+0.02, noise=a.createBuffer(1,sr*2,sr), d=noise.getChannelData(0);
       for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
@@ -638,6 +649,7 @@ const staticSound=(()=>{
     setTimeout(()=>a.close().catch(()=>{}),800)}
   return {start,stop};
 })();
+document.addEventListener("visibilitychange",()=>{if(document.hidden) staticSound.stop(); else if(staticOn) staticSound.start()}); // the static is heard only while it can be seen
 function setSound(on,force){if(on&&needTap&&!force){tapHint(); return} muted=!on; soundBtn(muted); knobs(); if(MODE!=="yt"||!player)return;
   if(muted){player.mute(); interlude.stop(); staticSound.stop(); return} player.unMute(); player.playVideo(); checkSound()}
 function checkSound(tries=0,asks=0,p=player){ // refused (muted again or paused by the browser): carry on muted, picture first
@@ -1073,10 +1085,11 @@ function tick(){
     const card=$("card"), handover=!!playingKey&&!card.hidden&&card.classList.contains("interlude"); // the programme follows Coming up next
     playingKey=key; playingId=s.v.id; playingEnd=s.end; ended=false; gapHushed=false; interlude.stop(); remote.meta(onAir(s),ch.n+" · "+ch.name); // next programme: the jingle fades out
     if(MODE==="yt"){hidePauseScreen(); if(handover) handOver(); else {handing=false;card.hidden=true;showStatic(); hidePanel()} // always cover the switch -- harmless and invisible if the intro splash is still up, but closes any gap if it isn't
-      // A hidden page (another tab or app in front) keeps its player for the next programme: the browser lets a player
-      // that is already playing carry on with sound, where a new one can be held back, silent, until the page is seen.
-      // Only where there's hover: YouTube's touch chrome after loadVideoById (see recreatePlayer) is a no-hover thing.
-      if((keepPlayer||document.hidden&&HOVER)&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.max(0,Math.floor((now-s.start)/1000))}); if(muted)player.mute(); else player.unMute()}
+      // A hidden page (another tab or app in front, or a phone's screen off) keeps its player for the next programme, on
+      // every device: the browser lets a player that is already playing carry on with sound, where a new one is held back,
+      // silent, until the page is seen (on a phone too: by report, 23 Nov 2026, Brave played only the static's glitch and
+      // never the next song). A touch screen then shows YouTube's own controls (see recreatePlayer): renewed on return.
+      if((keepPlayer||document.hidden)&&player){player.loadVideoById(s.live?{videoId:s.v.id}:{videoId:s.v.id,startSeconds:Math.max(0,Math.floor((now-s.start)/1000))}); if(muted)player.mute(); else player.unMute(); if(document.hidden&&!keepPlayer&&!HOVER) renewDue=true}
       else recreatePlayer(s,now)}
     else if(MODE==="fallback") showCard();
     $("nowTitle").textContent=onAir(s);

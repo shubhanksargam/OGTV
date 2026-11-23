@@ -566,16 +566,19 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:conic-gradient(from 20deg,#f7e9cb,#a07743 18%,#fdf3de 33%,#7f5b30 52%,#f1dcb0 70%,#9d7442 86%,#f7e9cb); /* a brushed-gold ring */
   box-shadow:0 12px 22px rgba(0,0,0,.6),0 3px 5px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.35)}
 /* each disc a cover of its own (by request, 23 Nov 2026), in black and white: the channel's name in a script (set by js/dial.js),
-   black on an ivory label with fine black rings, in its gold ring. No pictures, the current channel's included (by request) */
+   white on a black lacquer label with fine white rings and a glossy sheen, in its gold ring. No pictures, the current
+   channel's included (by request) */
 .dk-cover{position:absolute;inset:5px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;
-  font:400 calc(var(--d) * .2)/1.05 "Great Vibes",cursive;color:#151515;-webkit-text-stroke:.4px #151515;text-shadow:0 1px 0 rgba(255,255,255,.65);
-  background:radial-gradient(circle at 34% 26%,#fefcf7,#f1ede4 48%,#ddd8cd)}
+  font:400 calc(var(--d) * .2)/1.05 "Great Vibes",cursive;color:#f6f2ea;-webkit-text-stroke:.25px #f6f2ea;
+  text-shadow:0 0 7px rgba(255,255,255,.18),0 1px 1px rgba(0,0,0,.9);
+  background:radial-gradient(circle at 32% 22%,#3b3b40,#1b1b1e 34%,#0b0b0c 66%,#030303)}
 .dk-cover::before,.dk-cover::after{content:"";position:absolute;border-radius:50%}
-.dk-cover::before{inset:3px;border:1.5px solid #191919}
-.dk-cover::after{inset:6.5px;border:1px solid rgba(25,25,25,.4)}
-.dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none; /* a sheen on paper */
-  background:conic-gradient(from 300deg,transparent,rgba(255,255,255,.35) 40deg,transparent 80deg 190deg,rgba(255,255,255,.18) 225deg,transparent 260deg);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.45),inset 0 -8px 14px rgba(0,0,0,.14)}
+.dk-cover::before{inset:3px;border:1px solid rgba(255,255,255,.6)}
+.dk-cover::after{inset:6px;border:1px solid rgba(255,255,255,.18)}
+.dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none; /* a lacquer's gloss: a soft light at the top, a sheen across */
+  background:radial-gradient(110% 60% at 32% 0%,rgba(255,255,255,.15),transparent 58%),
+    conic-gradient(from 300deg,transparent,rgba(255,255,255,.1) 40deg,transparent 80deg 190deg,rgba(255,255,255,.06) 225deg,transparent 260deg);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.7),inset 0 1px 1px rgba(255,255,255,.14),inset 0 -8px 14px rgba(0,0,0,.45)}
 .dk-hole{position:absolute;left:50%;top:50%;width:18%;height:18%;transform:translate(-50%,-50%);border-radius:50%;
   background:radial-gradient(circle,#0b090e 0 38%,#e9d6ae 42% 58%,#8a6a3c 63%);box-shadow:0 1px 3px rgba(0,0,0,.7)}
 .dk-n{font:700 .78rem/1 "Unbounded",var(--body);letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
