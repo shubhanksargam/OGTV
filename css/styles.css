@@ -569,8 +569,8 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
    white on a pitch-black label with fine white rings, in its gold ring. No pictures, the current
    channel's included (by request) */
 .dk-cover{position:absolute;inset:5px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;
-  font:400 calc(var(--d) * .2)/1.05 "Great Vibes",cursive;color:#f6f2ea;-webkit-text-stroke:.25px #f6f2ea;
-  text-shadow:0 0 7px rgba(255,255,255,.18),0 1px 1px rgba(0,0,0,.9);
+  font:400 calc(var(--d) * .2)/1.05 "Great Vibes",cursive;color:#d9d9d9;-webkit-text-stroke:.25px #d9d9d9; /* white with a slightly grey hue (by request) */
+  text-shadow:0 0 6px rgba(255,255,255,.1),0 1px 1px rgba(0,0,0,.9);
   background:#000} /* pitch black, no gradient (by request) */
 .dk-cover::before,.dk-cover::after{content:"";position:absolute;border-radius:50%}
 .dk-cover::before{inset:3px;border:1px solid rgba(255,255,255,.6)}
