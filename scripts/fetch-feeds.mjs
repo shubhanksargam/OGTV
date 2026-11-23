@@ -12,16 +12,17 @@
 // "route": sorts each song by scripts/home.mjs (YouTube's India chart): {"south": {cat, tag, lang}, "foreign": {...}} sends
 //   South Indian and foreign songs to those categories instead, null leaves them out; desi songs stay in "cat".
 //   "regional": null also leaves out desi songs in a language other than Hindi, Punjabi or Urdu (Desi Pop's Reels).
+//   "devotional": {cat, tag, lang} sends desi devotional songs there (Bhakti); one in a regional language is left out.
 // Usage: node scripts/fetch-feeds.mjs            refresh every source
 //        node scripts/fetch-feeds.mjs khel,geet  refresh only these categories, keep the rest as they are
 import {readFile, writeFile} from "node:fs/promises";
 import {roman} from "./roman.mjs";
-import {homeOf, coverOf, desiLangOf, SOUTH_LABEL} from "./home.mjs";
+import {homeOf, coverOf, desiLangOf, devotionalOf, SOUTH_LABEL} from "./home.mjs";
 import {BHOJPURI, BIHAR_FOLK, SOUTH_TITLE, SOUTH_AUTHOR} from "./feed-rules.mjs";
 
 const ROOT = new URL("..", import.meta.url);
 const OUT = new URL("js/feeds.js", ROOT);
-const {feeds, blockChannels = [], blockVideos = [], noSouthIn = [], noBhojpuriIn = [], strictNoBhojpuriIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
+const {feeds, blockChannels = [], blockVideos = [], noSouthIn = [], noBhojpuriIn = [], strictNoBhojpuriIn = [], noMuslimDevotionalIn = []} = JSON.parse(await readFile(new URL("scripts/feeds.json", ROOT), "utf8"));
 const BLOCKED = new Set(blockChannels.map(s => s.toLowerCase())); // uploaders never used, whichever source lists them
 // Reels never air: a Short (its /shorts/ address answers instead of redirecting) or a portrait clip. Only videos of
 // 3 minutes or less can be either; each is checked once and remembered in scripts/reels.json.
@@ -45,6 +46,9 @@ const NO_BHOJPURI = new Set(noBhojpuriIn); // BHOJPURI, BIHAR_FOLK, SOUTH_TITLE,
 // too, as a Bhojpuri upload often names only its singer ("Daura Leke Sanghe Jata Bhatar Ho", tagged "chhath geet")
 const STRICT_BHOJPURI = new Set(strictNoBhojpuriIn);
 const NO_SOUTH = new Set(noSouthIn);
+// Desi Pop plays no Muslim devotional songs (by request, 23 Nov 2026; its chart's devotional songs go to Bhakti): naats, nasheeds,
+// qasidas, nohas, "Allah Hu"... by their titles. Not sufi or qawwali, mostly film and pop songs
+const NO_MUSLIM_DEVOTIONAL = new Set(noMuslimDevotionalIn), MUSLIM_DEVOTIONAL = /\b(allah\s*h[ou]+|naats?|nasheeds?|qas[ie]e?das?|nohas?|nauha|marsiya|durood|darood|salawat|hamd|manqabat|ya nabi)\b/i;
 const KEY = process.env.YT_API_KEY;
 const HEADERS = {"accept-language": "en-IN,en;q=0.9", cookie: "SOCS=CAI; CONSENT=YES+1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"};
@@ -218,9 +222,10 @@ async function fetchFeed(f, old) {
 
 // Sources with "route" (YouTube's India chart): each song is sorted once by scripts/home.mjs and remembered in
 // scripts/homes.json ("desi", "desi cover" for a song Desi Pop plays as audio only, "desi hr" for one in a regional language
-// other than Hindi, Punjabi or Urdu, which a route's "regional" decides, "south te", "foreign"). HOME_RULES goes up
+// other than Hindi, Punjabi or Urdu, which a route's "regional" decides, "desi bhakti" for a devotional one, which its
+// "devotional" decides, "south te", "foreign"). HOME_RULES goes up
 // whenever home.mjs changes, so every song is sorted again.
-const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 3;
+const HOMES = new URL("scripts/homes.json", ROOT), HOME_RULES = 5;
 const homes = await readFile(HOMES, "utf8").then(JSON.parse).catch(() => ({}));
 if (homes.rules !== HOME_RULES) Object.assign(homes, {rules: HOME_RULES, videos: {}});
 // What sorting needs. The watch page has it all, with the language YouTube hears (its auto-captions); the API stands in
@@ -252,7 +257,7 @@ function homeFor(id) {
     const country = d.ch ? await countryOf(d.ch) : ""; if (country === null) return null;
     if (!KEY) await sleep(300);
     const home = homeOf({...d, country}), lang = home === "desi" ? desiLangOf(d) : "";
-    return (homes.videos[id] = home + (lang ? " " + lang : "") + (home === "desi" && coverOf(d) ? " cover" : ""));
+    return (homes.videos[id] = home + (lang ? " " + lang : "") + (home === "desi" && devotionalOf(d) ? " bhakti" : "") + (home === "desi" && coverOf(d) ? " cover" : ""));
   })());
   return sorting.get(id);
 }
@@ -264,8 +269,11 @@ async function routeAll(items, f, kept) {
   if (unsorted * 2 > items.length && kept.length) { console.log(`  could not sort ${unsorted} of ${items.length} from ${f.src}; kept last run's`); return kept }
   return items.flatMap((v, i) => {
     if (!found[i]) return [];
-    const [home, ...more] = found[i].split(" "), cover = more.includes("cover"), sub = more.find(m => m !== "cover"); // sub: a South language, or a desi song's regional one
-    const key = home === "desi" && sub ? "regional" : home, to = key === "desi" ? undefined : f.route[key]; // a regional song the route doesn't mention stays
+    const [home, ...more] = found[i].split(" "), cover = more.includes("cover"), devotional = more.includes("bhakti"), sub = more.find(m => m !== "cover" && m !== "bhakti"); // sub: a South language, or a desi song's regional one
+    // a devotional desi song goes where the route's "devotional" says (Bhakti), unless it is in a regional language: then it is
+    // left out (Bhakti keeps to Hindi); a regional song the route doesn't mention stays
+    const key = home !== "desi" ? home : devotional && f.route.devotional ? (sub ? "out" : "devotional") : sub ? "regional" : "desi";
+    const to = key === "desi" ? undefined : key === "out" ? null : f.route[key];
     if (to === null) return [];
     const {tag: _, cover: __, ...song} = v, tag = to ? to.tag : f.tag;
     return [{...song, cat: to?.cat || f.cat, lang: !to ? f.lang : sub && sub !== "multi" ? sub : to.lang || f.lang, ...(tag && {tag}), ...(cover && {cover: 1})}];
@@ -318,7 +326,7 @@ if (process.env.GOATCOUNTER_CODE && process.env.GOATCOUNTER_TOKEN) {
 for (const [id, d] of Object.entries(refused)) if ((Date.parse(refusedToday) - Date.parse(d)) / 864e5 > REFUSED_DAYS) delete refused[id];
 await writeFile(REFUSED_FILE, "{\n" + Object.keys(refused).sort().map(id => JSON.stringify(id) + ": " + JSON.stringify(refused[id])).join(",\n") + "\n}\n");
 const BLOCKED_IDS = new Set([...blockVideos, ...Object.keys(refused)]);
-const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t)) || (STRICT_BHOJPURI.has(v.cat) && BIHAR_FOLK.test(v.t))) return false;
+const passes = v => { if (BLOCKED_IDS.has(v.id) || (NO_MUSLIM_DEVOTIONAL.has(v.cat) && MUSLIM_DEVOTIONAL.test(v.t)) || (NO_SOUTH.has(v.cat) && SOUTH_TITLE.test(v.t)) || (NO_BHOJPURI.has(v.cat) && BHOJPURI.test(v.t)) || (STRICT_BHOJPURI.has(v.cat) && BIHAR_FOLK.test(v.t))) return false;
   if (v.cat !== "trailers" && /\b(official )?(trailer|teaser)\b/i.test(v.t)) return false; // trailers play only on Trailers
   const f = bySource.get(v.feed); if (!f) return true;
   if (v.min < (f.minMin ?? 3) || v.min > (f.maxMin ?? 60)) return false; // kept videos meet today's length rules too

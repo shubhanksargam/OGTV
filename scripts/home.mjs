@@ -67,6 +67,14 @@ export function desiLangOf({title = "", author = "", kw = [], desc = "", lang = 
   return "";
 }
 
+// A devotional song (bhajan, aarti, chalisa, mantra, kirtan, shabad; naat, nasheed, qasida, noha...), which Desi Pop's chart
+// sources send to Bhakti, so none plays on Desi Pop, a Muslim one neither (by
+// request, 23 Nov 2026: "All trending devotional songs should go to bhakti"). Read from the title, the uploader ("T-Series
+// Bhakti Sagar", "Ambey Bhakti"), the tags ("Bhakti geet", "Devotional songs") and the description's opening. Not sufi or
+// qawwali, which are mostly film and pop songs.
+const DEVOTIONAL = /\b(bhajans?|aartis?|aarthi|aarati|bhakti|devotional|chalisa|mantras?|stuti|stotra|stotram|kirtan|keertan|shabad|gurbani|amritwani|aradhana|vandan|naats?|hamd|manqabat|nasheeds?|qas[ie]e?das?|nohas?|nauha|marsiya|durood|darood|salawat|islamic|nabi|madina|madine)\b/i; // not "aari" (Dhurandhar's tags)
+export const devotionalOf = ({title = "", author = "", kw = [], desc = ""}) => DEVOTIONAL.test([title, author, kw.join(", "), desc.slice(0, 200)].join("\n"));
+
 // A video whose picture Desi Pop never shows (it plays the song's audio-only track instead, scripts/find-audio.mjs), by request: revealing,
 // item-song or sexual visuals, or marked 18+. Read from the title and the uploader's own tags ("Bollywood Hot Scenes"
 // on ZiD's "Saanson Ko"); a description only counts for an explicit marking, as descriptions carry lyrics ("bada hot

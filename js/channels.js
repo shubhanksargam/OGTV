@@ -306,10 +306,10 @@ const CHANNELS = [
     {from:17,to:18,cat:"desipop",tag:"amit",alt:"desipop",label:"Amit Trivedi, back to back"},
     {from:18,to:21,cat:"desipop",tag:"trending",alt:"desipop",boost:{src:"Hanumankind",every:16},label:"Prime time: trending now, India's top songs this week"},
     {from:21,to:24,cat:"desipop",src:"Arijit",alt:"desipop",label:"Prime time: Arijit Singh, back to back"},
-    // trending on Reels (by request, 22 Nov 2026): 4 hours a day, 11 am-1 pm and 7-9 pm by the clock (fixed: prime time's
+    // trending on Reels (by request, 22 Nov 2026; 1.5 hours a day since 23 Nov, by request): 11-11:45 am and 7-7:45 pm by the clock (fixed: prime time's
     // stretch leaves them there); YouTube's official charts of the songs India makes Shorts with, weekly and daily (feeds.json)
-    {from:11,to:13,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Trending on Reels: the songs India is making Reels and Shorts with"},
-    {from:19,to:21,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Evening: trending on Reels"}]},
+    {from:11,to:11.75,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Trending on Reels: the songs India is making Reels and Shorts with"},
+    {from:19,to:19.75,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Evening: trending on Reels"}]},
   {key:"drive",n:34,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
   // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
   // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
@@ -404,7 +404,7 @@ const CHANNELS = [
     {from:18,to:20, cat:"geet",mix:[{tag:"kishore"},{tag:"rafi"}],alt:"geet",label:"Prime time: Kishore & Rafi"},
     {from:20,to:22, cat:"geet",mix:[{tag:"lata"},{tag:"mukesh"}],alt:"geet",label:"Prime time: Lata & Mukesh"},
     {from:22,to:24, cat:"geet",mix:[{tag:"kishore"},{tag:"lata"},{tag:"rafi"},{tag:"mukesh"}],alt:"geet",label:"Late night: Kishore, Lata, Rafi & Mukesh"}]},
-  {key:"bhakti",n:46,group:"Music",name:"Bhakti",en:"Devotional, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
+  {key:"bhakti",n:46,group:"Music",name:"Bhakti",en:"Devotional, today's trending bhajans, and the coming festival's bhajans",parts:[  // festivalNext: 8 h a day of the Hindu festival on now or within two weeks (its bhajans and aartis only), by request; plain devotional otherwise
     {from:0,to:4,  cat:"bhakti",label:"Devotional"},
     {from:4,to:5,  cat:"bhakti",tag:"mrityunjay",label:"4 am, Brahma muhurat: Mahamrityunjay Mantra · Anuradha Paudwal"}, // by request
     {from:5,to:6,  cat:"bhakti",festivalNext:true,label:"Devotional"},
@@ -412,7 +412,7 @@ const CHANNELS = [
     {from:6.5,to:7,cat:"bhakti",tag:"chalisa",label:"Shree Hanuman Chalisa"},
     {from:7,to:8,  cat:"bhakti",src:"Hariharan",alt:"bhakti",label:"Hariharan bhajans"},
     {from:8,to:11, cat:"bhakti",festivalNext:true,label:"Devotional"},
-    {from:11,to:17,cat:"bhakti",label:"Devotional"},
+    {from:11,to:17,cat:"bhakti",mix:[{tag:"trending",share:0.25},{notTag:"trending"}],label:"Devotional, with India's trending bhajans"}, // the charts' devotional songs (Desi Pop's sources send them here, by request): a quarter of these hours
     {from:17,to:21,cat:"bhakti",festivalNext:true,label:"Evening devotional"},
     {from:21,to:24,cat:"bhakti",label:"Devotional"}]},
   // ---- Latest ----
