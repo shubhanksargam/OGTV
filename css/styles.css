@@ -11,6 +11,7 @@
 @font-face{font-family:"Unbounded";font-style:normal;font-weight:300 700;font-display:swap;src:url(../fonts/unbounded-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:"Unbounded";font-style:normal;font-weight:300 700;font-display:swap;src:url(../fonts/unbounded-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:"VT323";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/vt323-400-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Great Vibes";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/greatvibes-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD} /* the record's covers (js/dial.js), loaded when the page is idle */
 @font-face{font-family:"VT323";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/vt323-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 /* Layout: a living-room TV — the big screen, with the programme guide (which is also the channel list) underneath.
    Single committed dark look (a lit screen in a dim room), large type for viewers 14–80. */
@@ -548,7 +549,7 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .now.tuning{opacity:0;visibility:hidden;transition:none}
 @media (prefers-reduced-motion:reduce){.now{transition:none}}
 /* The channel record (js/dial.js): the bottom segment of a vinyl record in a panel of its own, above this one (by request), every channel
-   round its rim as a small disc (gold ring, the cover of what's on, a gloss and a spindle hole), the one at the centre
+   round its rim as a small disc (gold ring, its own cover in black and white, a sheen), the one at the centre
    described above it. Only the discs move, by transform; the record, its grooves and its light are painted once. */
 .dial{--d:100px;position:relative;isolation:isolate;flex:none;height:330px;overflow:hidden;
   border:1px solid var(--line);border-radius:14px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;outline:none;
@@ -564,29 +565,20 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 .dk-disc{position:relative;flex:none;width:var(--d);height:var(--d);border-radius:50%;
   background:conic-gradient(from 20deg,#f7e9cb,#a07743 18%,#fdf3de 33%,#7f5b30 52%,#f1dcb0 70%,#9d7442 86%,#f7e9cb); /* a brushed-gold ring */
   box-shadow:0 12px 22px rgba(0,0,0,.6),0 3px 5px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.35)}
-.dk-disc img{position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:50%;object-fit:cover;background:#191520;pointer-events:none}
-/* no pictures on the record (by request, 23 Nov 2026): every disc a plain grooved record with a dark label in its gold ring,
-   as Radio's and the Tuning-in record; only the channel on now shows its programme, in a premium black and white */
-.dk-disc::before{content:"";position:absolute;inset:5px;border-radius:50%;
-  background:radial-gradient(circle,#3a2f49 0 9%,#231c2d 16.5%,rgba(233,214,174,.55) 16.6% 17.4%,transparent 17.6%),
-    radial-gradient(circle,transparent 0 33%,rgba(0,0,0,.5) 34%,transparent 37% 62%,rgba(255,255,255,.05) 63%,transparent 65%),
-    repeating-radial-gradient(circle,#15121a 0 1px,#1e1a24 1px 2.5px)}
-.dk:not(.cur) .dk-disc img{display:none}
-.dk.cur .dk-disc img{filter:grayscale(1) contrast(1.15) brightness(1.04)}
-.dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,transparent 0 31%,rgba(0,0,0,.35) 32%,transparent 34% 63%,rgba(0,0,0,.2) 64%,transparent 67%),
-    conic-gradient(from 300deg,transparent,rgba(255,255,255,.3) 40deg,transparent 80deg 190deg,rgba(255,255,255,.14) 225deg,transparent 260deg);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.5),inset 0 -10px 18px rgba(0,0,0,.4)}
+/* each disc a cover of its own (by request, 23 Nov 2026), in black and white: the channel's name in a script (set by js/dial.js),
+   black on an ivory label with fine black rings, in its gold ring. No pictures, the current channel's included (by request) */
+.dk-cover{position:absolute;inset:5px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;
+  font:400 calc(var(--d) * .2)/1.05 "Great Vibes",cursive;color:#151515;-webkit-text-stroke:.4px #151515;text-shadow:0 1px 0 rgba(255,255,255,.65);
+  background:radial-gradient(circle at 34% 26%,#fefcf7,#f1ede4 48%,#ddd8cd)}
+.dk-cover::before,.dk-cover::after{content:"";position:absolute;border-radius:50%}
+.dk-cover::before{inset:3px;border:1.5px solid #191919}
+.dk-cover::after{inset:6.5px;border:1px solid rgba(25,25,25,.4)}
+.dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none; /* a sheen on paper */
+  background:conic-gradient(from 300deg,transparent,rgba(255,255,255,.35) 40deg,transparent 80deg 190deg,rgba(255,255,255,.18) 225deg,transparent 260deg);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.45),inset 0 -8px 14px rgba(0,0,0,.14)}
 .dk-hole{position:absolute;left:50%;top:50%;width:18%;height:18%;transform:translate(-50%,-50%);border-radius:50%;
   background:radial-gradient(circle,#0b090e 0 38%,#e9d6ae 42% 58%,#8a6a3c 63%);box-shadow:0 1px 3px rgba(0,0,0,.7)}
 .dk-n{font:700 .78rem/1 "Unbounded",var(--body);letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
-.dk-name{font-weight:700;font-size:.8rem;line-height:1.1;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em;opacity:0;transition:opacity .2s} /* in capitals, by request, as the card above */
-.dk.near .dk-name{opacity:1}
-/* a phone's discs are close (69 px apart): every name keeps to its own slot, on two lines if need be; a long name in the
-   centre takes two lines across and its neighbours' names step aside (their numbers stay); a long name beside it isn't shown */
-@media (max-width:600px){.dk-name{white-space:normal;width:66px;text-align:center} /* each name in its own slot, on two lines if it needs them */
-  .dk.long .dk-name{width:8em}
-  .dial:has(.dk.mid.long) .dk.near:not(.mid) .dk-name,.dk.near.long:not(.mid) .dk-name{opacity:0}}
 .dk.mid .dk-n{color:var(--marigold)}
 .dk.cur .dk-disc{box-shadow:0 0 0 3px var(--marigold),0 0 28px rgba(242,160,61,.55),0 12px 22px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.35)}
 .dk.cur .dk-n::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sindoor);margin-right:5px;vertical-align:1px}
@@ -622,7 +614,6 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
 @keyframes dial-spin{to{transform:rotate(1turn)}}
 @media (prefers-reduced-motion:reduce){.dial.loading .dial-spin .vinyl-sweep{animation:none}.dial-ring,.dial-info{transition:none}}
 @media (max-width:560px){.dial{height:300px}.di-title{font-size:1.02rem}.di-bar{width:80px}}
-@media (prefers-reduced-motion:reduce){.dk-name{transition:none}}
 .now-main>:empty,.now-side>:empty{display:none}
 .now-side{align-self:stretch;padding-left:22px;border-left:1px solid var(--line)}
 .now-yt .lby{margin-top:0}
