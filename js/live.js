@@ -2,65 +2,72 @@
 const LIVE = {
  "news": [
   {
-   "id": "92hchFYqYYo",
-   "t": "Black & White with Anjana Om Kashyap LIVE |Russia | America | China | Putin | Bangladesh |",
-   "since": "2026-11-22T15:22:46Z",
+   "id": "z_zwekNnIjk",
+   "t": "PM Modi-Balen Shah Joint PC LIVE: Hyderabad House men donon netaon ke bich sajha pres konp",
+   "since": "2026-11-23T08:06:45Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "9tytOfVPh0U",
-   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 23 November ",
-   "since": "2026-11-23T00:49:06Z",
+   "id": "M6UHPAPpiDI",
+   "t": "Gold Price News LIVE: 2 bajte hi sone ke taja nae reton ne logon ke urae hosh! | Big Break",
+   "since": "2026-11-23T08:37:36Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "jxu9Vfyp1sQ",
-   "t": "Sone ke nae damon par hosh urane vali khabarLIVE | Big Breaking | Gold New Price | Modi | ",
-   "since": "2026-11-22T16:13:41Z",
+   "id": "WsKXMKw2J7o",
+   "t": "NDTV UP Samvad LIVE : Gaon Ki Raftar | sarak, sehat, ghar aur behtar avsar | CM Yogi | Bar",
+   "since": "2026-11-23T05:45:03Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "6hDKLvxBM8E",
-   "t": "SP-Congress Seat Sharing News Live : yupi men rahul ko kitni siten denge akhilesh?",
-   "since": "2026-11-22T08:14:58Z",
+   "id": "BgfljQCrerY",
+   "t": "Kahani Kursi Ki | Saurav Sharma : rahul aur akhilesh, kitne par dil kloj | Congress-SP Sea",
+   "since": "2026-11-23T07:28:53Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "kwnyYuDW2dY",
-   "t": "Aaj Ki Taza Khabar LIVE: UP Election | BJP | Congress| CM Yogi | PM Modi | Rahul Gandhi | ",
-   "since": "2026-11-23T00:27:56Z",
+   "id": "uO5RhIYPTfQ",
+   "t": "China On India-Nepal Deal LIVE: bharat-nepal ke bich tagri dil se chin men machi bhagdar! ",
+   "since": "2026-11-23T04:08:38Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "mYjhLPuy9L8",
-   "t": "Today's Breaking News LIVE: PM Modi | Rahul Gandhi | Azam Khan | UP Elections | Trump | US",
-   "since": "2026-11-22T23:57:48Z",
+   "id": "BM3xgqxwcK0",
+   "t": "Anant Singh Daughter Wedding Live News : anant sinh beti ki shadi se pahle hue dukhi! | Pa",
+   "since": "2026-11-23T08:06:21Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "auRsXu2MJkI",
-   "t": "PM Modi LIVE | PM Modi Lucknow | PM Modi Today | PM Modi On Gold Prices | NDTV LIVE",
-   "since": "2026-11-22T18:34:13Z",
+   "id": "QZ9Mk3p0t0c",
+   "t": "News Punch LIVE : bharat-nepal dosti atut | 8 aham MOU samjhauton se rishton ka naya adhya",
+   "since": "2026-11-23T08:28:59Z",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "oNrggGcONng",
+   "t": "Bisleri Water News LIVE | Bisleri Under FSSAI Scanner | FSSAI Initiates Prosecution Agains",
+   "since": "2026-11-23T08:19:29Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "fLGQwrusPVI",
-   "t": "Rahul Gandhi's US Remarks On India Spark Row | Attack On Modi Government Or India? Watch N",
-   "since": "2026-11-22T18:30:05Z",
+   "id": "NmBF9ZZHhdU",
+   "t": "India Today LIVE: Rahul Gandhi | US-Iran War | Donald Trump | UP Election 2027 | PM Modi |",
+   "since": "2026-11-23T01:33:34Z",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
-   "since": "2026-11-20T01:52:29Z",
+   "id": "XEf7CnpjfJs",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "since": "2026-11-23T01:35:10Z",
    "src": "WION",
    "lang": "en"
   },
@@ -72,26 +79,33 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "WqCaEmQ3FrU",
-   "t": "LIVE: KASH PATEL LOSES HIS COOL | FBI Chief Faces Explosive Questions Over Epstein Files |",
-   "since": "2026-11-23T00:47:28Z",
+   "id": "KyYG1VgyrTA",
+   "t": "LIVE: DEMS WIN HISTORIC 258 HOUSE SEATS! BIGGEST MAJORITY IN 3 DECADES | REPS CRYING? N18G",
+   "since": "2026-11-23T07:31:43Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "A2U23e2Tcf4",
+   "id": "VXd7liEJ-D4",
    "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | PM Modi Bihar Visit |",
-   "since": "2026-11-22T16:27:56Z",
+   "since": "2026-11-23T08:38:48Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "Z2IvqykyA5w",
-   "t": "Patna: bihar ke uchch shiksha vibhag men banpar bahali ki taiyari, 13,208 padon ko vitt vi",
-   "since": "2026-11-22T17:07:47Z",
-   "src": "Kashish News",
+   "id": "41mDTD0sz48",
+   "t": "Nepal India Friendship : piem modi-balen shah ki pres konphrens LIVE",
+   "since": "2026-11-23T08:14:36Z",
+   "src": "Zee Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "RCvwGZ003Rk",
+   "t": "Pappu Yadav bant rahe yuvaon ko naukri, purniya men laga sabse bara mela | Bihar News | Ne",
+   "since": "2026-11-23T08:36:29Z",
+   "src": "News4Nation",
    "lang": "hi"
   }
  ],
@@ -104,16 +118,16 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "SFENiqMBQg8",
-   "t": "LIVE: France Protest Chaos Returns! Police Clash With Demonstrators As 82,500 Hit Streets ",
-   "since": "2026-11-22T18:15:17Z",
+   "id": "XK8-mbOofDM",
+   "t": "LIVE: 'Biggest Seizure': Houthis Parade Massive Weapons Seized from Saudi Forces | Firstpo",
+   "since": "2026-11-23T06:29:41Z",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "klgpig576uM",
-   "t": "US Iran War LIVE: US Fires Nuclear Capable Minuteman Iii, Global Powers On High Alert | WI",
-   "since": "2026-11-20T01:52:29Z",
+   "id": "XEf7CnpjfJs",
+   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
+   "since": "2026-11-23T01:35:10Z",
    "src": "WION",
    "lang": "en"
   },
