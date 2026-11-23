@@ -89,10 +89,13 @@ function pick(part,ch){
 // instead, which shows only the album's cover art (v.a and v.am: the track's ID and length, found by scripts/find-audio.mjs).
 // A covered song with no track is left out until it has one.
 const coveredSong=(ch,v)=>v.cover===1||!!ch.cover&&((ch.cover.ids||[]).includes(v.id)||!!ch.cover.match&&rx(ch.cover.match).test(v.t));
+// A channel with ch.audio (Vibe, by request, 23 Nov 2026: only audio uploads) plays every song so: as its audio-only upload
+// (v.a; a song that is one already is its own). A song with none (v.an) is left out; one not looked up yet plays as it is
+// until the nightly run reaches it.
 const HEARD=new WeakMap(); // one stand-in per song, so a day's lists keep the same objects
 function heard(ch,list){
-  return list.flatMap(v=>{if(v.live||!coveredSong(ch,v)) return [v];
-    if(!v.a||BAD.has(v.a)) return [];
+  return list.flatMap(v=>{const cov=coveredSong(ch,v); if(v.live||!cov&&!ch.audio) return [v];
+    if(!v.a||BAD.has(v.a)) return ch.audio&&!cov&&!v.an&&!v.a?[v]:[];
     let h=HEARD.get(v); if(!h) HEARD.set(v,h={...v,id:v.a,min:v.am||v.min,heard:v.id}); return [h]})}
 /* Festivals: the row covering this day, if any */
 function festivalOn(dayStart){const d=new Date(dayStart+IST).toISOString().slice(0,10);
@@ -107,20 +110,22 @@ function bhaktiFestival(dayStart){const d=new Date(dayStart+IST).toISOString().s
   const list=(typeof FESTIVALS==="undefined"?[]:FESTIVALS).filter(x=>BHAKTI_FEST.test(x.cat));
   const on=list.find(x=>x.from<=d&&d<=x.to); if(on) return {f:on,on:true};
   const nx=list.find(x=>x.from>d&&(Date.parse(x.from)-Date.parse(d))/DAY<=14); return nx?{f:nx,on:false}:null}
+const FEST_MAX=30;
 const onFestival=(p,dayStart)=>{
   if(p.festivalNext){const b=bhaktiFestival(dayStart); if(!b) return p;
-    return {...p,cat:b.f.cat,match:DEVOTIONAL,strict:true,src:undefined,srcSkip:undefined,alt:p.cat,label:b.on?`${b.f.name}: bhajans & aartis`:`Coming up, ${b.f.name}: bhajans & aartis`}}
+    return {...p,cat:b.f.cat,match:DEVOTIONAL,strict:true,src:undefined,srcSkip:undefined,alt:p.cat,maxMin:p.maxMin||FEST_MAX,label:b.on?`${b.f.name}: bhajans & aartis`:`Coming up, ${b.f.name}: bhajans & aartis`}}
   const f=p.festival&&festivalOn(dayStart);
-  return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,label:`${f.name} songs`}:p};
+  return f?{...p,cat:f.cat,match:undefined,src:undefined,srcSkip:undefined,alt:p.cat,maxMin:p.maxMin||FEST_MAX,label:`${f.name} songs`}:p};
+// The festival songs' sources have no time limit since Vibe went audio only (23 Nov 2026); other channels' festival hours keep one
 /* Vibe (the Festivals channel): today's festival from js/festivals.js, else the next one. ch.festival {skip, exclude,
    excludeSrc, min}: the festivals it passes over, the songs it never plays (devotional ones, by request), and how many
    songs a festival needs left to be celebrated at all */
 const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-function festivalParts(dayStart,cfg){
+function festivalParts(dayStart,cfg,audio){
   cfg=typeof cfg==="object"?cfg:{};
   const d=new Date(dayStart+IST).toISOString().slice(0,10), days=(a,b)=>Math.round((Date.parse(b)-Date.parse(a))/DAY);
   const base={from:0,to:24,exclude:cfg.exclude,excludeSrc:cfg.excludeSrc}, skip=rx(cfg.skip), exT=rx(cfg.exclude), exS=rx(cfg.excludeSrc);
-  const songs=cat=>inCats(cat).filter(v=>!BAD.has(v.id)&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src))).length;
+  const songs=cat=>inCats(cat).filter(v=>!BAD.has(v.id)&&!(audio&&v.an)&&(!exT||!exT.test(v.t))&&(!exS||!exS.test(v.src))).length; // audio: those it can play
   const list=(typeof FESTIVALS==="undefined"?[]:FESTIVALS).filter(x=>!(skip&&skip.test(x.cat))&&(!cfg.min||songs(x.cat)>=cfg.min));
   const party=cfg.party||"fest-newyear"; // between festivals: party songs, never devotional
   const f=list.find(x=>x.from<=d&&d<=x.to);
@@ -163,7 +168,7 @@ function buildDay(ch,dayStart){if(ch.menu) return []; // Latest Mix: no day to w
   const slots=[], warp=primeWarp(ch,dayStart);
   const wkend=[0,6].includes(new Date(dayStart+IST).getUTCDay()); // p.weekend: Saturday and Sunday take those settings
   const odd=Math.round(dayStart/DAY)%2===1; // p.otherDay: every other day takes those settings
-  const parts=ch.festival?festivalParts(dayStart,ch.festival):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
+  const parts=ch.festival?festivalParts(dayStart,ch.festival,ch.audio):ch.parts.map(p=>onFestival(wkend&&p.weekend?{...p,...p.weekend}:odd&&p.otherDay?{...p,...p.otherDay}:p,dayStart));
   const fixed=parts.filter(p=>p.fixed).map(p=>[dayStart+p.from*HOUR,dayStart+p.to*HOUR]);
   // p.boost {id, tag or src, every}: that song, or those songs in turn, every so many (boost.cat: the category a song by
   // its id is in, when it isn't one of the channel's own, so it comes with the channel: chCats). Several parts with the same boost

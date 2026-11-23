@@ -993,16 +993,21 @@ html:has(.pseudo-fs){overflow:hidden} /* filling the window: no page scrollbar o
 .legal-table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:.92rem}
 .legal-table th,.legal-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 .legal-table th{color:var(--muted);font-weight:700}
-/* The first visit's two tick boxes (the Terms of Use, the Privacy Policy), under the play button's line */
 .start-consent{position:absolute;left:50%;top:calc(100% + clamp(54px,9vh,88px));translate:-50% 0;display:grid;gap:10px;width:max-content;max-width:88vw;
   visibility:hidden;opacity:0;font:500 clamp(.86rem,1.6vw,.98rem)/1.35 "Mukta",var(--body);color:rgba(244,241,236,.85);text-align:left;cursor:auto}
-.start.ask .start-consent:not([hidden]){visibility:visible;animation:ask-text 1.2s ease .6s forwards}
 .start-consent label{display:flex;align-items:center;gap:10px;cursor:pointer}
 .start-consent input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--marigold);cursor:pointer}
 .start-consent a{color:var(--marigold);text-underline-offset:3px}
-.start-consent.nudge{animation:consent-nudge .45s ease}
-@keyframes consent-nudge{20%,60%{translate:calc(-50% - 7px) 0}40%,80%{translate:calc(-50% + 7px) 0}}
-.start.ask.consent-wait{cursor:default}
+/* The first visit's Terms of Use and Privacy Policy (by request, 23 Nov 2026): a translucent pop-up over the picture, 1.5 s after
+   the TV has opened, the channel playing on underneath; it fades away once both boxes are ticked (js/app.js termsPop) */
+.terms-pop{position:absolute;left:50%;top:50%;z-index:500;translate:-50% -50%;width:min(400px,calc(100% - 24px));box-sizing:border-box;padding:16px 18px 14px;
+  border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(18,15,24,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 18px 40px rgba(0,0,0,.45);color:#f4f1ec;opacity:0;transition:opacity .45s ease;pointer-events:auto;text-align:left}
+.terms-pop.on{opacity:1}
+.terms-pop h2{margin:0 0 4px;font:600 clamp(.92rem,2.2vw,1.05rem)/1.3 "Unbounded",var(--body);letter-spacing:.02em}
+.terms-pop p{margin:0 0 10px;font:400 .86rem/1.35 "Mukta",var(--body);color:rgba(244,241,236,.75)}
+.terms-pop .start-consent{position:static;translate:none;visibility:visible;opacity:1;width:auto;max-width:none}
+@media (prefers-reduced-motion:reduce){.terms-pop{transition:none}}
 /* The header logo keeps its real width (Unbounded's) before the font arrives: the narrower stand-in font let the phone's
    buttons share the logo's row until the font loaded, then they dropped a row and the page jumped (CLS) */
 .top .logo-word{display:inline-block;min-width:2.56em}

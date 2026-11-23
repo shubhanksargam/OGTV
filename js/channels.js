@@ -314,14 +314,19 @@ const CHANNELS = [
   // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
   // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
   // skip: festivals whose songs are all worship, passed over for the next one; exclude: titles, excludeSrc: sources never played
-  {key:"festival",n:35,group:"Music",name:"Vibe",oldSlugs:["festivals"],en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
+  // audio: only audio-only uploads (by request, 23 Nov 2026), each song as its official audio track (js/scheduler.js heard)
+  {key:"festival",n:35,group:"Music",name:"Vibe",oldSlugs:["festivals"],audio:true,en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
     skip:"^fest-(ram|chhath|shivratri|janmashtami|gurpurab)$",
     exclude:String.raw`bhajan|aarti|aarati|\barti\b|chalisa|stuti|vandana|vandna|mantra|stotra|stotr|ashtak|shatakam|shlok|\bpuja\b|pooja|pujan|bhakti|kirtan|shabad|gurbani|qawwal|qavval|kavvali|\bnaat\b|vrat katha|amritwani|maiya|\bmata\b|\bdevi\b|bhagwan|bhagvan|lakshmi|laxmi|ganesh|ganpati|ganapati|bappa|\bshiv\b|shiva|shankar|shambh|bhole|bhola|mahadev|mahakal|\bram\b|shri ram|siya ram|krishna|krishn\b|kanha|govind|gopal|shyam|radhe|hanuman|bajrang|durga|\bambe\b|jagdamba|mardini|aigiri|jhanki|chhath|carol|hymn|holy night|silent night|stille nacht|manger|allah|khwaja|khvaja|maula`,
     excludeSrc:"bhakti|bhajan|shabad|kirtan|qawwal|choir|sounds of isha|sanskrit channel|tilak|mayapur|barsana|lathmar|vrat katha|mardini",
     min:12, // festivals left with fewer songs than this are passed over too
     ahead:14, party:["fest-diwali","fest-newyear","fest-holi","fest-lohri"]},parts:[]}, // a festival's songs from two weeks before it; party songs in between
-  {key:"hits2010",n:36,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019",parts:[{from:0,to:24,cat:"hits2010",label:"2010s hits"}]},
-  {key:"hits2000",n:37,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009",parts:[{from:0,to:24,cat:"hits2000",label:"2000s hits"}]},
+  {key:"hits2010",n:36,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019, and KK",parts:[{from:0,to:21,cat:"hits2010",label:"2010s hits"},
+    {from:21,to:22,cat:"hits2010",tag:"kk",alt:"hits2010",label:"KK, back to back: Zindagi Do Pal Ki, Tujhe Sochta Hoon & Tu Jo Mila"}, // by request, 23 Nov 2026
+    {from:22,to:24,cat:"hits2010",label:"2010s hits"}]},
+  {key:"hits2000",n:37,group:"Music",name:"2000s Hits",en:"Bollywood 2000-2009, and KK",parts:[{from:0,to:20,cat:"hits2000",label:"2000s hits"},
+    {from:20,to:22,cat:"hits2000",tag:"kk",alt:"hits2000",label:"KK, back to back: Khuda Jaane, Zara Sa, Alvida & Tu Hi Meri Shab Hai"}, // by request, 23 Nov 2026
+    {from:22,to:24,cat:"hits2000",label:"2000s hits"}]},
   {key:"hits90",n:38,group:"Music",name:"90s Hits",en:"Bollywood 1990-1999",parts:[{from:0,to:24,cat:"hits90",label:"90s hits", // audio-only uploads first (by request): most of the airtime,
     mix:[{tag:"audio",share:0.6,once:true},{notTag:"audio"}]}]}, // as long as none comes round twice a day. By request, 21 Nov: official 90s playlists, long uploads too
   {key:"deccan",n:39,group:"Music",name:"Deccan Chargers",en:"Anirudh, A. R. Rahman, Ilaiyaraaja, Keeravaani & South Indian bangers",parts:[  // the one channel outside Hindi & English, by request; composer spotlights back to back, by request: Anirudh 9 h, Ilaiyaraaja 4 h, A. R. Rahman 3 h, Keeravaani 2 h, Sai Abhyankkar 2 h a day

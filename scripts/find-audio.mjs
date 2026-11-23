@@ -9,6 +9,8 @@
 // which scripts/fetch-feeds.mjs keeps. A covered song with no track is left out (heard, js/scheduler.js).
 // A track's cover art is the one picture it shows, so it is looked at by hand: an entry set to {"no": "<why>"} in
 // scripts/audio.json is a song left out for good (Jism 2's poster is as revealing as its video), and is kept as it is.
+// Also every song of a channel that plays only audio uploads (ch.audio: Vibe, by request, 23 Nov 2026), which leaves out a song
+// looked up with none (an: 1 on its entries).
 // Run after fetch-feeds (nightly, .github/workflows/refresh-feeds.yml): node scripts/find-audio.mjs
 import {readFileSync} from "node:fs";
 import {readFile, writeFile} from "node:fs/promises";
@@ -22,10 +24,17 @@ const today = new Date().toISOString().slice(0, 10), sleep = ms => new Promise(r
 
 // The site's own data and rules, loaded as the page loads them
 const S = new Function(["catalog", "feeds", "live", "festivals", "channels", "scheduler"].map(f => read(`js/${f}.js`)).join("\n")
-  + ";return {CATALOG, CHANNELS, coveredSong};")();
+  + ";return {CATALOG, CHANNELS, coveredSong, FESTIVALS: typeof FESTIVALS === \"undefined\" ? [] : FESTIVALS};")();
 const catsOf = ch => new Set((ch.parts || []).flatMap(p => [].concat(p.cat, typeof p.alt === "string" ? p.alt : [])));
 const covered = new Map(); // id -> the song, as the catalogue has it
 for (const v of S.CATALOG) if (!v.live && (v.cover === 1 || S.CHANNELS.some(ch => ch.cover && catsOf(ch).has(v.cat) && S.coveredSong(ch, v)))) covered.set(v.id, v);
+// The songs a channel with ch.audio can play: its parts' categories, and for Vibe the festivals it celebrates and its party
+// songs, less what it never plays (its festival rule's skip, exclude and excludeSrc)
+for (const ch of S.CHANNELS.filter(c => c.audio)) {
+  const f = typeof ch.festival === "object" ? ch.festival : null, rxi = s => s ? new RegExp(s, "i") : null, skip = rxi(f?.skip), exT = rxi(f?.exclude), exS = rxi(f?.excludeSrc);
+  const cats = new Set([...catsOf(ch), ...(ch.festival ? [...S.FESTIVALS.map(x => x.cat).filter(c => !(skip && skip.test(c))), ...(f?.party || []), "fest-newyear"] : [])]);
+  for (const v of S.CATALOG) if (!v.live && cats.has(v.cat) && !(exT && exT.test(v.t)) && !(exS && exS.test(v.src || "")) && !covered.has(v.id)) covered.set(v.id, v);
+}
 
 async function get(url) {
   for (let i = 1; ; i++) {
@@ -101,11 +110,11 @@ const text = await readFile(FEEDS, "utf8"), eol = text.includes("\r\n") ? "\r\n"
 let changed = 0;
 const lines = text.split(eol).map(line => {
   const m = line.match(/^(\{"id":.*\})(,?)$/); if (!m) return line;
-  const {a: _a, am: _am, ...v} = JSON.parse(m[1]), f = next[v.id];
-  const out = JSON.stringify(f?.a ? {...v, a: f.a, am: Math.ceil(f.sec / 60)} : v) + m[2];
+  const {a: _a, am: _am, an: _an, ...v} = JSON.parse(m[1]), f = next[v.id];
+  const out = JSON.stringify(f?.a ? {...v, a: f.a, am: Math.ceil(f.sec / 60)} : f && (f.none || f.no) ? {...v, an: 1} : v) + m[2];
   if (out !== line) changed++;
   return out;
 });
 if (changed) await writeFile(FEEDS, lines.join(eol));
 const n = Object.values(next);
-console.log(`${covered.size} covered songs: ${n.filter(x => x.a).length} play as audio only, ${n.filter(x => !x.a).length} left out (${n.filter(x => x.no).length} by hand); ${changed} feed entries updated`);
+console.log(`${covered.size} songs wanting an audio-only track (covered, or on an audio-only channel): ${n.filter(x => x.a).length} have one, ${n.filter(x => !x.a).length} left out (${n.filter(x => x.no).length} by hand); ${changed} feed entries updated`);

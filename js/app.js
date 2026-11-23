@@ -482,7 +482,7 @@ function toggleSound(){if(MODE!=="yt"||!player)return;soundTapped=true;if(muted&
    the channel starts muted until the first tap or key. */
 let startedAt=0, started=false, soundTapped=false, primed=false, introTimer=0, bloomTimer=0, needTap=false; // needTap: sound only after a tap on the picture (soundRefused)
 const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function start(done){if(started)return; started=true; startedAt=Date.now(); clearTimeout(introTimer); setTimeout(guideLater,600); if(!RESUME) track("start","Opened"); // a resume after a reload is the same viewing
+function start(done){if(started)return; started=true; startedAt=Date.now(); clearTimeout(introTimer); setTimeout(guideLater,600); setTimeout(termsPop,1500); if(!RESUME) track("start","Opened"); // a resume after a reload is the same viewing
   countChannel(); const el=$("start"); if(done===true) el.hidden=true; else {el.classList.add("out"); setTimeout(()=>el.hidden=true,400); bloom()}
   if(MODE==="yt"&&!videoUp) showStatic(); // still tuning in: static until the picture comes
   setTimeout(()=>(window.requestIdleCallback||setTimeout)(()=>interlude.warm()),3000); // the interlude's audio engine, made ahead of time
@@ -512,18 +512,22 @@ function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))
 // button, a tap or click anywhere on the intro, Enter or Space) is the viewer's go-ahead for sound on every device and
 // browser: the intro plays out with its music and the channel's sound fades in after it.
 let asked=false, pressed=false;
-// The Terms of Use and the Privacy Policy, agreed to on the first visit (by request): two tick boxes under the play button,
-// both needed before Play works; remembered on this device, asked again when TERMS_VERSION changes. The TV app, run by a
-// remote, goes on by itself as before.
+// The Terms of Use and the Privacy Policy, agreed to on the first visit (by request): remembered on this device, asked again
+// when TERMS_VERSION changes. The intro is as it was (by request, 23 Nov 2026): play goes straight on, and 1.5 s after the
+// TV has opened the two tick boxes come up over the picture in a translucent pop-up (termsPop), the channel playing on
+// underneath, until both are ticked. The TV app, run by a remote, goes on by itself as before.
 const TERMS_VERSION="1.0";
 const termsAgreed=()=>{try{const t=JSON.parse(localStorage.getItem("ogtv-terms")||"null"); return !!t&&t.v===TERMS_VERSION}catch(e){return false}};
 let needConsent=!TV_APP&&!termsAgreed();
 const consentOk=()=>$("agreeTerms").checked&&$("agreePrivacy").checked;
-function consentState(){const ok=!needConsent||consentOk(); $("start").classList.toggle("consent-wait",!ok);
-  const t=$("start").querySelector(".ask-text"); if(t) t.textContent=ok?"Press play to tune in":"Tick both, then press play"}
-function consentNudge(){const c=$("startConsent"); c.classList.remove("nudge"); void c.offsetWidth; c.classList.add("nudge"); (!$("agreeTerms").checked?$("agreeTerms"):$("agreePrivacy")).focus({preventScroll:true})}
-["agreeTerms","agreePrivacy"].forEach(id=>$(id).addEventListener("change",consentState));
-function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(needConsent){$("startConsent").hidden=false; consentState()} if(TV_APP){askedAt=Date.now(); prepareChime(); setTimeout(tvGo,1100)}}
+function termsPop(){if(!needConsent||$("termsPop")) return;
+  const pop=document.createElement("div"), c=$("startConsent"); pop.className="terms-pop"; pop.id="termsPop"; pop.setAttribute("role","dialog"); pop.setAttribute("aria-labelledby","termsPopH");
+  pop.innerHTML='<h2 id="termsPopH">Welcome to OGTV</h2><p>Tick both to keep watching.</p>'; c.hidden=false; pop.append(c);
+  $("screen").append(pop); requestAnimationFrame(()=>pop.classList.add("on"))}
+["agreeTerms","agreePrivacy"].forEach(id=>$(id).addEventListener("change",()=>{if(!needConsent||!consentOk()) return; needConsent=false;
+  try{localStorage.setItem("ogtv-terms",JSON.stringify({v:TERMS_VERSION,at:new Date().toISOString()}))}catch(e){} track("terms-agreed","Terms and Privacy agreed");
+  const p=$("termsPop"); if(p){p.classList.remove("on"); setTimeout(()=>p.remove(),500)}}));
+function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); prepareChime(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once OGTV has formed and the channel is playing behind the intro, the intro goes on by itself
 let askedAt=0, tvGoing=false;
 function tvGo(){if(!TV_APP||!asked||pressed||started||tvGoing||!(videoUp||capped)||Date.now()-askedAt<1000)return; tvGoing=true; whenQuiet(pressPlay,2000)}
@@ -533,9 +537,7 @@ function whenQuiet(fn,cap){const t0=Date.now(); let calm=0, last=t0;
   const tick=()=>{const now=Date.now(); calm=now-last<150?calm+1:0; last=now; if(calm>=5||now-t0>cap) fn(); else setTimeout(tick,100)};
   setTimeout(tick,100)}
 function pressPlay(e){if(!asked||pressed||started)return;
-  if(e&&e.target&&e.target.closest&&e.target.closest(".start-consent")) return; // ticking a box or opening the Terms or the Privacy Policy isn't a press of play
   if(e&&e.type==="keydown"){if(e.key!=="Enter"&&e.key!==" ")return; e.preventDefault()}
-  if(needConsent){if(!consentOk()){consentNudge(); return} needConsent=false; try{localStorage.setItem("ogtv-terms",JSON.stringify({v:TERMS_VERSION,at:new Date().toISOString()}))}catch(e){} track("terms-agreed","Terms and Privacy agreed")}
   pressed=true; primed=true; if(identAc) identAc.resume().catch(()=>{});
   if(MODE==="yt"&&player&&!needTap){player.setVolume(0); player.unMute(); if(TV_APP) player.setVolume(0)} // allowed now; fades up after the intro (the TV app sets 0 again: YouTube unmutes at 0 to 5)
   // TV app: OGTV's glow flashes up with the chime and dissolves into the channel (.tv-app rules), all off the page's
