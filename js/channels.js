@@ -361,7 +361,7 @@ const CHANNELS = [
     {from:3,to:6,  cat:"global",tag:"alltime",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Night: billion-view classics & Select's favourites"}, // was the world tour (Korea, Japan, South Africa charts), replaced by request, 24 Nov 2026
     {from:6,to:9,  cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Morning chart: this week's global top 100 & Select's favourites"},
     {from:9,to:12, cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Global top 100, US & UK charts & Select's favourites"},
-    {from:12,to:15,cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Daily global chart & Select's favourites"},
+    {from:12,to:15,cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Afternoon: the global top 100, US & UK charts & Select's favourites"},
     {from:15,to:18,cat:"global",tag:"alltime",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"All-time most viewed & Select's favourites"},
     {from:18,to:24,cat:"global",tag:"chart",alt:"global",mix:[{},{cat:"select",home:"foreign",share:0.25}],label:"Prime time: the global top 100, US & UK charts & Select's favourites"},
     // Ed Sheeran's hour (by request): 9 to 10 pm by the clock (fixed: prime time's stretch leaves it where it is), his official music videos (js/catalog.js)
