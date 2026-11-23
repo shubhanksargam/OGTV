@@ -565,6 +565,14 @@ button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(
   background:conic-gradient(from 20deg,#f7e9cb,#a07743 18%,#fdf3de 33%,#7f5b30 52%,#f1dcb0 70%,#9d7442 86%,#f7e9cb); /* a brushed-gold ring */
   box-shadow:0 12px 22px rgba(0,0,0,.6),0 3px 5px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.35)}
 .dk-disc img{position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:50%;object-fit:cover;background:#191520;pointer-events:none}
+/* no pictures on the record (by request, 23 Nov 2026): every disc a plain grooved record with a dark label in its gold ring,
+   as Radio's and the Tuning-in record; only the channel on now shows its programme, in a premium black and white */
+.dk-disc::before{content:"";position:absolute;inset:5px;border-radius:50%;
+  background:radial-gradient(circle,#3a2f49 0 9%,#231c2d 16.5%,rgba(233,214,174,.55) 16.6% 17.4%,transparent 17.6%),
+    radial-gradient(circle,transparent 0 33%,rgba(0,0,0,.5) 34%,transparent 37% 62%,rgba(255,255,255,.05) 63%,transparent 65%),
+    repeating-radial-gradient(circle,#15121a 0 1px,#1e1a24 1px 2.5px)}
+.dk:not(.cur) .dk-disc img{display:none}
+.dk.cur .dk-disc img{filter:grayscale(1) contrast(1.15) brightness(1.04)}
 .dk-gloss{position:absolute;inset:5px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle,transparent 0 31%,rgba(0,0,0,.35) 32%,transparent 34% 63%,rgba(0,0,0,.2) 64%,transparent 67%),
     conic-gradient(from 300deg,transparent,rgba(255,255,255,.3) 40deg,transparent 80deg 190deg,rgba(255,255,255,.14) 225deg,transparent 260deg);

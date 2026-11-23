@@ -67,8 +67,9 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
   g.save(); g.beginPath(); g.arc(cx,cy,R,0,Math.PI*2); g.clip(); g.fillStyle=sweep; g.fillRect(0,0,W,H);
   const fade=g.createRadialGradient(cx,cy,Math.max(0,-cy-10),cx,cy,R); fade.addColorStop(0,"rgba(0,0,0,.25)"); fade.addColorStop(1,"rgba(0,0,0,1)");
   g.globalCompositeOperation="destination-in"; g.fillStyle=fade; g.fillRect(0,0,W,H); g.restore()}
-// The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
-function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending) return; // pending: its videos are on their way (js/data.js)
+// The cover of what's on now, on the current channel's disc only (by request, 23 Nov 2026: the others are plain records,
+// and their pictures aren't fetched at all); shown in black and white (css)
+function art(i){if(i!==cur) return; const s=onNow(i), it=items[i]; if(!s||s.pending) return; // pending: its videos are on their way (js/data.js)
   const id=s.menu?((latestItems()[0]||{}).id||""):s.v.id; if(!id||it.id===id) return; // Latest Mix: its list's first video
   it.id=id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`}
 function render(){if(!W) return; // not measured yet (or out of sight): the observer places it all when it is laid out
