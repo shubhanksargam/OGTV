@@ -222,18 +222,18 @@ const CATALOG = [
   {id:"PmdyY38g6Rg",t:"Abrar’s Entry | Jamal Kudu · Harshavardhan Rameshwar, Choir",cat:"select",tag:"spotify",lang:"hi",min:3,src:"T-Series",pub:"2023-12-13"}, // 6
   {id:"Etkd-07gnxM",t:"O Maahi · Pritam, Arijit Singh",cat:"select",tag:"spotify",lang:"hi",min:5,src:"T-Series",pub:"2024-02-04"}, // 7
   {id:"2U0ZuRURKoo",t:"Vaseegara And Zara Zara Mashup · Jonita Gandhi",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Saregama Tamil",pub:"2020-02-20"}, // 8
-  {id:"0I647GU3Jsc",t:"Natural · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2018-08-24"}, // 9
-  {id:"9RuCOqofMYo",t:"Dusk Till Dawn · ZAYN, Sia",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ZAYN - Topic",pub:"2018-06-23"}, // 10
+  {id:"0I647GU3Jsc",t:"Natural · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2018-08-24",a:"pXu6JC6-d_o",am:4}, // 9
+  {id:"9RuCOqofMYo",t:"Dusk Till Dawn · ZAYN, Sia",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ZAYN - Topic",pub:"2018-06-23",a:"9RuCOqofMYo",am:4}, // 10
   {id:"9GIgN1BFAjk",t:"For You. · Saurabh Trivedi",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Saurabh Trivedi - Topic",pub:"2024-11-11"}, // 11
   {id:"7Kxaqu3mAYs",t:"Inaaya · Saurabh Trivedi, Suyash",cat:"select",tag:"spotify",lang:"hi",min:6,src:"Saurabh Trivedi - Topic",pub:"2021-11-11"}, // 12
-  {id:"m5P1r2Q7Yns",t:"roblox girlfriend · luminism",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"luminism - Topic",pub:"2019-06-20"}, // 13
+  {id:"m5P1r2Q7Yns",t:"roblox girlfriend · luminism",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"luminism - Topic",pub:"2019-06-20",a:"m5P1r2Q7Yns",am:3}, // 13
   {id:"0pWsCiBvLOk",t:"One Love · Shubh",cat:"select",tag:"spotify",lang:"hi",min:3,src:"SHUBH",pub:"2023-08-18"}, // 14
   {id:"Ku1YmydCBUA",t:"More Saiyaan · Sadaat Shafqat Amanat, Utpal Udit",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Sadaat Shafqat Amanat",pub:"2023-11-05"}, // 15
-  {id:"y2KbdFvUabA",t:"For the First Time · The Script",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheScriptVEVO",pub:"2025-09-07"}, // 16
-  {id:"gS9o1FAszdk",t:"The Man Who Can't Be Moved · The Script",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TheScriptVEVO",pub:"2009-10-24"}, // 17
+  {id:"y2KbdFvUabA",t:"For the First Time · The Script",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheScriptVEVO",pub:"2025-09-07",a:"Pu3LvS1sXcw",am:5}, // 16
+  {id:"gS9o1FAszdk",t:"The Man Who Can't Be Moved · The Script",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TheScriptVEVO",pub:"2009-10-24",a:"uAYUfGWD9SM",am:5}, // 17
   {id:"t7wSjy9Lv-o",t:"Khalasi | Coke Studio Bharat · Aditya Gadhvi, Achint",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Coke Studio India",pub:"2023-07-04"}, // 18
-  {id:"Gb_-rZB2Foc",t:"It Was A Good Day · Ice Cube",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ice Cube - Topic",pub:"2017-03-02"}, // 19
-  {id:"oecO66xIRGc",t:"Whistle (Prod. GroovyRoom) · GroovyRoom, Sik-K",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:3,src:"GroovyRoom - Topic",pub:"2022-09-06"}, // 21
+  {id:"Gb_-rZB2Foc",t:"It Was A Good Day · Ice Cube",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ice Cube - Topic",pub:"2017-03-02",a:"Gb_-rZB2Foc",am:5}, // 19
+  {id:"oecO66xIRGc",t:"Whistle (Prod. GroovyRoom) · GroovyRoom, Sik-K",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:3,src:"GroovyRoom - Topic",pub:"2022-09-06",a:"oecO66xIRGc",am:3}, // 21
   {id:"DsjRNPrvq6U",t:"Hukum - Thalaivar Alappara · Anirudh Ravichander, Super Subu",cat:"select",tag:"spotify",lang:"ta",min:4,src:"Anirudh Ravichander - Topic",pub:"2023-07-17"}, // 22
   {id:"IZDbfXjZ0Bw",t:"Bijlee Bijlee · Harrdy Sandhu",cat:"select",tag:"spotify",lang:"hi",min:4,src:"DM - Desi Melodies",pub:"2026-11-04"}, // 23
   {id:"5Eqb_-j3FDA",t:"Pasoori · Ali Sethi, Shae Gill",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Coke Studio Pakistan",pub:"2022-02-07"}, // 24
@@ -246,9 +246,9 @@ const CATALOG = [
   {id:"VAdGW7QDJiU",t:"Chaleya · Anirudh Ravichander, Arijit Singh",cat:"select",tag:"spotify",lang:"hi",min:4,src:"T-Series",pub:"2023-08-13"}, // 31
   {id:"tC1L9qjOzXs",t:"Ranjha · Jasleen Royal, B Praak",cat:"select",tag:"spotify",lang:"hi",min:4,src:"SonyMusicIndiaVEVO",pub:"2021-10-20"}, // 32
   {id:"RLzC55ai0eo",t:"Heeriye · Jasleen Royal, Arijit Singh",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Jasleen Royal",pub:"2023-07-25"}, // 33
-  {id:"rkYlZnIbe2E",t:"STAY · The Kid LAROI, Justin Bieber",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"The Kid LAROI - Topic",pub:"2021-07-08"}, // 34
-  {id:"FPrHuDvXEBw",t:"Boulevard of Broken Dreams · Green Day",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Green Day - Topic",pub:"2015-04-04"}, // 35
-  {id:"dawrQnvwMTY",t:"Shinunoga E-Wa · Fujii Kaze",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Fujii Kaze",pub:"2022-10-26"}, // 36
+  {id:"rkYlZnIbe2E",t:"STAY · The Kid LAROI, Justin Bieber",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"The Kid LAROI - Topic",pub:"2021-07-08",a:"rkYlZnIbe2E",am:3}, // 34
+  {id:"FPrHuDvXEBw",t:"Boulevard of Broken Dreams · Green Day",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Green Day - Topic",pub:"2015-04-04",a:"FPrHuDvXEBw",am:5}, // 35
+  {id:"dawrQnvwMTY",t:"Shinunoga E-Wa · Fujii Kaze",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Fujii Kaze",pub:"2022-10-26",a:"3zh9Wb1KuW8",am:4}, // 36
   {id:"aQpRNtZ00Ks",t:"Rang · Bombay the Artist",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Sony Music India",pub:"2023-05-26"}, // 37
   {id:"rF2JVGItSD0",t:"Waqt Ki Baatein · Dream Note",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Dream Note Official",pub:"2022-06-24"}, // 38
   {id:"A6eHr0spgqs",t:"Muskurahat · Mitraz",cat:"select",tag:"spotify",lang:"hi",min:5,src:"MITRAZ",pub:"2022-06-26"}, // 39
@@ -256,40 +256,40 @@ const CATALOG = [
   {id:"Fw-S8NCDsTY",t:"Khaare Raste · Raghav Kaushik, Yashika Sikka",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Raghav Kaushik",pub:"2021-04-06"}, // 41
   {id:"U77d9912lrw",t:"Aaftaab · The Local Train",cat:"select",tag:"spotify",lang:"hi",min:4,src:"The Local Train",pub:"2017-11-14"}, // 42
   {id:"lmhKXQBgEQU",t:"Kho Gaye · Taaruk Raina, Mismatched - Cast",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Netflix India",pub:"2022-11-08"}, // 43
-  {id:"d4PZ1cIvVXk",t:"4runner · Brenn!",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Brenn!",pub:"2023-04-27"}, // 44
+  {id:"d4PZ1cIvVXk",t:"4runner · Brenn!",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Brenn!",pub:"2023-04-27",a:"npeJbqon2wg",am:5}, // 44
   {id:"9UxU0qsfGPA",t:"Lamhey · Anubha Bajaj",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Sony Music India",pub:"2023-05-25"}, // 45
-  {id:"X7aF3nZOS98",t:"I KNOW ? · Travis Scott",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TravisScottVEVO",pub:"2024-01-23"}, // 46
-  {id:"vNfgVjZF8_4",t:"Someday · OneRepublic",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"OneRepublicVEVO",pub:"2021-08-27"}, // 47
-  {id:"J3M_n6joby4",t:"NO BAD DAYS · Macklemore, Collett",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Macklemore - Topic",pub:"2023-03-02"}, // 48
-  {id:"QPzOeESWG5o",t:"Arcade · Duncan Laurence",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Duncan Laurence - Topic",pub:"2020-11-26"}, // 49
+  {id:"X7aF3nZOS98",t:"I KNOW ? · Travis Scott",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TravisScottVEVO",pub:"2024-01-23",a:"l-Z8PWbAveU",am:4}, // 46
+  {id:"vNfgVjZF8_4",t:"Someday · OneRepublic",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"OneRepublicVEVO",pub:"2021-08-27",a:"eRPF_MR6o4g",am:4}, // 47
+  {id:"J3M_n6joby4",t:"NO BAD DAYS · Macklemore, Collett",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Macklemore - Topic",pub:"2023-03-02",a:"J3M_n6joby4",am:3}, // 48
+  {id:"QPzOeESWG5o",t:"Arcade · Duncan Laurence",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Duncan Laurence - Topic",pub:"2020-11-26",a:"QPzOeESWG5o",am:4}, // 49
   {id:"2vKMY75kvjI",t:"Aankhon Se Batana · Dikshant",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Sony Music India",pub:"2022-04-21"}, // 50
-  {id:"L4s0gyT2oKA",t:"ORANGES · Jaron Steele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Jaron Steele - Topic",pub:"2023-05-08"}, // 51
-  {id:"FPMbS0xbolk",t:"Sci-Fi · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2022-08-11"}, // 52
+  {id:"L4s0gyT2oKA",t:"ORANGES · Jaron Steele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Jaron Steele - Topic",pub:"2023-05-08",a:"L4s0gyT2oKA",am:3}, // 51
+  {id:"FPMbS0xbolk",t:"Sci-Fi · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2022-08-11",a:"qJUEy2zRRNQ",am:3}, // 52
   {id:"OJLRRMye4YI",t:"Walk With Me · Taba Chake",cat:"select",home:"desi",tag:"spotify",lang:"en",min:3,src:"Taba Chake",pub:"2019-02-13"}, // 53
-  {id:"6vopR3ys8Kw",t:"Drop The Game · Flume, Chet Faker",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Future Classic",pub:"2013-11-18"}, // 54
-  {id:"ocRqQcRapQQ",t:"Sunset Lover · Petit Biscuit",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Petit Biscuit - Topic",pub:"2015-06-23"}, // 55
-  {id:"a0OHkWX7B-E",t:"Every Summertime · NIKI",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"88rising",pub:"2021-12-10"}, // 56
-  {id:"akCyi4VndXY",t:"Problems - Taska Black Remix · Petit Biscuit, Taska Black",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Petit Biscuit",pub:"2018-05-04"}, // 57
-  {id:"V_A20lBsBMM",t:"Stoned at the Nail Salon · Lorde",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"LordeVEVO",pub:"2021-07-21"}, // 59
-  {id:"q-74HTjRbuY",t:"Musician · Porter Robinson",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Porter Robinson",pub:"2021-03-17"}, // 60
-  {id:"Z6kNQEzQJpA",t:"Runner · Tennis",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Tennis",pub:"2019-11-08"}, // 61
-  {id:"cyDOUPz0hpA",t:"Billie Jean · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Koala Kontrol",pub:"2015-11-23"}, // 62
-  {id:"k5wC88XlB50",t:"Big Love · Louis The Child, EARTHGANG",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"LouistheChildVEVO",pub:"2020-08-20"}, // 64
-  {id:"Qg2PM_tbs7w",t:"Better · Phil Good",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Phil Good",pub:"2019-09-11"}, // 65
-  {id:"pLuQ0MGLBXU",t:"What If I Go? · Mura Masa, Bonzai",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"MuraMasaVEVO",pub:"2016-04-07"}, // 66
-  {id:"baj01imKCfA",t:"I CAN'T WAIT · DROELOE",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"DROELOE",pub:"2020-04-07"}, // 67
-  {id:"Pc-dxNilmBg",t:"Little Things · Louis The Child, Quinn XCII",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LouistheChildVEVO",pub:"2020-04-30"}, // 68
-  {id:"pp4YQPykBMM",t:"Feel Something · ILLENIUM, Excision",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"IlleniumVEVO",pub:"2020-04-02"}, // 69
-  {id:"XiNDI0ky-uU",t:"good morning · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2020-02-13"}, // 70
-  {id:"M3cbrXMXNUo",t:"In My Mind · Mura Masa",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Mura Masa",pub:"2020-01-17"}, // 71
-  {id:"d0uBuSYCD4g",t:"projector · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2019-10-24"}, // 73
-  {id:"jBVmcmrv_ik",t:"brighter days · San Holo, Bipolar Sunshine",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"SAN HOLO",pub:"2018-09-28"}, // 74
-  {id:"iWDxMpLvaUE",t:"Calling (Spider-Man: Across the Spider-Verse) · Metro Boomin, Swae Lee",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"MetroBoominVEVO",pub:"2023-06-01"}, // 75
-  {id:"WL9ahHAlPKU",t:"HiiiPower · Kendrick Lamar",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Kendrick Lamar - Topic",pub:"2019-07-31"}, // 76
-  {id:"ECoIGvDT36Q",t:"What Are You Going to Do When You Are Not Saving the World? · Hans Zimmer",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"WaterTower Music",pub:"2024-12-17"}, // 77
-  {id:"d5_V3a_oRnA",t:"Mona Lisa (Spider-Man: Across the Spider-Verse) · Dominic Fike",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Dominic Fike",pub:"2023-06-01"}, // 78
-  {id:"rtOvBOTyX00",t:"a thousand years · Christina Perri",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Christina Perri",pub:"2011-10-26"}, // 79
-  {id:"9ACakK-spaU",t:"Don't Walk Away · Jade",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"RHINO",pub:"2026-11-06"}, // 80
+  {id:"6vopR3ys8Kw",t:"Drop The Game · Flume, Chet Faker",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Future Classic",pub:"2013-11-18",a:"GnUXVkDIWcM",am:4}, // 54
+  {id:"ocRqQcRapQQ",t:"Sunset Lover · Petit Biscuit",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Petit Biscuit - Topic",pub:"2015-06-23",a:"ocRqQcRapQQ",am:4}, // 55
+  {id:"a0OHkWX7B-E",t:"Every Summertime · NIKI",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"88rising",pub:"2021-12-10",a:"UyMvBWVGaOA",am:4}, // 56
+  {id:"akCyi4VndXY",t:"Problems - Taska Black Remix · Petit Biscuit, Taska Black",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Petit Biscuit",pub:"2018-05-04",a:"Ye18zAmBmA0",am:4}, // 57
+  {id:"V_A20lBsBMM",t:"Stoned at the Nail Salon · Lorde",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"LordeVEVO",pub:"2021-07-21",a:"hRsu4bsV7q4",am:5}, // 59
+  {id:"q-74HTjRbuY",t:"Musician · Porter Robinson",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Porter Robinson",pub:"2021-03-17",a:"EEGBRKVxlLw",am:4}, // 60
+  {id:"Z6kNQEzQJpA",t:"Runner · Tennis",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Tennis",pub:"2019-11-08",a:"4JSx8SENo74",am:4}, // 61
+  {id:"cyDOUPz0hpA",t:"Billie Jean · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Koala Kontrol",pub:"2015-11-23",a:"LQ31Sq_z0Mk",am:4}, // 62
+  {id:"k5wC88XlB50",t:"Big Love · Louis The Child, EARTHGANG",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"LouistheChildVEVO",pub:"2020-08-20",a:"cEN6sUMuNck",am:3}, // 64
+  {id:"Qg2PM_tbs7w",t:"Better · Phil Good",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Phil Good",pub:"2019-09-11",a:"2oBO1tFotpc",am:4}, // 65
+  {id:"pLuQ0MGLBXU",t:"What If I Go? · Mura Masa, Bonzai",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"MuraMasaVEVO",pub:"2016-04-07",a:"__EDZIxYpT4",am:4}, // 66
+  {id:"baj01imKCfA",t:"I CAN'T WAIT · DROELOE",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"DROELOE",pub:"2020-04-07",a:"Zmmpvn5cXn4",am:3}, // 67
+  {id:"Pc-dxNilmBg",t:"Little Things · Louis The Child, Quinn XCII",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LouistheChildVEVO",pub:"2020-04-30",a:"yItC0Id8yVc",am:4}, // 68
+  {id:"pp4YQPykBMM",t:"Feel Something · ILLENIUM, Excision",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"IlleniumVEVO",pub:"2020-04-02",a:"p0Q1g6syrdI",am:4}, // 69
+  {id:"XiNDI0ky-uU",t:"good morning · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2020-02-13",an:1}, // 70
+  {id:"M3cbrXMXNUo",t:"In My Mind · Mura Masa",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Mura Masa",pub:"2020-01-17",a:"FWZNgqjJPXY",am:6}, // 71
+  {id:"d0uBuSYCD4g",t:"projector · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2019-10-24",an:1}, // 73
+  {id:"jBVmcmrv_ik",t:"brighter days · San Holo, Bipolar Sunshine",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"SAN HOLO",pub:"2018-09-28",a:"M8tZnz44t00",am:4}, // 74
+  {id:"iWDxMpLvaUE",t:"Calling (Spider-Man: Across the Spider-Verse) · Metro Boomin, Swae Lee",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"MetroBoominVEVO",pub:"2023-06-01",a:"ucbkKSTv474",am:4}, // 75
+  {id:"WL9ahHAlPKU",t:"HiiiPower · Kendrick Lamar",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Kendrick Lamar - Topic",pub:"2019-07-31",a:"WL9ahHAlPKU",am:5}, // 76
+  {id:"ECoIGvDT36Q",t:"What Are You Going to Do When You Are Not Saving the World? · Hans Zimmer",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"WaterTower Music",pub:"2024-12-17",a:"YrGNQpllhzI",am:6}, // 77
+  {id:"d5_V3a_oRnA",t:"Mona Lisa (Spider-Man: Across the Spider-Verse) · Dominic Fike",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Dominic Fike",pub:"2023-06-01",a:"i4KrrgQi6tI",am:4}, // 78
+  {id:"rtOvBOTyX00",t:"a thousand years · Christina Perri",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Christina Perri",pub:"2011-10-26",a:"TA1W-pHNKl8",am:5}, // 79
+  {id:"9ACakK-spaU",t:"Don't Walk Away · Jade",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"RHINO",pub:"2026-11-06",a:"AQr6BH63xDQ",am:4}, // 80
   {id:"PHULePbksEU",t:"Aaya Na Tu · Arjun Kanungo, Momina Mustehsan",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Universal Music India",pub:"2018-06-19"}, // 81
   {id:"FGaO0krcOE4",t:"Bulleya · Asim Azhar, Shae Gill",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Asim Azhar",pub:"2023-05-29"}, // 82
   {id:"6MbSP5yaJHs",t:"Defaulter · R Nait, Gurlez Akhtar",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Jass Records",pub:"2020-01-20"}, // 83
@@ -298,29 +298,29 @@ const CATALOG = [
   {id:"CV315UIeOZg",t:"Chaand Baaliyan · Aditya A",cat:"select",tag:"spotify",lang:"hi",min:2,src:"Sony Music India",pub:"2024-03-15"}, // 86
   {id:"jY8mAWdQFOA",t:"Rangi Saari · Kavita Seth, Kanishk Seth",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Kavita Seth",pub:"2020-04-23"}, // 87
   {id:"_kUrW9SEaJc",t:"Sage · Ritviz",cat:"select",tag:"spotify",lang:"hi",min:5,src:"RITVIZ",pub:"2019-06-29"}, // 88
-  {id:"ewCPQeAtICk",t:"Vtyurilas · Dora",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:3,src:"Dora",pub:"2020-08-26"}, // 89
-  {id:"072lEafKN7k",t:"Safari · Serena",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Serena",pub:"2020-12-29"}, // 91
-  {id:"ZUJc1lycgwM",t:"Kolybelnaya · Rauf & Faik",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Atlantic Records Russia",pub:"2019-12-05"}, // 92
+  {id:"ewCPQeAtICk",t:"Vtyurilas · Dora",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:3,src:"Dora",pub:"2020-08-26",an:1}, // 89
+  {id:"072lEafKN7k",t:"Safari · Serena",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Serena",pub:"2020-12-29",a:"3m8aECABghI",am:4}, // 91
+  {id:"ZUJc1lycgwM",t:"Kolybelnaya · Rauf & Faik",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Atlantic Records Russia",pub:"2019-12-05",an:1}, // 92
   {id:"nqUN530Rgtw",t:"Summer High · AP Dhillon",cat:"select",tag:"spotify",lang:"hi",min:4,src:"APDHILLON",pub:"2022-08-04"}, // 93
   {id:"L1yVXl_Bwxs",t:"Jadi Buti · Major Lazer, Nucleya",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Major Lazer Official",pub:"2020-10-23"}, // 94
-  {id:"60ItHLz5WEA",t:"Faded · Alan Walker",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Alan Walker",pub:"2015-12-03"}, // 95
-  {id:"31crA53Dgu0",t:"Cheap Thrills · Sia, Sean Paul",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"SiaVEVO",pub:"2016-03-21"}, // 96
-  {id:"nD1UqCcKutU",t:"Reaching 2 · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2022-09-08"}, // 97
-  {id:"W0KMtmi2H3g",t:"Beach House · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2018-11-16"}, // 98
+  {id:"60ItHLz5WEA",t:"Faded · Alan Walker",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Alan Walker",pub:"2015-12-03",a:"pIWaVJPl0-c",am:4}, // 95
+  {id:"31crA53Dgu0",t:"Cheap Thrills · Sia, Sean Paul",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"SiaVEVO",pub:"2016-03-21",a:"K_idN3P5_yk",am:4}, // 96
+  {id:"nD1UqCcKutU",t:"Reaching 2 · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"EDEN",pub:"2022-09-08",a:"AOXltKtZzFY",am:3}, // 97
+  {id:"W0KMtmi2H3g",t:"Beach House · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2018-11-16",a:"49mLnWVbZ9Q",am:4}, // 98
   {id:"cU3IO6Am65o",t:"Saadi Galli Aaja · Rochak Kohli, Ayushmann Khurrana",cat:"select",tag:"spotify",lang:"hi",min:4,src:"T-Series",pub:"2013-04-23"}, // 99
-  {id:"U3ASj1L6_sY",t:"Easy On Me · Adele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"AdeleVEVO",pub:"2021-10-14"}, // 100
+  {id:"U3ASj1L6_sY",t:"Easy On Me · Adele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"AdeleVEVO",pub:"2021-10-14",an:1}, // 100
   // ...and the playlists "No Idea" and "After Hours" (2026-11-10), matched and checked the same way
-{id:"_r-nPqWGG6c",t:"No Idea · Don Toliver",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Don Toliver",pub:"2019-05-29"}, // No Idea 1
-  {id:"Iy-dJwHVX84",t:"Money Trees · Kendrick Lamar, Jay Rock",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"Kendrick Lamar - Topic",pub:"2018-07-26"}, // No Idea 2
-  {id:"SItIaWAjI_4",t:"We Won't Be Alone · Feint, Laura Brehm",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Monstercat Uncaged",pub:"2015-09-18"}, // No Idea 3
-  {id:"aZ5fQyiZgns",t:"Stayin' Alive · Bee Gees",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:2,src:"Bee Gees - Topic",pub:"2018-07-24"}, // No Idea 4
+{id:"_r-nPqWGG6c",t:"No Idea · Don Toliver",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Don Toliver",pub:"2019-05-29",a:"ZkJHEUKtvXI",am:3}, // No Idea 1
+  {id:"Iy-dJwHVX84",t:"Money Trees · Kendrick Lamar, Jay Rock",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"Kendrick Lamar - Topic",pub:"2018-07-26",a:"Iy-dJwHVX84",am:7}, // No Idea 2
+  {id:"SItIaWAjI_4",t:"We Won't Be Alone · Feint, Laura Brehm",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Monstercat Uncaged",pub:"2015-09-18",a:"ckfq0AyzQGs",am:4}, // No Idea 3
+  {id:"aZ5fQyiZgns",t:"Stayin' Alive · Bee Gees",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:2,src:"Bee Gees - Topic",pub:"2018-07-24",a:"aZ5fQyiZgns",am:2}, // No Idea 4
   {id:"VNs_cCtdbPc",t:"Brown Munde · AP Dhillon, Gminxr",cat:"select",tag:"spotify",lang:"hi",min:5,src:"APDHILLON",pub:"2020-09-17"}, // No Idea 5
-  {id:"gSJeHDlhYls",t:"All Caps · Madvillain, Madlib",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Stones Throw",pub:"2021-02-09"}, // No Idea 6
-  {id:"15H0jdKhKtE",t:"Meant To Be · Arc North, Krista Marina",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Arc North",pub:"2016-11-11"}, // No Idea 7
-  {id:"_ovdm2yX4MA",t:"Levels · Avicii",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AviciiOfficialVEVO",pub:"2011-11-29"}, // No Idea 8
-  {id:"T3E9Wjbq44E",t:"Stereo Hearts · Gym Class Heroes, Adam Levine",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Fueled By Ramen",pub:"2011-08-12"}, // No Idea 9
-  {id:"CVxMTl6cUSE",t:"Gangnam Style · PSY",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Psy - Topic",pub:"2018-07-28"}, // No Idea 10
-  {id:"vhumOLNSSJY",t:"HAPPY · NF",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"NFVEVO",pub:"2023-04-06"}, // No Idea 11
+  {id:"gSJeHDlhYls",t:"All Caps · Madvillain, Madlib",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Stones Throw",pub:"2021-02-09",a:"NPiAK33CfxQ",am:3}, // No Idea 6
+  {id:"15H0jdKhKtE",t:"Meant To Be · Arc North, Krista Marina",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Arc North",pub:"2016-11-11",a:"cuityZwulEw",am:4}, // No Idea 7
+  {id:"_ovdm2yX4MA",t:"Levels · Avicii",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AviciiOfficialVEVO",pub:"2011-11-29",a:"xAgv1mAyxr8",am:4}, // No Idea 8
+  {id:"T3E9Wjbq44E",t:"Stereo Hearts · Gym Class Heroes, Adam Levine",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Fueled By Ramen",pub:"2011-08-12",a:"SiRJw4f_ufc",am:4}, // No Idea 9
+  {id:"CVxMTl6cUSE",t:"Gangnam Style · PSY",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Psy - Topic",pub:"2018-07-28",a:"CVxMTl6cUSE",am:4}, // No Idea 10
+  {id:"vhumOLNSSJY",t:"HAPPY · NF",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"NFVEVO",pub:"2023-04-06",a:"r0MqadBYOso",am:5}, // No Idea 11
   {id:"Cxg6xPmSFFU",t:"socha na tha · Zaeden",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Zaeden",pub:"2020-11-17"}, // No Idea 12
   {id:"goPn5HAsNZo",t:"Pal Behta Jaaye · Vismay Patel",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Vismay Patel",pub:"2020-06-13"}, // No Idea 13
   {id:"CvV5P-mgaR8",t:"Maula · Anuv Jain",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Anuv Jain",pub:"2020-04-02"}, // No Idea 14
@@ -336,138 +336,138 @@ const CATALOG = [
   {id:"jL27HdBJx1U",t:"Dheere Se · The Yellow Diary",cat:"select",tag:"spotify",lang:"hi",min:4,src:"Sony Music India",pub:"2018-11-19"}, // No Idea 24
   {id:"X1PguQUsqGQ",t:"Khayaal · Abhijeet Srivastava, Prateeksha Srivastava",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Springboard Records",pub:"2020-07-03"}, // No Idea 25
   {id:"AbPxxWOMe78",t:"Kabootar · Arham Fulfagar",cat:"select",tag:"spotify",lang:"hi",min:3,src:"Arham Fulfagar",pub:"2025-01-31"}, // No Idea 26
-  {id:"8nQLXkl9Zco",t:"Balling · Vibe Chemistry",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"DnB Allstars",pub:"2021-07-29"}, // No Idea 27
-  {id:"u9n7Cw-4_HQ",t:"Moth To A Flame · Swedish House Mafia, The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-10-21"}, // No Idea 28
-  {id:"euCqAq6BRa4",t:"Let Me Love You · DJ Snake, Justin Bieber",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"DJSnakeVEVO",pub:"2016-11-29"}, // No Idea 29
-  {id:"FA375RUlXsc",t:"Kiss Me More · Doja Cat, SZA",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Doja Cat - Topic",pub:"2021-06-24"}, // No Idea 30
-  {id:"9lybsz-7TFM",t:"On The Floor · Jennifer Lopez, Pitbull",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Jennifer Lopez - Topic",pub:"2018-07-23"}, // No Idea 31
-  {id:"UYA7Nu4OyNY",t:"Oxygen · OSVISS",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"OSVISS",pub:"2021-08-13"}, // No Idea 32
-  {id:"DnrpKMXS1fY",t:"Alive · Ytram, Citadelle",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Martin Garrix",pub:"2020-12-17"}, // No Idea 33
+  {id:"8nQLXkl9Zco",t:"Balling · Vibe Chemistry",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"DnB Allstars",pub:"2021-07-29",a:"2JpadIo3OUY",am:5}, // No Idea 27
+  {id:"u9n7Cw-4_HQ",t:"Moth To A Flame · Swedish House Mafia, The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-10-21",a:"peLRPSCeppI",am:4}, // No Idea 28
+  {id:"euCqAq6BRa4",t:"Let Me Love You · DJ Snake, Justin Bieber",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"DJSnakeVEVO",pub:"2016-11-29",a:"rJ0D1GbDq1Q",am:4}, // No Idea 29
+  {id:"FA375RUlXsc",t:"Kiss Me More · Doja Cat, SZA",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Doja Cat - Topic",pub:"2021-06-24",a:"FA375RUlXsc",am:4}, // No Idea 30
+  {id:"9lybsz-7TFM",t:"On The Floor · Jennifer Lopez, Pitbull",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Jennifer Lopez - Topic",pub:"2018-07-23",a:"9lybsz-7TFM",am:5}, // No Idea 31
+  {id:"UYA7Nu4OyNY",t:"Oxygen · OSVISS",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"OSVISS",pub:"2021-08-13",a:"3ylvNUjiGyk",am:4}, // No Idea 32
+  {id:"DnrpKMXS1fY",t:"Alive · Ytram, Citadelle",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Martin Garrix",pub:"2020-12-17",a:"h0EqdAZEL_c",am:3}, // No Idea 33
   {id:"Dy5kp7UJs4s",t:"Musafir · Arijit Anand",cat:"select",tag:"spotify",lang:"hi",min:5,src:"Arijit Anand",pub:"2020-08-21"}, // No Idea 34
-  {id:"0pwttmAYCTw",t:"This Town · Kygo, Sasha Alex Sloan",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"KygoOfficialVEVO",pub:"2017-09-22"}, // No Idea 35
-  {id:"poYy7ZgpZk0",t:"Photosynthesis · Saba, Jean Deaux",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Saba Pivot",pub:"2016-10-27"}, // No Idea 36
+  {id:"0pwttmAYCTw",t:"This Town · Kygo, Sasha Alex Sloan",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"KygoOfficialVEVO",pub:"2017-09-22",a:"gvwH4Q8Aifs",am:4}, // No Idea 35
+  {id:"poYy7ZgpZk0",t:"Photosynthesis · Saba, Jean Deaux",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Saba Pivot",pub:"2016-10-27",a:"cYKAr38pZcY",am:4}, // No Idea 36
   {id:"cgYuuYU_HhQ",t:"Krishna Theme (Flute) · Paras Nath",cat:"select",tag:"spotify",lang:"hi",min:3,src:"T-Series Bhakti Sagar",pub:"2012-08-25"}, // No Idea 38
-  {id:"J5spiMVI9U8",t:"Hero · Martin Garrix, JVKE",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Martin Garrix",pub:"2022-12-08"}, // No Idea 39
-  {id:"iqdrEaf74sM",t:"In Too Deep · Why Don't We",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Atlantic Records",pub:"2018-08-30"}, // No Idea 40
-  {id:"4bzIpYiPUUo",t:"Little Do You Know · Alex & Sierra",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AlexSierraOfficVEVO",pub:"2014-10-06"}, // No Idea 41
+  {id:"J5spiMVI9U8",t:"Hero · Martin Garrix, JVKE",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Martin Garrix",pub:"2022-12-08",a:"liT5r8Dulys",am:3}, // No Idea 39
+  {id:"iqdrEaf74sM",t:"In Too Deep · Why Don't We",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Atlantic Records",pub:"2018-08-30",a:"f6NPW31i03s",am:4}, // No Idea 40
+  {id:"4bzIpYiPUUo",t:"Little Do You Know · Alex & Sierra",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AlexSierraOfficVEVO",pub:"2014-10-06",a:"68-LByyHfpc",am:4}, // No Idea 41
   {id:"6ZwwapPikyQ",t:"Samay Samjhayega (Lofi) · Mohit Lalwani, Bharat Kamal",cat:"select",tag:"spotify",lang:"hi",min:4,src:"ML Records",pub:"2022-08-08"}, // No Idea 42
-  {id:"-67YyAwOOP8",t:"BEST OF US · WIER, Alexa Feser",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Lotte - Topic",pub:"2020-06-29"}, // No Idea 43
-  {id:"RnBT9uUYb1w",t:"In the Name of Love · Martin Garrix, Bebe Rexha",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Martin Garrix",pub:"2016-08-23"}, // No Idea 44
-  {id:"DIKIgjLGf98",t:"SNAP · Rosa Linn",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Rosa Linn",pub:"2022-10-07"}, // No Idea 45
-  {id:"8ATu1BiOPZA",t:"Tennis Court - Flume Remix · Lorde, Flume",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"Flume",pub:"2014-04-23"}, // No Idea 46
-  {id:"ePao0cTGG-o",t:"Be Kind [Stripped] · Marshmello, Halsey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Marshmello",pub:"2020-06-27"}, // No Idea 47
-  {id:"0Li8MmMfQ2o",t:"Nightmares · Ellise",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Ellise",pub:"2022-11-13"}, // No Idea 48
-  {id:"SJOgTMP8cs4",t:"Hope · The Chainsmokers, Winona Oak",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"The Chainsmokers",pub:"2018-12-14"}, // No Idea 49
-  {id:"FSfRRBNPfFs",t:"Jiggle Jiggle · Louis Theroux, Duke & Jones",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:2,src:"Duke & Jones",pub:"2022-04-12"}, // No Idea 50
-  {id:"8PTDv_szmL0",t:"Nothing on You · B.o.B, Bruno Mars",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"B.o.B",pub:"2010-03-09"}, // No Idea 51
-  {id:"2Vv-BfVoq4g",t:"Perfect · Ed Sheeran",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-11-09"}, // No Idea 52
-  {id:"h8DLofLM7No",t:"Lavender Haze · Taylor Swift",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Taylor Swift",pub:"2023-01-26"}, // No Idea 53
-  {id:"mNEUkkoUoIA",t:"I Ain't Worried · OneRepublic",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"OneRepublicVEVO",pub:"2022-05-12"}, // No Idea 54
-  {id:"S9bCLPwzSC0",t:"Mockingbird · Eminem",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"EminemVEVO",pub:"2009-12-24"}, // No Idea 55
-  {id:"kXYiU_JCYtU",t:"Numb · Linkin Park",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Linkin Park",pub:"2007-03-05"}, // No Idea 56
-  {id:"mWRsgZuwf_8",t:"Demons · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2013-05-07"}, // No Idea 57
-  {id:"ktvTqknDobU",t:"Radioactive · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2012-12-10"}, // No Idea 58
-  {id:"H5v3kku4y6Q",t:"As It Was · Harry Styles",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"HarryStylesVEVO",pub:"2022-03-31"}, // No Idea 59
-  {id:"IOrbP1OqNsg",t:"Enemy · Imagine Dragons, JID",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Imagine Dragons - Topic",pub:"2021-10-28"}, // No Idea 60
-  {id:"pfxyk1glEq4",t:"Under The Influence (Body Language) · Chris Brown",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"ChrisBrownVEVO",pub:"2022-10-20"}, // No Idea 61
-  {id:"TO-_3tck2tg",t:"Bones · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"ImagineDragonsVEVO",pub:"2022-04-06"}, // No Idea 62
-  {id:"m7Bc3pLyij0",t:"Happier · Marshmello, Bastille",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Marshmello",pub:"2018-09-24"}, // No Idea 64
-  {id:"e-fA-gBCkj0",t:"Locked out of Heaven · Bruno Mars",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Bruno Mars",pub:"2012-10-15"}, // No Idea 65
-  {id:"4NRXx6U8ABQ",t:"Blinding Lights · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2020-01-21"}, // No Idea 66; the music video, not the audio (by request, 21 Nov)
-  {id:"TUVcZfQe-Kw",t:"Levitating · Dua Lipa, DaBaby",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Dua Lipa",pub:"2020-10-02"}, // No Idea 67
-  {id:"EObr0jeNL2Q",t:"There's Nothing Holdin' Me Back · Shawn Mendes",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Shawn Mendes - Topic",pub:"2018-07-24"}, // No Idea 68
-  {id:"UtF6Jej8yb4",t:"The Nights · Avicii",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AviciiOfficialVEVO",pub:"2014-12-15"}, // No Idea 69
-  {id:"WFsAon_TWPQ",t:"Light Switch · Charlie Puth",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Charlie Puth",pub:"2022-01-20"}, // No Idea 70
-  {id:"AfxsFsLhL04",t:"High · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2022-01-27"}, // No Idea 71
-  {id:"Io0fBr1XBUA",t:"Don't Let Me Down · The Chainsmokers, Daya",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2016-04-29"}, // No Idea 72
-  {id:"0zGcUoRlhmw",t:"Closer · The Chainsmokers, Halsey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ChainsmokersVEVO",pub:"2016-10-24"}, // No Idea 73
-  {id:"fRNkQH4DVg8",t:"Paris · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2017-02-16"}, // No Idea 74
-  {id:"4AqjqOqNrjw",t:"Thunder · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2017-04-27"}, // No Idea 75
+  {id:"-67YyAwOOP8",t:"BEST OF US · WIER, Alexa Feser",cat:"select",home:"foreign",tag:"spotify",lang:"intl",min:4,src:"Lotte - Topic",pub:"2020-06-29",a:"-67YyAwOOP8",am:4}, // No Idea 43
+  {id:"RnBT9uUYb1w",t:"In the Name of Love · Martin Garrix, Bebe Rexha",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Martin Garrix",pub:"2016-08-23",a:"4u4d4GWdpo8",am:4}, // No Idea 44
+  {id:"DIKIgjLGf98",t:"SNAP · Rosa Linn",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Rosa Linn",pub:"2022-10-07",a:"uziIDxPrjJc",am:3}, // No Idea 45
+  {id:"8ATu1BiOPZA",t:"Tennis Court - Flume Remix · Lorde, Flume",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"Flume",pub:"2014-04-23",a:"ZOyELf8C4UY",am:7}, // No Idea 46
+  {id:"ePao0cTGG-o",t:"Be Kind [Stripped] · Marshmello, Halsey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Marshmello",pub:"2020-06-27",a:"xT7CiURAHUI",am:3}, // No Idea 47
+  {id:"0Li8MmMfQ2o",t:"Nightmares · Ellise",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Ellise",pub:"2022-11-13",an:1}, // No Idea 48
+  {id:"SJOgTMP8cs4",t:"Hope · The Chainsmokers, Winona Oak",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"The Chainsmokers",pub:"2018-12-14",a:"IDyQO0QuvKY",am:3}, // No Idea 49
+  {id:"FSfRRBNPfFs",t:"Jiggle Jiggle · Louis Theroux, Duke & Jones",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:2,src:"Duke & Jones",pub:"2022-04-12",a:"JZBg58A_ZiE",am:2}, // No Idea 50
+  {id:"8PTDv_szmL0",t:"Nothing on You · B.o.B, Bruno Mars",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"B.o.B",pub:"2010-03-09",a:"YVev0EXDSm0",am:5}, // No Idea 51
+  {id:"2Vv-BfVoq4g",t:"Perfect · Ed Sheeran",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-11-09",a:"ORrFJ63nlcA",am:5}, // No Idea 52
+  {id:"h8DLofLM7No",t:"Lavender Haze · Taylor Swift",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Taylor Swift",pub:"2023-01-26",a:"GwNPBeWpI-0",am:4}, // No Idea 53
+  {id:"mNEUkkoUoIA",t:"I Ain't Worried · OneRepublic",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"OneRepublicVEVO",pub:"2022-05-12",a:"-K9VwBEOI-Q",am:3}, // No Idea 54
+  {id:"S9bCLPwzSC0",t:"Mockingbird · Eminem",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"EminemVEVO",pub:"2009-12-24",a:"9kznlAwE-8o",am:5}, // No Idea 55
+  {id:"kXYiU_JCYtU",t:"Numb · Linkin Park",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Linkin Park",pub:"2007-03-05",a:"PEQRv87ygRk",am:4}, // No Idea 56
+  {id:"mWRsgZuwf_8",t:"Demons · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2013-05-07",a:"y4FiCl-tUJc",am:3}, // No Idea 57
+  {id:"ktvTqknDobU",t:"Radioactive · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2012-12-10",a:"R_BO8C05XLA",am:4}, // No Idea 58
+  {id:"H5v3kku4y6Q",t:"As It Was · Harry Styles",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"HarryStylesVEVO",pub:"2022-03-31",a:"nujn6wbr-e8",am:3}, // No Idea 59
+  {id:"IOrbP1OqNsg",t:"Enemy · Imagine Dragons, JID",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Imagine Dragons - Topic",pub:"2021-10-28",a:"IOrbP1OqNsg",am:3}, // No Idea 60
+  {id:"pfxyk1glEq4",t:"Under The Influence (Body Language) · Chris Brown",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"ChrisBrownVEVO",pub:"2022-10-20",a:"BLFGsxijRHg",am:4}, // No Idea 61
+  {id:"TO-_3tck2tg",t:"Bones · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"ImagineDragonsVEVO",pub:"2022-04-06",a:"V2SVRJ6dcE4",am:3}, // No Idea 62
+  {id:"m7Bc3pLyij0",t:"Happier · Marshmello, Bastille",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Marshmello",pub:"2018-09-24",a:"kfCTO9PPtVo",am:4}, // No Idea 64
+  {id:"e-fA-gBCkj0",t:"Locked out of Heaven · Bruno Mars",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Bruno Mars",pub:"2012-10-15",a:"zuaBRqUBhyw",am:4}, // No Idea 65
+  {id:"4NRXx6U8ABQ",t:"Blinding Lights · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2020-01-21",a:"J7p4bzqLvCw",am:4}, // No Idea 66; the music video, not the audio (by request, 21 Nov)
+  {id:"TUVcZfQe-Kw",t:"Levitating · Dua Lipa, DaBaby",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Dua Lipa",pub:"2020-10-02",a:"e8WoWk4b3D0",am:4}, // No Idea 67
+  {id:"EObr0jeNL2Q",t:"There's Nothing Holdin' Me Back · Shawn Mendes",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Shawn Mendes - Topic",pub:"2018-07-24",a:"EObr0jeNL2Q",am:4}, // No Idea 68
+  {id:"UtF6Jej8yb4",t:"The Nights · Avicii",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"AviciiOfficialVEVO",pub:"2014-12-15",a:"W4C-NEWrnSQ",am:3}, // No Idea 69
+  {id:"WFsAon_TWPQ",t:"Light Switch · Charlie Puth",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Charlie Puth",pub:"2022-01-20",a:"ntG3GQdY_Ok",am:4}, // No Idea 70
+  {id:"AfxsFsLhL04",t:"High · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2022-01-27",a:"sBqHtRE-PHI",am:3}, // No Idea 71
+  {id:"Io0fBr1XBUA",t:"Don't Let Me Down · The Chainsmokers, Daya",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2016-04-29",a:"CpTr4USXjQw",am:4}, // No Idea 72
+  {id:"0zGcUoRlhmw",t:"Closer · The Chainsmokers, Halsey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ChainsmokersVEVO",pub:"2016-10-24",a:"r7zTKRonHXM",am:5}, // No Idea 73
+  {id:"fRNkQH4DVg8",t:"Paris · The Chainsmokers",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ChainsmokersVEVO",pub:"2017-02-16",a:"Dfiw7EmRTC4",am:4}, // No Idea 74
+  {id:"4AqjqOqNrjw",t:"Thunder · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2017-04-27",a:"9ssQKlLxBdQ",am:4}, // No Idea 75
   {id:"aHnYwR1caLc",t:"Vaishnav Jan To · A.R. Rahman, Shreya Ghoshal",cat:"select",tag:"spotify",lang:"hi",min:6,src:"A. R. Rahman - Topic",pub:"2023-01-24"}, // No Idea 76
-  {id:"0_v8IfJKhFY",t:"MONEY ON THE DASH · Elley Duhé, Whethan",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Elley Duhé",pub:"2023-01-19"}, // No Idea 77
-  {id:"nfs8NYg7yQM",t:"Attention · Charlie Puth",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Charlie Puth",pub:"2017-04-24"}, // No Idea 78
-  {id:"YykjpeuMNEk",t:"Hymn for the Weekend · Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Coldplay",pub:"2016-01-29"}, // No Idea 79
-  {id:"2CuTKl7Q-Xk",t:"One Kiss X I Was Never There · Just Lowkey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Just Lowkey - Topic",pub:"2026-10-11"}, // No Idea 80
-  {id:"qpgTC9MDx1o",t:"Animals · Maroon 5",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Maroon5VEVO",pub:"2014-09-29"}, // No Idea 82
-  {id:"2FFdYZ1ZsbA",t:"forever//over · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"EDEN",pub:"2018-01-18"}, // No Idea 83
-  {id:"KQetemT1sWc",t:"Here Comes The Sun - Remastered 2009 · The Beatles",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TheBeatlesVEVO",pub:"2019-09-26"}, // No Idea 84
-  {id:"oSHzUD-uqKY",t:"MIDDLE OF THE NIGHT · Elley Duhé",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Elley Duhé",pub:"2022-05-05"}, // No Idea 85
-  {id:"YCQYdgYG7uY",t:"Rasputin - Single Version · Boney M.",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Boney M. - Topic",pub:"2014-11-06"}, // No Idea 86
+  {id:"0_v8IfJKhFY",t:"MONEY ON THE DASH · Elley Duhé, Whethan",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Elley Duhé",pub:"2023-01-19",a:"hI_DYWCKyp0",am:3}, // No Idea 77
+  {id:"nfs8NYg7yQM",t:"Attention · Charlie Puth",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Charlie Puth",pub:"2017-04-24",a:"vxUBYHz_q1I",am:4}, // No Idea 78
+  {id:"YykjpeuMNEk",t:"Hymn for the Weekend · Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Coldplay",pub:"2016-01-29",a:"H3Kzh6RrnMc",am:5}, // No Idea 79
+  {id:"2CuTKl7Q-Xk",t:"One Kiss X I Was Never There · Just Lowkey",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:3,src:"Just Lowkey - Topic",pub:"2026-10-11",a:"2CuTKl7Q-Xk",am:3}, // No Idea 80
+  {id:"qpgTC9MDx1o",t:"Animals · Maroon 5",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Maroon5VEVO",pub:"2014-09-29",a:"5DF9aRuiOZo",am:4}, // No Idea 82
+  {id:"2FFdYZ1ZsbA",t:"forever//over · EDEN",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"EDEN",pub:"2018-01-18",a:"bYV908QcGCU",am:6}, // No Idea 83
+  {id:"KQetemT1sWc",t:"Here Comes The Sun - Remastered 2009 · The Beatles",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"TheBeatlesVEVO",pub:"2019-09-26",a:"2Vv5pkwpFzk",am:4}, // No Idea 84
+  {id:"oSHzUD-uqKY",t:"MIDDLE OF THE NIGHT · Elley Duhé",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Elley Duhé",pub:"2022-05-05",a:"4zsVKROnQfY",am:4}, // No Idea 85
+  {id:"YCQYdgYG7uY",t:"Rasputin - Single Version · Boney M.",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Boney M. - Topic",pub:"2014-11-06",a:"YCQYdgYG7uY",am:4}, // No Idea 86
   {id:"hvKaPTmQBA8",t:"Aaoge Tum Kabhi · The Local Train",cat:"select",tag:"spotify",lang:"hi",min:6,src:"The Local Train",pub:"2016-02-23"}, // No Idea 87
   {id:"sFMRqxCexDk",t:"Choo Lo · The Local Train",cat:"select",tag:"spotify",lang:"hi",min:4,src:"The Local Train",pub:"2016-02-23"}, // No Idea 88
-  {id:"J6ZWlDks0nQ",t:"Paradise · Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Coldplay",pub:"2011-09-10"}, // No Idea 89
-  {id:"RYr96YYEaZY",t:"Electric Love · BØRNS",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"BØRNSmusicVEVO",pub:"2015-05-06"}, // No Idea 90
-  {id:"rWZr2F0qohA",t:"Safe And Sound · Capital Cities",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Capital Cities",pub:"2011-02-24"}, // No Idea 91
-  {id:"UTHLKHL_whs",t:"INDUSTRY BABY · Lil Nas X, Jack Harlow",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2021-07-22"}, // No Idea 92
-  {id:"Pkh8UtuejGw",t:"Señorita · Shawn Mendes, Camila Cabello",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ShawnMendesVEVO",pub:"2019-06-20"}, // No Idea 93
-  {id:"7wtfhZwyrcc",t:"Believer · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2017-03-07"}, // No Idea 94
-  {id:"-hzFTJDJGkQ",t:"Love In The Dark · Adele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Adele - Topic",pub:"2019-12-20"}, // No Idea 96
-  {id:"PWqEPKduGm8",t:"Infinity · Jaymes Young",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Jaymes Young",pub:"2017-06-22"}, // No Idea 97
-  {id:"b1kbLwvqugk",t:"Anti-Hero · Taylor Swift",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Taylor Swift",pub:"2022-10-21"}, // No Idea 98
-  {id:"mRD0-GxqHVo",t:"Heat Waves · Glass Animals",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"GlassAnimalsVEVO",pub:"2020-06-29"}, // No Idea 99
-  {id:"PkiIPzG37vQ",t:"Mirror · Porter Robinson",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Porter Robinson",pub:"2020-09-09"}, // No Idea 100
-{id:"ygTZZpVkmKg",t:"After Hours · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"The Weeknd",pub:"2020-02-18"}, // After Hours 1
-  {id:"EXIWlRrkjKE",t:"10:35 · Tiësto, Tate McRae",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Tiësto",pub:"2022-11-03"}, // After Hours 2
-  {id:"FM7MFYoylVs",t:"Something Just Like This · The Chainsmokers, Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ChainsmokersVEVO",pub:"2017-02-22"}, // After Hours 6
-  {id:"a40XLhSUREo",t:"Bad Liar · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2018-11-06"}, // After Hours 7
-  {id:"SlPhMPnQ58k",t:"Memories · Maroon 5",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Maroon5VEVO",pub:"2019-10-08"}, // After Hours 8
-  {id:"V1Pl8CzNzCw",t:"lovely · Billie Eilish, Khalid",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"BillieEilishVEVO",pub:"2018-04-26"}, // After Hours 9
-  {id:"ydPYNo8o-lI",t:"Thunder / Young Dumb & Broke - Medley · Imagine Dragons, Khalid",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2017-12-19"}, // After Hours 10
-  {id:"LfyIt1BOW2E",t:"do Whatever you like · Hallman",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Hallman - Topic",pub:"2022-07-07"}, // After Hours 11
-  {id:"XXYlFuWEuKI",t:"Save Your Tears · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-01-05"}, // After Hours 12; the music video, not the audio (by request, 21 Nov)
-  {id:"wp43OdtAAkM",t:"Running Up That Hill (A Deal with God) · Kate Bush",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"KateBushMusic",pub:"2011-01-15"}, // Max's song in Stranger Things (by request, 21 Nov)
+  {id:"J6ZWlDks0nQ",t:"Paradise · Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Coldplay",pub:"2011-09-10",a:"Q0TEUMPIhk8",am:5}, // No Idea 89
+  {id:"RYr96YYEaZY",t:"Electric Love · BØRNS",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"BØRNSmusicVEVO",pub:"2015-05-06",a:"1T6r0OttdN0",am:4}, // No Idea 90
+  {id:"rWZr2F0qohA",t:"Safe And Sound · Capital Cities",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Capital Cities",pub:"2011-02-24",a:"jWpZuFM0Qtk",am:4}, // No Idea 91
+  {id:"UTHLKHL_whs",t:"INDUSTRY BABY · Lil Nas X, Jack Harlow",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2021-07-22",a:"jPe0bX_GtBo",am:4}, // No Idea 92
+  {id:"Pkh8UtuejGw",t:"Señorita · Shawn Mendes, Camila Cabello",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ShawnMendesVEVO",pub:"2019-06-20",a:"VKC_hzJ3jzg",am:4}, // No Idea 93
+  {id:"7wtfhZwyrcc",t:"Believer · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"ImagineDragonsVEVO",pub:"2017-03-07",a:"Kx7B-XvmFtE",am:4}, // No Idea 94
+  {id:"-hzFTJDJGkQ",t:"Love In The Dark · Adele",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Adele - Topic",pub:"2019-12-20",a:"-hzFTJDJGkQ",am:5}, // No Idea 96
+  {id:"PWqEPKduGm8",t:"Infinity · Jaymes Young",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Jaymes Young",pub:"2017-06-22",a:"WMK3JXG3Fx0",am:4}, // No Idea 97
+  {id:"b1kbLwvqugk",t:"Anti-Hero · Taylor Swift",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Taylor Swift",pub:"2022-10-21",an:1}, // No Idea 98
+  {id:"mRD0-GxqHVo",t:"Heat Waves · Glass Animals",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"GlassAnimalsVEVO",pub:"2020-06-29",a:"XDjB9E3YtUE",am:4}, // No Idea 99
+  {id:"PkiIPzG37vQ",t:"Mirror · Porter Robinson",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:6,src:"Porter Robinson",pub:"2020-09-09",a:"7i_Rgrtv8rQ",am:6}, // No Idea 100
+{id:"ygTZZpVkmKg",t:"After Hours · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:7,src:"The Weeknd",pub:"2020-02-18",a:"WxYgXmZ9xh8",am:7}, // After Hours 1
+  {id:"EXIWlRrkjKE",t:"10:35 · Tiësto, Tate McRae",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Tiësto",pub:"2022-11-03",a:"TG2AtaWuikA",am:3}, // After Hours 2
+  {id:"FM7MFYoylVs",t:"Something Just Like This · The Chainsmokers, Coldplay",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ChainsmokersVEVO",pub:"2017-02-22",a:"owTWCbq_nSk",am:5}, // After Hours 6
+  {id:"a40XLhSUREo",t:"Bad Liar · Imagine Dragons",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2018-11-06",a:"I203G1sMGDg",am:5}, // After Hours 7
+  {id:"SlPhMPnQ58k",t:"Memories · Maroon 5",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Maroon5VEVO",pub:"2019-10-08",a:"lNilb-EaTOU",am:4}, // After Hours 8
+  {id:"V1Pl8CzNzCw",t:"lovely · Billie Eilish, Khalid",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"BillieEilishVEVO",pub:"2018-04-26",a:"MMfpp0-lnw4",am:4}, // After Hours 9
+  {id:"ydPYNo8o-lI",t:"Thunder / Young Dumb & Broke - Medley · Imagine Dragons, Khalid",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"ImagineDragonsVEVO",pub:"2017-12-19",a:"jXf_PdAbjr4",am:5}, // After Hours 10
+  {id:"LfyIt1BOW2E",t:"do Whatever you like · Hallman",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"Hallman - Topic",pub:"2022-07-07",a:"LfyIt1BOW2E",am:4}, // After Hours 11
+  {id:"XXYlFuWEuKI",t:"Save Your Tears · The Weeknd",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"TheWeekndVEVO",pub:"2021-01-05",a:"RmYCOm4ehKs",am:4}, // After Hours 12; the music video, not the audio (by request, 21 Nov)
+  {id:"wp43OdtAAkM",t:"Running Up That Hill (A Deal with God) · Kate Bush",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"KateBushMusic",pub:"2011-01-15",a:"D1Fw6CbGAX4",am:5}, // Max's song in Stranger Things (by request, 21 Nov)
   // F1 The Album (the 2025 film's songs, by request, 22 Nov 2026): Select's f1 set. Official uploads on the artists' own channels
-  {id:"WWEs82u37Mw",t:"Lose My Mind · Don Toliver, Doja Cat",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Don Toliver"},
-  {id:"KFapxdAvi74",t:"No Room for a Saint · Dom Dolla, Nathan Nicholson",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Dom Dolla"},
-  {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"dpvQqmX6SUI",t:"Just Keep Watching · Tate McRae",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Tate McRae"},
-  {id:"ia2Ph61bYzc",t:"Messy · ROSÉ",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"ROSÉ"},
-  {id:"h35Nhha7qQI",t:"Don't Let Me Drown · Burna Boy",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Burna Boy"},
-  {id:"qW4Tc1vVLIc",t:"Underdog · Roddy Ricch",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Roddy Ricch"},
-  {id:"0DDTgoeieik",t:"Grandma Calls the Boy Bad News · RAYE",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"RAYE"},
-  {id:"p13Cn0mONP8",t:"Bad As I Used To Be · Chris Stapleton",cat:"select",home:"foreign",tag:"f1",lang:"en",min:5,src:"Chris Stapleton"},
-  {id:"mfnyDjleNRY",t:"OMG! · Tiësto, Sexyy Red",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Tiësto"},
-  {id:"CksB-6MRP54",t:"All At Once · Madison Beer",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Madison Beer"},
-  {id:"63AIpRUren0",t:"D.A.N.C.E · Peggy Gou",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Peggy Gou"},
-  {id:"iC-hlli6ShE",t:"Double C · PAWSA",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"PAWSA"},
-  {id:"C0y3t4LynjI",t:"Attention · Mr Eazi",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Mr Eazi"},
-  {id:"6mFUg-WbY6s",t:"Give Me Love · Darkoo",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Darkoo"},
-  {id:"xvx1Sk8tNqA",t:"Gasoline · Obongjayar",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Obongjayar"},
+  {id:"WWEs82u37Mw",t:"Lose My Mind · Don Toliver, Doja Cat",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Don Toliver",a:"AVN7SJkNOR0",am:4},
+  {id:"KFapxdAvi74",t:"No Room for a Saint · Dom Dolla, Nathan Nicholson",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Dom Dolla",a:"K550NF8wIeU",am:4},
+  {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Ed Sheeran",a:"_UH6Hj_1eDQ",am:4},
+  {id:"dpvQqmX6SUI",t:"Just Keep Watching · Tate McRae",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Tate McRae",a:"eFF1TGfHdp8",am:3},
+  {id:"ia2Ph61bYzc",t:"Messy · ROSÉ",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"ROSÉ",a:"QVTIWWNhaYE",am:3},
+  {id:"h35Nhha7qQI",t:"Don't Let Me Drown · Burna Boy",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Burna Boy",a:"ugSoIfhLeXU",am:4},
+  {id:"qW4Tc1vVLIc",t:"Underdog · Roddy Ricch",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Roddy Ricch",a:"g8aiQ4vxQsM",am:3},
+  {id:"0DDTgoeieik",t:"Grandma Calls the Boy Bad News · RAYE",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"RAYE",a:"0DDTgoeieik",am:4},
+  {id:"p13Cn0mONP8",t:"Bad As I Used To Be · Chris Stapleton",cat:"select",home:"foreign",tag:"f1",lang:"en",min:5,src:"Chris Stapleton",a:"dXidJX9WHdQ",am:5},
+  {id:"mfnyDjleNRY",t:"OMG! · Tiësto, Sexyy Red",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Tiësto",a:"astVBgajdKc",am:3},
+  {id:"CksB-6MRP54",t:"All At Once · Madison Beer",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Madison Beer",a:"Ya1pty-MauE",am:3},
+  {id:"63AIpRUren0",t:"D.A.N.C.E · Peggy Gou",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Peggy Gou",a:"jAwtFtcgNkA",am:4},
+  {id:"iC-hlli6ShE",t:"Double C · PAWSA",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"PAWSA",a:"wfKsJvjvY7M",am:4},
+  {id:"C0y3t4LynjI",t:"Attention · Mr Eazi",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Mr Eazi",a:"DWTwAOYzzTo",am:3},
+  {id:"6mFUg-WbY6s",t:"Give Me Love · Darkoo",cat:"select",home:"foreign",tag:"f1",lang:"en",min:3,src:"Darkoo",a:"6mFUg-WbY6s",am:3},
+  {id:"xvx1Sk8tNqA",t:"Gasoline · Obongjayar",cat:"select",home:"foreign",tag:"f1",lang:"en",min:4,src:"Obongjayar",a:"PmG0kPHrgHM",am:4},
   // Ed Sheeran (by request, 22 Nov 2026): Global Hits' hour of his own, 21:00-22:00. His official music videos, on his own channel
-  {id:"lp-EO5I60KA",t:"Thinking Out Loud · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"nSDgHBxUbVQ",t:"Photograph · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"K0ibBPhiaG0",t:"Castle on the Hill · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"orJSJGHjBLI",t:"Bad Habits · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"Il0S8BoucSA",t:"Shivers · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"87gWaABqGYs",t:"Galway Girl · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"tlYcUqEPN58",t:"Sing · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"iD2rhdFRehU",t:"Don't · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"c4BLVznuWnU",t:"Lego House · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"UAWcs5H-qgQ",t:"The A Team · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"FOjdXSrtUxA",t:"Give Me Love · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"iWZmdoY1aTE",t:"Happier · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"y83x7MgzWOA",t:"I Don't Care · Ed Sheeran, Justin Bieber",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"mj0XInqZMHY",t:"Beautiful People · Ed Sheeran, Khalid",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"UPOT2tgY9QQ",t:"South of the Border · Ed Sheeran, Camila Cabello, Cardi B",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"u6wOyMUs74I",t:"Eyes Closed · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"JgDNFQ2RaLQ",t:"Sapphire · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"k6ZoE4RrcDs",t:"Overpass Graffiti · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"Z_MvkyuOJgk",t:"2step · Ed Sheeran, Lil Baby",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"23g5HBOg3Ic",t:"Celestial · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"_NGQfFCFUn4",t:"Afterglow · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"Orq_75kFi8I",t:"Bloodstream · Ed Sheeran, Rudimental",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"CfkxLRuSteI",t:"Antisocial · Ed Sheeran, Travis Scott",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"rj5dxoMY-dE",t:"Old Phone · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"XJQy_R9CYR4",t:"Take Me Back to London · Ed Sheeran, Stormzy, Jaykae, Aitch",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"YxSj3TP90SA",t:"Curtains · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"O_0Wn73AnC8",t:"A Little More · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"MI9ZpIKgyf0",t:"Azizam · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"O8WXFI_MSAI",t:"Camera · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"mKEphyIbtXo",t:"Boat · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
-  {id:"eiDiKwbGfIY",t:"Perfect Symphony · Ed Sheeran, Andrea Bocelli",cat:"edsheeran",lang:"en",min:6,src:"Ed Sheeran"},
-  {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"2Vv-BfVoq4g",t:"Perfect · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran"},
-  {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran"},
+  {id:"lp-EO5I60KA",t:"Thinking Out Loud · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"fdz_cabS9BU",am:5},
+  {id:"nSDgHBxUbVQ",t:"Photograph · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"SlbfAYvA_gI",am:5},
+  {id:"K0ibBPhiaG0",t:"Castle on the Hill · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"wqlTrBCNRiY",am:5},
+  {id:"orJSJGHjBLI",t:"Bad Habits · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"hJWSZDJb-W4",am:4},
+  {id:"Il0S8BoucSA",t:"Shivers · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"G1ej5up7JG0",am:4},
+  {id:"87gWaABqGYs",t:"Galway Girl · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"K0WAS1pyocY",am:3},
+  {id:"tlYcUqEPN58",t:"Sing · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"wAVEsckRmwY",am:4},
+  {id:"iD2rhdFRehU",t:"Don't · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"LHQWrmAZsxY",am:4},
+  {id:"c4BLVznuWnU",t:"Lego House · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"AlnZReStfKs",am:4},
+  {id:"UAWcs5H-qgQ",t:"The A Team · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"WYABDdnBu0w",am:5},
+  {id:"FOjdXSrtUxA",t:"Give Me Love · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"rSsBDsH7WMQ",am:6},
+  {id:"iWZmdoY1aTE",t:"Happier · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"9fMPtkbKVYk",am:4},
+  {id:"y83x7MgzWOA",t:"I Don't Care · Ed Sheeran, Justin Bieber",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"7hDam9i-Aps",am:4},
+  {id:"mj0XInqZMHY",t:"Beautiful People · Ed Sheeran, Khalid",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"6v8BmMirkUk",am:4},
+  {id:"UPOT2tgY9QQ",t:"South of the Border · Ed Sheeran, Camila Cabello, Cardi B",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",an:1},
+  {id:"u6wOyMUs74I",t:"Eyes Closed · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"dopf-_6KkOQ",am:4},
+  {id:"JgDNFQ2RaLQ",t:"Sapphire · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"xT-5e1F1p8Y",am:3},
+  {id:"k6ZoE4RrcDs",t:"Overpass Graffiti · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"gtR09WMSaAw",am:4},
+  {id:"Z_MvkyuOJgk",t:"2step · Ed Sheeran, Lil Baby",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"OePtCSw1BB8",am:3},
+  {id:"23g5HBOg3Ic",t:"Celestial · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"eAOvikzmuGQ",am:4},
+  {id:"_NGQfFCFUn4",t:"Afterglow · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"OINhZEiKnqY",am:3},
+  {id:"Orq_75kFi8I",t:"Bloodstream · Ed Sheeran, Rudimental",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"84UjXR6KbtE",am:6},
+  {id:"CfkxLRuSteI",t:"Antisocial · Ed Sheeran, Travis Scott",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"HTAGWZXM99k",am:3},
+  {id:"rj5dxoMY-dE",t:"Old Phone · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"GZ-raN0P9zY",am:4},
+  {id:"XJQy_R9CYR4",t:"Take Me Back to London · Ed Sheeran, Stormzy, Jaykae, Aitch",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"fuCJsoXvcS8",am:4},
+  {id:"YxSj3TP90SA",t:"Curtains · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"pDW0e5SO5Co",am:4},
+  {id:"O_0Wn73AnC8",t:"A Little More · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",an:1},
+  {id:"MI9ZpIKgyf0",t:"Azizam · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"I66_rC6o4K4",am:3},
+  {id:"O8WXFI_MSAI",t:"Camera · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"oYbpcLylZZc",am:4},
+  {id:"mKEphyIbtXo",t:"Boat · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"AgyrjpX4OT8",am:4},
+  {id:"eiDiKwbGfIY",t:"Perfect Symphony · Ed Sheeran, Andrea Bocelli",cat:"edsheeran",lang:"en",min:6,src:"Ed Sheeran",a:"F1ZyommhrVo",am:5},
+  {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"xTvyyoF_LZY",am:4},
+  {id:"2Vv-BfVoq4g",t:"Perfect · Ed Sheeran",cat:"edsheeran",lang:"en",min:5,src:"Ed Sheeran",a:"ORrFJ63nlcA",am:5},
+  {id:"Cf1hKtrA9lg",t:"Drive · Ed Sheeran",cat:"edsheeran",lang:"en",min:4,src:"Ed Sheeran",a:"_UH6Hj_1eDQ",am:4},
   // Sargam (by request, 22 Nov 2026): background scores without vocals, official uploads (labels' and composers' own); the
   // albums, lofi, santoor, flute and calm come from scripts/feeds.json
   {id:"JPxoOlC8ZSU",t:"Flight (Man of Steel) · Hans Zimmer",cat:"sargam",tag:"zimmer",lang:"intl",min:5,src:"WaterTower Music"},
@@ -507,11 +507,11 @@ const CATALOG = [
   {id:"igOn1d9kcew",t:"The Mandalorian and Grogu · Ludwig Göransson",cat:"sargam",tag:"series",lang:"intl",min:4,src:"Star Wars"},
   {id:"YAe7QuTvGRc",t:"Best of Rahul Sharma: santoor · Rahul Sharma",cat:"sargam",tag:"santoor",lang:"hi",min:104,src:"Sony Music India Classical"},
   {id:"Qf8ETxbQ8kQ",t:"Cortisol Reset (777 Hz), handpan · Malte Marten",cat:"sargam",tag:"calm",lang:"intl",min:122,src:"Malte Marten"},
-  {id:"-gj4_qp4a28",t:"Ready · Kodaline",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"KodalineVEVO",pub:"2015-06-03"}, // After Hours 13
-  {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-01-30"}, // After Hours 14
-  {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21"}, // After Hours 15
-  {id:"v7HAVTyvLqI",t:"STAR WALKIN' (League of Legends Worlds Anthem) · Lil Nas X",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2022-09-29"}, // After Hours 16
-  {id:"SC4xMk98Pdc",t:"Congratulations · Post Malone, Quavo",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"PostMaloneVEVO",pub:"2017-01-23"}, // After Hours 62
+  {id:"-gj4_qp4a28",t:"Ready · Kodaline",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"KodalineVEVO",pub:"2015-06-03",a:"NtIIFnNuFO8",am:4}, // After Hours 13
+  {id:"JGwWNGJdvx8",t:"Shape of You · Ed Sheeran",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Ed Sheeran",pub:"2017-01-30",a:"xTvyyoF_LZY",am:4}, // After Hours 14
+  {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21",a:"mVw5KiGwqaQ",am:5}, // After Hours 15
+  {id:"v7HAVTyvLqI",t:"STAR WALKIN' (League of Legends Worlds Anthem) · Lil Nas X",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2022-09-29",a:"_GX3D32b3TI",am:4}, // After Hours 16
+  {id:"SC4xMk98Pdc",t:"Congratulations · Post Malone, Quavo",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"PostMaloneVEVO",pub:"2017-01-23",a:"FFhGqNa-Waw",am:4}, // After Hours 62
   // Songs like Ruposh and Jhol (by request, 23 Nov 2026): Select's soul set. Coke Studio Pakistan, Pakistani indie and OSTs, and
   // Indian indie in that vein; official uploads (the artist's own channel or Topic, Coke Studio Pakistan, the label), each
   // checked to play embedded. Not Hasan Raheem's "Wishes": both his uploads refuse embedding. Pasoori is in the Spotify set

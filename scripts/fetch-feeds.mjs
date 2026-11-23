@@ -295,7 +295,8 @@ const inSeason = cat => FESTIVALS.some(x => x.cat === cat && today <= x.to && Da
 const ONLY = process.argv[2]?.split(",");
 const old = await previous(), results = new Array(feeds.length);
 let next = 0;
-await Promise.all(Array.from({length: 6}, async () => {
+// FEEDS_PARALLEL: how many sources at a time (6); 1 spares YouTube when a run without an API key sorts many new songs
+await Promise.all(Array.from({length: +process.env.FEEDS_PARALLEL || 6}, async () => {
   while (next < feeds.length) {
     const i = next++, f = feeds[i];
     const kept = old.filter(v => v.feed === keyOf(f));
