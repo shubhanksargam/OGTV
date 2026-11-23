@@ -96,9 +96,14 @@ async function trackFor(id) {
 
 const saved = await readFile(FILE, "utf8").then(JSON.parse).catch(() => ({}));
 const next = {};
+// A time budget (AUDIO_MINUTES, 20 by default): the nightly job has 60 minutes for everything, and a few hundred new songs (an
+// audio-only channel's whole list, 24 Nov 2026) take longer than that. Past it no new song is looked up; those are left for the
+// next run (an audio-only channel plays them as they are meanwhile), and what was found is kept.
+const BUDGET = (+process.env.AUDIO_MINUTES || 20) * 60e3, t0 = Date.now(); let later = 0;
 for (const [id, v] of covered) {
   const old = saved[id];
   if (old?.a || old?.no || old?.none && (Date.parse(today) - Date.parse(old.none)) / 864e5 < RETRY_DAYS) { next[id] = old; continue }
+  if (Date.now() - t0 > BUDGET) { if (old) next[id] = old; later++; continue } // the next run's
   try {
     const f = await trackFor(id);
     next[id] = f ? {...f, t: v.t, at: today} : {none: today, t: v.t};
@@ -120,4 +125,4 @@ const lines = text.split(eol).map(line => {
 });
 if (changed) await writeFile(FEEDS, lines.join(eol));
 const n = Object.values(next);
-console.log(`${covered.size} songs wanting an audio-only track (covered, or on an audio-only channel): ${n.filter(x => x.a).length} have one, ${n.filter(x => !x.a).length} left out (${n.filter(x => x.no).length} by hand); ${changed} feed entries updated`);
+console.log(`${covered.size} songs wanting an audio-only track (covered, or on an audio-only channel): ${n.filter(x => x.a).length} have one, ${n.filter(x => !x.a).length} left out (${n.filter(x => x.no).length} by hand); ${changed} feed entries updated${later ? `; ${later} left for the next run (time budget)` : ""}`);
