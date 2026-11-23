@@ -514,19 +514,29 @@ function openIris(){if(opened||started||!logoDone||!pressed||!(videoUp||capped))
 let asked=false, pressed=false;
 // The Terms of Use and the Privacy Policy, agreed to on the first visit (by request): remembered on this device, asked again
 // when TERMS_VERSION changes. The intro is as it was (by request, 23 Nov 2026): play goes straight on, and 1.5 s after the
-// TV has opened the two tick boxes come up over the picture in a translucent pop-up (termsPop), the channel playing on
-// underneath, until both are ticked. The TV app, run by a remote, goes on by itself as before.
+// TV has opened the two tick boxes come up in a translucent pop-up (termsPop), the channel playing on underneath. It stays on
+// top of the screen, fixed (the page doesn't scroll), and nothing in the app can be used, no tap, click or key, until both
+// are ticked (by request); then it goes. The TV app, run by a remote, goes on by itself as before.
 const TERMS_VERSION="1.0";
 const termsAgreed=()=>{try{const t=JSON.parse(localStorage.getItem("ogtv-terms")||"null"); return !!t&&t.v===TERMS_VERSION}catch(e){return false}};
 let needConsent=!TV_APP&&!termsAgreed();
 const consentOk=()=>$("agreeTerms").checked&&$("agreePrivacy").checked;
-function termsPop(){if(!needConsent||$("termsPop")) return;
-  const pop=document.createElement("div"), c=$("startConsent"); pop.className="terms-pop"; pop.id="termsPop"; pop.setAttribute("role","dialog"); pop.setAttribute("aria-labelledby","termsPopH");
-  pop.innerHTML='<h2 id="termsPopH">Welcome to OGTV</h2><p>Tick both to keep watching.</p>'; c.hidden=false; pop.append(c);
-  $("screen").append(pop); requestAnimationFrame(()=>pop.classList.add("on"))}
+function termsPop(){if(!needConsent||$("termsVeil")) return;
+  const veil=document.createElement("div"), pop=document.createElement("div"), c=$("startConsent"); veil.className="terms-veil"; veil.id="termsVeil";
+  pop.className="terms-pop"; pop.id="termsPop"; pop.setAttribute("role","dialog"); pop.setAttribute("aria-modal","true"); pop.setAttribute("aria-labelledby","termsPopH");
+  pop.innerHTML='<h2 id="termsPopH">Welcome to OGTV</h2><p>Tick both to start watching.</p>'; c.hidden=false; pop.append(c); veil.append(pop);
+  (document.fullscreenElement||document.body).append(veil); document.documentElement.classList.add("terms-lock"); // the veil takes every tap and click
+  requestAnimationFrame(()=>veil.classList.add("on")); setTimeout(()=>{if($("termsVeil")) $("agreeTerms").focus({preventScroll:true})},300)}
+// While it is up no key reaches the app (the channel keys, M, F...): only Tab, Space and Enter on the pop-up's own boxes and links,
+// and the focus can't leave it
+addEventListener("keydown",e=>{const v=$("termsVeil"); if(!v) return; const inPop=e.target&&e.target.closest&&e.target.closest(".terms-pop");
+  if(e.key==="Tab"){const f=[...v.querySelectorAll("input,a")], i=f.indexOf(document.activeElement); e.preventDefault(); e.stopImmediatePropagation();
+    f[(i<0?0:i+(e.shiftKey?f.length-1:1))%f.length].focus({preventScroll:true}); return}
+  if(!(inPop&&(e.key===" "||e.key==="Enter"))){e.preventDefault(); e.stopImmediatePropagation()}},true);
+addEventListener("focusin",e=>{const v=$("termsVeil"); if(v&&!v.contains(e.target)) $("agreeTerms").focus({preventScroll:true})},true);
 ["agreeTerms","agreePrivacy"].forEach(id=>$(id).addEventListener("change",()=>{if(!needConsent||!consentOk()) return; needConsent=false;
   try{localStorage.setItem("ogtv-terms",JSON.stringify({v:TERMS_VERSION,at:new Date().toISOString()}))}catch(e){} track("terms-agreed","Terms and Privacy agreed");
-  const p=$("termsPop"); if(p){p.classList.remove("on"); setTimeout(()=>p.remove(),500)}}));
+  const v=$("termsVeil"); document.documentElement.classList.remove("terms-lock"); if(v){v.classList.remove("on"); v.style.pointerEvents="none"; setTimeout(()=>v.remove(),500)}}));
 function ask(){if(asked||started)return; asked=true; $("start").classList.add("ask"); if(TV_APP){askedAt=Date.now(); prepareChime(); setTimeout(tvGo,1100)}}
 // The TV app needs no press: once OGTV has formed and the channel is playing behind the intro, the intro goes on by itself
 let askedAt=0, tvGoing=false;
