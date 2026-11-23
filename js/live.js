@@ -81,9 +81,9 @@ const LIVE = {
  ],
  "bihar": [
   {
-   "id": "MdwgwsO3DtQ",
-   "t": "Bihar Job Vacancy 2026 LIVE : bihar ke uchch shiksha vibhag men banpar bahali!| Bihar Teac",
-   "since": "2026-11-22T14:52:11Z",
+   "id": "A2U23e2Tcf4",
+   "t": "Bihar News LIVE: aaj ki bari khabren| Anant Singh Daughter Wedding | PM Modi Bihar Visit |",
+   "since": "2026-11-22T16:27:56Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
