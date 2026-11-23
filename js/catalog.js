@@ -522,6 +522,33 @@ const CATALOG = [
   {id:"papuvlVeZg8",t:"Rockabye · Clean Bandit, Anne-Marie",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:5,src:"Clean Bandit",pub:"2016-10-21"}, // After Hours 15
   {id:"v7HAVTyvLqI",t:"STAR WALKIN' (League of Legends Worlds Anthem) · Lil Nas X",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"LilNasXVEVO",pub:"2022-09-29"}, // After Hours 16
   {id:"SC4xMk98Pdc",t:"Congratulations · Post Malone, Quavo",cat:"select",home:"foreign",tag:"spotify",lang:"en",min:4,src:"PostMaloneVEVO",pub:"2017-01-23"}, // After Hours 62
+  // Songs like Ruposh and Jhol (by request, 23 Nov 2026): Select's soul set. Coke Studio Pakistan, Pakistani indie and OSTs, and
+  // Indian indie in that vein; official uploads (the artist's own channel or Topic, Coke Studio Pakistan, the label), each
+  // checked to play embedded. Not Hasan Raheem's "Wishes": both his uploads refuse embedding. Pasoori is in the Spotify set
+  {id:"ERzPDjbMJcc",t:"Ruposh · Wajhi Farooki",cat:"select",tag:"soul",lang:"hi",min:5,src:"Wajhi Farooki",pub:"2026-06-04"},
+  {id:"-2RAq5o5pwc",t:"Jhol · Maanu, Annural Khalid · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:5,src:"Coke Studio Pakistan",pub:"2024-06-14"},
+  {id:"4FrNiFoa3x0",t:"Kahani Suno 2.0 · Kaifi Khalil",cat:"select",tag:"soul",lang:"hi",min:3,src:"Kaifi Khalil",pub:"2026-09-17"},
+  {id:"CAHN1yO196M",t:"Kahani Meri · Kaifi Khalil",cat:"select",tag:"soul",lang:"hi",min:3,src:"Novice Records",pub:"2024-04-17"},
+  {id:"-ME6vyY0Wf4",t:"Mujhe Pyaar Hua Tha · Kaifi Khalil",cat:"select",tag:"soul",lang:"hi",min:4,src:"Kaifi Khalil",pub:"2022-12-18"},
+  {id:"AX6OrbgS8lI",t:"Tu Hai Kahan · AUR",cat:"select",tag:"soul",lang:"hi",min:5,src:"AUR",pub:"2023-06-10"},
+  {id:"QxddU3sjVRY",t:"Shikayat · AUR",cat:"select",tag:"soul",lang:"hi",min:5,src:"AUR",pub:"2023-12-15"},
+  {id:"8of5w7RgcTc",t:"Pal Pal · Afusic",cat:"select",tag:"soul",lang:"hi",min:3,src:"Afusic",pub:"2025-02-17"},
+  {id:"kw4tT7SCmaY",t:"Afreen Afreen · Rahat Fateh Ali Khan, Momina Mustehsan · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:7,src:"Coke Studio Pakistan",pub:"2016-08-19"},
+  {id:"9sekgEXGm-E",t:"Faasle · Kaavish, Quratulain Balouch · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:6,src:"Coke Studio Pakistan",pub:"2017-08-18"},
+  {id:"4DVDFxiZKCg",t:"O Yaara · Abdul Hannan, Kaavish · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:5,src:"Coke Studio Pakistan",pub:"2024-05-12"},
+  {id:"Qwm6BSGrOq0",t:"Iraaday · Abdul Hannan, Rovalio",cat:"select",tag:"soul",lang:"hi",min:3,src:"Abdul Hannan",pub:"2022-03-18"},
+  {id:"aRzbHxJZSTo",t:"Bikhra · Rovalio, Abdul Hannan",cat:"select",tag:"soul",lang:"hi",min:3,src:"Rovalio",pub:"2022-02-11"},
+  {id:"zQDAi8tI-cU",t:"Kana Yaari · Kaifi Khalil, Eva B, Abdul Wahab Bugti · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:4,src:"Coke Studio Pakistan",pub:"2022-01-19"},
+  {id:"hHuG7FIKgtc",t:"Ishq · Faheem Abdullah, Rauhan Malik, Amir Ameer",cat:"select",tag:"soul",lang:"hi",min:4,src:"Artiste First",pub:"2024-04-06"},
+  // Faheem Abdullah (by request, 23 Nov 2026): his songs, official uploads (Saiyaara's title song is in the saiyaara set)
+  {id:"C3njz8sf4aM",t:"Ehsaas · Faheem Abdullah, Duha Shah",cat:"select",tag:"soul",lang:"hi",min:5,src:"Universal Music India",pub:"2025-04-15"},
+  {id:"t9dUiCYJpiw",t:"Sajde · Faheem Abdullah, Huzaif Nazar",cat:"select",tag:"soul",lang:"hi",min:9,src:"Faheem Abdullah",pub:"2024-05-11"},
+  {id:"-NHkPJj0wws",t:"Teri Yaad · Faheem Abdullah",cat:"select",tag:"soul",lang:"hi",min:6,src:"Universal Music India",pub:"2025-10-06"},
+  {id:"bJcTM4ns9KM",t:"Beqadra · Faheem Abdullah",cat:"select",tag:"soul",lang:"hi",min:4,src:"T-Series",pub:"2026-09-29"},
+  {id:"BosvyiLwlDI",t:"Chaand · Pehla Pyaar Doosri Baar · Faheem Abdullah",cat:"select",tag:"soul",lang:"hi",min:3,src:"T-Series",pub:"2026-11-04"},
+  {id:"9S5_E65AbTQ",t:"Hoor · Faheem Abdullah, Arslan Nizami · Coke Studio Bharat",cat:"select",tag:"soul",lang:"hi",min:7,src:"Coke Studio India",pub:"2026-06-30"},
+  {id:"JBUvJ7mdg3U",t:"Darbadar · Faheem Abdullah, Moosa Saleem",cat:"select",tag:"soul",lang:"hi",min:3,src:"Universal Music India",pub:"2026-11-22"},
+  {id:"8367ETnagHo",t:"Tera Woh Pyar · Momina Mustehsan, Asim Azhar · Coke Studio Pakistan",cat:"select",tag:"soul",lang:"hi",min:8,src:"Coke Studio Pakistan",pub:"2016-09-16"},
   // South Gems (by request, 21 Nov): critically acclaimed South Indian films only, each a full Hindi-dubbed upload by its
   // rights holder (Goldmines, B4U Movies, Zee Movies, Aditya Movies, Wamindia, DRJ Records), checked to play on other sites
   {id:"mW0G9W4ZE1c",t:"Drishyam (Malayalam, 2013)",cat:"southgems",lang:"hi",min:153,src:"B4U Movies",pub:"2020-02-11"},
