@@ -28,21 +28,28 @@ dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><
 
 const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
   b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
-  b.innerHTML=`<span class="dk-disc"><span class="dk-cover"></span><i class="dk-gloss"></i><i class="dk-hole"></i></span>`
+  b.innerHTML=`<span class="dk-disc"><span class="dk-cover"></span><i class="dk-hole"></i></span>`
     +`<span class="dk-n">${c.n}</span>`; // no name under it (by request, 23 Nov 2026): its cover carries it
   b.style.visibility="hidden"; // hidden until placed (render): a disc first seen where it belongs, never moved into place
   ring.appendChild(b); return {b, cover:b.querySelector(".dk-cover"), vis:false}});
-// Each disc's cover (by request, 23 Nov 2026): the channel's name in a script, white on black, as large as fits the label,
-// on one line or broken between its words onto two or three (a circle: the more lines, the narrower); the spindle hole
-// sits over it in the middle, cropping the letters it covers (by request). Measured once, when the script has loaded;
-// until then the labels are plain.
+// Each disc's cover (by request, 23 Nov 2026): the channel's name in a script, white on black, on one line or broken between
+// its words onto two or three, a little wider than the label, so the label's edge crops it a little at the sides (by
+// request): each line up to OVER times the label's width where it sits (a circle: narrower away from the middle), all of
+// it within TALL of the label's height; a layout cropped so is preferred to a bigger one that stops short of the edge.
+// The spindle hole sits over it in the middle, cropping the letters it covers.
+// Measured once, when the script has loaded; until then the labels are plain.
+const OVER=1.04, TALL=.8, BIGGEST=.7, LH=1.05; // in discs; a line's height in its size
 function letter(){const g=document.createElement("canvas").getContext("2d"); if(!g) return;
-  g.font="100px "+getComputedStyle(items[0].cover).fontFamily; const em=t=>g.measureText(t).width/100;
+  g.font="100px "+getComputedStyle(items[0].cover).fontFamily; const em=t=>g.measureText(t).width/100, LABEL=.5-5/D; // the label's radius, in discs
+  const size=ls=>{const n=ls.length, cap=Math.min(BIGGEST,TALL/(n*LH)); let lo=0, hi=cap; // the largest size at which every line keeps within OVER
+    for(let k=0;k<14;k++){const fs=(lo+hi)/2, L=fs*LH, ok=ls.every((t,j)=>{const y=Math.abs(j-(n-1)/2)*L; return em(t)*fs<=OVER*2*Math.sqrt(LABEL*LABEL-y*y)});
+      if(ok) lo=fs; else hi=fs}
+    return {fs:lo, crop:lo<cap*.99}}; // crop: the label's width set its size
   items.forEach((it,i)=>{const w=CHANNELS[i].name.split(" "), ways=[[w.join(" ")]]; let best=null;
     for(let k=1;k<w.length;k++) ways.push([w.slice(0,k).join(" "),w.slice(k).join(" ")]);
     if(w.length>2) ways.push(w);
-    for(const ls of ways){const fs=Math.min([.66,.6,.56][ls.length-1]/Math.max(...ls.map(em)),.6/(ls.length*1.05),.27);
-      if(!best||fs>best.fs+.005) best={fs,ls}} // fewer lines unless more are clearly bigger
+    for(const ls of ways){const s=size(ls); // cropped at the sides first; then fewer lines, unless more are clearly bigger
+      if(!best||s.crop&&!best.crop||s.crop===best.crop&&s.fs>best.fs+.005) best={...s,ls}}
     it.cover.innerHTML=best.ls.map(esc).join("<br>"); it.cover.style.fontSize=`calc(var(--d) * ${best.fs.toFixed(3)})`})}
 
 // Sizes: the discs' circle is wide enough that neighbours don't overlap; the record's rim is the panel's foot
