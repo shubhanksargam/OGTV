@@ -1,8 +1,8 @@
 /* ---------- The channel record (by request) ----------
    Above the panel under the TV (what's on now) is a record, of which only the bottom segment shows: black vinyl with its grooves and
-   a gold rim, and every channel round its rim, all 360 degrees of it, each a small disc with its own cover (its name in a
-   script, black on ivory; no pictures, by request). The channel you're on sits at the bottom centre; its neighbours
-   rise away along the rim on either side, smaller the further they are. Turning the record (drag or swipe across it, a trackpad's sideways scroll, or ← → once it has
+   a gold rim, and every channel round its rim, all 360 degrees of it, each a small disc with the cover of what's on it
+   now. The channel you're on sits at the bottom centre; its neighbours rise away along the rim on either side, smaller
+   the further they are. Turning the record (drag or swipe across it, a trackpad's sideways scroll, or ← → once it has
    focus) browses the channels: the one at the centre shows what's on it, as the full-screen strip does, with Watch.
    A tap on a channel's disc watches it, and the record turns to it. Left alone for 15 s, it turns back to the channel
    you're on. It moves only while it turns, and only by transforms (kind to a phone's GPU). */
@@ -13,7 +13,7 @@ const N=CHANNELS.length, STEP=2*Math.PI/N, IDLE=15e3;
 const still=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wrapD=d=>((d%N)+N*1.5)%N-N/2;            // a distance round the record, -N/2 to N/2 channels
 const at=p=>((Math.round(p)%N)+N)%N;            // the channel at a position
-const LIFT=36; // room under the centre disc for its number, above the rim
+const LIFT=54; // room under the centre disc for its number and name, above the rim
 let W=0, H=0, D=100, r=700, pos=cur, target=cur, raf=0, drag=null, dragged=false, idle=0, wheelT=0, shown=-1, busy=false, pending=null, changeT=0;
 // The record itself is painted once onto a canvas the size of the panel (drawRecord), so nothing about it has to be
 // painted again while the TV is busy tuning in; and the little spinning record for tuning in sits on its own layer
@@ -27,30 +27,11 @@ let geo=null, tintAt=null;
 dial.insertAdjacentHTML("beforeend",`<div class="dial-load" aria-hidden="true"><span class="vinyl dial-spin"><i class="vinyl-grooves"></i><i class="vinyl-sweep"></i><i class="vinyl-label"></i><i class="dk-hole"></i></span><span>Tuning in</span></div>`);
 
 const items=CHANNELS.map((c,i)=>{const b=document.createElement("button");
-  b.type="button"; b.className="dk"; b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`);
-  b.innerHTML=`<span class="dk-disc"><span class="dk-cover"></span><i class="dk-hole"></i></span>`
-    +`<span class="dk-n">${c.n}</span>`; // no name under it (by request, 23 Nov 2026): its cover carries it
+  b.type="button"; b.className="dk"+(c.name.length>13?" long":""); b.dataset.i=i; b.tabIndex=-1; b.setAttribute("aria-label",`Watch ${c.n} ${c.name}`); // long: its name needs room on a phone (css)
+  b.innerHTML=`<span class="dk-disc"><img alt="" decoding="async" draggable="false"><i class="dk-gloss"></i><i class="dk-hole"></i></span>`
+    +`<span class="dk-n">${c.n}</span><span class="dk-name">${esc(c.name)}</span>`;
   b.style.visibility="hidden"; // hidden until placed (render): a disc first seen where it belongs, never moved into place
-  ring.appendChild(b); return {b, cover:b.querySelector(".dk-cover"), vis:false}});
-// Each disc's cover (by request, 23 Nov 2026): the channel's name in a script, white on black, on one line or broken between
-// its words onto two or three, a little wider than the label, so the label's edge crops it a little at the sides (by
-// request): each line up to OVER times the label's width where it sits (a circle: narrower away from the middle), all of
-// it within TALL of the label's height; a layout cropped so is preferred to a bigger one that stops short of the edge.
-// The spindle hole sits over it in the middle, cropping the letters it covers.
-// Measured once, when the script has loaded; until then the labels are plain.
-const OVER=1.04, TALL=.8, BIGGEST=.7, LH=1.05; // in discs; a line's height in its size
-function letter(){const g=document.createElement("canvas").getContext("2d"); if(!g) return;
-  g.font="100px "+getComputedStyle(items[0].cover).fontFamily; const em=t=>g.measureText(t).width/100, LABEL=.5-5/D; // the label's radius, in discs
-  const size=ls=>{const n=ls.length, cap=Math.min(BIGGEST,TALL/(n*LH)); let lo=0, hi=cap; // the largest size at which every line keeps within OVER
-    for(let k=0;k<14;k++){const fs=(lo+hi)/2, L=fs*LH, ok=ls.every((t,j)=>{const y=Math.abs(j-(n-1)/2)*L; return em(t)*fs<=OVER*2*Math.sqrt(LABEL*LABEL-y*y)});
-      if(ok) lo=fs; else hi=fs}
-    return {fs:lo, crop:lo<cap*.99}}; // crop: the label's width set its size
-  items.forEach((it,i)=>{const w=CHANNELS[i].name.split(" "), ways=[[w.join(" ")]]; let best=null;
-    for(let k=1;k<w.length;k++) ways.push([w.slice(0,k).join(" "),w.slice(k).join(" ")]);
-    if(w.length>2) ways.push(w);
-    for(const ls of ways){const s=size(ls); // cropped at the sides first; then fewer lines, unless more are clearly bigger
-      if(!best||s.crop&&!best.crop||s.crop===best.crop&&s.fs>best.fs+.005) best={...s,ls}}
-    it.cover.innerHTML=best.ls.map(esc).join("<br>"); it.cover.style.fontSize=`calc(var(--d) * ${best.fs.toFixed(3)})`})}
+  ring.appendChild(b); return {b, img:b.querySelector("img"), id:"", vis:false}});
 
 // Sizes: the discs' circle is wide enough that neighbours don't overlap; the record's rim is the panel's foot
 function measure(){W=dial.clientWidth; H=dial.clientHeight; if(!W) return false;
@@ -86,17 +67,23 @@ function drawTint(){if(!geo||tintAt===pos) return; tintAt=pos;
   g.save(); g.beginPath(); g.arc(cx,cy,R,0,Math.PI*2); g.clip(); g.fillStyle=sweep; g.fillRect(0,0,W,H);
   const fade=g.createRadialGradient(cx,cy,Math.max(0,-cy-10),cx,cy,R); fade.addColorStop(0,"rgba(0,0,0,.25)"); fade.addColorStop(1,"rgba(0,0,0,1)");
   g.globalCompositeOperation="destination-in"; g.fillStyle=fade; g.fillRect(0,0,W,H); g.restore()}
+// The cover of what's on a channel now (the programme's YouTube picture), fetched once the disc first comes round
+function art(i){const s=onNow(i), it=items[i]; if(!s||s.pending) return; // pending: its videos are on their way (js/data.js)
+  const id=s.menu?((latestItems()[0]||{}).id||""):s.v.id; if(!id||it.id===id) return; // Latest Mix: its list's first video
+  it.id=id; it.img.src=`https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`}
 function render(){if(!W) return; // not measured yet (or out of sight): the observer places it all when it is laid out
   const cx=W/2, cy=H-D/2-LIFT-r, mid=at(pos);
   for(let i=0;i<N;i++){const it=items[i], d=wrapD(i-pos), a=d*STEP, ad=Math.abs(d), x=r*Math.sin(a);
     const vis=ad<5.5&&Math.abs(x)<W/2+D;
     if(vis!==it.vis){it.b.style.visibility=vis?"":"hidden"; it.vis=vis}
     if(!vis) continue;
+    if(!it.id) art(i);
     const s=Math.max(.5,1-.13*ad);
     it.b.style.transform=`translate3d(${(cx+x).toFixed(1)}px,${(cy+r*Math.cos(a)).toFixed(1)}px,0) scale(${s.toFixed(3)})`;
     it.b.style.opacity=ad<3.5?"":Math.max(0,(5.5-ad)/2).toFixed(2);
     it.b.style.zIndex=100-Math.round(ad*10);
-    it.b.classList.toggle("mid",i===mid)}
+    it.img.style.transform=`rotate(${(-a*180/Math.PI).toFixed(1)}deg)`; // the cover turns with the record
+    it.b.classList.toggle("near",ad<1.5); it.b.classList.toggle("mid",i===mid)}
   if(mid!==shown) showInfo(mid);
   drawTint()}
 // What's on the channel at the centre, as the full-screen strip shows it
@@ -126,7 +113,7 @@ window.dialTo=i=>{if(busy){pending=i; return} turnToChannel(i)};
 // already turned to the channel.
 window.dialBusy=on=>{if(on===busy) return; busy=on;
   if(on){dial.classList.add("loading"); return}
-  shown=-1;
+  items.forEach((it,i)=>{if(it.id) art(i)}); shown=-1;
   if(pending!==null){const i=pending, base=Math.round(target); pending=null; cancelAnimationFrame(raf); raf=0;
     items.forEach((it,k)=>it.b.classList.toggle("cur",k===cur)); pos=target=base+wrapD(i-base)} // no turn to watch: it was away
   render(); dial.classList.remove("loading"); warmThen()};
@@ -166,7 +153,7 @@ new ResizeObserver(()=>{if(W&&dial.clientWidth===W&&dial.clientHeight===H) retur
 // Real time, as the programme guide: the covers and the centre change the moment a programme ends on any channel (the
 // soonest end of all, looked up again after each change; tick() calls this too, so a skipped programme doesn't linger),
 // and the centre's progress bar moves every second. Nothing changes while a channel tunes in.
-window.dialRefresh=()=>{if(busy) return; const i=at(pos); if(!drag&&info._k!==infoKey(i)) showInfo(i)};
+window.dialRefresh=()=>{if(busy) return; items.forEach((it,i)=>{if(it.id||CHANNELS[i].menu) art(i)}); const i=at(pos); if(!drag&&info._k!==infoKey(i)) showInfo(i)};
 function nextChange(){clearTimeout(changeT); const now=tvNow(); let soon=now+60e3;
   for(const c of CHANNELS){const s=slotAt(c,now); if(s&&!s.live&&!s.pending&&!s.menu&&s.end>now&&s.end<soon) soon=s.end}
   changeT=setTimeout(()=>{dialRefresh(); warmThen()},soon-now+100)}
@@ -183,7 +170,6 @@ function warmThen(){if(warming){again=true; return} warming=true; again=false; l
   whenIdle(step)}
 warmThen();
 addEventListener("ogtv-data",warmThen);
-whenIdle(()=>{const f=document.fonts; (f?f.load("100px "+getComputedStyle(items[0].cover).fontFamily).catch(()=>{}):Promise.resolve()).then(letter)});
 setInterval(()=>{if(busy||document.hidden) return; const i=at(pos), s=onNow(i), now=chNow(i), b=info.querySelector(".di-bar i");
   if(b&&s&&!s.live&&!s.pending&&!s.menu) b.style.width=Math.max(0,Math.min(100,(now-s.start)/(s.end-s.start)*100)).toFixed(1)+"%"},1000);
 })();
