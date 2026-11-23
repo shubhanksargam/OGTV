@@ -7,6 +7,10 @@
 const GYAAN_MIX=[{src:"^Tarikh$",share:0.15},{src:"^HISTORY TV18$",share:0.12},{src:"^(Timeline|World History Encyclopedia|Epimetheus)$",share:0.15},
   {src:"^(PMO India|Indian Army)$",share:0.1},{src:"^(ISRO|Documentary|Explainer|Mohak Mangal|StudyIQ IAS)$"}];
 const DATA_MIX=[{src:"^Khan Sir$",share:0.15},{src:"^Life On Wheels$",share:0.15},{src:"^(India in Pixels|Nitish Rajput|Infra Talks|Breakdown|Think School|Aevy TV)$"}];
+// Vibe (by request, 24 Nov 2026): its sets, about half international, and drinking songs left out, strictly (titles; the
+// list itself is chosen without them)
+const VIBE_MIX=[{tag:"world",share:0.35},{tag:"bolly",share:0.2},{tag:"punjabi",share:0.15},{tag:"south",share:0.1},{tag:"anthem"}]; // energetic South songs too (by request)
+const NO_DRINKING=String.raw`\b(daa?ru|sharaa?b|sharabi|botal|bottles?|vodka|whiske?y|beers?|pegs?|pegg|theke?y?|nash[ae]|tequila|rum|wine|champagne|drunk|drinks?|drinking|bewda|tipsy|liquor|alcohol|shots?|pub|cheers|maikhana|mehkhana|jaam|saa?qi|piyo|pila)\b`;
 const CHANNELS = [
   // ---- Latest ----
   // Latest Mix (by request, 22 Nov 2026): channel 1, OGTV's first (by request, 22 Nov 2026). No schedule (menu). It plays the last two days' trending uploads of OGTV's YouTube
@@ -311,16 +315,16 @@ const CHANNELS = [
     {from:11,to:11.75,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Trending on Reels: the songs India is making Reels and Shorts with"},
     {from:19,to:19.75,fixed:true,cat:"desipop",tag:"reels",alt:"desipop",label:"Evening: trending on Reels"}]},
   {key:"drive",n:34,group:"Music",name:"Drive",en:"Road-trip songs",parts:[{from:0,to:24,cat:"drive",label:"Road-trip playlist"}]},
-  // festival: songs for today's festival from js/festivals.js, or the next one coming up (the Festivals channel, renamed by request).
-  // No devotional songs, by request: bhajans, aartis, kirtans, shabads, qawwalis and carols play on Bhakti or not at all.
-  // skip: festivals whose songs are all worship, passed over for the next one; exclude: titles, excludeSrc: sources never played
-  // audio: only audio-only uploads (by request, 23 Nov 2026), each song as its official audio track (js/scheduler.js heard)
-  {key:"festival",n:35,group:"Music",name:"Vibe",oldSlugs:["festivals"],audio:true,en:"Festival party songs: Diwali, Holi, garba, Lohri, Eid, Christmas & New Year",festival:{
-    skip:"^fest-(ram|chhath|shivratri|janmashtami|gurpurab)$",
-    exclude:String.raw`bhajan|aarti|aarati|\barti\b|chalisa|stuti|vandana|vandna|mantra|stotra|stotr|ashtak|shatakam|shlok|\bpuja\b|pooja|pujan|bhakti|kirtan|shabad|gurbani|qawwal|qavval|kavvali|\bnaat\b|vrat katha|amritwani|maiya|\bmata\b|\bdevi\b|bhagwan|bhagvan|lakshmi|laxmi|ganesh|ganpati|ganapati|bappa|\bshiv\b|shiva|shankar|shambh|bhole|bhola|mahadev|mahakal|\bram\b|shri ram|siya ram|krishna|krishn\b|kanha|govind|gopal|shyam|radhe|hanuman|bajrang|durga|\bambe\b|jagdamba|mardini|aigiri|jhanki|chhath|carol|hymn|holy night|silent night|stille nacht|manger|allah|khwaja|khvaja|maula`,
-    excludeSrc:"bhakti|bhajan|shabad|kirtan|qawwal|choir|sounds of isha|sanskrit channel|tilak|mayapur|barsana|lathmar|vrat katha|mardini",
-    min:12, // festivals left with fewer songs than this are passed over too
-    ahead:14, party:["fest-diwali","fest-newyear","fest-holi","fest-lohri"]},parts:[]}, // a festival's songs from two weeks before it; party songs in between
+  // Vibe (by request, 24 Nov 2026): a premium, energetic dance & concert channel, no longer festivals. About half international,
+  // Gangnam Style kind of songs, every song its official audio track (audio), no drinking songs (NO_DRINKING, and a list chosen
+  // without them). A concert hour of stadium anthems at 8 pm.
+  {key:"festival",n:35,group:"Music",name:"Vibe",oldSlugs:["festivals"],audio:true,en:"Dance & concert bangers: Bollywood, Punjabi, South & the world's party hits",parts:[
+    {from:0,to:6,  cat:"vibe",mix:VIBE_MIX,exclude:NO_DRINKING,label:"After dark: the dance floor, desi & global"},
+    {from:6,to:12, cat:"vibe",mix:VIBE_MIX,exclude:NO_DRINKING,label:"Morning energy: dance hits from Seoul to Mumbai"},
+    {from:12,to:18,cat:"vibe",mix:VIBE_MIX,exclude:NO_DRINKING,label:"Afternoon bangers: Bollywood, Punjabi & the world's party hits"},
+    {from:18,to:20,cat:"vibe",mix:VIBE_MIX,exclude:NO_DRINKING,label:"Warm-up: the dance floor fills"},
+    {from:20,to:21,cat:"vibe",tag:"anthem",alt:"vibe",exclude:NO_DRINKING,label:"Concert hour: stadium anthems, from Queen to Chak De India"},
+    {from:21,to:24,cat:"vibe",mix:VIBE_MIX,exclude:NO_DRINKING,label:"Late night: the party, desi & global"}]},
   {key:"hits2010",n:36,group:"Music",name:"2010s Hits",en:"Bollywood 2010-2019, and KK",parts:[{from:0,to:21,cat:"hits2010",label:"2010s hits"},
     {from:21,to:22,cat:"hits2010",tag:"kk",alt:"hits2010",label:"KK, back to back: Zindagi Do Pal Ki, Tujhe Sochta Hoon & Tu Jo Mila"}, // by request, 23 Nov 2026
     {from:22,to:24,cat:"hits2010",label:"2010s hits"}]},

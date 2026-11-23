@@ -38,7 +38,7 @@ export default {
   select: {verb: "listen to", asks: ["favourite songs: Indian and global hits, Dhurandhar, Saiyaara, Diljit Dosanjh and Karan Aujla"]},
   bollywood: {verb: "listen to", asks: ["the songs trending on Instagram Reels and YouTube Shorts in India", "this week's trending Hindi songs", "Arijit Singh and Shreya Ghoshal songs"]},
   drive: {verb: "listen to", asks: ["road-trip songs", "a driving playlist"]},
-  festival: {verb: "listen to", asks: ["Diwali, Holi and garba party songs", "festival songs for Lohri, Eid, Christmas and New Year"]},
+  festival: {verb: "listen to", asks: ["dance and party songs, desi and international", "Bollywood dance anthems and Punjabi bangers", "concert and stadium anthems"]},
   hits2010: {verb: "listen to", asks: ["Bollywood songs from 2010 to 2019"]},
   hits2000: {verb: "listen to", asks: ["Bollywood songs from 2000 to 2009"]},
   hits90: {verb: "listen to", asks: ["90s Bollywood songs", "Kumar Sanu and Alka Yagnik songs, and 90s audio jukeboxes"]},

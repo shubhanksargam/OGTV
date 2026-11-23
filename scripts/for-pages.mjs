@@ -70,7 +70,7 @@ export default n => [
   {slug: "songs-by-mood", ch: "select", use: "mood", h: "Songs for your mood",
     title: "Songs for Every Mood: Road Trip, Workout, Party, Calm | OGTV",
     description: "Pick a channel for your mood on OGTV: Select for favourites, Drive for road trips, Gym for workouts, Vibe for parties, Raag for calm, Sadabahar for nostalgia.",
-    body: ["On OGTV a mood is a channel. Select plays favourites. Drive is for the road: road-trip songs, non-stop. Gym is for a workout: Punjabi gym bangers, desi hip-hop, rap, rock and phonk. Vibe is for a party or a festival: Diwali, Holi, garba, Lohri, Eid, Christmas and New Year. Raag is for calm and focus: sitar, santoor and classical voices.",
+    body: ["On OGTV a mood is a channel. Select plays favourites. Drive is for the road: road-trip songs, non-stop. Gym is for a workout: Punjabi gym bangers, desi hip-hop, rap, rock and phonk. Vibe is for a party, dancing or a concert feel: Bollywood dance anthems, Punjabi bangers and the world's party hits, from Gangnam Style to Despacito. Raag is for calm and focus: sitar, santoor and classical voices.",
       "Sadabahar is for nostalgia, 90s Hits for romance, Bhakti for prayer and mornings, Deccan Chargers for South Indian energy, and Anthems for singing along. Put one on and leave it: it plays to a schedule, so there's nothing to pick."],
     chans: ["select", "drive", "gym", "festival", "raag", "sargam", "geet", "hits90", "bhakti", "deccan", "anthems"],
     faq: [["What songs can I play on a road trip?", "OGTV's Drive channel plays road-trip songs non-stop, free: ogtv.co.in/drive/."],
