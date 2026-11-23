@@ -65,9 +65,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "gh45_mYE9iY",
-   "t": "Donald Trump LIVE: Trump's Stunning Announcement | Trump Latest News LIVE | US News | Whit",
-   "since": "2026-11-23T18:09:27Z",
+   "id": "K2H_Ole8abM",
+   "t": "Rubio's Shocking Order Live | Rubio's Iran Warning Stuns America | Trump Iran Showdown | T",
+   "since": "2026-11-23T15:57:24Z",
    "src": "Times Now",
    "lang": "en"
   },
