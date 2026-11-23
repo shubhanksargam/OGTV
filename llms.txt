@@ -130,7 +130,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - [9 · India in Data](https://ogtv.co.in/india-in-data/): India in Data on OGTV: maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School, free and always on. Videos from Khan Sir.
 - [10 · Classroom](https://ogtv.co.in/classroom/): Classroom on OGTV: data & AI engineering, UPSC & lectures, free and always on. Videos from NPTEL IIT Kharagpur, MIT OpenCourseWare, Stanford Online and NPTEL.
 - [11 · Digital System Design](https://ogtv.co.in/digital-system-design/): Digital System Design on OGTV: IIT Madras's course from its BS in Electronic Systems, all 62 lectures in order on a loop that goes on and on, from what a digital system is and Verilog to FPGAs, memory, CPUs and SoCs. Free, with no sign-up.
-- [12 · Tech](https://ogtv.co.in/tech/): Tech on OGTV: gadgets, explainers, cars & bikes, free and always on. Videos from Tech Burner, Beebom, C4ETech and Marques Brownlee.
+- [12 · Tech](https://ogtv.co.in/tech/): Tech on OGTV: gadgets, explainers, cars & bikes, free and always on. Videos from Technical Guruji, Tech Burner, Beebom and C4ETech.
 - [13 · Paisa](https://ogtv.co.in/paisa/): Paisa on OGTV: money: The Daily Brief, Markets by Zerodha & investing, free and always on. Videos from Ankur Warikoo, Zero1 by Zerodha and CA Rachana Ranade.
 - [14 · Baatcheet](https://ogtv.co.in/baatcheet/): Baatcheet on OGTV: podcasts & long interviews: Raj Shamani, Neelesh Misra's Slow Interview, Lallantop's GITN, free and always on. Videos from Raj Shamani.
 - [15 · Niche](https://ogtv.co.in/niche/): Niche on OGTV: rare, offbeat & curious, free and always on. Videos from Primitive Technology, Tom Scott, Half as Interesting and Wendover Productions.
