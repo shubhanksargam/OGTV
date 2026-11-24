@@ -2,118 +2,125 @@
 const LIVE = {
  "news": [
   {
-   "id": "jDEC_lGh5rs",
-   "t": "Black and White with Sweta Singh LIVE: Balen Shah India Visit | PM Modi | Asia Super Power",
-   "since": "2026-11-23T15:21:39Z",
+   "id": "GZMU-b8g0fw",
+   "t": "Aaj Tak LIVE : SP-Congress Meeting | UP Elections | Jensen Huang Returns NVIDIA | Hindi Ne",
+   "since": "2026-11-24T01:05:46Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "3lxqnH5Zo7s",
-   "t": "UP Elections SP Congress Seat Sharing LIVE Updates: sapa ka kliyar sandesh | Akhilesh | Ra",
-   "since": "2026-11-23T18:13:51Z",
+   "id": "OIreZFn0BPo",
+   "t": "Headlines Today LIVE: bari khabren phataphat | Aaj Ki Taja Khabar | 24 November | Hindi Ne",
+   "since": "2026-11-24T02:22:45Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "pfhsOgYDSP0",
-   "t": "Ramdev-bageshvar men ho gaee laraee?aa gaee hosh urane vali khabar!Ramdev Vs Baba Ramdev |",
-   "since": "2026-11-23T15:59:30Z",
+   "id": "H8nGbv_f6G0",
+   "t": "Today Breaking News | 24 November | Baba Bageshwar | Yogi | PM Modi | Akhilesh | Nepal | R",
+   "since": "2026-11-24T01:33:12Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "dBcT4SW7xhc",
-   "t": "Aaj Ki Baat LIVE | Rajat Sharma: bharat daure par balen shah, kya dil DONE? | India-Nepal ",
-   "since": "2026-11-23T14:59:17Z",
+   "id": "jVqdO5uRVqU",
+   "t": "Aaj ki Badi Khabrein LIVE: Prakash Parv 2026 | Varanasi Dev Deepawali | SP-Congress Seat S",
+   "since": "2026-11-24T01:20:08Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "-UlHMDZ1TQo",
-   "t": "Indonesia Navy Big Action On China Ship LIVE: chini jahaj jabt..nausena ke tagre ekshan se",
-   "since": "2026-11-23T18:11:11Z",
+   "id": "juYMTe4ntvY",
+   "t": "Today Big Breaking News LIVE: abhi ki sabse bari khabren LIVE | Balen Shah India Visit |UP",
+   "since": "2026-11-24T04:05:18Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "3CygMqk4GmU",
-   "t": "Live: Desh Ki Pathshala | desh ki pathshala Episode 158 | PM Modi | Rahul Gandhi | India A",
-   "since": "2026-11-23T15:19:57Z",
+   "id": "bh4CmEqa4Ho",
+   "t": "Anant Singh Daughter Wedding Live News : anant sinh ko jhatka, pandal men bhara pani! | Bi",
+   "since": "2026-11-24T04:24:18Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "i5DGOBglMeI",
-   "t": "NVIDIA Stock Soars 30%? Jensen Huang Returns As CEO | NVIDIA Breaking News LIVE",
-   "since": "2026-11-23T14:28:27Z",
-   "src": "NDTV 24x7",
-   "lang": "en"
+   "id": "6rRBIMOMYIs",
+   "t": "News Punch LIVE : DD News",
+   "since": "2026-11-24T04:58:57Z",
+   "src": "DD News",
+   "lang": "hi"
   },
   {
-   "id": "zNYTHNruRP4",
-   "t": "LIVE: S Gurumurthy Exclusive On Tamil Nadu Deepam Row Amid The Growing Political Flashpoin",
-   "since": "2026-11-23T18:09:23Z",
+   "id": "DSuKMCcAgIM",
+   "t": "India Today LIVE: Jensen Huang | NVIDIA CEO | PM Modi | Donald Trump | UP Elections 2027 |",
+   "since": "2026-11-24T01:25:16Z",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "XEf7CnpjfJs",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
-   "since": "2026-11-23T01:35:10Z",
+   "id": "erMwZPgeT-I",
+   "t": "US-Iran War LIVE: Iran Unveils Khorramshahr-4 Missile With 4,000-Km Range, Puts Europe On ",
+   "since": "2026-11-24T01:08:57Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "K2H_Ole8abM",
-   "t": "Rubio's Shocking Order Live | Rubio's Iran Warning Stuns America | Trump Iran Showdown | T",
-   "since": "2026-11-23T15:57:24Z",
+   "id": "9GHxwgoCybU",
+   "t": "Breaking News LIVE: Trump DROPS BOMBSHELL, IMMEDIATE Lockdown Declared Across America!",
+   "since": "2026-11-24T02:31:54Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "JCW7IhgILP8",
-   "t": "LIVE | JASMINE CROCKETT UNLEASHES ON KASH PATEL | 'LEAST QUALIFIED FBI DIRECTOR IN HISTORY",
-   "since": "2026-11-23T19:57:07Z",
+   "id": "0hlOAMmdrH8",
+   "t": "Ossoff vs Hegseth | Heated Senate Clash Over Iran War, US Military Claims & Billions | US-",
+   "since": "2026-11-24T02:58:52Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "HqbuslmZEZ8",
-   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
-   "since": "2026-11-23T18:05:54Z",
+   "id": "uqTLXPYvUaA",
+   "t": "Bihar-Jharkhand Earthquake Live: bihar aur jharkhand men doli dharti | Earthquake News | N",
+   "since": "2026-11-24T03:58:42Z",
    "src": "News18 Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "CRFKv7aYQic",
+   "t": "Surtendra Yadav Podcast Controversy: phir vivadon men RJD sansad surendr yadav",
+   "since": "2026-11-24T04:18:40Z",
+   "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
  ],
  "newsroom": [
   {
-   "id": "vJAGNURr7uA",
-   "t": "The Palki Sharma Show | November 23, 2026 | IGR | India Global Review",
-   "since": "2026-11-23T15:29:28Z",
+   "id": "y0BF3e9Dbbk",
+   "t": "The Palki Sharma Show LIVE: Nvidia Reinstates Jensen Huang as CEO | Nepal PM's Shortened I",
+   "since": "2026-11-24T02:51:09Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "1fcDlxYftTA",
-   "t": "LIVE: Iran's IRGC Shows Off 'Double Trouble' Missile Aimed At Trump's Troops | Vantage",
-   "since": "2026-11-23T15:27:54Z",
+   "id": "BzgbuQDVoCM",
+   "t": "LIVE: Iran's Double Blow to Trump in Hormuz: F-35 Emergency, Tankers on Fire | Firstpost L",
+   "since": "2026-11-24T04:29:31Z",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "XEf7CnpjfJs",
-   "t": "Russia-Ukraine War LIVE: Putin Unleashes Hypersonic Missile Terror On Ukraine, Blasts Shak",
-   "since": "2026-11-23T01:35:10Z",
+   "id": "erMwZPgeT-I",
+   "t": "US-Iran War LIVE: Iran Unveils Khorramshahr-4 Missile With 4,000-Km Range, Puts Europe On ",
+   "since": "2026-11-24T01:08:57Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "wru5CFTR9Ts",
-   "t": "LIVE: NYC Mayor Zohran Mamdani Announces New Transportation Plan for New York City",
-   "since": "2026-11-23T16:41:22Z",
+   "id": "Tm_6KUoIEis",
+   "t": "LIVE: Mamdani Questions AI Economy as Jensen Huang Returns to NVIDIA Helm | US | AI | Tech",
+   "since": "2026-11-24T03:59:22Z",
    "src": "Mint",
    "lang": "en"
   },
