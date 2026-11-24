@@ -3,7 +3,7 @@ const LIVE = {
  "news": [
   {
    "id": "GZMU-b8g0fw",
-   "t": "Aaj Tak LIVE : SP-Congress Meeting | UP Elections | Jensen Huang Returns NVIDIA | Hindi Ne",
+   "t": "Aaj Tak LIVE : BJP-Akali Alliance | SP-Congress Meeting | UP Election | Sheikh Hasina | Hi",
    "since": "2026-11-24T01:05:46Z",
    "src": "Aaj Tak",
    "lang": "hi"
@@ -16,9 +16,9 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "H8nGbv_f6G0",
-   "t": "Today Breaking News | 24 November | Baba Bageshwar | Yogi | PM Modi | Akhilesh | Nepal | R",
-   "since": "2026-11-24T01:33:12Z",
+   "id": "poUsHBfxhOU",
+   "t": "Dhirendr shastri par baba ramdev ke bharakne ki asli vajah! LIVE | Ramdev vs Bageshwar Bab",
+   "since": "2026-11-24T05:45:18Z",
    "src": "NDTV India",
    "lang": "hi"
   },
@@ -37,18 +37,25 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "bh4CmEqa4Ho",
+   "id": "bn_se4b4Pm0",
    "t": "Anant Singh Daughter Wedding Live News : anant sinh ko jhatka, pandal men bhara pani! | Bi",
-   "since": "2026-11-24T04:24:18Z",
+   "since": "2026-11-24T05:26:35Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "6rRBIMOMYIs",
-   "t": "News Punch LIVE : DD News",
-   "since": "2026-11-24T04:58:57Z",
+   "id": "ikwBzTFVMrM",
+   "t": "11 Baje LIVE : UP chunav se pahle siton par siyasi saudebaji! | SP-Congress men 130 siton ",
+   "since": "2026-11-24T05:29:39Z",
    "src": "DD News",
    "lang": "hi"
+  },
+  {
+   "id": "xlbpp32Zp9k",
+   "t": "NDTV Live: Jensen Huang | Nvidia | Congress | UP Elections 2027 | PM Modi | Rahul Gandhi",
+   "since": "2026-11-24T01:32:26Z",
+   "src": "NDTV 24x7",
+   "lang": "en"
   },
   {
    "id": "DSuKMCcAgIM",
@@ -72,9 +79,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "0hlOAMmdrH8",
-   "t": "Ossoff vs Hegseth | Heated Senate Clash Over Iran War, US Military Claims & Billions | US-",
-   "since": "2026-11-24T02:58:52Z",
+   "id": "Z1fKHiPA6aw",
+   "t": "KARTHIGAI DEEPAM 2026 LIVE: Maha Deepam Lighting at Tiruvannamalai | Arunachala Hills | N1",
+   "since": "2026-11-24T01:03:19Z",
    "src": "CNN-News18",
    "lang": "en"
   }
@@ -88,9 +95,9 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "CRFKv7aYQic",
-   "t": "Surtendra Yadav Podcast Controversy: phir vivadon men RJD sansad surendr yadav",
-   "since": "2026-11-24T04:18:40Z",
+   "id": "aqJOifSjl84",
+   "t": "Nitish Kumar Visit JDU office : JDU daphtar pahunche nitish kumar! LIVE",
+   "since": "2026-11-24T06:02:21Z",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   }
@@ -118,9 +125,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "Tm_6KUoIEis",
-   "t": "LIVE: Mamdani Questions AI Economy as Jensen Huang Returns to NVIDIA Helm | US | AI | Tech",
-   "since": "2026-11-24T03:59:22Z",
+   "id": "0LLDWkjiBnA",
+   "t": "LIVE: Canada NDP Pushes to Ban Surveillance Pricing, Targets Big Tech Over Personal Data |",
+   "since": "2026-11-24T06:00:56Z",
    "src": "Mint",
    "lang": "en"
   },
