@@ -2,132 +2,139 @@
 const LIVE = {
  "news": [
   {
-   "id": "GZMU-b8g0fw",
-   "t": "Aaj Tak LIVE : BJP-Akali Alliance | SP-Congress Meeting | UP Election | Sheikh Hasina | Hi",
-   "since": "2026-11-24T01:05:46Z",
+   "id": "1wqBN35vThc",
+   "t": "Black and White with Sweta Singh LIVE: Sheikh Hasina Return | BJP-Akali Dal | UP Elections",
+   "since": "2026-11-24T15:24:46Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "OIreZFn0BPo",
-   "t": "Headlines Today LIVE: bari khabren phataphat | Aaj Ki Taja Khabar | 24 November | Hindi Ne",
-   "since": "2026-11-24T02:22:45Z",
+   "id": "ZkX9vOTfMSQ",
+   "t": "Sandeep Chaudhary LIVE: 27 ka mel...'26' ka khel! | UP Election 2027 | Akhilesh | Rahul | ",
+   "since": "2026-11-24T13:28:05Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "poUsHBfxhOU",
-   "t": "Dhirendr shastri par baba ramdev ke bharakne ki asli vajah! LIVE | Ramdev vs Bageshwar Bab",
-   "since": "2026-11-24T05:45:18Z",
+   "id": "NVUiNBodZT8",
+   "t": "Bharat Ki Baat Batata Hoon With Syed Suhail LIVE: bihar ke lal ne thoka dohra shatak! Vaib",
+   "since": "2026-11-24T15:15:35Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "jVqdO5uRVqU",
-   "t": "Aaj ki Badi Khabrein LIVE: Prakash Parv 2026 | Varanasi Dev Deepawali | SP-Congress Seat S",
-   "since": "2026-11-24T01:20:08Z",
+   "id": "RCQcYMsj9gg",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma: bijepi-akali dal mile, kya gul khile ? | BJP-Akali Allian",
+   "since": "2026-11-24T15:00:35Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "juYMTe4ntvY",
-   "t": "Today Big Breaking News LIVE: abhi ki sabse bari khabren LIVE | Balen Shah India Visit |UP",
-   "since": "2026-11-24T04:05:18Z",
+   "id": "XhyxZ63cvBc",
+   "t": "DNA LIVE : paksh-vipaksh ke 'gathbandhan modal' ka DNA test, tranp ne ek 'istiphe' se kais",
+   "since": "2026-11-24T15:21:26Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "bn_se4b4Pm0",
-   "t": "Anant Singh Daughter Wedding Live News : anant sinh ko jhatka, pandal men bhara pani! | Bi",
-   "since": "2026-11-24T05:26:35Z",
+   "id": "Y8EuJi9mQik",
+   "t": "Live: Desh Ki Pathshala With Sushant Sinha | desh ki pathshala Episode 159 | PM Modi | Tri",
+   "since": "2026-11-24T15:16:18Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "ikwBzTFVMrM",
-   "t": "11 Baje LIVE : UP chunav se pahle siton par siyasi saudebaji! | SP-Congress men 130 siton ",
-   "since": "2026-11-24T05:29:39Z",
+   "id": "-D0jadGIuSc",
+   "t": "DECODE Live: Sudhir Chaudhary | Punjab Election | BJP-SAD Alliance | Sooryavanshi | Dev De",
+   "since": "2026-11-24T15:28:00Z",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "xlbpp32Zp9k",
-   "t": "NDTV Live: Jensen Huang | Nvidia | Congress | UP Elections 2027 | PM Modi | Rahul Gandhi",
-   "since": "2026-11-24T01:32:26Z",
+   "id": "saS0RZUhs-c",
+   "t": "LIVE: Varanasi Glows With Thousands Of Diyas | Spectacular Dev Deepawali 2026 | Kartik Pur",
+   "since": "2026-11-24T13:34:55Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "DSuKMCcAgIM",
-   "t": "India Today LIVE: Jensen Huang | NVIDIA CEO | PM Modi | Donald Trump | UP Elections 2027 |",
-   "since": "2026-11-24T01:25:16Z",
+   "id": "MKLSA1eJxcM",
+   "t": "Rajdeep Show LIVE: Did Vijay Govt Defy Supreme Court Over Deepam? BJP Slams Tamil Nadu Gov",
+   "since": "2026-11-24T15:34:09Z",
    "src": "India Today",
    "lang": "en"
   },
   {
-   "id": "erMwZPgeT-I",
-   "t": "US-Iran War LIVE: Iran Unveils Khorramshahr-4 Missile With 4,000-Km Range, Puts Europe On ",
-   "since": "2026-11-24T01:08:57Z",
+   "id": "hUa5kGtFaUo",
+   "t": "LIVE: Russia Warns of Nuclear Strike as Ukraine Launches Drone Attack; Jets Breach S Korea",
+   "since": "2026-11-24T15:30:33Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "9GHxwgoCybU",
-   "t": "Breaking News LIVE: Trump DROPS BOMBSHELL, IMMEDIATE Lockdown Declared Across America!",
-   "since": "2026-11-24T02:31:54Z",
+   "id": "dcJ-iTDElgw",
+   "t": "Trump Speech LIVE | TRUMP ANNOUNCES THANKSGIVING SUPER BIG DEAL | Christmas | New Year 202",
+   "since": "2026-11-24T14:13:34Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "Z1fKHiPA6aw",
-   "t": "KARTHIGAI DEEPAM 2026 LIVE: Maha Deepam Lighting at Tiruvannamalai | Arunachala Hills | N1",
-   "since": "2026-11-24T01:03:19Z",
+   "id": "fT2F1f14KaM",
+   "t": "TRUMP LOSES HIS COOL | 'YOU'RE REALLY A RUDE PERSON!' | Trump Snaps at Reporter in Fiery E",
+   "since": "2026-11-24T15:16:14Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "uqTLXPYvUaA",
-   "t": "Bihar-Jharkhand Earthquake Live: bihar aur jharkhand men doli dharti | Earthquake News | N",
-   "since": "2026-11-24T03:58:42Z",
+   "id": "3d1t1AULLd0",
+   "t": "Bihar-Jharkhand Earthquake Live: bhukanp ke jhatke se hila pura bihar ! | Breaking News |E",
+   "since": "2026-11-24T14:12:01Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "aqJOifSjl84",
-   "t": "Nitish Kumar Visit JDU office : JDU daphtar pahunche nitish kumar! LIVE",
-   "since": "2026-11-24T06:02:21Z",
+   "id": "mH_KXtm6w4s",
+   "t": "Anant Singh Daughter Wedding : anant sinh ki beti ki haldi ka VIDEO aaya samne, dekhie pah",
+   "since": "2026-11-24T09:26:58Z",
    "src": "Zee Bihar Jharkhand",
+   "lang": "hi"
+  },
+  {
+   "id": "Ul3l3W2HgCY",
+   "t": "Anant Singh Exclusive Interview: beti ki shadi se pahle anant sinh ka dhamakedar intravyu ",
+   "since": "2026-11-24T12:18:33Z",
+   "src": "ABP Bihar",
    "lang": "hi"
   }
  ],
  "newsroom": [
   {
-   "id": "y0BF3e9Dbbk",
-   "t": "The Palki Sharma Show LIVE: Nvidia Reinstates Jensen Huang as CEO | Nepal PM's Shortened I",
-   "since": "2026-11-24T02:51:09Z",
+   "id": "holMvGmklXQ",
+   "t": "The Palki Sharma Show | November 24, 2026 | IGR | India Global Review",
+   "since": "2026-11-24T15:30:18Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "BzgbuQDVoCM",
-   "t": "LIVE: Iran's Double Blow to Trump in Hormuz: F-35 Emergency, Tankers on Fire | Firstpost L",
-   "since": "2026-11-24T04:29:31Z",
+   "id": "kqkxTsSfccc",
+   "t": "LIVE: Russia's 144 Missile Barrage Batters Ukraine, Zelensky 'Begs' For Mercy | Vantage",
+   "since": "2026-11-24T15:27:29Z",
    "src": "Firstpost",
    "lang": "en"
   },
   {
-   "id": "erMwZPgeT-I",
-   "t": "US-Iran War LIVE: Iran Unveils Khorramshahr-4 Missile With 4,000-Km Range, Puts Europe On ",
-   "since": "2026-11-24T01:08:57Z",
+   "id": "hUa5kGtFaUo",
+   "t": "LIVE: Russia Warns of Nuclear Strike as Ukraine Launches Drone Attack; Jets Breach S Korea",
+   "since": "2026-11-24T15:30:33Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "0LLDWkjiBnA",
-   "t": "LIVE: Canada NDP Pushes to Ban Surveillance Pricing, Targets Big Tech Over Personal Data |",
-   "since": "2026-11-24T06:00:56Z",
+   "id": "sFd0gISlRmw",
+   "t": "Donald Trump LIVE: Trump Unleashes Brutal Message to Carney: ‘Canada Has Been Ripping Us O",
+   "since": "2026-11-24T15:44:42Z",
    "src": "Mint",
    "lang": "en"
   },
