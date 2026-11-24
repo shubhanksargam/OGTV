@@ -9,16 +9,16 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "ZkX9vOTfMSQ",
-   "t": "Sandeep Chaudhary LIVE: 27 ka mel...'26' ka khel! | UP Election 2027 | Akhilesh | Rahul | ",
-   "since": "2026-11-24T13:28:05Z",
+   "id": "RWZFIZ-WM9I",
+   "t": "Azam Khan News LIVE: kangres-sapa men sit bantvarepar aajam khan ka khulasa,'jel men list ",
+   "since": "2026-11-24T15:35:47Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "NVUiNBodZT8",
-   "t": "Bharat Ki Baat Batata Hoon With Syed Suhail LIVE: bihar ke lal ne thoka dohra shatak! Vaib",
-   "since": "2026-11-24T15:15:35Z",
+   "id": "wYKjDfYVeBU",
+   "t": "Ramdev-bageshvar men ho gaee laraee?aa gaee hosh urane vali khabar!Ramdev Vs Baba Ramdev |",
+   "since": "2026-11-24T14:33:41Z",
    "src": "NDTV India",
    "lang": "hi"
   },
@@ -44,16 +44,16 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "-D0jadGIuSc",
-   "t": "DECODE Live: Sudhir Chaudhary | Punjab Election | BJP-SAD Alliance | Sooryavanshi | Dev De",
-   "since": "2026-11-24T15:28:00Z",
+   "id": "-DtL45QmHv4",
+   "t": "LIVE Special Show | IFFI 2026: sinema ke rang | IFFI Goa | Indian Cinema | DD News",
+   "since": "2026-11-24T17:30:13Z",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "saS0RZUhs-c",
-   "t": "LIVE: Varanasi Glows With Thousands Of Diyas | Spectacular Dev Deepawali 2026 | Kartik Pur",
-   "since": "2026-11-24T13:34:55Z",
+   "id": "N_Eq7gZSNIU",
+   "t": "Thiruparankundram Deepam Row: Why Did Vijay Government Defy Court Orders? | The Buck Stops",
+   "since": "2026-11-24T17:42:25Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -65,23 +65,23 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "hUa5kGtFaUo",
-   "t": "LIVE: Russia Warns of Nuclear Strike as Ukraine Launches Drone Attack; Jets Breach S Korea",
-   "since": "2026-11-24T15:30:33Z",
+   "id": "KGYKlQKwBmI",
+   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
+   "since": "2026-11-24T01:22:15Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "dcJ-iTDElgw",
-   "t": "Trump Speech LIVE | TRUMP ANNOUNCES THANKSGIVING SUPER BIG DEAL | Christmas | New Year 202",
-   "since": "2026-11-24T14:13:34Z",
+   "id": "sz6IhR33noY",
+   "t": "Donald Trump LIVE: Trump's Stunning Announcement | Trump Latest News LIVE | US News | Whit",
+   "since": "2026-11-24T16:58:03Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "fT2F1f14KaM",
-   "t": "TRUMP LOSES HIS COOL | 'YOU'RE REALLY A RUDE PERSON!' | Trump Snaps at Reporter in Fiery E",
-   "since": "2026-11-24T15:16:14Z",
+   "id": "geXsLhjYzf8",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "since": "2026-11-24T15:43:05Z",
    "src": "CNN-News18",
    "lang": "en"
   }
@@ -125,16 +125,16 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "hUa5kGtFaUo",
-   "t": "LIVE: Russia Warns of Nuclear Strike as Ukraine Launches Drone Attack; Jets Breach S Korea",
-   "since": "2026-11-24T15:30:33Z",
+   "id": "KGYKlQKwBmI",
+   "t": "Saudi Under Attack LIVE: Houthis Claim Deadly Missile Attack On King Khalid Airport Again ",
+   "since": "2026-11-24T01:22:15Z",
    "src": "WION",
    "lang": "en"
   },
   {
-   "id": "sFd0gISlRmw",
-   "t": "Donald Trump LIVE: Trump Unleashes Brutal Message to Carney: ‘Canada Has Been Ripping Us O",
-   "since": "2026-11-24T15:44:42Z",
+   "id": "Wu0ovVsQzm0",
+   "t": "LIVE: FBI and DOJ Target Global Scam Networks as Blanche Reveals Results of Cybercrime Cra",
+   "since": "2026-11-24T17:17:48Z",
    "src": "Mint",
    "lang": "en"
   },
