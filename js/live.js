@@ -2,65 +2,65 @@
 const LIVE = {
  "news": [
   {
-   "id": "Hl6Qjih9qPM",
-   "t": "Anant Singh Daughter Wedding LIVE: Barh ke Nadawan men Horse Race dekhne umra jansailab | ",
-   "since": "2026-11-25T09:16:27Z",
+   "id": "k4cxNHLJNaM",
+   "t": "Halla Bol Live With Anjana Om Kashyap | SP Candidate List | UP Election 2027 | Akhilesh Ra",
+   "since": "2026-11-25T12:22:49Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "mJee0bEwbTg",
-   "t": "Breaking News LIVE: akele 403 siton par laregi kangres? | Congress-SP Seating Sharing | UP",
-   "since": "2026-11-25T07:31:49Z",
+   "id": "bxgDzZk5UUE",
+   "t": "Aaj Ki Taja Khabar LIVE: sham ki 100 bari khabren | Headline | 100 News | 25 November | Br",
+   "since": "2026-11-25T12:35:31Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "GGHAfkK73zk",
-   "t": "CM Yogi se achanak milne pahunche Dhirendra Shastri LIVE | Ramdev Baba on Dhirendra Shastr",
-   "since": "2026-11-25T06:24:08Z",
+   "id": "riKy-P_ZB_U",
+   "t": "Sona kharidne se pahle savdhan! aa gaee hosh urane vali khabar LIVE | Gold Rate Today | Br",
+   "since": "2026-11-25T12:46:28Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "3ueE2Xu7cio",
-   "t": "Kahani Kursi Ki LIVE | Saurav Sharma: bantvare se pahle jang 'gugli' se kangres kaise dang",
-   "since": "2026-11-25T07:29:10Z",
+   "id": "Py0SYZIYhHo",
+   "t": "Coffee Par Kurukshetra LIVE | Saurav Sharma : UP men Congress-SP ka gathbandhan ho paega? ",
+   "since": "2026-11-25T12:50:56Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "DFWiSeOYBi0",
-   "t": "Big Action On Mumbai Muslims Attackers LIVE: premi jore ko dandon se pitne vali gaing ki t",
-   "since": "2026-11-25T08:21:07Z",
+   "id": "GEKIF1fNLYo",
+   "t": "Anant Singh Daughter Wedding LIVE : anant sinh ki beti ki shadi men jansailab LIVE |Bihar ",
+   "since": "2026-11-25T12:04:34Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "qAZ82votcgI",
-   "t": "Anant Singh Daughter Wedding Live News : anant sinh ke ganv men ghurdaur pratiyogita | Mok",
-   "since": "2026-11-25T06:37:51Z",
+   "id": "1RaB3n2pDys",
+   "t": "Bhaiyaji Kahin With Prateek Trivedi Live: UP Elections | SP-Congress Seat Sharing | Rahul-",
+   "since": "2026-11-25T12:08:27Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "3S1NyVjxrMs",
-   "t": "LIVE: Cabinet Press Briefing | Key Decisions & Announcements",
-   "since": "2026-11-25T09:32:40Z",
+   "id": "DR4qyOr4O-8",
+   "t": "LIVE Charcha Me | nae bharat ki naee uran–udyog, eyarport aur samudri vyapar | Cabinet Dec",
+   "since": "2026-11-25T12:30:19Z",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "Jy3exbRABkk",
-   "t": "LIVE: Sensex Jumps 2,000 Points As Foreign Investors Pour Billions Into Technology Stocks",
-   "since": "2026-11-25T09:10:12Z",
+   "id": "R3Y_RkPLiWI",
+   "t": "UP Election 2027 LIVE | Rahul Vs Akhilesh? PDA Alliance Faces Its Biggest Test Yet | UP Ne",
+   "since": "2026-11-25T12:26:13Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "TnyfHEqKEKo",
-   "t": "India Today LIVE: Vaibhav Sooryavanshi | Jensen Huang | PM Modi | Trump | UP Elections | N",
-   "since": "2026-11-25T01:31:07Z",
+   "id": "hzIynyDCCwo",
+   "t": "Deepam Row Live: Is an Apology Enough? CM Vijay | Fresh PIL In SC | Deepathoon | Madurai |",
+   "since": "2026-11-25T12:38:05Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -72,55 +72,55 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "qWj_EdHapTU",
-   "t": "Trump LIVE: 'WW3 on the Line?' Trump Shocks the World | Trump Speech LIVE | Breaking News ",
-   "since": "2026-11-25T02:33:15Z",
+   "id": "RnsDV6qVa90",
+   "t": "Breaking News LIVE | Secret Service Escorts Donald Trump Out of Press Conference | World N",
+   "since": "2026-11-25T11:19:39Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "IXGDipMA5FI",
-   "t": "LIVE: Trump's Major Announcement On Iran War | US Says Oil Flowing, Iran Says Hormuz Close",
-   "since": "2026-11-25T08:16:57Z",
+   "id": "YZV004hs1rY",
+   "t": "Jon Ossoff Exposes Pete Hegseth LIVE: Caught in His Own Words on US-Iran War Victory Claim",
+   "since": "2026-11-25T11:42:46Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "3t1qpC_KEAE",
-   "t": "Anant Singh Daughter Wedding LIVE: nadavan men ghoron ka jamavra ghurasvari sidhe LIVE | S",
-   "since": "2026-11-25T07:49:26Z",
+   "id": "Wv4Wp1oTcBc",
+   "t": "Anant Singh Horse Race LIVE : anant sinh ki ghurdaur men umri lakhon ki bhir! | Mokama | S",
+   "since": "2026-11-25T10:58:03Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "fvuON9xJqLw",
-   "t": "Anant Singh Daughter Wedding : anant sinh ki beti ki shadi men ghurdaur LIVE",
-   "since": "2026-11-25T06:58:38Z",
+   "id": "aqIlBYJJvIM",
+   "t": "Anant Singh Daughter Wedding : anant sinh ke yahan ghurdaur men kaun jit raha THAR ? LIVE",
+   "since": "2026-11-25T09:59:20Z",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "Ul3l3W2HgCY",
-   "t": "Anant Singh Exclusive Interview: beti ki shadi se pahle anant sinh ka dhamakedar intravyu ",
-   "since": "2026-11-24T12:18:33Z",
+   "id": "ImJAf-Emp9g",
+   "t": "Anant Singh Daughter Marriage : anant sinh ke ganv ke lie Bihta se nikli barat.. Live | AB",
+   "since": "2026-11-25T12:47:07Z",
    "src": "ABP Bihar",
    "lang": "hi"
   }
  ],
  "newsroom": [
   {
-   "id": "k_5ihihhnWM",
-   "t": "The Palki Sharma Show LIVE: Hasina Sets Return Date | Putin’s Arctic Power Play| Iran's Wa",
-   "since": "2026-11-25T06:27:01Z",
+   "id": "StfLP11uYRI",
+   "t": "Bangladesh Protest LIVE: Fresh Protests Hit Bangladesh as Wage Hike Falls Short of Workers",
+   "since": "2026-11-25T12:29:28Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "rAfKyGFw5Vo",
-   "t": "LIVE: Israel's Strike-First Warning: Is Iran Developing Chemical Weapons? | Firstpost Live",
-   "since": "2026-11-25T09:29:31Z",
+   "id": "g2RUzhklvcw",
+   "t": "LIVE | Blown Away in Seconds? Putin Considers Nuclear Strikes on 'Paper Tiger' NATO | Spot",
+   "since": "2026-11-25T12:29:39Z",
    "src": "Firstpost",
    "lang": "en"
   },
@@ -132,9 +132,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "nUXGOhjPBUc",
-   "t": "LIVE : DOJ Chief PUT ON THE SPOT Over Jensen Huang and Nvidia's China Controversy",
-   "since": "2026-11-25T09:05:02Z",
+   "id": "Ri0hGqIvkgE",
+   "t": "LIVE: Todd Blanche Faces Questions Over Trump’s Claim That Jensen Huang Was Cleared | Nvid",
+   "since": "2026-11-25T12:38:12Z",
    "src": "Mint",
    "lang": "en"
   },
