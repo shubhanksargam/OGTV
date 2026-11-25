@@ -2,51 +2,58 @@
 const LIVE = {
  "news": [
   {
-   "id": "ULfyGvjdEHo",
-   "t": "Aaj Tak LIVE : SP-Congress Meeting | UP Election | BJP-Akali Alliance | Sheikh Hasina | Hi",
-   "since": "2026-11-25T01:36:52Z",
+   "id": "Hl6Qjih9qPM",
+   "t": "Anant Singh Daughter Wedding LIVE: Barh ke Nadawan men Horse Race dekhne umra jansailab | ",
+   "since": "2026-11-25T09:16:27Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "N2XSqVaYqhI",
-   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 25 November ",
-   "since": "2026-11-25T00:02:01Z",
+   "id": "mJee0bEwbTg",
+   "t": "Breaking News LIVE: akele 403 siton par laregi kangres? | Congress-SP Seating Sharing | UP",
+   "since": "2026-11-25T07:31:49Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "bIcnL0LJV4M",
-   "t": "Aaj Ki Taaza Khabar| Vaibhav Suryavanshi | Ramdev | Baba Bageshwar | Akhilesh | Yogi | Con",
-   "since": "2026-11-25T00:42:55Z",
+   "id": "GGHAfkK73zk",
+   "t": "CM Yogi se achanak milne pahunche Dhirendra Shastri LIVE | Ramdev Baba on Dhirendra Shastr",
+   "since": "2026-11-25T06:24:08Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "OrjLk4wBGsE",
-   "t": "Aaj Ka Rashifal, 25 Nov. 2026 LIVE: Shubh Muhurat | Today Bhavishyavani With Acharya Indu ",
-   "since": "2026-11-25T01:51:57Z",
+   "id": "3ueE2Xu7cio",
+   "t": "Kahani Kursi Ki LIVE | Saurav Sharma: bantvare se pahle jang 'gugli' se kangres kaise dang",
+   "since": "2026-11-25T07:29:10Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "FaI4bcTFhIA",
-   "t": "Aaj Ki Taza Khabar LIVE: UP Election 2026 | BJP | CM Yogi | PM Modi | Rahul Gandhi | ZEE N",
-   "since": "2026-11-25T00:31:45Z",
+   "id": "DFWiSeOYBi0",
+   "t": "Big Action On Mumbai Muslims Attackers LIVE: premi jore ko dandon se pitne vali gaing ki t",
+   "since": "2026-11-25T08:21:07Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "M4688uBkUmo",
-   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Amit Shah | Sukhbir Singh Badal | Trending |",
-   "since": "2026-11-24T14:16:20Z",
+   "id": "qAZ82votcgI",
+   "t": "Anant Singh Daughter Wedding Live News : anant sinh ke ganv men ghurdaur pratiyogita | Mok",
+   "since": "2026-11-25T06:37:51Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "fL79_dCU1sM",
-   "t": "NDTV LIVE: UP Elections 2027 | Sheikh Hasina | Deepam Row | Samajwadi Party | Trump | PM M",
-   "since": "2026-11-25T01:34:15Z",
+   "id": "3S1NyVjxrMs",
+   "t": "LIVE: Cabinet Press Briefing | Key Decisions & Announcements",
+   "since": "2026-11-25T09:32:40Z",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "Jy3exbRABkk",
+   "t": "LIVE: Sensex Jumps 2,000 Points As Foreign Investors Pour Billions Into Technology Stocks",
+   "since": "2026-11-25T09:10:12Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
@@ -65,32 +72,32 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "WFkc3fi6VwM",
-   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
-   "since": "2026-11-24T23:58:46Z",
+   "id": "qWj_EdHapTU",
+   "t": "Trump LIVE: 'WW3 on the Line?' Trump Shocks the World | Trump Speech LIVE | Breaking News ",
+   "since": "2026-11-25T02:33:15Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "BVs3PfMsPGQ",
-   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
-   "since": "2026-11-25T01:35:48Z",
+   "id": "IXGDipMA5FI",
+   "t": "LIVE: Trump's Major Announcement On Iran War | US Says Oil Flowing, Iran Says Hormuz Close",
+   "since": "2026-11-25T08:16:57Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "_cK7DfW7Ppo",
-   "t": "Anant Singh Daughter Wedding LIVE: anant sinh ke ghar men shadi ki taiyari dekhie | Shivan",
-   "since": "2026-11-25T01:32:04Z",
+   "id": "3t1qpC_KEAE",
+   "t": "Anant Singh Daughter Wedding LIVE: nadavan men ghoron ka jamavra ghurasvari sidhe LIVE | S",
+   "since": "2026-11-25T07:49:26Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
   {
-   "id": "mH_KXtm6w4s",
-   "t": "Anant Singh Daughter Wedding : anant sinh ki beti ki haldi ka VIDEO aaya samne, dekhie pah",
-   "since": "2026-11-24T09:26:58Z",
+   "id": "fvuON9xJqLw",
+   "t": "Anant Singh Daughter Wedding : anant sinh ki beti ki shadi men ghurdaur LIVE",
+   "since": "2026-11-25T06:58:38Z",
    "src": "Zee Bihar Jharkhand",
    "lang": "hi"
   },
@@ -104,16 +111,16 @@ const LIVE = {
  ],
  "newsroom": [
   {
-   "id": "holMvGmklXQ",
-   "t": "The Palki Sharma Show | November 24, 2026 | IGR | India Global Review",
-   "since": "2026-11-24T15:30:18Z",
+   "id": "k_5ihihhnWM",
+   "t": "The Palki Sharma Show LIVE: Hasina Sets Return Date | Putin’s Arctic Power Play| Iran's Wa",
+   "since": "2026-11-25T06:27:01Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "A32Qib6itvU",
-   "t": "US WAR LIVE: Iran Declares Declares 'Era Of Sanctions Is Over' Signals New World Order",
-   "since": "2026-11-25T01:57:57Z",
+   "id": "rAfKyGFw5Vo",
+   "t": "LIVE: Israel's Strike-First Warning: Is Iran Developing Chemical Weapons? | Firstpost Live",
+   "since": "2026-11-25T09:29:31Z",
    "src": "Firstpost",
    "lang": "en"
   },
@@ -125,9 +132,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "Vb33NjbQ2TI",
-   "t": "Donald Trump LIVE: 'NO COMPROMISE!' Trump Fires Warning at Democrats Over Public Safety",
-   "since": "2026-11-25T01:56:21Z",
+   "id": "nUXGOhjPBUc",
+   "t": "LIVE : DOJ Chief PUT ON THE SPOT Over Jensen Huang and Nvidia's China Controversy",
+   "since": "2026-11-25T09:05:02Z",
    "src": "Mint",
    "lang": "en"
   },
