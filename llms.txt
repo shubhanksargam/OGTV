@@ -121,14 +121,14 @@ Link the channel itself: each opens playing, with nothing to set up.
 ### News
 
 - [2 · Just News](https://ogtv.co.in/just-news/): Just News on OGTV: 24x7 news, free and always on. Live streams from Aaj Tak, ABP News, NDTV India and India TV.
-- [3 · Khabar](https://ogtv.co.in/khabar/): Khabar on OGTV: Hindi news & analysis, free and always on. Videos from The Lallantop, BBC News Hindi, Khabargaon and Newslaundry Hindi.
+- [3 · Khabar](https://ogtv.co.in/khabar/): Khabar on OGTV: Hindi news & analysis, free and always on. Videos from BBC News Hindi, The Lallantop, Khabargaon and Newslaundry Hindi.
 - [4 · Magadh Times](https://ogtv.co.in/magadh-times/): Magadh Times on OGTV: bihar & Jharkhand news: bulletins, the day's roundups, ground reports & analysis, only the last two days, free and always on.
 - [5 · Newsroom](https://ogtv.co.in/newsroom/): Newsroom on OGTV: vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days, free and always on.
 
 ### Knowledge
 
 - [6 · Gyaan](https://ogtv.co.in/gyaan/): Gyaan on OGTV: history, space & explainers: Tarikh, HISTORY TV18, ISRO, Timeline, free and always on. Videos from Tarikh and Mohak Mangal.
-- [7 · Discover](https://ogtv.co.in/discover/): Discover on OGTV: science, free and always on. Videos from Binocs Ki Duniya, Science ABC, Infinity Stream and Animal Planet India.
+- [7 · Discover](https://ogtv.co.in/discover/): Discover on OGTV: science, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
 - [8 · Curious](https://ogtv.co.in/curious/): Curious on OGTV: science & maths explainers, free and always on. Videos from Numberphile, minutephysics, CGP Grey and Steve Mould.
 - [9 · India in Data](https://ogtv.co.in/india-in-data/): India in Data on OGTV: maps, data, infrastructure & explainers: Khan Sir, Life on Wheels, Think School, free and always on. Videos from Khan Sir.
 - [10 · Classroom](https://ogtv.co.in/classroom/): Classroom on OGTV: data & AI engineering, UPSC & lectures, free and always on. Videos from NPTEL IIT Kharagpur, MIT OpenCourseWare, Stanford Online and NPTEL.
@@ -151,7 +151,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 - [21 · Sehat](https://ogtv.co.in/sehat/): Sehat on OGTV: sports fitness, army & Soviet-style training, yoga & FitTuber, free and always on. Videos from Fit Tuber and Fit Tuber Hindi.
 - [22 · Rasoi](https://ogtv.co.in/rasoi/): Rasoi on OGTV: cooking, free and always on. Videos from Kabita's Kitchen, Nisha Madhulika, Sanjeev Kapoor Khazana and Hebbars Kitchen Hindi.
 - [23 · Safar](https://ogtv.co.in/safar/): Safar on OGTV: travel, India & the world, free and always on. Videos from Beautiful Destinations, Visa2explore, Travelling Mantra and Desi Couple On The Go.
-- [24 · Bachche](https://ogtv.co.in/bachche/): Bachche on OGTV: kids, free and always on. Videos from Binocs Ki Duniya, Science ABC, Infinity Stream and Animal Planet India.
+- [24 · Bachche](https://ogtv.co.in/bachche/): Bachche on OGTV: kids, free and always on. Videos from Binocs Ki Duniya, Science ABC, Animal Planet India and Infinity Stream.
 
 ### Entertainment
 
