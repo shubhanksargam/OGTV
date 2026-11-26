@@ -2,65 +2,65 @@
 const LIVE = {
  "news": [
   {
-   "id": "m9Qpa728pX4",
-   "t": "Samajwadi Party Manifesto LIVE: Akhilesh Yadav ne khola vadon ka pitara | Azam Khan |UP El",
-   "since": "2026-11-26T10:35:57Z",
+   "id": "JWH6Dvq4NTM",
+   "t": "AAJTAK 2 LIVE | ANANT SINGH DAUGHTER WEDDING. beti ki shadi ki charchaen, dekhie rat men k",
+   "since": "2026-11-26T13:14:14Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "Y-YdNu0AIaA",
-   "t": "Mahadangal With Chitra Tripathi LIVE: ghoshnapatr taiyar, gathbandhan par takrar! | SP Man",
-   "since": "2026-11-26T11:21:59Z",
+   "id": "JeSA1YXvQOc",
+   "t": "Sandeep Chaudhary LIVE: shiksha aur rojgar..lagaenge SP ki naiya par? | UP Elections News ",
+   "since": "2026-11-26T13:28:55Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "SZ2YR-1cZzM",
-   "t": "Anant sinh ki beti ki shadi men jo huaa use dekh sabhi hairan LIVE | Anant Singh Daughter ",
-   "since": "2026-11-26T09:24:22Z",
+   "id": "2esb6Xwmu-s",
+   "t": "Anant Singh Daughter Wedding LIVE : anant sinh ki beti ki shadi men ghurdaur, sidha LIVE |",
+   "since": "2026-11-26T12:42:06Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "B_IRzLLHpTk",
-   "t": "SP-Congress Alliance LIVE: sit sheyring ke bich sapa ne kangres ko diya bara jhatka | Cong",
-   "since": "2026-11-26T10:42:25Z",
+   "id": "JT8gjDYZf3I",
+   "t": "Aaj Ki Baat LIVE | Rajat Sharma : kya ab akhilesh banenge vazir-e-aazam ? UP Election 2027",
+   "since": "2026-11-26T14:58:53Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "DJ-DlzfGIfw",
-   "t": "Anant Singh Daughter Wedding LIVE : anant sinh ki beti ki shadi.. ghurdaur dekhne umra jan",
-   "since": "2026-11-26T11:02:16Z",
+   "id": "w24QZDIokh0",
+   "t": "Pakistan Astronaut Big News LIVE:antriksh yatri ke lie100 se jyada pakvan..muslimon men su",
+   "since": "2026-11-26T14:58:08Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "telbbtcT-F8",
-   "t": "Goonj With Arpita Aarya Live: Akhilesh Yadav | SP Manifesto 2027 | Yogi | Rahul Gandhi | U",
-   "since": "2026-11-26T11:21:16Z",
+   "id": "t9VUPW3QT1o",
+   "t": "Sau Baat Ki Ek Baat With Kishore Ajwani Live: Anant Singh Daughter Wedding |Congress-SP Se",
+   "since": "2026-11-26T14:10:14Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "BfXjxhmLj2M",
-   "t": "LIVE: President Droupadi Murmu Attends Constitution Day Celebrations",
-   "since": "2026-11-26T11:10:19Z",
+   "id": "YA_mV_G8vdU",
+   "t": "LIVE News Night: sanvidhan divas par piem ka sandesh, mahila aarakshan par ghiri Congress ",
+   "since": "2026-11-26T14:28:29Z",
    "src": "DD News",
    "lang": "hi"
   },
   {
-   "id": "UbFhMcH4ozk",
-   "t": "SAURAV Das In BIG TROUBLE | Saurav Das Passport | Cockroach Janata Party Latest News",
-   "since": "2026-11-26T11:42:14Z",
+   "id": "nmKcJBxbEMA",
+   "t": "Uttar Pradesh | Mafia, Mahila, Manifesto: Akhilesh's 'Jungleraj' Antidote | The Buck Stops",
+   "since": "2026-11-26T14:31:54Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "g9l7hWV3mPw",
-   "t": "Saurav Das Passport Row LIVE: Lookout Notice Issued, Centre Tells Delhi High Court | CJP",
-   "since": "2026-11-26T07:24:41Z",
+   "id": "u6otx1JKNMk",
+   "t": "Live: Special Parliament Session Announced | Delimitation | Amit Shah | PM Modi Rahul Gand",
+   "since": "2026-11-26T14:34:26Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -72,25 +72,25 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "lSGWoVNT9BA",
-   "t": "BREAKING NEWS LIVE: Trump Announcement Sparks Nationwide Lockdown Alert in America",
-   "since": "2026-11-26T10:52:57Z",
+   "id": "xPY5HX-xGEc",
+   "t": "LIVE: Marco Rubio's Chilling Nuclear Warning | America Braces For Major Emergency | US New",
+   "since": "2026-11-26T14:42:06Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "8S3uB7O5HHE",
-   "t": "LIVE: Mamdani Announces Macy's Parade Shake-up! 100th Thanksgiving Parade Postponed | N18G",
-   "since": "2026-11-26T10:49:04Z",
+   "id": "8FKHcOSevO4",
+   "t": "LIVE: KASH PATEL LOSES HIS COOL | FBI Chief Faces Explosive Questions Over Epstein Files |",
+   "since": "2026-11-26T13:16:44Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "oNnXla5Ds7M",
-   "t": "Anand Mohan Breaking News Live: purv bahubli MP aanand mohan ko jel jana hoga | Supreme Co",
-   "since": "2026-11-26T10:59:41Z",
+   "id": "2UdNwDU_7K0",
+   "t": "Anant Singh's Daughter Shivangi's Emotional Bidaai | Grand Wedding in Bihar | Ladma Villag",
+   "since": "2026-11-26T12:59:50Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -111,16 +111,16 @@ const LIVE = {
  ],
  "newsroom": [
   {
-   "id": "okEbYfcCMyE",
-   "t": "LIVE: Russia’s Progress Cargo Spacecraft Arrives at International Space Station |India Glo",
-   "since": "2026-11-26T11:31:56Z",
+   "id": "WniRE5dzFVQ",
+   "t": "Russia MoFA Briefing LIVE: Russia Launches Ballistic Missile Attack on Kyiv | India Global",
+   "since": "2026-11-26T13:06:07Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "tJKfMcde5Gc",
-   "t": "LIVE: Houthis Target Riyadh, Hit Jeddah and Jizan Ports 24 Hours After Strike Threat | Fir",
-   "since": "2026-11-26T09:29:17Z",
+   "id": "d-VoR2qGRuA",
+   "t": "Iran's Hidden Fortress Near Nuclear Sites! Tanker Attacks Raise Fresh Alarm | FIRSTPOST LI",
+   "since": "2026-11-26T14:52:33Z",
    "src": "Firstpost",
    "lang": "en"
   },
@@ -132,9 +132,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "uD-xTHUG5AU",
-   "t": "LIVE: El Niño and King Tides Batter California With High Surf, Coastal Flooding | US | Wea",
-   "since": "2026-11-26T10:43:50Z",
+   "id": "eokd8SSrPGg",
+   "t": "LIVE: Thomas Massie Takes Epstein Files Fight to House Floor as New DOJ Disclosure Showdow",
+   "since": "2026-11-26T14:46:48Z",
    "src": "Mint",
    "lang": "en"
   },
