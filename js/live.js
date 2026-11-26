@@ -9,9 +9,9 @@ const LIVE = {
    "lang": "hi"
   },
   {
-   "id": "rmHMXfhaFEw",
-   "t": "Anant Singh Beti Ki Shadi LIVE: bekabu huee bhir! | Mokama | Daughter Weeding | Videos | C",
-   "since": "2026-11-26T15:59:03Z",
+   "id": "uCSMTt53vDQ",
+   "t": "Aaj Ki Taja Khabar LIVE: aaj ki taja 100 bari khabren | Headline | 100 News | 27 November ",
+   "since": "2026-11-26T22:35:56Z",
    "src": "ABP News",
    "lang": "hi"
   },
@@ -51,9 +51,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "cmiEPaJYTco",
-   "t": "Live: Govt Calls For Special Parliament Session | Delimitation | Amit Shah | PM Modi | Rah",
-   "since": "2026-11-26T17:56:02Z",
+   "id": "Kvw8znqCzDw",
+   "t": "Live: All Eyes On Special Parliament Session | Women's Quota | Delimitation | PM Modi | Ra",
+   "since": "2026-11-26T16:37:18Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -65,16 +65,16 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "q9GnW-TVYFU",
-   "t": "LIVE | Trump Drops NUCLEAR Bombshell On Iran, Russia, China | Declares EMERGENCY From Whit",
-   "since": "2026-11-26T18:01:20Z",
+   "id": "lZFg1uOxfDY",
+   "t": "Donald Trump LIVE: 'Lockdown Now' | Immediate Order Sends Shockwaves Across Nation | US Ne",
+   "since": "2026-11-26T05:44:14Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "X5Q_ePP2X_0",
-   "t": "Thanksgiving Weather Nightmare LIVE: Floods, Winds & Snow Batter U.S. | Storms Disrupt Tra",
-   "since": "2026-11-26T19:25:44Z",
+   "id": "1r_Bxbi0umQ",
+   "t": "US-IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
+   "since": "2026-11-26T15:37:40Z",
    "src": "CNN-News18",
    "lang": "en"
   }
@@ -125,9 +125,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "4y_nvaoB9nU",
-   "t": "LIVE: Bernie Sanders Challenges Trump's Education Watchdog Pick Over Retaliation and $15,0",
-   "since": "2026-11-26T17:04:53Z",
+   "id": "HmCeS1rYnY0",
+   "t": "LIVE: 'NO DEAL!' Nigel Farage Rules Out Restore Britain Pact, Puts Rupert Lowe on the Spot",
+   "since": "2026-11-26T13:58:00Z",
    "src": "Mint",
    "lang": "en"
   },
