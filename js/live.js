@@ -2,58 +2,65 @@
 const LIVE = {
  "news": [
   {
-   "id": "SDIEGNkDiW0",
-   "t": "Modi Cabinet Meeting LIVE Updates: seva tirth men modi kaibinet ki bari baithak | Parliame",
-   "since": "2026-11-27T07:38:07Z",
+   "id": "qv8gMW8fxns",
+   "t": "Parliament Special Session LIVE Updates: parisiman bil ko lekar aarjedi men bhi khalabli |",
+   "since": "2026-11-27T09:05:37Z",
    "src": "Aaj Tak",
    "lang": "hi"
   },
   {
-   "id": "KHQG3u1jQyY",
-   "t": "Congress-SP Seat Sharing LIVE: kangres ne sapa ko diya sit sheyring par naya nanbar | Akhi",
-   "since": "2026-11-27T05:28:44Z",
+   "id": "Nq4WlQ2bsjg",
+   "t": "Delimitation Bill Parliament Special Session LIVE: lokasbha men barhengi 50% siten? | Wome",
+   "since": "2026-11-27T12:47:51Z",
    "src": "ABP News",
    "lang": "hi"
   },
   {
-   "id": "J7kgIEBrzW0",
-   "t": "Jel aa jate akhilesh?aajam ke bayan ne ura die hosh! LIVE Samajwadi Party Manifesto | Azam",
-   "since": "2026-11-27T07:42:46Z",
+   "id": "hU5KNY_VZUk",
+   "t": "Delimitation Bill Parliament Session News LIVE: parisiman bil par modi ki jit, dare rahul?",
+   "since": "2026-11-27T11:55:46Z",
    "src": "NDTV India",
    "lang": "hi"
   },
   {
-   "id": "vYevewznH_Q",
-   "t": "Kahani Kursi Ki Live: modi sarkar ki Cabinet miting shuru hone vali hai | PM Modi | Delimi",
-   "since": "2026-11-27T07:30:02Z",
+   "id": "S1E3y8MEPAk",
+   "t": "Parliament Special Session News Live : vishesh satr se pahle piem modi ka bara ekshan |",
+   "since": "2026-11-27T08:55:10Z",
    "src": "India TV",
    "lang": "hi"
   },
   {
-   "id": "tFWGNsm66q8",
-   "t": "Meerut Salman Encounter LIVE: hindu larki ko uthane vale salman ka naya vidiyo dekhkar khu",
-   "since": "2026-11-27T06:06:36Z",
+   "id": "LJYFVvc2M0M",
+   "t": "Trump 25% Tariff on India LIVE: bharat par 25% ka tairiph? tranp ke nae ailan ne sari duni",
+   "since": "2026-11-27T12:15:14Z",
    "src": "Zee News",
    "lang": "hi"
   },
   {
-   "id": "nFDZiAnN_JM",
-   "t": "LIVE : Kejriwal ka 'shishamhal' aam janta ke lie khola gaya | Delhi News | Parvesh Verma |",
-   "since": "2026-11-27T04:32:58Z",
+   "id": "9jDG5OEngDs",
+   "t": "Bhaiyaji Kahin With Prateek Trivedi Live: Akhilesh Yadav | SP Manifesto | UP Election 2027",
+   "since": "2026-11-27T12:08:49Z",
    "src": "News18 India",
    "lang": "hi"
   },
   {
-   "id": "2-ZsTmgYQGA",
-   "t": "NDTV LIVE: UP Elections 2027 | SP | Congress | Delimitation Bill | BJP | Deepam Row | Trum",
-   "since": "2026-11-27T01:28:38Z",
+   "id": "-DyeDuMMrbA",
+   "t": "LIVE Charcha Me: samudri suraksha se aarthik samriddhi tak: IORA men bharat ki pahal | DD ",
+   "since": "2026-11-27T12:29:32Z",
+   "src": "DD News",
+   "lang": "hi"
+  },
+  {
+   "id": "WkABI8IK7P0",
+   "t": "Deepam Row | 'Case Of Contempt': Supreme Court Pulls Up Vijay Government In Deepam Row | L",
+   "since": "2026-11-27T12:33:38Z",
    "src": "NDTV 24x7",
    "lang": "en"
   },
   {
-   "id": "SGIsqtWKQH4",
-   "t": "India Today LIVE: PM Modi | Special Parliament Session | TN Deepam Row | US Tariffs | Dona",
-   "since": "2026-11-27T01:23:36Z",
+   "id": "v_ryP4GmbXg",
+   "t": "TN Deepam Row LIVE: SC's Sharpest Rebuke To Vijay Govt, Historic Lighting At Deepathoon To",
+   "since": "2026-11-27T12:31:13Z",
    "src": "India Today",
    "lang": "en"
   },
@@ -72,18 +79,18 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "-e7VCohTbGk",
-   "t": "LIVE: Ossoff ERUPTS At Hegseth! Iran War Questions Leave Pentagon Chief Under Pressure | N",
-   "since": "2026-11-27T03:51:05Z",
+   "id": "TsaoEamYWWY",
+   "t": "US LIVE: Donald Trump Faces Fresh Trouble As Kash Patel Makes A Major Admission | Washingt",
+   "since": "2026-11-27T11:31:50Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "gNLR7veq9LM",
-   "t": "Rajasthan Pradhan Chunav Live: pradhan pad chunav se abhi-abhi aaya sabse bara apdet ! | L",
-   "since": "2026-11-27T07:17:52Z",
+   "id": "cT6T412wxUQ",
+   "t": "Live : aaj ki bari khabren | Anant Singh Daughter Wedding | UP Election 2027 | Vaibhav Soo",
+   "since": "2026-11-27T11:44:10Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   },
@@ -104,16 +111,16 @@ const LIVE = {
  ],
  "newsroom": [
   {
-   "id": "yErsO9Gy9Jw",
-   "t": "The Palki Sharma Show LIVE: Houthis Strike Saudi Oil Refinery | Tariffs to Pressure India?",
-   "since": "2026-11-27T06:24:11Z",
+   "id": "rKeMXo79o5k",
+   "t": "India US Trade Deal News LIVE: India Edges Closer to a Trade Agreement With the US | Piyus",
+   "since": "2026-11-27T11:38:32Z",
    "src": "IGR",
    "lang": "en"
   },
   {
-   "id": "5ZzuuyKdd24",
-   "t": "LIVE: Inside NATO's Push to Stop Putin as Russia Raises Baltic Nuclear Stakes | Firstpost ",
-   "since": "2026-11-27T06:29:34Z",
+   "id": "5L-l0crHlnk",
+   "t": "'Leave Or Face Fire': Iran 'Burns' Amazon, Microsoft & Starlink In Chilling Video | WAR LI",
+   "since": "2026-11-27T11:46:24Z",
    "src": "Firstpost",
    "lang": "en"
   },
@@ -125,9 +132,9 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "khtcQbLOBRQ",
-   "t": "LIVE: Trump CONFUSES Israel With Iran, Says Military 'Wiped Out' in On-Camera Blunder",
-   "since": "2026-11-27T08:17:50Z",
+   "id": "DQy3Co9Hrls",
+   "t": "US Senate LIVE: Bernie Sanders GOES AFTER Trump's 3 Picks in Fiery Senate Showdown!",
+   "since": "2026-11-27T12:04:33Z",
    "src": "Mint",
    "lang": "en"
   },
