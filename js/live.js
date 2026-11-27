@@ -65,25 +65,25 @@ const LIVE = {
    "lang": "en"
   },
   {
-   "id": "xkVcGpHjkxg",
-   "t": "US NEWS LIVE: Trump Suddenly Escorted Out by Secret Service! Press Conference Takes Shocki",
-   "since": "2026-11-27T16:53:07Z",
+   "id": "9QYluP2TYAY",
+   "t": "US News Live: Trump's Emergency Warning | Nationwide Lockdown in America? US on HIGH ALERT",
+   "since": "2026-11-27T14:19:08Z",
    "src": "Times Now",
    "lang": "en"
   },
   {
-   "id": "QBFtVkMzPps",
-   "t": "US IRAN WAR LIVE: Trump's Big Announcement On Military Action Against Iran | Hormuz War | ",
-   "since": "2026-11-27T15:44:59Z",
+   "id": "RmnWAZH6Js8",
+   "t": "US SENATE LIVE: Donald Trump Faces Fresh Trouble As Kash Patel Makes A Major Admission | N",
+   "since": "2026-11-27T20:05:46Z",
    "src": "CNN-News18",
    "lang": "en"
   }
  ],
  "bihar": [
   {
-   "id": "QjJsk-ATtxk",
-   "t": "Live : aaj ki bari khabren | Anant Singh Daughter Wedding | UP Election 2027 | Vaibhav Soo",
-   "since": "2026-11-27T17:55:56Z",
+   "id": "sPT-TStMPRE",
+   "t": "Iran America War LIVE: eeran amerika yuddh ka bara apdet!| Netanyahu | Trump | Houthis Sau",
+   "since": "2026-11-27T17:59:34Z",
    "src": "News18 Bihar Jharkhand",
    "lang": "hi"
   }
