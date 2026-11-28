@@ -121,7 +121,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 ### News
 
 - [2 · Just News](https://ogtv.co.in/just-news/): Just News on OGTV: 24x7 news, free and always on. Live streams from Aaj Tak, ABP News, NDTV India and India TV.
-- [3 · Khabar](https://ogtv.co.in/khabar/): Khabar on OGTV: Hindi news & analysis, free and always on. Videos from Khabargaon, BBC News Hindi, The Lallantop and Newslaundry Hindi.
+- [3 · Khabar](https://ogtv.co.in/khabar/): Khabar on OGTV: Hindi news & analysis, free and always on. Videos from Khabargaon, The Lallantop, BBC News Hindi and Newslaundry Hindi.
 - [4 · Magadh Times](https://ogtv.co.in/magadh-times/): Magadh Times on OGTV: bihar & Jharkhand news: bulletins, the day's roundups, ground reports & analysis, only the last two days, free and always on.
 - [5 · Newsroom](https://ogtv.co.in/newsroom/): Newsroom on OGTV: vantage with Palki Sharma, IGR, Firstpost, WION, Mint, Bloomberg & Zerodha: only the last two days, free and always on.
 
@@ -156,7 +156,7 @@ Link the channel itself: each opens playing, with nothing to set up.
 ### Entertainment
 
 - [25 · Aangan](https://ogtv.co.in/aangan/): Aangan on OGTV: the family TV of an Indian home, in Hindi. Aarti, Doordarshan classics, kahaniyan, kavi sammelan, wildlife, Taarak Mehta, KBC and old songs.
-- [26 · Comedy](https://ogtv.co.in/comedy/): Comedy on OGTV: stand-up, sketches & shows, free and always on. Videos from Jimmy Kimmel Live and Whose Line Is It Anyway?.
+- [26 · Comedy](https://ogtv.co.in/comedy/): Comedy on OGTV: stand-up, sketches & shows, free and always on. Videos from The Tonight Show Starring Jimmy Fallon and Jimmy Kimmel Live.
 - [27 · Purvaiya](https://ogtv.co.in/purvaiya/): Purvaiya on OGTV: regional news, legends, travel & vlogs, free and always on. Live streams from News18 Bihar Jharkhand, Zee Bihar Jharkhand and ABP Bihar.
 - [28 · Fiction](https://ogtv.co.in/fiction/): Fiction on OGTV: web series, short films & DD classics, free and always on. Videos from Chanakya (1991), Ramayan (Tilak) and Upanishad Ganga (Chinmaya).
 - [29 · Retro Movies](https://ogtv.co.in/retro-movies/): Retro Movies on OGTV: Classic Hindi films, free and always on. Videos from Ultra Movie Parlour, Goldmines Bollywood, Shemaroo Movies and Rajshri.
